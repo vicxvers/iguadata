@@ -57,15 +57,10 @@
         }
 
         .header-logo-main {
-            font-family: var(--font-display);
-            font-size: 1.75rem;
-            color: #ffffff;
-            font-weight: 600;
-            animation: fadeUp 0.7s ease 0.1s forwards;
-        }
-
-        .header-logo-main em {
-            font-style: italic;
+            height: 1.75rem;
+            width: auto;
+            filter: brightness(0) invert(1);
+            opacity: 0;
             animation: fadeUp 0.7s ease 0.1s forwards;
         }
 
@@ -308,19 +303,6 @@
             .header-content {
                 justify-content: center;
             }
-            .header-logo-svg {
-                height: 1.75rem;
-                aspect-ratio: 306 / 102;
-                -webkit-mask-image: url('iguadata.svg');
-                -webkit-mask-size: contain;
-                -webkit-mask-repeat: no-repeat;
-                -webkit-mask-position: left center;
-                mask-image: url('iguadata.svg');
-                mask-size: contain;
-                mask-repeat: no-repeat;
-                mask-position: left center;
-                animation: fadeUp 0.7s ease 0.1s forwards;
-            }
         }
     </style>
 </head>
@@ -328,7 +310,7 @@
 <body>
     <div class="home-wrapper">
         <section class="hero">
-            <div className="header-logo-svg" role="img" aria-label="Iguadata"></div>
+            <img src="iguadata.svg" alt="Iguadata" class="header-logo-main">
             <h1 class="hero-title">
                 Tot és <em>públic</em>
             </h1>
