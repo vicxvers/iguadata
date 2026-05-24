@@ -1,0 +1,314 @@
+name: Update BORME data
+
+# Runs every Sunday at 23:00 UTC (Monday 00:00/01:00 Madrid time, depending on DST).
+# Also triggerable manually from the GitHub Actions UI ("Run workflow").
+on:
+  schedule:
+    - cron: '0 23 * * 0'
+  workflow_dispatch:
+    inputs:
+      start_date:
+        description: 'Optional BORME scrape start date (YYYY-MM-DD). Leave empty for automatic last-date minus 3 days.'
+        required: false
+        type: string
+      end_date:
+        description: 'Optional BORME scrape end date (YYYY-MM-DD). Leave empty for today UTC.'
+        required: false
+        type: string
+      allow_contract_drop:
+        description: 'Allow a suspicious Socrata contract drop and continue anyway.'
+        required: false
+        type: boolean
+        default: false
+
+concurrency:
+  group: update-borme-data
+  cancel-in-progress: false
+
+permissions:
+  contents: write  # needed to commit the JSONs and manage the "data" release
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 240  # 4h hard cap — weekly increment should be < 20 min
+
+    steps:
+      # ------------------------------------------------------------------
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+          cache-dependency-path: .github/requirements.txt
+
+      - name: Install dependencies
+        run: pip install -r .github/requirements.txt
+
+      # ------------------------------------------------------------------
+      # 1. Pull the accumulated parquets from the "data" release.
+      #    If the release doesn't exist yet, skip (cold start).
+      # ------------------------------------------------------------------
+      - name: Download accumulated parquets
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          mkdir -p .dev/borme
+          if gh release view data >/dev/null 2>&1; then
+            gh release download data \
+              -D .dev/borme \
+              -p 'borme_empresas.parquet' \
+              -p 'borme_cargos.parquet' \
+              --clobber
+            echo "Parquets descargados del release 'data'"
+            ls -lh .dev/borme/*.parquet
+          else
+            echo "::warning::Release 'data' inexistente — arrancando en cold-start."
+          fi
+
+      # ------------------------------------------------------------------
+      # 2. Determine the scraping window (last date - 3 days safety overlap).
+      # ------------------------------------------------------------------
+      - name: Compute scraping window
+        id: window
+        env:
+          INPUT_START_DATE: ${{ github.event_name == 'workflow_dispatch' && inputs.start_date || '' }}
+          INPUT_END_DATE: ${{ github.event_name == 'workflow_dispatch' && inputs.end_date || '' }}
+        run: |
+          LAST=$(python .github/scripts/get_last_borme_date.py .dev/borme/borme_empresas.parquet)
+          AUTO_START=$(python -c "from datetime import date, timedelta; print((date.fromisoformat('$LAST') - timedelta(days=3)).isoformat())")
+          AUTO_END=$(date -u +%Y-%m-%d)
+          START="${INPUT_START_DATE:-$AUTO_START}"
+          END="${INPUT_END_DATE:-$AUTO_END}"
+          python -c "from datetime import date; start = date.fromisoformat('$START'); end = date.fromisoformat('$END'); assert start <= end, f'Invalid scraping window: {start} > {end}'"
+          echo "last=$LAST"   >> "$GITHUB_OUTPUT"
+          echo "start=$START" >> "$GITHUB_OUTPUT"
+          echo "end=$END"     >> "$GITHUB_OUTPUT"
+          echo "Ventana de scraping: $START -> $END (última fecha parquet: $LAST)"
+
+      # ------------------------------------------------------------------
+      # 3. Scrape only the new days.
+      # ------------------------------------------------------------------
+      - name: Scrape BORME PDFs (rolling window)
+        run: |
+          mkdir -p scratch/pdfs
+          python .github/scripts/borme_scraper.py \
+            --start ${{ steps.window.outputs.start }} \
+            --end   ${{ steps.window.outputs.end }} \
+            --output scratch/pdfs \
+            --workers 4 \
+            --delay 1.0
+
+      # ------------------------------------------------------------------
+      # 4. Parse new PDFs into delta parquets.
+      # ------------------------------------------------------------------
+      - name: Parse new PDFs -> delta parquets
+        run: |
+          mkdir -p scratch/delta
+          python .github/scripts/borme_batch_parser.py \
+            --input  scratch/pdfs \
+            --output scratch/delta \
+            --workers 4
+
+      # ------------------------------------------------------------------
+      # 5. Merge delta into the accumulated parquets.
+      # ------------------------------------------------------------------
+      - name: Merge delta into accumulated parquets
+        run: |
+          python .github/scripts/merge_parquets.py \
+            --big-dir   .dev/borme \
+            --delta-dir scratch/delta
+
+      - name: Validate accumulated parquets
+        run: |
+          test -s .dev/borme/borme_empresas.parquet
+          test -s .dev/borme/borme_cargos.parquet
+          EMPRESAS_SIZE=$(stat -c%s .dev/borme/borme_empresas.parquet)
+          CARGOS_SIZE=$(stat -c%s .dev/borme/borme_cargos.parquet)
+          echo "borme_empresas.parquet: $EMPRESAS_SIZE bytes"
+          echo "borme_cargos.parquet: $CARGOS_SIZE bytes"
+          test "$EMPRESAS_SIZE" -gt 100000000
+          test "$CARGOS_SIZE" -gt 100000000
+
+      # ------------------------------------------------------------------
+      # 6a. Refresh company-name alias map from parquet (captures new
+      #     name changes via the parser's 'nombre_posterior' column).
+      # ------------------------------------------------------------------
+      - name: Refresh company-name alias map
+        run: |
+          python .github/scripts/build_alias_from_parquet.py
+
+      # ------------------------------------------------------------------
+      # 6b. Refresh contractes.json + empreses.json from Socrata first.
+      #     Downstream analysis then uses the latest companies/contracts
+      #     from the same run, not the previous week's snapshot.
+      # ------------------------------------------------------------------
+      - name: Refresh contractes + empreses from Socrata
+        run: |
+          mkdir -p scratch
+          cp json/contractes.json scratch/contractes.previous.json
+          python .github/scripts/fetch_contractes_socrata.py
+          python .github/scripts/enrich_empreses.py
+
+      - name: Guard against suspicious contract deletion
+        if: ${{ !(github.event_name == 'workflow_dispatch' && inputs.allow_contract_drop) }}
+        run: |
+          python .github/scripts/validate_contractes_snapshot.py \
+            --old scratch/contractes.previous.json \
+            --new json/contractes.json \
+            --max-count-drop-pct 5 \
+            --max-amount-drop-pct 10 \
+            --max-missing-contracts 50
+
+      - name: Contract deletion guard bypassed
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.allow_contract_drop }}
+        run: |
+          echo "::warning::Anti-deletion guard bypassed by manual workflow input."
+
+      # ------------------------------------------------------------------
+      # 6c. Regenerate the frontend JSONs and analysis outputs.
+      # ------------------------------------------------------------------
+      - name: Regenerate JSONs (administradores + persones + analyses)
+        run: |
+          python .github/scripts/generate_carrecs.py
+          python .github/scripts/generate_persones.py
+          python .github/scripts/generate_fraccionament.py
+          python .github/scripts/generate_concentracio.py
+          python .github/scripts/generate_electoralisme.py
+
+      - name: Validate generated JSONs
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          checks = {
+              "json/contractes.json": 500_000,
+              "json/contractes_arxiu.json": 2,
+              "json/empreses.json": 50_000,
+              "json/carrecs.json": 100_000,
+              "json/persones.json": 100_000,
+              "json/fraccionament.json": 10_000,
+              "json/concentracio.json": 10_000,
+              "json/electoralisme.json": 10_000,
+              "json/carrecs_eliminats.json": 1_000,
+              ".github/scripts/alias_empreses.json": 1_000_000,
+          }
+
+          for rel, min_size in checks.items():
+              path = Path(rel)
+              if not path.exists():
+                  raise SystemExit(f"Missing expected file: {rel}")
+              size = path.stat().st_size
+              if size < min_size:
+                  raise SystemExit(f"Suspiciously small file: {rel} ({size} bytes)")
+              with path.open("r", encoding="utf-8") as f:
+                  json.load(f)
+              print(f"OK {rel}: {size} bytes")
+          PY
+
+      # ------------------------------------------------------------------
+      # 7. Commit updated JSONs (if any change).
+      # ------------------------------------------------------------------
+      - name: Commit refreshed JSONs
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add json/carrecs.json json/persones.json json/carrecs_eliminats.json
+          git add json/empreses.json json/contractes.json json/contractes_arxiu.json json/fraccionament.json json/concentracio.json json/electoralisme.json
+          git add .github/scripts/alias_empreses.json
+          if git diff --staged --quiet; then
+            echo "Sense canvis als JSON, res per commitar."
+          else
+            git commit -m "chore(data): actualització setmanal BORME (${{ steps.window.outputs.end }})"
+            git push
+          fi
+
+      # ------------------------------------------------------------------
+      # 8. Push updated parquets back to the "data" release.
+      # ------------------------------------------------------------------
+      - name: Publish updated parquets to "data" release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          END="${{ steps.window.outputs.end }}"
+          if ! gh release view data >/dev/null 2>&1; then
+            gh release create data \
+              --title "BORME accumulated parquets" \
+              --notes "Automated data release — updated weekly by GH Actions. Do not delete."
+          fi
+
+          sha256sum .dev/borme/borme_empresas.parquet .dev/borme/borme_cargos.parquet > ".dev/borme/checksums-$END.txt"
+          cp .dev/borme/borme_empresas.parquet ".dev/borme/borme_empresas-$END.parquet"
+          cp .dev/borme/borme_cargos.parquet ".dev/borme/borme_cargos-$END.parquet"
+
+          gh release upload data \
+            .dev/borme/borme_empresas.parquet \
+            .dev/borme/borme_cargos.parquet \
+            ".dev/borme/borme_empresas-$END.parquet" \
+            ".dev/borme/borme_cargos-$END.parquet" \
+            ".dev/borme/checksums-$END.txt" \
+            --clobber
+
+          cleanup_old_assets() {
+            prefix="$1"
+            keep="$2"
+            mapfile -t assets < <(gh release view data --json assets --jq '.assets[].name' | grep -E "^${prefix}-[0-9]{4}-[0-9]{2}-[0-9]{2}\\." | sort -r || true)
+            for asset in "${assets[@]:$keep}"; do
+              echo "Deleting old backup asset: $asset"
+              gh release delete-asset data "$asset" -y || true
+            done
+          }
+
+          cleanup_old_assets "borme_empresas" 4
+          cleanup_old_assets "borme_cargos" 4
+          cleanup_old_assets "checksums" 4
+
+      # ------------------------------------------------------------------
+      # 9. Publish lightweight JSON snapshots to a separate release.
+      # ------------------------------------------------------------------
+      - name: Publish JSON snapshots to "snapshots" release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          END="${{ steps.window.outputs.end }}"
+          mkdir -p scratch/snapshots
+          if ! gh release view snapshots >/dev/null 2>&1; then
+            gh release create snapshots \
+              --title "Iguadata JSON snapshots" \
+              --notes "Weekly contract/company JSON snapshots. Do not delete."
+          fi
+
+          cp json/contractes.json "scratch/snapshots/contractes-$END.json"
+          cp json/contractes_arxiu.json "scratch/snapshots/contractes_arxiu-$END.json"
+          cp json/empreses.json "scratch/snapshots/empreses-$END.json"
+          sha256sum "scratch/snapshots/contractes-$END.json" "scratch/snapshots/contractes_arxiu-$END.json" "scratch/snapshots/empreses-$END.json" > "scratch/snapshots/json-checksums-$END.txt"
+
+          gh release upload snapshots \
+            "scratch/snapshots/contractes-$END.json" \
+            "scratch/snapshots/contractes_arxiu-$END.json" \
+            "scratch/snapshots/empreses-$END.json" \
+            "scratch/snapshots/json-checksums-$END.txt" \
+            --clobber
+
+          cleanup_old_snapshot_assets() {
+            prefix="$1"
+            keep="$2"
+            mapfile -t assets < <(gh release view snapshots --json assets --jq '.assets[].name' | grep -E "^${prefix}-[0-9]{4}-[0-9]{2}-[0-9]{2}\\." | sort -r || true)
+            for asset in "${assets[@]:$keep}"; do
+              echo "Deleting old snapshot asset: $asset"
+              gh release delete-asset snapshots "$asset" -y || true
+            done
+          }
+
+          cleanup_old_snapshot_assets "contractes" 12
+          cleanup_old_snapshot_assets "empreses" 12
+          cleanup_old_snapshot_assets "json-checksums" 12
+
+      # ------------------------------------------------------------------
+      - name: Cleanup scratch
+        if: always()
+        run: rm -rf scratch/
