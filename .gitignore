@@ -1,0 +1,6 @@
+.claude/
+.dev/
+AGENTS.md
+DESIGN.md
+__pycache__/
+.tmp-impact-*/
