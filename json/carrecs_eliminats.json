@@ -1,0 +1,602 @@
+[
+  {
+    "persona": "LOS RESTAURANTES,PUESTOS DE COMIDAS Y ESTABLECIMIENTOS DE BEBIDAS",
+    "empresa_norm": "AMESMARMESVELA S.L",
+    "cargo": "AMPLIAR A",
+    "motius": "coma-comprimida"
+  },
+  {
+    "persona": "DECORACIONES ESCENICAS, AUDIOVISUALES, ACTIVIADES AUXILIARES DE ARTES ESCENICAS, ALQUILER DE EQUIPOS AUDIOVISUALES, ETC",
+    "empresa_norm": "QUENOPARILAFESTA S.L",
+    "cargo": "OTRAS ACTIVIDADES",
+    "motius": "len>65"
+  },
+  {
+    "persona": "EL ALQUILER SIN CONDUCTOR DE VEHICULOS INDUSTRIALES Y DE MAQUINARIA INDUSTRIAL",
+    "empresa_norm": "XBSTEEL TRADE S.L",
+    "cargo": "AMPLIAR A",
+    "motius": "len>65"
+  },
+  {
+    "persona": "EL COMERCIO DE CHOCOLATERIA Y CONFITERIA Y TODAS LAS ACTIVIDADESRELACIONADO CON UNA INDUSTRIA DEL CACAO Y CHOCOLATE",
+    "empresa_norm": "CATERING DE L'ANOIA",
+    "cargo": "AMPLIAR A",
+    "motius": "len>65"
+  },
+  {
+    "persona": "LA SATISFACCION DE LAS MISIONES Y PRINCIPIOS DEL SERVICIO PUBLICO DE LOS ARTICULOS 33 Y 26.3 DE LA LEY DE COMUNICACION AUDIOVISUAL DE CATALUNYA",
+    "empresa_norm": "TAELUS",
+    "cargo": "AMPLIAR A",
+    "motius": "len>65"
+  },
+  {
+    "persona": "PLAZO DE DURACION Y SISTEMA RETRIBUTIVO DEL ORGANO DE ADMINISTRACION SOCIAL",
+    "empresa_norm": "BOSTRAN 21",
+    "cargo": "ARTICULOS 18 Y 20",
+    "motius": "len>65"
+  },
+  {
+    "persona": "SE PUBLICO POR ERROR EN LA INSCRIPCION 245 EL NOMBRAMIENTO COMO APODERADO DE DON JUAN GRALLERA GALLARDO SIENDO LO CORRECTO DON JUAN GRAGERA GALLARDO",
+    "empresa_norm": "TELEFONICA SOLUCIONES DE INFORMATICA Y COMUNICACIONES DE ESPAÑA",
+    "cargo": "Fe de erratas",
+    "motius": "len>65"
+  },
+  {
+    "persona": "SE PUBLICO POR ERROR EN LA INSCRIPCION 470 EL NOMBRAMIENTO DE DON RAFAEL MARQUEZ OSORIO Y DOÑA FRANCISCA MARTIN TABERNERO COMO VICEPRESIDENTES DE LA COMISION DE AUDITORIA Y RETRIBUCIONES SIENDO LO CORRECTO MIEMBROS DE LA COMISION DE AUDITORIA Y RETRIBUCIONES",
+    "empresa_norm": "MAPFRE",
+    "cargo": "Fe de erratas",
+    "motius": "len>65"
+  },
+  {
+    "persona": "SE PUBLICO POR ERROR EN LA INSCRIPCION 562 LA REELECCION DE DON ANTONIO MIGUEL-ROMERO DE OLANO COMO MIEMBRO DE LA COMISION DE AUDITORIA Y RETRIBUCIONES SIENDO LO CORRECTO MIEMBRO DEL COMITE DE AUDITORIA",
+    "empresa_norm": "MAPFRE",
+    "cargo": "Fe de erratas",
+    "motius": "len>65"
+  },
+  {
+    "persona": "SE PUBLICO POR ERROR EN LA INSCRIPCION 575, EL NOMBRAMIENTO DE DON JOSE ANTONIO COLOMER GUIU COMO MIEMBREO DE LA COMISION DE AUDITORIA Y RETRIBUCIONES, CUANDO LO CORRECTO ES VOCAL DEL COMITE DE AUDITORIA",
+    "empresa_norm": "MAPFRE",
+    "cargo": "Fe de erratas",
+    "motius": "len>65"
+  },
+  {
+    "persona": "EL COMERCIO AL POR MAYOR DE MUEBLES,ALFOMBRAS Y APARATOS DE ILUMINACION,Y COMERCIO AL POR MAYOR DE MUEBLES DE OFICINA",
+    "empresa_norm": "INAD-HOC HABITAT",
+    "cargo": "AMPLIAR A",
+    "motius": "len>65,coma-comprimida"
+  },
+  {
+    "persona": "FUNCIONES DE VERIFICACION,INSPECCION Y CONTROL EN MATERIA DE URBANISMO COMO ENTIDAD COLABORADORA DE LA ADMINISTRACION",
+    "empresa_norm": "ECA ENTIDAD COLABORADORA DE LA ADMINISTRACION",
+    "cargo": "AMPLIAR A",
+    "motius": "len>65,coma-comprimida"
+  },
+  {
+    "persona": "LA APLICACION DE HERBICIDAS,TRATAMIENTO DE PLAGAS,LIMPIEZA FORESTAL Y EXTERMINIO DE PARASITOS EN ARBOLES Y PLANTAS,MEDIANTE LOS SISTEMAS DE PULVERIZACION Y FUMIGACION",
+    "empresa_norm": "ACUALATA",
+    "cargo": "AMPLIAR A",
+    "motius": "len>65,coma-comprimida"
+  },
+  {
+    "persona": "LA APLICACION DE HERBICIDAS,TRATAMIENTO DE PLAGAS,LIMPIEZA FORESTAL Y EXTERMINIO DE PARASITOS EN ARBOLES Y PLANTAS,POR LOS SISTEMAS DE PULVERIZACION,ESPOLVORIZACION Y FUMIGACION",
+    "empresa_norm": "INICIATIVES JAT S.L",
+    "cargo": "AMPLIAR A",
+    "motius": "len>65,coma-comprimida"
+  },
+  {
+    "persona": "ACTIVIDADES PROPIAS DE LA PRESTACION DE SERVICIOS ENERGETICOS O DE MEJORA DE LA EFICIENCIA ENERGETICA EN LAS INSTALACIONES O LOCALES DE AQUELLOS USUARIOS QUE LO SOLICITEN",
+    "empresa_norm": "ECA ENTIDAD COLABORADORA DE LA ADMINISTRACION",
+    "cargo": "AMPLIAR A",
+    "motius": "len>65,objecte-social"
+  },
+  {
+    "persona": "EL NEGOCIO DE EXPLOTACION DE PLANTA DE ARIDOS Y DE HORMIGON, TRANSPORTE DE MAQUINARIA, MATERIALES DE CONSTRUCCION Y RESIDUOS, ASI COMO LA COMERCIALIZACION DE TODA CLASE DE MATERIALES RELACIONADOS, ETC",
+    "empresa_norm": "CONSTRUCTORA DE CALAF",
+    "cargo": "SE AMPLIA EN",
+    "motius": "len>65,objecte-social"
+  },
+  {
+    "persona": "LA CONSTRUCCION COMPLETA DE TODO TIPO DE OBRAS DE EDIFICACION, OBRAS CIVILES E INSTALACIONES, ASI COMO SU MANTENIMIENTO",
+    "empresa_norm": "SERVEIS I MANTENIMENTS SERVIAL S.L",
+    "cargo": "AMPLIAR A",
+    "motius": "len>65,objecte-social"
+  },
+  {
+    "persona": "LA PRESTACION DE SERVICIOS A FAVOR DE TERCEROS RELATIVOS A LAS ACTIVIDADES REFERIDAS EN EL OBJETO SOCIAL",
+    "empresa_norm": "IMPRESSIONS INTERCOMARCALS",
+    "cargo": "AMPLIAR A",
+    "motius": "len>65,objecte-social"
+  },
+  {
+    "persona": "LA PRESTACION DE SERVICIOS DE LIMPIEZA DE TODO TIPO A EMPRESAS Y PARTICULARES",
+    "empresa_norm": "JOSEMU 18 S.L",
+    "cargo": "AMPLIAR A",
+    "motius": "len>65,objecte-social"
+  },
+  {
+    "persona": "LA REALIZACION DE ACTIVIDADES Y LA PRESTACION DE SERVICIOS ENERGETICOS Y DE MEJORA DE LA EFICIENCIA ENERGETICA EN LAS INSTALACIONES O LOCALES DE CLIENTES FINALES",
+    "empresa_norm": "ESTUDI RAMON FOLCH I ASSOCIATS",
+    "cargo": "AMPLIAR A",
+    "motius": "len>65,objecte-social"
+  },
+  {
+    "persona": "LA VENTA DE PRODUCTOS Y JUEGOS DE CRECIMIENTO Y DESARROLLO PERSONAL",
+    "empresa_norm": "KITCO VALLEY S.L",
+    "cargo": "OTRAS ACTIVIDADES",
+    "motius": "len>65,objecte-social"
+  },
+  {
+    "persona": "CONSTRUCCION COMPLETA,REPARACION Y CONSERVACION DE EDIFICACIONES Y OBRA CIVIL",
+    "empresa_norm": "BEGUVERD",
+    "cargo": "AMPLIAR A",
+    "motius": "len>65,objecte-social,coma-comprimida"
+  },
+  {
+    "persona": "LA ACTIVIDAD DE ARMERIA ENTENDIENDO POR TAL,LA FABRICACION,ALMACENAMIENTO,DEPOSITO,COMERCIALIZACION,IMPORTACION Y EXPORTACION DE ARMAS DE FUEGO Y CARTUCHERIA,ASI COMO ARTICULOS DE DEFENSA Y SEGURIDAD PERSONAL",
+    "empresa_norm": "USIS GUIRAO",
+    "cargo": "AMPLIAR A",
+    "motius": "len>65,objecte-social,coma-comprimida"
+  },
+  {
+    "persona": "LA ACTIVIDAD DE CORREDOR,TALES COMO LA COMPRA,VENTA U ORGANIZACION DE ACTIVIDADES RELACIONADAS CON LAR ARMAS DE FUEGO,PIEZAS FUNDAMENTALES O MUNICIONES",
+    "empresa_norm": "USIS GUIRAO",
+    "cargo": "AMPLIAR A",
+    "motius": "len>65,objecte-social,coma-comprimida"
+  },
+  {
+    "persona": "LA COMERCIALIZACION,DISTRIBUCION Y VENTA DE TODA CLASE DE PRODUCTOS DE ALIMENTACION,DROGUERIA Y PARA EL MANTENIMIENTO Y FUNCIONAMIENTO DEL HOGAR",
+    "empresa_norm": "BEGUDES IGUALADA",
+    "cargo": "AMPLIAR A",
+    "motius": "len>65,objecte-social,coma-comprimida"
+  },
+  {
+    "persona": "LA COMPRA,GESTION DE TRANSPORTE Y ALMACENAMIENTO,DISTRIBUCION Y VENTA DE COMBUSTIBLES,CARBURANTES,LUCRICANTES Y DERIVADOS DEL PETROLEO COMO ACTIVIDAD AUXILIAR",
+    "empresa_norm": "PETROMIRALLES",
+    "cargo": "AMPLIAR A",
+    "motius": "len>65,objecte-social,coma-comprimida"
+  },
+  {
+    "persona": "LA CONFECCION, EXPORTACION Y DISTRIBUCION DE ARTICULOS TEXTILES,UNIFORMES, ROPA DEL HOGAR, Y SUS COMPLEMENTOS",
+    "empresa_norm": "BARNA IMPORT MEDICA",
+    "cargo": "AMPLIAR A",
+    "motius": "len>65,objecte-social,coma-comprimida"
+  },
+  {
+    "persona": "LA CONSTRUCCION COMPLETA,REPARACION Y CONSERVACION DE OBRAS CIVILES",
+    "empresa_norm": "ELM",
+    "cargo": "AMPLIAR A",
+    "motius": "len>65,objecte-social,coma-comprimida"
+  },
+  {
+    "persona": "LA CONSTRUCCION,CONSERVACION Y MANTENIMIENTO DE TODO TIPO DE OBRAS E INSTALACIONES",
+    "empresa_norm": "ASFALTOS BARCINO",
+    "cargo": "AMPLIAR A",
+    "motius": "len>65,objecte-social,coma-comprimida"
+  },
+  {
+    "persona": "LA CREACION,PRODUCCION Y EXPLOTACION TEATRAL Y DE CUALQUIER TIPO DE ESPECTACULOS ARTISTICOS",
+    "empresa_norm": "GROSTEL GRUP EMPRESARIAL",
+    "cargo": "AMPLIAR A",
+    "motius": "len>65,objecte-social,coma-comprimida"
+  },
+  {
+    "persona": "LA ENSEÑANZA Y FORMACION A TRAVES DE LOS CORRESPONDIENTES PROFESIONALES Y PODRA IMPARTIR CURSOS DE FORMACION TECNICA Y RECICLAJE PROFESIONAL,IMPARTIR CURSOS DE FORMACION EN EL AMBITO DE LA SALUD AMBIENTAL",
+    "empresa_norm": "SISTEMAS DE GESTION AMBIENTAL",
+    "cargo": "AMPLIAR A",
+    "motius": "len>65,objecte-social,coma-comprimida"
+  },
+  {
+    "persona": "LA EXPLOTACION,GESTION,MANTENIMIENTO Y EQUIPOS DE PRIMERA INTERVENCION EN TUNELES,EN TODO TIPO DE INFRAESTRUCTURAS VIARIAS Y EN CENTROS DE GESTION DE TRAFICO",
+    "empresa_norm": "ALUMBRADOS VIARIOS",
+    "cargo": "AMPLIAR A",
+    "motius": "len>65,objecte-social,coma-comprimida"
+  },
+  {
+    "persona": "LA IMPARTICION DE CURSOS PARA LA PREVENCION DE LA LEGIONELA Y SANIDAD AMBIENTAL EN INSTALACIONES DE RIESGO,PARA LOS OPERADORES DE MANTENIMIENTO DE DICHAS INSTALACIONES",
+    "empresa_norm": "EMINFOR",
+    "cargo": "AMPLIAR A",
+    "motius": "len>65,objecte-social,coma-comprimida"
+  },
+  {
+    "persona": "LA INTERMEDIACION EN LA ELABORACION DE PROYECTOS DE INGENIERIA AMBIENTAL,ASI COMO DE PRODUCTOS RELACIONADOS CON LA SOSTENIBILIDAD E IMPARTIR CURSOS DE FORMACION RELACIONADOS CON DICHA TEMATICA",
+    "empresa_norm": "PUNT NET ANOIA S.L",
+    "cargo": "AMPLIAR A",
+    "motius": "len>65,objecte-social,coma-comprimida"
+  },
+  {
+    "persona": "LA ORGANIZACION DE TODA CLASE DE EVENTOS DEPORTIVOS EN GENERAL,YA SEA DIRECTAMENTE COMO INDIRECTAMENTE Y TAMBIEN EN REPRESENTACION Y A COMISION",
+    "empresa_norm": "INVICTO SPORT",
+    "cargo": "AMPLIAR A",
+    "motius": "len>65,objecte-social,coma-comprimida"
+  },
+  {
+    "persona": "LA ORGANIZACION Y PROMOCION DE CONGRESOS,FERIAS Y EXPOSICIONES,ASI COMO EL MONTAJE Y DESMONTAJE DE LAS MISMAS",
+    "empresa_norm": "BAF GENERAL DE CATALUNYA",
+    "cargo": "AMPLIAR A",
+    "motius": "len>65,objecte-social,coma-comprimida"
+  },
+  {
+    "persona": "LA PRESTACION DE SERVICIOS DE MARKETING,PUBLICIDAD Y DISEÑO, ASI COMO LA PLANIFICACION,EJECUCION,DIFUSION Y DISTRIBUCION DE CAMPAÑAS PUBLICITARIAS Y DE PROPAGANDA, CON INDEPENDENCIA DEL MEDIO Y SOPORTE,A TRAVES DE",
+    "empresa_norm": "COOLTRA MOTOS",
+    "cargo": "AMPLIAR EN",
+    "motius": "len>65,objecte-social,coma-comprimida"
+  },
+  {
+    "persona": "LA PRESTACION DE TODO TIPO DE SERVICIOS DE MANTENIMIENTO Y REPARACION DE EQUIPOS INFORMATICOS,DE IMPRESION Y OFIMATICOS",
+    "empresa_norm": "SISTEMES D'ORGANITZACIO",
+    "cargo": "AMPLIAR A",
+    "motius": "len>65,objecte-social,coma-comprimida"
+  },
+  {
+    "persona": "LA PRESTACION DEL SERVICIO DE TRANSPORTE SANITARIO COLECTIVO NO ASISTENCIAL POR CARRETERA,CONSISTENTE EN LA PRESTACION DE LABORES DE SERVICIO SOCIAL",
+    "empresa_norm": "AUTOBUSES DE GRANOLLERS",
+    "cargo": "AMPLIAR A",
+    "motius": "len>65,objecte-social,coma-comprimida"
+  },
+  {
+    "persona": "LA REALIZACION Y EJECUCION DE PROYECTOS DE URBANISMO,ARQUITECTURA E INGENIERIA,SIN QUE EN NINGUN CASO CONSTITUYA UNA SOCIEDAD PROFESIONAL",
+    "empresa_norm": "BERRYSAR",
+    "cargo": "AMPLIAR A",
+    "motius": "len>65,objecte-social,coma-comprimida"
+  },
+  {
+    "persona": "LOS SERVICIOS DE ENSEÑANZA Y EDUCACION EN GENERAL,CURSOS DE EDUCACION PRINCIPALMENTE DE OCIO Y MONITORAJE,TODO ESTO PREVIAS LAS OPORTUNAS AUTORIZACIONES.SERVICIOS RECREATIVOS,CULTURALES Y DEPORTIVOS",
+    "empresa_norm": "AZIMUT PROJECTES",
+    "cargo": "AMPLIAR A",
+    "motius": "len>65,objecte-social,coma-comprimida"
+  },
+  {
+    "persona": "LOS SERVICIOS DE ENSEÑANZA Y EDUCACION EN GENERAL,PREVIAS LAS OPORTUNAS AUTORIZACIONES.EL ASESORAMIENTO TECNICO,PLANIFICACION,GESTION Y REALIZACION DE ACTIVIDADES SOCIOCULTURALES.SERVICIOS RECREATIVOS,CULTURALES",
+    "empresa_norm": "AQUASOS SERVEIS INTEGRALS",
+    "cargo": "AMPLIAR A",
+    "motius": "len>65,objecte-social,coma-comprimida"
+  },
+  {
+    "persona": "EL DISEÑO, LA FABRICACION, COMERCIALIZACION, DISTRIBUCION, MANTENIMIENTO, REPARACION, REHABILITACION, HOMOLOGACION Y LA COMPRAVENTA, ALQUILER, TRANSPORTE Y EXPLOTACION DE TODA CLASE DE MAQUINARIA EN GENERAL, ..",
+    "empresa_norm": "CONSTRUCTORA DE CALAF",
+    "cargo": "AMPLIAR A",
+    "motius": "len>65,objecte-social,ellipsi"
+  },
+  {
+    "persona": "LA CONSULTORIA EN TRATAMIENTO DE SEMILLAS.TRATAMIENTO Y RECUBRIMIENTO DE SEMILLAS.LA CONSTRUCCION DE MAQUINARIA Y EQUIPOS MECANICOS.FABRICACION DE ESTRUCTURAS METALICAS Y CERRAJERIA.INSTALACIONES Y MONTAJES ..",
+    "empresa_norm": "ACUSTIC ANOIA",
+    "cargo": "AMPLIAR A",
+    "motius": "len>65,objecte-social,ellipsi"
+  },
+  {
+    "persona": "LA PRESTACION DEL SERVICIO DE ORDENACION DEL ESTACIONAMIENTO DE VEHICULOS, LA MOVILIDAD Y APARCAMIENTO EN SUPERFICIE, LA GESTION DEL SERVICIO PUBLICO DE ESTACIONAMIENTO CONTROLADO DE VEHICULOS A MOTOR CON..",
+    "empresa_norm": "SOCIEDAD ANONIMA MASATS TRANSPORTS GENERALS",
+    "cargo": "AMPLIAR A",
+    "motius": "len>65,objecte-social,ellipsi"
+  },
+  {
+    "persona": "LA REALIZACION DE OBRAS PUBLICAS O PRIVADAS DE CUALQUIER CLASE, TANTO CIVILES COMO DE CUALQUIER OTRO TIPO, ESPECIALMENTE EXCAVACIONES, DEMOLICIONES, DERRIBOS, EXTRACCIONES, CONSOLIDACION Y PREPARACION DE..",
+    "empresa_norm": "BENITO URBAN",
+    "cargo": "AMPLIAR A",
+    "motius": "len>65,objecte-social,ellipsi"
+  },
+  {
+    "persona": "ALQUILER Y VENTA DE BIENES MUEBLES Y DE CONSUMO,RELACIONADOS CONLA ORGANIZACION DE EVENTOS,FIESTAS Y CELEBRACIONES EN GENERAL,TALES COMO MAQUINARIA Y EQUIPOS HOTELEROS,ELECTRODOMESTICOS Y ARTICULOS O APARATOS ..",
+    "empresa_norm": "ABANIK PRODUCCIONES",
+    "cargo": "AMPLIAR A",
+    "motius": "len>65,objecte-social,ellipsi,coma-comprimida"
+  },
+  {
+    "persona": "ARTES GRAFICAS,LA IMPRESION DIGITAL DE PEQUEÑO Y GRAN FORMATO,SERVICIOS DE DISEÑO GRAFICO,TECNICAS DE IMPRESION,ROTULACION,EL ESCANER,PLASTIFICADOS,CARTELERIA DE PEQUEÑO Y GRAN FORMATO,VALLAS PUBLICITARIAS I ..",
+    "empresa_norm": "INICIATIVES EVENTS",
+    "cargo": "AMPLIAR A",
+    "motius": "len>65,objecte-social,ellipsi,coma-comprimida"
+  },
+  {
+    "persona": "ASESORAMIENTO,GESTION Y TRATAMIENTO DE PRODUCTOS FITOSANITARIOS Y DE CONTROL DE PLAGAS Y PARASITOS.ASESORAMIENTO TECNICO AGRARIO EN GENERAL Y PRESTACION DE TODO TIPO DE SERVICIOS AGRICOLAS Y DE JARDINERIA ..",
+    "empresa_norm": "MARTI FABRES",
+    "cargo": "AMPLIAR A",
+    "motius": "len>65,objecte-social,ellipsi,coma-comprimida"
+  },
+  {
+    "persona": "COMPRA,VENTA Y ARRENDAMIENTO DE ORDENADORES Y TODO TIPO DE EQUIPOS ELECTRONICOS Y ACCESORIOS ASI COMO LA REPARACION Y MANTENIMIENTO DE LOS MISMOS.FORMACION DE PRODUCTOS SOFTWARE DE GESTION Y OFIMATICOS..",
+    "empresa_norm": "TOT CLAR",
+    "cargo": "AMPLIAR A",
+    "motius": "len>65,objecte-social,ellipsi,coma-comprimida"
+  },
+  {
+    "persona": "EL MANTENIMIENTO,REPARACION DE EQUIPOS E INSTALACIONES ELECTRICAS Y ELECTRONICAS Y LA REALIZACION..",
+    "empresa_norm": "BAF GENERAL DE CATALUNYA",
+    "cargo": "AMPLIAR A",
+    "motius": "len>65,objecte-social,ellipsi,coma-comprimida"
+  },
+  {
+    "persona": "FABRICACION,DISTRIBUCION,IMPORTACION Y EXPORTACION E INSTALACION DE TODO TIPO DE PRODUCTOS Y SUMINISTROS DE LOS MISMOS O DE SUS INSTALACIONES TANTO EN VENTA COMO EN ALQUILER.FORMALIZAR TODO TIPO DE CONTRATOS CON ..",
+    "empresa_norm": "XIMENEZ CATALUNYA",
+    "cargo": "AMPLIAR A",
+    "motius": "len>65,objecte-social,ellipsi,coma-comprimida"
+  },
+  {
+    "persona": "GESTION DE FLOTAS DE VEHICULOS DE MOTOR,A NIVEL NACIONAL E INTERNACIONAL,INCLUIDO EL SERVICIO DE INFORMACION Y ASESORAMIENTO A LOS CLIENTESEN TODOS LOS ASPECTOS DE LA OPERACION Y DEL CONTROL DE UN PARQUE MOVIL..",
+    "empresa_norm": "TUV SUD IBERIA",
+    "cargo": "AMPLIAR A",
+    "motius": "len>65,objecte-social,ellipsi,coma-comprimida"
+  },
+  {
+    "persona": "L A PRODUCCION,COMPRA,VENTA,ALQUILER,EDICION,REPRODUCCION,IMPORTACION,EXPORTACION,DISTRIBUCION,EXHIBICI ON,FINANCIACION DE TODA CLASE DE OBRAS AUDIOVISUALES,EN CUALQUIERA DE SUS MODALIDADES Y CUALQUIERA QUE SEA ..",
+    "empresa_norm": "LUSTIG MEDIA S.L",
+    "cargo": "A M P L I A R A",
+    "motius": "len>65,objecte-social,ellipsi,coma-comprimida"
+  },
+  {
+    "persona": "LA APERTURA,PROMOCION,MONTAJE Y EXPLOTACION,BIEN POR CUENTA PROPIA O BIEN MEDIANTE EL SISTEMA DE ARRENDAMIENTO,CONCESION O CUALQUIER OTRA FORMA JURIDICA VALIDA DE TODA CLASE DE ESTABLECIMIENTOS,INSTALACIONES Y ..",
+    "empresa_norm": "EL SILU GROC S.L",
+    "cargo": "AMPLIAR A",
+    "motius": "len>65,objecte-social,ellipsi,coma-comprimida"
+  },
+  {
+    "persona": "LA ASESORIA EMPRESARIAL Y LA FORMACION EN MATERIA TECNICA,DE SEGURIDAD,SALUD,CALIDAD Y MEDIO AMBIENTE.LA INTERMEDIACION ENTRE PROFESIONAL Y PACIENTE EN LA PRESTACION DE SERVICIOS MEDICOS PARA LA OBTENCION DE ..",
+    "empresa_norm": "SERVIPREIN SOCIEDAD DE PREVENCION",
+    "cargo": "AMPLIAR A",
+    "motius": "len>65,objecte-social,ellipsi,coma-comprimida"
+  },
+  {
+    "persona": "LA COMERCIALIZACION,FABRICACION Y MONTAJE DE COMPLEMENTOS DE MADERA,ALUMINIO,VIDRIO,PAVIMENTOS Y REVESTIMIENTOS EXTERIORES E INTERIORES PARA LA DECORACION DE HOGARES,LOCALES PUBLICOS Y COMERCIALES..",
+    "empresa_norm": "MOVIMENTS I TRANSPORTS QUIMAR",
+    "cargo": "AMPLIAR A",
+    "motius": "len>65,objecte-social,ellipsi,coma-comprimida"
+  },
+  {
+    "persona": "LA COMPRA Y VENTA DE ENERGIA ELECTRICA,SIN LIMITACIONES O RESERVAS A DICHA ACTIVIDAD ACTUANDO COMO GESTOR DE CARGA DEL SISTEMA PARA LA RECARGA DE VEHICULOS ELECTRICOS,RESPETANDO LAS EXIGENCIAS QUE RESULTE DE ..",
+    "empresa_norm": "SABA APARCAMIENTOS",
+    "cargo": "AMPLIAR A",
+    "motius": "len>65,objecte-social,ellipsi,coma-comprimida"
+  },
+  {
+    "persona": "LA FORJA, ESTAMPADO,EMBUTICION,TROQUELADO,CORTE Y REPULSADO DE METALES.EL DISEÑO,LA FABRICACION,IMPORTACION,EXPORTACION,COMERCIALIZACION Y DISTRIBUCION DE PRODUCTOS Y MATERIALES PARA LA CONSTRUCCION EN GENERAL..",
+    "empresa_norm": "DISSENY BARRACA",
+    "cargo": "AMPLIAR A",
+    "motius": "len>65,objecte-social,ellipsi,coma-comprimida"
+  },
+  {
+    "persona": "LA GESTION DE ESTACIONES DE INSPECCION TECNICA DE TODO TIPO DE VEHICULOS TANTO EN PROPIEDAD COMO EN CONCESION ADMINISTRATIVA,ARRENDAMIENTOO CUALQUIER OTRA TITULARIDAD ADMITIDA EN DERECHO YA SEA DIRECTAMENTE..",
+    "empresa_norm": "ELECTROMECANICA SOLER",
+    "cargo": "AMPLIAR A",
+    "motius": "len>65,objecte-social,ellipsi,coma-comprimida"
+  },
+  {
+    "persona": "LA GESTION Y EXPLOTACION DE APARCAMIENTOS DE TODO TIPO DE VEHICULOS,TANTO EN PROPIEDAD,CONCESION ADMINISTRATIVA,ARRENDAMIENTO,O CUALQUIER OTRA TITULARIDAD ADMITIDA EN DERECHO,YA SEA DIRECTAMENTE..",
+    "empresa_norm": "ELECTROMECANICA SOLER",
+    "cargo": "AMPLIAR A",
+    "motius": "len>65,objecte-social,ellipsi,coma-comprimida"
+  },
+  {
+    "persona": "LA GESTION,PRESTACION Y ADMINISTRACION DE SERVICIOS DE MANTENIMIENTO Y DE LIMPIEZA DE TODO TIPO DE EDIFICACIONES, INSTALACIONES Y ELEMENTOS TECNICOS DESTINADOS A ACTIVIDADES SANITARIAS,SOCIOSANITARIAS..",
+    "empresa_norm": "CSC SERVEIS INSTRUMENTALS S.A",
+    "cargo": "AMPLIAR A",
+    "motius": "len>65,objecte-social,ellipsi,coma-comprimida"
+  },
+  {
+    "persona": "LA IMPORTACION,EXPORTACION Y COMERCIO AL MAYOR Y MENOR DE TODA CLASE DE MOBILIARIO Y MAQUINARIA..",
+    "empresa_norm": "CATERING DE L'ANOIA",
+    "cargo": "AMPLIAR A",
+    "motius": "len>65,objecte-social,ellipsi,coma-comprimida"
+  },
+  {
+    "persona": "LA ORGANIZACION DE EVENTOS Y ESPECTACULOS DE TODO TIPO,CULTURALES,LUDICOS Y DE EMPRESA.LA EXPLOTACION DE FINCAS ..",
+    "empresa_norm": "HAUBI",
+    "cargo": "AMPLIAR A",
+    "motius": "len>65,objecte-social,ellipsi,coma-comprimida"
+  },
+  {
+    "persona": "LA PRODUCCION Y VENTA DE ENERGIA ELECTRICA,LA INSTALACION,REPARACION Y MANTENIMIENTO DE INSTALACIONES DE ALTA,BAJA Y MEDIA TENSION,ASI COMO DE TELECOMUNICACIONES,FONTANERIA,GAS,CALEFACCION,CLIAMATIZACION,FRIO..",
+    "empresa_norm": "SERVEIS I MANTENIMENTS SERVIAL S.L",
+    "cargo": "AMPLIAR A",
+    "motius": "len>65,objecte-social,ellipsi,coma-comprimida"
+  },
+  {
+    "persona": "LA REALIZACION DE PROYECTOS Y PRESTACION DE SERVICIOS DE HIGIENIZACION,DESINFECCION,DESINFECTACION Y DESRATIZACION ASI COMO LA COMERCIALIZACION,AL DETALLE O AL MAYOR,IMPORTACION,EXPORTACION Y DISTRIBUCION..",
+    "empresa_norm": "EMINFOR",
+    "cargo": "AMPLIAR A",
+    "motius": "len>65,objecte-social,ellipsi,coma-comprimida"
+  },
+  {
+    "persona": "LOS SERVICIOS PUBLICITARIOS Y DE RELACIONES PUBLICAS,ESTUDIOS DE MERCADO Y ESTUDIOS DE OPINION.LA COMPRAVENTA Y COMERCIALIZACION DE TODO TIPO DE ARTICULOS DEPORTIVOS Y LA ACTIVIDAD INMOBILIARIA DE COMPRAVENTA, ..",
+    "empresa_norm": "ESPAI I DIFUSIO",
+    "cargo": "AMPLIAR A",
+    "motius": "len>65,objecte-social,ellipsi,coma-comprimida"
+  },
+  {
+    "persona": "LOS SERVICIOS PUBLICITARIOS,RELACIONES PUBLICAS,SERVICIOS DE PUBLICIDAD MEDIANTE CUALQUIER MEDIO,CREACION DE CAMPAÑAS DE PUBLICIDAD,DE INFORMACION,PROPAGANDA ELECTORAL,COMUNICACION INSTITUCIONAL O PUBLICA Y ..",
+    "empresa_norm": "INICIATIVES EVENTS",
+    "cargo": "AMPLIAR A",
+    "motius": "len>65,objecte-social,ellipsi,coma-comprimida"
+  },
+  {
+    "persona": "OFRECIMIENTO,PROMOCION,COMERCIALIZACION O, EN GENERAL,EXPLOTACION,DE JUEGOS,CONCURSOS LOTERIAS,APUESTAS O PRODUCTOS SIMILARES,COMO PUNTO DE VENTA MIXTO,POR CUENTA Y NOMBRE DE LA SOCIEDAD ESTATAL LOTERIAS Y ..",
+    "empresa_norm": "PA IGUALADA",
+    "cargo": "AMPLIAR A",
+    "motius": "len>65,objecte-social,ellipsi,coma-comprimida"
+  },
+  {
+    "persona": "TRABAJOS DE CONSERVACION Y MANTENIMIENTO EN EDIFICIOS,TALES COMO ALBAÑILERIA,CRISTALERIA,CARPINTERIA,PINTURA,REVESTIMIENTOS CON PAPEL,TEJIDOS O PLASTICOS.TRABAJOS DE CONSERVACION Y MANTENIMIENTO DE TODO TIPO..",
+    "empresa_norm": "SERVEIS VIALS DEL VALLES",
+    "cargo": "AMPLIAR A",
+    "motius": "len>65,objecte-social,ellipsi,coma-comprimida"
+  },
+  {
+    "persona": "ACTIVIDADES DE CONSTRUCCION ESPECIALIZADA N.C.O.P",
+    "empresa_norm": "APREN SERVEIS AMBIENTALS",
+    "cargo": "AMPLIAR A",
+    "motius": "objecte-social"
+  },
+  {
+    "persona": "ALDESA ACTIVIDADES DE CONSTRUCCION SL",
+    "empresa_norm": "AERONAVAL DE CONSTRUCCIONES E INSTALACIONES",
+    "cargo": "Consejero",
+    "motius": "objecte-social"
+  },
+  {
+    "persona": "AUDRIA AUDITORIA Y CONSULTORIA SLP",
+    "empresa_norm": "ABS INFORMATICA",
+    "cargo": "AUDIT.CUENT.",
+    "motius": "objecte-social"
+  },
+  {
+    "persona": "BATEC PRODUCCIONS EDITORIALS SL",
+    "empresa_norm": "FEM PRODUCCIONS",
+    "cargo": "CONSEJERO",
+    "motius": "objecte-social"
+  },
+  {
+    "persona": "DEFINICION INTEGRAL TRANSPORTE URBANO SL",
+    "empresa_norm": "SOCIEDAD ANONIMA MASATS TRANSPORTS GENERALS",
+    "cargo": "SOCIO UNICO",
+    "motius": "objecte-social"
+  },
+  {
+    "persona": "DESARROLLAR ACTIVIDADES Y PRESTAR SERVICIOS EN EL AREA DE LAS TE",
+    "empresa_norm": "CINFO, CONTENIDOS INFORMATIVOS PERSONALIZADOS SL(R.M. A CORUÑA)",
+    "cargo": "Ampliado en cuanto a",
+    "motius": "objecte-social"
+  },
+  {
+    "persona": "GABINETE TECNICO DE AUDITORIA Y CONSULTORIA SA",
+    "empresa_norm": "GRUAS SERRAT",
+    "cargo": "AUDIT.CUENT.",
+    "motius": "objecte-social"
+  },
+  {
+    "persona": "IBERO GESTION DE INVERSIONES 2020 SOCIEDAD LIMITAD",
+    "empresa_norm": "2003",
+    "cargo": "Consejero",
+    "motius": "objecte-social"
+  },
+  {
+    "persona": "INSTALACIONES ELECTRICAS.CNAE 4321",
+    "empresa_norm": "AUDIOVISUAL RESOURCES S.L",
+    "cargo": "AMPLIAR A",
+    "motius": "objecte-social"
+  },
+  {
+    "persona": "KCONSULTING CONSULTORIA Y EVENTOS SL",
+    "empresa_norm": "ASR SUSCRIPCION DE RIESGOS",
+    "cargo": "Socio único",
+    "motius": "objecte-social"
+  },
+  {
+    "persona": "LA EDICION DE TODO TIPO DE OBRAS MUSICALES",
+    "empresa_norm": "HFMN CREW",
+    "cargo": "AMPLIAR A",
+    "motius": "objecte-social"
+  },
+  {
+    "persona": "LA INTERMEDIACION EN TRABAJOS DE INGENIERIA",
+    "empresa_norm": "LEICESTER TRADE CENTER",
+    "cargo": "AMPLIAR A",
+    "motius": "objecte-social"
+  },
+  {
+    "persona": "LA PRESTACION DE SERVICIOS DE CATERING",
+    "empresa_norm": "SERVICIOS INDUSTRIALES REUNIDOS",
+    "cargo": "AMPLIAR A",
+    "motius": "objecte-social"
+  },
+  {
+    "persona": "LOS SERVICIOS DE HOSTELERIA Y RESTAURACION",
+    "empresa_norm": "HAUBI",
+    "cargo": "AMPLIAR A",
+    "motius": "objecte-social"
+  },
+  {
+    "persona": "PREFABRICACIONES Y CONTRATAS SA",
+    "empresa_norm": "ESCOFET 1886",
+    "cargo": "CONSEJERO",
+    "motius": "objecte-social"
+  },
+  {
+    "persona": "SERVICIO DE GUARDA Y CUSTODIA DE NIÑOS MENORES DE SEIS AÑOS",
+    "empresa_norm": "MIMAJOCS",
+    "cargo": "AMPLIAR A",
+    "motius": "objecte-social"
+  },
+  {
+    "persona": "SERVICIOS DE INGENIERIA",
+    "empresa_norm": "BATLLE I ROIG",
+    "cargo": "AMPLIAR A",
+    "motius": "objecte-social"
+  },
+  {
+    "persona": "SOCIEDAD DE GESTION DE LOS SISTEMAS DE REGISTRO CO",
+    "empresa_norm": "GIGAS HOSTING",
+    "cargo": "Ent.Reg.Cont",
+    "motius": "objecte-social"
+  },
+  {
+    "persona": "SOCIEDAD DE PROMOCION Y PARTICIPACION EMPRESARIAL",
+    "empresa_norm": "MECALUX",
+    "cargo": "CONSEJERO",
+    "motius": "objecte-social"
+  },
+  {
+    "persona": "SOCIEDAD DE PROMOCION Y PARTICIPACION EMRESARIAL C",
+    "empresa_norm": "MECALUX",
+    "cargo": "CONSEJERO",
+    "motius": "objecte-social"
+  },
+  {
+    "persona": "SPORA CONSULTORIA AMBIENTAL SL",
+    "empresa_norm": "ID WASTE",
+    "cargo": "Adm. Unico",
+    "motius": "objecte-social"
+  },
+  {
+    "persona": "VENTA AL POR MAYOR Y AL POR MENOR DE PRODUCTOS SANITARIOS",
+    "empresa_norm": "TECOLOGIC SYSTEMS",
+    "cargo": "AMPLIAR A",
+    "motius": "objecte-social"
+  },
+  {
+    "persona": "LOS SERVICIOS DE OCIO,ENTRETENIMIENTO Y ESPECTACULOS",
+    "empresa_norm": "HAUBI",
+    "cargo": "AMPLIAR A",
+    "motius": "objecte-social,coma-comprimida"
+  },
+  {
+    "persona": "LA VENTA AL POR ..",
+    "empresa_norm": "PUNT NET ANOIA S.L",
+    "cargo": "AMPLIAR A",
+    "motius": "objecte-social,ellipsi"
+  },
+  {
+    "persona": "PRESTACION DEL SERVICIO DE TRANSPORTE SANITARIO ASISTENCIAL ..",
+    "empresa_norm": "AUTOBUSES DE GRANOLLERS",
+    "cargo": "AMPLIAR A",
+    "motius": "objecte-social,ellipsi"
+  },
+  {
+    "persona": "CURSOS SOBRE DEPURACION,REUTILIZACION Y ..",
+    "empresa_norm": "EMINFOR",
+    "cargo": "AMPLIAR A",
+    "motius": "objecte-social,ellipsi,coma-comprimida"
+  },
+  {
+    "persona": "A CONTRACORRIENTE FILMS SL",
+    "empresa_norm": "GRETICO S.L",
+    "cargo": "ADM.CONJUNTO",
+    "motius": "stop-word"
+  },
+  {
+    "persona": "A Y A2A AUDIT LEGAL CONSULTING SLP",
+    "empresa_norm": "SERVICIOS DEPEC",
+    "cargo": "AUDIT.ART265",
+    "motius": "stop-word"
+  },
+  {
+    "persona": "Y LA ..",
+    "empresa_norm": "SISTEMAS DE GESTION AMBIENTAL",
+    "cargo": "AMPLIAR A",
+    "motius": "stop-word,ellipsi"
+  },
+  {
+    "persona": "A LA PODA Y A TRABAJOS DE JARDINERIA TALES..",
+    "empresa_norm": "ACUALATA",
+    "cargo": "AMPLIAR A",
+    "motius": "stop-word,objecte-social,ellipsi"
+  }
+]
