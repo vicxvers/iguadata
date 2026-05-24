@@ -15,7 +15,9 @@
             return window.__IGUADATA_BASE__ + path;
         };
     </script>
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <script>
+        document.write('<link rel="icon" href="' + window.__IGUADATA_ASSET__('/favicon.ico') + '" type="image/x-icon">');
+    </script>
     <!-- SPA redirect: descodifica /?/ruta/que/no/existeix encaminat per 404.html -->
     <script>
         (function (l) {
@@ -35,11 +37,11 @@
         rel="stylesheet">
     <script defer src="https://static.cloudflareinsights.com/beacon.min.js"
         data-cf-beacon='{"token":"23357f28d01044b1907564bc05717389"}'></script>
-    <script src="assets/vendor/react.production.min.js"></script>
-    <script src="assets/vendor/react-dom.production.min.js"></script>
-    <script src="assets/vendor/three.min.js"></script>
-    <script src="assets/vendor/babel.min.js"></script>
-    <link rel="stylesheet" href="styles.css">
+    <script>document.write('<script src="' + window.__IGUADATA_ASSET__('/assets/vendor/react.production.min.js') + '"><\/script>');</script>
+    <script>document.write('<script src="' + window.__IGUADATA_ASSET__('/assets/vendor/react-dom.production.min.js') + '"><\/script>');</script>
+    <script>document.write('<script src="' + window.__IGUADATA_ASSET__('/assets/vendor/three.min.js') + '"><\/script>');</script>
+    <script>document.write('<script src="' + window.__IGUADATA_ASSET__('/assets/vendor/babel.min.js') + '"><\/script>');</script>
+    <script>document.write('<link rel="stylesheet" href="' + window.__IGUADATA_ASSET__('/styles.css') + '">');</script>
 </head>
 
 <body>
@@ -2399,7 +2401,7 @@
                     document.documentElement.classList.remove('home-lock-scroll');
                     document.body.classList.remove('home-lock-scroll');
                 };
-            }, [activeTab]);
+            }, [activeTab, loading]);
 
             useEffect(() => {
                 if (!loading && activeTab !== 'home') return;
