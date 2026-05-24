@@ -1,0 +1,35 @@
+name: Publish Iguadata 1.0.0
+
+on:
+  schedule:
+    # 2026-05-25 00:00 Europe/Madrid = 2026-05-24 22:00 UTC.
+    - cron: '0 22 24 5 *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  publish:
+    if: github.repository == 'vicxvers/iguadata'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Merge launch PR
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+
+          state="$(gh pr view 1 --repo "$GITHUB_REPOSITORY" --json state --jq .state)"
+          if [ "$state" = "MERGED" ] || [ "$state" = "CLOSED" ]; then
+            echo "PR #1 already $state; nothing to do."
+            exit 0
+          fi
+
+          is_draft="$(gh pr view 1 --repo "$GITHUB_REPOSITORY" --json isDraft --jq .isDraft)"
+          if [ "$is_draft" = "true" ]; then
+            gh pr ready 1 --repo "$GITHUB_REPOSITORY"
+          fi
+
+          gh pr merge 1 --repo "$GITHUB_REPOSITORY" --merge --delete-branch=false
