@@ -31,35 +31,6 @@ Les alertes, imports, vinculacions mercantils i patrons detectats no impliquen i
 
 La plataforma és una eina de transparència, exploració i context periodístic basada en fonts públiques. Qualsevol dada pot contenir errors d'origen o derivats del processament automatitzat.
 
-## Actualització
-
-El workflow `Update BORME data` actualitza setmanalment:
-
-- `json/contractes.json`
-- `json/contractes_arxiu.json`
-- `json/empreses.json`
-- `json/carrecs.json`
-- `json/persones.json`
-- `json/fraccionament.json`
-- `json/concentracio.json`
-- `json/electoralisme.json`
-
-També manté snapshots i parquets acumulats als Releases `snapshots` i `data`.
-
-## Desenvolupament
-
-El repositori de producció és `vicxvers/iguadata`.
-
-El desenvolupament i les proves es fan a `vicxvers/iguadata-dev`, publicat a:
-
-[iguadata-dev.netlify.app](https://iguadata-dev.netlify.app)
-
-Per servir la web en local:
-
-```bash
-python -m http.server 8080
-```
-
 ## Contacte
 
 Per consultes, correccions o exercici de drets relacionats amb dades personals:
