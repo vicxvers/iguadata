@@ -4,8 +4,6 @@ Iguadata és una plataforma independent de periodisme de dades per a l'anàlisi 
 
 El projecte combina dades obertes de contractació, informació mercantil i algoritmes propis per fer més accessible, comprensible i fiscalitzable la despesa pública municipal.
 
-[iguadata.cat](https://iguadata.cat)
-
 
 ## Què analitza
 
