@@ -1,6 +1,6 @@
 {
   "metodologia": "fraccionament_v2",
-  "generat_a": "2026-05-25",
+  "generat_a": "2026-05-26",
   "total_alertes": 923,
   "alertes": [
     {
@@ -14,7 +14,10 @@
         "BATLLE I ROIG, SLP"
       ],
       "administradors_comuns": [
-        "BATLLE DURANY ENRIC"
+        "BATLLE BLAY JOAN",
+        "BATLLE BLAY JOSEP",
+        "BATLLE DURANY ENRIC",
+        "ROIG DURAN JOAN"
       ],
       "import_total": 58900.0,
       "limit_legal": 15000,
@@ -191,6 +194,7 @@
         "MALGOSA & DELGADO ARQTEC, SLP"
       ],
       "administradors_comuns": [
+        "DELGADO FERRER XAVIER",
         "MALGOSA MORERA JOSE"
       ],
       "import_total": 29700.0,
@@ -2140,6 +2144,7 @@
         "ANOIA DE PLASTICS INDUSTRIALS, SL"
       ],
       "administradors_comuns": [
+        "ESCURA MIQUEL FERRAN",
         "MIQUEL VILANOVA MARIA ANGELS"
       ],
       "import_total": 15657.78,
@@ -7482,7 +7487,9 @@
         "RODRIGUEZ DE HARO PATRIMONIAL, SL"
       ],
       "administradors_comuns": [
-        "RODRIGUEZ ALVAREZ JOSE MANUEL"
+        "DE HARO GAMARRO ISABEL MARIA",
+        "RODRIGUEZ ALVAREZ JOSE MANUEL",
+        "RODRIGUEZ DE HARO JOSE MANUEL"
       ],
       "import_total": 28184.3,
       "limit_legal": 15000,

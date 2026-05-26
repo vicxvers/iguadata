@@ -179,6 +179,29 @@ def has_round_amount_signal(contracts: list[dict]) -> bool:
     return hits >= (1 if len(contracts) == 1 else 2)
 
 
+def build_company_admins(administradors: dict) -> dict[str, set[str]]:
+    company_admins = defaultdict(set)
+    for empresa, rows in administradors.items():
+        empresa_norm = norm_company(empresa)
+        if not empresa_norm:
+            continue
+        for row in rows or []:
+            if row.get("tipo_entidad") == "empresa":
+                continue
+            admin = fold(row.get("nombre", ""))
+            admin = re.sub(r"[^A-ZÑ0-9]+", " ", admin).strip()
+            if admin:
+                company_admins[empresa_norm].add(admin)
+    return company_admins
+
+
+def common_admins_for_companies(company_admins: dict[str, set[str]], companies: set[str]) -> list[str]:
+    admin_sets = [company_admins.get(company, set()) for company in companies if company]
+    if len(admin_sets) < 2:
+        return []
+    return sorted(set.intersection(*admin_sets))
+
+
 def build_admin_groups(administradors: dict) -> dict[str, set[str]]:
     by_admin = defaultdict(set)
     for empresa, rows in administradors.items():
@@ -331,6 +354,7 @@ def build_cases(contractes: list[dict], administradors: dict) -> list[dict]:
         if c["_company_norm"] and c["_date"]:
             by_company[c["_company_norm"]].append(c)
 
+    company_admins = build_company_admins(administradors)
     admin_groups = build_admin_groups(administradors)
     candidate_groups: list[tuple[str, list[dict], list[str]]] = []
     for company, rows in by_company.items():
@@ -385,7 +409,10 @@ def build_cases(contractes: list[dict], administradors: dict) -> list[dict]:
                         pair_reasons_flat.extend(reasons)
             avg_sim = sum(sims) / len(sims) if sims else 0
             min_days = min(days_list) if days_list else TEMPORAL_WINDOW_DAYS
-            score, motius = score_case(selected, avg_sim, min_days, shared_admins)
+            selected_companies = {c["_company_norm"] for c in selected if c["_company_norm"]}
+            selected_shared_admins = common_admins_for_companies(company_admins, selected_companies)
+            case_shared_admins = selected_shared_admins or shared_admins
+            score, motius = score_case(selected, avg_sim, min_days, case_shared_admins)
             if score < 40:
                 continue
 
@@ -399,7 +426,7 @@ def build_cases(contractes: list[dict], administradors: dict) -> list[dict]:
                 "nivell": risk_label(score),
                 "contractes_count": len(selected),
                 "empreses": sorted({c.get("adjudicatario", "") for c in selected if c.get("adjudicatario")}),
-                "administradors_comuns": shared_admins,
+                "administradors_comuns": case_shared_admins,
                 "import_total": round(sum(float(c.get("importe") or 0) for c in selected), 2),
                 "limit_legal": legal_limit(limit_kind),
                 "tipus_limit": limit_kind,
