@@ -3086,13 +3086,13 @@ function App() {
             return;
         }
         const titles = {
-            'home': 'Iguadata',
+            'home': "Iguadata | El projecte de transparència d'Igualada",
             'loading': 'Iguadata',
-            buscador: 'Iguadata',
-            empreses: 'Iguadata',
-            persones: 'Iguadata',
-            analisi: 'Iguadata',
-            sobre: 'Iguadata',
+            buscador: 'Contractes | Iguadata',
+            empreses: 'Empreses | Iguadata',
+            persones: 'Persones | Iguadata',
+            analisi: 'Anàlisi | Iguadata',
+            sobre: 'Sobre | Iguadata',
             legal: 'Iguadata'
         };
         document.title = titles[activeTab] || 'Iguadata';
