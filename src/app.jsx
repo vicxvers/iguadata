@@ -412,7 +412,11 @@ const CONTRACTS_CACHE_KEY = 'iguadata_contracts_cache_v1';
 
 async function fetchStaticContractsBackup() {
     const data = await fetchStaticContractsSnapshot();
-    return data.map(c => ({ ...c, __iguadataInternalContract: true }));
+    return data.map(c => ({
+        ...c,
+        slug: c.slug || buildContractSlug(c),
+        __iguadataInternalContract: true
+    }));
 }
 
 async function fetchStaticContractsSnapshot() {
@@ -2939,6 +2943,9 @@ function App() {
                 {
                     const seen = new Map();
                     for (const c of contractsData) {
+                        if (!c.slug || String(c.slug).startsWith('undefined')) {
+                            c.slug = buildContractSlug(c);
+                        }
                         const n = (seen.get(c.slug) || 0) + 1;
                         seen.set(c.slug, n);
                         if (n > 1) c.slug = `${c.slug}-${n}`;
