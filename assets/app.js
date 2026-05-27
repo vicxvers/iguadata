@@ -129,6 +129,28 @@ function riskLabel(n) {
 }
 const BASE = window.__IGUADATA_BASE__ || '';
 const assetUrl = path => `${BASE}${path}`;
+let DATA_VERSION = '';
+const setDataVersion = version => {
+  DATA_VERSION = version || '';
+};
+const jsonAssetUrl = path => {
+  const suffix = DATA_VERSION ? `?v=${encodeURIComponent(DATA_VERSION)}` : '';
+  return `${assetUrl(path)}${suffix}`;
+};
+let threeLoaderPromise = null;
+function loadThree() {
+  if (window.THREE) return Promise.resolve(window.THREE);
+  if (threeLoaderPromise) return threeLoaderPromise;
+  threeLoaderPromise = new Promise((resolve, reject) => {
+    const script = document.createElement('script');
+    script.src = assetUrl('/assets/vendor/three.min.js');
+    script.async = true;
+    script.onload = () => resolve(window.THREE);
+    script.onerror = reject;
+    document.head.appendChild(script);
+  });
+  return threeLoaderPromise;
+}
 const buildRouteUrl = path => `${BASE}${path.startsWith('/') ? path : `/${path}`}`;
 const isMobile = () => window.matchMedia('(max-width: 768px)').matches;
 function isPlainLeftClick(event) {
@@ -377,7 +399,7 @@ async function fetchAllContracts() {
 }
 const CONTRACTS_CACHE_KEY = 'iguadata_contracts_cache_v1';
 async function fetchStaticContractsBackup() {
-  const resp = await fetch(assetUrl('/json/contractes.json?t=' + new Date().getTime()));
+  const resp = await fetch(jsonAssetUrl('/json/contractes.json'));
   if (!resp.ok) throw new Error(`Backup contractes HTTP ${resp.status}`);
   const data = await resp.json();
   return Array.isArray(data) ? data.map(c => ({
@@ -386,7 +408,7 @@ async function fetchStaticContractsBackup() {
   })) : [];
 }
 async function fetchArchivedContracts() {
-  const resp = await fetch(assetUrl('/json/contractes_arxiu.json?t=' + new Date().getTime()));
+  const resp = await fetch(jsonAssetUrl('/json/contractes_arxiu.json'));
   if (!resp.ok) return [];
   const data = await resp.json();
   return Array.isArray(data) ? data : [];
@@ -3107,8 +3129,12 @@ function App() {
   const [monopolio, setMonopolio] = useState(null);
   const [stats, setStats] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [dataLoading, setDataLoading] = useState(true);
+  const [summary, setSummary] = useState(null);
+  const [summaryResolved, setSummaryResolved] = useState(false);
   const [loadingProgress, setLoadingProgress] = useState(0);
   const [homeIntroFading, setHomeIntroFading] = useState(false);
+  const [threeReadyTick, setThreeReadyTick] = useState(0);
   const [showMobileScrollTop, setShowMobileScrollTop] = useState(false);
   const homeIntroPlayedRef = useRef(false);
   useEffect(() => {
@@ -3121,6 +3147,37 @@ function App() {
     }, 50);
     return () => clearInterval(timer);
   }, [loading]);
+  useEffect(() => {
+    let cancelled = false;
+    fetch(assetUrl('/json/resum.json'), {
+      cache: 'no-cache'
+    }).then(res => res.ok ? res.json() : null).then(data => {
+      if (cancelled) return;
+      if (data) {
+        setDataVersion(data.version);
+        setSummary(data);
+        if (data.stats) {
+          setStats({
+            total_contratos: data.stats.total_contratos || 0,
+            importe_total: data.stats.importe_total || 0,
+            num_empresas: data.stats.num_empresas || 0
+          });
+        }
+      }
+    }).catch(err => {
+      console.warn('No s\'ha pogut carregar el resum inicial:', err);
+    }).finally(() => {
+      if (cancelled) return;
+      setSummaryResolved(true);
+      setLoadingProgress(100);
+      setTimeout(() => {
+        if (!cancelled) setLoading(false);
+      }, 180);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
   useEffect(() => {
     if (activeTab !== 'home' || loading || homeIntroPlayedRef.current) return;
     homeIntroPlayedRef.current = true;
@@ -3144,7 +3201,15 @@ function App() {
     const homeNode = canvas.parentElement;
     if (!homeNode) return;
     const THREE = window.THREE;
-    if (!THREE) return;
+    if (!THREE) {
+      let cancelled = false;
+      loadThree().then(() => {
+        if (!cancelled) setThreeReadyTick(tick => tick + 1);
+      }).catch(err => console.warn('No s\'ha pogut carregar Three.js:', err));
+      return () => {
+        cancelled = true;
+      };
+    }
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const styles = getComputedStyle(document.documentElement);
     const particleColor = styles.getPropertyValue('--surface').trim();
@@ -3322,7 +3387,7 @@ function App() {
       geometry.dispose();
       renderer.dispose();
     };
-  }, [activeTab, loading]);
+  }, [activeTab, loading, threeReadyTick]);
   useEffect(() => {
     const updateScrollTopButton = () => {
       setShowMobileScrollTop(activeTab !== 'home' && window.matchMedia('(max-width: 768px)').matches && window.scrollY > 180);
@@ -3589,17 +3654,23 @@ function App() {
   const importTotal = useCountUp(stats ? Math.floor(stats.importe_total / 1000000) : 0, 2000, !loading && stats);
   const importTotalTenths = useCountUp(stats ? Math.round(stats.importe_total / 100000) : 0, 2000, !loading && stats);
   const empresasCount = useCountUp(stats?.num_empresas || 0, 2000, !loading && stats);
-  const personesCount = useCountUp(persones.length || 0, 2000, !loading && stats);
+  const personesMetricTotal = persones.length || summary?.stats?.num_persones || 0;
+  const personesCount = useCountUp(personesMetricTotal, 2000, !loading && stats);
   const alertesVisibleTotal = useMemo(() => fraudes.filter(f => f.nivell !== 'BAIX').length + concentracio.length + electoral.filter(f => f.nivell !== 'BAIX').length, [fraudes, concentracio, electoral]);
-  const alertesCount = useCountUp(alertesVisibleTotal, 2000, !loading && stats);
+  const alertesMetricTotal = alertesVisibleTotal || summary?.stats?.num_alertes || 0;
+  const alertesCount = useCountUp(alertesMetricTotal, 2000, !loading && stats);
   useEffect(() => {
-    Promise.all([fetchAllContractsCached(), fetch(assetUrl('/json/empreses.json')).then(res => res.json()), fetch(assetUrl('/json/persones.json?t=' + new Date().getTime())).then(res => res.ok ? res.json() : []), fetch(assetUrl('/json/carrecs.json?t=' + new Date().getTime())).then(res => res.ok ? res.json() : {}), fetch(assetUrl('/json/fraccionament.json?t=' + new Date().getTime())).then(res => res.ok ? res.json() : {
+    if (!summaryResolved) return;
+    let cancelled = false;
+    setDataLoading(true);
+    Promise.all([fetchAllContractsCached(), fetch(jsonAssetUrl('/json/empreses.json')).then(res => res.json()), fetch(jsonAssetUrl('/json/persones.json')).then(res => res.ok ? res.json() : []), fetch(jsonAssetUrl('/json/carrecs.json')).then(res => res.ok ? res.json() : {}), fetch(jsonAssetUrl('/json/fraccionament.json')).then(res => res.ok ? res.json() : {
       alertes: []
-    }), fetch(assetUrl('/json/concentracio.json?t=' + new Date().getTime())).then(res => res.ok ? res.json() : {
+    }), fetch(jsonAssetUrl('/json/concentracio.json')).then(res => res.ok ? res.json() : {
       alertes: []
-    }), fetch(assetUrl('/json/electoralisme.json?t=' + new Date().getTime())).then(res => res.ok ? res.json() : {
+    }), fetch(jsonAssetUrl('/json/electoralisme.json')).then(res => res.ok ? res.json() : {
       alertes: []
     }), fetchArchivedContracts()]).then(([socrataRows, existingEmpreses, personesData, administradorsData, fraccionamentData, concentracioData, electoralismeData, archiveRows]) => {
+      if (cancelled) return;
       let contractsData = socrataRows.map((row, i) => row && row.__iguadataInternalContract ? Object.fromEntries(Object.entries(row).filter(([key]) => key !== '__iguadataInternalContract')) : mapSocrataContract(row, i + 1));
       contractsData = mergeArchivedContracts(contractsData, archiveRows);
       {
@@ -3641,14 +3712,16 @@ function App() {
         }
       }
       setEmpreses(empresesData);
-      setLoadingProgress(100);
-      setTimeout(() => setLoading(false), 300);
+      setDataLoading(false);
     }).catch(err => {
+      if (cancelled) return;
       console.error('Error loading data:', err);
-      setLoadingProgress(100);
-      setTimeout(() => setLoading(false), 300);
+      setDataLoading(false);
     });
-  }, []);
+    return () => {
+      cancelled = true;
+    };
+  }, [summaryResolved]);
   useEffect(() => {
     const route = getRoute();
     const resolved = resolveRoute(route);
@@ -4188,6 +4261,19 @@ function App() {
   }, "Tot \xE9s ", React.createElement("em", null, "p\xFAblic")), React.createElement("div", {
     className: "home-loading-progress"
   }, loadingProgress.toLocaleString('ca-ES'), "%")));
+  const dataTabs = ['buscador', 'empreses', 'persones', 'contracte', 'empresa', 'analisi', 'cas-fraccionament', 'cas-concentracio', 'cas-electoralisme'];
+  const isDataTabLoading = dataLoading && dataTabs.includes(activeTab);
+  const renderDataLoading = () => React.createElement("div", {
+    className: "container data-loading-container"
+  }, React.createElement("div", {
+    className: "data-loading-state",
+    role: "status",
+    "aria-live": "polite"
+  }, React.createElement("div", {
+    className: "data-loading-kicker"
+  }, "Iguadata"), React.createElement("div", {
+    className: "data-loading-title"
+  }, "Carregant dades")));
   if (loading) {
     return renderHomeLoading(false);
   }
@@ -4315,7 +4401,7 @@ function App() {
     })
   }, "Sobre")))), activeTab === 'home' && React.createElement("div", {
     className: "home-dissolve-stage"
-  }, renderHomeSection(homeIntroFading ? 'home-intro-target' : ''), homeIntroFading && renderHomeLoading(true)), activeTab === 'buscador' && React.createElement("div", {
+  }, renderHomeSection(homeIntroFading ? 'home-intro-target' : ''), homeIntroFading && renderHomeLoading(true)), isDataTabLoading && renderDataLoading(), activeTab === 'buscador' && !dataLoading && React.createElement("div", {
     className: "container contractes-page"
   }, React.createElement("h1", {
     className: "page-title"
@@ -4735,7 +4821,7 @@ function App() {
   }, "Les persones interessades poden exercir els drets d'acc\xE9s, rectificaci\xF3, limitaci\xF3 o oposici\xF3 al tractament posant-se en contacte a trav\xE9s de la secci\xF3 ", React.createElement("a", {
     href: "/avis-legal",
     className: "prose-link"
-  }, "Av\xEDs legal"), ". El dret de supressi\xF3 (dret a l'oblit) queda limitat per l'art. 17.3.b) del RGPD quan les dades figuren en registres oficials p\xFAblics o en documentaci\xF3 administrativa de contractaci\xF3 p\xFAblica, sense perjudici del dret a sol\xB7licitar la revisi\xF3 de possibles errors factuals.")))), activeTab === 'empreses' && !selectedEmpresa && React.createElement(EmpresesView, {
+  }, "Av\xEDs legal"), ". El dret de supressi\xF3 (dret a l'oblit) queda limitat per l'art. 17.3.b) del RGPD quan les dades figuren en registres oficials p\xFAblics o en documentaci\xF3 administrativa de contractaci\xF3 p\xFAblica, sense perjudici del dret a sol\xB7licitar la revisi\xF3 de possibles errors factuals.")))), activeTab === 'empreses' && !selectedEmpresa && !dataLoading && React.createElement(EmpresesView, {
     empreses: empreses,
     onEmpresaSelect: handleEmpresaClick,
     searchTerm: empresesSearch,
@@ -4748,7 +4834,7 @@ function App() {
     setSortBy: setEmpresesSort,
     currentPage: empresesPage,
     setCurrentPage: setEmpresesPage
-  }), activeTab === 'persones' && React.createElement(PersonesView, {
+  }), activeTab === 'persones' && !dataLoading && React.createElement(PersonesView, {
     persones: persones,
     onEmpresaSelect: handleEmpresaClick,
     onNavigateLegal: () => {
@@ -4766,7 +4852,7 @@ function App() {
     setCurrentPage: setPersonesPage,
     expandedIdx: personesExpanded,
     setExpandedIdx: setPersonesExpanded
-  }), activeTab === 'contracte' && selectedContractForDetail && React.createElement(ContractDetailView, {
+  }), activeTab === 'contracte' && selectedContractForDetail && !dataLoading && React.createElement(ContractDetailView, {
     contract: selectedContractForDetail,
     contracts: contracts,
     empreses: empreses,
@@ -4777,7 +4863,7 @@ function App() {
       setSelectedContractForDetail(null);
     }),
     onEmpresaClick: handleEmpresaClick
-  }), activeTab === 'empresa' && selectedEmpresa && React.createElement(EmpresaView, {
+  }), activeTab === 'empresa' && selectedEmpresa && !dataLoading && React.createElement(EmpresaView, {
     empresa: selectedEmpresa,
     contracts: contracts,
     empreses: empreses,
@@ -4789,7 +4875,7 @@ function App() {
       setSelectedEmpresa(null);
     }),
     onContractSelect: handleDetailClick
-  }), activeTab === 'cas-fraccionament' && selectedCasoDetail && React.createElement(CasFraccionamentView, {
+  }), activeTab === 'cas-fraccionament' && selectedCasoDetail && !dataLoading && React.createElement(CasFraccionamentView, {
     caso: selectedCasoDetail,
     contracts: contracts,
     empreses: empreses,
@@ -4799,7 +4885,7 @@ function App() {
     }),
     onContractSelect: handleDetailClick,
     onEmpresaClick: handleEmpresaClick
-  }), activeTab === 'cas-concentracio' && selectedConcentracioDetail && React.createElement(CasConcentracioView, {
+  }), activeTab === 'cas-concentracio' && selectedConcentracioDetail && !dataLoading && React.createElement(CasConcentracioView, {
     caso: selectedConcentracioDetail,
     contracts: contracts,
     empreses: empreses,
@@ -4809,7 +4895,7 @@ function App() {
     }),
     onContractSelect: handleDetailClick,
     onEmpresaClick: handleEmpresaClick
-  }), activeTab === 'cas-electoralisme' && selectedElectoralismeDetail && React.createElement(CasElectoralismeView, {
+  }), activeTab === 'cas-electoralisme' && selectedElectoralismeDetail && !dataLoading && React.createElement(CasElectoralismeView, {
     caso: selectedElectoralismeDetail,
     contracts: contracts,
     empreses: empreses,
@@ -4819,7 +4905,7 @@ function App() {
     }),
     onContractSelect: handleDetailClick,
     onEmpresaClick: handleEmpresaClick
-  }), activeTab === 'analisi' && React.createElement(React.Fragment, null, React.createElement("div", {
+  }), activeTab === 'analisi' && !dataLoading && React.createElement(React.Fragment, null, React.createElement("div", {
     className: "analisi-tabs-wrapper"
   }, React.createElement("div", {
     className: "analisi-tabs"
@@ -5234,7 +5320,7 @@ function App() {
     type: "button",
     className: 'concentracio-mode-btn' + (concentracioMode === 'temporal' ? ' active' : ''),
     onClick: () => setConcentracioMode('temporal')
-  }, "Concentracions")), concentracioMode === 'temporal' && React.createElement("div", {
+  }, "Temporals")), concentracioMode === 'temporal' && React.createElement("div", {
     className: "search-section analisi-search-section"
   }, React.createElement("div", {
     className: "search-input-wrapper"

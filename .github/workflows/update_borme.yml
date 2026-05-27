@@ -178,6 +178,7 @@ jobs:
           python .github/scripts/generate_fraccionament.py
           python .github/scripts/generate_concentracio.py
           python .github/scripts/generate_electoralisme.py
+          python .github/scripts/generate_resum.py
 
       - name: Validate generated JSONs
         run: |
@@ -194,6 +195,7 @@ jobs:
               "json/fraccionament.json": 10_000,
               "json/concentracio.json": 10_000,
               "json/electoralisme.json": 10_000,
+              "json/resum.json": 100,
               "json/carrecs_eliminats.json": 1_000,
               ".github/scripts/alias_empreses.json": 1_000_000,
           }
@@ -219,6 +221,7 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add json/carrecs.json json/persones.json json/carrecs_eliminats.json
           git add json/empreses.json json/contractes.json json/contractes_arxiu.json json/fraccionament.json json/concentracio.json json/electoralisme.json
+          git add json/resum.json
           git add .github/scripts/alias_empreses.json
           if git diff --staged --quiet; then
             echo "Sense canvis als JSON, res per commitar."

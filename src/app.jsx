@@ -126,6 +126,26 @@ function riskLabel(n) {
 // En GH Pages el projecte es serveix sota /iguadata-dev/. En localhost, sense prefix.
 const BASE = window.__IGUADATA_BASE__ || '';
 const assetUrl = (path) => `${BASE}${path}`;
+let DATA_VERSION = '';
+const setDataVersion = (version) => { DATA_VERSION = version || ''; };
+const jsonAssetUrl = (path) => {
+    const suffix = DATA_VERSION ? `?v=${encodeURIComponent(DATA_VERSION)}` : '';
+    return `${assetUrl(path)}${suffix}`;
+};
+let threeLoaderPromise = null;
+function loadThree() {
+    if (window.THREE) return Promise.resolve(window.THREE);
+    if (threeLoaderPromise) return threeLoaderPromise;
+    threeLoaderPromise = new Promise((resolve, reject) => {
+        const script = document.createElement('script');
+        script.src = assetUrl('/assets/vendor/three.min.js');
+        script.async = true;
+        script.onload = () => resolve(window.THREE);
+        script.onerror = reject;
+        document.head.appendChild(script);
+    });
+    return threeLoaderPromise;
+}
 const buildRouteUrl = (path) => `${BASE}${path.startsWith('/') ? path : `/${path}`}`;
 const isMobile = () => window.matchMedia('(max-width: 768px)').matches;
 
@@ -391,7 +411,7 @@ async function fetchAllContracts() {
 const CONTRACTS_CACHE_KEY = 'iguadata_contracts_cache_v1';
 
 async function fetchStaticContractsBackup() {
-    const resp = await fetch(assetUrl('/json/contractes.json?t=' + new Date().getTime()));
+    const resp = await fetch(jsonAssetUrl('/json/contractes.json'));
     if (!resp.ok) throw new Error(`Backup contractes HTTP ${resp.status}`);
     const data = await resp.json();
     return Array.isArray(data)
@@ -400,7 +420,7 @@ async function fetchStaticContractsBackup() {
 }
 
 async function fetchArchivedContracts() {
-    const resp = await fetch(assetUrl('/json/contractes_arxiu.json?t=' + new Date().getTime()));
+    const resp = await fetch(jsonAssetUrl('/json/contractes_arxiu.json'));
     if (!resp.ok) return [];
     const data = await resp.json();
     return Array.isArray(data) ? data : [];
@@ -2320,8 +2340,12 @@ function App() {
     const [monopolio, setMonopolio] = useState(null);
     const [stats, setStats] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [dataLoading, setDataLoading] = useState(true);
+    const [summary, setSummary] = useState(null);
+    const [summaryResolved, setSummaryResolved] = useState(false);
     const [loadingProgress, setLoadingProgress] = useState(0);
     const [homeIntroFading, setHomeIntroFading] = useState(false);
+    const [threeReadyTick, setThreeReadyTick] = useState(0);
     const [showMobileScrollTop, setShowMobileScrollTop] = useState(false);
     const homeIntroPlayedRef = useRef(false);
 
@@ -2335,6 +2359,38 @@ function App() {
         }, 50);
         return () => clearInterval(timer);
     }, [loading]);
+
+    useEffect(() => {
+        let cancelled = false;
+        fetch(assetUrl('/json/resum.json'), { cache: 'no-cache' })
+            .then(res => res.ok ? res.json() : null)
+            .then(data => {
+                if (cancelled) return;
+                if (data) {
+                    setDataVersion(data.version);
+                    setSummary(data);
+                    if (data.stats) {
+                        setStats({
+                            total_contratos: data.stats.total_contratos || 0,
+                            importe_total: data.stats.importe_total || 0,
+                            num_empresas: data.stats.num_empresas || 0,
+                        });
+                    }
+                }
+            })
+            .catch(err => {
+                console.warn('No s\'ha pogut carregar el resum inicial:', err);
+            })
+            .finally(() => {
+                if (cancelled) return;
+                setSummaryResolved(true);
+                setLoadingProgress(100);
+                setTimeout(() => {
+                    if (!cancelled) setLoading(false);
+                }, 180);
+            });
+        return () => { cancelled = true; };
+    }, []);
 
     useEffect(() => {
         if (activeTab !== 'home' || loading || homeIntroPlayedRef.current) return;
@@ -2361,7 +2417,15 @@ function App() {
         const homeNode = canvas.parentElement;
         if (!homeNode) return;
         const THREE = window.THREE;
-        if (!THREE) return;
+        if (!THREE) {
+            let cancelled = false;
+            loadThree()
+                .then(() => {
+                    if (!cancelled) setThreeReadyTick(tick => tick + 1);
+                })
+                .catch(err => console.warn('No s\'ha pogut carregar Three.js:', err));
+            return () => { cancelled = true; };
+        }
         const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         const styles = getComputedStyle(document.documentElement);
         const particleColor = styles.getPropertyValue('--surface').trim();
@@ -2537,7 +2601,7 @@ function App() {
             geometry.dispose();
             renderer.dispose();
         };
-    }, [activeTab, loading]);
+    }, [activeTab, loading, threeReadyTick]);
 
     useEffect(() => {
         const updateScrollTopButton = () => {
@@ -2805,26 +2869,32 @@ function App() {
     const importTotal = useCountUp(stats ? Math.floor(stats.importe_total / 1000000) : 0, 2000, !loading && stats);
     const importTotalTenths = useCountUp(stats ? Math.round(stats.importe_total / 100000) : 0, 2000, !loading && stats);
     const empresasCount = useCountUp(stats?.num_empresas || 0, 2000, !loading && stats);
-    const personesCount = useCountUp(persones.length || 0, 2000, !loading && stats);
+    const personesMetricTotal = persones.length || summary?.stats?.num_persones || 0;
+    const personesCount = useCountUp(personesMetricTotal, 2000, !loading && stats);
     const alertesVisibleTotal = useMemo(() =>
         fraudes.filter(f => f.nivell !== 'BAIX').length +
         concentracio.length +
         electoral.filter(f => f.nivell !== 'BAIX').length
         , [fraudes, concentracio, electoral]);
-    const alertesCount = useCountUp(alertesVisibleTotal, 2000, !loading && stats);
+    const alertesMetricTotal = alertesVisibleTotal || summary?.stats?.num_alertes || 0;
+    const alertesCount = useCountUp(alertesMetricTotal, 2000, !loading && stats);
 
     useEffect(() => {
+        if (!summaryResolved) return;
+        let cancelled = false;
+        setDataLoading(true);
         Promise.all([
             fetchAllContractsCached(),
-            fetch(assetUrl('/json/empreses.json')).then(res => res.json()),
-            fetch(assetUrl('/json/persones.json?t=' + new Date().getTime())).then(res => res.ok ? res.json() : []),
-            fetch(assetUrl('/json/carrecs.json?t=' + new Date().getTime())).then(res => res.ok ? res.json() : {}),
-            fetch(assetUrl('/json/fraccionament.json?t=' + new Date().getTime())).then(res => res.ok ? res.json() : { alertes: [] }),
-            fetch(assetUrl('/json/concentracio.json?t=' + new Date().getTime())).then(res => res.ok ? res.json() : { alertes: [] }),
-            fetch(assetUrl('/json/electoralisme.json?t=' + new Date().getTime())).then(res => res.ok ? res.json() : { alertes: [] }),
+            fetch(jsonAssetUrl('/json/empreses.json')).then(res => res.json()),
+            fetch(jsonAssetUrl('/json/persones.json')).then(res => res.ok ? res.json() : []),
+            fetch(jsonAssetUrl('/json/carrecs.json')).then(res => res.ok ? res.json() : {}),
+            fetch(jsonAssetUrl('/json/fraccionament.json')).then(res => res.ok ? res.json() : { alertes: [] }),
+            fetch(jsonAssetUrl('/json/concentracio.json')).then(res => res.ok ? res.json() : { alertes: [] }),
+            fetch(jsonAssetUrl('/json/electoralisme.json')).then(res => res.ok ? res.json() : { alertes: [] }),
             fetchArchivedContracts()
         ])
             .then(([socrataRows, existingEmpreses, personesData, administradorsData, fraccionamentData, concentracioData, electoralismeData, archiveRows]) => {
+                if (cancelled) return;
                 // Map Socrata rows to internal contract format
                 let contractsData = socrataRows.map((row, i) =>
                     row && row.__iguadataInternalContract
@@ -2880,15 +2950,15 @@ function App() {
                     }
                 }
                 setEmpreses(empresesData);
-                setLoadingProgress(100);
-                setTimeout(() => setLoading(false), 300);
+                setDataLoading(false);
             })
             .catch(err => {
+                if (cancelled) return;
                 console.error('Error loading data:', err);
-                setLoadingProgress(100);
-                setTimeout(() => setLoading(false), 300);
+                setDataLoading(false);
             });
-    }, []);
+        return () => { cancelled = true; };
+    }, [summaryResolved]);
 
     useEffect(() => {
         const route = getRoute();
@@ -3368,6 +3438,17 @@ function App() {
         </div>
     );
 
+    const dataTabs = ['buscador', 'empreses', 'persones', 'contracte', 'empresa', 'analisi', 'cas-fraccionament', 'cas-concentracio', 'cas-electoralisme'];
+    const isDataTabLoading = dataLoading && dataTabs.includes(activeTab);
+    const renderDataLoading = () => (
+        <div className="container data-loading-container">
+            <div className="data-loading-state" role="status" aria-live="polite">
+                <div className="data-loading-kicker">Iguadata</div>
+                <div className="data-loading-title">Carregant dades</div>
+            </div>
+        </div>
+    );
+
     if (loading) {
         return renderHomeLoading(false);
     }
@@ -3470,7 +3551,9 @@ function App() {
                 </div>
             )}
 
-            {activeTab === 'buscador' && (
+            {isDataTabLoading && renderDataLoading()}
+
+            {activeTab === 'buscador' && !dataLoading && (
                 <div className="container contractes-page">
                     <h1 className="page-title">Cercador de contractes</h1>
                     <div className="search-section">
@@ -3732,7 +3815,7 @@ function App() {
                 </div>
             )}
 
-            {activeTab === 'empreses' && !selectedEmpresa && (
+            {activeTab === 'empreses' && !selectedEmpresa && !dataLoading && (
                 <EmpresesView
                     empreses={empreses}
                     onEmpresaSelect={handleEmpresaClick}
@@ -3749,7 +3832,7 @@ function App() {
                 />
             )}
 
-            {activeTab === 'persones' && (
+            {activeTab === 'persones' && !dataLoading && (
                 <PersonesView
                     persones={persones}
                     onEmpresaSelect={handleEmpresaClick}
@@ -3765,7 +3848,7 @@ function App() {
                 />
             )}
 
-            {activeTab === 'contracte' && selectedContractForDetail && (
+            {activeTab === 'contracte' && selectedContractForDetail && !dataLoading && (
                 <ContractDetailView
                     contract={selectedContractForDetail}
                     contracts={contracts}
@@ -3775,7 +3858,7 @@ function App() {
                 />
             )}
 
-            {activeTab === 'empresa' && selectedEmpresa && (
+            {activeTab === 'empresa' && selectedEmpresa && !dataLoading && (
                 <EmpresaView
                     empresa={selectedEmpresa}
                     contracts={contracts}
@@ -3786,7 +3869,7 @@ function App() {
                 />
             )}
 
-            {activeTab === 'cas-fraccionament' && selectedCasoDetail && (
+            {activeTab === 'cas-fraccionament' && selectedCasoDetail && !dataLoading && (
                 <CasFraccionamentView
                     caso={selectedCasoDetail}
                     contracts={contracts}
@@ -3797,7 +3880,7 @@ function App() {
                 />
             )}
 
-            {activeTab === 'cas-concentracio' && selectedConcentracioDetail && (
+            {activeTab === 'cas-concentracio' && selectedConcentracioDetail && !dataLoading && (
                 <CasConcentracioView
                     caso={selectedConcentracioDetail}
                     contracts={contracts}
@@ -3808,7 +3891,7 @@ function App() {
                 />
             )}
 
-            {activeTab === 'cas-electoralisme' && selectedElectoralismeDetail && (
+            {activeTab === 'cas-electoralisme' && selectedElectoralismeDetail && !dataLoading && (
                 <CasElectoralismeView
                     caso={selectedElectoralismeDetail}
                     contracts={contracts}
@@ -3819,7 +3902,7 @@ function App() {
                 />
             )}
 
-            {activeTab === 'analisi' && (
+            {activeTab === 'analisi' && !dataLoading && (
                 <>
                     <div className="analisi-tabs-wrapper"><div className="analisi-tabs">
                         <button
@@ -4088,7 +4171,7 @@ function App() {
                                         className={'concentracio-mode-btn' + (concentracioMode === 'temporal' ? ' active' : '')}
                                         onClick={() => setConcentracioMode('temporal')}
                                     >
-                                        Concentracions
+                                        Temporals
                                     </button>
                                 </div>
 
