@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ca">
 
 <head>
@@ -7,13 +7,13 @@
     <meta name="robots" content="index, follow">
     <meta name="description"
         content="Iguadata és una plataforma independent de periodisme de dades per a l'anàlisi de la contractació pública de l'Ajuntament d'Igualada i dels seus organismes municipals.">
-    <link rel="canonical" href="https://iguadata.cat/sobre">
+    <link rel="canonical" href="https://iguadata.cat/sobre/">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Iguadata">
     <meta property="og:title" content="Sobre | Iguadata">
     <meta property="og:description"
         content="Iguadata és una plataforma independent de periodisme de dades per a l'anàlisi de la contractació pública de l'Ajuntament d'Igualada i dels seus organismes municipals.">
-    <meta property="og:url" content="https://iguadata.cat/sobre">
+    <meta property="og:url" content="https://iguadata.cat/sobre/">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="Sobre | Iguadata">
     <meta name="twitter:description"
@@ -23,7 +23,10 @@
         window.__IGUADATA_BASE__ = window.location.hostname.endsWith('github.io') ? '/iguadata-dev' : '';
         window.__IGUADATA_ASSET__ = function (path) { return window.__IGUADATA_BASE__ + path; };
     </script>
-    <script>document.write('<link rel="icon" href="' + window.__IGUADATA_ASSET__('/favicon.ico') + '" type="image/x-icon">');</script>
+    <script>
+        document.write('<link rel="icon" href="' + window.__IGUADATA_ASSET__('/favicon.ico') + '" type="image/x-icon">');
+        document.write('<link rel="icon" href="' + window.__IGUADATA_ASSET__('/favicon-48x48.png') + '" type="image/png" sizes="48x48">');
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
