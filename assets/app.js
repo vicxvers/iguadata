@@ -399,13 +399,17 @@ async function fetchAllContracts() {
 }
 const CONTRACTS_CACHE_KEY = 'iguadata_contracts_cache_v1';
 async function fetchStaticContractsBackup() {
+  const data = await fetchStaticContractsSnapshot();
+  return data.map(c => ({
+    ...c,
+    __iguadataInternalContract: true
+  }));
+}
+async function fetchStaticContractsSnapshot() {
   const resp = await fetch(jsonAssetUrl('/json/contractes.json'));
   if (!resp.ok) throw new Error(`Backup contractes HTTP ${resp.status}`);
   const data = await resp.json();
-  return Array.isArray(data) ? data.map(c => ({
-    ...c,
-    __iguadataInternalContract: true
-  })) : [];
+  return Array.isArray(data) ? data : [];
 }
 async function fetchArchivedContracts() {
   const resp = await fetch(jsonAssetUrl('/json/contractes_arxiu.json'));
@@ -498,6 +502,32 @@ function mergeArchivedContracts(contractsData, archiveRows) {
     preserved.slug = buildContractSlug(preserved);
     merged.push(preserved);
     existing.add(key);
+  }
+  return merged.sort((a, b) => {
+    if ((a.fecha || '') !== (b.fecha || '')) return (b.fecha || '').localeCompare(a.fecha || '');
+    if ((a.codigo || '') !== (b.codigo || '')) return (b.codigo || '').localeCompare(a.codigo || '');
+    return (b.adjudicatario || '').localeCompare(a.adjudicatario || '');
+  }).map((c, i) => ({
+    ...c,
+    id: i + 1
+  }));
+}
+function mergeMissingSnapshotContracts(contractsData, snapshotRows) {
+  const existing = new Set(contractsData.map(contractStableKey));
+  let nextId = contractsData.reduce((max, c) => Math.max(max, Number(c.id) || 0), 0);
+  const merged = [...contractsData];
+  for (const row of snapshotRows || []) {
+    if (!row || existing.has(contractStableKey(row))) continue;
+    const preserved = {
+      ...row,
+      estat_font: 'preservat_desaparegut_socrata',
+      preservat_iguadata: true,
+      font_preservacio: row.font_preservacio || 'json/contractes.json'
+    };
+    preserved.id = ++nextId;
+    preserved.slug = buildContractSlug(preserved);
+    merged.push(preserved);
+    existing.add(contractStableKey(preserved));
   }
   return merged.sort((a, b) => {
     if ((a.fecha || '') !== (b.fecha || '')) return (b.fecha || '').localeCompare(a.fecha || '');
@@ -3669,10 +3699,16 @@ function App() {
       alertes: []
     }), fetch(jsonAssetUrl('/json/electoralisme.json')).then(res => res.ok ? res.json() : {
       alertes: []
-    }), fetchArchivedContracts()]).then(([socrataRows, existingEmpreses, personesData, administradorsData, fraccionamentData, concentracioData, electoralismeData, archiveRows]) => {
+    }), fetchArchivedContracts()]).then(async ([socrataRows, existingEmpreses, personesData, administradorsData, fraccionamentData, concentracioData, electoralismeData, archiveRows]) => {
       if (cancelled) return;
       let contractsData = socrataRows.map((row, i) => row && row.__iguadataInternalContract ? Object.fromEntries(Object.entries(row).filter(([key]) => key !== '__iguadataInternalContract')) : mapSocrataContract(row, i + 1));
       contractsData = mergeArchivedContracts(contractsData, archiveRows);
+      const expectedContracts = summary?.stats?.total_contratos || 0;
+      if (expectedContracts && contractsData.length < expectedContracts) {
+        const snapshotRows = await fetchStaticContractsSnapshot();
+        if (cancelled) return;
+        contractsData = mergeMissingSnapshotContracts(contractsData, snapshotRows);
+      }
       {
         const seen = new Map();
         for (const c of contractsData) {
@@ -4265,15 +4301,11 @@ function App() {
   const isDataTabLoading = dataLoading && dataTabs.includes(activeTab);
   const renderDataLoading = () => React.createElement("div", {
     className: "container data-loading-container"
-  }, React.createElement("div", {
-    className: "data-loading-state",
+  }, React.createElement("h1", {
+    className: "page-title data-loading-title",
     role: "status",
     "aria-live": "polite"
-  }, React.createElement("div", {
-    className: "data-loading-kicker"
-  }, "Iguadata"), React.createElement("div", {
-    className: "data-loading-title"
-  }, "Carregant dades")));
+  }, "Carregant dades"));
   if (loading) {
     return renderHomeLoading(false);
   }

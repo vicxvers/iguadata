@@ -334,30 +334,10 @@ html.home-lock-scroll {
 
 .data-loading-container {
     min-height: 58vh;
-    display: grid;
-    place-items: center;
-}
-
-.data-loading-state {
-    text-align: center;
-    color: var(--navy);
-}
-
-.data-loading-kicker {
-    font-family: var(--font-mono);
-    font-size: var(--text-xs);
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--text-light);
 }
 
 .data-loading-title {
-    margin-top: 0.75rem;
-    font-family: var(--font-display);
-    font-size: var(--display-sm);
-    font-weight: 400;
-    letter-spacing: var(--tracking-title);
+    text-align: center;
 }
 
 

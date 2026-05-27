@@ -411,12 +411,15 @@ async function fetchAllContracts() {
 const CONTRACTS_CACHE_KEY = 'iguadata_contracts_cache_v1';
 
 async function fetchStaticContractsBackup() {
+    const data = await fetchStaticContractsSnapshot();
+    return data.map(c => ({ ...c, __iguadataInternalContract: true }));
+}
+
+async function fetchStaticContractsSnapshot() {
     const resp = await fetch(jsonAssetUrl('/json/contractes.json'));
     if (!resp.ok) throw new Error(`Backup contractes HTTP ${resp.status}`);
     const data = await resp.json();
-    return Array.isArray(data)
-        ? data.map(c => ({ ...c, __iguadataInternalContract: true }))
-        : [];
+    return Array.isArray(data) ? data : [];
 }
 
 async function fetchArchivedContracts() {
@@ -522,6 +525,30 @@ function mergeArchivedContracts(contractsData, archiveRows) {
         preserved.slug = buildContractSlug(preserved);
         merged.push(preserved);
         existing.add(key);
+    }
+    return merged.sort((a, b) => {
+        if ((a.fecha || '') !== (b.fecha || '')) return (b.fecha || '').localeCompare(a.fecha || '');
+        if ((a.codigo || '') !== (b.codigo || '')) return (b.codigo || '').localeCompare(a.codigo || '');
+        return (b.adjudicatario || '').localeCompare(a.adjudicatario || '');
+    }).map((c, i) => ({ ...c, id: i + 1 }));
+}
+
+function mergeMissingSnapshotContracts(contractsData, snapshotRows) {
+    const existing = new Set(contractsData.map(contractStableKey));
+    let nextId = contractsData.reduce((max, c) => Math.max(max, Number(c.id) || 0), 0);
+    const merged = [...contractsData];
+    for (const row of snapshotRows || []) {
+        if (!row || existing.has(contractStableKey(row))) continue;
+        const preserved = {
+            ...row,
+            estat_font: 'preservat_desaparegut_socrata',
+            preservat_iguadata: true,
+            font_preservacio: row.font_preservacio || 'json/contractes.json',
+        };
+        preserved.id = ++nextId;
+        preserved.slug = buildContractSlug(preserved);
+        merged.push(preserved);
+        existing.add(contractStableKey(preserved));
     }
     return merged.sort((a, b) => {
         if ((a.fecha || '') !== (b.fecha || '')) return (b.fecha || '').localeCompare(a.fecha || '');
@@ -2893,7 +2920,7 @@ function App() {
             fetch(jsonAssetUrl('/json/electoralisme.json')).then(res => res.ok ? res.json() : { alertes: [] }),
             fetchArchivedContracts()
         ])
-            .then(([socrataRows, existingEmpreses, personesData, administradorsData, fraccionamentData, concentracioData, electoralismeData, archiveRows]) => {
+            .then(async ([socrataRows, existingEmpreses, personesData, administradorsData, fraccionamentData, concentracioData, electoralismeData, archiveRows]) => {
                 if (cancelled) return;
                 // Map Socrata rows to internal contract format
                 let contractsData = socrataRows.map((row, i) =>
@@ -2902,6 +2929,12 @@ function App() {
                         : mapSocrataContract(row, i + 1)
                 );
                 contractsData = mergeArchivedContracts(contractsData, archiveRows);
+                const expectedContracts = summary?.stats?.total_contratos || 0;
+                if (expectedContracts && contractsData.length < expectedContracts) {
+                    const snapshotRows = await fetchStaticContractsSnapshot();
+                    if (cancelled) return;
+                    contractsData = mergeMissingSnapshotContracts(contractsData, snapshotRows);
+                }
                 // Desambigua col·lisions de slug (extremadament rar): afegeix sufix -2, -3...
                 {
                     const seen = new Map();
@@ -3442,10 +3475,7 @@ function App() {
     const isDataTabLoading = dataLoading && dataTabs.includes(activeTab);
     const renderDataLoading = () => (
         <div className="container data-loading-container">
-            <div className="data-loading-state" role="status" aria-live="polite">
-                <div className="data-loading-kicker">Iguadata</div>
-                <div className="data-loading-title">Carregant dades</div>
-            </div>
+            <h1 className="page-title data-loading-title" role="status" aria-live="polite">Carregant dades</h1>
         </div>
     );
 
