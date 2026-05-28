@@ -5945,7 +5945,7 @@ function App() {
     className: "prose-wrapper"
   }, React.createElement("p", {
     className: "prose-intro"
-  }, "Iguadata \xE9s una plataforma independent de periodisme de dades per a l'an\xE0lisi de la contractaci\xF3 p\xFAblica de l'Ajuntament d'Igualada i dels seus organismes municipals.", React.createElement("br", null), React.createElement("br", null), "El projecte combina dades obertes de contractaci\xF3, informaci\xF3 mercantil i algoritmes propis per fer m\xE9s accessible, comprensible i fiscalitzable la despesa p\xFAblica municipal."), React.createElement("h2", {
+  }, "Iguadata \xE9s la plataforma independent de periodisme de dades per a l'an\xE0lisi de la contractaci\xF3 p\xFAblica de l'Ajuntament d'Igualada i dels seus organismes municipals.", React.createElement("br", null), React.createElement("br", null), "El projecte combina dades obertes de contractaci\xF3, informaci\xF3 mercantil i algoritmes propis per fer m\xE9s accessible, comprensible i fiscalitzable la despesa p\xFAblica municipal."), React.createElement("h2", {
     className: "prose-heading"
   }, "Autoria"), React.createElement("p", {
     className: "prose-paragraph"

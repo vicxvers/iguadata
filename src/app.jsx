@@ -4531,7 +4531,7 @@ function App() {
                         <h1 className="page-title">Sobre el projecte</h1>
                         <div className="prose-wrapper">
                             <p className="prose-intro">
-                                Iguadata és una plataforma independent de periodisme de dades per a l'anàlisi de la contractació pública de l'Ajuntament d'Igualada i dels seus organismes municipals.<br /><br />El projecte combina dades obertes de contractació, informació mercantil i algoritmes propis per fer més accessible, comprensible i fiscalitzable la despesa pública municipal.
+                                Iguadata és la plataforma independent de periodisme de dades per a l'anàlisi de la contractació pública de l'Ajuntament d'Igualada i dels seus organismes municipals.<br /><br />El projecte combina dades obertes de contractació, informació mercantil i algoritmes propis per fer més accessible, comprensible i fiscalitzable la despesa pública municipal.
                             </p>
                             <h2 className="prose-heading">Autoria</h2>
                             <p className="prose-paragraph">
