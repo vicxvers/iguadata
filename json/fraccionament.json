@@ -1,6 +1,6 @@
 {
   "metodologia": "fraccionament_v2",
-  "generat_a": "2026-05-26",
+  "generat_a": "2026-06-01",
   "total_alertes": 923,
   "alertes": [
     {
@@ -10587,10 +10587,10 @@
           "tipo": "5. SERVEIS",
           "procedimiento": "Menor",
           "cpv": "92312240-5",
-          "estat_font": "actiu_socrata",
-          "preservat_iguadata": false,
-          "primera_absencia_detectada": "",
-          "font_preservacio": "",
+          "estat_font": "preservat_desaparegut_socrata",
+          "preservat_iguadata": true,
+          "primera_absencia_detectada": "2026-06-01",
+          "font_preservacio": "json/contractes.json anterior",
           "primer_snapshot_iguadata": ""
         },
         {
@@ -17314,10 +17314,10 @@
           "tipo": "5. SERVEIS",
           "procedimiento": "Menor",
           "cpv": "",
-          "estat_font": "actiu_socrata",
-          "preservat_iguadata": false,
-          "primera_absencia_detectada": "",
-          "font_preservacio": "",
+          "estat_font": "preservat_desaparegut_socrata",
+          "preservat_iguadata": true,
+          "primera_absencia_detectada": "2026-06-01",
+          "font_preservacio": "json/contractes.json anterior",
           "primer_snapshot_iguadata": ""
         },
         {
@@ -23821,10 +23821,10 @@
           "tipo": "5. SERVEIS",
           "procedimiento": "Menor",
           "cpv": "",
-          "estat_font": "actiu_socrata",
-          "preservat_iguadata": false,
-          "primera_absencia_detectada": "",
-          "font_preservacio": "",
+          "estat_font": "preservat_desaparegut_socrata",
+          "preservat_iguadata": true,
+          "primera_absencia_detectada": "2026-06-01",
+          "font_preservacio": "json/contractes.json anterior",
           "primer_snapshot_iguadata": ""
         },
         {
@@ -30307,10 +30307,10 @@
           "tipo": "3. SUBMINISTRAMENTS",
           "procedimiento": "Menor",
           "cpv": "",
-          "estat_font": "actiu_socrata",
-          "preservat_iguadata": false,
-          "primera_absencia_detectada": "",
-          "font_preservacio": "",
+          "estat_font": "preservat_desaparegut_socrata",
+          "preservat_iguadata": true,
+          "primera_absencia_detectada": "2026-06-01",
+          "font_preservacio": "json/contractes.json anterior",
           "primer_snapshot_iguadata": ""
         },
         {
@@ -36400,10 +36400,10 @@
           "tipo": "3. SUBMINISTRAMENTS",
           "procedimiento": "Menor",
           "cpv": "",
-          "estat_font": "actiu_socrata",
-          "preservat_iguadata": false,
-          "primera_absencia_detectada": "",
-          "font_preservacio": "",
+          "estat_font": "preservat_desaparegut_socrata",
+          "preservat_iguadata": true,
+          "primera_absencia_detectada": "2026-06-01",
+          "font_preservacio": "json/contractes.json anterior",
           "primer_snapshot_iguadata": ""
         },
         {
@@ -38239,10 +38239,10 @@
           "tipo": "5. SERVEIS",
           "procedimiento": "Menor",
           "cpv": "",
-          "estat_font": "actiu_socrata",
-          "preservat_iguadata": false,
-          "primera_absencia_detectada": "",
-          "font_preservacio": "",
+          "estat_font": "preservat_desaparegut_socrata",
+          "preservat_iguadata": true,
+          "primera_absencia_detectada": "2026-06-01",
+          "font_preservacio": "json/contractes.json anterior",
           "primer_snapshot_iguadata": ""
         },
         {
@@ -40310,10 +40310,10 @@
           "tipo": "5. SERVEIS",
           "procedimiento": "Menor",
           "cpv": "",
-          "estat_font": "actiu_socrata",
-          "preservat_iguadata": false,
-          "primera_absencia_detectada": "",
-          "font_preservacio": "",
+          "estat_font": "preservat_desaparegut_socrata",
+          "preservat_iguadata": true,
+          "primera_absencia_detectada": "2026-06-01",
+          "font_preservacio": "json/contractes.json anterior",
           "primer_snapshot_iguadata": ""
         },
         {
@@ -45002,10 +45002,10 @@
           "tipo": "3. SUBMINISTRAMENTS",
           "procedimiento": "Menor",
           "cpv": "",
-          "estat_font": "actiu_socrata",
-          "preservat_iguadata": false,
-          "primera_absencia_detectada": "",
-          "font_preservacio": "",
+          "estat_font": "preservat_desaparegut_socrata",
+          "preservat_iguadata": true,
+          "primera_absencia_detectada": "2026-06-01",
+          "font_preservacio": "json/contractes.json anterior",
           "primer_snapshot_iguadata": ""
         },
         {
@@ -46954,10 +46954,10 @@
           "tipo": "5. SERVEIS",
           "procedimiento": "Menor",
           "cpv": "",
-          "estat_font": "actiu_socrata",
-          "preservat_iguadata": false,
-          "primera_absencia_detectada": "",
-          "font_preservacio": "",
+          "estat_font": "preservat_desaparegut_socrata",
+          "preservat_iguadata": true,
+          "primera_absencia_detectada": "2026-06-01",
+          "font_preservacio": "json/contractes.json anterior",
           "primer_snapshot_iguadata": ""
         }
       ]

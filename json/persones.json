@@ -675,14 +675,14 @@
     ]
   },
   {
-    "nom": "HERNANDEZ FERNANDEZ LAURA",
+    "nom": "AJURIA FERNANDEZ JESUS",
     "total_adjudicat": 12551602.56,
     "relacions": [
       {
         "empresa": "FCC MEDIO AMBIENTE",
         "import_empresa": 12508558.56,
         "carrecs": [
-          "Apo.Man.Soli"
+          "Apoderado"
         ]
       },
       {
@@ -696,7 +696,35 @@
         "empresa": "CONTENUR SL",
         "import_empresa": 8322.0,
         "carrecs": [
+          "Apo.Manc."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "QUEREJETA URETA IÑIGO",
+    "total_adjudicat": 12551602.56,
+    "relacions": [
+      {
+        "empresa": "FCC MEDIO AMBIENTE",
+        "import_empresa": 12508558.56,
+        "carrecs": [
           "Apoderado"
+        ]
+      },
+      {
+        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
+        "import_empresa": 34722.0,
+        "carrecs": [
+          "APOD.SOL/MAN"
+        ]
+      },
+      {
+        "empresa": "CONTENUR SL",
+        "import_empresa": 8322.0,
+        "carrecs": [
+          "Apo.Manc.",
+          "Consejero"
         ]
       }
     ]
@@ -810,6 +838,33 @@
     ]
   },
   {
+    "nom": "HERNANDEZ FERNANDEZ LAURA",
+    "total_adjudicat": 12551602.56,
+    "relacions": [
+      {
+        "empresa": "FCC MEDIO AMBIENTE",
+        "import_empresa": 12508558.56,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      },
+      {
+        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
+        "import_empresa": 34722.0,
+        "carrecs": [
+          "APOD.SOL/MAN"
+        ]
+      },
+      {
+        "empresa": "CONTENUR SL",
+        "import_empresa": 8322.0,
+        "carrecs": [
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
     "nom": "ALVAREZ ALVAREZ JOSE TOMAS",
     "total_adjudicat": 12551602.56,
     "relacions": [
@@ -832,61 +887,6 @@
         "import_empresa": 8322.0,
         "carrecs": [
           "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "AJURIA FERNANDEZ JESUS",
-    "total_adjudicat": 12551602.56,
-    "relacions": [
-      {
-        "empresa": "FCC MEDIO AMBIENTE",
-        "import_empresa": 12508558.56,
-        "carrecs": [
-          "Apoderado"
-        ]
-      },
-      {
-        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
-        "import_empresa": 34722.0,
-        "carrecs": [
-          "APOD.SOL/MAN"
-        ]
-      },
-      {
-        "empresa": "CONTENUR SL",
-        "import_empresa": 8322.0,
-        "carrecs": [
-          "Apo.Manc."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "QUEREJETA URETA IÑIGO",
-    "total_adjudicat": 12551602.56,
-    "relacions": [
-      {
-        "empresa": "FCC MEDIO AMBIENTE",
-        "import_empresa": 12508558.56,
-        "carrecs": [
-          "Apoderado"
-        ]
-      },
-      {
-        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
-        "import_empresa": 34722.0,
-        "carrecs": [
-          "APOD.SOL/MAN"
-        ]
-      },
-      {
-        "empresa": "CONTENUR SL",
-        "import_empresa": 8322.0,
-        "carrecs": [
-          "Apo.Manc.",
-          "Consejero"
         ]
       }
     ]
@@ -3239,7 +3239,27 @@
     ]
   },
   {
-    "nom": "CARRASCO DELGADO JOSE MANUEL",
+    "nom": "DA VEIGA MEJIA ESTHER",
+    "total_adjudicat": 12516880.56,
+    "relacions": [
+      {
+        "empresa": "FCC MEDIO AMBIENTE",
+        "import_empresa": 12508558.56,
+        "carrecs": [
+          "Apoderado"
+        ]
+      },
+      {
+        "empresa": "CONTENUR SL",
+        "import_empresa": 8322.0,
+        "carrecs": [
+          "Apo.Manc."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "MORALES ASCARZA JAVIER",
     "total_adjudicat": 12516880.56,
     "relacions": [
       {
@@ -3259,27 +3279,7 @@
     ]
   },
   {
-    "nom": "GOMEZ MINGO JORGE LUIS",
-    "total_adjudicat": 12516880.56,
-    "relacions": [
-      {
-        "empresa": "FCC MEDIO AMBIENTE",
-        "import_empresa": 12508558.56,
-        "carrecs": [
-          "Apoderado"
-        ]
-      },
-      {
-        "empresa": "CONTENUR SL",
-        "import_empresa": 8322.0,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "DONOSO REBUELTA JOSE LUIS",
+    "nom": "ACOSTA MERIDA MANUEL JESUS",
     "total_adjudicat": 12516880.56,
     "relacions": [
       {
@@ -3359,7 +3359,7 @@
     ]
   },
   {
-    "nom": "MORALES ASCARZA JAVIER",
+    "nom": "DONOSO REBUELTA JOSE LUIS",
     "total_adjudicat": 12516880.56,
     "relacions": [
       {
@@ -3379,7 +3379,7 @@
     ]
   },
   {
-    "nom": "DA VEIGA MEJIA ESTHER",
+    "nom": "GOMEZ MINGO JORGE LUIS",
     "total_adjudicat": 12516880.56,
     "relacions": [
       {
@@ -3393,13 +3393,13 @@
         "empresa": "CONTENUR SL",
         "import_empresa": 8322.0,
         "carrecs": [
-          "Apo.Manc."
+          "Apoderado"
         ]
       }
     ]
   },
   {
-    "nom": "ACOSTA MERIDA MANUEL JESUS",
+    "nom": "CARRASCO DELGADO JOSE MANUEL",
     "total_adjudicat": 12516880.56,
     "relacions": [
       {
@@ -3434,6 +3434,19 @@
         "import_empresa": 8322.0,
         "carrecs": [
           "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "GORRITI GUTIERREZ CORTINES JUAN",
+    "total_adjudicat": 12508558.56,
+    "relacions": [
+      {
+        "empresa": "FCC MEDIO AMBIENTE",
+        "import_empresa": 12508558.56,
+        "carrecs": [
+          "Apo.Man.Soli"
         ]
       }
     ]
@@ -7160,28 +7173,40 @@
     ]
   },
   {
-    "nom": "TERESA SEQUEROS ARNO",
+    "nom": "MARIA ANGELES MONTANE BENET",
     "total_adjudicat": 4671257.63,
     "relacions": [
       {
         "empresa": "BENITO ARNÓ E HIJOS, SA, SOCIEDAD UNIPERSONAL",
         "import_empresa": 4671257.63,
         "carrecs": [
-          "Consejero"
+          "Apo.Sol."
         ]
       }
     ]
   },
   {
-    "nom": "ARNO FERRER JAIME",
+    "nom": "MARIA PILAR BLASCO BORBON",
     "total_adjudicat": 4671257.63,
     "relacions": [
       {
         "empresa": "BENITO ARNÓ E HIJOS, SA, SOCIEDAD UNIPERSONAL",
         "import_empresa": 4671257.63,
         "carrecs": [
-          "Presidente",
-          "Consejero"
+          "Apo.Sol."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "GOMEZ EROLES DAVID",
+    "total_adjudicat": 4671257.63,
+    "relacions": [
+      {
+        "empresa": "BENITO ARNÓ E HIJOS, SA, SOCIEDAD UNIPERSONAL",
+        "import_empresa": 4671257.63,
+        "carrecs": [
+          "Apo.Sol."
         ]
       }
     ]
@@ -7207,20 +7232,34 @@
         "empresa": "BENITO ARNÓ E HIJOS, SA, SOCIEDAD UNIPERSONAL",
         "import_empresa": 4671257.63,
         "carrecs": [
-          "Apoderado"
+          "Apo.Sol."
         ]
       }
     ]
   },
   {
-    "nom": "GOMEZ EROLES DAVID",
+    "nom": "TERESA SEQUEROS ARNO",
     "total_adjudicat": 4671257.63,
     "relacions": [
       {
         "empresa": "BENITO ARNÓ E HIJOS, SA, SOCIEDAD UNIPERSONAL",
         "import_empresa": 4671257.63,
         "carrecs": [
-          "Apoderado"
+          "Consejero"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "ARNO FERRER JAIME",
+    "total_adjudicat": 4671257.63,
+    "relacions": [
+      {
+        "empresa": "BENITO ARNÓ E HIJOS, SA, SOCIEDAD UNIPERSONAL",
+        "import_empresa": 4671257.63,
+        "carrecs": [
+          "Presidente",
+          "Consejero"
         ]
       }
     ]
@@ -19059,6 +19098,36 @@
     ]
   },
   {
+    "nom": "ARRANZ TORRES ANGELA",
+    "total_adjudicat": 533214.86,
+    "relacions": [
+      {
+        "empresa": "MONDO IBERICA SA",
+        "import_empresa": 533214.86,
+        "carrecs": [
+          "Consejero",
+          "Secretario",
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "CAVALLIN MAURIZIO",
+    "total_adjudicat": 533214.86,
+    "relacions": [
+      {
+        "empresa": "MONDO IBERICA SA",
+        "import_empresa": 533214.86,
+        "carrecs": [
+          "Apoderado",
+          "Consejero",
+          "Vicesecret."
+        ]
+      }
+    ]
+  },
+  {
     "nom": "PUERTAS RAVIRA JOSE CARLOS",
     "total_adjudicat": 533214.86,
     "relacions": [
@@ -19099,50 +19168,7 @@
     ]
   },
   {
-    "nom": "CAVALLIN MAURIZIO",
-    "total_adjudicat": 533214.86,
-    "relacions": [
-      {
-        "empresa": "MONDO IBERICA SA",
-        "import_empresa": 533214.86,
-        "carrecs": [
-          "Consejero",
-          "Vicesecret."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "GRAND NICOLAS",
-    "total_adjudicat": 533214.86,
-    "relacions": [
-      {
-        "empresa": "MONDO IBERICA SA",
-        "import_empresa": 533214.86,
-        "carrecs": [
-          "Consejero",
-          "Secretario",
-          "Con.Delegado",
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
     "nom": "ESPARZA RAMOS SERGIO",
-    "total_adjudicat": 533214.86,
-    "relacions": [
-      {
-        "empresa": "MONDO IBERICA SA",
-        "import_empresa": 533214.86,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "ARRANZ TORRES ANGELA",
     "total_adjudicat": 533214.86,
     "relacions": [
       {
@@ -28498,33 +28524,6 @@
     ]
   },
   {
-    "nom": "VIVAR LLEONART ROSA MARIA",
-    "total_adjudicat": 107956.53,
-    "relacions": [
-      {
-        "empresa": "ZURICH INSURANCE PLC SUCURSAL EN ESPAÑA",
-        "import_empresa": 97067.82,
-        "carrecs": [
-          "Apoderado"
-        ]
-      },
-      {
-        "empresa": "ZURICH INSURANCE EUROPE AG SUCURSAL EN ESPAÑA",
-        "import_empresa": 5595.72,
-        "carrecs": [
-          "Apoderado"
-        ]
-      },
-      {
-        "empresa": "ZURICH VIDA, COMPAÑIA DE SEGUROS Y REASEGUROS, SA",
-        "import_empresa": 5292.99,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
     "nom": "CANCIO GARCIA VICENTE",
     "total_adjudicat": 107956.53,
     "relacions": [
@@ -28558,7 +28557,7 @@
     ]
   },
   {
-    "nom": "PENELLA SOLANS SOFIA",
+    "nom": "TORRES MARTINEZ MONICA",
     "total_adjudicat": 107956.53,
     "relacions": [
       {
@@ -28580,6 +28579,87 @@
         "import_empresa": 5292.99,
         "carrecs": [
           "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "BLASCO GARCIA ARANDA SUSANA",
+    "total_adjudicat": 107956.53,
+    "relacions": [
+      {
+        "empresa": "ZURICH INSURANCE PLC SUCURSAL EN ESPAÑA",
+        "import_empresa": 97067.82,
+        "carrecs": [
+          "Apoderado"
+        ]
+      },
+      {
+        "empresa": "ZURICH INSURANCE EUROPE AG SUCURSAL EN ESPAÑA",
+        "import_empresa": 5595.72,
+        "carrecs": [
+          "Apoderado"
+        ]
+      },
+      {
+        "empresa": "ZURICH VIDA, COMPAÑIA DE SEGUROS Y REASEGUROS, SA",
+        "import_empresa": 5292.99,
+        "carrecs": [
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "MARTIN PEÑIN IGNACIO",
+    "total_adjudicat": 107956.53,
+    "relacions": [
+      {
+        "empresa": "ZURICH INSURANCE PLC SUCURSAL EN ESPAÑA",
+        "import_empresa": 97067.82,
+        "carrecs": [
+          "Apoderado"
+        ]
+      },
+      {
+        "empresa": "ZURICH INSURANCE EUROPE AG SUCURSAL EN ESPAÑA",
+        "import_empresa": 5595.72,
+        "carrecs": [
+          "Apoderado"
+        ]
+      },
+      {
+        "empresa": "ZURICH VIDA, COMPAÑIA DE SEGUROS Y REASEGUROS, SA",
+        "import_empresa": 5292.99,
+        "carrecs": [
+          "Apo.Sol."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "SAEZ COMA MERITXELL",
+    "total_adjudicat": 107956.53,
+    "relacions": [
+      {
+        "empresa": "ZURICH INSURANCE PLC SUCURSAL EN ESPAÑA",
+        "import_empresa": 97067.82,
+        "carrecs": [
+          "Apoderado"
+        ]
+      },
+      {
+        "empresa": "ZURICH INSURANCE EUROPE AG SUCURSAL EN ESPAÑA",
+        "import_empresa": 5595.72,
+        "carrecs": [
+          "Apoderado"
+        ]
+      },
+      {
+        "empresa": "ZURICH VIDA, COMPAÑIA DE SEGUROS Y REASEGUROS, SA",
+        "import_empresa": 5292.99,
+        "carrecs": [
+          "Apo.Sol."
         ]
       }
     ]
@@ -28612,21 +28692,21 @@
     ]
   },
   {
-    "nom": "PIERALLI GIORGIO MAURO",
+    "nom": "VIVAR LLEONART ROSA MARIA",
     "total_adjudicat": 107956.53,
     "relacions": [
       {
         "empresa": "ZURICH INSURANCE PLC SUCURSAL EN ESPAÑA",
         "import_empresa": 97067.82,
         "carrecs": [
-          "Apo.Man.Soli"
+          "Apoderado"
         ]
       },
       {
         "empresa": "ZURICH INSURANCE EUROPE AG SUCURSAL EN ESPAÑA",
         "import_empresa": 5595.72,
         "carrecs": [
-          "Apo.Man.Soli"
+          "Apoderado"
         ]
       },
       {
@@ -28720,7 +28800,34 @@
     ]
   },
   {
-    "nom": "MARTIN PEÑIN IGNACIO",
+    "nom": "PIERALLI GIORGIO MAURO",
+    "total_adjudicat": 107956.53,
+    "relacions": [
+      {
+        "empresa": "ZURICH INSURANCE PLC SUCURSAL EN ESPAÑA",
+        "import_empresa": 97067.82,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      },
+      {
+        "empresa": "ZURICH INSURANCE EUROPE AG SUCURSAL EN ESPAÑA",
+        "import_empresa": 5595.72,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      },
+      {
+        "empresa": "ZURICH VIDA, COMPAÑIA DE SEGUROS Y REASEGUROS, SA",
+        "import_empresa": 5292.99,
+        "carrecs": [
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "AGUILERA MARTINEZ JUAN FELIX",
     "total_adjudicat": 107956.53,
     "relacions": [
       {
@@ -28741,7 +28848,7 @@
         "empresa": "ZURICH VIDA, COMPAÑIA DE SEGUROS Y REASEGUROS, SA",
         "import_empresa": 5292.99,
         "carrecs": [
-          "Apo.Sol."
+          "Apoderado"
         ]
       }
     ]
@@ -28775,6 +28882,33 @@
   },
   {
     "nom": "MATEU SATUE BRUNO",
+    "total_adjudicat": 107956.53,
+    "relacions": [
+      {
+        "empresa": "ZURICH INSURANCE PLC SUCURSAL EN ESPAÑA",
+        "import_empresa": 97067.82,
+        "carrecs": [
+          "Apoderado"
+        ]
+      },
+      {
+        "empresa": "ZURICH INSURANCE EUROPE AG SUCURSAL EN ESPAÑA",
+        "import_empresa": 5595.72,
+        "carrecs": [
+          "Apoderado"
+        ]
+      },
+      {
+        "empresa": "ZURICH VIDA, COMPAÑIA DE SEGUROS Y REASEGUROS, SA",
+        "import_empresa": 5292.99,
+        "carrecs": [
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "SAIZ QUILEZ DANIEL",
     "total_adjudicat": 107956.53,
     "relacions": [
       {
@@ -28855,33 +28989,6 @@
     ]
   },
   {
-    "nom": "SAIZ QUILEZ DANIEL",
-    "total_adjudicat": 107956.53,
-    "relacions": [
-      {
-        "empresa": "ZURICH INSURANCE PLC SUCURSAL EN ESPAÑA",
-        "import_empresa": 97067.82,
-        "carrecs": [
-          "Apoderado"
-        ]
-      },
-      {
-        "empresa": "ZURICH INSURANCE EUROPE AG SUCURSAL EN ESPAÑA",
-        "import_empresa": 5595.72,
-        "carrecs": [
-          "Apoderado"
-        ]
-      },
-      {
-        "empresa": "ZURICH VIDA, COMPAÑIA DE SEGUROS Y REASEGUROS, SA",
-        "import_empresa": 5292.99,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
     "nom": "HERNANDEZ MARTINEZ ROBERTO EDUARDO",
     "total_adjudicat": 107956.53,
     "relacions": [
@@ -28897,33 +29004,6 @@
         "import_empresa": 5595.72,
         "carrecs": [
           "Apoderado"
-        ]
-      },
-      {
-        "empresa": "ZURICH VIDA, COMPAÑIA DE SEGUROS Y REASEGUROS, SA",
-        "import_empresa": 5292.99,
-        "carrecs": [
-          "Apo.Man.Soli"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "PELAEZ DOMINGUEZ ANTONIO",
-    "total_adjudicat": 107956.53,
-    "relacions": [
-      {
-        "empresa": "ZURICH INSURANCE PLC SUCURSAL EN ESPAÑA",
-        "import_empresa": 97067.82,
-        "carrecs": [
-          "APOD.SOL/MAN"
-        ]
-      },
-      {
-        "empresa": "ZURICH INSURANCE EUROPE AG SUCURSAL EN ESPAÑA",
-        "import_empresa": 5595.72,
-        "carrecs": [
-          "APOD.SOL/MAN"
         ]
       },
       {
@@ -28963,60 +29043,6 @@
     ]
   },
   {
-    "nom": "BLASCO GARCIA ARANDA SUSANA",
-    "total_adjudicat": 107956.53,
-    "relacions": [
-      {
-        "empresa": "ZURICH INSURANCE PLC SUCURSAL EN ESPAÑA",
-        "import_empresa": 97067.82,
-        "carrecs": [
-          "Apoderado"
-        ]
-      },
-      {
-        "empresa": "ZURICH INSURANCE EUROPE AG SUCURSAL EN ESPAÑA",
-        "import_empresa": 5595.72,
-        "carrecs": [
-          "Apoderado"
-        ]
-      },
-      {
-        "empresa": "ZURICH VIDA, COMPAÑIA DE SEGUROS Y REASEGUROS, SA",
-        "import_empresa": 5292.99,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "SAEZ COMA MERITXELL",
-    "total_adjudicat": 107956.53,
-    "relacions": [
-      {
-        "empresa": "ZURICH INSURANCE PLC SUCURSAL EN ESPAÑA",
-        "import_empresa": 97067.82,
-        "carrecs": [
-          "Apoderado"
-        ]
-      },
-      {
-        "empresa": "ZURICH INSURANCE EUROPE AG SUCURSAL EN ESPAÑA",
-        "import_empresa": 5595.72,
-        "carrecs": [
-          "Apoderado"
-        ]
-      },
-      {
-        "empresa": "ZURICH VIDA, COMPAÑIA DE SEGUROS Y REASEGUROS, SA",
-        "import_empresa": 5292.99,
-        "carrecs": [
-          "Apo.Sol."
-        ]
-      }
-    ]
-  },
-  {
     "nom": "INIESTA SORIA MIGUEL",
     "total_adjudicat": 107956.53,
     "relacions": [
@@ -29039,34 +29065,6 @@
         "import_empresa": 5292.99,
         "carrecs": [
           "Apo.Man.Soli"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "CABRERA GARBALLO MARIA TERESA",
-    "total_adjudicat": 107956.53,
-    "relacions": [
-      {
-        "empresa": "ZURICH INSURANCE PLC SUCURSAL EN ESPAÑA",
-        "import_empresa": 97067.82,
-        "carrecs": [
-          "Apoderado"
-        ]
-      },
-      {
-        "empresa": "ZURICH INSURANCE EUROPE AG SUCURSAL EN ESPAÑA",
-        "import_empresa": 5595.72,
-        "carrecs": [
-          "Apoderado"
-        ]
-      },
-      {
-        "empresa": "ZURICH VIDA, COMPAÑIA DE SEGUROS Y REASEGUROS, SA",
-        "import_empresa": 5292.99,
-        "carrecs": [
-          "VsecrNoConsj",
-          "Apoderado"
         ]
       }
     ]
@@ -29234,60 +29232,6 @@
     ]
   },
   {
-    "nom": "MARTINEZ GONZALEZ JOAQUIN",
-    "total_adjudicat": 107956.53,
-    "relacions": [
-      {
-        "empresa": "ZURICH INSURANCE PLC SUCURSAL EN ESPAÑA",
-        "import_empresa": 97067.82,
-        "carrecs": [
-          "Apo.Man.Soli"
-        ]
-      },
-      {
-        "empresa": "ZURICH INSURANCE EUROPE AG SUCURSAL EN ESPAÑA",
-        "import_empresa": 5595.72,
-        "carrecs": [
-          "Apo.Man.Soli"
-        ]
-      },
-      {
-        "empresa": "ZURICH VIDA, COMPAÑIA DE SEGUROS Y REASEGUROS, SA",
-        "import_empresa": 5292.99,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "AGUILERA MARTINEZ JUAN FELIX",
-    "total_adjudicat": 107956.53,
-    "relacions": [
-      {
-        "empresa": "ZURICH INSURANCE PLC SUCURSAL EN ESPAÑA",
-        "import_empresa": 97067.82,
-        "carrecs": [
-          "Apoderado"
-        ]
-      },
-      {
-        "empresa": "ZURICH INSURANCE EUROPE AG SUCURSAL EN ESPAÑA",
-        "import_empresa": 5595.72,
-        "carrecs": [
-          "Apoderado"
-        ]
-      },
-      {
-        "empresa": "ZURICH VIDA, COMPAÑIA DE SEGUROS Y REASEGUROS, SA",
-        "import_empresa": 5292.99,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
     "nom": "PEREZ TORRELLES MARIA ANGELES",
     "total_adjudicat": 107956.53,
     "relacions": [
@@ -29315,21 +29259,21 @@
     ]
   },
   {
-    "nom": "TORRES MARTINEZ MONICA",
+    "nom": "MARTINEZ GONZALEZ JOAQUIN",
     "total_adjudicat": 107956.53,
     "relacions": [
       {
         "empresa": "ZURICH INSURANCE PLC SUCURSAL EN ESPAÑA",
         "import_empresa": 97067.82,
         "carrecs": [
-          "Apoderado"
+          "Apo.Man.Soli"
         ]
       },
       {
         "empresa": "ZURICH INSURANCE EUROPE AG SUCURSAL EN ESPAÑA",
         "import_empresa": 5595.72,
         "carrecs": [
-          "Apoderado"
+          "Apo.Man.Soli"
         ]
       },
       {
@@ -29342,28 +29286,56 @@
     ]
   },
   {
-    "nom": "BALLESTA LORITE MIGUEL ANGEL",
+    "nom": "CABRERA GARBALLO MARIA TERESA",
     "total_adjudicat": 107956.53,
     "relacions": [
       {
         "empresa": "ZURICH INSURANCE PLC SUCURSAL EN ESPAÑA",
         "import_empresa": 97067.82,
         "carrecs": [
-          "APOD.MANCOMU"
+          "Apoderado"
         ]
       },
       {
         "empresa": "ZURICH INSURANCE EUROPE AG SUCURSAL EN ESPAÑA",
         "import_empresa": 5595.72,
         "carrecs": [
-          "APOD.MANCOMU"
+          "Apoderado"
         ]
       },
       {
         "empresa": "ZURICH VIDA, COMPAÑIA DE SEGUROS Y REASEGUROS, SA",
         "import_empresa": 5292.99,
         "carrecs": [
-          "Apo.Man.Soli"
+          "VsecrNoConsj",
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "PENELLA SOLANS SOFIA",
+    "total_adjudicat": 107956.53,
+    "relacions": [
+      {
+        "empresa": "ZURICH INSURANCE PLC SUCURSAL EN ESPAÑA",
+        "import_empresa": 97067.82,
+        "carrecs": [
+          "Apoderado"
+        ]
+      },
+      {
+        "empresa": "ZURICH INSURANCE EUROPE AG SUCURSAL EN ESPAÑA",
+        "import_empresa": 5595.72,
+        "carrecs": [
+          "Apoderado"
+        ]
+      },
+      {
+        "empresa": "ZURICH VIDA, COMPAÑIA DE SEGUROS Y REASEGUROS, SA",
+        "import_empresa": 5292.99,
+        "carrecs": [
+          "Apoderado"
         ]
       }
     ]
@@ -29423,6 +29395,33 @@
     ]
   },
   {
+    "nom": "BALLESTA LORITE MIGUEL ANGEL",
+    "total_adjudicat": 107956.53,
+    "relacions": [
+      {
+        "empresa": "ZURICH INSURANCE PLC SUCURSAL EN ESPAÑA",
+        "import_empresa": 97067.82,
+        "carrecs": [
+          "APOD.MANCOMU"
+        ]
+      },
+      {
+        "empresa": "ZURICH INSURANCE EUROPE AG SUCURSAL EN ESPAÑA",
+        "import_empresa": 5595.72,
+        "carrecs": [
+          "APOD.MANCOMU"
+        ]
+      },
+      {
+        "empresa": "ZURICH VIDA, COMPAÑIA DE SEGUROS Y REASEGUROS, SA",
+        "import_empresa": 5292.99,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
     "nom": "LOPEZ RUIZ MARIA YOLANDA",
     "total_adjudicat": 107956.53,
     "relacions": [
@@ -29445,6 +29444,33 @@
         "import_empresa": 5292.99,
         "carrecs": [
           "Apo.Manc."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "ROMERO SANTO TOMAS MARIA JESUS",
+    "total_adjudicat": 107956.53,
+    "relacions": [
+      {
+        "empresa": "ZURICH INSURANCE PLC SUCURSAL EN ESPAÑA",
+        "import_empresa": 97067.82,
+        "carrecs": [
+          "APOD.SOL/MAN"
+        ]
+      },
+      {
+        "empresa": "ZURICH INSURANCE EUROPE AG SUCURSAL EN ESPAÑA",
+        "import_empresa": 5595.72,
+        "carrecs": [
+          "APOD.SOL/MAN"
+        ]
+      },
+      {
+        "empresa": "ZURICH VIDA, COMPAÑIA DE SEGUROS Y REASEGUROS, SA",
+        "import_empresa": 5292.99,
+        "carrecs": [
+          "Apo.Sol."
         ]
       }
     ]
@@ -29477,7 +29503,7 @@
     ]
   },
   {
-    "nom": "ROMERO SANTO TOMAS MARIA JESUS",
+    "nom": "PELAEZ DOMINGUEZ ANTONIO",
     "total_adjudicat": 107956.53,
     "relacions": [
       {
@@ -29498,7 +29524,7 @@
         "empresa": "ZURICH VIDA, COMPAÑIA DE SEGUROS Y REASEGUROS, SA",
         "import_empresa": 5292.99,
         "carrecs": [
-          "Apo.Sol."
+          "Apo.Man.Soli"
         ]
       }
     ]
@@ -29585,7 +29611,7 @@
     ]
   },
   {
-    "nom": "LACASA ESCUSOL JOSE MIGUEL",
+    "nom": "RAMOS MOLINO JOSE LUIS",
     "total_adjudicat": 107956.53,
     "relacions": [
       {
@@ -29612,7 +29638,7 @@
     ]
   },
   {
-    "nom": "RAMOS MOLINO JOSE LUIS",
+    "nom": "LACASA ESCUSOL JOSE MIGUEL",
     "total_adjudicat": 107956.53,
     "relacions": [
       {
@@ -29870,6 +29896,27 @@
         "empresa": "TRANSPORTES DIEGO NOGUERA, S.L.",
         "import_empresa": 16520.0,
         "carrecs": [
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "LLADRO MARTIN GEMMA",
+    "total_adjudicat": 102663.54,
+    "relacions": [
+      {
+        "empresa": "ZURICH INSURANCE PLC SUCURSAL EN ESPAÑA",
+        "import_empresa": 97067.82,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      },
+      {
+        "empresa": "ZURICH INSURANCE EUROPE AG SUCURSAL EN ESPAÑA",
+        "import_empresa": 5595.72,
+        "carrecs": [
+          "Apo.Sol.",
           "APODERAD.SOL"
         ]
       }
@@ -31218,26 +31265,6 @@
   },
   {
     "nom": "VIDAL DONOSO JOSE JAVIER",
-    "total_adjudicat": 102663.54,
-    "relacions": [
-      {
-        "empresa": "ZURICH INSURANCE PLC SUCURSAL EN ESPAÑA",
-        "import_empresa": 97067.82,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      },
-      {
-        "empresa": "ZURICH INSURANCE EUROPE AG SUCURSAL EN ESPAÑA",
-        "import_empresa": 5595.72,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "LLADRO MARTIN GEMMA",
     "total_adjudicat": 102663.54,
     "relacions": [
       {
@@ -34932,6 +34959,58 @@
     ]
   },
   {
+    "nom": "PUJOL ARBOIX JOSEFINA",
+    "total_adjudicat": 80386.13,
+    "relacions": [
+      {
+        "empresa": "FLORS ROSET, SL",
+        "import_empresa": 80386.13,
+        "carrecs": [
+          "ADM.SOLIDAR."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "ROSET PUJOL JOSE MARIA",
+    "total_adjudicat": 80386.13,
+    "relacions": [
+      {
+        "empresa": "FLORS ROSET, SL",
+        "import_empresa": 80386.13,
+        "carrecs": [
+          "ADM.SOLIDAR."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "ROSET PUJOL ENRIQUE",
+    "total_adjudicat": 80386.13,
+    "relacions": [
+      {
+        "empresa": "FLORS ROSET, SL",
+        "import_empresa": 80386.13,
+        "carrecs": [
+          "ADM.SOLIDAR."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "ROSET PUJOL OSCAR",
+    "total_adjudicat": 80386.13,
+    "relacions": [
+      {
+        "empresa": "FLORS ROSET, SL",
+        "import_empresa": 80386.13,
+        "carrecs": [
+          "ADM.SOLIDAR."
+        ]
+      }
+    ]
+  },
+  {
     "nom": "SAMPIETRO VARA PAU",
     "total_adjudicat": 80300.0,
     "relacions": [
@@ -35377,6 +35456,19 @@
     ]
   },
   {
+    "nom": "VOGEL MICHAEL RENE",
+    "total_adjudicat": 67014.24,
+    "relacions": [
+      {
+        "empresa": "OBRAS Y PAVIMENTOS ESPECIALES, SA",
+        "import_empresa": 67014.24,
+        "carrecs": [
+          "Consejero"
+        ]
+      }
+    ]
+  },
+  {
     "nom": "TEEKENS JOHANNES ABRAHAM",
     "total_adjudicat": 67014.24,
     "relacions": [
@@ -35400,19 +35492,6 @@
         "carrecs": [
           "Consejero",
           "Apo.Sol."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "VOGEL MICHAEL RENE",
-    "total_adjudicat": 67014.24,
-    "relacions": [
-      {
-        "empresa": "OBRAS Y PAVIMENTOS ESPECIALES, SA",
-        "import_empresa": 67014.24,
-        "carrecs": [
-          "Consejero"
         ]
       }
     ]
@@ -39407,6 +39486,19 @@
         "import_empresa": 44849.0,
         "carrecs": [
           "ADM.SOLIDAR."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "JOSE GENE CAPDEVILA",
+    "total_adjudicat": 44835.98,
+    "relacions": [
+      {
+        "empresa": "CORPORACION ALIMENTARIA GUISSONA, SA",
+        "import_empresa": 44835.98,
+        "carrecs": [
+          "Apoderado"
         ]
       }
     ]
@@ -46101,6 +46193,33 @@
         "import_empresa": 24763.73,
         "carrecs": [
           "Consejero"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "MAYOLAS AMOROS GEORGINA",
+    "total_adjudicat": 24609.47,
+    "relacions": [
+      {
+        "empresa": "PROMOTORA MEDITERRANEA 2 S A",
+        "import_empresa": 10160.3,
+        "carrecs": [
+          "V-SEC NO CON"
+        ]
+      },
+      {
+        "empresa": "ESCOFET 1886, SA",
+        "import_empresa": 8270.35,
+        "carrecs": [
+          "V-SEC NO CON"
+        ]
+      },
+      {
+        "empresa": "INDUSTRIAL BREINCO, S.A.",
+        "import_empresa": 6178.82,
+        "carrecs": [
+          "V-SEC NO CON"
         ]
       }
     ]
@@ -53850,26 +53969,6 @@
     ]
   },
   {
-    "nom": "MAYOLAS AMOROS GEORGINA",
-    "total_adjudicat": 18430.65,
-    "relacions": [
-      {
-        "empresa": "PROMOTORA MEDITERRANEA 2 S A",
-        "import_empresa": 10160.3,
-        "carrecs": [
-          "V-SEC NO CON"
-        ]
-      },
-      {
-        "empresa": "ESCOFET 1886, SA",
-        "import_empresa": 8270.35,
-        "carrecs": [
-          "V-SEC NO CON"
-        ]
-      }
-    ]
-  },
-  {
     "nom": "ARIZA CABELLO CARMEN",
     "total_adjudicat": 18430.65,
     "relacions": [
@@ -54076,6 +54175,19 @@
         "import_empresa": 17440.55,
         "carrecs": [
           "ADM.UNICO"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "MARC ADRIAN RUSSELL COOKE",
+    "total_adjudicat": 17297.96,
+    "relacions": [
+      {
+        "empresa": "T-INNOVA INGENIERÍA APLICADA, SA",
+        "import_empresa": 17297.96,
+        "carrecs": [
+          "APODERAD.SOL"
         ]
       }
     ]
@@ -55306,6 +55418,175 @@
     ]
   },
   {
+    "nom": "ANDRE LORENZO RUBEN",
+    "total_adjudicat": 14283.6,
+    "relacions": [
+      {
+        "empresa": "SIEMENS, SA",
+        "import_empresa": 14283.6,
+        "carrecs": [
+          "Apo.Manc."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "DE FRANCISCO SANZ MONICA",
+    "total_adjudicat": 14283.6,
+    "relacions": [
+      {
+        "empresa": "SIEMENS, SA",
+        "import_empresa": 14283.6,
+        "carrecs": [
+          "Apo.Manc."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "BEUSS FRANK",
+    "total_adjudicat": 14283.6,
+    "relacions": [
+      {
+        "empresa": "SIEMENS, SA",
+        "import_empresa": 14283.6,
+        "carrecs": [
+          "Apo.Sol."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "LIQUETE TEJEDOR TEODORA",
+    "total_adjudicat": 14283.6,
+    "relacions": [
+      {
+        "empresa": "SIEMENS, SA",
+        "import_empresa": 14283.6,
+        "carrecs": [
+          "Apo.Sol."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "PEREIRA MIGUELEZ LAURA",
+    "total_adjudicat": 14283.6,
+    "relacions": [
+      {
+        "empresa": "SIEMENS, SA",
+        "import_empresa": 14283.6,
+        "carrecs": [
+          "Apo.Manc."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "PEREZ MATA JUAN DIEGO",
+    "total_adjudicat": 14283.6,
+    "relacions": [
+      {
+        "empresa": "SIEMENS, SA",
+        "import_empresa": 14283.6,
+        "carrecs": [
+          "Apo.Sol."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "MORENO PARAISO ANGEL",
+    "total_adjudicat": 14283.6,
+    "relacions": [
+      {
+        "empresa": "SIEMENS, SA",
+        "import_empresa": 14283.6,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "LEDESMA GARZA SERGIO",
+    "total_adjudicat": 14283.6,
+    "relacions": [
+      {
+        "empresa": "SIEMENS, SA",
+        "import_empresa": 14283.6,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "TRUCHARTE ARTIGAS FERNANDO",
+    "total_adjudicat": 14283.6,
+    "relacions": [
+      {
+        "empresa": "SIEMENS, SA",
+        "import_empresa": 14283.6,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "ESPAÑOL SORANDO ALEJANADRO",
+    "total_adjudicat": 14283.6,
+    "relacions": [
+      {
+        "empresa": "SIEMENS, SA",
+        "import_empresa": 14283.6,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "CARNERI TAMARYN NICOLAS",
+    "total_adjudicat": 14283.6,
+    "relacions": [
+      {
+        "empresa": "SIEMENS, SA",
+        "import_empresa": 14283.6,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "MORI DE SANTIAGO JOSE ANTONIO",
+    "total_adjudicat": 14283.6,
+    "relacions": [
+      {
+        "empresa": "SIEMENS, SA",
+        "import_empresa": 14283.6,
+        "carrecs": [
+          "Apo.Sol."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "BILBAO PEREZ IRANTZU",
+    "total_adjudicat": 14283.6,
+    "relacions": [
+      {
+        "empresa": "SIEMENS, SA",
+        "import_empresa": 14283.6,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
     "nom": "BLIM STEPHANIE",
     "total_adjudicat": 14283.6,
     "relacions": [
@@ -55423,19 +55704,6 @@
     ]
   },
   {
-    "nom": "ANDRE LORENZO RUBEN",
-    "total_adjudicat": 14283.6,
-    "relacions": [
-      {
-        "empresa": "SIEMENS, SA",
-        "import_empresa": 14283.6,
-        "carrecs": [
-          "Apo.Manc."
-        ]
-      }
-    ]
-  },
-  {
     "nom": "MARTINEZ RODRIGUEZ PAULA",
     "total_adjudicat": 14283.6,
     "relacions": [
@@ -55502,19 +55770,6 @@
   },
   {
     "nom": "GUILLEN TORRALBA MIGUEL ANGEL",
-    "total_adjudicat": 14283.6,
-    "relacions": [
-      {
-        "empresa": "SIEMENS, SA",
-        "import_empresa": 14283.6,
-        "carrecs": [
-          "Apo.Manc."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "LIQUETE TEJEDOR TEODORA",
     "total_adjudicat": 14283.6,
     "relacions": [
       {
@@ -57871,19 +58126,6 @@
     ]
   },
   {
-    "nom": "BEUSS FRANK",
-    "total_adjudicat": 14283.6,
-    "relacions": [
-      {
-        "empresa": "SIEMENS, SA",
-        "import_empresa": 14283.6,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
     "nom": "GONZALEZ LOPEZ LUIS",
     "total_adjudicat": 14283.6,
     "relacions": [
@@ -58118,19 +58360,6 @@
     ]
   },
   {
-    "nom": "MORI DE SANTIAGO JOSE ANTONIO",
-    "total_adjudicat": 14283.6,
-    "relacions": [
-      {
-        "empresa": "SIEMENS, SA",
-        "import_empresa": 14283.6,
-        "carrecs": [
-          "Apo.Manc."
-        ]
-      }
-    ]
-  },
-  {
     "nom": "COBIAN CADAVIECO CARLOS",
     "total_adjudicat": 14283.6,
     "relacions": [
@@ -58236,19 +58465,6 @@
   },
   {
     "nom": "HAHNKAMM MADRAZO ISABEL",
-    "total_adjudicat": 14283.6,
-    "relacions": [
-      {
-        "empresa": "SIEMENS, SA",
-        "import_empresa": 14283.6,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "PEREZ MATA JUAN DIEGO",
     "total_adjudicat": 14283.6,
     "relacions": [
       {
@@ -58392,19 +58608,6 @@
   },
   {
     "nom": "QUIROS BARBERO SERGIO",
-    "total_adjudicat": 14283.6,
-    "relacions": [
-      {
-        "empresa": "SIEMENS, SA",
-        "import_empresa": 14283.6,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "PEREIRA MIGUELEZ LAURA",
     "total_adjudicat": 14283.6,
     "relacions": [
       {
@@ -62100,46 +62303,6 @@
     ]
   },
   {
-    "nom": "VELASCO AGUAYO PABLO",
-    "total_adjudicat": 10888.71,
-    "relacions": [
-      {
-        "empresa": "ZURICH INSURANCE EUROPE AG SUCURSAL EN ESPAÑA",
-        "import_empresa": 5595.72,
-        "carrecs": [
-          "Apo.Man.Soli"
-        ]
-      },
-      {
-        "empresa": "ZURICH VIDA, COMPAÑIA DE SEGUROS Y REASEGUROS, SA",
-        "import_empresa": 5292.99,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "ARAGALL PRADAL EDMOND",
-    "total_adjudicat": 10888.71,
-    "relacions": [
-      {
-        "empresa": "ZURICH INSURANCE EUROPE AG SUCURSAL EN ESPAÑA",
-        "import_empresa": 5595.72,
-        "carrecs": [
-          "Apo.Man.Soli"
-        ]
-      },
-      {
-        "empresa": "ZURICH VIDA, COMPAÑIA DE SEGUROS Y REASEGUROS, SA",
-        "import_empresa": 5292.99,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
     "nom": "DE DIEGO ANDRES MARIA LOURDES",
     "total_adjudicat": 10888.71,
     "relacions": [
@@ -62175,6 +62338,46 @@
         "import_empresa": 5292.99,
         "carrecs": [
           "Apo.Sol."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "ARAGALL PRADAL EDMOND",
+    "total_adjudicat": 10888.71,
+    "relacions": [
+      {
+        "empresa": "ZURICH INSURANCE EUROPE AG SUCURSAL EN ESPAÑA",
+        "import_empresa": 5595.72,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      },
+      {
+        "empresa": "ZURICH VIDA, COMPAÑIA DE SEGUROS Y REASEGUROS, SA",
+        "import_empresa": 5292.99,
+        "carrecs": [
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "VELASCO AGUAYO PABLO",
+    "total_adjudicat": 10888.71,
+    "relacions": [
+      {
+        "empresa": "ZURICH INSURANCE EUROPE AG SUCURSAL EN ESPAÑA",
+        "import_empresa": 5595.72,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      },
+      {
+        "empresa": "ZURICH VIDA, COMPAÑIA DE SEGUROS Y REASEGUROS, SA",
+        "import_empresa": 5292.99,
+        "carrecs": [
+          "Apoderado"
         ]
       }
     ]
@@ -62220,14 +62423,14 @@
     ]
   },
   {
-    "nom": "GUASCH SERENO RICARD",
+    "nom": "RODRIGUEZ SANCHEZ JAVIER",
     "total_adjudicat": 10888.71,
     "relacions": [
       {
         "empresa": "ZURICH INSURANCE EUROPE AG SUCURSAL EN ESPAÑA",
         "import_empresa": 5595.72,
         "carrecs": [
-          "Apo.Man.Soli"
+          "Apoderado"
         ]
       },
       {
@@ -62260,14 +62463,14 @@
     ]
   },
   {
-    "nom": "SERRA ARQUERO AURORA",
+    "nom": "GUASCH SERENO RICARD",
     "total_adjudicat": 10888.71,
     "relacions": [
       {
         "empresa": "ZURICH INSURANCE EUROPE AG SUCURSAL EN ESPAÑA",
         "import_empresa": 5595.72,
         "carrecs": [
-          "Apoderado"
+          "Apo.Man.Soli"
         ]
       },
       {
@@ -62280,7 +62483,7 @@
     ]
   },
   {
-    "nom": "RODRIGUEZ SANCHEZ JAVIER",
+    "nom": "SERRA ARQUERO AURORA",
     "total_adjudicat": 10888.71,
     "relacions": [
       {
@@ -65752,6 +65955,19 @@
     ]
   },
   {
+    "nom": "GONZALEZ RODRIGUEZ JOSE ANTONIO",
+    "total_adjudicat": 8322.0,
+    "relacions": [
+      {
+        "empresa": "CONTENUR SL",
+        "import_empresa": 8322.0,
+        "carrecs": [
+          "Apo.Sol."
+        ]
+      }
+    ]
+  },
+  {
     "nom": "RUIZ RODRIGUEZ FRANCISCO JOSE",
     "total_adjudicat": 8322.0,
     "relacions": [
@@ -67703,19 +67919,6 @@
     ]
   },
   {
-    "nom": "GALLUR LLUCH MONTSERRAT",
-    "total_adjudicat": 7135.0,
-    "relacions": [
-      {
-        "empresa": "SIGNES IMATGE I COMUNICACIÓ  SA",
-        "import_empresa": 7135.0,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
     "nom": "GARCIA CANELA JOSE MANUEL",
     "total_adjudicat": 7135.0,
     "relacions": [
@@ -67725,6 +67928,19 @@
         "carrecs": [
           "ADM.UNICO",
           "APODERADO"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "GALLUR LLUCH MONTSERRAT",
+    "total_adjudicat": 7135.0,
+    "relacions": [
+      {
+        "empresa": "SIGNES IMATGE I COMUNICACIÓ  SA",
+        "import_empresa": 7135.0,
+        "carrecs": [
+          "APODERAD.SOL"
         ]
       }
     ]
@@ -88668,6 +88884,19 @@
         "import_empresa": 570.0,
         "carrecs": [
           "APODERADO"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "PUERTA VICENTE ANTONIO",
+    "total_adjudicat": 554.42,
+    "relacions": [
+      {
+        "empresa": "SGS INSPECCIONES REGLAMENTARIAS, SA",
+        "import_empresa": 554.42,
+        "carrecs": [
+          "Apoderado"
         ]
       }
     ]
