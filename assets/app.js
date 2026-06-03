@@ -37,6 +37,20 @@ function formatCurrency(amount) {
     maximumFractionDigits: 2
   }).format(amount);
 }
+function formatCompactCurrency(amount) {
+  const value = Number(amount) || 0;
+  if (Math.abs(value) >= 1000000) {
+    return `${(value / 1000000).toLocaleString('ca-ES', {
+      maximumFractionDigits: 1
+    })}M €`;
+  }
+  if (Math.abs(value) >= 1000) {
+    return `${(value / 1000).toLocaleString('ca-ES', {
+      maximumFractionDigits: 0
+    })}k €`;
+  }
+  return formatCurrency(value);
+}
 function formatDate(dateStr) {
   if (!dateStr) return '—';
   const p = dateStr.split('-');
@@ -159,6 +173,10 @@ function isPlainLeftClick(event) {
 function handleInternalLinkClick(event, navigate) {
   if (!isPlainLeftClick(event)) return;
   event.preventDefault();
+  if (window.__iguadataNavigateWithTransition) {
+    window.__iguadataNavigateWithTransition(navigate);
+    return;
+  }
   navigate();
 }
 function resolveRoute(path) {
@@ -3167,6 +3185,8 @@ function App() {
   const [homeIntroFading, setHomeIntroFading] = useState(false);
   const [threeReadyTick, setThreeReadyTick] = useState(0);
   const [showMobileScrollTop, setShowMobileScrollTop] = useState(false);
+  const [showHomeDockNav, setShowHomeDockNav] = useState(false);
+  const [homeRouteTransition, setHomeRouteTransition] = useState('');
   const homeIntroPlayedRef = useRef(false);
   useEffect(() => {
     if (!loading) return;
@@ -3217,12 +3237,17 @@ function App() {
     return () => clearTimeout(timer);
   }, [activeTab, loading]);
   useEffect(() => {
-    const lockScroll = activeTab === 'home' || loading;
+    const lockScroll = loading;
+    const hideScrollChrome = activeTab === 'home' && !loading;
     document.documentElement.classList.toggle('home-lock-scroll', lockScroll);
     document.body.classList.toggle('home-lock-scroll', lockScroll);
+    document.documentElement.classList.toggle('home-scroll-surface', hideScrollChrome);
+    document.body.classList.toggle('home-scroll-surface', hideScrollChrome);
     return () => {
       document.documentElement.classList.remove('home-lock-scroll');
       document.body.classList.remove('home-lock-scroll');
+      document.documentElement.classList.remove('home-scroll-surface');
+      document.body.classList.remove('home-scroll-surface');
     };
   }, [activeTab, loading]);
   useEffect(() => {
@@ -3433,6 +3458,42 @@ function App() {
       window.removeEventListener('resize', updateScrollTopButton);
     };
   }, [activeTab]);
+  useEffect(() => {
+    if (activeTab !== 'home') {
+      setShowHomeDockNav(false);
+      return;
+    }
+    const updateHomeDockNav = () => {
+      setShowHomeDockNav(window.scrollY > window.innerHeight * 0.72);
+    };
+    updateHomeDockNav();
+    window.addEventListener('scroll', updateHomeDockNav, {
+      passive: true
+    });
+    window.addEventListener('resize', updateHomeDockNav);
+    return () => {
+      window.removeEventListener('scroll', updateHomeDockNav);
+      window.removeEventListener('resize', updateHomeDockNav);
+    };
+  }, [activeTab]);
+  useEffect(() => {
+    if (activeTab !== 'home') return;
+    const handleHomeExploreClick = event => {
+      const trigger = event.target.closest?.('[data-home-explore]');
+      if (!trigger) return;
+      event.preventDefault();
+      const target = document.querySelector('.home-landing');
+      if (!target) return;
+      const scrollToLanding = () => window.scrollTo({
+        top: target.offsetTop,
+        behavior: 'smooth'
+      });
+      scrollToLanding();
+      requestAnimationFrame(() => requestAnimationFrame(scrollToLanding));
+    };
+    document.addEventListener('click', handleHomeExploreClick);
+    return () => document.removeEventListener('click', handleHomeExploreClick);
+  }, [activeTab]);
   const [expandedId, setExpandedId] = useState(null);
   const [expandedMonopolyId, setExpandedMonopolyId] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
@@ -3575,6 +3636,23 @@ function App() {
     }
     scheduleScrollTop();
   };
+  const runRouteTransition = useCallback(navigate => {
+    if (homeRouteTransition) return;
+    setHomeRouteTransition('is-entering');
+    window.setTimeout(() => {
+      navigate();
+      window.setTimeout(() => setHomeRouteTransition('is-leaving'), 90);
+      window.setTimeout(() => setHomeRouteTransition(''), 620);
+    }, 260);
+  }, [homeRouteTransition]);
+  useEffect(() => {
+    window.__iguadataNavigateWithTransition = runRouteTransition;
+    return () => {
+      if (window.__iguadataNavigateWithTransition === runRouteTransition) {
+        delete window.__iguadataNavigateWithTransition;
+      }
+    };
+  }, [runRouteTransition]);
   useEffect(() => {
     window.history.scrollRestoration = 'manual';
     if (!window.history.state?.iguadata) {
@@ -4099,10 +4177,12 @@ function App() {
       });
       return;
     }
-    handleNavigation('home', '/');
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
+    runRouteTransition(() => {
+      handleNavigation('home', '/');
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
     });
   };
   const navCurrentLabel = {
@@ -4141,10 +4221,57 @@ function App() {
   };
   const activeAnalisiFiltersCount = (analisiSearch.trim() ? 1 : 0) + (riskFilter !== 'TOTS' ? 1 : 0) + (analisiSort !== 'risk-desc' ? 1 : 0);
   const activeFiltersCount = [yearFilter, typeFilter, procedureFilter, dateStart, dateEnd, sortBy !== 'date-desc' ? sortBy : ''].filter(Boolean).length;
+  const homeTopSectors = useMemo(() => {
+    const totals = new Map();
+    empreses.forEach(empresa => {
+      const sector = empresa.sector || 'Sense classificar';
+      const amount = Number(empresa.total_importe) || 0;
+      if (!amount || sector === 'Sense classificar') return;
+      totals.set(sector, (totals.get(sector) || 0) + amount);
+    });
+    const rows = Array.from(totals, ([label, amount]) => ({
+      label,
+      amount
+    })).sort((a, b) => b.amount - a.amount).slice(0, 5);
+    const max = rows[0]?.amount || 1;
+    return rows.map((row, index) => ({
+      ...row,
+      rank: index + 1,
+      share: Math.max(0.08, row.amount / max)
+    }));
+  }, [empreses]);
+  const homeTopCategories = useMemo(() => {
+    const totals = new Map();
+    empreses.forEach(empresa => {
+      const categoria = empresa.categoria || 'Sense classificar';
+      const amount = Number(empresa.total_importe) || 0;
+      if (!amount || categoria === 'Sense classificar') return;
+      totals.set(categoria, (totals.get(categoria) || 0) + amount);
+    });
+    const rows = Array.from(totals, ([label, amount]) => ({
+      label,
+      amount
+    })).sort((a, b) => b.amount - a.amount).slice(0, 6);
+    const total = rows.reduce((sum, row) => sum + row.amount, 0) || 1;
+    return rows.map((row, index) => ({
+      ...row,
+      rank: index + 1,
+      share: row.amount / total
+    }));
+  }, [empreses]);
+  const homeLatestContracts = useMemo(() => {
+    return contracts.filter(contract => {
+      const amount = Number(contract.importe) || 0;
+      const adjudicatario = contract.adjudicatario || '';
+      return contract.fecha && amount > 0 && !/lot desert/i.test(adjudicatario);
+    }).sort((a, b) => String(b.fecha).localeCompare(String(a.fecha))).slice(0, 6);
+  }, [contracts]);
   const renderHomeSection = (extraClassName = '', interactive = true) => React.createElement("section", {
     className: `home${extraClassName ? ` ${extraClassName}` : ''}`,
     "aria-label": "Portada editorial Iguadata",
     "aria-hidden": !interactive
+  }, React.createElement("div", {
+    className: "home-hero"
   }, React.createElement("div", {
     className: "home-brand",
     onClick: interactive ? goToHome : undefined
@@ -4157,27 +4284,25 @@ function App() {
     className: "home-particles",
     "aria-hidden": "true"
   }), React.createElement("div", {
-    className: "home-orbit home-orbit-a",
-    "aria-hidden": "true"
-  }), React.createElement("div", {
-    className: "home-orbit home-orbit-b",
-    "aria-hidden": "true"
-  }), React.createElement("div", {
-    className: "home-orbit home-orbit-c",
-    "aria-hidden": "true"
-  }), React.createElement("div", {
     className: "home-copy"
   }, React.createElement("h1", {
     className: "home-title"
   }, "Tot \xE9s ", React.createElement("em", null, "p\xFAblic")), React.createElement("p", {
     className: "home-deck"
-  }, "Contractes, empreses, persones, imports i an\xE0lisi en una cartografia oberta de la contractaci\xF3 p\xFAblica de l'Ajuntament d'Igualada."), React.createElement("a", {
-    href: buildRouteUrl('/contractes'),
+  }, "Contractes, empreses, persones, imports i an\xE0lisi en una cartografia oberta de la contractaci\xF3 p\xFAblica de l'Ajuntament d'Igualada."), React.createElement("button", {
+    type: "button",
     className: "home-cta",
-    onClick: interactive ? event => handleInternalLinkClick(event, () => {
-      handleNavigation('buscador');
-      setIsMobileMenuOpen(false);
-    }) : event => event.preventDefault(),
+    "data-home-explore": "true",
+    onClick: interactive ? () => {
+      const target = document.querySelector('.home-landing');
+      if (!target) return;
+      const scrollToLanding = () => window.scrollTo({
+        top: target.offsetTop,
+        behavior: 'smooth'
+      });
+      scrollToLanding();
+      requestAnimationFrame(() => requestAnimationFrame(scrollToLanding));
+    } : undefined,
     tabIndex: interactive ? 0 : -1
   }, "Explorar")), React.createElement("div", {
     className: "home-metrics",
@@ -4272,7 +4397,147 @@ function App() {
     className: "home-metric-value"
   }, alertesCount.toLocaleString('ca-ES')), React.createElement("span", {
     className: "home-metric-label"
-  }, "Alertes"))));
+  }, "Alertes")))), React.createElement("div", {
+    id: "dades",
+    className: "home-landing",
+    "aria-label": "Dades destacades"
+  }, React.createElement("section", {
+    className: "home-story home-story-sectors"
+  }, React.createElement("div", {
+    className: "home-story-header"
+  }, React.createElement("h2", null, "On van els diners?"), React.createElement("p", null, "Els sectors que concentren m\xE9s contractes.")), React.createElement("div", {
+    className: "home-sector-bars",
+    "aria-label": "Sectors amb m\xE9s import adjudicat"
+  }, homeTopSectors.map(item => React.createElement("a", {
+    key: item.label,
+    href: buildRouteUrl('/empreses'),
+    className: "home-sector-row",
+    style: {
+      '--bar-scale': item.share
+    },
+    onClick: interactive ? event => handleInternalLinkClick(event, () => {
+      setEmpresesSector(item.label);
+      setEmpresesCategoria('');
+      setEmpresesPage(1);
+      handleNavigation('empreses', '/empreses', {
+        keepFilters: true
+      });
+    }) : event => event.preventDefault(),
+    tabIndex: interactive ? 0 : -1
+  }, React.createElement("span", {
+    className: "home-sector-rank"
+  }, String(item.rank).padStart(2, '0')), React.createElement("span", {
+    className: "home-sector-name"
+  }, item.label), React.createElement("span", {
+    className: "home-sector-amount"
+  }, formatCompactCurrency(item.amount)))))), React.createElement("section", {
+    className: "home-story home-story-categories"
+  }, React.createElement("div", {
+    className: "home-category-cloud",
+    "aria-label": "Categories amb m\xE9s import adjudicat"
+  }, homeTopCategories.map(item => React.createElement("a", {
+    key: item.label,
+    href: buildRouteUrl('/empreses'),
+    className: `home-category-chip home-category-chip-${Math.min(item.rank, 6)}`,
+    style: {
+      '--chip-scale': 0.72 + item.share * 2.8
+    },
+    onClick: interactive ? event => handleInternalLinkClick(event, () => {
+      setEmpresesCategoria(item.label);
+      setEmpresesSector('');
+      setEmpresesPage(1);
+      handleNavigation('empreses', '/empreses', {
+        keepFilters: true
+      });
+    }) : event => event.preventDefault(),
+    tabIndex: interactive ? 0 : -1
+  }, React.createElement("span", null, item.label), React.createElement("strong", null, formatCompactCurrency(item.amount))))), React.createElement("div", {
+    className: "home-story-header home-story-header-offset"
+  }, React.createElement("h2", null, "Qu\xE8 compra l'Ajuntament?"), React.createElement("p", null, "Categories f\xE0cils de llegir, no codis opacs."))), React.createElement("section", {
+    className: "home-story home-story-latest"
+  }, React.createElement("div", {
+    className: "home-story-header"
+  }, React.createElement("h2", null, "\xDAltims contractes signats"), React.createElement("p", null, "La fotografia es mou cada dia.")), React.createElement("div", {
+    className: "home-latest-list"
+  }, homeLatestContracts.map((contract, index) => React.createElement("a", {
+    key: contract.slug || contract.id || `${contract.fecha}-${index}`,
+    href: buildRouteUrl(`/contractes/${contract.slug}`),
+    className: "card-link-wrapper home-latest-card-link",
+    onClick: interactive ? event => handleInternalLinkClick(event, () => {
+      setSelectedContractForDetail(contract);
+      handleNavigation('contracte', `/contractes/${contract.slug}`);
+    }) : event => event.preventDefault(),
+    tabIndex: interactive ? 0 : -1
+  }, React.createElement("div", {
+    className: "contract-card home-latest-card"
+  }, React.createElement("div", {
+    className: "contract-header"
+  }, React.createElement("div", {
+    className: "contract-title"
+  }, contract.descripcion), React.createElement("div", {
+    className: "contract-amount"
+  }, formatCompactCurrency(contract.importe))), React.createElement("div", {
+    className: "contract-meta"
+  }, React.createElement("div", {
+    className: "contract-meta-item"
+  }, React.createElement("span", {
+    className: "contract-meta-label"
+  }, "Empresa adjudicat\xE0ria"), React.createElement("span", {
+    className: "contract-meta-value"
+  }, contract.adjudicatario)), React.createElement("div", {
+    className: "contract-meta-item"
+  }, React.createElement("span", {
+    className: "contract-meta-label"
+  }, "Data"), React.createElement("span", {
+    className: "contract-meta-value"
+  }, formatDate(contract.fecha)))))))))), React.createElement("div", {
+    className: `home-dock-shell${showHomeDockNav ? ' is-visible' : ''}`
+  }, React.createElement("div", {
+    className: "home-dock-logo header-logo",
+    onClick: interactive ? goToHome : undefined
+  }, React.createElement("div", {
+    className: "header-logo-svg",
+    role: "img",
+    "aria-label": "Iguadata"
+  })), React.createElement("nav", {
+    className: "home-dock-nav nav-wrapper nav-dark",
+    "aria-label": "Navegaci\xF3 principal"
+  }, React.createElement("div", {
+    className: "nav"
+  }, React.createElement("a", {
+    href: buildRouteUrl('/contractes'),
+    className: "nav-tab",
+    onClick: event => handleInternalLinkClick(event, () => {
+      handleNavigation('buscador');
+      setIsMobileMenuOpen(false);
+    })
+  }, "Contractes"), React.createElement("a", {
+    href: buildRouteUrl('/empreses'),
+    className: "nav-tab",
+    onClick: event => handleInternalLinkClick(event, () => {
+      handleNavigation('empreses');
+      setSelectedEmpresa(null);
+      setIsMobileMenuOpen(false);
+    })
+  }, "Empreses"), React.createElement("a", {
+    href: buildRouteUrl('/persones'),
+    className: "nav-tab",
+    onClick: event => handleInternalLinkClick(event, () => {
+      handleNavigation('persones');
+      setIsMobileMenuOpen(false);
+    })
+  }, "Persones"), React.createElement("a", {
+    href: buildRouteUrl('/analisi'),
+    className: "nav-tab",
+    onClick: event => handleInternalLinkClick(event, handleAnalisiNavClick)
+  }, "An\xE0lisi"), React.createElement("a", {
+    href: buildRouteUrl('/sobre'),
+    className: "nav-tab",
+    onClick: event => handleInternalLinkClick(event, () => {
+      handleNavigation('sobre');
+      setIsMobileMenuOpen(false);
+    })
+  }, "Sobre")))));
   const renderHomeLoading = (isDissolving = false) => React.createElement("div", {
     className: `home home-loading-screen${isDissolving ? ' is-dissolving' : ''}`
   }, React.createElement("div", {
@@ -4284,15 +4549,6 @@ function App() {
   })), !isDissolving && React.createElement("canvas", {
     ref: homeCanvasRef,
     className: "home-particles",
-    "aria-hidden": "true"
-  }), React.createElement("div", {
-    className: "home-orbit home-orbit-a",
-    "aria-hidden": "true"
-  }), React.createElement("div", {
-    className: "home-orbit home-orbit-b",
-    "aria-hidden": "true"
-  }), React.createElement("div", {
-    className: "home-orbit home-orbit-c",
     "aria-hidden": "true"
   }), React.createElement("div", {
     className: "home-copy home-loading-copy"
@@ -4314,20 +4570,28 @@ function App() {
     return renderHomeLoading(false);
   }
   const handleDetailClick = contract => {
-    setSelectedContractForDetail(contract);
-    handleNavigation('contracte', `/contractes/${contract.slug}`);
+    runRouteTransition(() => {
+      setSelectedContractForDetail(contract);
+      handleNavigation('contracte', `/contractes/${contract.slug}`);
+    });
   };
   const handleCasoClick = caso => {
-    setSelectedCasoDetail(caso);
-    handleNavigation('cas-fraccionament', `/analisi/fraccionament/${caso.id}`);
+    runRouteTransition(() => {
+      setSelectedCasoDetail(caso);
+      handleNavigation('cas-fraccionament', `/analisi/fraccionament/${caso.id}`);
+    });
   };
   const handleConcentracioClick = caso => {
-    setSelectedConcentracioDetail(caso);
-    handleNavigation('cas-concentracio', `/analisi/concentracio/${caso.id}`);
+    runRouteTransition(() => {
+      setSelectedConcentracioDetail(caso);
+      handleNavigation('cas-concentracio', `/analisi/concentracio/${caso.id}`);
+    });
   };
   const handleElectoralismeClick = caso => {
-    setSelectedElectoralismeDetail(caso);
-    handleNavigation('cas-electoralisme', `/analisi/electoralisme/${caso.id}`);
+    runRouteTransition(() => {
+      setSelectedElectoralismeDetail(caso);
+      handleNavigation('cas-electoralisme', `/analisi/electoralisme/${caso.id}`);
+    });
   };
   const handleAnalisiNavClick = () => {
     const isAnalisiList = activeTab === 'analisi';
@@ -4342,19 +4606,21 @@ function App() {
     setIsMobileMenuOpen(false);
   };
   const handleEmpresaClick = empresaName => {
-    setSelectedContractForDetail(null);
-    setSelectedEmpresa(empresaName);
-    if (activeTab === 'buscador' || activeTab === 'persones') {
-      setSourceTabForCompany(activeTab);
-    } else {
-      setSourceTabForCompany('empreses');
-    }
-    const emp = empreses.find(e => e.nom === empresaName);
-    if (emp && emp.slug) {
-      handleNavigation('empresa', `/empreses/${emp.slug}`);
-    } else {
-      handleNavigation('empresa');
-    }
+    runRouteTransition(() => {
+      setSelectedContractForDetail(null);
+      setSelectedEmpresa(empresaName);
+      if (activeTab === 'buscador' || activeTab === 'persones') {
+        setSourceTabForCompany(activeTab);
+      } else {
+        setSourceTabForCompany('empreses');
+      }
+      const emp = empreses.find(e => e.nom === empresaName);
+      if (emp && emp.slug) {
+        handleNavigation('empresa', `/empreses/${emp.slug}`);
+      } else {
+        handleNavigation('empresa');
+      }
+    });
   };
   const goBack = fallback => {
     saveCurrentScroll();
@@ -6129,7 +6395,10 @@ function App() {
       });
     },
     className: "footer-link"
-  }, "Av\xEDs Legal")))));
+  }, "Av\xEDs Legal")))), homeRouteTransition && React.createElement("div", {
+    className: `route-transition route-transition-navy ${homeRouteTransition}`,
+    "aria-hidden": "true"
+  }));
 }
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(React.createElement(App, null));

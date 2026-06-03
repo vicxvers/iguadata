@@ -7,7 +7,7 @@
 :root {
     --navy: #0d1f3c;
     --navy-light: #1e3a8a;
-    --accent: #f59e0b;
+    --accent: #ffd700;
     --bg: #f8fafc;
     --surface: #ffffff;
     --border: #e2e8f0;
@@ -1497,10 +1497,17 @@ html.home-lock-scroll {
 
 .home {
     position: relative;
-    flex: 1;
     min-height: 100dvh;
     overflow: hidden;
     background-color: var(--navy);
+    color: var(--surface);
+}
+
+.home-hero,
+.home-loading-screen {
+    position: relative;
+    min-height: 100dvh;
+    overflow: hidden;
     background-image:
         linear-gradient(rgba(248, 250, 252, 0.035) 1px, transparent 1px),
         linear-gradient(90deg, rgba(248, 250, 252, 0.035) 1px, transparent 1px);
@@ -1511,7 +1518,8 @@ html.home-lock-scroll {
     padding: 4rem 2rem;
 }
 
-.home::before {
+.home-hero::before,
+.home-loading-screen::before {
     content: "";
     position: absolute;
     inset: -12%;
@@ -1527,7 +1535,8 @@ html.home-lock-scroll {
     animation: homeDrift 42s linear infinite;
 }
 
-.home::after {
+.home-hero::after,
+.home-loading-screen::after {
     content: "";
     position: absolute;
     inset: -14%;
@@ -1547,23 +1556,31 @@ html.home-lock-scroll {
 }
 
 .home-wrapper {
-    height: 100dvh;
     min-height: 100dvh;
     overflow: hidden;
+    background-color: var(--navy);
+}
+
+html.home-scroll-surface,
+body.home-scroll-surface {
+    scrollbar-width: none;
+}
+
+html.home-scroll-surface::-webkit-scrollbar,
+body.home-scroll-surface::-webkit-scrollbar {
+    display: none;
 }
 
 .home-dissolve-stage {
     position: relative;
     flex: 1;
     min-height: 100dvh;
-    height: 100dvh;
-    overflow: hidden;
+    overflow: visible;
     background-color: var(--navy);
 }
 
 .home-dissolve-stage>.home {
-    min-height: 100%;
-    height: 100%;
+    min-height: 100dvh;
 }
 
 .home-loading-screen {
@@ -1629,37 +1646,6 @@ html.home-lock-scroll {
     height: 100%;
     opacity: 0.68;
     pointer-events: none;
-}
-
-.home-orbit {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    border: 1px solid var(--border-on-dark);
-    border-radius: 50%;
-    pointer-events: none;
-}
-
-.home-orbit-a {
-    width: 980px;
-    height: 360px;
-    transform: translate(-50%, -50%) rotate(-11deg);
-    animation: homeOrbitA 64s linear infinite;
-}
-
-.home-orbit-b {
-    width: 760px;
-    height: 560px;
-    transform: translate(-50%, -50%) rotate(21deg);
-    animation: homeOrbitB 78s linear infinite reverse;
-}
-
-.home-orbit-c {
-    width: 420px;
-    height: 420px;
-    border-color: rgba(248, 250, 252, 0.2);
-    transform: translate(-50%, -50%);
-    animation: homeOrbitC 56s linear infinite;
 }
 
 .home-copy {
@@ -1854,6 +1840,402 @@ html.home-lock-scroll {
     animation-delay: -5.8s;
 }
 
+.home-landing {
+    position: relative;
+    z-index: 2;
+    width: min(1180px, calc(100% - 3rem));
+    margin: 0 auto;
+    padding: 4rem 0 7rem;
+}
+
+.home-story {
+    position: relative;
+    display: grid;
+    gap: 2rem;
+    padding: clamp(3rem, 7vw, 5.75rem) 0;
+}
+
+.home-story-header {
+    max-width: 720px;
+}
+
+.home-story-header h2 {
+    margin: 0;
+    color: var(--surface);
+    font-family: var(--font-display);
+    font-size: var(--display-xl);
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: var(--tracking-title);
+}
+
+.home-story-header p {
+    max-width: 560px;
+    margin: 1.25rem 0 0;
+    color: var(--text-muted-on-dark);
+    font-size: var(--text-lg);
+    line-height: 1.6;
+}
+
+.home-story-sectors {
+    grid-template-columns: minmax(0, 0.85fr) minmax(420px, 1.15fr);
+    align-items: end;
+}
+
+.home-sector-bars {
+    display: grid;
+    gap: 0.85rem;
+}
+
+.home-sector-row {
+    --bar-scale: 0.1;
+    position: relative;
+    min-height: 4.75rem;
+    display: grid;
+    grid-template-columns: 3.5rem minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.1rem;
+    border: 1px solid color-mix(in srgb, var(--surface) 18%, transparent);
+    border-radius: var(--radius-lg);
+    background:
+        radial-gradient(circle at 14% 0%, color-mix(in srgb, var(--accent) 18%, transparent), transparent 42%),
+        radial-gradient(circle at 100% 18%, color-mix(in srgb, var(--navy-light) 24%, transparent), transparent 48%),
+        color-mix(in srgb, var(--navy) 68%, transparent);
+    color: var(--surface);
+    text-decoration: none;
+    overflow: hidden;
+    isolation: isolate;
+    backdrop-filter: blur(26px) saturate(125%);
+    -webkit-backdrop-filter: blur(26px) saturate(125%);
+    box-shadow:
+        var(--shadow-hero),
+        inset 0 1px 0 color-mix(in srgb, var(--surface) 18%, transparent),
+        inset 0 -24px 44px color-mix(in srgb, var(--navy) 42%, transparent);
+    transition: border-color 0.28s, box-shadow 0.28s, transform 0.28s, background 0.28s;
+}
+
+.home-sector-row::before {
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 0;
+    z-index: -1;
+    width: calc(var(--bar-scale) * 100%);
+    background: var(--navy-light);
+    opacity: 0.18;
+    mix-blend-mode: screen;
+    transform-origin: left center;
+    transition: width 0.35s, opacity 0.25s;
+}
+
+.home-sector-row:hover {
+    border-color: color-mix(in srgb, var(--surface) 34%, transparent);
+    background:
+        radial-gradient(circle at 14% 0%, color-mix(in srgb, var(--accent) 24%, transparent), transparent 42%),
+        radial-gradient(circle at 100% 18%, color-mix(in srgb, var(--navy-light) 32%, transparent), transparent 48%),
+        color-mix(in srgb, var(--navy) 62%, transparent);
+    box-shadow:
+        var(--shadow-hero),
+        inset 0 1px 0 color-mix(in srgb, var(--surface) 24%, transparent),
+        inset 0 -26px 48px color-mix(in srgb, var(--navy) 46%, transparent);
+    transform: translateY(-3px);
+}
+
+.home-sector-rank {
+    color: var(--text-muted-on-dark);
+    font-family: var(--font-mono);
+    font-size: var(--text-2xs);
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.home-sector-name {
+    min-width: 0;
+    font-size: clamp(1.05rem, 2vw, 1.45rem);
+    font-weight: 600;
+    line-height: 1.15;
+}
+
+.home-sector-amount {
+    font-family: var(--font-display);
+    font-size: clamp(1.65rem, 3vw, 2.55rem);
+    line-height: 0.95;
+    white-space: nowrap;
+}
+
+.home-story-categories {
+    min-height: 680px;
+    grid-template-columns: minmax(0, 1.2fr) minmax(310px, 0.8fr);
+    align-items: center;
+}
+
+.home-category-cloud {
+    position: relative;
+    min-height: 520px;
+}
+
+.home-category-chip {
+    --chip-scale: 1;
+    position: absolute;
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    width: clamp(10rem, calc(var(--chip-scale) * 12rem), 18.5rem);
+    aspect-ratio: 1;
+    padding: 1.35rem;
+    border: 1px solid color-mix(in srgb, var(--surface) 18%, transparent);
+    border-radius: 50%;
+    background:
+        radial-gradient(circle at 14% 0%, color-mix(in srgb, var(--accent) 18%, transparent), transparent 42%),
+        radial-gradient(circle at 100% 18%, color-mix(in srgb, var(--navy-light) 24%, transparent), transparent 48%),
+        color-mix(in srgb, var(--navy) 68%, transparent);
+    color: var(--surface);
+    text-align: center;
+    text-decoration: none;
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    box-shadow:
+        var(--shadow-hero),
+        inset 0 1px 0 color-mix(in srgb, var(--surface) 18%, transparent),
+        inset 0 -24px 44px color-mix(in srgb, var(--navy) 42%, transparent);
+    animation: homeFloat 12s ease-in-out infinite;
+    transition: border-color 0.28s, box-shadow 0.28s, transform 0.28s, background 0.28s;
+}
+
+.home-category-chip:hover {
+    border-color: color-mix(in srgb, var(--surface) 34%, transparent);
+    background:
+        radial-gradient(circle at 14% 0%, color-mix(in srgb, var(--accent) 24%, transparent), transparent 42%),
+        radial-gradient(circle at 100% 18%, color-mix(in srgb, var(--navy-light) 32%, transparent), transparent 48%),
+        color-mix(in srgb, var(--navy) 62%, transparent);
+    box-shadow:
+        var(--shadow-hero),
+        inset 0 1px 0 color-mix(in srgb, var(--surface) 24%, transparent),
+        inset 0 -26px 48px color-mix(in srgb, var(--navy) 46%, transparent);
+    transform: scale(1.035);
+}
+
+.home-category-chip span {
+    font-size: clamp(0.92rem, 1.5vw, 1.18rem);
+    font-weight: 600;
+    line-height: 1.16;
+}
+
+.home-category-chip strong {
+    margin-top: 0.7rem;
+    font-family: var(--font-display);
+    font-size: clamp(1.45rem, 2.5vw, 2.35rem);
+    font-weight: 400;
+    line-height: 0.95;
+}
+
+.home-category-chip-1 {
+    left: 6%;
+    top: 12%;
+}
+
+.home-category-chip-2 {
+    right: 9%;
+    top: 4%;
+    animation-delay: -2s;
+}
+
+.home-category-chip-3 {
+    left: 35%;
+    top: 35%;
+    animation-delay: -4s;
+}
+
+.home-category-chip-4 {
+    left: 3%;
+    bottom: 5%;
+    animation-delay: -5.5s;
+}
+
+.home-category-chip-5 {
+    right: 2%;
+    bottom: 11%;
+    animation-delay: -1.5s;
+}
+
+.home-category-chip-6 {
+    left: 53%;
+    bottom: 0;
+    animation-delay: -7s;
+}
+
+.home-story-header-offset {
+    align-self: end;
+    max-width: 420px;
+}
+
+.home-story-latest {
+    grid-template-columns: minmax(260px, 1fr) minmax(0, 2fr);
+    align-items: start;
+}
+
+.home-latest-list {
+    display: grid;
+    gap: 0.75rem;
+}
+
+.home-latest-card-link {
+    margin-bottom: 0;
+}
+
+.home-latest-card {
+    margin-bottom: 0;
+    padding: var(--pad-card);
+    border-color: var(--border-on-dark);
+    background:
+        radial-gradient(circle at 14% 0%, color-mix(in srgb, var(--accent) 10%, transparent), transparent 42%),
+        radial-gradient(circle at 100% 18%, color-mix(in srgb, var(--navy-light) 18%, transparent), transparent 48%),
+        color-mix(in srgb, var(--navy) 72%, transparent);
+    color: var(--surface);
+    box-shadow:
+        var(--shadow-card),
+        inset 0 1px 0 color-mix(in srgb, var(--surface) 12%, transparent);
+}
+
+.home-latest-card::before {
+    display: none;
+}
+
+.home-latest-card:hover {
+    border-color: color-mix(in srgb, var(--surface) 34%, transparent);
+    background:
+        radial-gradient(circle at 14% 0%, color-mix(in srgb, var(--accent) 14%, transparent), transparent 42%),
+        radial-gradient(circle at 100% 18%, color-mix(in srgb, var(--navy-light) 24%, transparent), transparent 48%),
+        color-mix(in srgb, var(--navy) 68%, transparent);
+    box-shadow: var(--shadow-hero);
+}
+
+.home-latest-card .contract-header {
+    gap: 2rem;
+    margin-bottom: 0;
+}
+
+.home-latest-card .contract-title {
+    color: var(--surface);
+    font-size: var(--text-lg);
+    line-height: 1.5;
+}
+
+.home-latest-card .contract-amount {
+    color: var(--surface);
+    font-size: 2.125rem;
+}
+
+.home-latest-card .contract-meta {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 2rem;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid color-mix(in srgb, var(--surface) 72%, transparent);
+}
+
+.home-latest-card .contract-meta-label {
+    color: var(--text-muted-on-dark);
+}
+
+.home-latest-card .contract-meta-value {
+    color: var(--surface);
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.home-dock-shell {
+    position: fixed;
+    left: 50%;
+    top: var(--header-pad-y);
+    z-index: 100;
+    display: grid;
+    justify-items: center;
+    gap: 0.75rem;
+    opacity: 0;
+    pointer-events: none;
+    transform: translate(-50%, -0.85rem);
+    transition: opacity 0.22s, transform 0.22s;
+}
+
+.home-dock-shell::before {
+    content: "";
+    position: fixed;
+    left: 50%;
+    top: 0;
+    z-index: -1;
+    width: 100vw;
+    height: 10.5rem;
+    background: linear-gradient(180deg, var(--navy) 0%, color-mix(in srgb, var(--navy) 92%, transparent) 42%, transparent 100%);
+    pointer-events: none;
+    transform: translateX(-50%);
+}
+
+.home-dock-shell.is-visible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translate(-50%, 0);
+}
+
+.home-dock-logo {
+    height: 2.5rem;
+    aspect-ratio: 306 / 102;
+    cursor: pointer;
+}
+
+.home-dock-nav.nav-wrapper {
+    position: relative;
+    top: auto;
+    width: min(720px, calc(100vw - 2rem));
+    border: 1px solid var(--border-on-dark);
+    border-radius: var(--radius-pill);
+    background: rgba(248, 250, 252, 0.1);
+    box-shadow: var(--shadow-hero);
+    overflow: hidden;
+}
+
+.home-dock-nav .nav {
+    width: 100%;
+    padding: 0.45rem;
+    gap: 0.25rem;
+}
+
+.home-dock-nav.nav-dark .nav-tab {
+    flex: 1 1 0;
+    padding: 0.85rem 1.15rem;
+    font-size: var(--text-xs);
+    color: var(--surface);
+}
+
+.home-dock-nav.nav-dark .nav-tab.active,
+.home-dock-nav.nav-dark .nav-tab:hover {
+    background: var(--surface);
+    color: var(--navy);
+}
+
+.route-transition {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    pointer-events: none;
+}
+
+.route-transition-navy {
+    background: var(--navy);
+}
+
+.route-transition.is-entering {
+    animation: routeFadeIn 0.26s ease forwards;
+}
+
+.route-transition.is-leaving {
+    animation: routeFadeOut 0.48s ease forwards;
+}
+
 @keyframes homeDrift {
     from {
         transform: translate3d(0, 0, 0);
@@ -1900,6 +2282,26 @@ html.home-lock-scroll {
     }
 }
 
+@keyframes routeFadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes routeFadeOut {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
 @keyframes homeFloat {
     0% {
         translate: 0 0;
@@ -1918,41 +2320,12 @@ html.home-lock-scroll {
     }
 }
 
-@keyframes homeOrbitA {
-    from {
-        transform: translate(-50%, -50%) rotate(-11deg);
-    }
-
-    to {
-        transform: translate(-50%, -50%) rotate(349deg);
-    }
-}
-
-@keyframes homeOrbitB {
-    from {
-        transform: translate(-50%, -50%) rotate(21deg);
-    }
-
-    to {
-        transform: translate(-50%, -50%) rotate(381deg);
-    }
-}
-
-@keyframes homeOrbitC {
-    from {
-        transform: translate(-50%, -50%) rotate(0deg);
-    }
-
-    to {
-        transform: translate(-50%, -50%) rotate(360deg);
-    }
-}
-
 @media (prefers-reduced-motion: reduce) {
 
-    .home::before,
-    .home-orbit,
-    .home-metric {
+    .home-hero::before,
+    .home-loading-screen::before,
+    .home-metric,
+    .home-category-chip {
         animation: none;
     }
 }
@@ -1975,6 +2348,20 @@ html.home-lock-scroll {
         left: calc(50% - 6.5rem);
         bottom: 6%;
     }
+
+    .home-story-sectors,
+    .home-story-latest {
+        grid-template-columns: 1fr;
+    }
+
+    .home-story-categories {
+        grid-template-columns: 1fr;
+        min-height: auto;
+    }
+
+    .home-category-cloud {
+        min-height: 500px;
+    }
 }
 
 @media (max-width: 768px) {
@@ -1987,23 +2374,21 @@ html.home-lock-scroll {
     }
 
     .home-wrapper {
-        height: 100dvh;
         min-height: 100dvh;
-        overflow: hidden;
+        overflow: visible;
     }
 
     .home-dissolve-stage {
-        height: 100dvh;
         min-height: 100dvh;
-        overflow: hidden;
+        overflow: visible;
     }
 
     .home-dissolve-stage>.home {
-        height: 100%;
         min-height: 100dvh;
     }
 
-    .home {
+    .home-hero,
+    .home-loading-screen {
         min-height: 100dvh;
         overflow: hidden;
         place-items: center;
@@ -2014,7 +2399,8 @@ html.home-lock-scroll {
         top: calc(50% - 1.125rem);
     }
 
-    .home::before {
+    .home-hero::before,
+    .home-loading-screen::before {
         animation: none;
     }
 
@@ -2045,23 +2431,125 @@ html.home-lock-scroll {
         margin-top: 2.75rem;
     }
 
-    .home-orbit-a {
-        width: 860px;
-        height: 315px;
-    }
-
-    .home-orbit-b {
-        width: 710px;
-        height: 495px;
-    }
-
-    .home-orbit-c {
-        width: 400px;
-        height: 400px;
-    }
-
     .home-metrics {
         display: none;
+    }
+
+    .home-landing {
+        width: min(100% - 2rem, 40rem);
+        padding: 2.75rem 0 4.5rem;
+    }
+
+    .home-story {
+        gap: 1.5rem;
+        padding: 3rem 0;
+    }
+
+    .home-story-header h2 {
+        font-size: clamp(2.45rem, 13vw, 4rem);
+    }
+
+    .home-sector-row {
+        grid-template-columns: 2.65rem minmax(0, 1fr);
+        min-height: 5.25rem;
+        gap: 0.7rem;
+    }
+
+    .home-sector-amount {
+        grid-column: 2;
+        font-size: 2rem;
+    }
+
+    .home-category-cloud {
+        min-height: 680px;
+    }
+
+    .home-category-chip {
+        width: clamp(9.5rem, calc(var(--chip-scale) * 10rem), 15rem);
+        padding: 1rem;
+    }
+
+    .home-category-chip-1 {
+        left: 0;
+        top: 8%;
+    }
+
+    .home-category-chip-2 {
+        right: 0;
+        top: 2%;
+    }
+
+    .home-category-chip-3 {
+        left: 21%;
+        top: 31%;
+    }
+
+    .home-category-chip-4 {
+        left: 0;
+        bottom: 14%;
+    }
+
+    .home-category-chip-5 {
+        right: 0;
+        bottom: 18%;
+    }
+
+    .home-category-chip-6 {
+        left: 30%;
+        bottom: 0;
+    }
+
+    .home-latest-card .contract-header {
+        display: grid;
+        gap: 0.8rem;
+        margin-bottom: 1rem;
+        padding-bottom: 1rem;
+    }
+
+    .home-latest-card .contract-amount {
+        font-size: 2rem;
+        text-align: left;
+    }
+
+    .home-latest-card .contract-meta-value {
+        white-space: normal;
+    }
+
+    .home-latest-card .contract-meta {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .home-dock-shell {
+        top: 0.75rem;
+        max-width: calc(100% - 1rem);
+    }
+
+    .home-dock-logo {
+        height: 2rem;
+    }
+
+    .home-dock-nav.nav-wrapper {
+        width: calc(100vw - 1rem);
+        overflow-x: auto;
+        scrollbar-width: none;
+    }
+
+    .home-dock-nav::-webkit-scrollbar {
+        display: none;
+    }
+
+    .home-dock-nav .nav {
+        width: max-content;
+        min-width: 100%;
+        padding: 0.35rem;
+    }
+
+    .home-dock-nav .nav-tab {
+        flex: 1 1 0;
+        min-height: 2.25rem;
+        padding: 0.65rem 0.9rem;
+        font-size: var(--text-2xs);
     }
 }
 
@@ -2070,7 +2558,8 @@ html.home-lock-scroll {
         font-size: clamp(4.1rem, 18vw, 4.85rem);
     }
 
-    .home {
+    .home-hero,
+    .home-loading-screen {
         padding-top: 5.25rem;
     }
 
