@@ -167,10 +167,6 @@ function isPlainLeftClick(event) {
 function handleInternalLinkClick(event, navigate) {
     if (!isPlainLeftClick(event)) return;
     event.preventDefault();
-    if (window.__iguadataNavigateWithTransition) {
-        window.__iguadataNavigateWithTransition(navigate);
-        return;
-    }
     navigate();
 }
 
@@ -2848,19 +2844,16 @@ function App() {
         setHomeRouteTransition('is-entering');
         window.setTimeout(() => {
             navigate();
-            window.setTimeout(() => setHomeRouteTransition('is-leaving'), 90);
-            window.setTimeout(() => setHomeRouteTransition(''), 620);
-        }, 260);
+            window.setTimeout(() => setHomeRouteTransition('is-leaving'), 120);
+            window.setTimeout(() => setHomeRouteTransition(''), 880);
+        }, 360);
     }, [homeRouteTransition]);
 
-    useEffect(() => {
-        window.__iguadataNavigateWithTransition = runRouteTransition;
-        return () => {
-            if (window.__iguadataNavigateWithTransition === runRouteTransition) {
-                delete window.__iguadataNavigateWithTransition;
-            }
-        };
-    }, [runRouteTransition]);
+    const handleTransitionLinkClick = (event, navigate) => {
+        if (!isPlainLeftClick(event)) return;
+        event.preventDefault();
+        runRouteTransition(navigate);
+    };
 
     useEffect(() => {
         window.history.scrollRestoration = 'manual';
@@ -3429,7 +3422,7 @@ function App() {
     }), [fraudes]);
 
     const goToHome = () => {
-        if (isMobile() && window.scrollY > 24) {
+        if (activeTab === 'home') {
             window.scrollTo({ top: 0, behavior: 'smooth' });
             return;
         }
@@ -3534,14 +3527,64 @@ function App() {
             .slice(0, 6);
     }, [contracts]);
 
+    const renderHomeChrome = (interactive = true) => (
+        <div className="home-chrome">
+            <div className="home-dock-gradient is-visible" aria-hidden="true"></div>
+            <div className="home-brand home-chrome-brand" onClick={interactive ? goToHome : undefined}>
+                <div className="home-logo" role="img" aria-label="Iguadata"></div>
+            </div>
+        </div>
+    );
+
+    const renderNavTabs = (showActive = true, useTransition = false) => {
+        const handleNavClick = useTransition ? handleTransitionLinkClick : handleInternalLinkClick;
+        return (
+            <div className="nav">
+                <a href={buildRouteUrl('/contractes')} className={'nav-tab' + (showActive && (activeTab === 'buscador' || activeTab === 'contracte') ? ' active' : '')} onClick={(event) => handleNavClick(event, () => { handleNavigation('buscador'); setSelectedEmpresa(null); setIsMobileMenuOpen(false); })}>Contractes</a>
+                <a href={buildRouteUrl('/empreses')} className={'nav-tab' + (showActive && (activeTab === 'empreses' || activeTab === 'empresa') ? ' active' : '')} onClick={(event) => handleNavClick(event, () => { handleNavigation('empreses'); setSelectedEmpresa(null); setIsMobileMenuOpen(false); })}>Empreses</a>
+                <a href={buildRouteUrl('/persones')} className={'nav-tab' + (showActive && activeTab === 'persones' ? ' active' : '')} onClick={(event) => handleNavClick(event, () => { handleNavigation('persones'); setIsMobileMenuOpen(false); })}>Persones</a>
+                <a href={buildRouteUrl('/analisi')} className={'nav-tab' + (showActive && (activeTab === 'analisi' || activeTab === 'cas-fraccionament' || activeTab === 'cas-concentracio' || activeTab === 'cas-electoralisme') ? ' active' : '')} onClick={(event) => handleNavClick(event, handleAnalisiNavClick)}>Anàlisi</a>
+                <a href={buildRouteUrl('/sobre')} className={'nav-tab' + (showActive && activeTab === 'sobre' ? ' active' : '')} onClick={(event) => handleNavClick(event, () => { handleNavigation('sobre'); setIsMobileMenuOpen(false); })}>Sobre</a>
+            </div>
+        );
+    };
+
+    const renderHomeDock = () => (
+        <div className={`home-dock-shell${showHomeDockNav ? ' is-visible' : ''}`}>
+            <nav className="home-dock-nav nav-wrapper nav-dark" aria-label="Navegació principal">
+                {renderNavTabs(false, true)}
+            </nav>
+        </div>
+    );
+
+    const renderSiteChrome = () => (
+        <div className="site-chrome site-chrome-light">
+            <div className="site-chrome-gradient" aria-hidden="true"></div>
+            <div className="site-chrome-brand" onClick={goToHome}>
+                <div className="home-logo" role="img" aria-label="Iguadata"></div>
+            </div>
+            <div className={`site-dock-shell is-visible${isMobileMenuOpen ? ' is-open' : ''}`}>
+                <nav className={'site-dock-nav nav-wrapper' + (isMobileMenuOpen ? ' open' : '')} aria-label="Navegació principal">
+                    <button
+                        className="mobile-nav-current"
+                        type="button"
+                        aria-expanded={isMobileMenuOpen}
+                        onClick={() => setIsMobileMenuOpen(prev => !prev)}
+                    >
+                        <span>{navCurrentLabel}</span>
+                        <svg className="mobile-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
+                    </button>
+                    {renderNavTabs(true, false)}
+                </nav>
+            </div>
+        </div>
+    );
+
     const renderHomeSection = (extraClassName = '', interactive = true) => (
         <section className={`home${extraClassName ? ` ${extraClassName}` : ''}`} aria-label="Portada editorial Iguadata" aria-hidden={!interactive}>
             <div className="home-hero">
-            <div className="home-brand" onClick={interactive ? goToHome : undefined}>
-                <div className="home-logo" role="img" aria-label="Iguadata"></div>
-            </div>
-
             <canvas ref={homeCanvasRef} className="home-particles" aria-hidden="true"></canvas>
+            <div className="home-hero-bottom-gradient" aria-hidden="true"></div>
             <div className="home-copy">
                 <h1 className="home-title">Tot és <em>públic</em></h1>
                 <p className="home-deck">
@@ -3651,7 +3694,7 @@ function App() {
                                 <div className="contract-card home-latest-card">
                                     <div className="contract-header">
                                         <div className="contract-title">{contract.descripcion}</div>
-                                        <div className="contract-amount">{formatCompactCurrency(contract.importe)}</div>
+                                        <div className="contract-amount">{formatCurrency(contract.importe)}</div>
                                     </div>
                                     <div className="contract-meta">
                                         <div className="contract-meta-item">
@@ -3668,20 +3711,6 @@ function App() {
                         ))}
                     </div>
                 </section>
-            </div>
-            <div className={`home-dock-shell${showHomeDockNav ? ' is-visible' : ''}`}>
-                <div className="home-dock-logo header-logo" onClick={interactive ? goToHome : undefined}>
-                    <div className="header-logo-svg" role="img" aria-label="Iguadata"></div>
-                </div>
-                <nav className="home-dock-nav nav-wrapper nav-dark" aria-label="Navegació principal">
-                    <div className="nav">
-                        <a href={buildRouteUrl('/contractes')} className="nav-tab" onClick={(event) => handleInternalLinkClick(event, () => { handleNavigation('buscador'); setIsMobileMenuOpen(false); })}>Contractes</a>
-                        <a href={buildRouteUrl('/empreses')} className="nav-tab" onClick={(event) => handleInternalLinkClick(event, () => { handleNavigation('empreses'); setSelectedEmpresa(null); setIsMobileMenuOpen(false); })}>Empreses</a>
-                        <a href={buildRouteUrl('/persones')} className="nav-tab" onClick={(event) => handleInternalLinkClick(event, () => { handleNavigation('persones'); setIsMobileMenuOpen(false); })}>Persones</a>
-                        <a href={buildRouteUrl('/analisi')} className="nav-tab" onClick={(event) => handleInternalLinkClick(event, handleAnalisiNavClick)}>Anàlisi</a>
-                        <a href={buildRouteUrl('/sobre')} className="nav-tab" onClick={(event) => handleInternalLinkClick(event, () => { handleNavigation('sobre'); setIsMobileMenuOpen(false); })}>Sobre</a>
-                    </div>
-                </nav>
             </div>
         </section>
     );
@@ -3714,31 +3743,23 @@ function App() {
     }
 
     const handleDetailClick = (contract) => {
-        runRouteTransition(() => {
-            setSelectedContractForDetail(contract);
-            handleNavigation('contracte', `/contractes/${contract.slug}`);
-        });
+        setSelectedContractForDetail(contract);
+        handleNavigation('contracte', `/contractes/${contract.slug}`);
     };
 
     const handleCasoClick = (caso) => {
-        runRouteTransition(() => {
-            setSelectedCasoDetail(caso);
-            handleNavigation('cas-fraccionament', `/analisi/fraccionament/${caso.id}`);
-        });
+        setSelectedCasoDetail(caso);
+        handleNavigation('cas-fraccionament', `/analisi/fraccionament/${caso.id}`);
     };
 
     const handleConcentracioClick = (caso) => {
-        runRouteTransition(() => {
-            setSelectedConcentracioDetail(caso);
-            handleNavigation('cas-concentracio', `/analisi/concentracio/${caso.id}`);
-        });
+        setSelectedConcentracioDetail(caso);
+        handleNavigation('cas-concentracio', `/analisi/concentracio/${caso.id}`);
     };
 
     const handleElectoralismeClick = (caso) => {
-        runRouteTransition(() => {
-            setSelectedElectoralismeDetail(caso);
-            handleNavigation('cas-electoralisme', `/analisi/electoralisme/${caso.id}`);
-        });
+        setSelectedElectoralismeDetail(caso);
+        handleNavigation('cas-electoralisme', `/analisi/electoralisme/${caso.id}`);
     };
 
     const handleAnalisiNavClick = () => {
@@ -3755,22 +3776,20 @@ function App() {
     };
 
     const handleEmpresaClick = (empresaName) => {
-        runRouteTransition(() => {
-            setSelectedContractForDetail(null);
-            setSelectedEmpresa(empresaName);
-            if (activeTab === 'buscador' || activeTab === 'persones') {
-                setSourceTabForCompany(activeTab);
-            } else {
-                setSourceTabForCompany('empreses');
-            }
+        setSelectedContractForDetail(null);
+        setSelectedEmpresa(empresaName);
+        if (activeTab === 'buscador' || activeTab === 'persones') {
+            setSourceTabForCompany(activeTab);
+        } else {
+            setSourceTabForCompany('empreses');
+        }
 
-            const emp = empreses.find(e => e.nom === empresaName);
-            if (emp && emp.slug) {
-                handleNavigation('empresa', `/empreses/${emp.slug}`);
-            } else {
-                handleNavigation('empresa');
-            }
-        });
+        const emp = empreses.find(e => e.nom === empresaName);
+        if (emp && emp.slug) {
+            handleNavigation('empresa', `/empreses/${emp.slug}`);
+        } else {
+            handleNavigation('empresa');
+        }
     };
 
     const goBack = (fallback) => {
@@ -3785,40 +3804,18 @@ function App() {
     };
 
     return (
-        <div className={activeTab === 'home' ? 'home-wrapper' : ''}>
-            {activeTab !== 'home' && (
-                <>
-                    <div className="header"><div className="header-content">
-                        <div className="header-logo" onClick={goToHome}>
-                            <div className="header-logo-svg" role="img" aria-label="Iguadata"></div>
-                        </div>
-                    </div></div>
-
-                    <div className={'nav-wrapper' + (isMobileMenuOpen ? ' open' : '')}>
-                        <button
-                            className="mobile-nav-current"
-                            type="button"
-                            aria-expanded={isMobileMenuOpen}
-                            onClick={() => setIsMobileMenuOpen(prev => !prev)}
-                        >
-                            <span>{navCurrentLabel}</span>
-                            <svg className="mobile-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
-                        </button>
-                        <div className="nav">
-                            <a href={buildRouteUrl('/contractes')} className={'nav-tab' + ((activeTab === 'buscador' || activeTab === 'contracte') ? ' active' : '')} onClick={(event) => handleInternalLinkClick(event, () => { handleNavigation('buscador'); setSelectedEmpresa(null); setIsMobileMenuOpen(false); })}>Contractes</a>
-                            <a href={buildRouteUrl('/empreses')} className={'nav-tab' + ((activeTab === 'empreses' || activeTab === 'empresa') ? ' active' : '')} onClick={(event) => handleInternalLinkClick(event, () => { handleNavigation('empreses'); setSelectedEmpresa(null); setIsMobileMenuOpen(false); })}>Empreses</a>
-                            <a href={buildRouteUrl('/persones')} className={'nav-tab' + (activeTab === 'persones' ? ' active' : '')} onClick={(event) => handleInternalLinkClick(event, () => { handleNavigation('persones'); setIsMobileMenuOpen(false); })}>Persones</a>
-                            <a href={buildRouteUrl('/analisi')} className={'nav-tab' + ((activeTab === 'analisi' || activeTab === 'cas-fraccionament' || activeTab === 'cas-concentracio' || activeTab === 'cas-electoralisme') ? ' active' : '')} onClick={(event) => handleInternalLinkClick(event, handleAnalisiNavClick)}>Anàlisi</a>
-                            <a href={buildRouteUrl('/sobre')} className={'nav-tab' + (activeTab === 'sobre' ? ' active' : '')} onClick={(event) => handleInternalLinkClick(event, () => { handleNavigation('sobre'); setIsMobileMenuOpen(false); })}>Sobre</a>
-                        </div></div>
-                </>
-            )}
+        <div className={activeTab === 'home' ? 'home-wrapper' : 'app-shell app-shell-chrome'}>
+            {activeTab !== 'home' && renderSiteChrome()}
 
             {activeTab === 'home' && (
-                <div className="home-dissolve-stage">
-                    {renderHomeSection(homeIntroFading ? 'home-intro-target' : '')}
-                    {homeIntroFading && renderHomeLoading(true)}
-                </div>
+                <>
+                    {renderHomeChrome()}
+                    {renderHomeDock()}
+                    <div className="home-dissolve-stage">
+                        {renderHomeSection(homeIntroFading ? 'home-intro-target' : '')}
+                        {homeIntroFading && renderHomeLoading(true)}
+                    </div>
+                </>
             )}
 
             {isDataTabLoading && renderDataLoading()}

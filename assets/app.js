@@ -173,10 +173,6 @@ function isPlainLeftClick(event) {
 function handleInternalLinkClick(event, navigate) {
   if (!isPlainLeftClick(event)) return;
   event.preventDefault();
-  if (window.__iguadataNavigateWithTransition) {
-    window.__iguadataNavigateWithTransition(navigate);
-    return;
-  }
   navigate();
 }
 function resolveRoute(path) {
@@ -3641,18 +3637,15 @@ function App() {
     setHomeRouteTransition('is-entering');
     window.setTimeout(() => {
       navigate();
-      window.setTimeout(() => setHomeRouteTransition('is-leaving'), 90);
-      window.setTimeout(() => setHomeRouteTransition(''), 620);
-    }, 260);
+      window.setTimeout(() => setHomeRouteTransition('is-leaving'), 120);
+      window.setTimeout(() => setHomeRouteTransition(''), 880);
+    }, 360);
   }, [homeRouteTransition]);
-  useEffect(() => {
-    window.__iguadataNavigateWithTransition = runRouteTransition;
-    return () => {
-      if (window.__iguadataNavigateWithTransition === runRouteTransition) {
-        delete window.__iguadataNavigateWithTransition;
-      }
-    };
-  }, [runRouteTransition]);
+  const handleTransitionLinkClick = (event, navigate) => {
+    if (!isPlainLeftClick(event)) return;
+    event.preventDefault();
+    runRouteTransition(navigate);
+  };
   useEffect(() => {
     window.history.scrollRestoration = 'manual';
     if (!window.history.state?.iguadata) {
@@ -4170,7 +4163,7 @@ function App() {
     totalVisible: fraudes.filter(f => f.nivell !== 'BAIX').length
   }), [fraudes]);
   const goToHome = () => {
-    if (isMobile() && window.scrollY > 24) {
+    if (activeTab === 'home') {
       window.scrollTo({
         top: 0,
         behavior: 'smooth'
@@ -4266,22 +4259,113 @@ function App() {
       return contract.fecha && amount > 0 && !/lot desert/i.test(adjudicatario);
     }).sort((a, b) => String(b.fecha).localeCompare(String(a.fecha))).slice(0, 6);
   }, [contracts]);
+  const renderHomeChrome = (interactive = true) => React.createElement("div", {
+    className: "home-chrome"
+  }, React.createElement("div", {
+    className: "home-dock-gradient is-visible",
+    "aria-hidden": "true"
+  }), React.createElement("div", {
+    className: "home-brand home-chrome-brand",
+    onClick: interactive ? goToHome : undefined
+  }, React.createElement("div", {
+    className: "home-logo",
+    role: "img",
+    "aria-label": "Iguadata"
+  })));
+  const renderNavTabs = (showActive = true, useTransition = false) => {
+    const handleNavClick = useTransition ? handleTransitionLinkClick : handleInternalLinkClick;
+    return React.createElement("div", {
+      className: "nav"
+    }, React.createElement("a", {
+      href: buildRouteUrl('/contractes'),
+      className: 'nav-tab' + (showActive && (activeTab === 'buscador' || activeTab === 'contracte') ? ' active' : ''),
+      onClick: event => handleNavClick(event, () => {
+        handleNavigation('buscador');
+        setSelectedEmpresa(null);
+        setIsMobileMenuOpen(false);
+      })
+    }, "Contractes"), React.createElement("a", {
+      href: buildRouteUrl('/empreses'),
+      className: 'nav-tab' + (showActive && (activeTab === 'empreses' || activeTab === 'empresa') ? ' active' : ''),
+      onClick: event => handleNavClick(event, () => {
+        handleNavigation('empreses');
+        setSelectedEmpresa(null);
+        setIsMobileMenuOpen(false);
+      })
+    }, "Empreses"), React.createElement("a", {
+      href: buildRouteUrl('/persones'),
+      className: 'nav-tab' + (showActive && activeTab === 'persones' ? ' active' : ''),
+      onClick: event => handleNavClick(event, () => {
+        handleNavigation('persones');
+        setIsMobileMenuOpen(false);
+      })
+    }, "Persones"), React.createElement("a", {
+      href: buildRouteUrl('/analisi'),
+      className: 'nav-tab' + (showActive && (activeTab === 'analisi' || activeTab === 'cas-fraccionament' || activeTab === 'cas-concentracio' || activeTab === 'cas-electoralisme') ? ' active' : ''),
+      onClick: event => handleNavClick(event, handleAnalisiNavClick)
+    }, "An\xE0lisi"), React.createElement("a", {
+      href: buildRouteUrl('/sobre'),
+      className: 'nav-tab' + (showActive && activeTab === 'sobre' ? ' active' : ''),
+      onClick: event => handleNavClick(event, () => {
+        handleNavigation('sobre');
+        setIsMobileMenuOpen(false);
+      })
+    }, "Sobre"));
+  };
+  const renderHomeDock = () => React.createElement("div", {
+    className: `home-dock-shell${showHomeDockNav ? ' is-visible' : ''}`
+  }, React.createElement("nav", {
+    className: "home-dock-nav nav-wrapper nav-dark",
+    "aria-label": "Navegaci\xF3 principal"
+  }, renderNavTabs(false, true)));
+  const renderSiteChrome = () => React.createElement("div", {
+    className: "site-chrome site-chrome-light"
+  }, React.createElement("div", {
+    className: "site-chrome-gradient",
+    "aria-hidden": "true"
+  }), React.createElement("div", {
+    className: "site-chrome-brand",
+    onClick: goToHome
+  }, React.createElement("div", {
+    className: "home-logo",
+    role: "img",
+    "aria-label": "Iguadata"
+  })), React.createElement("div", {
+    className: `site-dock-shell is-visible${isMobileMenuOpen ? ' is-open' : ''}`
+  }, React.createElement("nav", {
+    className: 'site-dock-nav nav-wrapper' + (isMobileMenuOpen ? ' open' : ''),
+    "aria-label": "Navegaci\xF3 principal"
+  }, React.createElement("button", {
+    className: "mobile-nav-current",
+    type: "button",
+    "aria-expanded": isMobileMenuOpen,
+    onClick: () => setIsMobileMenuOpen(prev => !prev)
+  }, React.createElement("span", null, navCurrentLabel), React.createElement("svg", {
+    className: "mobile-nav-chevron",
+    width: "16",
+    height: "16",
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: "1.8",
+    strokeLinecap: "round",
+    strokeLinejoin: "round",
+    "aria-hidden": "true"
+  }, React.createElement("path", {
+    d: "m6 9 6 6 6-6"
+  }))), renderNavTabs(true, false))));
   const renderHomeSection = (extraClassName = '', interactive = true) => React.createElement("section", {
     className: `home${extraClassName ? ` ${extraClassName}` : ''}`,
     "aria-label": "Portada editorial Iguadata",
     "aria-hidden": !interactive
   }, React.createElement("div", {
     className: "home-hero"
-  }, React.createElement("div", {
-    className: "home-brand",
-    onClick: interactive ? goToHome : undefined
-  }, React.createElement("div", {
-    className: "home-logo",
-    role: "img",
-    "aria-label": "Iguadata"
-  })), React.createElement("canvas", {
+  }, React.createElement("canvas", {
     ref: homeCanvasRef,
     className: "home-particles",
+    "aria-hidden": "true"
+  }), React.createElement("div", {
+    className: "home-hero-bottom-gradient",
     "aria-hidden": "true"
   }), React.createElement("div", {
     className: "home-copy"
@@ -4476,7 +4560,7 @@ function App() {
     className: "contract-title"
   }, contract.descripcion), React.createElement("div", {
     className: "contract-amount"
-  }, formatCompactCurrency(contract.importe))), React.createElement("div", {
+  }, formatCurrency(contract.importe))), React.createElement("div", {
     className: "contract-meta"
   }, React.createElement("div", {
     className: "contract-meta-item"
@@ -4490,54 +4574,7 @@ function App() {
     className: "contract-meta-label"
   }, "Data"), React.createElement("span", {
     className: "contract-meta-value"
-  }, formatDate(contract.fecha)))))))))), React.createElement("div", {
-    className: `home-dock-shell${showHomeDockNav ? ' is-visible' : ''}`
-  }, React.createElement("div", {
-    className: "home-dock-logo header-logo",
-    onClick: interactive ? goToHome : undefined
-  }, React.createElement("div", {
-    className: "header-logo-svg",
-    role: "img",
-    "aria-label": "Iguadata"
-  })), React.createElement("nav", {
-    className: "home-dock-nav nav-wrapper nav-dark",
-    "aria-label": "Navegaci\xF3 principal"
-  }, React.createElement("div", {
-    className: "nav"
-  }, React.createElement("a", {
-    href: buildRouteUrl('/contractes'),
-    className: "nav-tab",
-    onClick: event => handleInternalLinkClick(event, () => {
-      handleNavigation('buscador');
-      setIsMobileMenuOpen(false);
-    })
-  }, "Contractes"), React.createElement("a", {
-    href: buildRouteUrl('/empreses'),
-    className: "nav-tab",
-    onClick: event => handleInternalLinkClick(event, () => {
-      handleNavigation('empreses');
-      setSelectedEmpresa(null);
-      setIsMobileMenuOpen(false);
-    })
-  }, "Empreses"), React.createElement("a", {
-    href: buildRouteUrl('/persones'),
-    className: "nav-tab",
-    onClick: event => handleInternalLinkClick(event, () => {
-      handleNavigation('persones');
-      setIsMobileMenuOpen(false);
-    })
-  }, "Persones"), React.createElement("a", {
-    href: buildRouteUrl('/analisi'),
-    className: "nav-tab",
-    onClick: event => handleInternalLinkClick(event, handleAnalisiNavClick)
-  }, "An\xE0lisi"), React.createElement("a", {
-    href: buildRouteUrl('/sobre'),
-    className: "nav-tab",
-    onClick: event => handleInternalLinkClick(event, () => {
-      handleNavigation('sobre');
-      setIsMobileMenuOpen(false);
-    })
-  }, "Sobre")))));
+  }, formatDate(contract.fecha)))))))))));
   const renderHomeLoading = (isDissolving = false) => React.createElement("div", {
     className: `home home-loading-screen${isDissolving ? ' is-dissolving' : ''}`
   }, React.createElement("div", {
@@ -4570,28 +4607,20 @@ function App() {
     return renderHomeLoading(false);
   }
   const handleDetailClick = contract => {
-    runRouteTransition(() => {
-      setSelectedContractForDetail(contract);
-      handleNavigation('contracte', `/contractes/${contract.slug}`);
-    });
+    setSelectedContractForDetail(contract);
+    handleNavigation('contracte', `/contractes/${contract.slug}`);
   };
   const handleCasoClick = caso => {
-    runRouteTransition(() => {
-      setSelectedCasoDetail(caso);
-      handleNavigation('cas-fraccionament', `/analisi/fraccionament/${caso.id}`);
-    });
+    setSelectedCasoDetail(caso);
+    handleNavigation('cas-fraccionament', `/analisi/fraccionament/${caso.id}`);
   };
   const handleConcentracioClick = caso => {
-    runRouteTransition(() => {
-      setSelectedConcentracioDetail(caso);
-      handleNavigation('cas-concentracio', `/analisi/concentracio/${caso.id}`);
-    });
+    setSelectedConcentracioDetail(caso);
+    handleNavigation('cas-concentracio', `/analisi/concentracio/${caso.id}`);
   };
   const handleElectoralismeClick = caso => {
-    runRouteTransition(() => {
-      setSelectedElectoralismeDetail(caso);
-      handleNavigation('cas-electoralisme', `/analisi/electoralisme/${caso.id}`);
-    });
+    setSelectedElectoralismeDetail(caso);
+    handleNavigation('cas-electoralisme', `/analisi/electoralisme/${caso.id}`);
   };
   const handleAnalisiNavClick = () => {
     const isAnalisiList = activeTab === 'analisi';
@@ -4606,21 +4635,19 @@ function App() {
     setIsMobileMenuOpen(false);
   };
   const handleEmpresaClick = empresaName => {
-    runRouteTransition(() => {
-      setSelectedContractForDetail(null);
-      setSelectedEmpresa(empresaName);
-      if (activeTab === 'buscador' || activeTab === 'persones') {
-        setSourceTabForCompany(activeTab);
-      } else {
-        setSourceTabForCompany('empreses');
-      }
-      const emp = empreses.find(e => e.nom === empresaName);
-      if (emp && emp.slug) {
-        handleNavigation('empresa', `/empreses/${emp.slug}`);
-      } else {
-        handleNavigation('empresa');
-      }
-    });
+    setSelectedContractForDetail(null);
+    setSelectedEmpresa(empresaName);
+    if (activeTab === 'buscador' || activeTab === 'persones') {
+      setSourceTabForCompany(activeTab);
+    } else {
+      setSourceTabForCompany('empreses');
+    }
+    const emp = empreses.find(e => e.nom === empresaName);
+    if (emp && emp.slug) {
+      handleNavigation('empresa', `/empreses/${emp.slug}`);
+    } else {
+      handleNavigation('empresa');
+    }
   };
   const goBack = fallback => {
     saveCurrentScroll();
@@ -4633,77 +4660,10 @@ function App() {
     }
   };
   return React.createElement("div", {
-    className: activeTab === 'home' ? 'home-wrapper' : ''
-  }, activeTab !== 'home' && React.createElement(React.Fragment, null, React.createElement("div", {
-    className: "header"
-  }, React.createElement("div", {
-    className: "header-content"
-  }, React.createElement("div", {
-    className: "header-logo",
-    onClick: goToHome
-  }, React.createElement("div", {
-    className: "header-logo-svg",
-    role: "img",
-    "aria-label": "Iguadata"
-  })))), React.createElement("div", {
-    className: 'nav-wrapper' + (isMobileMenuOpen ? ' open' : '')
-  }, React.createElement("button", {
-    className: "mobile-nav-current",
-    type: "button",
-    "aria-expanded": isMobileMenuOpen,
-    onClick: () => setIsMobileMenuOpen(prev => !prev)
-  }, React.createElement("span", null, navCurrentLabel), React.createElement("svg", {
-    className: "mobile-nav-chevron",
-    width: "16",
-    height: "16",
-    viewBox: "0 0 24 24",
-    fill: "none",
-    stroke: "currentColor",
-    strokeWidth: "1.8",
-    strokeLinecap: "round",
-    strokeLinejoin: "round",
-    "aria-hidden": "true"
-  }, React.createElement("path", {
-    d: "m6 9 6 6 6-6"
-  }))), React.createElement("div", {
-    className: "nav"
-  }, React.createElement("a", {
-    href: buildRouteUrl('/contractes'),
-    className: 'nav-tab' + (activeTab === 'buscador' || activeTab === 'contracte' ? ' active' : ''),
-    onClick: event => handleInternalLinkClick(event, () => {
-      handleNavigation('buscador');
-      setSelectedEmpresa(null);
-      setIsMobileMenuOpen(false);
-    })
-  }, "Contractes"), React.createElement("a", {
-    href: buildRouteUrl('/empreses'),
-    className: 'nav-tab' + (activeTab === 'empreses' || activeTab === 'empresa' ? ' active' : ''),
-    onClick: event => handleInternalLinkClick(event, () => {
-      handleNavigation('empreses');
-      setSelectedEmpresa(null);
-      setIsMobileMenuOpen(false);
-    })
-  }, "Empreses"), React.createElement("a", {
-    href: buildRouteUrl('/persones'),
-    className: 'nav-tab' + (activeTab === 'persones' ? ' active' : ''),
-    onClick: event => handleInternalLinkClick(event, () => {
-      handleNavigation('persones');
-      setIsMobileMenuOpen(false);
-    })
-  }, "Persones"), React.createElement("a", {
-    href: buildRouteUrl('/analisi'),
-    className: 'nav-tab' + (activeTab === 'analisi' || activeTab === 'cas-fraccionament' || activeTab === 'cas-concentracio' || activeTab === 'cas-electoralisme' ? ' active' : ''),
-    onClick: event => handleInternalLinkClick(event, handleAnalisiNavClick)
-  }, "An\xE0lisi"), React.createElement("a", {
-    href: buildRouteUrl('/sobre'),
-    className: 'nav-tab' + (activeTab === 'sobre' ? ' active' : ''),
-    onClick: event => handleInternalLinkClick(event, () => {
-      handleNavigation('sobre');
-      setIsMobileMenuOpen(false);
-    })
-  }, "Sobre")))), activeTab === 'home' && React.createElement("div", {
+    className: activeTab === 'home' ? 'home-wrapper' : 'app-shell app-shell-chrome'
+  }, activeTab !== 'home' && renderSiteChrome(), activeTab === 'home' && React.createElement(React.Fragment, null, renderHomeChrome(), renderHomeDock(), React.createElement("div", {
     className: "home-dissolve-stage"
-  }, renderHomeSection(homeIntroFading ? 'home-intro-target' : ''), homeIntroFading && renderHomeLoading(true)), isDataTabLoading && renderDataLoading(), activeTab === 'buscador' && !dataLoading && React.createElement("div", {
+  }, renderHomeSection(homeIntroFading ? 'home-intro-target' : ''), homeIntroFading && renderHomeLoading(true))), isDataTabLoading && renderDataLoading(), activeTab === 'buscador' && !dataLoading && React.createElement("div", {
     className: "container contractes-page"
   }, React.createElement("h1", {
     className: "page-title"

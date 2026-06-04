@@ -1648,6 +1648,17 @@ body.home-scroll-surface::-webkit-scrollbar {
     pointer-events: none;
 }
 
+.home-hero-bottom-gradient {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    height: 11rem;
+    background: linear-gradient(0deg, var(--navy) 0%, color-mix(in srgb, var(--navy) 92%, transparent) 42%, transparent 100%);
+    pointer-events: none;
+}
+
 .home-copy {
     position: relative;
     z-index: 2;
@@ -1678,6 +1689,16 @@ body.home-scroll-surface::-webkit-scrollbar {
     mask-size: contain;
     mask-repeat: no-repeat;
     mask-position: center;
+}
+
+.home-chrome {
+    pointer-events: none;
+}
+
+.home-chrome-brand {
+    position: fixed;
+    z-index: 110;
+    pointer-events: auto;
 }
 
 .home-title {
@@ -1722,6 +1743,7 @@ body.home-scroll-surface::-webkit-scrollbar {
     text-transform: uppercase;
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
+    cursor: pointer;
     transition: background 0.2s, border-color 0.2s, transform 0.2s;
 }
 
@@ -2151,28 +2173,33 @@ body.home-scroll-surface::-webkit-scrollbar {
 .home-dock-shell {
     position: fixed;
     left: 50%;
-    top: var(--header-pad-y);
+    top: 5.5rem;
     z-index: 100;
+    width: 50vw;
+    max-width: calc(100vw - 2rem);
     display: grid;
     justify-items: center;
-    gap: 0.75rem;
     opacity: 0;
     pointer-events: none;
     transform: translate(-50%, -0.85rem);
     transition: opacity 0.22s, transform 0.22s;
 }
 
-.home-dock-shell::before {
-    content: "";
+.home-dock-gradient {
     position: fixed;
-    left: 50%;
     top: 0;
-    z-index: -1;
-    width: 100vw;
-    height: 10.5rem;
+    left: 0;
+    right: 0;
+    z-index: 90;
+    height: 11rem;
     background: linear-gradient(180deg, var(--navy) 0%, color-mix(in srgb, var(--navy) 92%, transparent) 42%, transparent 100%);
+    opacity: 0;
     pointer-events: none;
-    transform: translateX(-50%);
+    transition: opacity 0.22s;
+}
+
+.home-dock-gradient.is-visible {
+    opacity: 1;
 }
 
 .home-dock-shell.is-visible {
@@ -2181,16 +2208,10 @@ body.home-scroll-surface::-webkit-scrollbar {
     transform: translate(-50%, 0);
 }
 
-.home-dock-logo {
-    height: 2.5rem;
-    aspect-ratio: 306 / 102;
-    cursor: pointer;
-}
-
 .home-dock-nav.nav-wrapper {
     position: relative;
     top: auto;
-    width: min(720px, calc(100vw - 2rem));
+    width: 100%;
     border: 1px solid var(--border-on-dark);
     border-radius: var(--radius-pill);
     background: rgba(248, 250, 252, 0.1);
@@ -2217,6 +2238,93 @@ body.home-scroll-surface::-webkit-scrollbar {
     color: var(--navy);
 }
 
+.app-shell-chrome {
+    padding-top: 10.25rem;
+}
+
+.site-chrome {
+    pointer-events: none;
+}
+
+.site-chrome-gradient {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 90;
+    height: 11rem;
+    background: linear-gradient(180deg, var(--bg) 0%, color-mix(in srgb, var(--bg) 92%, transparent) 48%, transparent 100%);
+    pointer-events: none;
+}
+
+.site-chrome-brand {
+    position: fixed;
+    top: 2rem;
+    left: 50%;
+    z-index: 110;
+    width: 7.5rem;
+    height: 2.5rem;
+    transform: translateX(-50%);
+    cursor: pointer;
+    pointer-events: auto;
+}
+
+.site-chrome-light .home-logo {
+    background-color: var(--navy);
+}
+
+.site-dock-shell {
+    position: fixed;
+    left: 50%;
+    top: 5.5rem;
+    z-index: 100;
+    width: 50vw;
+    max-width: calc(100vw - 2rem);
+    display: grid;
+    justify-items: center;
+    pointer-events: none;
+    transform: translateX(-50%);
+}
+
+.site-dock-shell.is-visible {
+    pointer-events: auto;
+}
+
+.site-dock-nav.nav-wrapper {
+    position: relative;
+    top: auto;
+    width: 100%;
+    border: 1px solid color-mix(in srgb, var(--navy) 10%, var(--border));
+    border-radius: var(--radius-pill);
+    background: color-mix(in srgb, var(--bg) 92%, var(--surface));
+    box-shadow: 0 18px 48px rgba(15, 23, 42, 0.11);
+    overflow: hidden;
+}
+
+.site-dock-nav .mobile-nav-current {
+    display: none;
+}
+
+.site-dock-nav .nav {
+    width: 100%;
+    padding: 0.45rem;
+    gap: 0.25rem;
+}
+
+.site-dock-nav .nav-tab {
+    flex: 1 1 0;
+    padding: 0.85rem 1.15rem;
+    font-size: var(--text-xs);
+    color: var(--navy);
+}
+
+.site-dock-nav .nav-tab:hover,
+.site-dock-nav .nav-tab.active {
+    background: var(--surface);
+    color: var(--navy);
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+}
+
 .route-transition {
     position: fixed;
     inset: 0;
@@ -2229,11 +2337,11 @@ body.home-scroll-surface::-webkit-scrollbar {
 }
 
 .route-transition.is-entering {
-    animation: routeFadeIn 0.26s ease forwards;
+    animation: routeFadeIn 0.36s ease forwards;
 }
 
 .route-transition.is-leaving {
-    animation: routeFadeOut 0.48s ease forwards;
+    animation: routeFadeOut 0.62s ease forwards;
 }
 
 @keyframes homeDrift {
@@ -2521,12 +2629,9 @@ body.home-scroll-surface::-webkit-scrollbar {
     }
 
     .home-dock-shell {
-        top: 0.75rem;
+        top: 4.625rem;
+        width: calc(100vw - 1rem);
         max-width: calc(100% - 1rem);
-    }
-
-    .home-dock-logo {
-        height: 2rem;
     }
 
     .home-dock-nav.nav-wrapper {
@@ -4621,6 +4726,91 @@ body.home-scroll-surface::-webkit-scrollbar {
         color: var(--text-light);
         text-align: right;
         white-space: nowrap;
+    }
+
+    .app-shell-chrome {
+        padding-top: 8.75rem;
+    }
+
+    .site-chrome-gradient {
+        height: 9.25rem;
+    }
+
+    .site-chrome-brand {
+        top: 1.15rem;
+        width: 6.9rem;
+        height: 2.3rem;
+    }
+
+    .site-dock-shell {
+        top: 4.35rem;
+        width: calc(100vw - 1rem);
+        max-width: calc(100vw - 1rem);
+    }
+
+    .site-dock-nav.nav-wrapper,
+    .site-dock-nav.nav-wrapper.open {
+        position: relative;
+        inset: auto;
+        width: 100%;
+        height: auto;
+        max-height: none;
+        display: block;
+        padding: 0;
+        transform: none !important;
+        border: 1px solid color-mix(in srgb, var(--navy) 10%, var(--border));
+        border-radius: var(--radius-pill);
+        background: color-mix(in srgb, var(--bg) 94%, var(--surface));
+        box-shadow: 0 16px 42px rgba(15, 23, 42, 0.12);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        overflow: hidden;
+    }
+
+    .site-dock-nav .mobile-nav-current {
+        display: grid;
+        min-height: 2.8rem;
+        color: var(--navy);
+    }
+
+    .site-dock-nav .nav {
+        width: 100%;
+        min-width: 0;
+        max-height: 0;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        overflow: hidden;
+        opacity: 0;
+        padding: 0 0.45rem;
+        transition: max-height 0.28s ease, opacity 0.2s ease, padding-bottom 0.28s ease;
+    }
+
+    .site-dock-nav.open .nav {
+        max-height: 320px;
+        opacity: 1;
+        padding-bottom: 0.45rem;
+    }
+
+    .site-dock-nav .nav-tab {
+        display: flex !important;
+        width: 100%;
+        min-height: 42px;
+        justify-content: center;
+        padding: 0.7rem 1rem;
+        border-bottom: 1px solid var(--border);
+        border-radius: 0;
+        background: transparent !important;
+        color: var(--navy) !important;
+        box-shadow: none !important;
+    }
+
+    .site-dock-nav .nav-tab:last-child {
+        border-bottom: 0;
+    }
+
+    .site-dock-nav .nav-tab.active {
+        display: none !important;
     }
 
     .contractes-page .page-title,
