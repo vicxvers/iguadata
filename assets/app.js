@@ -3181,8 +3181,8 @@ function App() {
   const [homeIntroFading, setHomeIntroFading] = useState(false);
   const [threeReadyTick, setThreeReadyTick] = useState(0);
   const [showMobileScrollTop, setShowMobileScrollTop] = useState(false);
-  const [showHomeDockNav, setShowHomeDockNav] = useState(false);
   const [homeRouteTransition, setHomeRouteTransition] = useState('');
+  const [homeMetricTransition, setHomeMetricTransition] = useState(null);
   const homeIntroPlayedRef = useRef(false);
   useEffect(() => {
     if (!loading) return;
@@ -3454,42 +3454,6 @@ function App() {
       window.removeEventListener('resize', updateScrollTopButton);
     };
   }, [activeTab]);
-  useEffect(() => {
-    if (activeTab !== 'home') {
-      setShowHomeDockNav(false);
-      return;
-    }
-    const updateHomeDockNav = () => {
-      setShowHomeDockNav(window.scrollY > window.innerHeight * 0.72);
-    };
-    updateHomeDockNav();
-    window.addEventListener('scroll', updateHomeDockNav, {
-      passive: true
-    });
-    window.addEventListener('resize', updateHomeDockNav);
-    return () => {
-      window.removeEventListener('scroll', updateHomeDockNav);
-      window.removeEventListener('resize', updateHomeDockNav);
-    };
-  }, [activeTab]);
-  useEffect(() => {
-    if (activeTab !== 'home') return;
-    const handleHomeExploreClick = event => {
-      const trigger = event.target.closest?.('[data-home-explore]');
-      if (!trigger) return;
-      event.preventDefault();
-      const target = document.querySelector('.home-landing');
-      if (!target) return;
-      const scrollToLanding = () => window.scrollTo({
-        top: target.offsetTop,
-        behavior: 'smooth'
-      });
-      scrollToLanding();
-      requestAnimationFrame(() => requestAnimationFrame(scrollToLanding));
-    };
-    document.addEventListener('click', handleHomeExploreClick);
-    return () => document.removeEventListener('click', handleHomeExploreClick);
-  }, [activeTab]);
   const [expandedId, setExpandedId] = useState(null);
   const [expandedMonopolyId, setExpandedMonopolyId] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
@@ -3543,6 +3507,7 @@ function App() {
   const [personesSort, setPersonesSort] = useState('companies-desc');
   const [personesPage, setPersonesPage] = useState(1);
   const [personesExpanded, setPersonesExpanded] = useState(null);
+  const homeAtlasRef = useRef(null);
   const resetAllFilters = () => {
     setSearchTerm('');
     setDebouncedSearch('');
@@ -3645,6 +3610,29 @@ function App() {
     if (!isPlainLeftClick(event)) return;
     event.preventDefault();
     runRouteTransition(navigate);
+  };
+  const handleHomeMetricLinkClick = (event, navigate) => {
+    if (!isPlainLeftClick(event)) return;
+    if (isMobile()) {
+      event.preventDefault();
+      return;
+    }
+    event.preventDefault();
+    if (homeRouteTransition || homeMetricTransition) return;
+    const rect = event.currentTarget.getBoundingClientRect();
+    setHomeMetricTransition({
+      x: rect.left + rect.width / 2,
+      y: rect.top + rect.height / 2,
+      phase: 'is-expanding'
+    });
+    window.setTimeout(() => {
+      navigate();
+      setHomeMetricTransition(current => current ? {
+        ...current,
+        phase: 'is-revealing'
+      } : current);
+      window.setTimeout(() => setHomeMetricTransition(null), 760);
+    }, 440);
   };
   useEffect(() => {
     window.history.scrollRestoration = 'manual';
@@ -4257,12 +4245,84 @@ function App() {
       const amount = Number(contract.importe) || 0;
       const adjudicatario = contract.adjudicatario || '';
       return contract.fecha && amount > 0 && !/lot desert/i.test(adjudicatario);
-    }).sort((a, b) => String(b.fecha).localeCompare(String(a.fecha))).slice(0, 6);
+    }).sort((a, b) => String(b.fecha).localeCompare(String(a.fecha))).slice(0, 3);
   }, [contracts]);
+  const homeFeaturedAnalysis = useMemo(() => {
+    const fraccionament = fraudes.filter(item => item.nivell !== 'BAIX').map(item => ({
+      type: 'fraccionament',
+      label: 'Fraccionament',
+      title: (item.empreses || []).slice(0, 2).join(' · ') || 'Possible fraccionament',
+      text: `${item.contractes_count || item.contractes?.length || 0} contractes vinculats en ${item.dies_entre_primer_i_ultim || 0} dies.`,
+      amount: item.import_total,
+      score: item.risc || 0,
+      path: `/analisi/fraccionament/${item.id}`,
+      item
+    }));
+    const concentracioItems = concentracio.filter(item => item.finestra !== 'historic').map(item => ({
+      type: 'concentracio',
+      label: 'Concentració',
+      title: item.empresa_dominant || item.sector || 'Concentració de contractes',
+      text: `${item.sector || 'Sector'} · ${Math.round((item.quota_import || 0) * 100)}% de l'import.`,
+      amount: item.import_concentrat,
+      score: item.risc || Math.round((item.quota_import || 0) * 100),
+      path: `/analisi/concentracio/${item.id}`,
+      item
+    }));
+    const electoralItems = electoral.filter(item => item.nivell !== 'BAIX').map(item => ({
+      type: 'electoralisme',
+      label: 'Electoralisme',
+      title: item.empresa || 'Contractació en finestra electoral',
+      text: item.periode_electoral || 'Actuació en context electoral.',
+      amount: item.import_total,
+      score: item.risc || 0,
+      path: `/analisi/electoralisme/${item.id}`,
+      item
+    }));
+    return [...fraccionament, ...concentracioItems, ...electoralItems].filter(item => item.path && item.path.indexOf('undefined') === -1).sort((a, b) => (b.score || 0) - (a.score || 0))[0] || null;
+  }, [fraudes, concentracio, electoral]);
+  useEffect(() => {
+    if (activeTab !== 'home' || loading) return;
+    const atlas = homeAtlasRef.current;
+    if (!atlas) return;
+    const track = atlas.querySelector('.home-atlas-track');
+    if (!track) return;
+    let frameId = null;
+    const updateAtlas = () => {
+      frameId = null;
+      if (window.matchMedia('(max-width: 1024px)').matches) {
+        atlas.style.setProperty('--atlas-x', '0px');
+        atlas.style.setProperty('--atlas-progress', '0');
+        return;
+      }
+      const atlasTop = atlas.getBoundingClientRect().top + window.scrollY;
+      const maxScroll = Math.max(atlas.offsetHeight - window.innerHeight, 1);
+      const raw = (window.scrollY - atlasTop) / maxScroll;
+      const progress = Math.max(0, Math.min(1, raw));
+      const maxX = Math.max(track.scrollWidth - window.innerWidth, 0);
+      atlas.style.setProperty('--atlas-x', `${Math.round(-progress * maxX)}px`);
+      atlas.style.setProperty('--atlas-progress', progress.toFixed(4));
+    };
+    const requestUpdate = () => {
+      if (frameId !== null) return;
+      frameId = window.requestAnimationFrame(updateAtlas);
+    };
+    updateAtlas();
+    window.setTimeout(requestUpdate, 80);
+    window.setTimeout(requestUpdate, 500);
+    window.addEventListener('scroll', requestUpdate, {
+      passive: true
+    });
+    window.addEventListener('resize', requestUpdate);
+    return () => {
+      window.removeEventListener('scroll', requestUpdate);
+      window.removeEventListener('resize', requestUpdate);
+      if (frameId !== null) window.cancelAnimationFrame(frameId);
+    };
+  }, [activeTab, loading, homeFeaturedAnalysis, homeTopSectors, homeTopCategories, homeLatestContracts]);
   const renderHomeChrome = (interactive = true) => React.createElement("div", {
     className: "home-chrome"
   }, React.createElement("div", {
-    className: "home-dock-gradient is-visible",
+    className: "home-chrome-gradient is-visible",
     "aria-hidden": "true"
   }), React.createElement("div", {
     className: "home-brand home-chrome-brand",
@@ -4312,12 +4372,6 @@ function App() {
       })
     }, "Sobre"));
   };
-  const renderHomeDock = () => React.createElement("div", {
-    className: `home-dock-shell${showHomeDockNav ? ' is-visible' : ''}`
-  }, React.createElement("nav", {
-    className: "home-dock-nav nav-wrapper nav-dark",
-    "aria-label": "Navegaci\xF3 principal"
-  }, renderNavTabs(false, true)));
   const renderSiteChrome = () => React.createElement("div", {
     className: "site-chrome site-chrome-light"
   }, React.createElement("div", {
@@ -4373,37 +4427,16 @@ function App() {
     className: "home-title"
   }, "Tot \xE9s ", React.createElement("em", null, "p\xFAblic")), React.createElement("p", {
     className: "home-deck"
-  }, "Contractes, empreses, persones, imports i an\xE0lisi en una cartografia oberta de la contractaci\xF3 p\xFAblica de l'Ajuntament d'Igualada."), React.createElement("button", {
-    type: "button",
-    className: "home-cta",
-    "data-home-explore": "true",
-    onClick: interactive ? () => {
-      const target = document.querySelector('.home-landing');
-      if (!target) return;
-      const scrollToLanding = () => window.scrollTo({
-        top: target.offsetTop,
-        behavior: 'smooth'
-      });
-      scrollToLanding();
-      requestAnimationFrame(() => requestAnimationFrame(scrollToLanding));
-    } : undefined,
-    tabIndex: interactive ? 0 : -1
-  }, "Explorar")), React.createElement("div", {
+  }, "Contractes, empreses, persones, imports i an\xE0lisi en una cartografia oberta de la contractaci\xF3 p\xFAblica de l'Ajuntament d'Igualada.")), React.createElement("div", {
     className: "home-metrics",
     "aria-label": "Indicadors principals"
   }, React.createElement("a", {
     href: buildRouteUrl('/contractes'),
     className: "home-metric metric-contractes",
-    onClick: interactive ? event => {
-      if (isMobile()) {
-        event.preventDefault();
-        return;
-      }
-      handleInternalLinkClick(event, () => {
-        handleNavigation('buscador');
-        setIsMobileMenuOpen(false);
-      });
-    } : event => event.preventDefault(),
+    onClick: interactive ? event => handleHomeMetricLinkClick(event, () => {
+      handleNavigation('buscador');
+      setIsMobileMenuOpen(false);
+    }) : event => event.preventDefault(),
     tabIndex: interactive && !isMobile() ? 0 : -1
   }, React.createElement("span", {
     className: "home-metric-value"
@@ -4412,16 +4445,10 @@ function App() {
   }, "Contractes")), React.createElement("a", {
     href: buildRouteUrl('/contractes'),
     className: "home-metric metric-import",
-    onClick: interactive ? event => {
-      if (isMobile()) {
-        event.preventDefault();
-        return;
-      }
-      handleInternalLinkClick(event, () => {
-        handleNavigation('buscador');
-        setIsMobileMenuOpen(false);
-      });
-    } : event => event.preventDefault(),
+    onClick: interactive ? event => handleHomeMetricLinkClick(event, () => {
+      handleNavigation('buscador');
+      setIsMobileMenuOpen(false);
+    }) : event => event.preventDefault(),
     tabIndex: interactive && !isMobile() ? 0 : -1
   }, React.createElement("span", {
     className: "home-metric-value"
@@ -4433,16 +4460,10 @@ function App() {
   }, "Imports")), React.createElement("a", {
     href: buildRouteUrl('/empreses'),
     className: "home-metric metric-empreses",
-    onClick: interactive ? event => {
-      if (isMobile()) {
-        event.preventDefault();
-        return;
-      }
-      handleInternalLinkClick(event, () => {
-        handleNavigation('empreses');
-        setIsMobileMenuOpen(false);
-      });
-    } : event => event.preventDefault(),
+    onClick: interactive ? event => handleHomeMetricLinkClick(event, () => {
+      handleNavigation('empreses');
+      setIsMobileMenuOpen(false);
+    }) : event => event.preventDefault(),
     tabIndex: interactive && !isMobile() ? 0 : -1
   }, React.createElement("span", {
     className: "home-metric-value"
@@ -4451,16 +4472,10 @@ function App() {
   }, "Empreses")), React.createElement("a", {
     href: buildRouteUrl('/persones'),
     className: "home-metric metric-persones",
-    onClick: interactive ? event => {
-      if (isMobile()) {
-        event.preventDefault();
-        return;
-      }
-      handleInternalLinkClick(event, () => {
-        handleNavigation('persones');
-        setIsMobileMenuOpen(false);
-      });
-    } : event => event.preventDefault(),
+    onClick: interactive ? event => handleHomeMetricLinkClick(event, () => {
+      handleNavigation('persones');
+      setIsMobileMenuOpen(false);
+    }) : event => event.preventDefault(),
     tabIndex: interactive && !isMobile() ? 0 : -1
   }, React.createElement("span", {
     className: "home-metric-value"
@@ -4469,13 +4484,7 @@ function App() {
   }, "Persones")), React.createElement("a", {
     href: buildRouteUrl('/analisi'),
     className: "home-metric metric-alertes",
-    onClick: interactive ? event => {
-      if (isMobile()) {
-        event.preventDefault();
-        return;
-      }
-      handleInternalLinkClick(event, handleAnalisiNavClick);
-    } : event => event.preventDefault(),
+    onClick: interactive ? event => handleHomeMetricLinkClick(event, handleAnalisiNavClick) : event => event.preventDefault(),
     tabIndex: interactive && !isMobile() ? 0 : -1
   }, React.createElement("span", {
     className: "home-metric-value"
@@ -4485,8 +4494,21 @@ function App() {
     id: "dades",
     className: "home-landing",
     "aria-label": "Dades destacades"
+  }, React.createElement("div", {
+    className: "home-atlas",
+    ref: homeAtlasRef,
+    style: {
+      '--atlas-panels': homeFeaturedAnalysis ? 5 : 4
+    }
+  }, React.createElement("div", {
+    className: "home-atlas-sticky"
+  }, React.createElement("div", {
+    className: "home-atlas-rail",
+    "aria-hidden": "true"
+  }, React.createElement("span", null, "01"), React.createElement("span", null, "02"), React.createElement("span", null, "03"), React.createElement("span", null, "04"), React.createElement("span", null, "05")), React.createElement("div", {
+    className: "home-atlas-track"
   }, React.createElement("section", {
-    className: "home-story home-story-sectors"
+    className: "home-story home-atlas-panel home-story-sectors"
   }, React.createElement("div", {
     className: "home-story-header"
   }, React.createElement("h2", null, "On van els diners?"), React.createElement("p", null, "Els sectors que concentren m\xE9s contractes.")), React.createElement("div", {
@@ -4514,8 +4536,25 @@ function App() {
     className: "home-sector-name"
   }, item.label), React.createElement("span", {
     className: "home-sector-amount"
-  }, formatCompactCurrency(item.amount)))))), React.createElement("section", {
-    className: "home-story home-story-categories"
+  }, formatCompactCurrency(item.amount)))))), homeFeaturedAnalysis && React.createElement("section", {
+    className: "home-story home-atlas-panel home-story-featured"
+  }, React.createElement("div", {
+    className: "home-story-header"
+  }, React.createElement("h2", null, "Un cas per mirar de prop"), React.createElement("p", null, "Una alerta destacada per entrar a l'an\xE0lisi amb context i tra\xE7abilitat.")), React.createElement("a", {
+    href: buildRouteUrl(homeFeaturedAnalysis.path),
+    className: `home-featured-card home-featured-${homeFeaturedAnalysis.type}`,
+    onClick: interactive ? event => handleInternalLinkClick(event, () => {
+      if (homeFeaturedAnalysis.type === 'fraccionament') handleCasoClick(homeFeaturedAnalysis.item);
+      if (homeFeaturedAnalysis.type === 'concentracio') handleConcentracioClick(homeFeaturedAnalysis.item);
+      if (homeFeaturedAnalysis.type === 'electoralisme') handleElectoralismeClick(homeFeaturedAnalysis.item);
+    }) : event => event.preventDefault(),
+    tabIndex: interactive ? 0 : -1
+  }, React.createElement("span", {
+    className: "home-featured-label"
+  }, homeFeaturedAnalysis.label), React.createElement("strong", null, homeFeaturedAnalysis.title), React.createElement("p", null, homeFeaturedAnalysis.text), React.createElement("span", {
+    className: "home-featured-amount"
+  }, formatCompactCurrency(homeFeaturedAnalysis.amount)))), React.createElement("section", {
+    className: "home-story home-atlas-panel home-story-categories"
   }, React.createElement("div", {
     className: "home-category-cloud",
     "aria-label": "Categories amb m\xE9s import adjudicat"
@@ -4538,7 +4577,19 @@ function App() {
   }, React.createElement("span", null, item.label), React.createElement("strong", null, formatCompactCurrency(item.amount))))), React.createElement("div", {
     className: "home-story-header home-story-header-offset"
   }, React.createElement("h2", null, "Qu\xE8 compra l'Ajuntament?"), React.createElement("p", null, "Categories f\xE0cils de llegir, no codis opacs."))), React.createElement("section", {
-    className: "home-story home-story-latest"
+    className: "home-story home-atlas-panel home-story-method"
+  }, React.createElement("div", {
+    className: "home-story-header"
+  }, React.createElement("h2", null, "La capa que faltava"), React.createElement("p", null, "Iguadata creua contractaci\xF3 municipal amb BORME per convertir noms d'empresa en relacions mercantils llegibles.")), React.createElement("div", {
+    className: "home-method-grid"
+  }, React.createElement("div", {
+    className: "home-method-panel"
+  }, React.createElement("span", null, "01"), React.createElement("strong", null, "Contractes oberts"), React.createElement("p", null, "Imports, adjudicataris, procediments i objectes de la contractaci\xF3 p\xFAblica d'Igualada.")), React.createElement("div", {
+    className: "home-method-panel"
+  }, React.createElement("span", null, "02"), React.createElement("strong", null, "BORME hist\xF2ric"), React.createElement("p", null, "C\xE0rrecs, apoderaments, canvis de denominaci\xF3 i societats vinculades des de 2009.")), React.createElement("div", {
+    className: "home-method-panel"
+  }, React.createElement("span", null, "03"), React.createElement("strong", null, "Lectura editorial"), React.createElement("p", null, "Indicadors pensats per investigar millor, amb l\xEDmits expl\xEDcits i sense insinuar culpabilitat.")))), React.createElement("section", {
+    className: "home-story home-atlas-panel home-story-latest"
   }, React.createElement("div", {
     className: "home-story-header"
   }, React.createElement("h2", null, "\xDAltims contractes signats"), React.createElement("p", null, "La fotografia es mou cada dia.")), React.createElement("div", {
@@ -4574,7 +4625,11 @@ function App() {
     className: "contract-meta-label"
   }, "Data"), React.createElement("span", {
     className: "contract-meta-value"
-  }, formatDate(contract.fecha)))))))))));
+  }, formatDate(contract.fecha)))))))))))), React.createElement("section", {
+    className: "home-story home-story-trust"
+  }, React.createElement("div", {
+    className: "home-trust-strip"
+  }, React.createElement("div", null, React.createElement("span", null, "\xDAltima actualitzaci\xF3"), React.createElement("strong", null, summary?.generated_at ? formatDate(summary.generated_at.slice(0, 10)) : 'Automàtica')), React.createElement("div", null, React.createElement("span", null, "Fonts"), React.createElement("strong", null, "Socrata \xB7 BORME")), React.createElement("div", null, React.createElement("span", null, "Lectura responsable"), React.createElement("strong", null, "Les alertes no impliquen irregularitat"))))));
   const renderHomeLoading = (isDissolving = false) => React.createElement("div", {
     className: `home home-loading-screen${isDissolving ? ' is-dissolving' : ''}`
   }, React.createElement("div", {
@@ -4661,7 +4716,7 @@ function App() {
   };
   return React.createElement("div", {
     className: activeTab === 'home' ? 'home-wrapper' : 'app-shell app-shell-chrome'
-  }, activeTab !== 'home' && renderSiteChrome(), activeTab === 'home' && React.createElement(React.Fragment, null, renderHomeChrome(), renderHomeDock(), React.createElement("div", {
+  }, activeTab !== 'home' && renderSiteChrome(), activeTab === 'home' && React.createElement(React.Fragment, null, renderHomeChrome(), React.createElement("div", {
     className: "home-dissolve-stage"
   }, renderHomeSection(homeIntroFading ? 'home-intro-target' : ''), homeIntroFading && renderHomeLoading(true))), isDataTabLoading && renderDataLoading(), activeTab === 'buscador' && !dataLoading && React.createElement("div", {
     className: "container contractes-page"
@@ -6355,7 +6410,14 @@ function App() {
       });
     },
     className: "footer-link"
-  }, "Av\xEDs Legal")))), homeRouteTransition && React.createElement("div", {
+  }, "Av\xEDs Legal")))), homeMetricTransition && React.createElement("div", {
+    className: `home-metric-transition ${homeMetricTransition.phase || 'is-expanding'}`,
+    style: {
+      '--metric-transition-x': `${homeMetricTransition.x}px`,
+      '--metric-transition-y': `${homeMetricTransition.y}px`
+    },
+    "aria-hidden": "true"
+  }), homeRouteTransition && React.createElement("div", {
     className: `route-transition route-transition-navy ${homeRouteTransition}`,
     "aria-hidden": "true"
   }));

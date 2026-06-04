@@ -2389,8 +2389,8 @@ function App() {
     const [homeIntroFading, setHomeIntroFading] = useState(false);
     const [threeReadyTick, setThreeReadyTick] = useState(0);
     const [showMobileScrollTop, setShowMobileScrollTop] = useState(false);
-    const [showHomeDockNav, setShowHomeDockNav] = useState(false);
     const [homeRouteTransition, setHomeRouteTransition] = useState('');
+    const [homeMetricTransition, setHomeMetricTransition] = useState(null);
     const homeIntroPlayedRef = useRef(false);
 
     useEffect(() => {
@@ -2665,38 +2665,6 @@ function App() {
         };
     }, [activeTab]);
 
-    useEffect(() => {
-        if (activeTab !== 'home') {
-            setShowHomeDockNav(false);
-            return;
-        }
-        const updateHomeDockNav = () => {
-            setShowHomeDockNav(window.scrollY > window.innerHeight * 0.72);
-        };
-        updateHomeDockNav();
-        window.addEventListener('scroll', updateHomeDockNav, { passive: true });
-        window.addEventListener('resize', updateHomeDockNav);
-        return () => {
-            window.removeEventListener('scroll', updateHomeDockNav);
-            window.removeEventListener('resize', updateHomeDockNav);
-        };
-    }, [activeTab]);
-
-    useEffect(() => {
-        if (activeTab !== 'home') return;
-        const handleHomeExploreClick = (event) => {
-            const trigger = event.target.closest?.('[data-home-explore]');
-            if (!trigger) return;
-            event.preventDefault();
-            const target = document.querySelector('.home-landing');
-            if (!target) return;
-            const scrollToLanding = () => window.scrollTo({ top: target.offsetTop, behavior: 'smooth' });
-            scrollToLanding();
-            requestAnimationFrame(() => requestAnimationFrame(scrollToLanding));
-        };
-        document.addEventListener('click', handleHomeExploreClick);
-        return () => document.removeEventListener('click', handleHomeExploreClick);
-    }, [activeTab]);
     const [expandedId, setExpandedId] = useState(null);
     const [expandedMonopolyId, setExpandedMonopolyId] = useState(null);
     const [searchTerm, setSearchTerm] = useState('');
@@ -2754,6 +2722,7 @@ function App() {
     const [personesSort, setPersonesSort] = useState('companies-desc');
     const [personesPage, setPersonesPage] = useState(1);
     const [personesExpanded, setPersonesExpanded] = useState(null);
+    const homeAtlasRef = useRef(null);
 
     const resetAllFilters = () => {
         // Contractes
@@ -2853,6 +2822,27 @@ function App() {
         if (!isPlainLeftClick(event)) return;
         event.preventDefault();
         runRouteTransition(navigate);
+    };
+
+    const handleHomeMetricLinkClick = (event, navigate) => {
+        if (!isPlainLeftClick(event)) return;
+        if (isMobile()) {
+            event.preventDefault();
+            return;
+        }
+        event.preventDefault();
+        if (homeRouteTransition || homeMetricTransition) return;
+        const rect = event.currentTarget.getBoundingClientRect();
+        setHomeMetricTransition({
+            x: rect.left + rect.width / 2,
+            y: rect.top + rect.height / 2,
+            phase: 'is-expanding'
+        });
+        window.setTimeout(() => {
+            navigate();
+            setHomeMetricTransition(current => current ? { ...current, phase: 'is-revealing' } : current);
+            window.setTimeout(() => setHomeMetricTransition(null), 760);
+        }, 440);
     };
 
     useEffect(() => {
@@ -3524,12 +3514,92 @@ function App() {
                 return contract.fecha && amount > 0 && !/lot desert/i.test(adjudicatario);
             })
             .sort((a, b) => String(b.fecha).localeCompare(String(a.fecha)))
-            .slice(0, 6);
+            .slice(0, 3);
     }, [contracts]);
+
+    const homeFeaturedAnalysis = useMemo(() => {
+        const fraccionament = fraudes
+            .filter(item => item.nivell !== 'BAIX')
+            .map(item => ({
+                type: 'fraccionament',
+                label: 'Fraccionament',
+                title: (item.empreses || []).slice(0, 2).join(' · ') || 'Possible fraccionament',
+                text: `${item.contractes_count || item.contractes?.length || 0} contractes vinculats en ${item.dies_entre_primer_i_ultim || 0} dies.`,
+                amount: item.import_total,
+                score: item.risc || 0,
+                path: `/analisi/fraccionament/${item.id}`,
+                item
+            }));
+        const concentracioItems = concentracio
+            .filter(item => item.finestra !== 'historic')
+            .map(item => ({
+                type: 'concentracio',
+                label: 'Concentració',
+                title: item.empresa_dominant || item.sector || 'Concentració de contractes',
+                text: `${item.sector || 'Sector'} · ${Math.round((item.quota_import || 0) * 100)}% de l'import.`,
+                amount: item.import_concentrat,
+                score: item.risc || Math.round((item.quota_import || 0) * 100),
+                path: `/analisi/concentracio/${item.id}`,
+                item
+            }));
+        const electoralItems = electoral
+            .filter(item => item.nivell !== 'BAIX')
+            .map(item => ({
+                type: 'electoralisme',
+                label: 'Electoralisme',
+                title: item.empresa || 'Contractació en finestra electoral',
+                text: item.periode_electoral || 'Actuació en context electoral.',
+                amount: item.import_total,
+                score: item.risc || 0,
+                path: `/analisi/electoralisme/${item.id}`,
+                item
+            }));
+        return [...fraccionament, ...concentracioItems, ...electoralItems]
+            .filter(item => item.path && item.path.indexOf('undefined') === -1)
+            .sort((a, b) => (b.score || 0) - (a.score || 0))[0] || null;
+    }, [fraudes, concentracio, electoral]);
+
+    useEffect(() => {
+        if (activeTab !== 'home' || loading) return;
+        const atlas = homeAtlasRef.current;
+        if (!atlas) return;
+        const track = atlas.querySelector('.home-atlas-track');
+        if (!track) return;
+        let frameId = null;
+        const updateAtlas = () => {
+            frameId = null;
+            if (window.matchMedia('(max-width: 1024px)').matches) {
+                atlas.style.setProperty('--atlas-x', '0px');
+                atlas.style.setProperty('--atlas-progress', '0');
+                return;
+            }
+            const atlasTop = atlas.getBoundingClientRect().top + window.scrollY;
+            const maxScroll = Math.max(atlas.offsetHeight - window.innerHeight, 1);
+            const raw = (window.scrollY - atlasTop) / maxScroll;
+            const progress = Math.max(0, Math.min(1, raw));
+            const maxX = Math.max(track.scrollWidth - window.innerWidth, 0);
+            atlas.style.setProperty('--atlas-x', `${Math.round(-progress * maxX)}px`);
+            atlas.style.setProperty('--atlas-progress', progress.toFixed(4));
+        };
+        const requestUpdate = () => {
+            if (frameId !== null) return;
+            frameId = window.requestAnimationFrame(updateAtlas);
+        };
+        updateAtlas();
+        window.setTimeout(requestUpdate, 80);
+        window.setTimeout(requestUpdate, 500);
+        window.addEventListener('scroll', requestUpdate, { passive: true });
+        window.addEventListener('resize', requestUpdate);
+        return () => {
+            window.removeEventListener('scroll', requestUpdate);
+            window.removeEventListener('resize', requestUpdate);
+            if (frameId !== null) window.cancelAnimationFrame(frameId);
+        };
+    }, [activeTab, loading, homeFeaturedAnalysis, homeTopSectors, homeTopCategories, homeLatestContracts]);
 
     const renderHomeChrome = (interactive = true) => (
         <div className="home-chrome">
-            <div className="home-dock-gradient is-visible" aria-hidden="true"></div>
+            <div className="home-chrome-gradient is-visible" aria-hidden="true"></div>
             <div className="home-brand home-chrome-brand" onClick={interactive ? goToHome : undefined}>
                 <div className="home-logo" role="img" aria-label="Iguadata"></div>
             </div>
@@ -3548,14 +3618,6 @@ function App() {
             </div>
         );
     };
-
-    const renderHomeDock = () => (
-        <div className={`home-dock-shell${showHomeDockNav ? ' is-visible' : ''}`}>
-            <nav className="home-dock-nav nav-wrapper nav-dark" aria-label="Navegació principal">
-                {renderNavTabs(false, true)}
-            </nav>
-        </div>
-    );
 
     const renderSiteChrome = () => (
         <div className="site-chrome site-chrome-light">
@@ -3590,41 +3652,26 @@ function App() {
                 <p className="home-deck">
                     Contractes, empreses, persones, imports i anàlisi en una cartografia oberta de la contractació pública de l'Ajuntament d'Igualada.
                 </p>
-                <button
-                    type="button"
-                    className="home-cta"
-                    data-home-explore="true"
-                    onClick={interactive ? (() => {
-                        const target = document.querySelector('.home-landing');
-                        if (!target) return;
-                        const scrollToLanding = () => window.scrollTo({ top: target.offsetTop, behavior: 'smooth' });
-                        scrollToLanding();
-                        requestAnimationFrame(() => requestAnimationFrame(scrollToLanding));
-                    }) : undefined}
-                    tabIndex={interactive ? 0 : -1}
-                >
-                    Explorar
-                </button>
             </div>
 
             <div className="home-metrics" aria-label="Indicadors principals">
-                <a href={buildRouteUrl('/contractes')} className="home-metric metric-contractes" onClick={interactive ? ((event) => { if (isMobile()) { event.preventDefault(); return; } handleInternalLinkClick(event, () => { handleNavigation('buscador'); setIsMobileMenuOpen(false); }); }) : ((event) => event.preventDefault())} tabIndex={interactive && !isMobile() ? 0 : -1}>
+                <a href={buildRouteUrl('/contractes')} className="home-metric metric-contractes" onClick={interactive ? ((event) => handleHomeMetricLinkClick(event, () => { handleNavigation('buscador'); setIsMobileMenuOpen(false); })) : ((event) => event.preventDefault())} tabIndex={interactive && !isMobile() ? 0 : -1}>
                     <span className="home-metric-value">{contractCount.toLocaleString('ca-ES')}</span>
                     <span className="home-metric-label">Contractes</span>
                 </a>
-                <a href={buildRouteUrl('/contractes')} className="home-metric metric-import" onClick={interactive ? ((event) => { if (isMobile()) { event.preventDefault(); return; } handleInternalLinkClick(event, () => { handleNavigation('buscador'); setIsMobileMenuOpen(false); }); }) : ((event) => event.preventDefault())} tabIndex={interactive && !isMobile() ? 0 : -1}>
+                <a href={buildRouteUrl('/contractes')} className="home-metric metric-import" onClick={interactive ? ((event) => handleHomeMetricLinkClick(event, () => { handleNavigation('buscador'); setIsMobileMenuOpen(false); })) : ((event) => event.preventDefault())} tabIndex={interactive && !isMobile() ? 0 : -1}>
                     <span className="home-metric-value">{(importTotalTenths / 10).toLocaleString('ca-ES', { minimumFractionDigits: 1, maximumFractionDigits: 1 })}M €</span>
                     <span className="home-metric-label">Imports</span>
                 </a>
-                <a href={buildRouteUrl('/empreses')} className="home-metric metric-empreses" onClick={interactive ? ((event) => { if (isMobile()) { event.preventDefault(); return; } handleInternalLinkClick(event, () => { handleNavigation('empreses'); setIsMobileMenuOpen(false); }); }) : ((event) => event.preventDefault())} tabIndex={interactive && !isMobile() ? 0 : -1}>
+                <a href={buildRouteUrl('/empreses')} className="home-metric metric-empreses" onClick={interactive ? ((event) => handleHomeMetricLinkClick(event, () => { handleNavigation('empreses'); setIsMobileMenuOpen(false); })) : ((event) => event.preventDefault())} tabIndex={interactive && !isMobile() ? 0 : -1}>
                     <span className="home-metric-value">{empresasCount.toLocaleString('ca-ES')}</span>
                     <span className="home-metric-label">Empreses</span>
                 </a>
-                <a href={buildRouteUrl('/persones')} className="home-metric metric-persones" onClick={interactive ? ((event) => { if (isMobile()) { event.preventDefault(); return; } handleInternalLinkClick(event, () => { handleNavigation('persones'); setIsMobileMenuOpen(false); }); }) : ((event) => event.preventDefault())} tabIndex={interactive && !isMobile() ? 0 : -1}>
+                <a href={buildRouteUrl('/persones')} className="home-metric metric-persones" onClick={interactive ? ((event) => handleHomeMetricLinkClick(event, () => { handleNavigation('persones'); setIsMobileMenuOpen(false); })) : ((event) => event.preventDefault())} tabIndex={interactive && !isMobile() ? 0 : -1}>
                     <span className="home-metric-value">{personesCount.toLocaleString('ca-ES')}</span>
                     <span className="home-metric-label">Persones</span>
                 </a>
-                <a href={buildRouteUrl('/analisi')} className="home-metric metric-alertes" onClick={interactive ? ((event) => { if (isMobile()) { event.preventDefault(); return; } handleInternalLinkClick(event, handleAnalisiNavClick); }) : ((event) => event.preventDefault())} tabIndex={interactive && !isMobile() ? 0 : -1}>
+                <a href={buildRouteUrl('/analisi')} className="home-metric metric-alertes" onClick={interactive ? ((event) => handleHomeMetricLinkClick(event, handleAnalisiNavClick)) : ((event) => event.preventDefault())} tabIndex={interactive && !isMobile() ? 0 : -1}>
                     <span className="home-metric-value">{alertesCount.toLocaleString('ca-ES')}</span>
                     <span className="home-metric-label">Alertes</span>
                 </a>
@@ -3632,83 +3679,161 @@ function App() {
             </div>
 
             <div id="dades" className="home-landing" aria-label="Dades destacades">
-                <section className="home-story home-story-sectors">
-                    <div className="home-story-header">
-                        <h2>On van els diners?</h2>
-                        <p>Els sectors que concentren més contractes.</p>
-                    </div>
-                    <div className="home-sector-bars" aria-label="Sectors amb més import adjudicat">
-                        {homeTopSectors.map(item => (
-                            <a
-                                key={item.label}
-                                href={buildRouteUrl('/empreses')}
-                                className="home-sector-row"
-                                style={{ '--bar-scale': item.share }}
-                                onClick={interactive ? ((event) => handleInternalLinkClick(event, () => { setEmpresesSector(item.label); setEmpresesCategoria(''); setEmpresesPage(1); handleNavigation('empreses', '/empreses', { keepFilters: true }); })) : ((event) => event.preventDefault())}
-                                tabIndex={interactive ? 0 : -1}
-                            >
-                                <span className="home-sector-rank">{String(item.rank).padStart(2, '0')}</span>
-                                <span className="home-sector-name">{item.label}</span>
-                                <span className="home-sector-amount">{formatCompactCurrency(item.amount)}</span>
-                            </a>
-                        ))}
-                    </div>
-                </section>
+                <div className="home-atlas" ref={homeAtlasRef} style={{ '--atlas-panels': homeFeaturedAnalysis ? 5 : 4 }}>
+                    <div className="home-atlas-sticky">
+                        <div className="home-atlas-rail" aria-hidden="true">
+                            <span>01</span>
+                            <span>02</span>
+                            <span>03</span>
+                            <span>04</span>
+                            <span>05</span>
+                        </div>
+                        <div className="home-atlas-track">
+                            <section className="home-story home-atlas-panel home-story-sectors">
+                                <div className="home-story-header">
+                                    <h2>On van els diners?</h2>
+                                    <p>Els sectors que concentren més contractes.</p>
+                                </div>
+                                <div className="home-sector-bars" aria-label="Sectors amb més import adjudicat">
+                                    {homeTopSectors.map(item => (
+                                        <a
+                                            key={item.label}
+                                            href={buildRouteUrl('/empreses')}
+                                            className="home-sector-row"
+                                            style={{ '--bar-scale': item.share }}
+                                            onClick={interactive ? ((event) => handleInternalLinkClick(event, () => { setEmpresesSector(item.label); setEmpresesCategoria(''); setEmpresesPage(1); handleNavigation('empreses', '/empreses', { keepFilters: true }); })) : ((event) => event.preventDefault())}
+                                            tabIndex={interactive ? 0 : -1}
+                                        >
+                                            <span className="home-sector-rank">{String(item.rank).padStart(2, '0')}</span>
+                                            <span className="home-sector-name">{item.label}</span>
+                                            <span className="home-sector-amount">{formatCompactCurrency(item.amount)}</span>
+                                        </a>
+                                    ))}
+                                </div>
+                            </section>
 
-                <section className="home-story home-story-categories">
-                    <div className="home-category-cloud" aria-label="Categories amb més import adjudicat">
-                        {homeTopCategories.map(item => (
-                            <a
-                                key={item.label}
-                                href={buildRouteUrl('/empreses')}
-                                className={`home-category-chip home-category-chip-${Math.min(item.rank, 6)}`}
-                                style={{ '--chip-scale': 0.72 + item.share * 2.8 }}
-                                onClick={interactive ? ((event) => handleInternalLinkClick(event, () => { setEmpresesCategoria(item.label); setEmpresesSector(''); setEmpresesPage(1); handleNavigation('empreses', '/empreses', { keepFilters: true }); })) : ((event) => event.preventDefault())}
-                                tabIndex={interactive ? 0 : -1}
-                            >
-                                <span>{item.label}</span>
-                                <strong>{formatCompactCurrency(item.amount)}</strong>
-                            </a>
-                        ))}
-                    </div>
-                    <div className="home-story-header home-story-header-offset">
-                        <h2>Què compra l'Ajuntament?</h2>
-                        <p>Categories fàcils de llegir, no codis opacs.</p>
-                    </div>
-                </section>
+                            {homeFeaturedAnalysis && (
+                                <section className="home-story home-atlas-panel home-story-featured">
+                        <div className="home-story-header">
+                            <h2>Un cas per mirar de prop</h2>
+                            <p>Una alerta destacada per entrar a l'anàlisi amb context i traçabilitat.</p>
+                        </div>
+                        <a
+                            href={buildRouteUrl(homeFeaturedAnalysis.path)}
+                            className={`home-featured-card home-featured-${homeFeaturedAnalysis.type}`}
+                            onClick={interactive ? ((event) => handleInternalLinkClick(event, () => {
+                                if (homeFeaturedAnalysis.type === 'fraccionament') handleCasoClick(homeFeaturedAnalysis.item);
+                                if (homeFeaturedAnalysis.type === 'concentracio') handleConcentracioClick(homeFeaturedAnalysis.item);
+                                if (homeFeaturedAnalysis.type === 'electoralisme') handleElectoralismeClick(homeFeaturedAnalysis.item);
+                            })) : ((event) => event.preventDefault())}
+                            tabIndex={interactive ? 0 : -1}
+                        >
+                            <span className="home-featured-label">{homeFeaturedAnalysis.label}</span>
+                            <strong>{homeFeaturedAnalysis.title}</strong>
+                            <p>{homeFeaturedAnalysis.text}</p>
+                            <span className="home-featured-amount">{formatCompactCurrency(homeFeaturedAnalysis.amount)}</span>
+                        </a>
+                                </section>
+                            )}
 
-                <section className="home-story home-story-latest">
-                    <div className="home-story-header">
-                        <h2>Últims contractes signats</h2>
-                        <p>La fotografia es mou cada dia.</p>
-                    </div>
-                    <div className="home-latest-list">
-                        {homeLatestContracts.map((contract, index) => (
-                            <a
-                                key={contract.slug || contract.id || `${contract.fecha}-${index}`}
-                                href={buildRouteUrl(`/contractes/${contract.slug}`)}
-                                className="card-link-wrapper home-latest-card-link"
-                                onClick={interactive ? ((event) => handleInternalLinkClick(event, () => { setSelectedContractForDetail(contract); handleNavigation('contracte', `/contractes/${contract.slug}`); })) : ((event) => event.preventDefault())}
-                                tabIndex={interactive ? 0 : -1}
-                            >
-                                <div className="contract-card home-latest-card">
-                                    <div className="contract-header">
-                                        <div className="contract-title">{contract.descripcion}</div>
-                                        <div className="contract-amount">{formatCurrency(contract.importe)}</div>
+                            <section className="home-story home-atlas-panel home-story-categories">
+                                <div className="home-category-cloud" aria-label="Categories amb més import adjudicat">
+                                    {homeTopCategories.map(item => (
+                                        <a
+                                            key={item.label}
+                                            href={buildRouteUrl('/empreses')}
+                                            className={`home-category-chip home-category-chip-${Math.min(item.rank, 6)}`}
+                                            style={{ '--chip-scale': 0.72 + item.share * 2.8 }}
+                                            onClick={interactive ? ((event) => handleInternalLinkClick(event, () => { setEmpresesCategoria(item.label); setEmpresesSector(''); setEmpresesPage(1); handleNavigation('empreses', '/empreses', { keepFilters: true }); })) : ((event) => event.preventDefault())}
+                                            tabIndex={interactive ? 0 : -1}
+                                        >
+                                            <span>{item.label}</span>
+                                            <strong>{formatCompactCurrency(item.amount)}</strong>
+                                        </a>
+                                    ))}
+                                </div>
+                                <div className="home-story-header home-story-header-offset">
+                                    <h2>Què compra l'Ajuntament?</h2>
+                                    <p>Categories fàcils de llegir, no codis opacs.</p>
+                                </div>
+                            </section>
+
+                            <section className="home-story home-atlas-panel home-story-method">
+                                <div className="home-story-header">
+                                    <h2>La capa que faltava</h2>
+                                    <p>Iguadata creua contractació municipal amb BORME per convertir noms d'empresa en relacions mercantils llegibles.</p>
+                                </div>
+                                <div className="home-method-grid">
+                                    <div className="home-method-panel">
+                                        <span>01</span>
+                                        <strong>Contractes oberts</strong>
+                                        <p>Imports, adjudicataris, procediments i objectes de la contractació pública d'Igualada.</p>
                                     </div>
-                                    <div className="contract-meta">
-                                        <div className="contract-meta-item">
-                                            <span className="contract-meta-label">Empresa adjudicatària</span>
-                                            <span className="contract-meta-value">{contract.adjudicatario}</span>
-                                        </div>
-                                        <div className="contract-meta-item">
-                                            <span className="contract-meta-label">Data</span>
-                                            <span className="contract-meta-value">{formatDate(contract.fecha)}</span>
-                                        </div>
+                                    <div className="home-method-panel">
+                                        <span>02</span>
+                                        <strong>BORME històric</strong>
+                                        <p>Càrrecs, apoderaments, canvis de denominació i societats vinculades des de 2009.</p>
+                                    </div>
+                                    <div className="home-method-panel">
+                                        <span>03</span>
+                                        <strong>Lectura editorial</strong>
+                                        <p>Indicadors pensats per investigar millor, amb límits explícits i sense insinuar culpabilitat.</p>
                                     </div>
                                 </div>
-                            </a>
-                        ))}
+                            </section>
+
+                            <section className="home-story home-atlas-panel home-story-latest">
+                                <div className="home-story-header">
+                                    <h2>Últims contractes signats</h2>
+                                    <p>La fotografia es mou cada dia.</p>
+                                </div>
+                                <div className="home-latest-list">
+                                    {homeLatestContracts.map((contract, index) => (
+                                        <a
+                                            key={contract.slug || contract.id || `${contract.fecha}-${index}`}
+                                            href={buildRouteUrl(`/contractes/${contract.slug}`)}
+                                            className="card-link-wrapper home-latest-card-link"
+                                            onClick={interactive ? ((event) => handleInternalLinkClick(event, () => { setSelectedContractForDetail(contract); handleNavigation('contracte', `/contractes/${contract.slug}`); })) : ((event) => event.preventDefault())}
+                                            tabIndex={interactive ? 0 : -1}
+                                        >
+                                            <div className="contract-card home-latest-card">
+                                                <div className="contract-header">
+                                                    <div className="contract-title">{contract.descripcion}</div>
+                                                    <div className="contract-amount">{formatCurrency(contract.importe)}</div>
+                                                </div>
+                                                <div className="contract-meta">
+                                                    <div className="contract-meta-item">
+                                                        <span className="contract-meta-label">Empresa adjudicatària</span>
+                                                        <span className="contract-meta-value">{contract.adjudicatario}</span>
+                                                    </div>
+                                                    <div className="contract-meta-item">
+                                                        <span className="contract-meta-label">Data</span>
+                                                        <span className="contract-meta-value">{formatDate(contract.fecha)}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    ))}
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+
+                <section className="home-story home-story-trust">
+                    <div className="home-trust-strip">
+                        <div>
+                            <span>Última actualització</span>
+                            <strong>{summary?.generated_at ? formatDate(summary.generated_at.slice(0, 10)) : 'Automàtica'}</strong>
+                        </div>
+                        <div>
+                            <span>Fonts</span>
+                            <strong>Socrata · BORME</strong>
+                        </div>
+                        <div>
+                            <span>Lectura responsable</span>
+                            <strong>Les alertes no impliquen irregularitat</strong>
+                        </div>
                     </div>
                 </section>
             </div>
@@ -3810,7 +3935,6 @@ function App() {
             {activeTab === 'home' && (
                 <>
                     {renderHomeChrome()}
-                    {renderHomeDock()}
                     <div className="home-dissolve-stage">
                         {renderHomeSection(homeIntroFading ? 'home-intro-target' : '')}
                         {homeIntroFading && renderHomeLoading(true)}
@@ -4934,6 +5058,16 @@ function App() {
                     </footer>
                 )
             }
+            {homeMetricTransition && (
+                <div
+                    className={`home-metric-transition ${homeMetricTransition.phase || 'is-expanding'}`}
+                    style={{
+                        '--metric-transition-x': `${homeMetricTransition.x}px`,
+                        '--metric-transition-y': `${homeMetricTransition.y}px`
+                    }}
+                    aria-hidden="true"
+                ></div>
+            )}
             {homeRouteTransition && <div className={`route-transition route-transition-navy ${homeRouteTransition}`} aria-hidden="true"></div>}
         </div >
     );
