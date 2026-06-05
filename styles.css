@@ -1769,7 +1769,7 @@ body.home-scroll-surface::-webkit-scrollbar {
     background: color-mix(in srgb, var(--surface) 18%, transparent);
     box-shadow: 0 0 28px color-mix(in srgb, var(--surface) 22%, transparent);
     transform: translate(-50%, -50%);
-    transition: width 0.22s, height 0.22s, border-color 0.22s, background 0.22s;
+    transition: width 0.22s, height 0.22s, border-color 0.22s, background 0.22s, box-shadow 0.22s;
 }
 
 .home-metric:hover {
@@ -1778,10 +1778,14 @@ body.home-scroll-surface::-webkit-scrollbar {
 }
 
 .home-metric:hover::before {
-    width: 5.2rem;
-    height: 5.2rem;
-    border-color: color-mix(in srgb, var(--surface) 34%, transparent);
-    background: color-mix(in srgb, var(--navy-light) 28%, transparent);
+    width: 5.6rem;
+    height: 5.6rem;
+    border-color: color-mix(in srgb, var(--surface) 48%, transparent);
+    background: transparent;
+    box-shadow:
+        0 0 0 0.35rem color-mix(in srgb, var(--surface) 5%, transparent),
+        0 0 30px color-mix(in srgb, var(--surface) 30%, transparent),
+        0 0 72px color-mix(in srgb, var(--surface) 16%, transparent);
 }
 
 .home-metric-transition {
@@ -1880,8 +1884,8 @@ body.home-scroll-surface::-webkit-scrollbar {
     --atlas-x: 0px;
     --atlas-progress: 0;
     position: relative;
-    height: calc(var(--atlas-panels) * 100vh);
-    min-height: 220rem;
+    height: calc(var(--atlas-panels) * 122vh);
+    min-height: 270rem;
 }
 
 .home-atlas-sticky {
@@ -1896,11 +1900,32 @@ body.home-scroll-surface::-webkit-scrollbar {
 .home-atlas-track {
     display: flex;
     align-items: center;
-    gap: clamp(3rem, 6vw, 6rem);
+    gap: clamp(10rem, 18vw, 22rem);
     width: max-content;
-    padding: 0 max(3rem, calc((100vw - 1180px) / 2)) 0 max(3rem, calc((100vw - 1180px) / 2));
+    padding: 0 max(3rem, calc((100vw - 1180px) / 2));
     transform: translate3d(var(--atlas-x), 0, 0);
     will-change: transform;
+}
+
+.home-atlas-sticky::before,
+.home-atlas-sticky::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    z-index: 2;
+    width: clamp(8rem, 18vw, 18rem);
+    pointer-events: none;
+}
+
+.home-atlas-sticky::before {
+    left: 0;
+    background: linear-gradient(90deg, var(--navy) 0%, color-mix(in srgb, var(--navy) 92%, transparent) 42%, transparent 100%);
+}
+
+.home-atlas-sticky::after {
+    right: 0;
+    background: linear-gradient(270deg, var(--navy) 0%, color-mix(in srgb, var(--navy) 92%, transparent) 42%, transparent 100%);
 }
 
 .home-atlas-panel {
@@ -1911,13 +1936,13 @@ body.home-scroll-surface::-webkit-scrollbar {
 }
 
 .home-atlas-rail {
+    display: none;
     position: absolute;
     left: max(3rem, calc((100vw - 1180px) / 2));
     right: max(3rem, calc((100vw - 1180px) / 2));
     bottom: 2rem;
     z-index: 2;
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(var(--atlas-panels), 1fr);
     gap: 0.5rem;
     color: color-mix(in srgb, var(--surface) 40%, transparent);
     font-family: var(--font-mono);
@@ -1968,6 +1993,105 @@ body.home-scroll-surface::-webkit-scrollbar {
     color: var(--text-muted-on-dark);
     font-size: var(--text-lg);
     line-height: 1.6;
+}
+
+.home-story-manifest {
+    align-content: center;
+    gap: clamp(2rem, 4vw, 3.5rem);
+}
+
+.home-story-manifest h2 {
+    max-width: 720px;
+    margin: 0;
+    color: var(--surface);
+    font-family: var(--font-display);
+    font-size: clamp(4rem, 8vw, 7rem);
+    font-weight: 400;
+    line-height: 0.92;
+    letter-spacing: var(--tracking-title);
+}
+
+.home-manifest-copy {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(1.25rem, 3vw, 2.5rem);
+    max-width: 1040px;
+}
+
+.home-manifest-copy p {
+    margin: 0;
+    color: var(--text-muted-on-dark);
+    font-size: clamp(1.15rem, 1.7vw, 1.45rem);
+    line-height: 1.55;
+}
+
+.home-manifest-copy p:first-child {
+    color: var(--surface);
+}
+
+.home-minors-year {
+    color: var(--text-muted-on-dark);
+    font-family: var(--font-mono);
+    font-size: var(--text-2xs);
+    font-weight: 700;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+}
+
+.home-story-minors {
+    grid-template-columns: minmax(280px, 0.82fr) minmax(0, 1.18fr);
+    align-items: end;
+}
+
+.home-minors-chart {
+    min-height: 31rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(5rem, 1fr));
+    align-items: end;
+    gap: clamp(0.7rem, 1.6vw, 1.2rem);
+    padding: clamp(1.25rem, 3vw, 2rem);
+    border: 1px solid color-mix(in srgb, var(--surface) 16%, transparent);
+    border-radius: var(--radius-lg);
+    background:
+        linear-gradient(180deg, color-mix(in srgb, var(--surface) 8%, transparent), transparent 1px) 0 0 / 100% 25%,
+        radial-gradient(circle at 0% 0%, color-mix(in srgb, var(--accent) 14%, transparent), transparent 42%),
+        color-mix(in srgb, var(--navy) 72%, transparent);
+    box-shadow: var(--shadow-card);
+}
+
+.home-minors-bar {
+    --minor-scale: 0.1;
+    min-height: 25rem;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    gap: 0.7rem;
+    align-items: end;
+    color: var(--surface);
+}
+
+.home-minors-value {
+    font-family: var(--font-display);
+    font-size: clamp(1.45rem, 2.4vw, 2.4rem);
+    line-height: 0.95;
+    text-align: center;
+}
+
+.home-minors-fill {
+    width: 100%;
+    height: calc(var(--minor-scale) * 100%);
+    min-height: 2rem;
+    border: 1px solid color-mix(in srgb, var(--surface) 22%, transparent);
+    border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+    background:
+        linear-gradient(180deg, color-mix(in srgb, var(--surface) 24%, transparent), transparent),
+        color-mix(in srgb, var(--navy-light) 54%, transparent);
+    box-shadow:
+        0 0 34px color-mix(in srgb, var(--surface) 12%, transparent),
+        inset 0 1px 0 color-mix(in srgb, var(--surface) 22%, transparent);
+}
+
+.home-minors-year {
+    text-align: center;
 }
 
 .home-story-sectors {
@@ -2649,6 +2773,8 @@ body.home-scroll-surface::-webkit-scrollbar {
     }
 
     .home-atlas {
+        width: 100%;
+        margin-left: 0;
         height: auto;
         min-height: 0;
     }
@@ -2678,6 +2804,8 @@ body.home-scroll-surface::-webkit-scrollbar {
         display: none;
     }
 
+    .home-story-manifest,
+    .home-story-minors,
     .home-story-sectors,
     .home-story-latest,
     .home-story-featured {
@@ -2699,6 +2827,10 @@ body.home-scroll-surface::-webkit-scrollbar {
 
     .home-category-cloud {
         min-height: 500px;
+    }
+
+    .home-minors-chart {
+        min-height: 26rem;
     }
 }
 
@@ -2786,6 +2918,32 @@ body.home-scroll-surface::-webkit-scrollbar {
     .home-method-panel {
         min-height: auto;
         padding: 1.2rem;
+    }
+
+    .home-story-manifest {
+        max-width: 100%;
+    }
+
+    .home-story-manifest h2 {
+        font-size: clamp(3rem, 14vw, 4.8rem);
+    }
+
+    .home-manifest-copy {
+        grid-template-columns: 1fr;
+    }
+
+    .home-minors-chart {
+        min-height: 22rem;
+        grid-template-columns: repeat(auto-fit, minmax(3.8rem, 1fr));
+        padding: 1rem;
+    }
+
+    .home-minors-bar {
+        min-height: 17rem;
+    }
+
+    .home-minors-value {
+        font-size: 1.45rem;
     }
 
     .home-featured-card strong {

@@ -2478,15 +2478,10 @@ function App() {
         const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         const styles = getComputedStyle(document.documentElement);
         const particleColor = styles.getPropertyValue('--surface').trim();
-        const pointer = { x: 0, y: 0, active: 0 };
         const clock = new THREE.Clock();
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(48, 1, 0.1, 100);
-        const pointerRay = new THREE.Raycaster();
-        const pointerPlane = new THREE.Plane(new THREE.Vector3(0, 0, 1), 0);
-        const pointerPoint = new THREE.Vector3();
-        const pointerNdc = new THREE.Vector2();
-        const pointerTarget = new THREE.Vector3();
+        const pointerTarget = new THREE.Vector4(0, 0, 0, 0.22);
         const renderer = new THREE.WebGLRenderer({
             canvas,
             alpha: true,
@@ -2539,13 +2534,15 @@ function App() {
                         uTime: { value: 0 },
                         uColor: { value: color },
                         uPixelRatio: { value: Math.min(window.devicePixelRatio || 1, 2) },
-                        uPointer: { value: new THREE.Vector3(0, 0, 0) },
+                        uAspect: { value: 1 },
+                        uPointer: { value: new THREE.Vector4(0, 0, 0, 0.22) },
                     },
                     vertexShader: `
                         attribute vec4 aSeed;
                         uniform float uTime;
                         uniform float uPixelRatio;
-                        uniform vec3 uPointer;
+                        uniform float uAspect;
+                        uniform vec4 uPointer;
                         varying float vAlpha;
 
                         void main() {
@@ -2556,18 +2553,32 @@ function App() {
                             p.y += swirl;
                             p.z += sin(uTime * 0.28 + aSeed.z * 6.283 + p.x * 0.9) * 0.18;
 
-                            vec2 d = p.xy - uPointer.xy;
-                            float influence = smoothstep(1.05, 0.0, length(d)) * uPointer.z;
-                            if (length(d) > 0.001) {
-                                vec2 tangent = vec2(-d.y, d.x) / length(d);
-                                p.xy += tangent * influence * 0.08;
-                                p.xy += normalize(d) * influence * 0.04;
+                            vec4 mv = modelViewMatrix * vec4(p, 1.0);
+                            vec4 projected = projectionMatrix * mv;
+                            vec2 screen = projected.xy / projected.w;
+                            vec2 toPointer = uPointer.xy - screen;
+                            vec2 corrected = vec2(toPointer.x * uAspect, toPointer.y);
+                            float dist = length(corrected);
+                            float radius = max(uPointer.w, 0.001);
+                            float influence = smoothstep(radius, 0.0, dist) * uPointer.z;
+                            if (dist > 0.001 && uPointer.z > 0.001) {
+                                vec2 direction = corrected / dist;
+                                vec2 tangent = vec2(-direction.y, direction.x);
+                                float metricField = smoothstep(1.12, 1.22, uPointer.z);
+                                float core = smoothstep(radius * 0.34, 0.0, dist);
+                                float ring = smoothstep(radius, radius * 0.38, dist) * (1.0 - core);
+                                float pull = influence * (1.0 - core * 1.45);
+                                float hollowPush = smoothstep(radius * 0.96, radius * 0.08, dist) * metricField;
+                                vec2 field = direction * pull * 0.072 + tangent * ring * uPointer.z * 0.034;
+                                field -= direction * hollowPush * 0.07;
+                                projected.xy += vec2(field.x / uAspect, field.y) * projected.w;
                             }
 
-                            vec4 mv = modelViewMatrix * vec4(p, 1.0);
-                            gl_Position = projectionMatrix * mv;
-                            gl_PointSize = (1.8 + aSeed.w * 1.8 + influence * 0.18) * uPixelRatio * (7.0 / -mv.z);
-                            vAlpha = 0.12 + aSeed.z * 0.18 + influence * 0.025;
+                            gl_Position = projected;
+                            gl_PointSize = (1.8 + aSeed.w * 1.8 + influence * 0.48) * uPixelRatio * (7.0 / -mv.z);
+                            float metricField = smoothstep(1.12, 1.22, uPointer.z);
+                            float hollowMask = mix(1.0, smoothstep(radius * 0.86, radius * 1.02, dist), metricField);
+                            vAlpha = (0.12 + aSeed.z * 0.18 + influence * 0.07) * hollowMask;
                         }
                     `,
                     fragmentShader: `
@@ -2595,8 +2606,11 @@ function App() {
             renderer.setSize(rect.width, rect.height, false);
             camera.aspect = rect.width / Math.max(rect.height, 1);
             camera.updateProjectionMatrix();
-            if (points) points.material.uniforms.uPixelRatio.value = dpr;
             buildParticles();
+            if (points) {
+                points.material.uniforms.uPixelRatio.value = dpr;
+                points.material.uniforms.uAspect.value = camera.aspect;
+            }
         };
 
         const render = () => {
@@ -2611,23 +2625,28 @@ function App() {
             if (!reduceMotion) frameId = requestAnimationFrame(render);
         };
 
-        const handlePointerMove = (event) => {
+        const setPointerField = (clientX, clientY, strength = 1, radius = 0.22) => {
             const rect = canvas.getBoundingClientRect();
-            pointerNdc.set(
-                ((event.clientX - rect.left) / rect.width) * 2 - 1,
-                -(((event.clientY - rect.top) / rect.height) * 2 - 1)
+            pointerTarget.set(
+                ((clientX - rect.left) / rect.width) * 2 - 1,
+                -(((clientY - rect.top) / rect.height) * 2 - 1),
+                strength,
+                radius
             );
-            pointerRay.setFromCamera(pointerNdc, camera);
-            pointerRay.ray.intersectPlane(pointerPlane, pointerPoint);
-            pointer.x = pointerPoint.x;
-            pointer.y = pointerPoint.y;
-            pointer.active = 1;
-            pointerTarget.set(pointer.x, pointer.y, pointer.active);
+        };
+
+        const handlePointerMove = (event) => {
+            const metricNode = event.target.closest?.('.home-metric');
+            if (metricNode && homeNode.contains(metricNode)) {
+                const metricRect = metricNode.getBoundingClientRect();
+                setPointerField(metricRect.left + metricRect.width / 2, metricRect.top + metricRect.height / 2, 1.25, 0.31);
+            } else {
+                setPointerField(event.clientX, event.clientY, 1, 0.22);
+            }
             if (reduceMotion) render();
         };
         const handlePointerLeave = () => {
-            pointer.active = 0;
-            pointerTarget.set(pointer.x, pointer.y, pointer.active);
+            pointerTarget.z = 0;
             if (reduceMotion) render();
         };
 
@@ -3506,6 +3525,37 @@ function App() {
         }));
     }, [empreses]);
 
+    const homeMinorContractTrend = useMemo(() => {
+        const years = new Map();
+        const currentYear = new Date().getFullYear();
+        contracts.forEach(contract => {
+            const year = String(contract.fecha || '').slice(0, 4);
+            if (!/^\d{4}$/.test(year)) return;
+            if (Number(year) >= currentYear) return;
+            const current = years.get(year) || { year, total: 0, minor: 0, minorAmount: 0 };
+            const amount = Number(contract.importe) || 0;
+            current.total += 1;
+            if (/menor/i.test(contract.procedimiento || '')) {
+                current.minor += 1;
+                current.minorAmount += amount;
+            }
+            years.set(year, current);
+        });
+        const rows = Array.from(years.values())
+            .filter(row => row.total >= 50)
+            .sort((a, b) => a.year.localeCompare(b.year))
+            .map(row => ({
+                ...row,
+                percent: row.total ? row.minor / row.total : 0
+            }));
+        const maxPercent = Math.max(...rows.map(row => row.percent), 0.01);
+        return rows.map(row => ({
+            ...row,
+            barScale: Math.max(0.08, row.percent / maxPercent),
+            percentLabel: `${Math.round(row.percent * 100)}%`
+        }));
+    }, [contracts]);
+
     const homeLatestContracts = useMemo(() => {
         return contracts
             .filter(contract => {
@@ -3577,9 +3627,25 @@ function App() {
             const maxScroll = Math.max(atlas.offsetHeight - window.innerHeight, 1);
             const raw = (window.scrollY - atlasTop) / maxScroll;
             const progress = Math.max(0, Math.min(1, raw));
+            const panelCount = Math.max(track.children.length, 1);
+            const transitions = Math.max(panelCount - 1, 1);
+            const scaled = progress * transitions;
+            const panelIndex = Math.min(Math.floor(scaled), transitions - 1);
+            const local = Math.min(Math.max(scaled - panelIndex, 0), 1);
+            const transitionStart = 0.18;
+            const transitionEnd = 0.82;
+            const easedLocal = local <= transitionStart
+                ? 0
+                : local >= transitionEnd
+                    ? 1
+                    : (() => {
+                        const t = (local - transitionStart) / (transitionEnd - transitionStart);
+                        return t * t * (3 - 2 * t);
+                    })();
+            const steppedProgress = panelCount <= 1 ? 0 : (panelIndex + easedLocal) / transitions;
             const maxX = Math.max(track.scrollWidth - window.innerWidth, 0);
-            atlas.style.setProperty('--atlas-x', `${Math.round(-progress * maxX)}px`);
-            atlas.style.setProperty('--atlas-progress', progress.toFixed(4));
+            atlas.style.setProperty('--atlas-x', `${Math.round(-steppedProgress * maxX)}px`);
+            atlas.style.setProperty('--atlas-progress', steppedProgress.toFixed(4));
         };
         const requestUpdate = () => {
             if (frameId !== null) return;
@@ -3595,7 +3661,7 @@ function App() {
             window.removeEventListener('resize', requestUpdate);
             if (frameId !== null) window.cancelAnimationFrame(frameId);
         };
-    }, [activeTab, loading, homeFeaturedAnalysis, homeTopSectors, homeTopCategories, homeLatestContracts]);
+    }, [activeTab, loading, homeFeaturedAnalysis, homeTopSectors, homeTopCategories, homeMinorContractTrend, homeLatestContracts]);
 
     const renderHomeChrome = (interactive = true) => (
         <div className="home-chrome">
@@ -3679,16 +3745,63 @@ function App() {
             </div>
 
             <div id="dades" className="home-landing" aria-label="Dades destacades">
-                <div className="home-atlas" ref={homeAtlasRef} style={{ '--atlas-panels': homeFeaturedAnalysis ? 5 : 4 }}>
+                <div className="home-atlas" ref={homeAtlasRef} style={{ '--atlas-panels': homeFeaturedAnalysis ? 6 : 5 }}>
                     <div className="home-atlas-sticky">
                         <div className="home-atlas-rail" aria-hidden="true">
-                            <span>01</span>
-                            <span>02</span>
-                            <span>03</span>
-                            <span>04</span>
-                            <span>05</span>
+                            {Array.from({ length: homeFeaturedAnalysis ? 6 : 5 }, (_, index) => (
+                                <span key={index}>{String(index + 1).padStart(2, '0')}</span>
+                            ))}
                         </div>
                         <div className="home-atlas-track">
+                            <section className="home-story home-atlas-panel home-story-manifest">
+                                <h2>Una manera nova de mirar Igualada</h2>
+                                <div className="home-manifest-copy">
+                                    <p>Una dada pot ser pública i continuar sent invisible. Un contracte pot estar penjat en un registre oficial i no explicar res a ningú.</p>
+                                    <p>Iguadata ordena la contractació municipal perquè contractes, empreses, imports, persones vinculades i alertes es puguin llegir com un mapa.</p>
+                                    <p>No substitueix el periodisme, l'activa: converteix informació dispersa i tècnica en una infraestructura cívica per preguntar millor com circulen els diners públics.</p>
+                                </div>
+                            </section>
+
+                            {homeFeaturedAnalysis && (
+                                <section className="home-story home-atlas-panel home-story-featured">
+                                    <div className="home-story-header">
+                                        <h2>Un cas per mirar de prop</h2>
+                                        <p>Una alerta destacada per entrar a l'anàlisi amb context i traçabilitat.</p>
+                                    </div>
+                                    <a
+                                        href={buildRouteUrl(homeFeaturedAnalysis.path)}
+                                        className={`home-featured-card home-featured-${homeFeaturedAnalysis.type}`}
+                                        onClick={interactive ? ((event) => handleInternalLinkClick(event, () => {
+                                            if (homeFeaturedAnalysis.type === 'fraccionament') handleCasoClick(homeFeaturedAnalysis.item);
+                                            if (homeFeaturedAnalysis.type === 'concentracio') handleConcentracioClick(homeFeaturedAnalysis.item);
+                                            if (homeFeaturedAnalysis.type === 'electoralisme') handleElectoralismeClick(homeFeaturedAnalysis.item);
+                                        })) : ((event) => event.preventDefault())}
+                                        tabIndex={interactive ? 0 : -1}
+                                    >
+                                        <span className="home-featured-label">{homeFeaturedAnalysis.label}</span>
+                                        <strong>{homeFeaturedAnalysis.title}</strong>
+                                        <p>{homeFeaturedAnalysis.text}</p>
+                                        <span className="home-featured-amount">{formatCompactCurrency(homeFeaturedAnalysis.amount)}</span>
+                                    </a>
+                                </section>
+                            )}
+
+                            <section className="home-story home-atlas-panel home-story-minors">
+                                <div className="home-story-header">
+                                    <h2>El pes del contracte menor</h2>
+                                    <p>No tots els contractes menors són problemàtics. Però mirar-ne l'evolució ajuda a entendre com es contracta.</p>
+                                </div>
+                                <div className="home-minors-chart" aria-label="Percentatge anual de contractes menors">
+                                    {homeMinorContractTrend.map(item => (
+                                        <div key={item.year} className="home-minors-bar" style={{ '--minor-scale': item.barScale }}>
+                                            <span className="home-minors-value">{item.percentLabel}</span>
+                                            <span className="home-minors-fill" aria-hidden="true"></span>
+                                            <span className="home-minors-year">{item.year}</span>
+                                        </div>
+                                    ))}
+                                </div>
+                            </section>
+
                             <section className="home-story home-atlas-panel home-story-sectors">
                                 <div className="home-story-header">
                                     <h2>On van els diners?</h2>
@@ -3712,30 +3825,6 @@ function App() {
                                 </div>
                             </section>
 
-                            {homeFeaturedAnalysis && (
-                                <section className="home-story home-atlas-panel home-story-featured">
-                        <div className="home-story-header">
-                            <h2>Un cas per mirar de prop</h2>
-                            <p>Una alerta destacada per entrar a l'anàlisi amb context i traçabilitat.</p>
-                        </div>
-                        <a
-                            href={buildRouteUrl(homeFeaturedAnalysis.path)}
-                            className={`home-featured-card home-featured-${homeFeaturedAnalysis.type}`}
-                            onClick={interactive ? ((event) => handleInternalLinkClick(event, () => {
-                                if (homeFeaturedAnalysis.type === 'fraccionament') handleCasoClick(homeFeaturedAnalysis.item);
-                                if (homeFeaturedAnalysis.type === 'concentracio') handleConcentracioClick(homeFeaturedAnalysis.item);
-                                if (homeFeaturedAnalysis.type === 'electoralisme') handleElectoralismeClick(homeFeaturedAnalysis.item);
-                            })) : ((event) => event.preventDefault())}
-                            tabIndex={interactive ? 0 : -1}
-                        >
-                            <span className="home-featured-label">{homeFeaturedAnalysis.label}</span>
-                            <strong>{homeFeaturedAnalysis.title}</strong>
-                            <p>{homeFeaturedAnalysis.text}</p>
-                            <span className="home-featured-amount">{formatCompactCurrency(homeFeaturedAnalysis.amount)}</span>
-                        </a>
-                                </section>
-                            )}
-
                             <section className="home-story home-atlas-panel home-story-categories">
                                 <div className="home-category-cloud" aria-label="Categories amb més import adjudicat">
                                     {homeTopCategories.map(item => (
@@ -3758,33 +3847,9 @@ function App() {
                                 </div>
                             </section>
 
-                            <section className="home-story home-atlas-panel home-story-method">
-                                <div className="home-story-header">
-                                    <h2>La capa que faltava</h2>
-                                    <p>Iguadata creua contractació municipal amb BORME per convertir noms d'empresa en relacions mercantils llegibles.</p>
-                                </div>
-                                <div className="home-method-grid">
-                                    <div className="home-method-panel">
-                                        <span>01</span>
-                                        <strong>Contractes oberts</strong>
-                                        <p>Imports, adjudicataris, procediments i objectes de la contractació pública d'Igualada.</p>
-                                    </div>
-                                    <div className="home-method-panel">
-                                        <span>02</span>
-                                        <strong>BORME històric</strong>
-                                        <p>Càrrecs, apoderaments, canvis de denominació i societats vinculades des de 2009.</p>
-                                    </div>
-                                    <div className="home-method-panel">
-                                        <span>03</span>
-                                        <strong>Lectura editorial</strong>
-                                        <p>Indicadors pensats per investigar millor, amb límits explícits i sense insinuar culpabilitat.</p>
-                                    </div>
-                                </div>
-                            </section>
-
                             <section className="home-story home-atlas-panel home-story-latest">
                                 <div className="home-story-header">
-                                    <h2>Últims contractes signats</h2>
+                                    <h2>La fotografia viva</h2>
                                     <p>La fotografia es mou cada dia.</p>
                                 </div>
                                 <div className="home-latest-list">

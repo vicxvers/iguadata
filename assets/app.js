@@ -3265,19 +3265,10 @@ function App() {
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const styles = getComputedStyle(document.documentElement);
     const particleColor = styles.getPropertyValue('--surface').trim();
-    const pointer = {
-      x: 0,
-      y: 0,
-      active: 0
-    };
     const clock = new THREE.Clock();
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(48, 1, 0.1, 100);
-    const pointerRay = new THREE.Raycaster();
-    const pointerPlane = new THREE.Plane(new THREE.Vector3(0, 0, 1), 0);
-    const pointerPoint = new THREE.Vector3();
-    const pointerNdc = new THREE.Vector2();
-    const pointerTarget = new THREE.Vector3();
+    const pointerTarget = new THREE.Vector4(0, 0, 0, 0.22);
     const renderer = new THREE.WebGLRenderer({
       canvas,
       alpha: true,
@@ -3334,15 +3325,19 @@ function App() {
             uPixelRatio: {
               value: Math.min(window.devicePixelRatio || 1, 2)
             },
+            uAspect: {
+              value: 1
+            },
             uPointer: {
-              value: new THREE.Vector3(0, 0, 0)
+              value: new THREE.Vector4(0, 0, 0, 0.22)
             }
           },
           vertexShader: `
                         attribute vec4 aSeed;
                         uniform float uTime;
                         uniform float uPixelRatio;
-                        uniform vec3 uPointer;
+                        uniform float uAspect;
+                        uniform vec4 uPointer;
                         varying float vAlpha;
 
                         void main() {
@@ -3353,18 +3348,32 @@ function App() {
                             p.y += swirl;
                             p.z += sin(uTime * 0.28 + aSeed.z * 6.283 + p.x * 0.9) * 0.18;
 
-                            vec2 d = p.xy - uPointer.xy;
-                            float influence = smoothstep(1.05, 0.0, length(d)) * uPointer.z;
-                            if (length(d) > 0.001) {
-                                vec2 tangent = vec2(-d.y, d.x) / length(d);
-                                p.xy += tangent * influence * 0.08;
-                                p.xy += normalize(d) * influence * 0.04;
+                            vec4 mv = modelViewMatrix * vec4(p, 1.0);
+                            vec4 projected = projectionMatrix * mv;
+                            vec2 screen = projected.xy / projected.w;
+                            vec2 toPointer = uPointer.xy - screen;
+                            vec2 corrected = vec2(toPointer.x * uAspect, toPointer.y);
+                            float dist = length(corrected);
+                            float radius = max(uPointer.w, 0.001);
+                            float influence = smoothstep(radius, 0.0, dist) * uPointer.z;
+                            if (dist > 0.001 && uPointer.z > 0.001) {
+                                vec2 direction = corrected / dist;
+                                vec2 tangent = vec2(-direction.y, direction.x);
+                                float metricField = smoothstep(1.12, 1.22, uPointer.z);
+                                float core = smoothstep(radius * 0.34, 0.0, dist);
+                                float ring = smoothstep(radius, radius * 0.38, dist) * (1.0 - core);
+                                float pull = influence * (1.0 - core * 1.45);
+                                float hollowPush = smoothstep(radius * 0.96, radius * 0.08, dist) * metricField;
+                                vec2 field = direction * pull * 0.072 + tangent * ring * uPointer.z * 0.034;
+                                field -= direction * hollowPush * 0.07;
+                                projected.xy += vec2(field.x / uAspect, field.y) * projected.w;
                             }
 
-                            vec4 mv = modelViewMatrix * vec4(p, 1.0);
-                            gl_Position = projectionMatrix * mv;
-                            gl_PointSize = (1.8 + aSeed.w * 1.8 + influence * 0.18) * uPixelRatio * (7.0 / -mv.z);
-                            vAlpha = 0.12 + aSeed.z * 0.18 + influence * 0.025;
+                            gl_Position = projected;
+                            gl_PointSize = (1.8 + aSeed.w * 1.8 + influence * 0.48) * uPixelRatio * (7.0 / -mv.z);
+                            float metricField = smoothstep(1.12, 1.22, uPointer.z);
+                            float hollowMask = mix(1.0, smoothstep(radius * 0.86, radius * 1.02, dist), metricField);
+                            vAlpha = (0.12 + aSeed.z * 0.18 + influence * 0.07) * hollowMask;
                         }
                     `,
           fragmentShader: `
@@ -3391,8 +3400,11 @@ function App() {
       renderer.setSize(rect.width, rect.height, false);
       camera.aspect = rect.width / Math.max(rect.height, 1);
       camera.updateProjectionMatrix();
-      if (points) points.material.uniforms.uPixelRatio.value = dpr;
       buildParticles();
+      if (points) {
+        points.material.uniforms.uPixelRatio.value = dpr;
+        points.material.uniforms.uAspect.value = camera.aspect;
+      }
     };
     const render = () => {
       const elapsed = clock.getElapsedTime();
@@ -3405,20 +3417,22 @@ function App() {
       renderer.render(scene, camera);
       if (!reduceMotion) frameId = requestAnimationFrame(render);
     };
-    const handlePointerMove = event => {
+    const setPointerField = (clientX, clientY, strength = 1, radius = 0.22) => {
       const rect = canvas.getBoundingClientRect();
-      pointerNdc.set((event.clientX - rect.left) / rect.width * 2 - 1, -((event.clientY - rect.top) / rect.height * 2 - 1));
-      pointerRay.setFromCamera(pointerNdc, camera);
-      pointerRay.ray.intersectPlane(pointerPlane, pointerPoint);
-      pointer.x = pointerPoint.x;
-      pointer.y = pointerPoint.y;
-      pointer.active = 1;
-      pointerTarget.set(pointer.x, pointer.y, pointer.active);
+      pointerTarget.set((clientX - rect.left) / rect.width * 2 - 1, -((clientY - rect.top) / rect.height * 2 - 1), strength, radius);
+    };
+    const handlePointerMove = event => {
+      const metricNode = event.target.closest?.('.home-metric');
+      if (metricNode && homeNode.contains(metricNode)) {
+        const metricRect = metricNode.getBoundingClientRect();
+        setPointerField(metricRect.left + metricRect.width / 2, metricRect.top + metricRect.height / 2, 1.25, 0.31);
+      } else {
+        setPointerField(event.clientX, event.clientY, 1, 0.22);
+      }
       if (reduceMotion) render();
     };
     const handlePointerLeave = () => {
-      pointer.active = 0;
-      pointerTarget.set(pointer.x, pointer.y, pointer.active);
+      pointerTarget.z = 0;
       if (reduceMotion) render();
     };
     resize();
@@ -4240,6 +4254,38 @@ function App() {
       share: row.amount / total
     }));
   }, [empreses]);
+  const homeMinorContractTrend = useMemo(() => {
+    const years = new Map();
+    const currentYear = new Date().getFullYear();
+    contracts.forEach(contract => {
+      const year = String(contract.fecha || '').slice(0, 4);
+      if (!/^\d{4}$/.test(year)) return;
+      if (Number(year) >= currentYear) return;
+      const current = years.get(year) || {
+        year,
+        total: 0,
+        minor: 0,
+        minorAmount: 0
+      };
+      const amount = Number(contract.importe) || 0;
+      current.total += 1;
+      if (/menor/i.test(contract.procedimiento || '')) {
+        current.minor += 1;
+        current.minorAmount += amount;
+      }
+      years.set(year, current);
+    });
+    const rows = Array.from(years.values()).filter(row => row.total >= 50).sort((a, b) => a.year.localeCompare(b.year)).map(row => ({
+      ...row,
+      percent: row.total ? row.minor / row.total : 0
+    }));
+    const maxPercent = Math.max(...rows.map(row => row.percent), 0.01);
+    return rows.map(row => ({
+      ...row,
+      barScale: Math.max(0.08, row.percent / maxPercent),
+      percentLabel: `${Math.round(row.percent * 100)}%`
+    }));
+  }, [contracts]);
   const homeLatestContracts = useMemo(() => {
     return contracts.filter(contract => {
       const amount = Number(contract.importe) || 0;
@@ -4298,9 +4344,21 @@ function App() {
       const maxScroll = Math.max(atlas.offsetHeight - window.innerHeight, 1);
       const raw = (window.scrollY - atlasTop) / maxScroll;
       const progress = Math.max(0, Math.min(1, raw));
+      const panelCount = Math.max(track.children.length, 1);
+      const transitions = Math.max(panelCount - 1, 1);
+      const scaled = progress * transitions;
+      const panelIndex = Math.min(Math.floor(scaled), transitions - 1);
+      const local = Math.min(Math.max(scaled - panelIndex, 0), 1);
+      const transitionStart = 0.18;
+      const transitionEnd = 0.82;
+      const easedLocal = local <= transitionStart ? 0 : local >= transitionEnd ? 1 : (() => {
+        const t = (local - transitionStart) / (transitionEnd - transitionStart);
+        return t * t * (3 - 2 * t);
+      })();
+      const steppedProgress = panelCount <= 1 ? 0 : (panelIndex + easedLocal) / transitions;
       const maxX = Math.max(track.scrollWidth - window.innerWidth, 0);
-      atlas.style.setProperty('--atlas-x', `${Math.round(-progress * maxX)}px`);
-      atlas.style.setProperty('--atlas-progress', progress.toFixed(4));
+      atlas.style.setProperty('--atlas-x', `${Math.round(-steppedProgress * maxX)}px`);
+      atlas.style.setProperty('--atlas-progress', steppedProgress.toFixed(4));
     };
     const requestUpdate = () => {
       if (frameId !== null) return;
@@ -4318,7 +4376,7 @@ function App() {
       window.removeEventListener('resize', requestUpdate);
       if (frameId !== null) window.cancelAnimationFrame(frameId);
     };
-  }, [activeTab, loading, homeFeaturedAnalysis, homeTopSectors, homeTopCategories, homeLatestContracts]);
+  }, [activeTab, loading, homeFeaturedAnalysis, homeTopSectors, homeTopCategories, homeMinorContractTrend, homeLatestContracts]);
   const renderHomeChrome = (interactive = true) => React.createElement("div", {
     className: "home-chrome"
   }, React.createElement("div", {
@@ -4498,16 +4556,61 @@ function App() {
     className: "home-atlas",
     ref: homeAtlasRef,
     style: {
-      '--atlas-panels': homeFeaturedAnalysis ? 5 : 4
+      '--atlas-panels': homeFeaturedAnalysis ? 6 : 5
     }
   }, React.createElement("div", {
     className: "home-atlas-sticky"
   }, React.createElement("div", {
     className: "home-atlas-rail",
     "aria-hidden": "true"
-  }, React.createElement("span", null, "01"), React.createElement("span", null, "02"), React.createElement("span", null, "03"), React.createElement("span", null, "04"), React.createElement("span", null, "05")), React.createElement("div", {
+  }, Array.from({
+    length: homeFeaturedAnalysis ? 6 : 5
+  }, (_, index) => React.createElement("span", {
+    key: index
+  }, String(index + 1).padStart(2, '0')))), React.createElement("div", {
     className: "home-atlas-track"
   }, React.createElement("section", {
+    className: "home-story home-atlas-panel home-story-manifest"
+  }, React.createElement("h2", null, "Una manera nova de mirar Igualada"), React.createElement("div", {
+    className: "home-manifest-copy"
+  }, React.createElement("p", null, "Una dada pot ser p\xFAblica i continuar sent invisible. Un contracte pot estar penjat en un registre oficial i no explicar res a ning\xFA."), React.createElement("p", null, "Iguadata ordena la contractaci\xF3 municipal perqu\xE8 contractes, empreses, imports, persones vinculades i alertes es puguin llegir com un mapa."), React.createElement("p", null, "No substitueix el periodisme, l'activa: converteix informaci\xF3 dispersa i t\xE8cnica en una infraestructura c\xEDvica per preguntar millor com circulen els diners p\xFAblics."))), homeFeaturedAnalysis && React.createElement("section", {
+    className: "home-story home-atlas-panel home-story-featured"
+  }, React.createElement("div", {
+    className: "home-story-header"
+  }, React.createElement("h2", null, "Un cas per mirar de prop"), React.createElement("p", null, "Una alerta destacada per entrar a l'an\xE0lisi amb context i tra\xE7abilitat.")), React.createElement("a", {
+    href: buildRouteUrl(homeFeaturedAnalysis.path),
+    className: `home-featured-card home-featured-${homeFeaturedAnalysis.type}`,
+    onClick: interactive ? event => handleInternalLinkClick(event, () => {
+      if (homeFeaturedAnalysis.type === 'fraccionament') handleCasoClick(homeFeaturedAnalysis.item);
+      if (homeFeaturedAnalysis.type === 'concentracio') handleConcentracioClick(homeFeaturedAnalysis.item);
+      if (homeFeaturedAnalysis.type === 'electoralisme') handleElectoralismeClick(homeFeaturedAnalysis.item);
+    }) : event => event.preventDefault(),
+    tabIndex: interactive ? 0 : -1
+  }, React.createElement("span", {
+    className: "home-featured-label"
+  }, homeFeaturedAnalysis.label), React.createElement("strong", null, homeFeaturedAnalysis.title), React.createElement("p", null, homeFeaturedAnalysis.text), React.createElement("span", {
+    className: "home-featured-amount"
+  }, formatCompactCurrency(homeFeaturedAnalysis.amount)))), React.createElement("section", {
+    className: "home-story home-atlas-panel home-story-minors"
+  }, React.createElement("div", {
+    className: "home-story-header"
+  }, React.createElement("h2", null, "El pes del contracte menor"), React.createElement("p", null, "No tots els contractes menors s\xF3n problem\xE0tics. Per\xF2 mirar-ne l'evoluci\xF3 ajuda a entendre com es contracta.")), React.createElement("div", {
+    className: "home-minors-chart",
+    "aria-label": "Percentatge anual de contractes menors"
+  }, homeMinorContractTrend.map(item => React.createElement("div", {
+    key: item.year,
+    className: "home-minors-bar",
+    style: {
+      '--minor-scale': item.barScale
+    }
+  }, React.createElement("span", {
+    className: "home-minors-value"
+  }, item.percentLabel), React.createElement("span", {
+    className: "home-minors-fill",
+    "aria-hidden": "true"
+  }), React.createElement("span", {
+    className: "home-minors-year"
+  }, item.year))))), React.createElement("section", {
     className: "home-story home-atlas-panel home-story-sectors"
   }, React.createElement("div", {
     className: "home-story-header"
@@ -4536,24 +4639,7 @@ function App() {
     className: "home-sector-name"
   }, item.label), React.createElement("span", {
     className: "home-sector-amount"
-  }, formatCompactCurrency(item.amount)))))), homeFeaturedAnalysis && React.createElement("section", {
-    className: "home-story home-atlas-panel home-story-featured"
-  }, React.createElement("div", {
-    className: "home-story-header"
-  }, React.createElement("h2", null, "Un cas per mirar de prop"), React.createElement("p", null, "Una alerta destacada per entrar a l'an\xE0lisi amb context i tra\xE7abilitat.")), React.createElement("a", {
-    href: buildRouteUrl(homeFeaturedAnalysis.path),
-    className: `home-featured-card home-featured-${homeFeaturedAnalysis.type}`,
-    onClick: interactive ? event => handleInternalLinkClick(event, () => {
-      if (homeFeaturedAnalysis.type === 'fraccionament') handleCasoClick(homeFeaturedAnalysis.item);
-      if (homeFeaturedAnalysis.type === 'concentracio') handleConcentracioClick(homeFeaturedAnalysis.item);
-      if (homeFeaturedAnalysis.type === 'electoralisme') handleElectoralismeClick(homeFeaturedAnalysis.item);
-    }) : event => event.preventDefault(),
-    tabIndex: interactive ? 0 : -1
-  }, React.createElement("span", {
-    className: "home-featured-label"
-  }, homeFeaturedAnalysis.label), React.createElement("strong", null, homeFeaturedAnalysis.title), React.createElement("p", null, homeFeaturedAnalysis.text), React.createElement("span", {
-    className: "home-featured-amount"
-  }, formatCompactCurrency(homeFeaturedAnalysis.amount)))), React.createElement("section", {
+  }, formatCompactCurrency(item.amount)))))), React.createElement("section", {
     className: "home-story home-atlas-panel home-story-categories"
   }, React.createElement("div", {
     className: "home-category-cloud",
@@ -4577,22 +4663,10 @@ function App() {
   }, React.createElement("span", null, item.label), React.createElement("strong", null, formatCompactCurrency(item.amount))))), React.createElement("div", {
     className: "home-story-header home-story-header-offset"
   }, React.createElement("h2", null, "Qu\xE8 compra l'Ajuntament?"), React.createElement("p", null, "Categories f\xE0cils de llegir, no codis opacs."))), React.createElement("section", {
-    className: "home-story home-atlas-panel home-story-method"
-  }, React.createElement("div", {
-    className: "home-story-header"
-  }, React.createElement("h2", null, "La capa que faltava"), React.createElement("p", null, "Iguadata creua contractaci\xF3 municipal amb BORME per convertir noms d'empresa en relacions mercantils llegibles.")), React.createElement("div", {
-    className: "home-method-grid"
-  }, React.createElement("div", {
-    className: "home-method-panel"
-  }, React.createElement("span", null, "01"), React.createElement("strong", null, "Contractes oberts"), React.createElement("p", null, "Imports, adjudicataris, procediments i objectes de la contractaci\xF3 p\xFAblica d'Igualada.")), React.createElement("div", {
-    className: "home-method-panel"
-  }, React.createElement("span", null, "02"), React.createElement("strong", null, "BORME hist\xF2ric"), React.createElement("p", null, "C\xE0rrecs, apoderaments, canvis de denominaci\xF3 i societats vinculades des de 2009.")), React.createElement("div", {
-    className: "home-method-panel"
-  }, React.createElement("span", null, "03"), React.createElement("strong", null, "Lectura editorial"), React.createElement("p", null, "Indicadors pensats per investigar millor, amb l\xEDmits expl\xEDcits i sense insinuar culpabilitat.")))), React.createElement("section", {
     className: "home-story home-atlas-panel home-story-latest"
   }, React.createElement("div", {
     className: "home-story-header"
-  }, React.createElement("h2", null, "\xDAltims contractes signats"), React.createElement("p", null, "La fotografia es mou cada dia.")), React.createElement("div", {
+  }, React.createElement("h2", null, "La fotografia viva"), React.createElement("p", null, "La fotografia es mou cada dia.")), React.createElement("div", {
     className: "home-latest-list"
   }, homeLatestContracts.map((contract, index) => React.createElement("a", {
     key: contract.slug || contract.id || `${contract.fecha}-${index}`,
