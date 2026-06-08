@@ -1881,7 +1881,6 @@ body.home-scroll-surface::-webkit-scrollbar {
 
 .home-atlas {
     --atlas-panels: 5;
-    --atlas-x: 0px;
     --atlas-progress: 0;
     position: relative;
     height: calc(var(--atlas-panels) * 122vh);
@@ -1889,50 +1888,52 @@ body.home-scroll-surface::-webkit-scrollbar {
 }
 
 .home-atlas-sticky {
-    position: sticky;
+    position: absolute;
     top: 0;
+    left: 0;
+    right: 0;
+    z-index: 5;
     height: 100vh;
     overflow: hidden;
     display: grid;
     align-items: center;
 }
 
-.home-atlas-track {
-    display: flex;
-    align-items: center;
-    gap: clamp(10rem, 18vw, 22rem);
-    width: max-content;
-    padding: 0 max(3rem, calc((100vw - 1180px) / 2));
-    transform: translate3d(var(--atlas-x), 0, 0);
-    will-change: transform;
+.home-atlas-sticky.is-fixed {
+    position: fixed;
 }
 
-.home-atlas-sticky::before,
-.home-atlas-sticky::after {
-    content: "";
-    position: absolute;
-    top: 0;
+.home-atlas-sticky.is-after {
+    top: auto;
     bottom: 0;
-    z-index: 2;
-    width: clamp(8rem, 18vw, 18rem);
-    pointer-events: none;
 }
 
-.home-atlas-sticky::before {
-    left: 0;
-    background: linear-gradient(90deg, var(--navy) 0%, color-mix(in srgb, var(--navy) 92%, transparent) 42%, transparent 100%);
-}
-
-.home-atlas-sticky::after {
-    right: 0;
-    background: linear-gradient(270deg, var(--navy) 0%, color-mix(in srgb, var(--navy) 92%, transparent) 42%, transparent 100%);
+.home-atlas-track {
+    position: relative;
+    width: min(1180px, calc(100vw - 6rem));
+    height: min(720px, calc(100vh - 9rem));
+    margin: 0 auto;
 }
 
 .home-atlas-panel {
-    width: min(1180px, calc(100vw - 6rem));
-    min-height: min(720px, calc(100vh - 9rem));
-    flex: 0 0 auto;
+    position: absolute;
+    inset: 0;
+    z-index: var(--panel-layer, 1);
+    width: 100%;
+    min-height: 100%;
     padding: 0;
+    opacity: var(--panel-opacity, 0);
+    visibility: var(--panel-visibility, hidden);
+    pointer-events: none;
+    filter:
+        brightness(var(--panel-brightness, 1))
+        drop-shadow(0 0 var(--panel-glow-soft, 10px) rgba(255, 255, 255, var(--panel-glow-alpha, 0)))
+        drop-shadow(0 0 var(--panel-glow-wide, 0) rgba(91, 135, 255, var(--panel-glow-blue-alpha, 0)));
+    will-change: opacity, filter;
+}
+
+.home-atlas-panel[aria-hidden="false"] {
+    pointer-events: auto;
 }
 
 .home-atlas-rail {
@@ -2781,6 +2782,10 @@ body.home-scroll-surface::-webkit-scrollbar {
 
     .home-atlas-sticky {
         position: relative;
+        top: auto;
+        left: auto;
+        right: auto;
+        bottom: auto;
         height: auto;
         overflow: visible;
         display: block;
@@ -2790,14 +2795,21 @@ body.home-scroll-surface::-webkit-scrollbar {
         display: grid;
         gap: 2rem;
         width: 100%;
+        height: auto;
+        margin: 0;
         padding: 0;
-        transform: none !important;
     }
 
     .home-atlas-panel {
+        position: relative;
+        inset: auto;
         width: 100%;
         min-height: 0;
         padding: clamp(3rem, 7vw, 5.75rem) 0;
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        filter: none;
     }
 
     .home-atlas-rail {

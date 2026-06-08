@@ -4330,35 +4330,68 @@ function App() {
     if (activeTab !== 'home' || loading) return;
     const atlas = homeAtlasRef.current;
     if (!atlas) return;
+    const sticky = atlas.querySelector('.home-atlas-sticky');
     const track = atlas.querySelector('.home-atlas-track');
-    if (!track) return;
+    if (!sticky || !track) return;
     let frameId = null;
     const updateAtlas = () => {
       frameId = null;
       if (window.matchMedia('(max-width: 1024px)').matches) {
-        atlas.style.setProperty('--atlas-x', '0px');
+        sticky.classList.remove('is-fixed', 'is-after');
         atlas.style.setProperty('--atlas-progress', '0');
+        Array.from(track.children).forEach(panel => {
+          panel.style.removeProperty('--panel-opacity');
+          panel.style.removeProperty('--panel-visibility');
+          panel.style.removeProperty('--panel-brightness');
+          panel.style.removeProperty('--panel-glow-soft');
+          panel.style.removeProperty('--panel-glow-wide');
+          panel.style.removeProperty('--panel-glow-alpha');
+          panel.style.removeProperty('--panel-glow-blue-alpha');
+          panel.style.removeProperty('--panel-layer');
+          panel.inert = false;
+          panel.removeAttribute('aria-hidden');
+        });
         return;
       }
       const atlasTop = atlas.getBoundingClientRect().top + window.scrollY;
       const maxScroll = Math.max(atlas.offsetHeight - window.innerHeight, 1);
       const raw = (window.scrollY - atlasTop) / maxScroll;
       const progress = Math.max(0, Math.min(1, raw));
+      const isBefore = window.scrollY < atlasTop;
+      const isAfter = window.scrollY >= atlasTop + maxScroll;
+      sticky.classList.toggle('is-fixed', !isBefore && !isAfter);
+      sticky.classList.toggle('is-after', isAfter);
       const panelCount = Math.max(track.children.length, 1);
-      const transitions = Math.max(panelCount - 1, 1);
-      const scaled = progress * transitions;
-      const panelIndex = Math.min(Math.floor(scaled), transitions - 1);
-      const local = Math.min(Math.max(scaled - panelIndex, 0), 1);
-      const transitionStart = 0.18;
-      const transitionEnd = 0.82;
-      const easedLocal = local <= transitionStart ? 0 : local >= transitionEnd ? 1 : (() => {
+      const scaled = Math.min(progress * panelCount, panelCount - 0.0001);
+      const panelIndex = Math.floor(scaled);
+      const nextPanelIndex = Math.min(panelIndex + 1, panelCount - 1);
+      const local = scaled - panelIndex;
+      const transitionStart = 0.46;
+      const transitionEnd = 0.76;
+      const transitionBlend = local <= transitionStart ? 0 : local >= transitionEnd ? 1 : (() => {
         const t = (local - transitionStart) / (transitionEnd - transitionStart);
         return t * t * (3 - 2 * t);
       })();
-      const steppedProgress = panelCount <= 1 ? 0 : (panelIndex + easedLocal) / transitions;
-      const maxX = Math.max(track.scrollWidth - window.innerWidth, 0);
-      atlas.style.setProperty('--atlas-x', `${Math.round(-steppedProgress * maxX)}px`);
-      atlas.style.setProperty('--atlas-progress', steppedProgress.toFixed(4));
+      const blend = nextPanelIndex === panelIndex ? 0 : transitionBlend;
+      const glowEnvelope = Math.sin(Math.PI * blend);
+      const flicker = 0.72 + Math.abs(Math.sin(blend * Math.PI * 7)) * 0.28;
+      const glow = nextPanelIndex === panelIndex ? 0 : glowEnvelope * flicker;
+      const visiblePanel = blend < 0.5 ? panelIndex : nextPanelIndex;
+      Array.from(track.children).forEach((panel, index) => {
+        const opacity = index === panelIndex ? 1 - blend : index === nextPanelIndex ? blend : 0;
+        const panelGlow = opacity > 0.001 ? glow : 0;
+        panel.style.setProperty('--panel-opacity', opacity.toFixed(4));
+        panel.style.setProperty('--panel-visibility', opacity > 0.001 ? 'visible' : 'hidden');
+        panel.style.setProperty('--panel-brightness', (1 + panelGlow * 0.82).toFixed(4));
+        panel.style.setProperty('--panel-glow-soft', `${(12 + panelGlow * 46).toFixed(2)}px`);
+        panel.style.setProperty('--panel-glow-wide', `${(panelGlow * 96).toFixed(2)}px`);
+        panel.style.setProperty('--panel-glow-alpha', Math.min(panelGlow * 0.88, 0.88).toFixed(4));
+        panel.style.setProperty('--panel-glow-blue-alpha', Math.min(panelGlow * 0.68, 0.68).toFixed(4));
+        panel.style.setProperty('--panel-layer', index === visiblePanel ? '2' : '1');
+        panel.inert = index !== visiblePanel;
+        panel.setAttribute('aria-hidden', index === visiblePanel ? 'false' : 'true');
+      });
+      atlas.style.setProperty('--atlas-progress', progress.toFixed(4));
     };
     const requestUpdate = () => {
       if (frameId !== null) return;
@@ -4375,6 +4408,7 @@ function App() {
       window.removeEventListener('scroll', requestUpdate);
       window.removeEventListener('resize', requestUpdate);
       if (frameId !== null) window.cancelAnimationFrame(frameId);
+      sticky.classList.remove('is-fixed', 'is-after');
     };
   }, [activeTab, loading, homeFeaturedAnalysis, homeTopSectors, homeTopCategories, homeMinorContractTrend, homeLatestContracts]);
   const renderHomeChrome = (interactive = true) => React.createElement("div", {
