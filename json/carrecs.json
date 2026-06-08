@@ -35169,6 +35169,68 @@
       "tipo_entidad": "persona"
     }
   ],
+  "ECONOCOM SEMIC, S.A.U": [
+    {
+      "nombre": "GRUPO ECONOCOM ESPAÑA SL",
+      "cargo": "Socio único",
+      "fecha_nombramiento": "2025-08-14",
+      "tipo_entidad": "empresa"
+    },
+    {
+      "nombre": "RENAULD PHILIPPE",
+      "cargo": "Consejero",
+      "fecha_nombramiento": "2025-02-24",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "BDO AUDITORES SLP",
+      "cargo": "Auditor",
+      "fecha_nombramiento": "2025-01-13",
+      "tipo_entidad": "empresa"
+    },
+    {
+      "nombre": "SLAKSEMIC SL",
+      "cargo": "Vicepresid.",
+      "fecha_nombramiento": "2022-07-28",
+      "tipo_entidad": "empresa"
+    },
+    {
+      "nombre": "RODRIGUEZ DE LA FLOR Y DEL TORO LUIS MARIA",
+      "cargo": "SecreNoConsj",
+      "fecha_nombramiento": "2022-07-28",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "PEREZ HERCE GARCIA CARLOS ANTONIO",
+      "cargo": "Con.Delegado",
+      "fecha_nombramiento": "2022-07-28",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "LOPEZ GOMBAU OSCAR",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2022-07-28",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "GUIU RIUS RAMON",
+      "cargo": "Aud.Supl.",
+      "fecha_nombramiento": "2021-03-18",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "GUIU RIUS RAMON",
+      "cargo": "Auditor",
+      "fecha_nombramiento": "2018-01-15",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "PEIRO PASCUAL JOSE NARCISO",
+      "cargo": "Aud.Supl.",
+      "fecha_nombramiento": "2015-03-31",
+      "tipo_entidad": "persona"
+    }
+  ],
   "EIMER SISTEMAS AVANZADOS SL": [
     {
       "nombre": "TRADING MARKETS CAPITAL SL",
@@ -35192,6 +35254,14 @@
       "nombre": "ATIENZA MARTINEZ URSULA CRISTINA",
       "cargo": "REPR.143 RRM",
       "fecha_nombramiento": "2025-08-12",
+      "tipo_entidad": "persona"
+    }
+  ],
+  "SITPLACE SL": [
+    {
+      "nombre": "CARRILLO PEREZ JAVIER",
+      "cargo": "ADM.UNICO",
+      "fecha_nombramiento": "2025-08-11",
       "tipo_entidad": "persona"
     }
   ],
@@ -40673,6 +40743,26 @@
       "cargo": "Aud.Supl.",
       "fecha_nombramiento": "2011-08-24",
       "tipo_entidad": "empresa"
+    }
+  ],
+  "ORGANITZACIO I PROMOCIO D'ESPECTACLES LA MEDITERRANEA SL": [
+    {
+      "nombre": "TORRECILLAS IZQUIERDO ANGEL",
+      "cargo": "ADM.SOLIDAR.",
+      "fecha_nombramiento": "2024-03-13",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "VIDAL VIDAL ISABEL",
+      "cargo": "ADM.SOLIDAR.",
+      "fecha_nombramiento": "2024-03-13",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "TEIXIDO CASAJUANA CARLES",
+      "cargo": "APODERADO",
+      "fecha_nombramiento": "2009-07-14",
+      "tipo_entidad": "persona"
     }
   ],
   "TECALUM SISTEMES SLU": [
@@ -51484,6 +51574,20 @@
       "nombre": "FERNANDEZ PLAZA MARC",
       "cargo": "ADM.UNICO",
       "fecha_nombramiento": "2015-04-10",
+      "tipo_entidad": "persona"
+    }
+  ],
+  "AUDIT MANRESA, S.L.": [
+    {
+      "nombre": "TRULLAS FLOTATS JOSE",
+      "cargo": "ADM.SOLIDAR.",
+      "fecha_nombramiento": "2015-03-03",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "RIERA CREUS ANNA MARIA",
+      "cargo": "ADM.SOLIDAR.",
+      "fecha_nombramiento": "2015-03-03",
       "tipo_entidad": "persona"
     }
   ],
