@@ -22,4 +22,4 @@ if ($LASTEXITCODE -ne 0) {
     throw "No se pudo avanzar $branch mediante fast-forward."
 }
 
-Write-Host "Sincronización completada: $branch"
+Write-Host "Sincronizacion completada: $branch"
