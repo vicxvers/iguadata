@@ -1,6 +1,72 @@
 [
   {
     "estat_font": "desaparegut_socrata",
+    "primera_absencia_detectada": "2026-06-08",
+    "font_preservacio": "json/contractes.json anterior",
+    "exclos_analisis": false,
+    "contracte_original": {
+      "id": 7131,
+      "codigo": "21/2017",
+      "organismo": "Ajuntament d'Igualada",
+      "tipo": "5. SERVEIS",
+      "procedimiento": "Obert",
+      "descripcion": "Servei de Producció i Professionals de la 29a i 30a Mostra d'Igualada, Fira de Teatre Infantil i Juvenil",
+      "importe": 36363.64,
+      "adjudicatario": "ARNAU VINÓS ELIAS",
+      "fecha": "2017-07-21",
+      "año": 2017,
+      "mes": 7,
+      "cpv": "92312100-2",
+      "estat_font": "actiu_socrata",
+      "preservat_iguadata": false
+    }
+  },
+  {
+    "estat_font": "desaparegut_socrata",
+    "primera_absencia_detectada": "2026-06-08",
+    "font_preservacio": "json/contractes.json anterior",
+    "exclos_analisis": false,
+    "contracte_original": {
+      "id": 7130,
+      "codigo": "20/2017",
+      "organismo": "Ajuntament d'Igualada",
+      "tipo": "5. SERVEIS",
+      "procedimiento": "Obert",
+      "descripcion": "Servei de Direcció Executiva  de la 29a i 30a Mostra d'Igualada, Fira de Teatre Infantil i Juvenil",
+      "importe": 43000.0,
+      "adjudicatario": "UNICOOP CULTURAL SCCL",
+      "fecha": "2017-07-27",
+      "año": 2017,
+      "mes": 7,
+      "cpv": "92312000-1",
+      "estat_font": "actiu_socrata",
+      "preservat_iguadata": false
+    }
+  },
+  {
+    "estat_font": "desaparegut_socrata",
+    "primera_absencia_detectada": "2026-06-08",
+    "font_preservacio": "json/contractes.json anterior",
+    "exclos_analisis": false,
+    "contracte_original": {
+      "id": 7128,
+      "codigo": "19/2017",
+      "organismo": "Ajuntament d'Igualada",
+      "tipo": "5. SERVEIS",
+      "procedimiento": "Obert",
+      "descripcion": "Servei de Comunicació, Premsa, Públics i Protocol de la 29a i 30a Mostra d'Igualada, Fira de Teatre Infantil i Juvenil",
+      "importe": 36363.64,
+      "adjudicatario": "NURIA CAÑAMARES CASANOVAS",
+      "fecha": "2017-07-31",
+      "año": 2017,
+      "mes": 7,
+      "cpv": "92312100-2",
+      "estat_font": "actiu_socrata",
+      "preservat_iguadata": false
+    }
+  },
+  {
+    "estat_font": "desaparegut_socrata",
     "primera_absencia_detectada": "2026-05-14",
     "font_preservacio": "git:251557e:json/contractes.json",
     "primer_snapshot_iguadata": "2026-03-10",
@@ -37,6 +103,28 @@
       "año": 2018,
       "mes": 5,
       "cpv": "44100000-1",
+      "estat_font": "actiu_socrata",
+      "preservat_iguadata": false
+    }
+  },
+  {
+    "estat_font": "desaparegut_socrata",
+    "primera_absencia_detectada": "2026-06-08",
+    "font_preservacio": "json/contractes.json anterior",
+    "exclos_analisis": false,
+    "contracte_original": {
+      "id": 7121,
+      "codigo": "25/2018",
+      "organismo": "Ajuntament d'Igualada",
+      "tipo": "3. SUBMINISTRAMENTS",
+      "procedimiento": "Obert",
+      "descripcion": "Subministrament de Material Elèctric",
+      "importe": 31777.21,
+      "adjudicatario": "SALTOKI IGUALADA,SL",
+      "fecha": "2018-05-21",
+      "año": 2018,
+      "mes": 5,
+      "cpv": "31680000-6",
       "estat_font": "actiu_socrata",
       "preservat_iguadata": false
     }
@@ -7467,6 +7555,116 @@
       "año": 2021,
       "mes": 5,
       "cpv": "71240000-2",
+      "estat_font": "actiu_socrata",
+      "preservat_iguadata": false
+    }
+  },
+  {
+    "estat_font": "desaparegut_socrata",
+    "primera_absencia_detectada": "2026-06-08",
+    "font_preservacio": "json/contractes.json anterior",
+    "exclos_analisis": false,
+    "contracte_original": {
+      "id": 6750,
+      "codigo": "17/2021",
+      "organismo": "Ajuntament d'Igualada",
+      "tipo": "1. OBRES",
+      "procedimiento": "Obert",
+      "descripcion": "Obres corresponents al projecte de climatització de l'escola de Música d'Igualada, annex de modificació del projecte - FASE III",
+      "importe": 167666.77,
+      "adjudicatario": "PROJECTES INSTAL·LACIONS I MANTENIMENTS ENERGETICS",
+      "fecha": "2021-05-30",
+      "año": 2021,
+      "mes": 5,
+      "cpv": "45331000-6",
+      "estat_font": "actiu_socrata",
+      "preservat_iguadata": false
+    }
+  },
+  {
+    "estat_font": "desaparegut_socrata",
+    "primera_absencia_detectada": "2026-06-08",
+    "font_preservacio": "json/contractes.json anterior",
+    "exclos_analisis": false,
+    "contracte_original": {
+      "id": 6749,
+      "codigo": "FCR211274",
+      "organismo": "Consorci Sociosanitari d'Igualada",
+      "tipo": "5. SERVEIS",
+      "procedimiento": "Menor",
+      "descripcion": "Servei de Protecció de Dades (Nou RGPD i Delegat de Dades)",
+      "importe": 360.0,
+      "adjudicatario": "MANSA ASSESORS, SL",
+      "fecha": "2021-05-31",
+      "año": 2021,
+      "mes": 5,
+      "cpv": "",
+      "estat_font": "actiu_socrata",
+      "preservat_iguadata": false
+    }
+  },
+  {
+    "estat_font": "desaparegut_socrata",
+    "primera_absencia_detectada": "2026-06-08",
+    "font_preservacio": "json/contractes.json anterior",
+    "exclos_analisis": false,
+    "contracte_original": {
+      "id": 6748,
+      "codigo": "FCR211114",
+      "organismo": "Consorci Sociosanitari d'Igualada",
+      "tipo": "5. SERVEIS",
+      "procedimiento": "Menor",
+      "descripcion": "Consultoria i seleció Metge per residencia",
+      "importe": 7050.0,
+      "adjudicatario": "MARTIN WARWICK S.L",
+      "fecha": "2021-06-01",
+      "año": 2021,
+      "mes": 6,
+      "cpv": "79414000-9",
+      "estat_font": "actiu_socrata",
+      "preservat_iguadata": false
+    }
+  },
+  {
+    "estat_font": "desaparegut_socrata",
+    "primera_absencia_detectada": "2026-06-08",
+    "font_preservacio": "json/contractes.json anterior",
+    "exclos_analisis": false,
+    "contracte_original": {
+      "id": 6747,
+      "codigo": "FCR211116",
+      "organismo": "Consorci Sociosanitari d'Igualada",
+      "tipo": "3. SUBMINISTRAMENTS",
+      "procedimiento": "Menor",
+      "descripcion": "Adquisición 2 CÀMERES ROBOTITZADES I ACTUALITZACIÓ LLICÈNCIES",
+      "importe": 7560.0,
+      "adjudicatario": "PAL FICTION  S.L.",
+      "fecha": "2021-06-01",
+      "año": 2021,
+      "mes": 6,
+      "cpv": "32323500-8",
+      "estat_font": "actiu_socrata",
+      "preservat_iguadata": false
+    }
+  },
+  {
+    "estat_font": "desaparegut_socrata",
+    "primera_absencia_detectada": "2026-06-08",
+    "font_preservacio": "json/contractes.json anterior",
+    "exclos_analisis": false,
+    "contracte_original": {
+      "id": 6746,
+      "codigo": "28/2021 CMS",
+      "organismo": "Ajuntament d'Igualada",
+      "tipo": "5. SERVEIS",
+      "procedimiento": "Menor",
+      "descripcion": "Contractació d'una pòlissa d'assegurança d'accidents pel Casal d'Estiu 2021, l'Estiuet, del 28 de juny al 30 de juliol i del 23 d'agost al 10 de setembre de 2021.",
+      "importe": 459.99,
+      "adjudicatario": "SEGUROS CATALANA OCCIDENTE SA DE SEGUROS Y REASEGUROS, SOCIEDAD UNIPERSONAL",
+      "fecha": "2021-06-02",
+      "año": 2021,
+      "mes": 6,
+      "cpv": "",
       "estat_font": "actiu_socrata",
       "preservat_iguadata": false
     }
