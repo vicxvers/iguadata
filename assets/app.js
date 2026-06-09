@@ -233,6 +233,15 @@ function formatPageTitle(value) {
   const trimmed = (value || '').trim();
   return trimmed ? `${trimmed} | Iguadata` : 'Iguadata';
 }
+function normalizeSearchText(value) {
+  return String(value || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+}
+function matchesSearchQuery(values, query) {
+  const terms = normalizeSearchText(query).split(/\s+/).filter(Boolean);
+  if (!terms.length) return true;
+  const target = normalizeSearchText(Array.isArray(values) ? values.join(' ') : values);
+  return terms.every(term => target.includes(term));
+}
 function cyrb53(str) {
   let h1 = 0xdeadbeef,
     h2 = 0x41c6ce57;
@@ -1859,8 +1868,7 @@ function EmpresesView({
   const empresesFiltrades = useMemo(() => {
     let result = [...empreses];
     if (debouncedSearch) {
-      const s = debouncedSearch.toLowerCase();
-      result = result.filter(e => e.nom.toLowerCase().includes(s));
+      result = result.filter(e => matchesSearchQuery([e.nom, e.sector, e.categoria], debouncedSearch));
     }
     if (sectorFilter) {
       result = result.filter(e => e.sector === sectorFilter);
@@ -2305,7 +2313,9 @@ function EmpresaView({
   }, [empresaNom]);
   const empresaContracts = useMemo(() => {
     let result = [...allEmpresaContracts];
-    if (debouncedSearch) result = result.filter(c => c.descripcion.toLowerCase().includes(debouncedSearch.toLowerCase()));
+    if (debouncedSearch) {
+      result = result.filter(c => matchesSearchQuery([c.descripcion, c.codigo, c.tipo, c.procedimiento], debouncedSearch));
+    }
     if (yearFilter) result = result.filter(c => String(c.año || String(c.fecha || '').slice(0, 4)) === String(yearFilter));
     if (tipusFilter) result = result.filter(c => c.tipo === tipusFilter);
     if (procedureFilter) result = result.filter(c => c.procedimiento === procedureFilter);
@@ -2823,11 +2833,7 @@ function PersonesView({
   const personesFiltrades = useMemo(() => {
     let result = [...persones];
     if (debouncedSearch) {
-      const keywords = debouncedSearch.toLowerCase().trim().split(/\s+/);
-      result = result.filter(p => {
-        const searchTarget = p.nom.toLowerCase() + " " + p.relacions.map(e => e.empresa.toLowerCase()).join(" ");
-        return keywords.every(kw => searchTarget.includes(kw));
-      });
+      result = result.filter(p => matchesSearchQuery([p.nom, ...(p.relacions || []).flatMap(e => [e.empresa, ...(e.carrecs || [])])], debouncedSearch));
     }
     switch (sortBy) {
       case 'amount-desc':
@@ -3508,6 +3514,14 @@ function App() {
   });
   const [selectedEmpresa, setSelectedEmpresa] = useState(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  useEffect(() => {
+    document.documentElement.classList.toggle('mobile-menu-lock', isMobileMenuOpen);
+    document.body.classList.toggle('mobile-menu-lock', isMobileMenuOpen);
+    return () => {
+      document.documentElement.classList.remove('mobile-menu-lock');
+      document.body.classList.remove('mobile-menu-lock');
+    };
+  }, [isMobileMenuOpen]);
   const [sourceTabForCompany, setSourceTabForCompany] = useState('empreses');
   const restoreScrollRef = useRef(null);
   const pendingScrollTopRef = useRef(false);
@@ -3945,8 +3959,7 @@ function App() {
   const contractesFiltrats = useMemo(() => {
     let result = [...contracts];
     if (debouncedSearch) {
-      const s = debouncedSearch.toLowerCase();
-      result = result.filter(c => c.descripcion.toLowerCase().includes(s) || c.adjudicatario.toLowerCase().includes(s));
+      result = result.filter(c => matchesSearchQuery([c.descripcion, c.adjudicatario, c.codigo, c.tipo, c.procedimiento], debouncedSearch));
     }
     if (yearFilter) result = result.filter(c => c.año === parseInt(yearFilter));
     if (typeFilter) {
@@ -4016,8 +4029,7 @@ function App() {
       result = result.filter(f => f.nivell === riskFilter || f.nivel_riesgo === riskFilter);
     }
     if (analisiSearch.trim()) {
-      const s = analisiSearch.trim().toLowerCase();
-      result = result.filter(f => (f.empreses || []).some(e => e.toLowerCase().includes(s)) || (f.contractes || []).some(c => (c.descripcion || '').toLowerCase().includes(s) || (c.adjudicatario || '').toLowerCase().includes(s)));
+      result = result.filter(f => matchesSearchQuery([...(f.empreses || []), ...(f.contractes || []).flatMap(c => [c.descripcion, c.adjudicatario, c.codigo])], analisiSearch));
     }
     result = [...result];
     switch (analisiSort) {
@@ -4044,8 +4056,7 @@ function App() {
   const concentracioFiltradaBase = useMemo(() => {
     let result = [...concentracio];
     if (analisiSearch.trim()) {
-      const s = analisiSearch.trim().toLowerCase();
-      result = result.filter(f => (f.sector || '').toLowerCase().includes(s) || (f.finestra_label || '').toLowerCase().includes(s) || (f.empreses || []).some(e => e.toLowerCase().includes(s)));
+      result = result.filter(f => matchesSearchQuery([f.sector, f.finestra_label, ...(f.empreses || [])], analisiSearch));
     }
     return result;
   }, [concentracio, analisiSearch]);
@@ -4107,8 +4118,7 @@ function App() {
       result = result.filter(f => f.nivell === riskFilter);
     }
     if (analisiSearch.trim()) {
-      const s = analisiSearch.trim().toLowerCase();
-      result = result.filter(f => (f.empresa || '').toLowerCase().includes(s) || (f.periode_electoral || '').toLowerCase().includes(s) || (f.motius || []).some(m => m.toLowerCase().includes(s)) || (f.contractes || []).some(c => (c.descripcion || '').toLowerCase().includes(s) || (c.adjudicatario || '').toLowerCase().includes(s)));
+      result = result.filter(f => matchesSearchQuery([f.empresa, f.periode_electoral, ...(f.motius || []), ...(f.contractes || []).flatMap(c => [c.descripcion, c.adjudicatario, c.codigo])], analisiSearch));
     }
     result = [...result];
     switch (analisiSort) {
@@ -4465,9 +4475,12 @@ function App() {
     }, "Sobre"));
   };
   const renderSiteChrome = () => React.createElement("div", {
-    className: "site-chrome site-chrome-light"
+    className: 'site-chrome site-chrome-light' + (isMobileMenuOpen ? ' mobile-menu-open' : '')
   }, React.createElement("div", {
     className: "site-chrome-gradient",
+    "aria-hidden": "true"
+  }), isMobileMenuOpen && React.createElement("div", {
+    className: "mobile-menu-interaction-shield",
     "aria-hidden": "true"
   }), React.createElement("div", {
     className: "site-chrome-brand",
@@ -4486,6 +4499,8 @@ function App() {
     type: "button",
     "aria-expanded": isMobileMenuOpen,
     onClick: () => setIsMobileMenuOpen(prev => !prev)
+  }, React.createElement("span", {
+    className: "mobile-nav-current-group"
   }, React.createElement("span", null, navCurrentLabel), React.createElement("svg", {
     className: "mobile-nav-chevron",
     width: "16",
@@ -4499,7 +4514,7 @@ function App() {
     "aria-hidden": "true"
   }, React.createElement("path", {
     d: "m6 9 6 6 6-6"
-  }))), renderNavTabs(true, false))));
+  })))), renderNavTabs(true, false))));
   const renderHomeSection = (extraClassName = '', interactive = true) => React.createElement("section", {
     className: `home${extraClassName ? ` ${extraClassName}` : ''}`,
     "aria-label": "Portada editorial Iguadata",
@@ -5333,16 +5348,24 @@ function App() {
   }), activeTab === 'analisi' && !dataLoading && React.createElement(React.Fragment, null, React.createElement("div", {
     className: "analisi-tabs-wrapper"
   }, React.createElement("div", {
-    className: "analisi-tabs"
+    className: "analisi-tabs",
+    role: "tablist",
+    "aria-label": "Tipus d'an\xE0lisi"
   }, React.createElement("button", {
     className: 'analisi-tab' + (analisiTab === 'fraccionament' ? ' active' : ''),
-    onClick: () => setAnalisiTab('fraccionament')
+    onClick: () => setAnalisiTab('fraccionament'),
+    role: "tab",
+    "aria-selected": analisiTab === 'fraccionament'
   }, "Fraccionament"), React.createElement("button", {
     className: 'analisi-tab' + (analisiTab === 'monopoli' ? ' active' : ''),
-    onClick: () => setAnalisiTab('monopoli')
+    onClick: () => setAnalisiTab('monopoli'),
+    role: "tab",
+    "aria-selected": analisiTab === 'monopoli'
   }, "Concentraci\xF3"), React.createElement("button", {
     className: 'analisi-tab' + (analisiTab === 'electoral' ? ' active' : ''),
-    onClick: () => setAnalisiTab('electoral')
+    onClick: () => setAnalisiTab('electoral'),
+    role: "tab",
+    "aria-selected": analisiTab === 'electoral'
   }, "Electoralisme"))), React.createElement("div", {
     className: "container analisi-page"
   }, React.createElement("h1", {

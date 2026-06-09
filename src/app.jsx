@@ -191,6 +191,23 @@ function formatPageTitle(value) {
     return trimmed ? `${trimmed} | Iguadata` : 'Iguadata';
 }
 
+function normalizeSearchText(value) {
+    return String(value || '')
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, ' ')
+        .trim();
+}
+
+function matchesSearchQuery(values, query) {
+    const terms = normalizeSearchText(query).split(/\s+/).filter(Boolean);
+    if (!terms.length) return true;
+
+    const target = normalizeSearchText(Array.isArray(values) ? values.join(' ') : values);
+    return terms.every(term => target.includes(term));
+}
+
 // Hash determinista de 53 bits (cyrb53). Sempre retorna el mateix valor per al mateix input.
 function cyrb53(str) {
     let h1 = 0xdeadbeef, h2 = 0x41c6ce57;
@@ -1469,8 +1486,10 @@ function EmpresesView({ empreses, onEmpresaSelect, searchTerm, setSearchTerm, se
         let result = [...empreses];
 
         if (debouncedSearch) {
-            const s = debouncedSearch.toLowerCase();
-            result = result.filter(e => e.nom.toLowerCase().includes(s));
+            result = result.filter(e => matchesSearchQuery(
+                [e.nom, e.sector, e.categoria],
+                debouncedSearch
+            ));
         }
 
         if (sectorFilter) {
@@ -1802,7 +1821,12 @@ function EmpresaView({ empresa: empresaNom, contracts, empreses, administradors,
 
     const empresaContracts = useMemo(() => {
         let result = [...allEmpresaContracts];
-        if (debouncedSearch) result = result.filter(c => c.descripcion.toLowerCase().includes(debouncedSearch.toLowerCase()));
+        if (debouncedSearch) {
+            result = result.filter(c => matchesSearchQuery(
+                [c.descripcion, c.codigo, c.tipo, c.procedimiento],
+                debouncedSearch
+            ));
+        }
         if (yearFilter) result = result.filter(c => String(c.año || String(c.fecha || '').slice(0, 4)) === String(yearFilter));
         if (tipusFilter) result = result.filter(c => c.tipo === tipusFilter);
         if (procedureFilter) result = result.filter(c => c.procedimiento === procedureFilter);
@@ -2126,11 +2150,10 @@ function PersonesView({ persones, onEmpresaSelect, onNavigateLegal, searchTerm, 
         let result = [...persones];
 
         if (debouncedSearch) {
-            const keywords = debouncedSearch.toLowerCase().trim().split(/\s+/);
-            result = result.filter(p => {
-                const searchTarget = p.nom.toLowerCase() + " " + p.relacions.map(e => e.empresa.toLowerCase()).join(" ");
-                return keywords.every(kw => searchTarget.includes(kw));
-            });
+            result = result.filter(p => matchesSearchQuery(
+                [p.nom, ...(p.relacions || []).flatMap(e => [e.empresa, ...(e.carrecs || [])])],
+                debouncedSearch
+            ));
         }
 
         switch (sortBy) {
@@ -2724,6 +2747,14 @@ function App() {
     });
     const [selectedEmpresa, setSelectedEmpresa] = useState(null);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    useEffect(() => {
+        document.documentElement.classList.toggle('mobile-menu-lock', isMobileMenuOpen);
+        document.body.classList.toggle('mobile-menu-lock', isMobileMenuOpen);
+        return () => {
+            document.documentElement.classList.remove('mobile-menu-lock');
+            document.body.classList.remove('mobile-menu-lock');
+        };
+    }, [isMobileMenuOpen]);
     const [sourceTabForCompany, setSourceTabForCompany] = useState('empreses');
     const restoreScrollRef = useRef(null);
     const pendingScrollTopRef = useRef(false);
@@ -3185,11 +3216,10 @@ function App() {
         let result = [...contracts];
 
         if (debouncedSearch) {
-            const s = debouncedSearch.toLowerCase();
-            result = result.filter(c =>
-                c.descripcion.toLowerCase().includes(s) ||
-                c.adjudicatario.toLowerCase().includes(s)
-            );
+            result = result.filter(c => matchesSearchQuery(
+                [c.descripcion, c.adjudicatario, c.codigo, c.tipo, c.procedimiento],
+                debouncedSearch
+            ));
         }
 
         if (yearFilter) result = result.filter(c => c.año === parseInt(yearFilter));
@@ -3262,14 +3292,13 @@ function App() {
             result = result.filter(f => f.nivell === riskFilter || f.nivel_riesgo === riskFilter);
         }
         if (analisiSearch.trim()) {
-            const s = analisiSearch.trim().toLowerCase();
-            result = result.filter(f =>
-                (f.empreses || []).some(e => e.toLowerCase().includes(s)) ||
-                (f.contractes || []).some(c =>
-                    (c.descripcion || '').toLowerCase().includes(s) ||
-                    (c.adjudicatario || '').toLowerCase().includes(s)
-                )
-            );
+            result = result.filter(f => matchesSearchQuery(
+                [
+                    ...(f.empreses || []),
+                    ...(f.contractes || []).flatMap(c => [c.descripcion, c.adjudicatario, c.codigo])
+                ],
+                analisiSearch
+            ));
         }
         result = [...result];
         switch (analisiSort) {
@@ -3297,12 +3326,10 @@ function App() {
     const concentracioFiltradaBase = useMemo(() => {
         let result = [...concentracio];
         if (analisiSearch.trim()) {
-            const s = analisiSearch.trim().toLowerCase();
-            result = result.filter(f =>
-                (f.sector || '').toLowerCase().includes(s) ||
-                (f.finestra_label || '').toLowerCase().includes(s) ||
-                (f.empreses || []).some(e => e.toLowerCase().includes(s))
-            );
+            result = result.filter(f => matchesSearchQuery(
+                [f.sector, f.finestra_label, ...(f.empreses || [])],
+                analisiSearch
+            ));
         }
         return result;
     }, [concentracio, analisiSearch]);
@@ -3371,16 +3398,15 @@ function App() {
             result = result.filter(f => f.nivell === riskFilter);
         }
         if (analisiSearch.trim()) {
-            const s = analisiSearch.trim().toLowerCase();
-            result = result.filter(f =>
-                (f.empresa || '').toLowerCase().includes(s) ||
-                (f.periode_electoral || '').toLowerCase().includes(s) ||
-                (f.motius || []).some(m => m.toLowerCase().includes(s)) ||
-                (f.contractes || []).some(c =>
-                    (c.descripcion || '').toLowerCase().includes(s) ||
-                    (c.adjudicatario || '').toLowerCase().includes(s)
-                )
-            );
+            result = result.filter(f => matchesSearchQuery(
+                [
+                    f.empresa,
+                    f.periode_electoral,
+                    ...(f.motius || []),
+                    ...(f.contractes || []).flatMap(c => [c.descripcion, c.adjudicatario, c.codigo])
+                ],
+                analisiSearch
+            ));
         }
         result = [...result];
         switch (analisiSort) {
@@ -3726,8 +3752,14 @@ function App() {
     };
 
     const renderSiteChrome = () => (
-        <div className="site-chrome site-chrome-light">
+        <div className={'site-chrome site-chrome-light' + (isMobileMenuOpen ? ' mobile-menu-open' : '')}>
             <div className="site-chrome-gradient" aria-hidden="true"></div>
+            {isMobileMenuOpen && (
+                <div
+                    className="mobile-menu-interaction-shield"
+                    aria-hidden="true"
+                />
+            )}
             <div className="site-chrome-brand" onClick={goToHome}>
                 <div className="home-logo" role="img" aria-label="Iguadata"></div>
             </div>
@@ -3739,8 +3771,10 @@ function App() {
                         aria-expanded={isMobileMenuOpen}
                         onClick={() => setIsMobileMenuOpen(prev => !prev)}
                     >
-                        <span>{navCurrentLabel}</span>
-                        <svg className="mobile-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
+                        <span className="mobile-nav-current-group">
+                            <span>{navCurrentLabel}</span>
+                            <svg className="mobile-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
+                        </span>
                     </button>
                     {renderNavTabs(true, false)}
                 </nav>
@@ -4400,26 +4434,34 @@ function App() {
 
             {activeTab === 'analisi' && !dataLoading && (
                 <>
-                    <div className="analisi-tabs-wrapper"><div className="analisi-tabs">
+                    <div className="analisi-tabs-wrapper">
+                        <div className="analisi-tabs" role="tablist" aria-label="Tipus d'anàlisi">
                         <button
                             className={'analisi-tab' + (analisiTab === 'fraccionament' ? ' active' : '')}
                             onClick={() => setAnalisiTab('fraccionament')}
+                            role="tab"
+                            aria-selected={analisiTab === 'fraccionament'}
                         >
                             Fraccionament
                         </button>
                         <button
                             className={'analisi-tab' + (analisiTab === 'monopoli' ? ' active' : '')}
                             onClick={() => setAnalisiTab('monopoli')}
+                            role="tab"
+                            aria-selected={analisiTab === 'monopoli'}
                         >
                             Concentració
                         </button>
                         <button
                             className={'analisi-tab' + (analisiTab === 'electoral' ? ' active' : '')}
                             onClick={() => setAnalisiTab('electoral')}
+                            role="tab"
+                            aria-selected={analisiTab === 'electoral'}
                         >
                             Electoralisme
                         </button>
-                    </div></div>
+                        </div>
+                    </div>
 
                     <div className="container analisi-page">
                         <h1 className="page-title">Anàlisi de contractes</h1>
