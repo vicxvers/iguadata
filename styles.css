@@ -1866,9 +1866,886 @@ body.home-scroll-surface::-webkit-scrollbar {
 }
 
 .metric-alertes {
-    --node-x: 50%;
+    --node-x: 52.25%;
     --node-y: 80%;
     animation-delay: -5.8s;
+}
+
+.home-scroll-story {
+    position: relative;
+    height: 1350dvh;
+}
+
+.home-scroll-story .home-hero {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    min-height: 100dvh;
+    display: block;
+    padding: 0;
+    isolation: isolate;
+}
+
+.home-intro-scene,
+.home-editorial-scene,
+.home-chapter {
+    position: absolute;
+    inset: 0;
+}
+
+.home-intro-scene {
+    z-index: 2;
+    display: grid;
+    place-items: center;
+}
+
+.home-editorial-scene {
+    z-index: 2;
+    width: min(1180px, calc(100% - 6rem));
+    margin: auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1.55fr) minmax(18rem, 0.75fr);
+    align-items: center;
+    gap: clamp(4rem, 8vw, 8rem);
+    padding: 6rem 0 4rem;
+    visibility: hidden;
+}
+
+.home-editorial-scene p {
+    margin: 0;
+    color: var(--surface);
+    font-family: var(--font-display);
+    font-weight: 400;
+    letter-spacing: var(--tracking-title);
+    opacity: 1;
+}
+
+.home-editorial-scene p em {
+    font-style: italic;
+    line-height: 1.1;
+}
+
+.home-editorial-lead {
+    max-width: 10.5ch;
+    font-size: clamp(3.65rem, 5.8vw, 5.8rem);
+    line-height: 0.95;
+}
+
+.home-editorial-argument {
+    display: grid;
+    align-content: center;
+    gap: clamp(2.75rem, 6vh, 4.75rem);
+}
+
+.home-editorial-argument > p {
+    opacity: 0;
+    font-family: var(--font-body);
+    font-size: clamp(1.15rem, 1.55vw, 1.5rem);
+    font-style: normal;
+    line-height: 1.35;
+    letter-spacing: normal;
+}
+
+.home-editorial-thesis,
+.home-editorial-turn {
+    max-width: 24ch;
+}
+
+.home-editorial-final {
+    max-width: 24ch;
+}
+
+.home-chapter {
+    z-index: 2;
+    width: min(1180px, calc(100% - 6rem));
+    margin: auto;
+    padding: 6rem 0 4rem;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.home-chapter h2 {
+    margin: 0;
+    color: var(--surface);
+    font-family: var(--font-display);
+    font-size: clamp(3.8rem, 6.6vw, 6.4rem);
+    font-weight: 400;
+    line-height: 0.94;
+    letter-spacing: var(--tracking-title);
+}
+
+.home-chapter h2 em {
+    font-style: italic;
+}
+
+.home-economic-scene {
+    display: grid;
+    grid-template-columns: minmax(16rem, 0.72fr) minmax(0, 1.28fr);
+    align-items: center;
+    gap: clamp(3rem, 7vw, 7rem);
+}
+
+.home-economic-heading {
+    align-self: start;
+    padding-top: clamp(4rem, 11vh, 7rem);
+}
+
+.home-economic-heading h2 {
+    max-width: 7ch;
+}
+
+.home-economic-heading p,
+.home-patterns-heading p {
+    max-width: 29rem;
+    margin: 1.5rem 0 0;
+    color: var(--text-muted-on-dark);
+    font-size: var(--text-lg);
+    line-height: 1.55;
+}
+
+.home-economic-bars {
+    display: grid;
+    align-content: center;
+}
+
+.home-economic-row {
+    --economic-scale: 1;
+    position: relative;
+    min-height: 5.75rem;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 2rem;
+    color: var(--surface);
+    text-decoration: none;
+    border-bottom: 1px solid color-mix(in srgb, var(--surface) 18%, transparent);
+    opacity: 0;
+}
+
+.home-economic-row::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    width: calc(var(--economic-scale) * 100%);
+    height: 1px;
+    background: color-mix(in srgb, var(--surface) 72%, transparent);
+    transform-origin: left center;
+}
+
+.home-economic-row span {
+    min-width: 0;
+    font-size: clamp(1.1rem, 1.8vw, 1.45rem);
+    line-height: 1.2;
+}
+
+.home-economic-row strong {
+    font-family: var(--font-display);
+    font-size: clamp(1.8rem, 3.2vw, 3rem);
+    font-weight: 400;
+    line-height: 1;
+    white-space: nowrap;
+}
+
+.home-patterns-scene {
+    display: grid;
+    grid-template-columns: minmax(0, 1.08fr) minmax(30rem, 0.92fr);
+    align-items: center;
+    gap: clamp(3rem, 7vw, 7rem);
+}
+
+.home-categories-scene {
+    display: grid;
+    grid-template-columns: minmax(0, 1.3fr) minmax(20rem, 0.7fr);
+    align-items: center;
+    gap: clamp(3rem, 6vw, 6rem);
+}
+
+.home-categories-cloud {
+    position: relative;
+    min-height: 38rem;
+}
+
+.home-category-word {
+    position: absolute;
+    display: grid;
+    gap: 0.65rem;
+    color: var(--surface);
+    text-decoration: none;
+    opacity: 0;
+}
+
+.home-category-word span {
+    max-width: 11ch;
+    font-family: var(--font-display);
+    font-size: clamp(1.65rem, calc(var(--category-scale) * 1.85rem), 4.8rem);
+    font-weight: 400;
+    line-height: 0.98;
+    letter-spacing: var(--tracking-title);
+}
+
+.home-category-word strong {
+    color: var(--text-muted-on-dark);
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    letter-spacing: 0.08em;
+}
+
+.home-category-word-1 {
+    left: 0;
+    top: 0;
+}
+
+.home-category-word-2 {
+    right: 4%;
+    top: 2rem;
+}
+
+.home-category-word-3 {
+    left: 38%;
+    top: 12.5rem;
+}
+
+.home-category-word-4 {
+    left: 0;
+    bottom: 1rem;
+}
+
+.home-category-word-5 {
+    right: 3%;
+    bottom: 4rem;
+}
+
+.home-category-word-6 {
+    left: 42%;
+    bottom: 0;
+}
+
+.home-categories-heading {
+    align-self: end;
+    padding-bottom: 2rem;
+}
+
+.home-categories-heading h2 {
+    max-width: 8ch;
+}
+
+.home-categories-heading p {
+    max-width: 25rem;
+    margin: 1.25rem 0 0;
+    color: var(--text-muted-on-dark);
+    font-size: var(--text-lg);
+    line-height: 1.55;
+}
+
+.home-patterns-heading h2 {
+    max-width: 10ch;
+}
+
+.home-risk-metrics {
+    display: grid;
+    align-content: center;
+}
+
+.home-risk-metric {
+    min-height: 8.5rem;
+    display: grid;
+    grid-template-columns: minmax(7rem, auto) 1fr;
+    align-items: baseline;
+    gap: clamp(1.5rem, 4vw, 4rem);
+    padding: 1.3rem 0;
+    color: var(--surface);
+    border-bottom: 1px solid color-mix(in srgb, var(--surface) 20%, transparent);
+    opacity: 0;
+}
+
+.home-risk-metric:first-child {
+    border-top: 1px solid color-mix(in srgb, var(--surface) 20%, transparent);
+}
+
+.home-risk-metric strong {
+    font-family: var(--font-display);
+    font-size: clamp(4rem, 7vw, 6.75rem);
+    font-weight: 400;
+    line-height: 0.8;
+    letter-spacing: var(--tracking-title);
+}
+
+.home-risk-metric span {
+    color: var(--text-muted-on-dark);
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.home-loop-scene {
+    display: grid;
+    place-items: center;
+}
+
+.home-loop-copy {
+    position: relative;
+    z-index: 2;
+    max-width: 920px;
+    text-align: center;
+    opacity: 0;
+}
+
+.home-loop-copy .home-title {
+    font-size: clamp(3rem, 7vw, 6.5rem);
+}
+
+.home-scroll-invitation {
+    position: absolute;
+    left: 50%;
+    bottom: 2rem;
+    z-index: 4;
+    width: 1.65rem;
+    height: 1.1rem;
+    color: var(--text-muted-on-dark);
+    transform: translateX(-50%);
+}
+
+.home-scroll-invitation svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    animation: homeChevronPulse 1.9s ease-in-out infinite;
+}
+
+@supports (animation-timeline: scroll()) {
+    .home-intro-scene {
+        animation: homeIntroScroll linear both;
+        animation-timeline: scroll(root block);
+        animation-range: 0% 11%;
+    }
+
+    .home-copy {
+        animation: homeHeroCopyOut linear both;
+        animation-timeline: scroll(root block);
+        animation-range: 2% 7.5%;
+    }
+
+    .home-scroll-invitation {
+        animation: homeHeroInvitationOut linear both;
+        animation-timeline: scroll(root block);
+        animation-range: 0% 4.5%;
+    }
+
+    .home-intro-scene .home-metric {
+        animation-duration: auto;
+        animation-timing-function: linear;
+        animation-fill-mode: both;
+        animation-iteration-count: 1;
+        animation-delay: 0s;
+        animation-timeline: scroll(root block);
+        animation-range: 2.5% 10%;
+    }
+
+    .home-intro-scene .metric-contractes {
+        animation-name: homeMetricScatterTopLeft;
+    }
+
+    .home-intro-scene .metric-import {
+        animation-name: homeMetricScatterTopRight;
+    }
+
+    .home-intro-scene .metric-empreses {
+        animation-name: homeMetricScatterBottomLeft;
+    }
+
+    .home-intro-scene .metric-persones {
+        animation-name: homeMetricScatterBottomRight;
+    }
+
+    .home-intro-scene .metric-alertes {
+        animation-name: homeMetricScatterBottom;
+    }
+
+    .home-editorial-scene {
+        animation: homeManifestTimeline linear both;
+        animation-timeline: scroll(root block);
+    }
+
+    .home-editorial-lead {
+        animation: homeManifestLeadTimeline linear both;
+        animation-timeline: scroll(root block);
+    }
+
+    .home-editorial-argument > .home-editorial-thesis {
+        animation: homeManifestThesisTimeline linear both;
+        animation-timeline: scroll(root block);
+    }
+
+    .home-editorial-argument > .home-editorial-turn {
+        animation: homeManifestTurnTimeline linear both;
+        animation-timeline: scroll(root block);
+    }
+
+    .home-editorial-argument > .home-editorial-final {
+        animation: homeManifestFinalTimeline linear both;
+        animation-timeline: scroll(root block);
+    }
+
+    .home-economic-scene {
+        animation: homeChapterPass linear both;
+        animation-timeline: scroll(root block);
+        animation-range: 37% 55%;
+    }
+
+    .home-economic-heading {
+        animation: homeChapterElement linear both;
+        animation-timeline: scroll(root block);
+        animation-range: 39% 46%;
+    }
+
+    .home-economic-row {
+        animation: homeChapterElement linear both;
+        animation-timeline: scroll(root block);
+    }
+
+    .home-economic-row:nth-child(1) {
+        animation-range: 41% 48%;
+    }
+
+    .home-economic-row:nth-child(2) {
+        animation-range: 42.5% 49.5%;
+    }
+
+    .home-economic-row:nth-child(3) {
+        animation-range: 44% 51%;
+    }
+
+    .home-economic-row:nth-child(4) {
+        animation-range: 45.5% 52.5%;
+    }
+
+    .home-economic-row:nth-child(5) {
+        animation-range: 47% 54%;
+    }
+
+    .home-categories-scene {
+        animation: homeChapterPass linear both;
+        animation-timeline: scroll(root block);
+        animation-range: 54% 71%;
+    }
+
+    .home-categories-heading {
+        animation: homeChapterElement linear both;
+        animation-timeline: scroll(root block);
+        animation-range: 56% 63%;
+    }
+
+    .home-category-word {
+        animation: homeChapterElement linear both;
+        animation-timeline: scroll(root block);
+    }
+
+    .home-category-word:nth-child(1) {
+        animation-range: 56% 62%;
+    }
+
+    .home-category-word:nth-child(2) {
+        animation-range: 57% 63%;
+    }
+
+    .home-category-word:nth-child(3) {
+        animation-range: 58% 64%;
+    }
+
+    .home-category-word:nth-child(4) {
+        animation-range: 59% 65%;
+    }
+
+    .home-category-word:nth-child(5) {
+        animation-range: 60% 66%;
+    }
+
+    .home-category-word:nth-child(6) {
+        animation-range: 61% 67%;
+    }
+
+    .home-patterns-scene {
+        animation: homeChapterPass linear both;
+        animation-timeline: scroll(root block);
+        animation-range: 70% 87%;
+    }
+
+    .home-patterns-heading {
+        animation: homeChapterElement linear both;
+        animation-timeline: scroll(root block);
+        animation-range: 72% 79%;
+    }
+
+    .home-risk-metric {
+        animation: homeChapterElement linear both;
+        animation-timeline: scroll(root block);
+    }
+
+    .home-risk-metric:nth-child(1) {
+        animation-range: 74% 80%;
+    }
+
+    .home-risk-metric:nth-child(2) {
+        animation-range: 76% 82%;
+    }
+
+    .home-risk-metric:nth-child(3) {
+        animation-range: 78% 84%;
+    }
+
+    .home-loop-scene {
+        animation: homeChapterFinal linear both;
+        animation-timeline: scroll(root block);
+        animation-range: 86% 96%;
+    }
+
+    .home-loop-copy {
+        animation: homeLoopElement linear both;
+        animation-timeline: scroll(root block);
+        animation-range: 88% 93%;
+    }
+}
+
+@keyframes homeIntroScroll {
+    from {
+        visibility: visible;
+    }
+
+    to {
+        visibility: hidden;
+    }
+}
+
+@keyframes homeHeroCopyOut {
+    from {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    to {
+        opacity: 0;
+        transform: scale(0.96);
+    }
+}
+
+@keyframes homeHeroInvitationOut {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes homeMetricScatterTopLeft {
+    from {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    to {
+        opacity: 0;
+        transform: translate(calc(-50% - 48vw), calc(-50% - 42vh)) scale(2.35);
+    }
+}
+
+@keyframes homeMetricScatterTopRight {
+    from {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    to {
+        opacity: 0;
+        transform: translate(calc(-50% + 48vw), calc(-50% - 42vh)) scale(2.35);
+    }
+}
+
+@keyframes homeMetricScatterBottomLeft {
+    from {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    to {
+        opacity: 0;
+        transform: translate(calc(-50% - 48vw), calc(-50% + 42vh)) scale(2.35);
+    }
+}
+
+@keyframes homeMetricScatterBottomRight {
+    from {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    to {
+        opacity: 0;
+        transform: translate(calc(-50% + 48vw), calc(-50% + 42vh)) scale(2.35);
+    }
+}
+
+@keyframes homeMetricScatterBottom {
+    from {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    to {
+        opacity: 0;
+        transform: translate(-50%, calc(-50% + 58vh)) scale(2.35);
+    }
+}
+
+@keyframes homeChevronPulse {
+    0%,
+    100% {
+        opacity: 0.28;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+@keyframes homeEditorialScene {
+    from {
+        visibility: hidden;
+    }
+
+    to {
+        visibility: visible;
+    }
+}
+
+@keyframes homeEditorialMessage {
+    0%,
+    12% {
+        opacity: 0;
+        transform: translateY(1.75rem);
+    }
+
+    28%,
+    72% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    88%,
+    100% {
+        opacity: 0;
+        transform: translateY(-1.75rem);
+    }
+}
+
+@keyframes homeEditorialFinalMessage {
+    0%,
+    18% {
+        opacity: 0;
+        transform: translateY(1.75rem);
+    }
+
+    36%,
+    72% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    90%,
+    100% {
+        opacity: 0;
+        transform: translateY(-1.75rem);
+    }
+}
+
+@keyframes homeManifestTimeline {
+    0%,
+    9% {
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(2rem);
+    }
+
+    11%,
+    35% {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+
+    38%,
+    100% {
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-2rem);
+    }
+}
+
+@keyframes homeManifestLeadTimeline {
+    0%,
+    11% {
+        opacity: 0;
+        transform: translateY(1.25rem);
+    }
+
+    15.5%,
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes homeManifestThesisTimeline {
+    0%,
+    17.5% {
+        opacity: 0;
+        transform: translateY(1.25rem);
+    }
+
+    22%,
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes homeManifestTurnTimeline {
+    0%,
+    24% {
+        opacity: 0;
+        transform: translateY(1.25rem);
+    }
+
+    28.5%,
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes homeManifestFinalTimeline {
+    0%,
+    30.5% {
+        opacity: 0;
+        transform: translateY(1.25rem);
+    }
+
+    35%,
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes homeChapterPass {
+    0% {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transform: translateY(2rem);
+    }
+
+    12%,
+    78% {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        transform: translateY(0);
+    }
+
+    100% {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transform: translateY(-2rem);
+    }
+}
+
+@keyframes homeChapterElement {
+    0%,
+    18% {
+        opacity: 0;
+        transform: translateY(1.4rem);
+    }
+
+    48%,
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes homeChapterFinal {
+    0% {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transform: translateY(2rem);
+    }
+
+    38%,
+    100% {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        transform: translateY(0);
+    }
+}
+
+@keyframes homeLoopElement {
+    from {
+        opacity: 0;
+        transform: scale(0.96);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@supports not (animation-timeline: scroll()) {
+    .home-scroll-story {
+        height: auto;
+    }
+
+    .home-scroll-story .home-hero {
+        position: relative;
+        min-height: 0;
+    }
+
+    .home-intro-scene,
+    .home-editorial-scene,
+    .home-chapter {
+        position: relative;
+        min-height: 100dvh;
+    }
+
+    .home-editorial-scene,
+    .home-chapter {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+    }
+
+    .home-editorial-scene p,
+    .home-economic-row,
+    .home-category-word,
+    .home-risk-metric,
+    .home-loop-copy {
+        position: relative;
+        opacity: 1;
+    }
+
+    .home-risk-metrics {
+        display: grid;
+    }
 }
 
 .home-landing {
@@ -2757,8 +3634,47 @@ body.home-scroll-surface::-webkit-scrollbar {
     .home-hero::before,
     .home-loading-screen::before,
     .home-metric,
-    .home-category-chip {
+    .home-category-chip,
+    .home-scroll-invitation svg {
         animation: none;
+    }
+
+    .home-scroll-story {
+        height: auto;
+    }
+
+    .home-scroll-story .home-hero {
+        position: relative;
+        min-height: 0;
+    }
+
+    .home-intro-scene,
+    .home-editorial-scene,
+    .home-chapter {
+        position: relative;
+        min-height: 100dvh;
+        animation: none;
+        transform: none;
+    }
+
+    .home-editorial-scene,
+    .home-chapter {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+    }
+
+    .home-editorial-scene p,
+    .home-economic-row,
+    .home-category-word,
+    .home-risk-metric,
+    .home-loop-copy {
+        position: relative;
+        opacity: 1;
+    }
+
+    .home-risk-metrics {
+        display: grid;
     }
 }
 
@@ -2774,6 +3690,35 @@ body.home-scroll-surface::-webkit-scrollbar {
 
     .home-metric-value {
         font-size: 2.35rem;
+    }
+
+    .home-editorial-scene {
+        width: min(100% - 3rem, 64rem);
+        grid-template-columns: minmax(0, 1.35fr) minmax(17rem, 0.65fr);
+        gap: 3.5rem;
+    }
+
+    .home-editorial-lead {
+        font-size: clamp(3.5rem, 7vw, 5.5rem);
+    }
+
+    .home-editorial-argument {
+        gap: 2.75rem;
+    }
+
+    .home-chapter {
+        width: min(100% - 3rem, 64rem);
+    }
+
+    .home-economic-scene,
+    .home-categories-scene,
+    .home-patterns-scene {
+        grid-template-columns: minmax(15rem, 0.72fr) minmax(0, 1.28fr);
+        gap: 3rem;
+    }
+
+    .home-categories-cloud {
+        min-height: 34rem;
     }
 
     .home-landing {
@@ -2953,12 +3898,126 @@ body.home-scroll-surface::-webkit-scrollbar {
         line-height: 0.88;
     }
 
+    .home-loop-copy .home-title {
+        font-size: clamp(4.35rem, 19vw, 5.35rem);
+    }
+
     .home-deck {
         display: none;
     }
 
     .home-metrics {
         display: none;
+    }
+
+    .home-editorial-scene {
+        width: min(100% - 2rem, 40rem);
+        grid-template-columns: 1fr;
+        align-content: center;
+        gap: 2.4rem;
+        padding: 5.5rem 0 2rem;
+    }
+
+    .home-editorial-lead {
+        max-width: 10ch;
+        font-size: clamp(2.8rem, 12vw, 4rem);
+    }
+
+    .home-editorial-argument {
+        gap: 1.35rem;
+        margin-left: clamp(2rem, 10vw, 4rem);
+    }
+
+    .home-editorial-argument > p {
+        max-width: 24ch;
+        font-size: clamp(1rem, 4.2vw, 1.2rem);
+        line-height: 1.35;
+    }
+
+    .home-chapter {
+        width: min(100% - 2rem, 40rem);
+        padding: 5.5rem 0 1.5rem;
+    }
+
+    .home-chapter h2 {
+        font-size: clamp(2.8rem, 12vw, 4rem);
+    }
+
+    .home-economic-scene,
+    .home-categories-scene,
+    .home-patterns-scene {
+        grid-template-columns: 1fr;
+        align-content: center;
+        gap: 1.75rem;
+    }
+
+    .home-economic-heading {
+        padding-top: 0;
+    }
+
+    .home-economic-heading h2,
+    .home-categories-heading h2,
+    .home-patterns-heading h2 {
+        max-width: 9ch;
+    }
+
+    .home-economic-heading p,
+    .home-categories-heading p,
+    .home-patterns-heading p {
+        margin-top: 0.8rem;
+        font-size: 0.95rem;
+    }
+
+    .home-economic-row {
+        min-height: 3.65rem;
+        gap: 1rem;
+    }
+
+    .home-economic-row span {
+        font-size: 0.95rem;
+    }
+
+    .home-economic-row strong {
+        font-size: 1.65rem;
+    }
+
+    .home-categories-cloud {
+        min-height: 23rem;
+    }
+
+    .home-category-word span {
+        font-size: clamp(1.5rem, calc(var(--category-scale) * 1.2rem), 3.2rem);
+    }
+
+    .home-category-word strong {
+        font-size: 0.68rem;
+    }
+
+    .home-category-word-3 {
+        top: 7.5rem;
+    }
+
+    .home-category-word-5 {
+        bottom: 2.5rem;
+    }
+
+    .home-risk-metric {
+        min-height: 5rem;
+        grid-template-columns: minmax(5rem, auto) 1fr;
+        gap: 1.25rem;
+        padding: 0.85rem 0;
+    }
+
+    .home-risk-metric strong {
+        font-size: clamp(3rem, 14vw, 4.25rem);
+    }
+
+    .home-risk-metric span {
+        font-size: 0.68rem;
+    }
+
+    .home-loop-copy {
+        width: min(100%, 25rem);
     }
 
     .home-landing {

@@ -3535,7 +3535,6 @@ function App() {
   const [personesSort, setPersonesSort] = useState('companies-desc');
   const [personesPage, setPersonesPage] = useState(1);
   const [personesExpanded, setPersonesExpanded] = useState(null);
-  const homeAtlasRef = useRef(null);
   const resetAllFilters = () => {
     setSearchTerm('');
     setDebouncedSearch('');
@@ -3777,6 +3776,14 @@ function App() {
   const alertesVisibleTotal = useMemo(() => fraudes.filter(f => f.nivell !== 'BAIX').length + concentracio.length + electoral.filter(f => f.nivell !== 'BAIX').length, [fraudes, concentracio, electoral]);
   const alertesMetricTotal = alertesVisibleTotal || summary?.stats?.num_alertes || 0;
   const alertesCount = useCountUp(alertesMetricTotal, 2000, !loading && stats);
+  const homeRiskCounts = useMemo(() => {
+    const levels = [...fraudes, ...concentracio, ...electoral].map(item => String(item.nivell || '').toUpperCase());
+    return {
+      alt: levels.filter(level => level === 'CRITIC' || level === 'ALT').length,
+      mitja: levels.filter(level => level === 'OBSERVACIO').length,
+      baix: levels.filter(level => level === 'BAIX').length
+    };
+  }, [fraudes, concentracio, electoral]);
   useEffect(() => {
     if (!summaryResolved) return;
     let cancelled = false;
@@ -4336,91 +4343,6 @@ function App() {
     }));
     return [...fraccionament, ...concentracioItems, ...electoralItems].filter(item => item.path && item.path.indexOf('undefined') === -1).sort((a, b) => (b.score || 0) - (a.score || 0))[0] || null;
   }, [fraudes, concentracio, electoral]);
-  useEffect(() => {
-    if (activeTab !== 'home' || loading) return;
-    const atlas = homeAtlasRef.current;
-    if (!atlas) return;
-    const sticky = atlas.querySelector('.home-atlas-sticky');
-    const track = atlas.querySelector('.home-atlas-track');
-    if (!sticky || !track) return;
-    let frameId = null;
-    const updateAtlas = () => {
-      frameId = null;
-      if (window.matchMedia('(max-width: 1024px)').matches) {
-        sticky.classList.remove('is-fixed', 'is-after');
-        atlas.style.setProperty('--atlas-progress', '0');
-        Array.from(track.children).forEach(panel => {
-          panel.style.removeProperty('--panel-opacity');
-          panel.style.removeProperty('--panel-visibility');
-          panel.style.removeProperty('--panel-brightness');
-          panel.style.removeProperty('--panel-glow-soft');
-          panel.style.removeProperty('--panel-glow-wide');
-          panel.style.removeProperty('--panel-glow-alpha');
-          panel.style.removeProperty('--panel-glow-blue-alpha');
-          panel.style.removeProperty('--panel-layer');
-          panel.inert = false;
-          panel.removeAttribute('aria-hidden');
-        });
-        return;
-      }
-      const atlasTop = atlas.getBoundingClientRect().top + window.scrollY;
-      const maxScroll = Math.max(atlas.offsetHeight - window.innerHeight, 1);
-      const raw = (window.scrollY - atlasTop) / maxScroll;
-      const progress = Math.max(0, Math.min(1, raw));
-      const isBefore = window.scrollY < atlasTop;
-      const isAfter = window.scrollY >= atlasTop + maxScroll;
-      sticky.classList.toggle('is-fixed', !isBefore && !isAfter);
-      sticky.classList.toggle('is-after', isAfter);
-      const panelCount = Math.max(track.children.length, 1);
-      const scaled = Math.min(progress * panelCount, panelCount - 0.0001);
-      const panelIndex = Math.floor(scaled);
-      const nextPanelIndex = Math.min(panelIndex + 1, panelCount - 1);
-      const local = scaled - panelIndex;
-      const transitionStart = 0.46;
-      const transitionEnd = 0.76;
-      const transitionBlend = local <= transitionStart ? 0 : local >= transitionEnd ? 1 : (() => {
-        const t = (local - transitionStart) / (transitionEnd - transitionStart);
-        return t * t * (3 - 2 * t);
-      })();
-      const blend = nextPanelIndex === panelIndex ? 0 : transitionBlend;
-      const glowEnvelope = Math.sin(Math.PI * blend);
-      const flicker = 0.72 + Math.abs(Math.sin(blend * Math.PI * 7)) * 0.28;
-      const glow = nextPanelIndex === panelIndex ? 0 : glowEnvelope * flicker;
-      const visiblePanel = blend < 0.5 ? panelIndex : nextPanelIndex;
-      Array.from(track.children).forEach((panel, index) => {
-        const opacity = index === panelIndex ? 1 - blend : index === nextPanelIndex ? blend : 0;
-        const panelGlow = opacity > 0.001 ? glow : 0;
-        panel.style.setProperty('--panel-opacity', opacity.toFixed(4));
-        panel.style.setProperty('--panel-visibility', opacity > 0.001 ? 'visible' : 'hidden');
-        panel.style.setProperty('--panel-brightness', (1 + panelGlow * 0.82).toFixed(4));
-        panel.style.setProperty('--panel-glow-soft', `${(12 + panelGlow * 46).toFixed(2)}px`);
-        panel.style.setProperty('--panel-glow-wide', `${(panelGlow * 96).toFixed(2)}px`);
-        panel.style.setProperty('--panel-glow-alpha', Math.min(panelGlow * 0.88, 0.88).toFixed(4));
-        panel.style.setProperty('--panel-glow-blue-alpha', Math.min(panelGlow * 0.68, 0.68).toFixed(4));
-        panel.style.setProperty('--panel-layer', index === visiblePanel ? '2' : '1');
-        panel.inert = index !== visiblePanel;
-        panel.setAttribute('aria-hidden', index === visiblePanel ? 'false' : 'true');
-      });
-      atlas.style.setProperty('--atlas-progress', progress.toFixed(4));
-    };
-    const requestUpdate = () => {
-      if (frameId !== null) return;
-      frameId = window.requestAnimationFrame(updateAtlas);
-    };
-    updateAtlas();
-    window.setTimeout(requestUpdate, 80);
-    window.setTimeout(requestUpdate, 500);
-    window.addEventListener('scroll', requestUpdate, {
-      passive: true
-    });
-    window.addEventListener('resize', requestUpdate);
-    return () => {
-      window.removeEventListener('scroll', requestUpdate);
-      window.removeEventListener('resize', requestUpdate);
-      if (frameId !== null) window.cancelAnimationFrame(frameId);
-      sticky.classList.remove('is-fixed', 'is-after');
-    };
-  }, [activeTab, loading, homeFeaturedAnalysis, homeTopSectors, homeTopCategories, homeMinorContractTrend, homeLatestContracts]);
   const renderHomeChrome = (interactive = true) => React.createElement("div", {
     className: "home-chrome"
   }, React.createElement("div", {
@@ -4520,6 +4442,175 @@ function App() {
     "aria-label": "Portada editorial Iguadata",
     "aria-hidden": !interactive
   }, React.createElement("div", {
+    className: "home-scroll-story"
+  }, React.createElement("div", {
+    className: "home-hero"
+  }, React.createElement("canvas", {
+    ref: homeCanvasRef,
+    className: "home-particles",
+    "aria-hidden": "true"
+  }), React.createElement("div", {
+    className: "home-hero-bottom-gradient",
+    "aria-hidden": "true"
+  }), React.createElement("div", {
+    className: "home-intro-scene"
+  }, React.createElement("div", {
+    className: "home-copy"
+  }, React.createElement("h1", {
+    className: "home-title"
+  }, "Tot \xE9s ", React.createElement("em", null, "p\xFAblic")), React.createElement("p", {
+    className: "home-deck"
+  }, "Contractes, empreses, persones, imports i an\xE0lisi en una cartografia oberta de la contractaci\xF3 p\xFAblica de l'Ajuntament d'Igualada.")), React.createElement("div", {
+    className: "home-metrics",
+    "aria-label": "Indicadors principals"
+  }, React.createElement("a", {
+    href: buildRouteUrl('/contractes'),
+    className: "home-metric metric-contractes",
+    onClick: interactive ? event => handleHomeMetricLinkClick(event, () => {
+      handleNavigation('buscador');
+      setIsMobileMenuOpen(false);
+    }) : event => event.preventDefault(),
+    tabIndex: interactive && !isMobile() ? 0 : -1
+  }, React.createElement("span", {
+    className: "home-metric-value"
+  }, contractCount.toLocaleString('ca-ES')), React.createElement("span", {
+    className: "home-metric-label"
+  }, "Contractes")), React.createElement("a", {
+    href: buildRouteUrl('/contractes'),
+    className: "home-metric metric-import",
+    onClick: interactive ? event => handleHomeMetricLinkClick(event, () => {
+      handleNavigation('buscador');
+      setIsMobileMenuOpen(false);
+    }) : event => event.preventDefault(),
+    tabIndex: interactive && !isMobile() ? 0 : -1
+  }, React.createElement("span", {
+    className: "home-metric-value"
+  }, (importTotalTenths / 10).toLocaleString('ca-ES', {
+    minimumFractionDigits: 1,
+    maximumFractionDigits: 1
+  }), "M \u20AC"), React.createElement("span", {
+    className: "home-metric-label"
+  }, "Imports")), React.createElement("a", {
+    href: buildRouteUrl('/empreses'),
+    className: "home-metric metric-empreses",
+    onClick: interactive ? event => handleHomeMetricLinkClick(event, () => {
+      handleNavigation('empreses');
+      setIsMobileMenuOpen(false);
+    }) : event => event.preventDefault(),
+    tabIndex: interactive && !isMobile() ? 0 : -1
+  }, React.createElement("span", {
+    className: "home-metric-value"
+  }, empresasCount.toLocaleString('ca-ES')), React.createElement("span", {
+    className: "home-metric-label"
+  }, "Empreses")), React.createElement("a", {
+    href: buildRouteUrl('/persones'),
+    className: "home-metric metric-persones",
+    onClick: interactive ? event => handleHomeMetricLinkClick(event, () => {
+      handleNavigation('persones');
+      setIsMobileMenuOpen(false);
+    }) : event => event.preventDefault(),
+    tabIndex: interactive && !isMobile() ? 0 : -1
+  }, React.createElement("span", {
+    className: "home-metric-value"
+  }, personesCount.toLocaleString('ca-ES')), React.createElement("span", {
+    className: "home-metric-label"
+  }, "Persones")), React.createElement("a", {
+    href: buildRouteUrl('/analisi'),
+    className: "home-metric metric-alertes",
+    onClick: interactive ? event => handleHomeMetricLinkClick(event, handleAnalisiNavClick) : event => event.preventDefault(),
+    tabIndex: interactive && !isMobile() ? 0 : -1
+  }, React.createElement("span", {
+    className: "home-metric-value"
+  }, alertesCount.toLocaleString('ca-ES')), React.createElement("span", {
+    className: "home-metric-label"
+  }, "Alertes"))), React.createElement("div", {
+    className: "home-scroll-invitation",
+    "aria-hidden": "true"
+  }, React.createElement("svg", {
+    width: "24",
+    height: "24",
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: "1.5",
+    strokeLinecap: "round",
+    strokeLinejoin: "round"
+  }, React.createElement("path", {
+    d: "m6 9 6 6 6-6"
+  })))), React.createElement("section", {
+    className: "home-editorial-scene",
+    "aria-label": "Manifest Iguadata"
+  }, React.createElement("p", {
+    className: "home-editorial-lead"
+  }, "Durant anys hem acceptat una idea que semblava ", React.createElement("em", null, "indiscutible.")), React.createElement("div", {
+    className: "home-editorial-argument"
+  }, React.createElement("p", {
+    className: "home-editorial-thesis"
+  }, "Si les administracions publiquen dades, la ciutadania pot controlar millor el poder."), React.createElement("p", {
+    className: "home-editorial-turn"
+  }, "El problema \xE9s que no sempre \xE9s aix\xED."), React.createElement("p", {
+    className: "home-editorial-final"
+  }, "Fins ara."))), React.createElement("section", {
+    className: "home-chapter home-economic-scene",
+    "aria-labelledby": "home-economic-title"
+  }, React.createElement("div", {
+    className: "home-economic-heading"
+  }, React.createElement("h2", {
+    id: "home-economic-title"
+  }, "On van els ", React.createElement("em", null, "diners?")), React.createElement("p", null, "Els sectors amb m\xE9s despesa de l'Ajuntament d'Igualada.")), React.createElement("div", {
+    className: "home-economic-bars",
+    "aria-label": "Sectors amb m\xE9s import adjudicat"
+  }, homeTopSectors.map(item => React.createElement("div", {
+    key: item.label,
+    className: "home-economic-row",
+    style: {
+      '--economic-scale': item.share
+    }
+  }, React.createElement("span", null, item.label), React.createElement("strong", null, formatCompactCurrency(item.amount)))))), React.createElement("section", {
+    className: "home-chapter home-categories-scene",
+    "aria-labelledby": "home-categories-title"
+  }, React.createElement("div", {
+    className: "home-categories-cloud",
+    "aria-label": "Categories amb m\xE9s import adjudicat"
+  }, homeTopCategories.map(item => React.createElement("div", {
+    key: item.label,
+    className: `home-category-word home-category-word-${Math.min(item.rank, 6)}`,
+    style: {
+      '--category-scale': 0.82 + item.share * 2.4
+    }
+  }, React.createElement("span", null, item.label), React.createElement("strong", null, formatCompactCurrency(item.amount))))), React.createElement("div", {
+    className: "home-categories-heading"
+  }, React.createElement("h2", {
+    id: "home-categories-title"
+  }, "Qu\xE8 es ", React.createElement("em", null, "compra"), "?"), React.createElement("p", null, "Els serveis m\xE9s contractats de l'Ajuntament d'Igualada."))), React.createElement("section", {
+    className: "home-chapter home-patterns-scene",
+    "aria-labelledby": "home-patterns-title"
+  }, React.createElement("div", {
+    className: "home-patterns-heading"
+  }, React.createElement("h2", {
+    id: "home-patterns-title"
+  }, "I quan les dades es connecten, apareixen ", React.createElement("em", null, "patrons."))), React.createElement("div", {
+    className: "home-risk-metrics",
+    "aria-label": "Alertes per nivell de risc"
+  }, React.createElement("div", {
+    className: "home-risk-metric"
+  }, React.createElement("strong", null, homeRiskCounts.alt.toLocaleString('ca-ES')), React.createElement("span", null, "Risc alt")), React.createElement("div", {
+    className: "home-risk-metric"
+  }, React.createElement("strong", null, homeRiskCounts.mitja.toLocaleString('ca-ES')), React.createElement("span", null, "Risc mitj\xE0")), React.createElement("div", {
+    className: "home-risk-metric"
+  }, React.createElement("strong", null, homeRiskCounts.baix.toLocaleString('ca-ES')), React.createElement("span", null, "Risc baix")))), React.createElement("section", {
+    className: "home-chapter home-loop-scene",
+    "aria-label": "Tot \xE9s p\xFAblic"
+  }, React.createElement("div", {
+    className: "home-loop-copy"
+  }, React.createElement("h2", {
+    className: "home-title"
+  }, "Tot \xE9s ", React.createElement("em", null, "p\xFAblic")))))));
+  const renderLegacyHomeSection = (extraClassName = '', interactive = true) => React.createElement("section", {
+    className: `home${extraClassName ? ` ${extraClassName}` : ''}`,
+    "aria-label": "Portada editorial Iguadata",
+    "aria-hidden": !interactive
+  }, React.createElement("div", {
     className: "home-hero"
   }, React.createElement("canvas", {
     ref: homeCanvasRef,
@@ -4603,7 +4694,6 @@ function App() {
     "aria-label": "Dades destacades"
   }, React.createElement("div", {
     className: "home-atlas",
-    ref: homeAtlasRef,
     style: {
       '--atlas-panels': homeFeaturedAnalysis ? 6 : 5
     }

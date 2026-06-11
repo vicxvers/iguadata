@@ -2772,8 +2772,6 @@ function App() {
     const [personesSort, setPersonesSort] = useState('companies-desc');
     const [personesPage, setPersonesPage] = useState(1);
     const [personesExpanded, setPersonesExpanded] = useState(null);
-    const homeAtlasRef = useRef(null);
-
     const resetAllFilters = () => {
         // Contractes
         setSearchTerm(''); setDebouncedSearch('');
@@ -3016,6 +3014,16 @@ function App() {
         , [fraudes, concentracio, electoral]);
     const alertesMetricTotal = alertesVisibleTotal || summary?.stats?.num_alertes || 0;
     const alertesCount = useCountUp(alertesMetricTotal, 2000, !loading && stats);
+    const homeRiskCounts = useMemo(() => {
+        const levels = [...fraudes, ...concentracio, ...electoral]
+            .map(item => String(item.nivell || '').toUpperCase());
+
+        return {
+            alt: levels.filter(level => level === 'CRITIC' || level === 'ALT').length,
+            mitja: levels.filter(level => level === 'OBSERVACIO').length,
+            baix: levels.filter(level => level === 'BAIX').length,
+        };
+    }, [fraudes, concentracio, electoral]);
 
     useEffect(() => {
         if (!summaryResolved) return;
@@ -3635,100 +3643,6 @@ function App() {
             .sort((a, b) => (b.score || 0) - (a.score || 0))[0] || null;
     }, [fraudes, concentracio, electoral]);
 
-    useEffect(() => {
-        if (activeTab !== 'home' || loading) return;
-        const atlas = homeAtlasRef.current;
-        if (!atlas) return;
-        const sticky = atlas.querySelector('.home-atlas-sticky');
-        const track = atlas.querySelector('.home-atlas-track');
-        if (!sticky || !track) return;
-        let frameId = null;
-        const updateAtlas = () => {
-            frameId = null;
-            if (window.matchMedia('(max-width: 1024px)').matches) {
-                sticky.classList.remove('is-fixed', 'is-after');
-                atlas.style.setProperty('--atlas-progress', '0');
-                Array.from(track.children).forEach(panel => {
-                    panel.style.removeProperty('--panel-opacity');
-                    panel.style.removeProperty('--panel-visibility');
-                    panel.style.removeProperty('--panel-brightness');
-                    panel.style.removeProperty('--panel-glow-soft');
-                    panel.style.removeProperty('--panel-glow-wide');
-                    panel.style.removeProperty('--panel-glow-alpha');
-                    panel.style.removeProperty('--panel-glow-blue-alpha');
-                    panel.style.removeProperty('--panel-layer');
-                    panel.inert = false;
-                    panel.removeAttribute('aria-hidden');
-                });
-                return;
-            }
-            const atlasTop = atlas.getBoundingClientRect().top + window.scrollY;
-            const maxScroll = Math.max(atlas.offsetHeight - window.innerHeight, 1);
-            const raw = (window.scrollY - atlasTop) / maxScroll;
-            const progress = Math.max(0, Math.min(1, raw));
-            const isBefore = window.scrollY < atlasTop;
-            const isAfter = window.scrollY >= atlasTop + maxScroll;
-            sticky.classList.toggle('is-fixed', !isBefore && !isAfter);
-            sticky.classList.toggle('is-after', isAfter);
-            const panelCount = Math.max(track.children.length, 1);
-            const scaled = Math.min(progress * panelCount, panelCount - 0.0001);
-            const panelIndex = Math.floor(scaled);
-            const nextPanelIndex = Math.min(panelIndex + 1, panelCount - 1);
-            const local = scaled - panelIndex;
-            const transitionStart = 0.46;
-            const transitionEnd = 0.76;
-            const transitionBlend = local <= transitionStart
-                ? 0
-                : local >= transitionEnd
-                    ? 1
-                    : (() => {
-                        const t = (local - transitionStart) / (transitionEnd - transitionStart);
-                        return t * t * (3 - 2 * t);
-                    })();
-            const blend = nextPanelIndex === panelIndex ? 0 : transitionBlend;
-            const glowEnvelope = Math.sin(Math.PI * blend);
-            const flicker = 0.72 + Math.abs(Math.sin(blend * Math.PI * 7)) * 0.28;
-            const glow = nextPanelIndex === panelIndex ? 0 : glowEnvelope * flicker;
-            const visiblePanel = blend < 0.5 ? panelIndex : nextPanelIndex;
-
-            Array.from(track.children).forEach((panel, index) => {
-                const opacity = index === panelIndex
-                    ? 1 - blend
-                    : index === nextPanelIndex
-                        ? blend
-                        : 0;
-                const panelGlow = opacity > 0.001 ? glow : 0;
-                panel.style.setProperty('--panel-opacity', opacity.toFixed(4));
-                panel.style.setProperty('--panel-visibility', opacity > 0.001 ? 'visible' : 'hidden');
-                panel.style.setProperty('--panel-brightness', (1 + panelGlow * 0.82).toFixed(4));
-                panel.style.setProperty('--panel-glow-soft', `${(12 + panelGlow * 46).toFixed(2)}px`);
-                panel.style.setProperty('--panel-glow-wide', `${(panelGlow * 96).toFixed(2)}px`);
-                panel.style.setProperty('--panel-glow-alpha', Math.min(panelGlow * 0.88, 0.88).toFixed(4));
-                panel.style.setProperty('--panel-glow-blue-alpha', Math.min(panelGlow * 0.68, 0.68).toFixed(4));
-                panel.style.setProperty('--panel-layer', index === visiblePanel ? '2' : '1');
-                panel.inert = index !== visiblePanel;
-                panel.setAttribute('aria-hidden', index === visiblePanel ? 'false' : 'true');
-            });
-
-            atlas.style.setProperty('--atlas-progress', progress.toFixed(4));
-        };
-        const requestUpdate = () => {
-            if (frameId !== null) return;
-            frameId = window.requestAnimationFrame(updateAtlas);
-        };
-        updateAtlas();
-        window.setTimeout(requestUpdate, 80);
-        window.setTimeout(requestUpdate, 500);
-        window.addEventListener('scroll', requestUpdate, { passive: true });
-        window.addEventListener('resize', requestUpdate);
-        return () => {
-            window.removeEventListener('scroll', requestUpdate);
-            window.removeEventListener('resize', requestUpdate);
-            if (frameId !== null) window.cancelAnimationFrame(frameId);
-            sticky.classList.remove('is-fixed', 'is-after');
-        };
-    }, [activeTab, loading, homeFeaturedAnalysis, homeTopSectors, homeTopCategories, homeMinorContractTrend, homeLatestContracts]);
-
     const renderHomeChrome = (interactive = true) => (
         <div className="home-chrome">
             <div className="home-chrome-gradient is-visible" aria-hidden="true"></div>
@@ -3784,6 +3698,128 @@ function App() {
 
     const renderHomeSection = (extraClassName = '', interactive = true) => (
         <section className={`home${extraClassName ? ` ${extraClassName}` : ''}`} aria-label="Portada editorial Iguadata" aria-hidden={!interactive}>
+            <div className="home-scroll-story">
+                <div className="home-hero">
+                    <canvas ref={homeCanvasRef} className="home-particles" aria-hidden="true"></canvas>
+                    <div className="home-hero-bottom-gradient" aria-hidden="true"></div>
+
+                    <div className="home-intro-scene">
+                        <div className="home-copy">
+                            <h1 className="home-title">Tot és <em>públic</em></h1>
+                            <p className="home-deck">
+                                Contractes, empreses, persones, imports i anàlisi en una cartografia oberta de la contractació pública de l'Ajuntament d'Igualada.
+                            </p>
+                        </div>
+
+                        <div className="home-metrics" aria-label="Indicadors principals">
+                            <a href={buildRouteUrl('/contractes')} className="home-metric metric-contractes" onClick={interactive ? ((event) => handleHomeMetricLinkClick(event, () => { handleNavigation('buscador'); setIsMobileMenuOpen(false); })) : ((event) => event.preventDefault())} tabIndex={interactive && !isMobile() ? 0 : -1}>
+                                <span className="home-metric-value">{contractCount.toLocaleString('ca-ES')}</span>
+                                <span className="home-metric-label">Contractes</span>
+                            </a>
+                            <a href={buildRouteUrl('/contractes')} className="home-metric metric-import" onClick={interactive ? ((event) => handleHomeMetricLinkClick(event, () => { handleNavigation('buscador'); setIsMobileMenuOpen(false); })) : ((event) => event.preventDefault())} tabIndex={interactive && !isMobile() ? 0 : -1}>
+                                <span className="home-metric-value">{(importTotalTenths / 10).toLocaleString('ca-ES', { minimumFractionDigits: 1, maximumFractionDigits: 1 })}M €</span>
+                                <span className="home-metric-label">Imports</span>
+                            </a>
+                            <a href={buildRouteUrl('/empreses')} className="home-metric metric-empreses" onClick={interactive ? ((event) => handleHomeMetricLinkClick(event, () => { handleNavigation('empreses'); setIsMobileMenuOpen(false); })) : ((event) => event.preventDefault())} tabIndex={interactive && !isMobile() ? 0 : -1}>
+                                <span className="home-metric-value">{empresasCount.toLocaleString('ca-ES')}</span>
+                                <span className="home-metric-label">Empreses</span>
+                            </a>
+                            <a href={buildRouteUrl('/persones')} className="home-metric metric-persones" onClick={interactive ? ((event) => handleHomeMetricLinkClick(event, () => { handleNavigation('persones'); setIsMobileMenuOpen(false); })) : ((event) => event.preventDefault())} tabIndex={interactive && !isMobile() ? 0 : -1}>
+                                <span className="home-metric-value">{personesCount.toLocaleString('ca-ES')}</span>
+                                <span className="home-metric-label">Persones</span>
+                            </a>
+                            <a href={buildRouteUrl('/analisi')} className="home-metric metric-alertes" onClick={interactive ? ((event) => handleHomeMetricLinkClick(event, handleAnalisiNavClick)) : ((event) => event.preventDefault())} tabIndex={interactive && !isMobile() ? 0 : -1}>
+                                <span className="home-metric-value">{alertesCount.toLocaleString('ca-ES')}</span>
+                                <span className="home-metric-label">Alertes</span>
+                            </a>
+                        </div>
+
+                        <div className="home-scroll-invitation" aria-hidden="true">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                                <path d="m6 9 6 6 6-6" />
+                            </svg>
+                        </div>
+                    </div>
+
+                    <section className="home-editorial-scene" aria-label="Manifest Iguadata">
+                        <p className="home-editorial-lead">Durant anys hem acceptat una idea que semblava <em>indiscutible.</em></p>
+                        <div className="home-editorial-argument">
+                            <p className="home-editorial-thesis">Si les administracions publiquen dades, la ciutadania pot controlar millor el poder.</p>
+                            <p className="home-editorial-turn">El problema és que no sempre és així.</p>
+                            <p className="home-editorial-final">Fins ara.</p>
+                        </div>
+                    </section>
+
+                    <section className="home-chapter home-economic-scene" aria-labelledby="home-economic-title">
+                        <div className="home-economic-heading">
+                            <h2 id="home-economic-title">On van els <em>diners?</em></h2>
+                            <p>Els sectors amb més despesa de l'Ajuntament d'Igualada.</p>
+                        </div>
+                        <div className="home-economic-bars" aria-label="Sectors amb més import adjudicat">
+                            {homeTopSectors.map(item => (
+                                <div
+                                    key={item.label}
+                                    className="home-economic-row"
+                                    style={{ '--economic-scale': item.share }}
+                                >
+                                    <span>{item.label}</span>
+                                    <strong>{formatCompactCurrency(item.amount)}</strong>
+                                </div>
+                            ))}
+                        </div>
+                    </section>
+
+                    <section className="home-chapter home-categories-scene" aria-labelledby="home-categories-title">
+                        <div className="home-categories-cloud" aria-label="Categories amb més import adjudicat">
+                            {homeTopCategories.map(item => (
+                                <div
+                                    key={item.label}
+                                    className={`home-category-word home-category-word-${Math.min(item.rank, 6)}`}
+                                    style={{ '--category-scale': 0.82 + item.share * 2.4 }}
+                                >
+                                    <span>{item.label}</span>
+                                    <strong>{formatCompactCurrency(item.amount)}</strong>
+                                </div>
+                            ))}
+                        </div>
+                        <div className="home-categories-heading">
+                            <h2 id="home-categories-title">Què es <em>compra</em>?</h2>
+                            <p>Els serveis més contractats de l'Ajuntament d'Igualada.</p>
+                        </div>
+                    </section>
+
+                    <section className="home-chapter home-patterns-scene" aria-labelledby="home-patterns-title">
+                        <div className="home-patterns-heading">
+                            <h2 id="home-patterns-title">I quan les dades es connecten, apareixen <em>patrons.</em></h2>
+                        </div>
+                        <div className="home-risk-metrics" aria-label="Alertes per nivell de risc">
+                            <div className="home-risk-metric">
+                                <strong>{homeRiskCounts.alt.toLocaleString('ca-ES')}</strong>
+                                <span>Risc alt</span>
+                            </div>
+                            <div className="home-risk-metric">
+                                <strong>{homeRiskCounts.mitja.toLocaleString('ca-ES')}</strong>
+                                <span>Risc mitjà</span>
+                            </div>
+                            <div className="home-risk-metric">
+                                <strong>{homeRiskCounts.baix.toLocaleString('ca-ES')}</strong>
+                                <span>Risc baix</span>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section className="home-chapter home-loop-scene" aria-label="Tot és públic">
+                        <div className="home-loop-copy">
+                            <h2 className="home-title">Tot és <em>públic</em></h2>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </section>
+    );
+
+    const renderLegacyHomeSection = (extraClassName = '', interactive = true) => (
+        <section className={`home${extraClassName ? ` ${extraClassName}` : ''}`} aria-label="Portada editorial Iguadata" aria-hidden={!interactive}>
             <div className="home-hero">
             <canvas ref={homeCanvasRef} className="home-particles" aria-hidden="true"></canvas>
             <div className="home-hero-bottom-gradient" aria-hidden="true"></div>
@@ -3819,7 +3855,7 @@ function App() {
             </div>
 
             <div id="dades" className="home-landing" aria-label="Dades destacades">
-                <div className="home-atlas" ref={homeAtlasRef} style={{ '--atlas-panels': homeFeaturedAnalysis ? 6 : 5 }}>
+                <div className="home-atlas" style={{ '--atlas-panels': homeFeaturedAnalysis ? 6 : 5 }}>
                     <div className="home-atlas-sticky">
                         <div className="home-atlas-rail" aria-hidden="true">
                             {Array.from({ length: homeFeaturedAnalysis ? 6 : 5 }, (_, index) => (
