@@ -8,25 +8,39 @@ const {
 } = React;
 function useCountUp(target, duration, active) {
   const [count, setCount] = useState(0);
+  const countRef = useRef(0);
+  const hasActivatedRef = useRef(false);
+  const isActive = Boolean(active);
   useEffect(() => {
-    if (!active) {
-      setCount(0);
+    if (!isActive) {
+      if (!hasActivatedRef.current) {
+        countRef.current = 0;
+        setCount(0);
+      }
       return;
     }
-    let elapsed = 0;
-    const totalSteps = duration / 16;
-    const step = target / totalSteps;
-    const timer = setInterval(() => {
-      elapsed += step;
-      if (elapsed >= target) {
-        setCount(Math.floor(target));
-        clearInterval(timer);
+    hasActivatedRef.current = true;
+    const nextTarget = Number(target) || 0;
+    const startValue = countRef.current;
+    if (startValue === nextTarget) return;
+    const startedAt = performance.now();
+    let frameId;
+    const tick = now => {
+      const progress = Math.min(1, (now - startedAt) / duration);
+      const current = startValue + (nextTarget - startValue) * progress;
+      const displayed = nextTarget >= startValue ? Math.floor(current) : Math.ceil(current);
+      countRef.current = displayed;
+      setCount(displayed);
+      if (progress < 1) {
+        frameId = requestAnimationFrame(tick);
       } else {
-        setCount(Math.floor(elapsed));
+        countRef.current = nextTarget;
+        setCount(nextTarget);
       }
-    }, 16);
-    return () => clearInterval(timer);
-  }, [target, duration, active]);
+    };
+    frameId = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(frameId);
+  }, [target, duration, isActive]);
   return count;
 }
 function formatCurrency(amount) {
@@ -3640,10 +3654,6 @@ function App() {
   };
   const handleHomeMetricLinkClick = (event, navigate) => {
     if (!isPlainLeftClick(event)) return;
-    if (isMobile()) {
-      event.preventDefault();
-      return;
-    }
     event.preventDefault();
     if (homeRouteTransition || homeMetricTransition) return;
     const rect = event.currentTarget.getBoundingClientRect();
@@ -3777,13 +3787,16 @@ function App() {
   const alertesMetricTotal = alertesVisibleTotal || summary?.stats?.num_alertes || 0;
   const alertesCount = useCountUp(alertesMetricTotal, 2000, !loading && stats);
   const homeRiskCounts = useMemo(() => {
+    if (!fraudes.length && !concentracio.length && !electoral.length && summary?.home?.risk_counts) {
+      return summary.home.risk_counts;
+    }
     const levels = [...fraudes, ...concentracio, ...electoral].map(item => String(item.nivell || '').toUpperCase());
     return {
-      alt: levels.filter(level => level === 'CRITIC' || level === 'ALT').length,
-      mitja: levels.filter(level => level === 'OBSERVACIO').length,
-      baix: levels.filter(level => level === 'BAIX').length
+      alt: levels.filter(level => level === 'CRITIC').length,
+      mitja: levels.filter(level => level === 'ALT').length,
+      baix: levels.filter(level => level === 'OBSERVACIO' || level === 'BAIX').length
     };
-  }, [fraudes, concentracio, electoral]);
+  }, [fraudes, concentracio, electoral, summary]);
   useEffect(() => {
     if (!summaryResolved) return;
     let cancelled = false;
@@ -4234,6 +4247,15 @@ function App() {
   const activeAnalisiFiltersCount = (analisiSearch.trim() ? 1 : 0) + (riskFilter !== 'TOTS' ? 1 : 0) + (analisiSort !== 'risk-desc' ? 1 : 0);
   const activeFiltersCount = [yearFilter, typeFilter, procedureFilter, dateStart, dateEnd, sortBy !== 'date-desc' ? sortBy : ''].filter(Boolean).length;
   const homeTopSectors = useMemo(() => {
+    if (!empreses.length && summary?.home?.top_sectors) {
+      const rows = summary.home.top_sectors;
+      const max = rows[0]?.amount || 1;
+      return rows.map((row, index) => ({
+        ...row,
+        rank: index + 1,
+        share: Math.max(0.08, row.amount / max)
+      }));
+    }
     const totals = new Map();
     empreses.forEach(empresa => {
       const sector = empresa.sector || 'Sense classificar';
@@ -4251,8 +4273,17 @@ function App() {
       rank: index + 1,
       share: Math.max(0.08, row.amount / max)
     }));
-  }, [empreses]);
+  }, [empreses, summary]);
   const homeTopCategories = useMemo(() => {
+    if (!empreses.length && summary?.home?.top_categories) {
+      const rows = summary.home.top_categories;
+      const total = rows.reduce((sum, row) => sum + row.amount, 0) || 1;
+      return rows.map((row, index) => ({
+        ...row,
+        rank: index + 1,
+        share: row.amount / total
+      }));
+    }
     const totals = new Map();
     empreses.forEach(empresa => {
       const categoria = empresa.categoria || 'Sense classificar';
@@ -4270,7 +4301,7 @@ function App() {
       rank: index + 1,
       share: row.amount / total
     }));
-  }, [empreses]);
+  }, [empreses, summary]);
   const homeMinorContractTrend = useMemo(() => {
     const years = new Map();
     const currentYear = new Date().getFullYear();
@@ -4470,7 +4501,7 @@ function App() {
       handleNavigation('buscador');
       setIsMobileMenuOpen(false);
     }) : event => event.preventDefault(),
-    tabIndex: interactive && !isMobile() ? 0 : -1
+    tabIndex: interactive ? 0 : -1
   }, React.createElement("span", {
     className: "home-metric-value"
   }, contractCount.toLocaleString('ca-ES')), React.createElement("span", {
@@ -4482,7 +4513,7 @@ function App() {
       handleNavigation('buscador');
       setIsMobileMenuOpen(false);
     }) : event => event.preventDefault(),
-    tabIndex: interactive && !isMobile() ? 0 : -1
+    tabIndex: interactive ? 0 : -1
   }, React.createElement("span", {
     className: "home-metric-value"
   }, (importTotalTenths / 10).toLocaleString('ca-ES', {
@@ -4497,7 +4528,7 @@ function App() {
       handleNavigation('empreses');
       setIsMobileMenuOpen(false);
     }) : event => event.preventDefault(),
-    tabIndex: interactive && !isMobile() ? 0 : -1
+    tabIndex: interactive ? 0 : -1
   }, React.createElement("span", {
     className: "home-metric-value"
   }, empresasCount.toLocaleString('ca-ES')), React.createElement("span", {
@@ -4509,7 +4540,7 @@ function App() {
       handleNavigation('persones');
       setIsMobileMenuOpen(false);
     }) : event => event.preventDefault(),
-    tabIndex: interactive && !isMobile() ? 0 : -1
+    tabIndex: interactive ? 0 : -1
   }, React.createElement("span", {
     className: "home-metric-value"
   }, personesCount.toLocaleString('ca-ES')), React.createElement("span", {
@@ -4518,7 +4549,7 @@ function App() {
     href: buildRouteUrl('/analisi'),
     className: "home-metric metric-alertes",
     onClick: interactive ? event => handleHomeMetricLinkClick(event, handleAnalisiNavClick) : event => event.preventDefault(),
-    tabIndex: interactive && !isMobile() ? 0 : -1
+    tabIndex: interactive ? 0 : -1
   }, React.createElement("span", {
     className: "home-metric-value"
   }, alertesCount.toLocaleString('ca-ES')), React.createElement("span", {
@@ -4538,19 +4569,6 @@ function App() {
   }, React.createElement("path", {
     d: "m6 9 6 6 6-6"
   })))), React.createElement("section", {
-    className: "home-editorial-scene",
-    "aria-label": "Manifest Iguadata"
-  }, React.createElement("p", {
-    className: "home-editorial-lead"
-  }, "Durant anys hem acceptat una idea que semblava ", React.createElement("em", null, "indiscutible.")), React.createElement("div", {
-    className: "home-editorial-argument"
-  }, React.createElement("p", {
-    className: "home-editorial-thesis"
-  }, "Si les administracions publiquen dades, la ciutadania pot controlar millor el poder."), React.createElement("p", {
-    className: "home-editorial-turn"
-  }, "El problema \xE9s que no sempre \xE9s aix\xED."), React.createElement("p", {
-    className: "home-editorial-final"
-  }, "Fins ara."))), React.createElement("section", {
     className: "home-chapter home-economic-scene",
     "aria-labelledby": "home-economic-title"
   }, React.createElement("div", {
@@ -4600,12 +4618,13 @@ function App() {
     className: "home-risk-metric"
   }, React.createElement("strong", null, homeRiskCounts.baix.toLocaleString('ca-ES')), React.createElement("span", null, "Risc baix")))), React.createElement("section", {
     className: "home-chapter home-loop-scene",
-    "aria-label": "Tot \xE9s p\xFAblic"
+    "aria-labelledby": "home-loop-title"
   }, React.createElement("div", {
     className: "home-loop-copy"
   }, React.createElement("h2", {
-    className: "home-title"
-  }, "Tot \xE9s ", React.createElement("em", null, "p\xFAblic")))))));
+    id: "home-loop-title",
+    className: "home-loop-title"
+  }, "El projecte de transpar\xE8ncia ", React.createElement("em", null, "d'Igualada")))))));
   const renderLegacyHomeSection = (extraClassName = '', interactive = true) => React.createElement("section", {
     className: `home${extraClassName ? ` ${extraClassName}` : ''}`,
     "aria-label": "Portada editorial Iguadata",

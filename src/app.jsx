@@ -3,18 +3,45 @@ const { useState, useMemo, useEffect, useCallback, useRef } = React;
 /* ---- useCountUp ------------------------------------------------- */
 function useCountUp(target, duration, active) {
     const [count, setCount] = useState(0);
+    const countRef = useRef(0);
+    const hasActivatedRef = useRef(false);
+    const isActive = Boolean(active);
+
     useEffect(() => {
-        if (!active) { setCount(0); return; }
-        let elapsed = 0;
-        const totalSteps = duration / 16;
-        const step = target / totalSteps;
-        const timer = setInterval(() => {
-            elapsed += step;
-            if (elapsed >= target) { setCount(Math.floor(target)); clearInterval(timer); }
-            else { setCount(Math.floor(elapsed)); }
-        }, 16);
-        return () => clearInterval(timer);
-    }, [target, duration, active]);
+        if (!isActive) {
+            if (!hasActivatedRef.current) {
+                countRef.current = 0;
+                setCount(0);
+            }
+            return;
+        }
+
+        hasActivatedRef.current = true;
+        const nextTarget = Number(target) || 0;
+        const startValue = countRef.current;
+        if (startValue === nextTarget) return;
+
+        const startedAt = performance.now();
+        let frameId;
+        const tick = (now) => {
+            const progress = Math.min(1, (now - startedAt) / duration);
+            const current = startValue + (nextTarget - startValue) * progress;
+            const displayed = nextTarget >= startValue ? Math.floor(current) : Math.ceil(current);
+            countRef.current = displayed;
+            setCount(displayed);
+
+            if (progress < 1) {
+                frameId = requestAnimationFrame(tick);
+            } else {
+                countRef.current = nextTarget;
+                setCount(nextTarget);
+            }
+        };
+
+        frameId = requestAnimationFrame(tick);
+        return () => cancelAnimationFrame(frameId);
+    }, [target, duration, isActive]);
+
     return count;
 }
 
@@ -2874,10 +2901,6 @@ function App() {
 
     const handleHomeMetricLinkClick = (event, navigate) => {
         if (!isPlainLeftClick(event)) return;
-        if (isMobile()) {
-            event.preventDefault();
-            return;
-        }
         event.preventDefault();
         if (homeRouteTransition || homeMetricTransition) return;
         const rect = event.currentTarget.getBoundingClientRect();
@@ -3015,15 +3038,18 @@ function App() {
     const alertesMetricTotal = alertesVisibleTotal || summary?.stats?.num_alertes || 0;
     const alertesCount = useCountUp(alertesMetricTotal, 2000, !loading && stats);
     const homeRiskCounts = useMemo(() => {
+        if (!fraudes.length && !concentracio.length && !electoral.length && summary?.home?.risk_counts) {
+            return summary.home.risk_counts;
+        }
         const levels = [...fraudes, ...concentracio, ...electoral]
             .map(item => String(item.nivell || '').toUpperCase());
 
         return {
-            alt: levels.filter(level => level === 'CRITIC' || level === 'ALT').length,
-            mitja: levels.filter(level => level === 'OBSERVACIO').length,
-            baix: levels.filter(level => level === 'BAIX').length,
+            alt: levels.filter(level => level === 'CRITIC').length,
+            mitja: levels.filter(level => level === 'ALT').length,
+            baix: levels.filter(level => level === 'OBSERVACIO' || level === 'BAIX').length,
         };
-    }, [fraudes, concentracio, electoral]);
+    }, [fraudes, concentracio, electoral, summary]);
 
     useEffect(() => {
         if (!summaryResolved) return;
@@ -3522,6 +3548,15 @@ function App() {
     ].filter(Boolean).length;
 
     const homeTopSectors = useMemo(() => {
+        if (!empreses.length && summary?.home?.top_sectors) {
+            const rows = summary.home.top_sectors;
+            const max = rows[0]?.amount || 1;
+            return rows.map((row, index) => ({
+                ...row,
+                rank: index + 1,
+                share: Math.max(0.08, row.amount / max)
+            }));
+        }
         const totals = new Map();
         empreses.forEach(empresa => {
             const sector = empresa.sector || 'Sense classificar';
@@ -3538,9 +3573,18 @@ function App() {
             rank: index + 1,
             share: Math.max(0.08, row.amount / max)
         }));
-    }, [empreses]);
+    }, [empreses, summary]);
 
     const homeTopCategories = useMemo(() => {
+        if (!empreses.length && summary?.home?.top_categories) {
+            const rows = summary.home.top_categories;
+            const total = rows.reduce((sum, row) => sum + row.amount, 0) || 1;
+            return rows.map((row, index) => ({
+                ...row,
+                rank: index + 1,
+                share: row.amount / total
+            }));
+        }
         const totals = new Map();
         empreses.forEach(empresa => {
             const categoria = empresa.categoria || 'Sense classificar';
@@ -3557,7 +3601,7 @@ function App() {
             rank: index + 1,
             share: row.amount / total
         }));
-    }, [empreses]);
+    }, [empreses, summary]);
 
     const homeMinorContractTrend = useMemo(() => {
         const years = new Map();
@@ -3712,23 +3756,23 @@ function App() {
                         </div>
 
                         <div className="home-metrics" aria-label="Indicadors principals">
-                            <a href={buildRouteUrl('/contractes')} className="home-metric metric-contractes" onClick={interactive ? ((event) => handleHomeMetricLinkClick(event, () => { handleNavigation('buscador'); setIsMobileMenuOpen(false); })) : ((event) => event.preventDefault())} tabIndex={interactive && !isMobile() ? 0 : -1}>
+                            <a href={buildRouteUrl('/contractes')} className="home-metric metric-contractes" onClick={interactive ? ((event) => handleHomeMetricLinkClick(event, () => { handleNavigation('buscador'); setIsMobileMenuOpen(false); })) : ((event) => event.preventDefault())} tabIndex={interactive ? 0 : -1}>
                                 <span className="home-metric-value">{contractCount.toLocaleString('ca-ES')}</span>
                                 <span className="home-metric-label">Contractes</span>
                             </a>
-                            <a href={buildRouteUrl('/contractes')} className="home-metric metric-import" onClick={interactive ? ((event) => handleHomeMetricLinkClick(event, () => { handleNavigation('buscador'); setIsMobileMenuOpen(false); })) : ((event) => event.preventDefault())} tabIndex={interactive && !isMobile() ? 0 : -1}>
+                            <a href={buildRouteUrl('/contractes')} className="home-metric metric-import" onClick={interactive ? ((event) => handleHomeMetricLinkClick(event, () => { handleNavigation('buscador'); setIsMobileMenuOpen(false); })) : ((event) => event.preventDefault())} tabIndex={interactive ? 0 : -1}>
                                 <span className="home-metric-value">{(importTotalTenths / 10).toLocaleString('ca-ES', { minimumFractionDigits: 1, maximumFractionDigits: 1 })}M €</span>
                                 <span className="home-metric-label">Imports</span>
                             </a>
-                            <a href={buildRouteUrl('/empreses')} className="home-metric metric-empreses" onClick={interactive ? ((event) => handleHomeMetricLinkClick(event, () => { handleNavigation('empreses'); setIsMobileMenuOpen(false); })) : ((event) => event.preventDefault())} tabIndex={interactive && !isMobile() ? 0 : -1}>
+                            <a href={buildRouteUrl('/empreses')} className="home-metric metric-empreses" onClick={interactive ? ((event) => handleHomeMetricLinkClick(event, () => { handleNavigation('empreses'); setIsMobileMenuOpen(false); })) : ((event) => event.preventDefault())} tabIndex={interactive ? 0 : -1}>
                                 <span className="home-metric-value">{empresasCount.toLocaleString('ca-ES')}</span>
                                 <span className="home-metric-label">Empreses</span>
                             </a>
-                            <a href={buildRouteUrl('/persones')} className="home-metric metric-persones" onClick={interactive ? ((event) => handleHomeMetricLinkClick(event, () => { handleNavigation('persones'); setIsMobileMenuOpen(false); })) : ((event) => event.preventDefault())} tabIndex={interactive && !isMobile() ? 0 : -1}>
+                            <a href={buildRouteUrl('/persones')} className="home-metric metric-persones" onClick={interactive ? ((event) => handleHomeMetricLinkClick(event, () => { handleNavigation('persones'); setIsMobileMenuOpen(false); })) : ((event) => event.preventDefault())} tabIndex={interactive ? 0 : -1}>
                                 <span className="home-metric-value">{personesCount.toLocaleString('ca-ES')}</span>
                                 <span className="home-metric-label">Persones</span>
                             </a>
-                            <a href={buildRouteUrl('/analisi')} className="home-metric metric-alertes" onClick={interactive ? ((event) => handleHomeMetricLinkClick(event, handleAnalisiNavClick)) : ((event) => event.preventDefault())} tabIndex={interactive && !isMobile() ? 0 : -1}>
+                            <a href={buildRouteUrl('/analisi')} className="home-metric metric-alertes" onClick={interactive ? ((event) => handleHomeMetricLinkClick(event, handleAnalisiNavClick)) : ((event) => event.preventDefault())} tabIndex={interactive ? 0 : -1}>
                                 <span className="home-metric-value">{alertesCount.toLocaleString('ca-ES')}</span>
                                 <span className="home-metric-label">Alertes</span>
                             </a>
@@ -3740,15 +3784,6 @@ function App() {
                             </svg>
                         </div>
                     </div>
-
-                    <section className="home-editorial-scene" aria-label="Manifest Iguadata">
-                        <p className="home-editorial-lead">Durant anys hem acceptat una idea que semblava <em>indiscutible.</em></p>
-                        <div className="home-editorial-argument">
-                            <p className="home-editorial-thesis">Si les administracions publiquen dades, la ciutadania pot controlar millor el poder.</p>
-                            <p className="home-editorial-turn">El problema és que no sempre és així.</p>
-                            <p className="home-editorial-final">Fins ara.</p>
-                        </div>
-                    </section>
 
                     <section className="home-chapter home-economic-scene" aria-labelledby="home-economic-title">
                         <div className="home-economic-heading">
@@ -3808,9 +3843,9 @@ function App() {
                         </div>
                     </section>
 
-                    <section className="home-chapter home-loop-scene" aria-label="Tot és públic">
+                    <section className="home-chapter home-loop-scene" aria-labelledby="home-loop-title">
                         <div className="home-loop-copy">
-                            <h2 className="home-title">Tot és <em>públic</em></h2>
+                            <h2 id="home-loop-title" className="home-loop-title">El projecte de transparència <em>d'Igualada</em></h2>
                         </div>
                     </section>
                 </div>

@@ -1751,7 +1751,7 @@ body.home-scroll-surface::-webkit-scrollbar {
     text-decoration: none;
     pointer-events: auto;
     transform: translate(-50%, -50%);
-    animation: homeFloat 10s ease-in-out infinite;
+    animation: homeFloat 12s ease-in-out var(--float-delay, 0s) infinite;
     transition: color 0.22s, opacity 0.22s, transform 0.22s;
     will-change: transform, translate;
 }
@@ -1850,30 +1850,30 @@ body.home-scroll-surface::-webkit-scrollbar {
 .metric-import {
     --node-x: 78%;
     --node-y: 29%;
-    animation-delay: -2.2s;
+    --float-delay: -2.2s;
 }
 
 .metric-empreses {
     --node-x: 22%;
     --node-y: 67%;
-    animation-delay: -4.4s;
+    --float-delay: -4.4s;
 }
 
 .metric-persones {
     --node-x: 78%;
     --node-y: 68%;
-    animation-delay: -1.2s;
+    --float-delay: -1.2s;
 }
 
 .metric-alertes {
     --node-x: 52.25%;
     --node-y: 80%;
-    animation-delay: -5.8s;
+    --float-delay: -5.8s;
 }
 
 .home-scroll-story {
     position: relative;
-    height: 1350dvh;
+    height: 1000dvh;
 }
 
 .home-scroll-story .home-hero {
@@ -1887,7 +1887,6 @@ body.home-scroll-surface::-webkit-scrollbar {
 }
 
 .home-intro-scene,
-.home-editorial-scene,
 .home-chapter {
     position: absolute;
     inset: 0;
@@ -1897,62 +1896,6 @@ body.home-scroll-surface::-webkit-scrollbar {
     z-index: 2;
     display: grid;
     place-items: center;
-}
-
-.home-editorial-scene {
-    z-index: 2;
-    width: min(1180px, calc(100% - 6rem));
-    margin: auto;
-    display: grid;
-    grid-template-columns: minmax(0, 1.55fr) minmax(18rem, 0.75fr);
-    align-items: center;
-    gap: clamp(4rem, 8vw, 8rem);
-    padding: 6rem 0 4rem;
-    visibility: hidden;
-}
-
-.home-editorial-scene p {
-    margin: 0;
-    color: var(--surface);
-    font-family: var(--font-display);
-    font-weight: 400;
-    letter-spacing: var(--tracking-title);
-    opacity: 1;
-}
-
-.home-editorial-scene p em {
-    font-style: italic;
-    line-height: 1.1;
-}
-
-.home-editorial-lead {
-    max-width: 10.5ch;
-    font-size: clamp(3.65rem, 5.8vw, 5.8rem);
-    line-height: 0.95;
-}
-
-.home-editorial-argument {
-    display: grid;
-    align-content: center;
-    gap: clamp(2.75rem, 6vh, 4.75rem);
-}
-
-.home-editorial-argument > p {
-    opacity: 0;
-    font-family: var(--font-body);
-    font-size: clamp(1.15rem, 1.55vw, 1.5rem);
-    font-style: normal;
-    line-height: 1.35;
-    letter-spacing: normal;
-}
-
-.home-editorial-thesis,
-.home-editorial-turn {
-    max-width: 24ch;
-}
-
-.home-editorial-final {
-    max-width: 24ch;
 }
 
 .home-chapter {
@@ -2146,23 +2089,29 @@ body.home-scroll-surface::-webkit-scrollbar {
 
 .home-risk-metrics {
     display: grid;
-    align-content: center;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: center;
+    gap: clamp(1rem, 3vw, 3rem);
+    min-height: min(58vh, 34rem);
 }
 
 .home-risk-metric {
-    min-height: 8.5rem;
     display: grid;
-    grid-template-columns: minmax(7rem, auto) 1fr;
-    align-items: baseline;
-    gap: clamp(1.5rem, 4vw, 4rem);
-    padding: 1.3rem 0;
+    gap: 0.8rem;
     color: var(--surface);
-    border-bottom: 1px solid color-mix(in srgb, var(--surface) 20%, transparent);
     opacity: 0;
 }
 
-.home-risk-metric:first-child {
-    border-top: 1px solid color-mix(in srgb, var(--surface) 20%, transparent);
+.home-risk-metric:nth-child(1) {
+    align-self: start;
+}
+
+.home-risk-metric:nth-child(2) {
+    align-self: center;
+}
+
+.home-risk-metric:nth-child(3) {
+    align-self: end;
 }
 
 .home-risk-metric strong {
@@ -2190,13 +2139,28 @@ body.home-scroll-surface::-webkit-scrollbar {
 .home-loop-copy {
     position: relative;
     z-index: 2;
-    max-width: 920px;
+    width: min(100%, 1000px);
+    display: grid;
+    justify-items: center;
+    gap: clamp(2rem, 4vw, 3rem);
     text-align: center;
     opacity: 0;
 }
 
-.home-loop-copy .home-title {
+.home-loop-title {
+    max-width: 14ch;
+    margin: 0;
+    color: var(--surface);
+    font-family: var(--font-display);
     font-size: clamp(3rem, 7vw, 6.5rem);
+    font-weight: 400;
+    line-height: 0.94;
+    letter-spacing: var(--tracking-title);
+    text-wrap: balance;
+}
+
+.home-loop-title em {
+    font-style: italic;
 }
 
 .home-scroll-invitation {
@@ -2221,86 +2185,61 @@ body.home-scroll-surface::-webkit-scrollbar {
     .home-intro-scene {
         animation: homeIntroScroll linear both;
         animation-timeline: scroll(root block);
-        animation-range: 0% 11%;
+        animation-range: 0% 14%;
     }
 
     .home-copy {
         animation: homeHeroCopyOut linear both;
         animation-timeline: scroll(root block);
-        animation-range: 2% 7.5%;
+        animation-range: 2.5% 10%;
     }
 
     .home-scroll-invitation {
         animation: homeHeroInvitationOut linear both;
         animation-timeline: scroll(root block);
-        animation-range: 0% 4.5%;
+        animation-range: 0% 5%;
     }
 
     .home-intro-scene .home-metric {
-        animation-duration: auto;
-        animation-timing-function: linear;
-        animation-fill-mode: both;
-        animation-iteration-count: 1;
-        animation-delay: 0s;
-        animation-timeline: scroll(root block);
-        animation-range: 2.5% 10%;
+        animation-duration: auto, 12s;
+        animation-timing-function: linear, ease-in-out;
+        animation-fill-mode: both, both;
+        animation-iteration-count: 1, infinite;
+        animation-delay: 0s, var(--float-delay, 0s);
+        animation-timeline: scroll(root block), auto;
+        animation-range: 3% 13%, normal;
     }
 
     .home-intro-scene .metric-contractes {
-        animation-name: homeMetricScatterTopLeft;
+        animation-name: homeMetricScatterTopLeft, homeFloat;
     }
 
     .home-intro-scene .metric-import {
-        animation-name: homeMetricScatterTopRight;
+        animation-name: homeMetricScatterTopRight, homeFloat;
     }
 
     .home-intro-scene .metric-empreses {
-        animation-name: homeMetricScatterBottomLeft;
+        animation-name: homeMetricScatterBottomLeft, homeFloat;
     }
 
     .home-intro-scene .metric-persones {
-        animation-name: homeMetricScatterBottomRight;
+        animation-name: homeMetricScatterBottomRight, homeFloat;
     }
 
     .home-intro-scene .metric-alertes {
-        animation-name: homeMetricScatterBottom;
-    }
-
-    .home-editorial-scene {
-        animation: homeManifestTimeline linear both;
-        animation-timeline: scroll(root block);
-    }
-
-    .home-editorial-lead {
-        animation: homeManifestLeadTimeline linear both;
-        animation-timeline: scroll(root block);
-    }
-
-    .home-editorial-argument > .home-editorial-thesis {
-        animation: homeManifestThesisTimeline linear both;
-        animation-timeline: scroll(root block);
-    }
-
-    .home-editorial-argument > .home-editorial-turn {
-        animation: homeManifestTurnTimeline linear both;
-        animation-timeline: scroll(root block);
-    }
-
-    .home-editorial-argument > .home-editorial-final {
-        animation: homeManifestFinalTimeline linear both;
-        animation-timeline: scroll(root block);
+        animation-name: homeMetricScatterBottom, homeFloat;
     }
 
     .home-economic-scene {
         animation: homeChapterPass linear both;
         animation-timeline: scroll(root block);
-        animation-range: 37% 55%;
+        animation-range: 11% 38%;
     }
 
     .home-economic-heading {
         animation: homeChapterElement linear both;
         animation-timeline: scroll(root block);
-        animation-range: 39% 46%;
+        animation-range: 13% 24%;
     }
 
     .home-economic-row {
@@ -2309,35 +2248,35 @@ body.home-scroll-surface::-webkit-scrollbar {
     }
 
     .home-economic-row:nth-child(1) {
-        animation-range: 41% 48%;
+        animation-range: 16% 27%;
     }
 
     .home-economic-row:nth-child(2) {
-        animation-range: 42.5% 49.5%;
+        animation-range: 18% 29%;
     }
 
     .home-economic-row:nth-child(3) {
-        animation-range: 44% 51%;
+        animation-range: 20% 31%;
     }
 
     .home-economic-row:nth-child(4) {
-        animation-range: 45.5% 52.5%;
+        animation-range: 22% 33%;
     }
 
     .home-economic-row:nth-child(5) {
-        animation-range: 47% 54%;
+        animation-range: 24% 35%;
     }
 
     .home-categories-scene {
         animation: homeChapterPass linear both;
         animation-timeline: scroll(root block);
-        animation-range: 54% 71%;
+        animation-range: 36% 62%;
     }
 
     .home-categories-heading {
         animation: homeChapterElement linear both;
         animation-timeline: scroll(root block);
-        animation-range: 56% 63%;
+        animation-range: 38% 49%;
     }
 
     .home-category-word {
@@ -2346,39 +2285,39 @@ body.home-scroll-surface::-webkit-scrollbar {
     }
 
     .home-category-word:nth-child(1) {
-        animation-range: 56% 62%;
+        animation-range: 38% 47%;
     }
 
     .home-category-word:nth-child(2) {
-        animation-range: 57% 63%;
+        animation-range: 40% 49%;
     }
 
     .home-category-word:nth-child(3) {
-        animation-range: 58% 64%;
+        animation-range: 42% 51%;
     }
 
     .home-category-word:nth-child(4) {
-        animation-range: 59% 65%;
+        animation-range: 44% 53%;
     }
 
     .home-category-word:nth-child(5) {
-        animation-range: 60% 66%;
+        animation-range: 46% 55%;
     }
 
     .home-category-word:nth-child(6) {
-        animation-range: 61% 67%;
+        animation-range: 48% 57%;
     }
 
     .home-patterns-scene {
         animation: homeChapterPass linear both;
         animation-timeline: scroll(root block);
-        animation-range: 70% 87%;
+        animation-range: 60% 85%;
     }
 
     .home-patterns-heading {
         animation: homeChapterElement linear both;
         animation-timeline: scroll(root block);
-        animation-range: 72% 79%;
+        animation-range: 62% 73%;
     }
 
     .home-risk-metric {
@@ -2387,27 +2326,27 @@ body.home-scroll-surface::-webkit-scrollbar {
     }
 
     .home-risk-metric:nth-child(1) {
-        animation-range: 74% 80%;
+        animation-range: 65% 74%;
     }
 
     .home-risk-metric:nth-child(2) {
-        animation-range: 76% 82%;
+        animation-range: 68% 77%;
     }
 
     .home-risk-metric:nth-child(3) {
-        animation-range: 78% 84%;
+        animation-range: 71% 80%;
     }
 
     .home-loop-scene {
         animation: homeChapterFinal linear both;
         animation-timeline: scroll(root block);
-        animation-range: 86% 96%;
+        animation-range: 83% 97%;
     }
 
     .home-loop-copy {
         animation: homeLoopElement linear both;
         animation-timeline: scroll(root block);
-        animation-range: 88% 93%;
+        animation-range: 86% 92%;
     }
 }
 
@@ -2564,85 +2503,6 @@ body.home-scroll-surface::-webkit-scrollbar {
     }
 }
 
-@keyframes homeManifestTimeline {
-    0%,
-    9% {
-        opacity: 0;
-        visibility: hidden;
-        transform: translateY(2rem);
-    }
-
-    11%,
-    35% {
-        opacity: 1;
-        visibility: visible;
-        transform: translateY(0);
-    }
-
-    38%,
-    100% {
-        opacity: 0;
-        visibility: hidden;
-        transform: translateY(-2rem);
-    }
-}
-
-@keyframes homeManifestLeadTimeline {
-    0%,
-    11% {
-        opacity: 0;
-        transform: translateY(1.25rem);
-    }
-
-    15.5%,
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes homeManifestThesisTimeline {
-    0%,
-    17.5% {
-        opacity: 0;
-        transform: translateY(1.25rem);
-    }
-
-    22%,
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes homeManifestTurnTimeline {
-    0%,
-    24% {
-        opacity: 0;
-        transform: translateY(1.25rem);
-    }
-
-    28.5%,
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes homeManifestFinalTimeline {
-    0%,
-    30.5% {
-        opacity: 0;
-        transform: translateY(1.25rem);
-    }
-
-    35%,
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
 @keyframes homeChapterPass {
     0% {
         opacity: 0;
@@ -2721,20 +2581,17 @@ body.home-scroll-surface::-webkit-scrollbar {
     }
 
     .home-intro-scene,
-    .home-editorial-scene,
     .home-chapter {
         position: relative;
         min-height: 100dvh;
     }
 
-    .home-editorial-scene,
     .home-chapter {
         opacity: 1;
         visibility: visible;
         pointer-events: auto;
     }
 
-    .home-editorial-scene p,
     .home-economic-row,
     .home-category-word,
     .home-risk-metric,
@@ -3545,6 +3402,32 @@ body.home-scroll-surface::-webkit-scrollbar {
     }
 }
 
+@keyframes homeMetricExpandMobile {
+    from {
+        opacity: 0.96;
+        background: color-mix(in srgb, var(--surface) 18%, var(--navy));
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    to {
+        opacity: 1;
+        background: var(--navy);
+        transform: translate(-50%, -50%) scale(220);
+    }
+}
+
+@keyframes homeMetricRevealMobile {
+    from {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(220);
+    }
+
+    to {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(220);
+    }
+}
+
 @keyframes homeDrift {
     from {
         transform: translate3d(0, 0, 0);
@@ -3617,11 +3500,11 @@ body.home-scroll-surface::-webkit-scrollbar {
     }
 
     33% {
-        translate: 8px -10px;
+        translate: 3px -4px;
     }
 
     66% {
-        translate: -6px 6px;
+        translate: -2px 3px;
     }
 
     100% {
@@ -3649,7 +3532,6 @@ body.home-scroll-surface::-webkit-scrollbar {
     }
 
     .home-intro-scene,
-    .home-editorial-scene,
     .home-chapter {
         position: relative;
         min-height: 100dvh;
@@ -3657,14 +3539,12 @@ body.home-scroll-surface::-webkit-scrollbar {
         transform: none;
     }
 
-    .home-editorial-scene,
     .home-chapter {
         opacity: 1;
         visibility: visible;
         pointer-events: auto;
     }
 
-    .home-editorial-scene p,
     .home-economic-row,
     .home-category-word,
     .home-risk-metric,
@@ -3690,20 +3570,6 @@ body.home-scroll-surface::-webkit-scrollbar {
 
     .home-metric-value {
         font-size: 2.35rem;
-    }
-
-    .home-editorial-scene {
-        width: min(100% - 3rem, 64rem);
-        grid-template-columns: minmax(0, 1.35fr) minmax(17rem, 0.65fr);
-        gap: 3.5rem;
-    }
-
-    .home-editorial-lead {
-        font-size: clamp(3.5rem, 7vw, 5.5rem);
-    }
-
-    .home-editorial-argument {
-        gap: 2.75rem;
     }
 
     .home-chapter {
@@ -3888,18 +3754,14 @@ body.home-scroll-surface::-webkit-scrollbar {
     }
 
     .home-brand {
-        top: 1.75rem;
-        width: 6rem;
-        height: 2rem;
+        top: 1.5rem;
+        width: 5.5rem;
+        height: 1.85rem;
     }
 
     .home-title {
-        font-size: clamp(4.35rem, 19vw, 5.35rem);
+        font-size: clamp(4.1rem, 18vw, 4.9rem);
         line-height: 0.88;
-    }
-
-    .home-loop-copy .home-title {
-        font-size: clamp(4.35rem, 19vw, 5.35rem);
     }
 
     .home-deck {
@@ -3907,40 +3769,91 @@ body.home-scroll-surface::-webkit-scrollbar {
     }
 
     .home-metrics {
-        display: none;
+        display: block;
     }
 
-    .home-editorial-scene {
-        width: min(100% - 2rem, 40rem);
-        grid-template-columns: 1fr;
-        align-content: center;
-        gap: 2.4rem;
-        padding: 5.5rem 0 2rem;
+    .home-intro-scene .home-metric {
+        width: 8.4rem;
+        min-height: 4.25rem;
+        gap: 0.3rem;
+        padding: 0.55rem;
     }
 
-    .home-editorial-lead {
-        max-width: 10ch;
-        font-size: clamp(2.8rem, 12vw, 4rem);
+    .home-metric:hover,
+    .home-metric:active {
+        transform: translate(-50%, -50%);
     }
 
-    .home-editorial-argument {
-        gap: 1.35rem;
-        margin-left: clamp(2rem, 10vw, 4rem);
+    .home-metric:hover::before {
+        width: 0.6rem;
+        height: 0.6rem;
+        border-color: color-mix(in srgb, var(--surface) 42%, transparent);
+        background: color-mix(in srgb, var(--surface) 18%, transparent);
+        box-shadow: 0 0 28px color-mix(in srgb, var(--surface) 22%, transparent);
     }
 
-    .home-editorial-argument > p {
-        max-width: 24ch;
-        font-size: clamp(1rem, 4.2vw, 1.2rem);
-        line-height: 1.35;
+    .home-metric-value {
+        font-size: clamp(1.85rem, 8.5vw, 2.35rem);
+    }
+
+    .home-metric-label {
+        font-size: 0.58rem;
+        letter-spacing: 0.12em;
+    }
+
+    .home-intro-scene .metric-contractes {
+        --node-x: 20%;
+        --node-y: 30%;
+        --float-delay: -0.8s;
+    }
+
+    .home-intro-scene .metric-import {
+        --node-x: 78%;
+        --node-y: 25%;
+        --float-delay: -3.2s;
+    }
+
+    .home-intro-scene .metric-empreses {
+        --node-x: 18%;
+        --node-y: 69%;
+        --float-delay: -5.1s;
+    }
+
+    .home-intro-scene .metric-persones {
+        --node-x: 79%;
+        --node-y: 64%;
+        --float-delay: -1.9s;
+    }
+
+    .home-intro-scene .metric-alertes {
+        --node-x: 52%;
+        --node-y: 81%;
+        --float-delay: -6.7s;
+    }
+
+    .home-metric-transition {
+        width: 0.72rem;
+        height: 0.72rem;
+        border: 1px solid color-mix(in srgb, var(--surface) 42%, transparent);
+        background: color-mix(in srgb, var(--surface) 18%, var(--navy));
+        box-shadow: 0 0 28px color-mix(in srgb, var(--surface) 22%, transparent);
+    }
+
+    .home-metric-transition.is-expanding {
+        animation-name: homeMetricExpandMobile;
+    }
+
+    .home-metric-transition.is-revealing {
+        animation-name: homeMetricRevealMobile;
     }
 
     .home-chapter {
         width: min(100% - 2rem, 40rem);
-        padding: 5.5rem 0 1.5rem;
+        padding: 5rem 0 2rem;
     }
 
     .home-chapter h2 {
-        font-size: clamp(2.8rem, 12vw, 4rem);
+        font-size: clamp(3.15rem, 13vw, 4.15rem);
     }
 
     .home-economic-scene,
@@ -3948,7 +3861,7 @@ body.home-scroll-surface::-webkit-scrollbar {
     .home-patterns-scene {
         grid-template-columns: 1fr;
         align-content: center;
-        gap: 1.75rem;
+        gap: 2.15rem;
     }
 
     .home-economic-heading {
@@ -3958,66 +3871,159 @@ body.home-scroll-surface::-webkit-scrollbar {
     .home-economic-heading h2,
     .home-categories-heading h2,
     .home-patterns-heading h2 {
-        max-width: 9ch;
+        max-width: 10ch;
     }
 
     .home-economic-heading p,
     .home-categories-heading p,
     .home-patterns-heading p {
+        max-width: 31ch;
         margin-top: 0.8rem;
-        font-size: 0.95rem;
+        font-size: 1rem;
+        line-height: 1.45;
     }
 
     .home-economic-row {
-        min-height: 3.65rem;
-        gap: 1rem;
+        min-height: 3.8rem;
+        gap: 0.85rem;
     }
 
     .home-economic-row span {
-        font-size: 0.95rem;
+        max-width: 23ch;
+        font-size: 1rem;
+        line-height: 1.16;
     }
 
     .home-economic-row strong {
-        font-size: 1.65rem;
+        font-size: 1.75rem;
     }
 
     .home-categories-cloud {
-        min-height: 23rem;
+        position: relative;
+        min-height: 29rem;
+        display: block;
+    }
+
+    .home-category-word {
+        position: absolute;
+        min-width: 0;
+        align-content: start;
+        gap: 0.5rem;
+    }
+
+    .home-category-word-2,
+    .home-category-word-5 {
+        justify-items: end;
+        text-align: right;
     }
 
     .home-category-word span {
-        font-size: clamp(1.5rem, calc(var(--category-scale) * 1.2rem), 3.2rem);
+        max-width: 11ch;
+        font-size: clamp(1.4rem, 6vw, 1.8rem);
+        line-height: 1;
     }
 
     .home-category-word strong {
-        font-size: 0.68rem;
+        font-size: 0.7rem;
+    }
+
+    .home-category-word-1 {
+        left: 0;
+        top: 0;
+        width: 45%;
+    }
+
+    .home-category-word-1 span {
+        font-size: clamp(1.85rem, 8vw, 2.4rem);
+    }
+
+    .home-category-word-2 {
+        right: 0;
+        top: 1rem;
+        width: 44%;
+    }
+
+    .home-category-word-2 span {
+        font-size: clamp(1.55rem, 6.7vw, 2rem);
     }
 
     .home-category-word-3 {
-        top: 7.5rem;
+        left: 35%;
+        top: 9.5rem;
+        width: 35%;
+    }
+
+    .home-category-word-4 {
+        left: 0;
+        top: 18rem;
+        width: 38%;
     }
 
     .home-category-word-5 {
-        bottom: 2.5rem;
+        right: 0;
+        top: 16.5rem;
+        width: 35%;
+    }
+
+    .home-category-word-6 {
+        left: 39%;
+        top: 22.5rem;
+        width: 37%;
+    }
+
+    .home-categories-heading {
+        align-self: auto;
+        padding-bottom: 0;
+    }
+
+    .home-patterns-heading h2 {
+        max-width: 10ch;
+        font-size: clamp(3.1rem, 12.8vw, 4rem);
     }
 
     .home-risk-metric {
-        min-height: 5rem;
-        grid-template-columns: minmax(5rem, auto) 1fr;
-        gap: 1.25rem;
-        padding: 0.85rem 0;
+        position: relative;
+        gap: 0.45rem;
+        min-width: 0;
+        text-align: center;
+    }
+
+    .home-risk-metrics {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        align-items: start;
+        gap: 0.5rem;
+        min-height: 10rem;
+    }
+
+    .home-risk-metric:nth-child(1) {
+        margin-top: 0;
+    }
+
+    .home-risk-metric:nth-child(2) {
+        margin-top: 2.35rem;
+    }
+
+    .home-risk-metric:nth-child(3) {
+        margin-top: 0.75rem;
     }
 
     .home-risk-metric strong {
-        font-size: clamp(3rem, 14vw, 4.25rem);
+        font-size: clamp(3.05rem, 13vw, 4rem);
     }
 
     .home-risk-metric span {
-        font-size: 0.68rem;
+        font-size: 0.62rem;
+        letter-spacing: 0.06em;
     }
 
     .home-loop-copy {
         width: min(100%, 25rem);
+    }
+
+    .home-loop-title {
+        max-width: 12ch;
+        font-size: clamp(3.35rem, 13.5vw, 4.35rem);
     }
 
     .home-landing {
@@ -4150,7 +4156,7 @@ body.home-scroll-surface::-webkit-scrollbar {
 
 @media (max-width: 480px) {
     .home-title {
-        font-size: clamp(4.1rem, 18vw, 4.85rem);
+        font-size: clamp(3.9rem, 17.5vw, 4.65rem);
     }
 
     .home-hero,
