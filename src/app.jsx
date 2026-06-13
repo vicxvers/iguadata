@@ -4438,10 +4438,10 @@ function App() {
             {activeTab === 'home' && (
                 <>
                     {renderHomeChrome()}
-                    <div className="home-dissolve-stage">
+                    <main id="main-content" className="home-dissolve-stage">
                         {renderHomeSection(homeIntroFading ? 'home-intro-target' : '')}
                         {homeIntroFading && renderHomeLoading(true)}
-                    </div>
+                    </main>
                 </>
             )}
 

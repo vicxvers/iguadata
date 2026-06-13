@@ -5115,7 +5115,8 @@ function App() {
   };
   return React.createElement("div", {
     className: activeTab === 'home' ? 'home-wrapper' : 'app-shell app-shell-chrome'
-  }, activeTab !== 'home' && renderSiteChrome(), activeTab === 'home' && React.createElement(React.Fragment, null, renderHomeChrome(), React.createElement("div", {
+  }, activeTab !== 'home' && renderSiteChrome(), activeTab === 'home' && React.createElement(React.Fragment, null, renderHomeChrome(), React.createElement("main", {
+    id: "main-content",
     className: "home-dissolve-stage"
   }, renderHomeSection(homeIntroFading ? 'home-intro-target' : ''), homeIntroFading && renderHomeLoading(true))), activeTab !== 'home' && React.createElement("main", {
     id: "main-content",
