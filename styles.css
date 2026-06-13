@@ -507,11 +507,6 @@ html.home-lock-scroll {
     grid-column: 3 / 5;
 }
 
-.filters-row .filter-group-reset {
-    display: flex;
-    justify-content: flex-start;
-}
-
 .filter-actions {
     display: flex;
     width: 100%;
@@ -696,16 +691,6 @@ html.home-lock-scroll {
 
 .mobile-scroll-top {
     display: none;
-}
-
-/* BotÃ³n cuadrado de icono â€” combinar con .btn-reset */
-.btn-icon-square {
-    width: var(--control-h);
-    height: var(--control-h);
-    padding: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 /* Lista vertical sin estilos de marcador */
@@ -5189,12 +5174,6 @@ body.home-scroll-surface::-webkit-scrollbar {
     margin-bottom: 0;
 }
 
-.persona-subtitle {
-    font-family: var(--font-body);
-    font-size: 0.9rem;
-    color: var(--text-light);
-}
-
 .persona-amount {
     font-size: var(--display-sm);
 }
@@ -5870,10 +5849,6 @@ body.home-scroll-surface::-webkit-scrollbar {
         grid-template-columns: 1fr;
     }
 
-    .filter-group-reset {
-        margin-top: 1rem;
-    }
-
     .contract-meta {
         flex-direction: column;
         gap: 0.5rem;
@@ -6508,12 +6483,6 @@ body.home-scroll-surface::-webkit-scrollbar {
         flex: 1 1 100% !important;
     }
 
-    .search-section .filter-group-reset {
-        display: none !important;
-        width: 48px !important;
-        flex: 0 0 48px !important;
-    }
-
     .results-count {
         display: flex;
         justify-content: space-between;
@@ -6966,15 +6935,6 @@ body.home-scroll-surface::-webkit-scrollbar {
         line-height: 1.5;
         font-weight: 500;
         margin-bottom: 0;
-    }
-
-    .persones-page .persona-subtitle {
-        font-family: var(--font-body);
-        font-size: var(--text-base);
-        font-weight: 400;
-        letter-spacing: 0;
-        text-transform: none;
-        color: var(--navy);
     }
 
     .persones-page .persona-row-amount {
