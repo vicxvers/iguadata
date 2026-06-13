@@ -2454,6 +2454,14 @@ function App() {
     const [personesLoaded, setPersonesLoaded] = useState(false);
     const [administradorsLoaded, setAdministradorsLoaded] = useState(false);
     const [analisiLoaded, setAnalisiLoaded] = useState(false);
+    const [coreDataError, setCoreDataError] = useState(false);
+    const [personesError, setPersonesError] = useState(false);
+    const [administradorsError, setAdministradorsError] = useState(false);
+    const [analisiError, setAnalisiError] = useState(false);
+    const [coreRetry, setCoreRetry] = useState(0);
+    const [personesRetry, setPersonesRetry] = useState(0);
+    const [administradorsRetry, setAdministradorsRetry] = useState(0);
+    const [analisiRetry, setAnalisiRetry] = useState(0);
     const [summary, setSummary] = useState(null);
     const [summaryResolved, setSummaryResolved] = useState(false);
     const [loadingProgress, setLoadingProgress] = useState(0);
@@ -3115,10 +3123,14 @@ function App() {
     useEffect(() => {
         if (!summaryResolved) return;
         let cancelled = false;
+        setCoreDataError(false);
         setDataLoading(true);
         Promise.all([
             fetchAllContractsCached(),
-            fetch(jsonAssetUrl('/json/empreses.json')).then(res => res.json()),
+            fetch(jsonAssetUrl('/json/empreses.json')).then(res => {
+                if (!res.ok) throw new Error(`Empreses HTTP ${res.status}`);
+                return res.json();
+            }),
             fetchArchivedContracts()
         ])
             .then(async ([socrataRows, existingEmpreses, archiveRows]) => {
@@ -3186,44 +3198,55 @@ function App() {
             .catch(err => {
                 if (cancelled) return;
                 console.error('Error loading data:', err);
+                setCoreDataError(true);
                 setDataLoading(false);
             });
         return () => { cancelled = true; };
-    }, [summaryResolved]);
+    }, [summaryResolved, coreRetry]);
 
     useEffect(() => {
         if (!summaryResolved || activeTab !== 'persones' || personesLoaded) return;
         let cancelled = false;
+        setPersonesError(false);
         fetch(jsonAssetUrl('/json/persones.json'))
-            .then(res => res.ok ? res.json() : [])
+            .then(res => {
+                if (!res.ok) throw new Error(`Persones HTTP ${res.status}`);
+                return res.json();
+            })
             .then(data => {
                 if (!cancelled) setPersones(data || []);
             })
             .catch(err => {
                 console.error('Error loading persones:', err);
+                if (!cancelled) setPersonesError(true);
             })
             .finally(() => {
                 if (!cancelled) setPersonesLoaded(true);
             });
         return () => { cancelled = true; };
-    }, [activeTab, summaryResolved, personesLoaded]);
+    }, [activeTab, summaryResolved, personesLoaded, personesRetry]);
 
     useEffect(() => {
         if (!summaryResolved || activeTab !== 'empresa' || administradorsLoaded) return;
         let cancelled = false;
+        setAdministradorsError(false);
         fetch(jsonAssetUrl('/json/carrecs.json'))
-            .then(res => res.ok ? res.json() : {})
+            .then(res => {
+                if (!res.ok) throw new Error(`Carrecs HTTP ${res.status}`);
+                return res.json();
+            })
             .then(data => {
                 if (!cancelled) setAdministradors(data || {});
             })
             .catch(err => {
                 console.error('Error loading carrecs:', err);
+                if (!cancelled) setAdministradorsError(true);
             })
             .finally(() => {
                 if (!cancelled) setAdministradorsLoaded(true);
             });
         return () => { cancelled = true; };
-    }, [activeTab, summaryResolved, administradorsLoaded]);
+    }, [activeTab, summaryResolved, administradorsLoaded, administradorsRetry]);
 
     useEffect(() => {
         const analisiTabs = ['analisi', 'cas-fraccionament', 'cas-concentracio', 'cas-electoralisme'];
@@ -3235,10 +3258,20 @@ function App() {
         let idleId = null;
         let timeoutId = null;
         const loadAnalisi = () => {
+            setAnalisiError(false);
             Promise.all([
-                fetch(jsonAssetUrl('/json/fraccionament.json')).then(res => res.ok ? res.json() : { alertes: [] }),
-                fetch(jsonAssetUrl('/json/concentracio.json')).then(res => res.ok ? res.json() : { alertes: [] }),
-                fetch(jsonAssetUrl('/json/electoralisme.json')).then(res => res.ok ? res.json() : { alertes: [] })
+                fetch(jsonAssetUrl('/json/fraccionament.json')).then(res => {
+                    if (!res.ok) throw new Error(`Fraccionament HTTP ${res.status}`);
+                    return res.json();
+                }),
+                fetch(jsonAssetUrl('/json/concentracio.json')).then(res => {
+                    if (!res.ok) throw new Error(`Concentracio HTTP ${res.status}`);
+                    return res.json();
+                }),
+                fetch(jsonAssetUrl('/json/electoralisme.json')).then(res => {
+                    if (!res.ok) throw new Error(`Electoralisme HTTP ${res.status}`);
+                    return res.json();
+                })
             ])
                 .then(([fraccionamentData, concentracioData, electoralismeData]) => {
                     if (cancelled) return;
@@ -3248,6 +3281,7 @@ function App() {
                 })
                 .catch(err => {
                     console.error('Error loading analysis data:', err);
+                    if (!cancelled) setAnalisiError(true);
                 })
                 .finally(() => {
                     if (!cancelled) setAnalisiLoaded(true);
@@ -3267,7 +3301,7 @@ function App() {
             if (idleId !== null) window.cancelIdleCallback(idleId);
             if (timeoutId !== null) window.clearTimeout(timeoutId);
         };
-    }, [activeTab, summaryResolved, dataLoading, analisiLoaded]);
+    }, [activeTab, summaryResolved, dataLoading, analisiLoaded, analisiRetry]);
 
     useEffect(() => {
         const route = getRoute();
@@ -4217,14 +4251,55 @@ function App() {
 
     const dataTabs = ['buscador', 'empreses', 'persones', 'contracte', 'empresa', 'analisi', 'cas-fraccionament', 'cas-concentracio', 'cas-electoralisme'];
     const analisiTabs = ['analisi', 'cas-fraccionament', 'cas-concentracio', 'cas-electoralisme'];
+    const activeDataError =
+        (dataTabs.includes(activeTab) && coreDataError) ||
+        (activeTab === 'persones' && personesError) ||
+        (activeTab === 'empresa' && administradorsError) ||
+        (analisiTabs.includes(activeTab) && analisiError);
     const isSupplementalDataLoading =
         (activeTab === 'persones' && !personesLoaded) ||
         (activeTab === 'empresa' && !administradorsLoaded) ||
         (analisiTabs.includes(activeTab) && !analisiLoaded);
     const isDataTabLoading = dataTabs.includes(activeTab) && (dataLoading || isSupplementalDataLoading);
+    const canRenderDataTab = !isDataTabLoading && !activeDataError;
+    const retryActiveData = () => {
+        if (coreDataError) {
+            setCoreRetry(value => value + 1);
+            return;
+        }
+        if (activeTab === 'persones') {
+            setPersonesLoaded(false);
+            setPersonesError(false);
+            setPersonesRetry(value => value + 1);
+            return;
+        }
+        if (activeTab === 'empresa') {
+            setAdministradorsLoaded(false);
+            setAdministradorsError(false);
+            setAdministradorsRetry(value => value + 1);
+            return;
+        }
+        if (analisiTabs.includes(activeTab)) {
+            setAnalisiLoaded(false);
+            setAnalisiError(false);
+            setAnalisiRetry(value => value + 1);
+        }
+    };
     const renderDataLoading = () => (
         <div className="container data-loading-container">
             <h1 className="page-title data-loading-title" role="status" aria-live="polite">Carregant dades</h1>
+        </div>
+    );
+    const renderDataError = () => (
+        <div className="container data-loading-container">
+            <div className="empty-state" role="alert">
+                <div className="empty-state-icon" aria-hidden="true">!</div>
+                <div className="empty-state-title">No s'han pogut carregar les dades</div>
+                <div className="empty-state-text">Comprova la connexió i torna-ho a provar.</div>
+                <div className="empty-state-action">
+                    <button className="empty-state-btn" onClick={retryActiveData} type="button">Tornar-ho a provar</button>
+                </div>
+            </div>
         </div>
     );
 
@@ -4309,9 +4384,9 @@ function App() {
 
             {activeTab !== 'home' && (
                 <main id="main-content" className="site-main">
-            {isDataTabLoading && renderDataLoading()}
+            {activeDataError ? renderDataError() : (isDataTabLoading && renderDataLoading())}
 
-            {activeTab === 'buscador' && !isDataTabLoading && (
+            {activeTab === 'buscador' && canRenderDataTab && (
                 <div className="container contractes-page">
                     <h1 className="page-title">Cercador de contractes</h1>
                     <div className="search-section">
@@ -4563,7 +4638,7 @@ function App() {
                 </div>
             )}
 
-            {activeTab === 'empreses' && !selectedEmpresa && !isDataTabLoading && (
+            {activeTab === 'empreses' && !selectedEmpresa && canRenderDataTab && (
                 <EmpresesView
                     empreses={empreses}
                     onEmpresaSelect={handleEmpresaClick}
@@ -4580,7 +4655,7 @@ function App() {
                 />
             )}
 
-            {activeTab === 'persones' && !isDataTabLoading && (
+            {activeTab === 'persones' && canRenderDataTab && (
                 <PersonesView
                     persones={persones}
                     onEmpresaSelect={handleEmpresaClick}
@@ -4596,7 +4671,7 @@ function App() {
                 />
             )}
 
-            {activeTab === 'contracte' && selectedContractForDetail && !isDataTabLoading && (
+            {activeTab === 'contracte' && selectedContractForDetail && canRenderDataTab && (
                 <ContractDetailView
                     contract={selectedContractForDetail}
                     contracts={contracts}
@@ -4606,7 +4681,7 @@ function App() {
                 />
             )}
 
-            {activeTab === 'empresa' && selectedEmpresa && !isDataTabLoading && (
+            {activeTab === 'empresa' && selectedEmpresa && canRenderDataTab && (
                 <EmpresaView
                     empresa={selectedEmpresa}
                     contracts={contracts}
@@ -4617,7 +4692,7 @@ function App() {
                 />
             )}
 
-            {activeTab === 'cas-fraccionament' && selectedCasoDetail && !isDataTabLoading && (
+            {activeTab === 'cas-fraccionament' && selectedCasoDetail && canRenderDataTab && (
                 <CasFraccionamentView
                     caso={selectedCasoDetail}
                     contracts={contracts}
@@ -4628,7 +4703,7 @@ function App() {
                 />
             )}
 
-            {activeTab === 'cas-concentracio' && selectedConcentracioDetail && !isDataTabLoading && (
+            {activeTab === 'cas-concentracio' && selectedConcentracioDetail && canRenderDataTab && (
                 <CasConcentracioView
                     caso={selectedConcentracioDetail}
                     contracts={contracts}
@@ -4639,7 +4714,7 @@ function App() {
                 />
             )}
 
-            {activeTab === 'cas-electoralisme' && selectedElectoralismeDetail && !isDataTabLoading && (
+            {activeTab === 'cas-electoralisme' && selectedElectoralismeDetail && canRenderDataTab && (
                 <CasElectoralismeView
                     caso={selectedElectoralismeDetail}
                     contracts={contracts}
@@ -4650,7 +4725,7 @@ function App() {
                 />
             )}
 
-            {activeTab === 'analisi' && !isDataTabLoading && (
+            {activeTab === 'analisi' && canRenderDataTab && (
                 <>
                     <div className="analisi-tabs-wrapper">
                         <div className="analisi-tabs" role="tablist" aria-label="Tipus d'anàlisi">

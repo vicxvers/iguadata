@@ -3104,6 +3104,14 @@ function App() {
   const [personesLoaded, setPersonesLoaded] = useState(false);
   const [administradorsLoaded, setAdministradorsLoaded] = useState(false);
   const [analisiLoaded, setAnalisiLoaded] = useState(false);
+  const [coreDataError, setCoreDataError] = useState(false);
+  const [personesError, setPersonesError] = useState(false);
+  const [administradorsError, setAdministradorsError] = useState(false);
+  const [analisiError, setAnalisiError] = useState(false);
+  const [coreRetry, setCoreRetry] = useState(0);
+  const [personesRetry, setPersonesRetry] = useState(0);
+  const [administradorsRetry, setAdministradorsRetry] = useState(0);
+  const [analisiRetry, setAnalisiRetry] = useState(0);
   const [summary, setSummary] = useState(null);
   const [summaryResolved, setSummaryResolved] = useState(false);
   const [loadingProgress, setLoadingProgress] = useState(0);
@@ -3750,8 +3758,12 @@ function App() {
   useEffect(() => {
     if (!summaryResolved) return;
     let cancelled = false;
+    setCoreDataError(false);
     setDataLoading(true);
-    Promise.all([fetchAllContractsCached(), fetch(jsonAssetUrl('/json/empreses.json')).then(res => res.json()), fetchArchivedContracts()]).then(async ([socrataRows, existingEmpreses, archiveRows]) => {
+    Promise.all([fetchAllContractsCached(), fetch(jsonAssetUrl('/json/empreses.json')).then(res => {
+      if (!res.ok) throw new Error(`Empreses HTTP ${res.status}`);
+      return res.json();
+    }), fetchArchivedContracts()]).then(async ([socrataRows, existingEmpreses, archiveRows]) => {
       if (cancelled) return;
       let contractsData = socrataRows.map((row, i) => row && row.__iguadataInternalContract ? Object.fromEntries(Object.entries(row).filter(([key]) => key !== '__iguadataInternalContract')) : mapSocrataContract(row, i + 1));
       contractsData = mergeArchivedContracts(contractsData, archiveRows);
@@ -3802,40 +3814,51 @@ function App() {
     }).catch(err => {
       if (cancelled) return;
       console.error('Error loading data:', err);
+      setCoreDataError(true);
       setDataLoading(false);
     });
     return () => {
       cancelled = true;
     };
-  }, [summaryResolved]);
+  }, [summaryResolved, coreRetry]);
   useEffect(() => {
     if (!summaryResolved || activeTab !== 'persones' || personesLoaded) return;
     let cancelled = false;
-    fetch(jsonAssetUrl('/json/persones.json')).then(res => res.ok ? res.json() : []).then(data => {
+    setPersonesError(false);
+    fetch(jsonAssetUrl('/json/persones.json')).then(res => {
+      if (!res.ok) throw new Error(`Persones HTTP ${res.status}`);
+      return res.json();
+    }).then(data => {
       if (!cancelled) setPersones(data || []);
     }).catch(err => {
       console.error('Error loading persones:', err);
+      if (!cancelled) setPersonesError(true);
     }).finally(() => {
       if (!cancelled) setPersonesLoaded(true);
     });
     return () => {
       cancelled = true;
     };
-  }, [activeTab, summaryResolved, personesLoaded]);
+  }, [activeTab, summaryResolved, personesLoaded, personesRetry]);
   useEffect(() => {
     if (!summaryResolved || activeTab !== 'empresa' || administradorsLoaded) return;
     let cancelled = false;
-    fetch(jsonAssetUrl('/json/carrecs.json')).then(res => res.ok ? res.json() : {}).then(data => {
+    setAdministradorsError(false);
+    fetch(jsonAssetUrl('/json/carrecs.json')).then(res => {
+      if (!res.ok) throw new Error(`Carrecs HTTP ${res.status}`);
+      return res.json();
+    }).then(data => {
       if (!cancelled) setAdministradors(data || {});
     }).catch(err => {
       console.error('Error loading carrecs:', err);
+      if (!cancelled) setAdministradorsError(true);
     }).finally(() => {
       if (!cancelled) setAdministradorsLoaded(true);
     });
     return () => {
       cancelled = true;
     };
-  }, [activeTab, summaryResolved, administradorsLoaded]);
+  }, [activeTab, summaryResolved, administradorsLoaded, administradorsRetry]);
   useEffect(() => {
     const analisiTabs = ['analisi', 'cas-fraccionament', 'cas-concentracio', 'cas-electoralisme'];
     const shouldLoadImmediately = analisiTabs.includes(activeTab);
@@ -3845,12 +3868,16 @@ function App() {
     let idleId = null;
     let timeoutId = null;
     const loadAnalisi = () => {
-      Promise.all([fetch(jsonAssetUrl('/json/fraccionament.json')).then(res => res.ok ? res.json() : {
-        alertes: []
-      }), fetch(jsonAssetUrl('/json/concentracio.json')).then(res => res.ok ? res.json() : {
-        alertes: []
-      }), fetch(jsonAssetUrl('/json/electoralisme.json')).then(res => res.ok ? res.json() : {
-        alertes: []
+      setAnalisiError(false);
+      Promise.all([fetch(jsonAssetUrl('/json/fraccionament.json')).then(res => {
+        if (!res.ok) throw new Error(`Fraccionament HTTP ${res.status}`);
+        return res.json();
+      }), fetch(jsonAssetUrl('/json/concentracio.json')).then(res => {
+        if (!res.ok) throw new Error(`Concentracio HTTP ${res.status}`);
+        return res.json();
+      }), fetch(jsonAssetUrl('/json/electoralisme.json')).then(res => {
+        if (!res.ok) throw new Error(`Electoralisme HTTP ${res.status}`);
+        return res.json();
       })]).then(([fraccionamentData, concentracioData, electoralismeData]) => {
         if (cancelled) return;
         setFraudes(fraccionamentData && fraccionamentData.alertes || []);
@@ -3858,6 +3885,7 @@ function App() {
         setElectoral(electoralismeData && electoralismeData.alertes || []);
       }).catch(err => {
         console.error('Error loading analysis data:', err);
+        if (!cancelled) setAnalisiError(true);
       }).finally(() => {
         if (!cancelled) setAnalisiLoaded(true);
       });
@@ -3876,7 +3904,7 @@ function App() {
       if (idleId !== null) window.cancelIdleCallback(idleId);
       if (timeoutId !== null) window.clearTimeout(timeoutId);
     };
-  }, [activeTab, summaryResolved, dataLoading, analisiLoaded]);
+  }, [activeTab, summaryResolved, dataLoading, analisiLoaded, analisiRetry]);
   useEffect(() => {
     const route = getRoute();
     const resolved = resolveRoute(route);
@@ -4907,8 +4935,33 @@ function App() {
   }, loadingProgress.toLocaleString('ca-ES'), "%")));
   const dataTabs = ['buscador', 'empreses', 'persones', 'contracte', 'empresa', 'analisi', 'cas-fraccionament', 'cas-concentracio', 'cas-electoralisme'];
   const analisiTabs = ['analisi', 'cas-fraccionament', 'cas-concentracio', 'cas-electoralisme'];
+  const activeDataError = dataTabs.includes(activeTab) && coreDataError || activeTab === 'persones' && personesError || activeTab === 'empresa' && administradorsError || analisiTabs.includes(activeTab) && analisiError;
   const isSupplementalDataLoading = activeTab === 'persones' && !personesLoaded || activeTab === 'empresa' && !administradorsLoaded || analisiTabs.includes(activeTab) && !analisiLoaded;
   const isDataTabLoading = dataTabs.includes(activeTab) && (dataLoading || isSupplementalDataLoading);
+  const canRenderDataTab = !isDataTabLoading && !activeDataError;
+  const retryActiveData = () => {
+    if (coreDataError) {
+      setCoreRetry(value => value + 1);
+      return;
+    }
+    if (activeTab === 'persones') {
+      setPersonesLoaded(false);
+      setPersonesError(false);
+      setPersonesRetry(value => value + 1);
+      return;
+    }
+    if (activeTab === 'empresa') {
+      setAdministradorsLoaded(false);
+      setAdministradorsError(false);
+      setAdministradorsRetry(value => value + 1);
+      return;
+    }
+    if (analisiTabs.includes(activeTab)) {
+      setAnalisiLoaded(false);
+      setAnalisiError(false);
+      setAnalisiRetry(value => value + 1);
+    }
+  };
   const renderDataLoading = () => React.createElement("div", {
     className: "container data-loading-container"
   }, React.createElement("h1", {
@@ -4916,6 +4969,25 @@ function App() {
     role: "status",
     "aria-live": "polite"
   }, "Carregant dades"));
+  const renderDataError = () => React.createElement("div", {
+    className: "container data-loading-container"
+  }, React.createElement("div", {
+    className: "empty-state",
+    role: "alert"
+  }, React.createElement("div", {
+    className: "empty-state-icon",
+    "aria-hidden": "true"
+  }, "!"), React.createElement("div", {
+    className: "empty-state-title"
+  }, "No s'han pogut carregar les dades"), React.createElement("div", {
+    className: "empty-state-text"
+  }, "Comprova la connexi\xF3 i torna-ho a provar."), React.createElement("div", {
+    className: "empty-state-action"
+  }, React.createElement("button", {
+    className: "empty-state-btn",
+    onClick: retryActiveData,
+    type: "button"
+  }, "Tornar-ho a provar"))));
   if (loading) {
     return renderHomeLoading(false);
   }
@@ -4979,7 +5051,7 @@ function App() {
   }, renderHomeSection(homeIntroFading ? 'home-intro-target' : ''), homeIntroFading && renderHomeLoading(true))), activeTab !== 'home' && React.createElement("main", {
     id: "main-content",
     className: "site-main"
-  }, isDataTabLoading && renderDataLoading(), activeTab === 'buscador' && !isDataTabLoading && React.createElement("div", {
+  }, activeDataError ? renderDataError() : isDataTabLoading && renderDataLoading(), activeTab === 'buscador' && canRenderDataTab && React.createElement("div", {
     className: "container contractes-page"
   }, React.createElement("h1", {
     className: "page-title"
@@ -5343,7 +5415,7 @@ function App() {
   }, "Les persones interessades poden exercir els drets d'acc\xE9s, rectificaci\xF3, limitaci\xF3 o oposici\xF3 al tractament posant-se en contacte a trav\xE9s de la secci\xF3 ", React.createElement("a", {
     href: "/avis-legal",
     className: "prose-link"
-  }, "Av\xEDs legal"), ". El dret de supressi\xF3 (dret a l'oblit) queda limitat per l'art. 17.3.b) del RGPD quan les dades figuren en registres oficials p\xFAblics o en documentaci\xF3 administrativa de contractaci\xF3 p\xFAblica, sense perjudici del dret a sol\xB7licitar la revisi\xF3 de possibles errors factuals.")))), activeTab === 'empreses' && !selectedEmpresa && !isDataTabLoading && React.createElement(EmpresesView, {
+  }, "Av\xEDs legal"), ". El dret de supressi\xF3 (dret a l'oblit) queda limitat per l'art. 17.3.b) del RGPD quan les dades figuren en registres oficials p\xFAblics o en documentaci\xF3 administrativa de contractaci\xF3 p\xFAblica, sense perjudici del dret a sol\xB7licitar la revisi\xF3 de possibles errors factuals.")))), activeTab === 'empreses' && !selectedEmpresa && canRenderDataTab && React.createElement(EmpresesView, {
     empreses: empreses,
     onEmpresaSelect: handleEmpresaClick,
     searchTerm: empresesSearch,
@@ -5356,7 +5428,7 @@ function App() {
     setSortBy: setEmpresesSort,
     currentPage: empresesPage,
     setCurrentPage: setEmpresesPage
-  }), activeTab === 'persones' && !isDataTabLoading && React.createElement(PersonesView, {
+  }), activeTab === 'persones' && canRenderDataTab && React.createElement(PersonesView, {
     persones: persones,
     onEmpresaSelect: handleEmpresaClick,
     onNavigateLegal: () => {
@@ -5374,7 +5446,7 @@ function App() {
     setCurrentPage: setPersonesPage,
     expandedIdx: personesExpanded,
     setExpandedIdx: setPersonesExpanded
-  }), activeTab === 'contracte' && selectedContractForDetail && !isDataTabLoading && React.createElement(ContractDetailView, {
+  }), activeTab === 'contracte' && selectedContractForDetail && canRenderDataTab && React.createElement(ContractDetailView, {
     contract: selectedContractForDetail,
     contracts: contracts,
     empreses: empreses,
@@ -5385,7 +5457,7 @@ function App() {
       setSelectedContractForDetail(null);
     }),
     onEmpresaClick: handleEmpresaClick
-  }), activeTab === 'empresa' && selectedEmpresa && !isDataTabLoading && React.createElement(EmpresaView, {
+  }), activeTab === 'empresa' && selectedEmpresa && canRenderDataTab && React.createElement(EmpresaView, {
     empresa: selectedEmpresa,
     contracts: contracts,
     empreses: empreses,
@@ -5397,7 +5469,7 @@ function App() {
       setSelectedEmpresa(null);
     }),
     onContractSelect: handleDetailClick
-  }), activeTab === 'cas-fraccionament' && selectedCasoDetail && !isDataTabLoading && React.createElement(CasFraccionamentView, {
+  }), activeTab === 'cas-fraccionament' && selectedCasoDetail && canRenderDataTab && React.createElement(CasFraccionamentView, {
     caso: selectedCasoDetail,
     contracts: contracts,
     empreses: empreses,
@@ -5407,7 +5479,7 @@ function App() {
     }),
     onContractSelect: handleDetailClick,
     onEmpresaClick: handleEmpresaClick
-  }), activeTab === 'cas-concentracio' && selectedConcentracioDetail && !isDataTabLoading && React.createElement(CasConcentracioView, {
+  }), activeTab === 'cas-concentracio' && selectedConcentracioDetail && canRenderDataTab && React.createElement(CasConcentracioView, {
     caso: selectedConcentracioDetail,
     contracts: contracts,
     empreses: empreses,
@@ -5417,7 +5489,7 @@ function App() {
     }),
     onContractSelect: handleDetailClick,
     onEmpresaClick: handleEmpresaClick
-  }), activeTab === 'cas-electoralisme' && selectedElectoralismeDetail && !isDataTabLoading && React.createElement(CasElectoralismeView, {
+  }), activeTab === 'cas-electoralisme' && selectedElectoralismeDetail && canRenderDataTab && React.createElement(CasElectoralismeView, {
     caso: selectedElectoralismeDetail,
     contracts: contracts,
     empreses: empreses,
@@ -5427,7 +5499,7 @@ function App() {
     }),
     onContractSelect: handleDetailClick,
     onEmpresaClick: handleEmpresaClick
-  }), activeTab === 'analisi' && !isDataTabLoading && React.createElement(React.Fragment, null, React.createElement("div", {
+  }), activeTab === 'analisi' && canRenderDataTab && React.createElement(React.Fragment, null, React.createElement("div", {
     className: "analisi-tabs-wrapper"
   }, React.createElement("div", {
     className: "analisi-tabs",
