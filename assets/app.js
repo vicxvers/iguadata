@@ -3267,6 +3267,29 @@ function App() {
     };
   }, [activeTab, loading]);
   useEffect(() => {
+    if (activeTab !== 'home' || loading || !window.matchMedia('(max-width: 768px)').matches) return;
+    let touchStartY = 0;
+    const handleTouchStart = event => {
+      touchStartY = event.touches[0]?.clientY || 0;
+    };
+    const handleTouchMove = event => {
+      const currentY = event.touches[0]?.clientY || 0;
+      if (window.scrollY <= 1 && currentY > touchStartY) {
+        event.preventDefault();
+      }
+    };
+    window.addEventListener('touchstart', handleTouchStart, {
+      passive: true
+    });
+    window.addEventListener('touchmove', handleTouchMove, {
+      passive: false
+    });
+    return () => {
+      window.removeEventListener('touchstart', handleTouchStart);
+      window.removeEventListener('touchmove', handleTouchMove);
+    };
+  }, [activeTab, loading]);
+  useEffect(() => {
     if (!loading && activeTab !== 'home') return;
     const canvas = homeCanvasRef.current;
     if (!canvas) return;
@@ -3283,32 +3306,38 @@ function App() {
       };
     }
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const isMobileViewport = window.matchMedia('(max-width: 768px)').matches;
+    const useStaticParticles = reduceMotion;
+    const usePointerInteraction = !reduceMotion && !isMobileViewport;
     const styles = getComputedStyle(document.documentElement);
     const particleColor = styles.getPropertyValue('--surface').trim();
+    const navyColor = styles.getPropertyValue('--navy').trim();
     const clock = new THREE.Clock();
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(48, 1, 0.1, 100);
     const pointerTarget = new THREE.Vector4(0, 0, 0, 0.22);
     const renderer = new THREE.WebGLRenderer({
       canvas,
-      alpha: true,
+      alpha: !isMobileViewport,
       antialias: false,
-      powerPreference: 'high-performance'
+      powerPreference: isMobileViewport ? 'low-power' : 'high-performance'
     });
     const geometry = new THREE.BufferGeometry();
     const color = new THREE.Color(particleColor);
     camera.position.z = 7.5;
-    renderer.setClearColor(0x000000, 0);
+    renderer.setClearColor(isMobileViewport ? new THREE.Color(navyColor) : 0x000000, isMobileViewport ? 1 : 0);
     let frameId = null;
     let points = null;
+    let particlesBuilt = false;
+    let renderWidth = 0;
+    let renderHeight = 0;
     const rand = seed => {
       const x = Math.sin(seed * 12.9898) * 43758.5453;
       return x - Math.floor(x);
     };
     const buildParticles = () => {
-      const rect = canvas.getBoundingClientRect();
-      const isMobileViewport = window.innerWidth < 768;
-      const count = isMobileViewport ? 7200 : 12500;
+      if (particlesBuilt) return;
+      const count = isMobileViewport ? 2600 : 12500;
       const positions = new Float32Array(count * 3);
       const seeds = new Float32Array(count * 4);
       const radius = isMobileViewport ? 3.35 : 4.35;
@@ -3412,30 +3441,38 @@ function App() {
         points.rotation.x = -0.16;
         scene.add(points);
       }
+      particlesBuilt = true;
     };
     const resize = () => {
       const rect = canvas.getBoundingClientRect();
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const nextWidth = Math.round(rect.width);
+      const nextHeight = Math.round(rect.height);
+      if (isMobileViewport && renderWidth === nextWidth && renderHeight > 0) return;
+      if (nextWidth === renderWidth && nextHeight === renderHeight) return;
+      renderWidth = nextWidth;
+      renderHeight = nextHeight;
+      const dpr = isMobileViewport ? 1 : Math.min(window.devicePixelRatio || 1, 2);
       renderer.setPixelRatio(dpr);
-      renderer.setSize(rect.width, rect.height, false);
-      camera.aspect = rect.width / Math.max(rect.height, 1);
+      renderer.setSize(nextWidth, nextHeight, false);
+      camera.aspect = nextWidth / Math.max(nextHeight, 1);
       camera.updateProjectionMatrix();
       buildParticles();
       if (points) {
         points.material.uniforms.uPixelRatio.value = dpr;
         points.material.uniforms.uAspect.value = camera.aspect;
       }
+      if (useStaticParticles) renderer.render(scene, camera);
     };
     const render = () => {
       const elapsed = clock.getElapsedTime();
       if (points) {
-        points.material.uniforms.uTime.value = reduceMotion ? 0 : elapsed;
+        points.material.uniforms.uTime.value = useStaticParticles ? 0 : elapsed;
         points.material.uniforms.uPointer.value.lerp(pointerTarget, 0.14);
         points.rotation.y = elapsed * 0.045;
         points.rotation.z = Math.sin(elapsed * 0.13) * 0.08;
       }
       renderer.render(scene, camera);
-      if (!reduceMotion) frameId = requestAnimationFrame(render);
+      if (!useStaticParticles) frameId = requestAnimationFrame(render);
     };
     const setPointerField = (clientX, clientY, strength = 1, radius = 0.22) => {
       const rect = canvas.getBoundingClientRect();
@@ -3458,12 +3495,16 @@ function App() {
     resize();
     render();
     window.addEventListener('resize', resize);
-    homeNode.addEventListener('pointermove', handlePointerMove);
-    homeNode.addEventListener('pointerleave', handlePointerLeave);
+    if (usePointerInteraction) {
+      homeNode.addEventListener('pointermove', handlePointerMove);
+      homeNode.addEventListener('pointerleave', handlePointerLeave);
+    }
     return () => {
       window.removeEventListener('resize', resize);
-      homeNode.removeEventListener('pointermove', handlePointerMove);
-      homeNode.removeEventListener('pointerleave', handlePointerLeave);
+      if (usePointerInteraction) {
+        homeNode.removeEventListener('pointermove', handlePointerMove);
+        homeNode.removeEventListener('pointerleave', handlePointerLeave);
+      }
       if (frameId) cancelAnimationFrame(frameId);
       if (points) {
         scene.remove(points);
