@@ -871,6 +871,14 @@ function ContractDetailView({ contract: c, contracts, empreses, onBack, onEmpres
                     <h2
                         className="contracte-detail-company-title"
                         onClick={() => onEmpresaClick(c.adjudicatario)}
+                        onKeyDown={(event) => {
+                            if (event.key === 'Enter' || event.key === ' ') {
+                                event.preventDefault();
+                                onEmpresaClick(c.adjudicatario);
+                            }
+                        }}
+                        role="link"
+                        tabIndex={0}
                     >
                         {c.adjudicatario}
                     </h2>
@@ -890,7 +898,19 @@ function CasoCard({ caso, onSelect }) {
     const rc = riskClass(caso.nivel_riesgo);
     const pct = caso.umbral > 0 ? (caso.importe_total / caso.umbral) * 100 : 0;
     return (
-        <div className={"alert-card risk-" + rc} onClick={onSelect} style={{ cursor: 'pointer' }}>
+        <div
+            className={"alert-card risk-" + rc}
+            onClick={onSelect}
+            onKeyDown={(event) => {
+                if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    onSelect();
+                }
+            }}
+            role="button"
+            tabIndex={0}
+            style={{ cursor: 'pointer' }}
+        >
             <div className="alert-header">
                 <div className="alert-header-left">
                     <div className="alert-title">{caso.empresa}</div>
@@ -947,16 +967,23 @@ function CasoCard({ caso, onSelect }) {
 function CasoModal({ caso, onClose }) {
     useEffect(() => {
         document.body.style.overflow = 'hidden';
-        return () => { document.body.style.overflow = ''; };
-    }, []);
+        const handleKeyDown = (event) => {
+            if (event.key === 'Escape') onClose();
+        };
+        window.addEventListener('keydown', handleKeyDown);
+        return () => {
+            document.body.style.overflow = '';
+            window.removeEventListener('keydown', handleKeyDown);
+        };
+    }, [onClose]);
     const rc = riskClass(caso.nivel_riesgo);
     const pct = caso.umbral > 0 ? (caso.importe_total / caso.umbral) * 100 : 0;
     return (
         <div className="modal-overlay" onClick={onClose}>
-            <div className="modal-content" onClick={e => e.stopPropagation()}>
+            <div className="modal-content" onClick={e => e.stopPropagation()} role="dialog" aria-modal="true" aria-label={`Detall de ${caso.empresa}`}>
                 <div className="modal-header">
                     <div className="modal-header-top">
-                        <button className="modal-close" onClick={onClose}>?</button>
+                        <button className="modal-close" onClick={onClose} type="button" aria-label="Tancar">?</button>
                     </div>
                     <span className={"risk-badge modal-risk-badge " + rc}>
                         {riskLabel(caso.nivel_riesgo)}
@@ -1463,6 +1490,31 @@ function CasElectoralismeView({ caso, contracts, empreses, onBack, onContractSel
     );
 }
 
+function FilterActions({ open, onToggle, activeCount, onReset }) {
+    return (
+        <div className="filter-actions">
+            <button
+                className="filters-toggle-btn"
+                onClick={onToggle}
+                aria-expanded={open}
+                type="button"
+            >
+                <span>Filtres</span>
+                <span className="filters-toggle-meta">{activeCount}</span>
+            </button>
+            <button
+                className="btn-reset filters-mobile-reset"
+                onClick={onReset}
+                title="Restablir filtres"
+                aria-label="Restablir filtres"
+                type="button"
+            >
+                <svg className="filters-reset-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8" /><path d="M3 3v5h5" /></svg>
+            </button>
+        </div>
+    );
+}
+
 /* ---- EmpresesView ----------------------------------------------- */
 function EmpresesView({ empreses, onEmpresaSelect, searchTerm, setSearchTerm, sectorFilter, setSectorFilter, categoriaFilter, setCategoriaFilter, sortBy, setSortBy, currentPage, setCurrentPage }) {
     const [debouncedSearch, setDebouncedSearch] = useState(searchTerm);
@@ -1585,33 +1637,26 @@ function EmpresesView({ empreses, onEmpresaSelect, searchTerm, setSearchTerm, se
                         type="text"
                         className="search-input"
                         placeholder="Cerca per empresa adjudicatària"
+                        aria-label="Cerca per empresa adjudicatària"
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
                     />
                     {searchTerm && (
-                        <button className="search-clear" onClick={() => setSearchTerm('')}>&times;</button>
+                        <button className="search-clear" onClick={() => setSearchTerm('')} type="button" aria-label="Netejar cerca">&times;</button>
                     )}
                 </div>
 
-                <div className="filters-mobile-actions" style={{ display: 'none' }}>
-                    <button
-                        className="filters-toggle-btn"
-                        onClick={() => setEmpresesFiltersOpen(prev => !prev)}
-                        aria-expanded={empresesFiltersOpen}
-                        type="button"
-                    >
-                        <span>Filtres</span>
-                        <span className="filters-toggle-meta">{activeFiltersCount}</span>
-                    </button>
-                    <button className="btn-reset filters-mobile-reset" onClick={resetFilters} title="Restablir filtres" type="button">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" /><path d="M3 3v5h5" /></svg>
-                    </button>
-                </div>
+                <FilterActions
+                    open={empresesFiltersOpen}
+                    onToggle={() => setEmpresesFiltersOpen(prev => !prev)}
+                    activeCount={activeFiltersCount}
+                    onReset={resetFilters}
+                />
 
-                <div className={"filters filters-panel" + (!empresesFiltersOpen ? " collapsed" : "")} style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', alignItems: 'flex-end', marginTop: '1.5rem' }}>
+                <div className={"filters search-filter-panel" + (!empresesFiltersOpen ? " collapsed" : "")}>
                     <div className="filter-group" style={{ flex: '1 1 200px' }}>
                         <label className="filter-label">Sector</label>
-                        <select className="filter-select" style={{ height: '48px' }} value={sectorFilter} onChange={(e) => { setSectorFilter(e.target.value); setCategoriaFilter(''); }}>
+                        <select className="filter-select" style={{ height: '48px' }} value={sectorFilter} onChange={(e) => { setSectorFilter(e.target.value); setCategoriaFilter(''); }} aria-label="Sector">
                             <option value="">Tots els sectors</option>
                             {allSectors
                                 .slice()
@@ -1627,7 +1672,7 @@ function EmpresesView({ empreses, onEmpresaSelect, searchTerm, setSearchTerm, se
                     </div>
                     <div className="filter-group" style={{ flex: '1 1 200px' }}>
                         <label className="filter-label">Categoria</label>
-                        <select className="filter-select" style={{ height: '48px' }} value={categoriaFilter} onChange={(e) => setCategoriaFilter(e.target.value)} disabled={!sectorFilter}>
+                        <select className="filter-select" style={{ height: '48px' }} value={categoriaFilter} onChange={(e) => setCategoriaFilter(e.target.value)} disabled={!sectorFilter} aria-label="Categoria">
                             <option value="">{sectorFilter ? 'Totes les categories' : 'Selecciona un sector'}</option>
                             {categoriesForSector
                                 .slice()
@@ -1643,17 +1688,12 @@ function EmpresesView({ empreses, onEmpresaSelect, searchTerm, setSearchTerm, se
                     </div>
                     <div className="filter-group" style={{ flex: '1 1 200px' }}>
                         <label className="filter-label">Ordenar per</label>
-                        <select className="filter-select" style={{ height: '48px' }} value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
+                        <select className="filter-select" style={{ height: '48px' }} value={sortBy} onChange={(e) => setSortBy(e.target.value)} aria-label="Ordenar empreses per">
                             <option value="amount-desc">Import (descendent)</option>
                             <option value="amount-asc">Import (ascendent)</option>
                             <option value="contracts-desc">Nombre de contractes (descendent)</option>
                             <option value="contracts-asc">Nombre de contractes (ascendent)</option>
                         </select>
-                    </div>
-                    <div className="filter-group filter-group-reset" style={{ flex: '0 0 auto', width: '48px', margin: 0 }}>
-                        <button className="btn-reset btn-icon-square" onClick={resetFilters} title="Restablir filtres">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" /><path d="M3 3v5h5" /></svg>
-                        </button>
                     </div>
                 </div>
             </div>
@@ -2013,32 +2053,25 @@ function EmpresaView({ empresa: empresaNom, contracts, empreses, administradors,
                         type="text"
                         className="search-input"
                         placeholder="Cerca per descripció del contracte"
+                        aria-label="Cerca per descripció del contracte"
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
                     />
                     {searchTerm && (
-                        <button className="search-clear" onClick={() => setSearchTerm('')}>&times;</button>
+                        <button className="search-clear" onClick={() => setSearchTerm('')} type="button" aria-label="Netejar cerca">&times;</button>
                     )}
                 </div>
-                <div className="filters-mobile-actions" style={{ display: 'none' }}>
-                    <button
-                        className="filters-toggle-btn"
-                        onClick={() => setEmpresaFiltersOpen(prev => !prev)}
-                        aria-expanded={empresaFiltersOpen}
-                        type="button"
-                    >
-                        <span>Filtres</span>
-                        <span className="filters-toggle-meta">{activeFiltersCount}</span>
-                    </button>
-                    <button className="btn-reset filters-mobile-reset" onClick={resetFilters} title="Restablir filtres" type="button">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" /><path d="M3 3v5h5" /></svg>
-                    </button>
-                </div>
+                <FilterActions
+                    open={empresaFiltersOpen}
+                    onToggle={() => setEmpresaFiltersOpen(prev => !prev)}
+                    activeCount={activeFiltersCount}
+                    onReset={resetFilters}
+                />
 
-                <div className={"filters filters-panel" + (!empresaFiltersOpen ? " collapsed" : "")} style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', alignItems: 'flex-end', marginTop: '1.5rem' }}>
+                <div className={"filters search-filter-panel search-filter-panel-four" + (!empresaFiltersOpen ? " collapsed" : "")}>
                     <div className="filter-group" style={{ flex: '1 1 200px' }}>
                         <label className="filter-label">Tipus</label>
-                        <select className="filter-select" style={{ height: '48px' }} value={tipusFilter} onChange={(e) => setTipusFilter(e.target.value)}>
+                        <select className="filter-select" style={{ height: '48px' }} value={tipusFilter} onChange={(e) => setTipusFilter(e.target.value)} aria-label="Tipus de contracte">
                             <option value="">Tots els tipus</option>
                             <option value="1. OBRES">Obres</option>
                             <option value="3. SUBMINISTRAMENTS">Subministraments</option>
@@ -2051,7 +2084,7 @@ function EmpresaView({ empresa: empresaNom, contracts, empreses, administradors,
                     </div>
                     <div className="filter-group" style={{ flex: '1 1 200px' }}>
                         <label className="filter-label">Procediment</label>
-                        <select className="filter-select" style={{ height: '48px' }} value={procedureFilter} onChange={(e) => setProcedureFilter(e.target.value)}>
+                        <select className="filter-select" style={{ height: '48px' }} value={procedureFilter} onChange={(e) => setProcedureFilter(e.target.value)} aria-label="Procediment">
                             <option value="">Tots els procediments</option>
                             <option value="Menor">Menor</option>
                             <option value="Obert">Obert</option>
@@ -2063,7 +2096,7 @@ function EmpresaView({ empresa: empresaNom, contracts, empreses, administradors,
                     </div>
                     <div className="filter-group" style={{ flex: '1 1 200px' }}>
                         <label className="filter-label">Any</label>
-                        <select className="filter-select" style={{ height: '48px' }} value={yearFilter} onChange={(e) => setYearFilter(e.target.value)}>
+                        <select className="filter-select" style={{ height: '48px' }} value={yearFilter} onChange={(e) => setYearFilter(e.target.value)} aria-label="Any">
                             <option value="">Tots els anys</option>
                             {[...new Set(allEmpresaContracts.map(c => c.año || parseInt(String(c.fecha || '').slice(0, 4), 10)).filter(Boolean))]
                                 .sort((a, b) => b - a)
@@ -2072,17 +2105,12 @@ function EmpresaView({ empresa: empresaNom, contracts, empreses, administradors,
                     </div>
                     <div className="filter-group" style={{ flex: '1 1 200px' }}>
                         <label className="filter-label">Ordenar per</label>
-                        <select className="filter-select" style={{ height: '48px' }} value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
+                        <select className="filter-select" style={{ height: '48px' }} value={sortBy} onChange={(e) => setSortBy(e.target.value)} aria-label="Ordenar contractes de l'empresa per">
                             <option value="date-desc">Data (més recents)</option>
                             <option value="date-asc">Data (més antics)</option>
                             <option value="amount-desc">Import (descendent)</option>
                             <option value="amount-asc">Import (ascendent)</option>
                         </select>
-                    </div>
-                    <div className="filter-group filter-group-reset" style={{ flex: '0 0 auto', width: '48px', margin: 0 }}>
-                        <button className="btn-reset btn-icon-square" onClick={resetFilters} title="Restablir filtres">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" /><path d="M3 3v5h5" /></svg>
-                        </button>
                     </div>
                 </div>
             </div>
@@ -2224,43 +2252,31 @@ function PersonesView({ persones, onEmpresaSelect, onNavigateLegal, searchTerm, 
                         type="text"
                         className="search-input"
                         placeholder="Cerca per persona o empresa adjudicatària"
+                        aria-label="Cerca per persona o empresa adjudicatària"
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
                     />
                     {searchTerm && (
-                        <button className="search-clear" onClick={() => setSearchTerm('')}>&times;</button>
+                        <button className="search-clear" onClick={() => setSearchTerm('')} type="button" aria-label="Netejar cerca">&times;</button>
                     )}
                 </div>
 
-                <div className="filters-mobile-actions" style={{ display: 'none' }}>
-                    <button
-                        className="filters-toggle-btn"
-                        onClick={() => setPersonesFiltersOpen(prev => !prev)}
-                        aria-expanded={personesFiltersOpen}
-                        type="button"
-                    >
-                        <span>Filtres</span>
-                        <span className="filters-toggle-meta">{activeFiltersCount}</span>
-                    </button>
-                    <button className="btn-reset filters-mobile-reset" onClick={resetFilters} title="Restablir filtres" type="button">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" /><path d="M3 3v5h5" /></svg>
-                    </button>
-                </div>
+                <FilterActions
+                    open={personesFiltersOpen}
+                    onToggle={() => setPersonesFiltersOpen(prev => !prev)}
+                    activeCount={activeFiltersCount}
+                    onReset={resetFilters}
+                />
 
-                <div className={"filters filters-panel" + (!personesFiltersOpen ? " collapsed" : "")} style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', alignItems: 'flex-end', marginTop: '1.5rem' }}>
+                <div className={"filters search-filter-panel search-filter-panel-single" + (!personesFiltersOpen ? " collapsed" : "")}>
                     <div className="filter-group" style={{ flex: '1 1 200px' }}>
                         <label className="filter-label">Ordenar per</label>
-                        <select className="filter-select" style={{ height: '48px' }} value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
+                        <select className="filter-select" style={{ height: '48px' }} value={sortBy} onChange={(e) => setSortBy(e.target.value)} aria-label="Ordenar persones per">
                             <option value="companies-desc">Nombre d'empreses (descendent)</option>
                             <option value="companies-asc">Nombre d'empreses (ascendent)</option>
                             <option value="amount-desc">Import (descendent)</option>
                             <option value="amount-asc">Import (ascendent)</option>
                         </select>
-                    </div>
-                    <div className="filter-group filter-group-reset" style={{ flex: '0 0 auto', width: '48px', margin: 0 }}>
-                        <button className="btn-reset btn-icon-square" onClick={resetFilters} title="Restablir filtres">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" /><path d="M3 3v5h5" /></svg>
-                        </button>
                     </div>
                 </div>
             </div>
@@ -2277,16 +2293,15 @@ function PersonesView({ persones, onEmpresaSelect, onNavigateLegal, searchTerm, 
                     const isExpanded = expandedIdx === idx;
                     return (
                         <div key={idx} className="contract-card persona-card">
-                            <div
+                            <button
+                                type="button"
                                 className={`persona-row-header${isExpanded ? ' is-expanded' : ''}`}
                                 onClick={() => togglePersona(idx)}
+                                aria-expanded={isExpanded}
                             >
                                 <div className="persona-row-header-left">
                                     <div>
                                         <div className="contract-title persona-title">{p.nom}</div>
-                                        <div className="persona-subtitle">
-                                            {p.relacions.length} {p.relacions.length === 1 ? 'empresa' : 'empreses'}
-                                        </div>
                                     </div>
                                 </div>
                                 <div className="persona-row-header-right">
@@ -2294,12 +2309,15 @@ function PersonesView({ persones, onEmpresaSelect, onNavigateLegal, searchTerm, 
                                         <div className="contract-amount persona-amount">
                                             {formatCurrency(p.total_adjudicat)}
                                         </div>
+                                        <div className="contract-meta-value persona-amount-caption">
+                                            Per a {p.relacions.length} {p.relacions.length === 1 ? 'empresa vinculada' : 'empreses vinculades'}
+                                        </div>
                                     </div>
                                     <div className={`persona-row-chevron${isExpanded ? ' is-expanded' : ''}`}>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9" /></svg>
                                     </div>
                                 </div>
-                            </div>
+                            </button>
 
                             <div className={`persona-row-body-wrapper${isExpanded ? ' is-expanded' : ''}`}>
                                 <div>
@@ -2433,6 +2451,9 @@ function App() {
     const [stats, setStats] = useState(null);
     const [loading, setLoading] = useState(true);
     const [dataLoading, setDataLoading] = useState(true);
+    const [personesLoaded, setPersonesLoaded] = useState(false);
+    const [administradorsLoaded, setAdministradorsLoaded] = useState(false);
+    const [analisiLoaded, setAnalisiLoaded] = useState(false);
     const [summary, setSummary] = useState(null);
     const [summaryResolved, setSummaryResolved] = useState(false);
     const [loadingProgress, setLoadingProgress] = useState(0);
@@ -3098,14 +3119,9 @@ function App() {
         Promise.all([
             fetchAllContractsCached(),
             fetch(jsonAssetUrl('/json/empreses.json')).then(res => res.json()),
-            fetch(jsonAssetUrl('/json/persones.json')).then(res => res.ok ? res.json() : []),
-            fetch(jsonAssetUrl('/json/carrecs.json')).then(res => res.ok ? res.json() : {}),
-            fetch(jsonAssetUrl('/json/fraccionament.json')).then(res => res.ok ? res.json() : { alertes: [] }),
-            fetch(jsonAssetUrl('/json/concentracio.json')).then(res => res.ok ? res.json() : { alertes: [] }),
-            fetch(jsonAssetUrl('/json/electoralisme.json')).then(res => res.ok ? res.json() : { alertes: [] }),
             fetchArchivedContracts()
         ])
-            .then(async ([socrataRows, existingEmpreses, personesData, administradorsData, fraccionamentData, concentracioData, electoralismeData, archiveRows]) => {
+            .then(async ([socrataRows, existingEmpreses, archiveRows]) => {
                 if (cancelled) return;
                 // Map Socrata rows to internal contract format
                 let contractsData = socrataRows.map((row, i) =>
@@ -3142,12 +3158,6 @@ function App() {
                     num_empresas: uniqueEmps.size,
                 });
 
-                setPersones(personesData || []);
-                setAdministradors(administradorsData || {});
-                setFraudes((fraccionamentData && fraccionamentData.alertes) || []);
-                setConcentracio((concentracioData && concentracioData.alertes) || []);
-                setElectoral((electoralismeData && electoralismeData.alertes) || []);
-
                 // Build empreses: existing AI classifications + CPV for new ones
                 const empresesData = buildEmpreses(contractsData, existingEmpreses);
 
@@ -3180,6 +3190,84 @@ function App() {
             });
         return () => { cancelled = true; };
     }, [summaryResolved]);
+
+    useEffect(() => {
+        if (!summaryResolved || activeTab !== 'persones' || personesLoaded) return;
+        let cancelled = false;
+        fetch(jsonAssetUrl('/json/persones.json'))
+            .then(res => res.ok ? res.json() : [])
+            .then(data => {
+                if (!cancelled) setPersones(data || []);
+            })
+            .catch(err => {
+                console.error('Error loading persones:', err);
+            })
+            .finally(() => {
+                if (!cancelled) setPersonesLoaded(true);
+            });
+        return () => { cancelled = true; };
+    }, [activeTab, summaryResolved, personesLoaded]);
+
+    useEffect(() => {
+        if (!summaryResolved || activeTab !== 'empresa' || administradorsLoaded) return;
+        let cancelled = false;
+        fetch(jsonAssetUrl('/json/carrecs.json'))
+            .then(res => res.ok ? res.json() : {})
+            .then(data => {
+                if (!cancelled) setAdministradors(data || {});
+            })
+            .catch(err => {
+                console.error('Error loading carrecs:', err);
+            })
+            .finally(() => {
+                if (!cancelled) setAdministradorsLoaded(true);
+            });
+        return () => { cancelled = true; };
+    }, [activeTab, summaryResolved, administradorsLoaded]);
+
+    useEffect(() => {
+        const analisiTabs = ['analisi', 'cas-fraccionament', 'cas-concentracio', 'cas-electoralisme'];
+        const shouldLoadImmediately = analisiTabs.includes(activeTab);
+        const shouldLoadWhenIdle = activeTab === 'home' && !dataLoading;
+        if (!summaryResolved || analisiLoaded || (!shouldLoadImmediately && !shouldLoadWhenIdle)) return;
+
+        let cancelled = false;
+        let idleId = null;
+        let timeoutId = null;
+        const loadAnalisi = () => {
+            Promise.all([
+                fetch(jsonAssetUrl('/json/fraccionament.json')).then(res => res.ok ? res.json() : { alertes: [] }),
+                fetch(jsonAssetUrl('/json/concentracio.json')).then(res => res.ok ? res.json() : { alertes: [] }),
+                fetch(jsonAssetUrl('/json/electoralisme.json')).then(res => res.ok ? res.json() : { alertes: [] })
+            ])
+                .then(([fraccionamentData, concentracioData, electoralismeData]) => {
+                    if (cancelled) return;
+                    setFraudes((fraccionamentData && fraccionamentData.alertes) || []);
+                    setConcentracio((concentracioData && concentracioData.alertes) || []);
+                    setElectoral((electoralismeData && electoralismeData.alertes) || []);
+                })
+                .catch(err => {
+                    console.error('Error loading analysis data:', err);
+                })
+                .finally(() => {
+                    if (!cancelled) setAnalisiLoaded(true);
+                });
+        };
+
+        if (shouldLoadImmediately) {
+            loadAnalisi();
+        } else if ('requestIdleCallback' in window) {
+            idleId = window.requestIdleCallback(loadAnalisi, { timeout: 2500 });
+        } else {
+            timeoutId = window.setTimeout(loadAnalisi, 800);
+        }
+
+        return () => {
+            cancelled = true;
+            if (idleId !== null) window.cancelIdleCallback(idleId);
+            if (timeoutId !== null) window.clearTimeout(timeoutId);
+        };
+    }, [activeTab, summaryResolved, dataLoading, analisiLoaded]);
 
     useEffect(() => {
         const route = getRoute();
@@ -3730,7 +3818,18 @@ function App() {
     const renderHomeChrome = (interactive = true) => (
         <div className="home-chrome">
             <div className="home-chrome-gradient is-visible" aria-hidden="true"></div>
-            <div className="home-brand home-chrome-brand" onClick={interactive ? goToHome : undefined}>
+            <div
+                className="home-brand home-chrome-brand"
+                onClick={interactive ? goToHome : undefined}
+                onKeyDown={interactive ? (event) => {
+                    if (event.key === 'Enter' || event.key === ' ') {
+                        event.preventDefault();
+                        goToHome();
+                    }
+                } : undefined}
+                role={interactive ? 'link' : undefined}
+                tabIndex={interactive ? 0 : undefined}
+            >
                 <div className="home-logo" role="img" aria-label="Iguadata"></div>
             </div>
         </div>
@@ -3758,7 +3857,18 @@ function App() {
                     aria-hidden="true"
                 />
             )}
-            <div className="site-chrome-brand" onClick={goToHome}>
+            <div
+                className="site-chrome-brand"
+                onClick={goToHome}
+                onKeyDown={(event) => {
+                    if (event.key === 'Enter' || event.key === ' ') {
+                        event.preventDefault();
+                        goToHome();
+                    }
+                }}
+                role="link"
+                tabIndex={0}
+            >
                 <div className="home-logo" role="img" aria-label="Iguadata"></div>
             </div>
             <div className={`site-dock-shell is-visible${isMobileMenuOpen ? ' is-open' : ''}`}>
@@ -4106,7 +4216,12 @@ function App() {
     );
 
     const dataTabs = ['buscador', 'empreses', 'persones', 'contracte', 'empresa', 'analisi', 'cas-fraccionament', 'cas-concentracio', 'cas-electoralisme'];
-    const isDataTabLoading = dataLoading && dataTabs.includes(activeTab);
+    const analisiTabs = ['analisi', 'cas-fraccionament', 'cas-concentracio', 'cas-electoralisme'];
+    const isSupplementalDataLoading =
+        (activeTab === 'persones' && !personesLoaded) ||
+        (activeTab === 'empresa' && !administradorsLoaded) ||
+        (analisiTabs.includes(activeTab) && !analisiLoaded);
+    const isDataTabLoading = dataTabs.includes(activeTab) && (dataLoading || isSupplementalDataLoading);
     const renderDataLoading = () => (
         <div className="container data-loading-container">
             <h1 className="page-title data-loading-title" role="status" aria-live="polite">Carregant dades</h1>
@@ -4192,9 +4307,11 @@ function App() {
                 </>
             )}
 
+            {activeTab !== 'home' && (
+                <main id="main-content" className="site-main">
             {isDataTabLoading && renderDataLoading()}
 
-            {activeTab === 'buscador' && !dataLoading && (
+            {activeTab === 'buscador' && !isDataTabLoading && (
                 <div className="container contractes-page">
                     <h1 className="page-title">Cercador de contractes</h1>
                     <div className="search-section">
@@ -4206,33 +4323,26 @@ function App() {
                                 type="text"
                                 className="search-input"
                                 placeholder="Cerca per descripció o empresa adjudicatària"
+                                aria-label="Cerca per descripció o empresa adjudicatària"
                                 value={searchTerm}
                                 onChange={(e) => setSearchTerm(e.target.value)}
                             />
                             {searchTerm && (
-                                <button className="search-clear" onClick={() => setSearchTerm('')}>&times;</button>
+                                <button className="search-clear" onClick={() => setSearchTerm('')} type="button" aria-label="Netejar cerca">&times;</button>
                             )}
                         </div>
 
-                        <div className="filters-mobile-actions" style={{ display: 'none' }}>
-                            <button
-                                className="filters-toggle-btn"
-                                onClick={() => setFiltersOpen(prev => !prev)}
-                                aria-expanded={filtersOpen}
-                                type="button"
-                            >
-                                <span>Filtres</span>
-                                <span className="filters-toggle-meta">{activeFiltersCount}</span>
-                            </button>
-                            <button className="btn-reset filters-mobile-reset" onClick={resetFilters} title="Restablir filtres" type="button">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" /><path d="M3 3v5h5" /></svg>
-                            </button>
-                        </div>
+                        <FilterActions
+                            open={filtersOpen}
+                            onToggle={() => setFiltersOpen(prev => !prev)}
+                            activeCount={activeFiltersCount}
+                            onReset={resetFilters}
+                        />
 
-                        <div className={"filters filters-panel" + (!filtersOpen ? " collapsed" : "")} style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', alignItems: 'flex-end', marginTop: '1.5rem' }}>
+                        <div className={"filters search-filter-panel" + (!filtersOpen ? " collapsed" : "")}>
                             <div className="filter-group" style={{ flex: '1 1 200px' }}>
                                 <label className="filter-label">Tipus</label>
-                                <select className="filter-select" style={{ height: '48px' }} value={typeFilter} onChange={(e) => setTypeFilter(e.target.value)}>
+                                <select className="filter-select" style={{ height: '48px' }} value={typeFilter} onChange={(e) => setTypeFilter(e.target.value)} aria-label="Tipus de contracte">
                                     <option value="">Tots els tipus</option>
                                     <option value="1. OBRES">Obres</option>
                                     <option value="3. SUBMINISTRAMENTS">Subministraments</option>
@@ -4245,7 +4355,7 @@ function App() {
                             </div>
                             <div className="filter-group" style={{ flex: '1 1 200px' }}>
                                 <label className="filter-label">Procediment</label>
-                                <select className="filter-select" style={{ height: '48px' }} value={procedureFilter} onChange={(e) => setProcedureFilter(e.target.value)}>
+                                <select className="filter-select" style={{ height: '48px' }} value={procedureFilter} onChange={(e) => setProcedureFilter(e.target.value)} aria-label="Procediment">
                                     <option value="">Tots els procediments</option>
                                     <option value="Menor">Menor</option>
                                     <option value="Obert">Obert</option>
@@ -4257,7 +4367,7 @@ function App() {
                             </div>
                             <div className="filter-group" style={{ flex: '1 1 200px' }}>
                                 <label className="filter-label">Ordenar per</label>
-                                <select className="filter-select" style={{ height: '48px' }} value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
+                                <select className="filter-select" style={{ height: '48px' }} value={sortBy} onChange={(e) => setSortBy(e.target.value)} aria-label="Ordenar contractes per">
                                     <option value="date-desc">Data (més recents)</option>
                                     <option value="date-asc">Data (més antics)</option>
                                     <option value="amount-desc">Import (descendent)</option>
@@ -4266,10 +4376,10 @@ function App() {
                             </div>
                         </div>
 
-                        <div className={"filters-row filters-panel" + (!filtersOpen ? " collapsed" : "")} style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', alignItems: 'flex-end', marginTop: '1rem' }}>
+                        <div className={"filters-row search-filter-panel search-filter-panel-secondary" + (!filtersOpen ? " collapsed" : "")}>
                             <div className="filter-group" style={{ flex: '1 1 150px' }}>
                                 <label className="filter-label">Any</label>
-                                <select className="filter-select" style={{ height: '48px' }} value={yearFilter} onChange={(e) => setYearFilter(e.target.value)}>
+                                <select className="filter-select" style={{ height: '48px' }} value={yearFilter} onChange={(e) => setYearFilter(e.target.value)} aria-label="Any">
                                     <option value="">Tots els anys</option>
                                     {[2026, 2025, 2024, 2023, 2022, 2021, 2020, 2019, 2018, 2017, 2016].map(y => <option key={y} value={y}>{y}</option>)}
                                 </select>
@@ -4279,6 +4389,7 @@ function App() {
                                 <input
                                     type="date"
                                     className="filter-input-date"
+                                    aria-label="Data inici"
                                     style={{ height: '48px' }}
                                     value={dateStart}
                                     onChange={(e) => setDateStart(e.target.value)}
@@ -4289,15 +4400,11 @@ function App() {
                                 <input
                                     type="date"
                                     className="filter-input-date"
+                                    aria-label="Data final"
                                     style={{ height: '48px' }}
                                     value={dateEnd}
                                     onChange={(e) => setDateEnd(e.target.value)}
                                 />
-                            </div>
-                            <div className="filter-group filter-group-reset" style={{ flex: '0 0 auto', width: '48px', margin: 0 }}>
-                                <button className="btn-reset btn-icon-square" onClick={resetFilters} title="Restablir filtres">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" /><path d="M3 3v5h5" /></svg>
-                                </button>
                             </div>
                         </div>
                     </div>
@@ -4456,7 +4563,7 @@ function App() {
                 </div>
             )}
 
-            {activeTab === 'empreses' && !selectedEmpresa && !dataLoading && (
+            {activeTab === 'empreses' && !selectedEmpresa && !isDataTabLoading && (
                 <EmpresesView
                     empreses={empreses}
                     onEmpresaSelect={handleEmpresaClick}
@@ -4473,7 +4580,7 @@ function App() {
                 />
             )}
 
-            {activeTab === 'persones' && !dataLoading && (
+            {activeTab === 'persones' && !isDataTabLoading && (
                 <PersonesView
                     persones={persones}
                     onEmpresaSelect={handleEmpresaClick}
@@ -4489,7 +4596,7 @@ function App() {
                 />
             )}
 
-            {activeTab === 'contracte' && selectedContractForDetail && !dataLoading && (
+            {activeTab === 'contracte' && selectedContractForDetail && !isDataTabLoading && (
                 <ContractDetailView
                     contract={selectedContractForDetail}
                     contracts={contracts}
@@ -4499,7 +4606,7 @@ function App() {
                 />
             )}
 
-            {activeTab === 'empresa' && selectedEmpresa && !dataLoading && (
+            {activeTab === 'empresa' && selectedEmpresa && !isDataTabLoading && (
                 <EmpresaView
                     empresa={selectedEmpresa}
                     contracts={contracts}
@@ -4510,7 +4617,7 @@ function App() {
                 />
             )}
 
-            {activeTab === 'cas-fraccionament' && selectedCasoDetail && !dataLoading && (
+            {activeTab === 'cas-fraccionament' && selectedCasoDetail && !isDataTabLoading && (
                 <CasFraccionamentView
                     caso={selectedCasoDetail}
                     contracts={contracts}
@@ -4521,7 +4628,7 @@ function App() {
                 />
             )}
 
-            {activeTab === 'cas-concentracio' && selectedConcentracioDetail && !dataLoading && (
+            {activeTab === 'cas-concentracio' && selectedConcentracioDetail && !isDataTabLoading && (
                 <CasConcentracioView
                     caso={selectedConcentracioDetail}
                     contracts={contracts}
@@ -4532,7 +4639,7 @@ function App() {
                 />
             )}
 
-            {activeTab === 'cas-electoralisme' && selectedElectoralismeDetail && !dataLoading && (
+            {activeTab === 'cas-electoralisme' && selectedElectoralismeDetail && !isDataTabLoading && (
                 <CasElectoralismeView
                     caso={selectedElectoralismeDetail}
                     contracts={contracts}
@@ -4543,38 +4650,44 @@ function App() {
                 />
             )}
 
-            {activeTab === 'analisi' && !dataLoading && (
+            {activeTab === 'analisi' && !isDataTabLoading && (
                 <>
                     <div className="analisi-tabs-wrapper">
                         <div className="analisi-tabs" role="tablist" aria-label="Tipus d'anàlisi">
                         <button
                             className={'analisi-tab' + (analisiTab === 'fraccionament' ? ' active' : '')}
                             onClick={() => setAnalisiTab('fraccionament')}
+                            type="button"
                             role="tab"
                             aria-selected={analisiTab === 'fraccionament'}
+                            aria-controls="analisi-panel"
                         >
                             Fraccionament
                         </button>
                         <button
                             className={'analisi-tab' + (analisiTab === 'monopoli' ? ' active' : '')}
                             onClick={() => setAnalisiTab('monopoli')}
+                            type="button"
                             role="tab"
                             aria-selected={analisiTab === 'monopoli'}
+                            aria-controls="analisi-panel"
                         >
                             Concentració
                         </button>
                         <button
                             className={'analisi-tab' + (analisiTab === 'electoral' ? ' active' : '')}
                             onClick={() => setAnalisiTab('electoral')}
+                            type="button"
                             role="tab"
                             aria-selected={analisiTab === 'electoral'}
+                            aria-controls="analisi-panel"
                         >
                             Electoralisme
                         </button>
                         </div>
                     </div>
 
-                    <div className="container analisi-page">
+                    <div className="container analisi-page" id="analisi-panel" role="tabpanel">
                         <h1 className="page-title">Anàlisi de contractes</h1>
 
                         {analisiTab === 'fraccionament' && (
@@ -4626,28 +4739,26 @@ function App() {
                                             type="text"
                                             className="search-input"
                                             placeholder="Cerca per descripció o empresa adjudicatària"
+                                            aria-label="Cerca casos de fraccionament"
                                             value={analisiSearch}
                                             onChange={(e) => setAnalisiSearch(e.target.value)}
                                         />
                                         {analisiSearch && (
-                                            <button className="search-clear" onClick={() => setAnalisiSearch('')}>&times;</button>
+                                            <button className="search-clear" onClick={() => setAnalisiSearch('')} type="button" aria-label="Netejar cerca">&times;</button>
                                         )}
                                     </div>
 
-                                    <div className="filters-mobile-actions" style={{ display: 'none' }}>
-                                        <button className="filters-toggle-btn" onClick={() => setAnalisiFiltersOpen(prev => !prev)} aria-expanded={analisiFiltersOpen} type="button">
-                                            <span>Filtres</span>
-                                            <span className="filters-toggle-meta">{activeAnalisiFiltersCount}</span>
-                                        </button>
-                                        <button className="btn-reset filters-mobile-reset" onClick={resetAnalisiFilters} title="Restablir filtres" type="button">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" /><path d="M3 3v5h5" /></svg>
-                                        </button>
-                                    </div>
+                                    <FilterActions
+                                        open={analisiFiltersOpen}
+                                        onToggle={() => setAnalisiFiltersOpen(prev => !prev)}
+                                        activeCount={activeAnalisiFiltersCount}
+                                        onReset={resetAnalisiFilters}
+                                    />
 
-                                    <div className={"filters filters-panel" + (!analisiFiltersOpen ? " collapsed" : "")} style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', alignItems: 'flex-end', marginTop: '1.5rem' }}>
+                                    <div className={"filters search-filter-panel search-filter-panel-analysis" + (!analisiFiltersOpen ? " collapsed" : "")}>
                                         <div className="filter-group" style={{ flex: '1 1 240px' }}>
                                             <label className="filter-label">Ordenar per</label>
-                                            <select className="filter-select" style={{ height: '48px' }} value={analisiSort} onChange={(e) => setAnalisiSort(e.target.value)}>
+                                            <select className="filter-select" style={{ height: '48px' }} value={analisiSort} onChange={(e) => setAnalisiSort(e.target.value)} aria-label="Ordenar casos de fraccionament per">
                                                 <option value="risk-desc">Puntuació de risc (descendent)</option>
                                                 <option value="risk-asc">Puntuació de risc (ascendent)</option>
                                                 <option value="amount-desc">Import (descendent)</option>
@@ -4672,11 +4783,6 @@ function App() {
                                                     </button>
                                                 ))}
                                             </div>
-                                        </div>
-                                        <div className="filter-group filter-group-reset" style={{ flex: '0 0 auto', width: '48px', margin: 0 }}>
-                                            <button className="btn-reset btn-icon-square" onClick={resetAnalisiFilters} title="Restablir filtres">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" /><path d="M3 3v5h5" /></svg>
-                                            </button>
                                         </div>
                                     </div>
                                 </div>
@@ -4834,28 +4940,26 @@ function App() {
                                                 type="text"
                                                 className="search-input"
                                                 placeholder="Cerca per sector o empresa adjudicatària"
+                                                aria-label="Cerca casos de concentració"
                                                 value={analisiSearch}
                                                 onChange={(e) => setAnalisiSearch(e.target.value)}
                                             />
                                             {analisiSearch && (
-                                                <button className="search-clear" onClick={() => setAnalisiSearch('')}>&times;</button>
+                                                <button className="search-clear" onClick={() => setAnalisiSearch('')} type="button" aria-label="Netejar cerca">&times;</button>
                                             )}
                                         </div>
 
-                                        <div className="filters-mobile-actions" style={{ display: 'none' }}>
-                                            <button className="filters-toggle-btn" onClick={() => setAnalisiFiltersOpen(prev => !prev)} aria-expanded={analisiFiltersOpen} type="button">
-                                                <span>Filtres</span>
-                                                <span className="filters-toggle-meta">{activeAnalisiFiltersCount}</span>
-                                            </button>
-                                            <button className="btn-reset filters-mobile-reset" onClick={resetAnalisiFilters} title="Restablir filtres" type="button">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" /><path d="M3 3v5h5" /></svg>
-                                            </button>
-                                        </div>
+                                        <FilterActions
+                                            open={analisiFiltersOpen}
+                                            onToggle={() => setAnalisiFiltersOpen(prev => !prev)}
+                                            activeCount={activeAnalisiFiltersCount}
+                                            onReset={resetAnalisiFilters}
+                                        />
 
-                                        <div className={"filters filters-panel" + (!analisiFiltersOpen ? " collapsed" : "")} style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', alignItems: 'flex-end', marginTop: '1.5rem' }}>
+                                        <div className={"filters search-filter-panel search-filter-panel-analysis" + (!analisiFiltersOpen ? " collapsed" : "")}>
                                             <div className="filter-group" style={{ flex: '1 1 240px' }}>
                                                 <label className="filter-label">Ordenar per</label>
-                                                <select className="filter-select" style={{ height: '48px' }} value={analisiSort} onChange={(e) => setAnalisiSort(e.target.value)}>
+                                                <select className="filter-select" style={{ height: '48px' }} value={analisiSort} onChange={(e) => setAnalisiSort(e.target.value)} aria-label="Ordenar casos de concentració per">
                                                     <option value="risk-desc">Puntuació de risc (descendent)</option>
                                                     <option value="risk-asc">Puntuació de risc (ascendent)</option>
                                                     <option value="amount-desc">Import (descendent)</option>
@@ -4878,11 +4982,6 @@ function App() {
                                                         </button>
                                                     ))}
                                                 </div>
-                                            </div>
-                                            <div className="filter-group filter-group-reset" style={{ flex: '0 0 auto', width: '48px', margin: 0 }}>
-                                                <button className="btn-reset btn-icon-square" onClick={resetAnalisiFilters} title="Restablir filtres">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" /><path d="M3 3v5h5" /></svg>
-                                                </button>
                                             </div>
                                         </div>
                                     </div>
@@ -5018,28 +5117,26 @@ function App() {
                                             type="text"
                                             className="search-input"
                                             placeholder="Cerca per descripció, empresa adjudicatària o període electoral"
+                                            aria-label="Cerca casos d'electoralisme"
                                             value={analisiSearch}
                                             onChange={(e) => setAnalisiSearch(e.target.value)}
                                         />
                                         {analisiSearch && (
-                                            <button className="search-clear" onClick={() => setAnalisiSearch('')}>&times;</button>
+                                            <button className="search-clear" onClick={() => setAnalisiSearch('')} type="button" aria-label="Netejar cerca">&times;</button>
                                         )}
                                     </div>
 
-                                    <div className="filters-mobile-actions" style={{ display: 'none' }}>
-                                        <button className="filters-toggle-btn" onClick={() => setAnalisiFiltersOpen(prev => !prev)} aria-expanded={analisiFiltersOpen} type="button">
-                                            <span>Filtres</span>
-                                            <span className="filters-toggle-meta">{activeAnalisiFiltersCount}</span>
-                                        </button>
-                                        <button className="btn-reset filters-mobile-reset" onClick={resetAnalisiFilters} title="Restablir filtres" type="button">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" /><path d="M3 3v5h5" /></svg>
-                                        </button>
-                                    </div>
+                                    <FilterActions
+                                        open={analisiFiltersOpen}
+                                        onToggle={() => setAnalisiFiltersOpen(prev => !prev)}
+                                        activeCount={activeAnalisiFiltersCount}
+                                        onReset={resetAnalisiFilters}
+                                    />
 
-                                    <div className={"filters filters-panel" + (!analisiFiltersOpen ? " collapsed" : "")} style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', alignItems: 'flex-end', marginTop: '1.5rem' }}>
+                                    <div className={"filters search-filter-panel search-filter-panel-analysis" + (!analisiFiltersOpen ? " collapsed" : "")}>
                                         <div className="filter-group" style={{ flex: '1 1 240px' }}>
                                             <label className="filter-label">Ordenar per</label>
-                                            <select className="filter-select" style={{ height: '48px' }} value={analisiSort} onChange={(e) => setAnalisiSort(e.target.value)}>
+                                            <select className="filter-select" style={{ height: '48px' }} value={analisiSort} onChange={(e) => setAnalisiSort(e.target.value)} aria-label="Ordenar casos d'electoralisme per">
                                                 <option value="risk-desc">Puntuació de risc (descendent)</option>
                                                 <option value="risk-asc">Puntuació de risc (ascendent)</option>
                                                 <option value="amount-desc">Import (descendent)</option>
@@ -5062,11 +5159,6 @@ function App() {
                                                     </button>
                                                 ))}
                                             </div>
-                                        </div>
-                                        <div className="filter-group filter-group-reset" style={{ flex: '0 0 auto', width: '48px', margin: 0 }}>
-                                            <button className="btn-reset btn-icon-square" onClick={resetAnalisiFilters} title="Restablir filtres">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" /><path d="M3 3v5h5" /></svg>
-                                            </button>
                                         </div>
                                     </div>
                                 </div>
@@ -5287,6 +5379,9 @@ function App() {
                     </div>
                 )
             }
+
+                </main>
+            )}
 
             {
                 activeTab !== 'home' && (

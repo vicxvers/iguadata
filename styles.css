@@ -512,6 +512,102 @@ html.home-lock-scroll {
     justify-content: flex-start;
 }
 
+.filter-actions {
+    display: flex;
+    width: 100%;
+    gap: 0.75rem;
+    margin-top: 1rem;
+    align-items: stretch;
+}
+
+.filters-toggle-btn {
+    display: flex;
+    flex: 1 1 auto;
+    min-height: var(--control-h);
+    margin: 0;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.875rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+    color: var(--navy);
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+
+.filters-toggle-btn:hover {
+    border-color: var(--navy-light);
+    background: var(--bg);
+}
+
+.filters-toggle-meta {
+    color: var(--text-light);
+    font-size: var(--text-2xs);
+}
+
+.filters-mobile-reset {
+    display: flex;
+    flex: 0 0 var(--control-h);
+    min-width: var(--control-h);
+    width: var(--control-h);
+    height: var(--control-h);
+    padding: 0;
+    align-items: center;
+    justify-content: center;
+    color: var(--navy);
+}
+
+.filters-reset-icon {
+    display: block;
+    flex: 0 0 auto;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.search-filter-panel {
+    grid-template-columns: repeat(3, 1fr);
+    max-height: 12rem;
+    opacity: 1;
+    overflow: hidden;
+    transition: max-height 0.28s ease, opacity 0.2s ease, margin-top 0.28s ease;
+}
+
+.search-filter-panel .filter-group:nth-child(3):last-child {
+    grid-column: auto;
+}
+
+.search-filter-panel.collapsed {
+    max-height: 0;
+    opacity: 0;
+    margin-top: 0;
+    pointer-events: none;
+}
+
+.search-filter-panel-single {
+    grid-template-columns: 1fr;
+}
+
+.search-filter-panel-four {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.search-filter-panel-analysis {
+    grid-template-columns: minmax(15rem, 1fr) minmax(18rem, 1.2fr);
+}
+
+.search-filter-panel-secondary {
+    max-height: 8rem;
+}
+
 
 .filter-input-date {
     width: 100%;
@@ -4736,13 +4832,15 @@ body.home-scroll-surface::-webkit-scrollbar {
 
 /* â”€â”€â”€ Sobre / AvÃ­s Legal page utilities â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .prose-wrapper {
-    max-width: 980px;
+    width: 62.5vw;
+    max-width: none;
     margin-left: auto;
     margin-right: auto;
 }
 
 .prose-page .page-title {
-    max-width: 980px;
+    width: 62.5vw;
+    max-width: none;
     margin-left: auto;
     margin-right: auto;
 }
@@ -4963,10 +5061,20 @@ body.home-scroll-surface::-webkit-scrollbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 100%;
     padding: 1.5rem 2.25rem;
+    border: 0;
     background-color: transparent;
+    color: inherit;
+    font: inherit;
+    text-align: left;
     transition: background-color 0.2s;
     cursor: pointer;
+}
+
+.persona-row-header:focus-visible {
+    outline: 2px solid rgba(15, 23, 42, 0.25);
+    outline-offset: -2px;
 }
 
 .persona-row-header.is-expanded {
@@ -4988,6 +5096,12 @@ body.home-scroll-surface::-webkit-scrollbar {
 
 .persona-row-amount {
     text-align: right;
+}
+
+.persona-amount-caption {
+    max-width: 18rem;
+    margin-top: 0.35rem;
+    line-height: 1.35;
 }
 
 .persona-row-chevron {
@@ -5072,7 +5186,7 @@ body.home-scroll-surface::-webkit-scrollbar {
 
 .persona-title {
     font-size: var(--text-lg);
-    margin-bottom: 0.25rem;
+    margin-bottom: 0;
 }
 
 .persona-subtitle {
@@ -6308,7 +6422,7 @@ body.home-scroll-surface::-webkit-scrollbar {
     }
 
     /* FASE 3.2 - Contractes + filtres accordion */
-    .filters-mobile-actions {
+    .filter-actions {
         display: flex !important;
         width: 100%;
         gap: 0.75rem;
@@ -6370,7 +6484,7 @@ body.home-scroll-surface::-webkit-scrollbar {
         background: var(--mobile-input-bg);
     }
 
-    .search-section .filters-panel {
+    .search-section .search-filter-panel {
         width: 100%;
         flex-direction: column !important;
         align-items: stretch !important;
@@ -6382,7 +6496,7 @@ body.home-scroll-surface::-webkit-scrollbar {
         transition: max-height 0.28s ease, opacity 0.2s ease, margin-top 0.28s ease;
     }
 
-    .search-section .filters-panel.collapsed {
+    .search-section .search-filter-panel.collapsed {
         max-height: 0;
         opacity: 0;
         margin-top: 0 !important;
@@ -6851,7 +6965,7 @@ body.home-scroll-surface::-webkit-scrollbar {
         font-size: var(--text-md);
         line-height: 1.5;
         font-weight: 500;
-        margin-bottom: 0.35rem;
+        margin-bottom: 0;
     }
 
     .persones-page .persona-subtitle {
@@ -6914,6 +7028,7 @@ body.home-scroll-surface::-webkit-scrollbar {
     }
 
     .prose-page .page-title {
+        width: auto;
         font-size: clamp(2.25rem, 9vw, 2.75rem);
         line-height: 1.05;
         margin: 0 0 2.5rem;
@@ -6921,6 +7036,7 @@ body.home-scroll-surface::-webkit-scrollbar {
     }
 
     .prose-wrapper {
+        width: auto;
         max-width: none;
     }
 

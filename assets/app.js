@@ -870,7 +870,15 @@ function ContractDetailView({
     className: "contract-header contracte-detail-company-row"
   }, React.createElement("h2", {
     className: "contracte-detail-company-title",
-    onClick: () => onEmpresaClick(c.adjudicatario)
+    onClick: () => onEmpresaClick(c.adjudicatario),
+    onKeyDown: event => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        onEmpresaClick(c.adjudicatario);
+      }
+    },
+    role: "link",
+    tabIndex: 0
   }, c.adjudicatario), React.createElement("div", {
     className: "contract-pills contracte-detail-company-pills"
   }, React.createElement("button", {
@@ -887,6 +895,14 @@ function CasoCard({
   return React.createElement("div", {
     className: "alert-card risk-" + rc,
     onClick: onSelect,
+    onKeyDown: event => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        onSelect();
+      }
+    },
+    role: "button",
+    tabIndex: 0,
     style: {
       cursor: 'pointer'
     }
@@ -943,10 +959,15 @@ function CasoModal({
 }) {
   useEffect(() => {
     document.body.style.overflow = 'hidden';
+    const handleKeyDown = event => {
+      if (event.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', handleKeyDown);
     return () => {
       document.body.style.overflow = '';
+      window.removeEventListener('keydown', handleKeyDown);
     };
-  }, []);
+  }, [onClose]);
   const rc = riskClass(caso.nivel_riesgo);
   const pct = caso.umbral > 0 ? caso.importe_total / caso.umbral * 100 : 0;
   return React.createElement("div", {
@@ -954,14 +975,19 @@ function CasoModal({
     onClick: onClose
   }, React.createElement("div", {
     className: "modal-content",
-    onClick: e => e.stopPropagation()
+    onClick: e => e.stopPropagation(),
+    role: "dialog",
+    "aria-modal": "true",
+    "aria-label": `Detall de ${caso.empresa}`
   }, React.createElement("div", {
     className: "modal-header"
   }, React.createElement("div", {
     className: "modal-header-top"
   }, React.createElement("button", {
     className: "modal-close",
-    onClick: onClose
+    onClick: onClose,
+    type: "button",
+    "aria-label": "Tancar"
   }, "?")), React.createElement("span", {
     className: "risk-badge modal-risk-badge " + rc
   }, riskLabel(caso.nivel_riesgo)), React.createElement("div", {
@@ -1830,6 +1856,41 @@ function CasElectoralismeView({
     className: "contract-amount"
   }, formatCurrency(contracte.importe)))));
 }
+function FilterActions({
+  open,
+  onToggle,
+  activeCount,
+  onReset
+}) {
+  return React.createElement("div", {
+    className: "filter-actions"
+  }, React.createElement("button", {
+    className: "filters-toggle-btn",
+    onClick: onToggle,
+    "aria-expanded": open,
+    type: "button"
+  }, React.createElement("span", null, "Filtres"), React.createElement("span", {
+    className: "filters-toggle-meta"
+  }, activeCount)), React.createElement("button", {
+    className: "btn-reset filters-mobile-reset",
+    onClick: onReset,
+    title: "Restablir filtres",
+    "aria-label": "Restablir filtres",
+    type: "button"
+  }, React.createElement("svg", {
+    className: "filters-reset-icon",
+    xmlns: "http://www.w3.org/2000/svg",
+    width: "20",
+    height: "20",
+    viewBox: "0 0 24 24",
+    fill: "none",
+    "aria-hidden": "true"
+  }, React.createElement("path", {
+    d: "M3 12a9 9 0 1 0 3-6.7L3 8"
+  }), React.createElement("path", {
+    d: "M3 3v5h5"
+  }))));
+}
 function EmpresesView({
   empreses,
   onEmpresaSelect,
@@ -1966,51 +2027,21 @@ function EmpresesView({
     type: "text",
     className: "search-input",
     placeholder: "Cerca per empresa adjudicat\xE0ria",
+    "aria-label": "Cerca per empresa adjudicat\xE0ria",
     value: searchTerm,
     onChange: e => setSearchTerm(e.target.value)
   }), searchTerm && React.createElement("button", {
     className: "search-clear",
-    onClick: () => setSearchTerm('')
-  }, "\xD7")), React.createElement("div", {
-    className: "filters-mobile-actions",
-    style: {
-      display: 'none'
-    }
-  }, React.createElement("button", {
-    className: "filters-toggle-btn",
-    onClick: () => setEmpresesFiltersOpen(prev => !prev),
-    "aria-expanded": empresesFiltersOpen,
-    type: "button"
-  }, React.createElement("span", null, "Filtres"), React.createElement("span", {
-    className: "filters-toggle-meta"
-  }, activeFiltersCount)), React.createElement("button", {
-    className: "btn-reset filters-mobile-reset",
-    onClick: resetFilters,
-    title: "Restablir filtres",
-    type: "button"
-  }, React.createElement("svg", {
-    xmlns: "http://www.w3.org/2000/svg",
-    width: "20",
-    height: "20",
-    viewBox: "0 0 24 24",
-    fill: "none",
-    stroke: "currentColor",
-    strokeWidth: "2",
-    strokeLinecap: "round",
-    strokeLinejoin: "round"
-  }, React.createElement("path", {
-    d: "M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"
-  }), React.createElement("path", {
-    d: "M3 3v5h5"
-  })))), React.createElement("div", {
-    className: "filters filters-panel" + (!empresesFiltersOpen ? " collapsed" : ""),
-    style: {
-      display: 'flex',
-      flexWrap: 'wrap',
-      gap: '1rem',
-      alignItems: 'flex-end',
-      marginTop: '1.5rem'
-    }
+    onClick: () => setSearchTerm(''),
+    type: "button",
+    "aria-label": "Netejar cerca"
+  }, "\xD7")), React.createElement(FilterActions, {
+    open: empresesFiltersOpen,
+    onToggle: () => setEmpresesFiltersOpen(prev => !prev),
+    activeCount: activeFiltersCount,
+    onReset: resetFilters
+  }), React.createElement("div", {
+    className: "filters search-filter-panel" + (!empresesFiltersOpen ? " collapsed" : "")
   }, React.createElement("div", {
     className: "filter-group",
     style: {
@@ -2027,7 +2058,8 @@ function EmpresesView({
     onChange: e => {
       setSectorFilter(e.target.value);
       setCategoriaFilter('');
-    }
+    },
+    "aria-label": "Sector"
   }, React.createElement("option", {
     value: ""
   }, "Tots els sectors"), allSectors.slice().sort((a, b) => {
@@ -2051,7 +2083,8 @@ function EmpresesView({
     },
     value: categoriaFilter,
     onChange: e => setCategoriaFilter(e.target.value),
-    disabled: !sectorFilter
+    disabled: !sectorFilter,
+    "aria-label": "Categoria"
   }, React.createElement("option", {
     value: ""
   }, sectorFilter ? 'Totes les categories' : 'Selecciona un sector'), categoriesForSector.slice().sort((a, b) => {
@@ -2074,7 +2107,8 @@ function EmpresesView({
       height: '48px'
     },
     value: sortBy,
-    onChange: e => setSortBy(e.target.value)
+    onChange: e => setSortBy(e.target.value),
+    "aria-label": "Ordenar empreses per"
   }, React.createElement("option", {
     value: "amount-desc"
   }, "Import (descendent)"), React.createElement("option", {
@@ -2083,32 +2117,7 @@ function EmpresesView({
     value: "contracts-desc"
   }, "Nombre de contractes (descendent)"), React.createElement("option", {
     value: "contracts-asc"
-  }, "Nombre de contractes (ascendent)"))), React.createElement("div", {
-    className: "filter-group filter-group-reset",
-    style: {
-      flex: '0 0 auto',
-      width: '48px',
-      margin: 0
-    }
-  }, React.createElement("button", {
-    className: "btn-reset btn-icon-square",
-    onClick: resetFilters,
-    title: "Restablir filtres"
-  }, React.createElement("svg", {
-    xmlns: "http://www.w3.org/2000/svg",
-    width: "20",
-    height: "20",
-    viewBox: "0 0 24 24",
-    fill: "none",
-    stroke: "currentColor",
-    strokeWidth: "2",
-    strokeLinecap: "round",
-    strokeLinejoin: "round"
-  }, React.createElement("path", {
-    d: "M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"
-  }), React.createElement("path", {
-    d: "M3 3v5h5"
-  })))))), React.createElement("div", {
+  }, "Nombre de contractes (ascendent)"))))), React.createElement("div", {
     className: "results-count"
   }, React.createElement("span", {
     className: "results-count-total"
@@ -2521,51 +2530,21 @@ function EmpresaView({
     type: "text",
     className: "search-input",
     placeholder: "Cerca per descripci\xF3 del contracte",
+    "aria-label": "Cerca per descripci\xF3 del contracte",
     value: searchTerm,
     onChange: e => setSearchTerm(e.target.value)
   }), searchTerm && React.createElement("button", {
     className: "search-clear",
-    onClick: () => setSearchTerm('')
-  }, "\xD7")), React.createElement("div", {
-    className: "filters-mobile-actions",
-    style: {
-      display: 'none'
-    }
-  }, React.createElement("button", {
-    className: "filters-toggle-btn",
-    onClick: () => setEmpresaFiltersOpen(prev => !prev),
-    "aria-expanded": empresaFiltersOpen,
-    type: "button"
-  }, React.createElement("span", null, "Filtres"), React.createElement("span", {
-    className: "filters-toggle-meta"
-  }, activeFiltersCount)), React.createElement("button", {
-    className: "btn-reset filters-mobile-reset",
-    onClick: resetFilters,
-    title: "Restablir filtres",
-    type: "button"
-  }, React.createElement("svg", {
-    xmlns: "http://www.w3.org/2000/svg",
-    width: "20",
-    height: "20",
-    viewBox: "0 0 24 24",
-    fill: "none",
-    stroke: "currentColor",
-    strokeWidth: "2",
-    strokeLinecap: "round",
-    strokeLinejoin: "round"
-  }, React.createElement("path", {
-    d: "M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"
-  }), React.createElement("path", {
-    d: "M3 3v5h5"
-  })))), React.createElement("div", {
-    className: "filters filters-panel" + (!empresaFiltersOpen ? " collapsed" : ""),
-    style: {
-      display: 'flex',
-      flexWrap: 'wrap',
-      gap: '1rem',
-      alignItems: 'flex-end',
-      marginTop: '1.5rem'
-    }
+    onClick: () => setSearchTerm(''),
+    type: "button",
+    "aria-label": "Netejar cerca"
+  }, "\xD7")), React.createElement(FilterActions, {
+    open: empresaFiltersOpen,
+    onToggle: () => setEmpresaFiltersOpen(prev => !prev),
+    activeCount: activeFiltersCount,
+    onReset: resetFilters
+  }), React.createElement("div", {
+    className: "filters search-filter-panel search-filter-panel-four" + (!empresaFiltersOpen ? " collapsed" : "")
   }, React.createElement("div", {
     className: "filter-group",
     style: {
@@ -2579,7 +2558,8 @@ function EmpresaView({
       height: '48px'
     },
     value: tipusFilter,
-    onChange: e => setTipusFilter(e.target.value)
+    onChange: e => setTipusFilter(e.target.value),
+    "aria-label": "Tipus de contracte"
   }, React.createElement("option", {
     value: ""
   }, "Tots els tipus"), React.createElement("option", {
@@ -2609,7 +2589,8 @@ function EmpresaView({
       height: '48px'
     },
     value: procedureFilter,
-    onChange: e => setProcedureFilter(e.target.value)
+    onChange: e => setProcedureFilter(e.target.value),
+    "aria-label": "Procediment"
   }, React.createElement("option", {
     value: ""
   }, "Tots els procediments"), React.createElement("option", {
@@ -2637,7 +2618,8 @@ function EmpresaView({
       height: '48px'
     },
     value: yearFilter,
-    onChange: e => setYearFilter(e.target.value)
+    onChange: e => setYearFilter(e.target.value),
+    "aria-label": "Any"
   }, React.createElement("option", {
     value: ""
   }, "Tots els anys"), [...new Set(allEmpresaContracts.map(c => c.año || parseInt(String(c.fecha || '').slice(0, 4), 10)).filter(Boolean))].sort((a, b) => b - a).map(y => React.createElement("option", {
@@ -2656,7 +2638,8 @@ function EmpresaView({
       height: '48px'
     },
     value: sortBy,
-    onChange: e => setSortBy(e.target.value)
+    onChange: e => setSortBy(e.target.value),
+    "aria-label": "Ordenar contractes de l'empresa per"
   }, React.createElement("option", {
     value: "date-desc"
   }, "Data (m\xE9s recents)"), React.createElement("option", {
@@ -2665,32 +2648,7 @@ function EmpresaView({
     value: "amount-desc"
   }, "Import (descendent)"), React.createElement("option", {
     value: "amount-asc"
-  }, "Import (ascendent)"))), React.createElement("div", {
-    className: "filter-group filter-group-reset",
-    style: {
-      flex: '0 0 auto',
-      width: '48px',
-      margin: 0
-    }
-  }, React.createElement("button", {
-    className: "btn-reset btn-icon-square",
-    onClick: resetFilters,
-    title: "Restablir filtres"
-  }, React.createElement("svg", {
-    xmlns: "http://www.w3.org/2000/svg",
-    width: "20",
-    height: "20",
-    viewBox: "0 0 24 24",
-    fill: "none",
-    stroke: "currentColor",
-    strokeWidth: "2",
-    strokeLinecap: "round",
-    strokeLinejoin: "round"
-  }, React.createElement("path", {
-    d: "M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"
-  }), React.createElement("path", {
-    d: "M3 3v5h5"
-  })))))), React.createElement("div", {
+  }, "Import (ascendent)"))))), React.createElement("div", {
     className: "results-count"
   }, React.createElement("span", {
     className: "results-count-total"
@@ -2907,51 +2865,21 @@ function PersonesView({
     type: "text",
     className: "search-input",
     placeholder: "Cerca per persona o empresa adjudicat\xE0ria",
+    "aria-label": "Cerca per persona o empresa adjudicat\xE0ria",
     value: searchTerm,
     onChange: e => setSearchTerm(e.target.value)
   }), searchTerm && React.createElement("button", {
     className: "search-clear",
-    onClick: () => setSearchTerm('')
-  }, "\xD7")), React.createElement("div", {
-    className: "filters-mobile-actions",
-    style: {
-      display: 'none'
-    }
-  }, React.createElement("button", {
-    className: "filters-toggle-btn",
-    onClick: () => setPersonesFiltersOpen(prev => !prev),
-    "aria-expanded": personesFiltersOpen,
-    type: "button"
-  }, React.createElement("span", null, "Filtres"), React.createElement("span", {
-    className: "filters-toggle-meta"
-  }, activeFiltersCount)), React.createElement("button", {
-    className: "btn-reset filters-mobile-reset",
-    onClick: resetFilters,
-    title: "Restablir filtres",
-    type: "button"
-  }, React.createElement("svg", {
-    xmlns: "http://www.w3.org/2000/svg",
-    width: "20",
-    height: "20",
-    viewBox: "0 0 24 24",
-    fill: "none",
-    stroke: "currentColor",
-    strokeWidth: "2",
-    strokeLinecap: "round",
-    strokeLinejoin: "round"
-  }, React.createElement("path", {
-    d: "M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"
-  }), React.createElement("path", {
-    d: "M3 3v5h5"
-  })))), React.createElement("div", {
-    className: "filters filters-panel" + (!personesFiltersOpen ? " collapsed" : ""),
-    style: {
-      display: 'flex',
-      flexWrap: 'wrap',
-      gap: '1rem',
-      alignItems: 'flex-end',
-      marginTop: '1.5rem'
-    }
+    onClick: () => setSearchTerm(''),
+    type: "button",
+    "aria-label": "Netejar cerca"
+  }, "\xD7")), React.createElement(FilterActions, {
+    open: personesFiltersOpen,
+    onToggle: () => setPersonesFiltersOpen(prev => !prev),
+    activeCount: activeFiltersCount,
+    onReset: resetFilters
+  }), React.createElement("div", {
+    className: "filters search-filter-panel search-filter-panel-single" + (!personesFiltersOpen ? " collapsed" : "")
   }, React.createElement("div", {
     className: "filter-group",
     style: {
@@ -2965,7 +2893,8 @@ function PersonesView({
       height: '48px'
     },
     value: sortBy,
-    onChange: e => setSortBy(e.target.value)
+    onChange: e => setSortBy(e.target.value),
+    "aria-label": "Ordenar persones per"
   }, React.createElement("option", {
     value: "companies-desc"
   }, "Nombre d'empreses (descendent)"), React.createElement("option", {
@@ -2974,32 +2903,7 @@ function PersonesView({
     value: "amount-desc"
   }, "Import (descendent)"), React.createElement("option", {
     value: "amount-asc"
-  }, "Import (ascendent)"))), React.createElement("div", {
-    className: "filter-group filter-group-reset",
-    style: {
-      flex: '0 0 auto',
-      width: '48px',
-      margin: 0
-    }
-  }, React.createElement("button", {
-    className: "btn-reset btn-icon-square",
-    onClick: resetFilters,
-    title: "Restablir filtres"
-  }, React.createElement("svg", {
-    xmlns: "http://www.w3.org/2000/svg",
-    width: "20",
-    height: "20",
-    viewBox: "0 0 24 24",
-    fill: "none",
-    stroke: "currentColor",
-    strokeWidth: "2",
-    strokeLinecap: "round",
-    strokeLinejoin: "round"
-  }, React.createElement("path", {
-    d: "M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"
-  }), React.createElement("path", {
-    d: "M3 3v5h5"
-  })))))), React.createElement("div", {
+  }, "Import (ascendent)"))))), React.createElement("div", {
     className: "results-count"
   }, React.createElement("span", {
     className: "results-count-total"
@@ -3018,22 +2922,24 @@ function PersonesView({
     return React.createElement("div", {
       key: idx,
       className: "contract-card persona-card"
-    }, React.createElement("div", {
+    }, React.createElement("button", {
+      type: "button",
       className: `persona-row-header${isExpanded ? ' is-expanded' : ''}`,
-      onClick: () => togglePersona(idx)
+      onClick: () => togglePersona(idx),
+      "aria-expanded": isExpanded
     }, React.createElement("div", {
       className: "persona-row-header-left"
     }, React.createElement("div", null, React.createElement("div", {
       className: "contract-title persona-title"
-    }, p.nom), React.createElement("div", {
-      className: "persona-subtitle"
-    }, p.relacions.length, " ", p.relacions.length === 1 ? 'empresa' : 'empreses'))), React.createElement("div", {
+    }, p.nom))), React.createElement("div", {
       className: "persona-row-header-right"
     }, React.createElement("div", {
       className: "persona-row-amount"
     }, React.createElement("div", {
       className: "contract-amount persona-amount"
-    }, formatCurrency(p.total_adjudicat))), React.createElement("div", {
+    }, formatCurrency(p.total_adjudicat)), React.createElement("div", {
+      className: "contract-meta-value persona-amount-caption"
+    }, "Per a ", p.relacions.length, " ", p.relacions.length === 1 ? 'empresa vinculada' : 'empreses vinculades')), React.createElement("div", {
       className: `persona-row-chevron${isExpanded ? ' is-expanded' : ''}`
     }, React.createElement("svg", {
       xmlns: "http://www.w3.org/2000/svg",
@@ -3195,6 +3101,9 @@ function App() {
   const [stats, setStats] = useState(null);
   const [loading, setLoading] = useState(true);
   const [dataLoading, setDataLoading] = useState(true);
+  const [personesLoaded, setPersonesLoaded] = useState(false);
+  const [administradorsLoaded, setAdministradorsLoaded] = useState(false);
+  const [analisiLoaded, setAnalisiLoaded] = useState(false);
   const [summary, setSummary] = useState(null);
   const [summaryResolved, setSummaryResolved] = useState(false);
   const [loadingProgress, setLoadingProgress] = useState(0);
@@ -3842,13 +3751,7 @@ function App() {
     if (!summaryResolved) return;
     let cancelled = false;
     setDataLoading(true);
-    Promise.all([fetchAllContractsCached(), fetch(jsonAssetUrl('/json/empreses.json')).then(res => res.json()), fetch(jsonAssetUrl('/json/persones.json')).then(res => res.ok ? res.json() : []), fetch(jsonAssetUrl('/json/carrecs.json')).then(res => res.ok ? res.json() : {}), fetch(jsonAssetUrl('/json/fraccionament.json')).then(res => res.ok ? res.json() : {
-      alertes: []
-    }), fetch(jsonAssetUrl('/json/concentracio.json')).then(res => res.ok ? res.json() : {
-      alertes: []
-    }), fetch(jsonAssetUrl('/json/electoralisme.json')).then(res => res.ok ? res.json() : {
-      alertes: []
-    }), fetchArchivedContracts()]).then(async ([socrataRows, existingEmpreses, personesData, administradorsData, fraccionamentData, concentracioData, electoralismeData, archiveRows]) => {
+    Promise.all([fetchAllContractsCached(), fetch(jsonAssetUrl('/json/empreses.json')).then(res => res.json()), fetchArchivedContracts()]).then(async ([socrataRows, existingEmpreses, archiveRows]) => {
       if (cancelled) return;
       let contractsData = socrataRows.map((row, i) => row && row.__iguadataInternalContract ? Object.fromEntries(Object.entries(row).filter(([key]) => key !== '__iguadataInternalContract')) : mapSocrataContract(row, i + 1));
       contractsData = mergeArchivedContracts(contractsData, archiveRows);
@@ -3876,11 +3779,6 @@ function App() {
         importe_total: contractsData.reduce((s, c) => s + c.importe, 0),
         num_empresas: uniqueEmps.size
       });
-      setPersones(personesData || []);
-      setAdministradors(administradorsData || {});
-      setFraudes(fraccionamentData && fraccionamentData.alertes || []);
-      setConcentracio(concentracioData && concentracioData.alertes || []);
-      setElectoral(electoralismeData && electoralismeData.alertes || []);
       const empresesData = buildEmpreses(contractsData, existingEmpreses);
       empresesData.forEach(e => {
         e.firstContractId = Math.min(...e.contratos);
@@ -3910,6 +3808,75 @@ function App() {
       cancelled = true;
     };
   }, [summaryResolved]);
+  useEffect(() => {
+    if (!summaryResolved || activeTab !== 'persones' || personesLoaded) return;
+    let cancelled = false;
+    fetch(jsonAssetUrl('/json/persones.json')).then(res => res.ok ? res.json() : []).then(data => {
+      if (!cancelled) setPersones(data || []);
+    }).catch(err => {
+      console.error('Error loading persones:', err);
+    }).finally(() => {
+      if (!cancelled) setPersonesLoaded(true);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [activeTab, summaryResolved, personesLoaded]);
+  useEffect(() => {
+    if (!summaryResolved || activeTab !== 'empresa' || administradorsLoaded) return;
+    let cancelled = false;
+    fetch(jsonAssetUrl('/json/carrecs.json')).then(res => res.ok ? res.json() : {}).then(data => {
+      if (!cancelled) setAdministradors(data || {});
+    }).catch(err => {
+      console.error('Error loading carrecs:', err);
+    }).finally(() => {
+      if (!cancelled) setAdministradorsLoaded(true);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [activeTab, summaryResolved, administradorsLoaded]);
+  useEffect(() => {
+    const analisiTabs = ['analisi', 'cas-fraccionament', 'cas-concentracio', 'cas-electoralisme'];
+    const shouldLoadImmediately = analisiTabs.includes(activeTab);
+    const shouldLoadWhenIdle = activeTab === 'home' && !dataLoading;
+    if (!summaryResolved || analisiLoaded || !shouldLoadImmediately && !shouldLoadWhenIdle) return;
+    let cancelled = false;
+    let idleId = null;
+    let timeoutId = null;
+    const loadAnalisi = () => {
+      Promise.all([fetch(jsonAssetUrl('/json/fraccionament.json')).then(res => res.ok ? res.json() : {
+        alertes: []
+      }), fetch(jsonAssetUrl('/json/concentracio.json')).then(res => res.ok ? res.json() : {
+        alertes: []
+      }), fetch(jsonAssetUrl('/json/electoralisme.json')).then(res => res.ok ? res.json() : {
+        alertes: []
+      })]).then(([fraccionamentData, concentracioData, electoralismeData]) => {
+        if (cancelled) return;
+        setFraudes(fraccionamentData && fraccionamentData.alertes || []);
+        setConcentracio(concentracioData && concentracioData.alertes || []);
+        setElectoral(electoralismeData && electoralismeData.alertes || []);
+      }).catch(err => {
+        console.error('Error loading analysis data:', err);
+      }).finally(() => {
+        if (!cancelled) setAnalisiLoaded(true);
+      });
+    };
+    if (shouldLoadImmediately) {
+      loadAnalisi();
+    } else if ('requestIdleCallback' in window) {
+      idleId = window.requestIdleCallback(loadAnalisi, {
+        timeout: 2500
+      });
+    } else {
+      timeoutId = window.setTimeout(loadAnalisi, 800);
+    }
+    return () => {
+      cancelled = true;
+      if (idleId !== null) window.cancelIdleCallback(idleId);
+      if (timeoutId !== null) window.clearTimeout(timeoutId);
+    };
+  }, [activeTab, summaryResolved, dataLoading, analisiLoaded]);
   useEffect(() => {
     const route = getRoute();
     const resolved = resolveRoute(route);
@@ -4422,7 +4389,15 @@ function App() {
     "aria-hidden": "true"
   }), React.createElement("div", {
     className: "home-brand home-chrome-brand",
-    onClick: interactive ? goToHome : undefined
+    onClick: interactive ? goToHome : undefined,
+    onKeyDown: interactive ? event => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        goToHome();
+      }
+    } : undefined,
+    role: interactive ? 'link' : undefined,
+    tabIndex: interactive ? 0 : undefined
   }, React.createElement("div", {
     className: "home-logo",
     role: "img",
@@ -4478,7 +4453,15 @@ function App() {
     "aria-hidden": "true"
   }), React.createElement("div", {
     className: "site-chrome-brand",
-    onClick: goToHome
+    onClick: goToHome,
+    onKeyDown: event => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        goToHome();
+      }
+    },
+    role: "link",
+    tabIndex: 0
   }, React.createElement("div", {
     className: "home-logo",
     role: "img",
@@ -4923,7 +4906,9 @@ function App() {
     className: "home-loading-progress"
   }, loadingProgress.toLocaleString('ca-ES'), "%")));
   const dataTabs = ['buscador', 'empreses', 'persones', 'contracte', 'empresa', 'analisi', 'cas-fraccionament', 'cas-concentracio', 'cas-electoralisme'];
-  const isDataTabLoading = dataLoading && dataTabs.includes(activeTab);
+  const analisiTabs = ['analisi', 'cas-fraccionament', 'cas-concentracio', 'cas-electoralisme'];
+  const isSupplementalDataLoading = activeTab === 'persones' && !personesLoaded || activeTab === 'empresa' && !administradorsLoaded || analisiTabs.includes(activeTab) && !analisiLoaded;
+  const isDataTabLoading = dataTabs.includes(activeTab) && (dataLoading || isSupplementalDataLoading);
   const renderDataLoading = () => React.createElement("div", {
     className: "container data-loading-container"
   }, React.createElement("h1", {
@@ -4991,7 +4976,10 @@ function App() {
     className: activeTab === 'home' ? 'home-wrapper' : 'app-shell app-shell-chrome'
   }, activeTab !== 'home' && renderSiteChrome(), activeTab === 'home' && React.createElement(React.Fragment, null, renderHomeChrome(), React.createElement("div", {
     className: "home-dissolve-stage"
-  }, renderHomeSection(homeIntroFading ? 'home-intro-target' : ''), homeIntroFading && renderHomeLoading(true))), isDataTabLoading && renderDataLoading(), activeTab === 'buscador' && !dataLoading && React.createElement("div", {
+  }, renderHomeSection(homeIntroFading ? 'home-intro-target' : ''), homeIntroFading && renderHomeLoading(true))), activeTab !== 'home' && React.createElement("main", {
+    id: "main-content",
+    className: "site-main"
+  }, isDataTabLoading && renderDataLoading(), activeTab === 'buscador' && !isDataTabLoading && React.createElement("div", {
     className: "container contractes-page"
   }, React.createElement("h1", {
     className: "page-title"
@@ -5023,51 +5011,21 @@ function App() {
     type: "text",
     className: "search-input",
     placeholder: "Cerca per descripci\xF3 o empresa adjudicat\xE0ria",
+    "aria-label": "Cerca per descripci\xF3 o empresa adjudicat\xE0ria",
     value: searchTerm,
     onChange: e => setSearchTerm(e.target.value)
   }), searchTerm && React.createElement("button", {
     className: "search-clear",
-    onClick: () => setSearchTerm('')
-  }, "\xD7")), React.createElement("div", {
-    className: "filters-mobile-actions",
-    style: {
-      display: 'none'
-    }
-  }, React.createElement("button", {
-    className: "filters-toggle-btn",
-    onClick: () => setFiltersOpen(prev => !prev),
-    "aria-expanded": filtersOpen,
-    type: "button"
-  }, React.createElement("span", null, "Filtres"), React.createElement("span", {
-    className: "filters-toggle-meta"
-  }, activeFiltersCount)), React.createElement("button", {
-    className: "btn-reset filters-mobile-reset",
-    onClick: resetFilters,
-    title: "Restablir filtres",
-    type: "button"
-  }, React.createElement("svg", {
-    xmlns: "http://www.w3.org/2000/svg",
-    width: "20",
-    height: "20",
-    viewBox: "0 0 24 24",
-    fill: "none",
-    stroke: "currentColor",
-    strokeWidth: "2",
-    strokeLinecap: "round",
-    strokeLinejoin: "round"
-  }, React.createElement("path", {
-    d: "M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"
-  }), React.createElement("path", {
-    d: "M3 3v5h5"
-  })))), React.createElement("div", {
-    className: "filters filters-panel" + (!filtersOpen ? " collapsed" : ""),
-    style: {
-      display: 'flex',
-      flexWrap: 'wrap',
-      gap: '1rem',
-      alignItems: 'flex-end',
-      marginTop: '1.5rem'
-    }
+    onClick: () => setSearchTerm(''),
+    type: "button",
+    "aria-label": "Netejar cerca"
+  }, "\xD7")), React.createElement(FilterActions, {
+    open: filtersOpen,
+    onToggle: () => setFiltersOpen(prev => !prev),
+    activeCount: activeFiltersCount,
+    onReset: resetFilters
+  }), React.createElement("div", {
+    className: "filters search-filter-panel" + (!filtersOpen ? " collapsed" : "")
   }, React.createElement("div", {
     className: "filter-group",
     style: {
@@ -5081,7 +5039,8 @@ function App() {
       height: '48px'
     },
     value: typeFilter,
-    onChange: e => setTypeFilter(e.target.value)
+    onChange: e => setTypeFilter(e.target.value),
+    "aria-label": "Tipus de contracte"
   }, React.createElement("option", {
     value: ""
   }, "Tots els tipus"), React.createElement("option", {
@@ -5111,7 +5070,8 @@ function App() {
       height: '48px'
     },
     value: procedureFilter,
-    onChange: e => setProcedureFilter(e.target.value)
+    onChange: e => setProcedureFilter(e.target.value),
+    "aria-label": "Procediment"
   }, React.createElement("option", {
     value: ""
   }, "Tots els procediments"), React.createElement("option", {
@@ -5139,7 +5099,8 @@ function App() {
       height: '48px'
     },
     value: sortBy,
-    onChange: e => setSortBy(e.target.value)
+    onChange: e => setSortBy(e.target.value),
+    "aria-label": "Ordenar contractes per"
   }, React.createElement("option", {
     value: "date-desc"
   }, "Data (m\xE9s recents)"), React.createElement("option", {
@@ -5149,14 +5110,7 @@ function App() {
   }, "Import (descendent)"), React.createElement("option", {
     value: "amount-asc"
   }, "Import (ascendent)")))), React.createElement("div", {
-    className: "filters-row filters-panel" + (!filtersOpen ? " collapsed" : ""),
-    style: {
-      display: 'flex',
-      flexWrap: 'wrap',
-      gap: '1rem',
-      alignItems: 'flex-end',
-      marginTop: '1rem'
-    }
+    className: "filters-row search-filter-panel search-filter-panel-secondary" + (!filtersOpen ? " collapsed" : "")
   }, React.createElement("div", {
     className: "filter-group",
     style: {
@@ -5170,7 +5124,8 @@ function App() {
       height: '48px'
     },
     value: yearFilter,
-    onChange: e => setYearFilter(e.target.value)
+    onChange: e => setYearFilter(e.target.value),
+    "aria-label": "Any"
   }, React.createElement("option", {
     value: ""
   }, "Tots els anys"), [2026, 2025, 2024, 2023, 2022, 2021, 2020, 2019, 2018, 2017, 2016].map(y => React.createElement("option", {
@@ -5186,6 +5141,7 @@ function App() {
   }, "Data inici"), React.createElement("input", {
     type: "date",
     className: "filter-input-date",
+    "aria-label": "Data inici",
     style: {
       height: '48px'
     },
@@ -5201,37 +5157,13 @@ function App() {
   }, "Data final"), React.createElement("input", {
     type: "date",
     className: "filter-input-date",
+    "aria-label": "Data final",
     style: {
       height: '48px'
     },
     value: dateEnd,
     onChange: e => setDateEnd(e.target.value)
-  })), React.createElement("div", {
-    className: "filter-group filter-group-reset",
-    style: {
-      flex: '0 0 auto',
-      width: '48px',
-      margin: 0
-    }
-  }, React.createElement("button", {
-    className: "btn-reset btn-icon-square",
-    onClick: resetFilters,
-    title: "Restablir filtres"
-  }, React.createElement("svg", {
-    xmlns: "http://www.w3.org/2000/svg",
-    width: "20",
-    height: "20",
-    viewBox: "0 0 24 24",
-    fill: "none",
-    stroke: "currentColor",
-    strokeWidth: "2",
-    strokeLinecap: "round",
-    strokeLinejoin: "round"
-  }, React.createElement("path", {
-    d: "M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"
-  }), React.createElement("path", {
-    d: "M3 3v5h5"
-  })))))), React.createElement("div", {
+  })))), React.createElement("div", {
     className: "results-count"
   }, React.createElement("span", {
     className: "results-count-total"
@@ -5411,7 +5343,7 @@ function App() {
   }, "Les persones interessades poden exercir els drets d'acc\xE9s, rectificaci\xF3, limitaci\xF3 o oposici\xF3 al tractament posant-se en contacte a trav\xE9s de la secci\xF3 ", React.createElement("a", {
     href: "/avis-legal",
     className: "prose-link"
-  }, "Av\xEDs legal"), ". El dret de supressi\xF3 (dret a l'oblit) queda limitat per l'art. 17.3.b) del RGPD quan les dades figuren en registres oficials p\xFAblics o en documentaci\xF3 administrativa de contractaci\xF3 p\xFAblica, sense perjudici del dret a sol\xB7licitar la revisi\xF3 de possibles errors factuals.")))), activeTab === 'empreses' && !selectedEmpresa && !dataLoading && React.createElement(EmpresesView, {
+  }, "Av\xEDs legal"), ". El dret de supressi\xF3 (dret a l'oblit) queda limitat per l'art. 17.3.b) del RGPD quan les dades figuren en registres oficials p\xFAblics o en documentaci\xF3 administrativa de contractaci\xF3 p\xFAblica, sense perjudici del dret a sol\xB7licitar la revisi\xF3 de possibles errors factuals.")))), activeTab === 'empreses' && !selectedEmpresa && !isDataTabLoading && React.createElement(EmpresesView, {
     empreses: empreses,
     onEmpresaSelect: handleEmpresaClick,
     searchTerm: empresesSearch,
@@ -5424,7 +5356,7 @@ function App() {
     setSortBy: setEmpresesSort,
     currentPage: empresesPage,
     setCurrentPage: setEmpresesPage
-  }), activeTab === 'persones' && !dataLoading && React.createElement(PersonesView, {
+  }), activeTab === 'persones' && !isDataTabLoading && React.createElement(PersonesView, {
     persones: persones,
     onEmpresaSelect: handleEmpresaClick,
     onNavigateLegal: () => {
@@ -5442,7 +5374,7 @@ function App() {
     setCurrentPage: setPersonesPage,
     expandedIdx: personesExpanded,
     setExpandedIdx: setPersonesExpanded
-  }), activeTab === 'contracte' && selectedContractForDetail && !dataLoading && React.createElement(ContractDetailView, {
+  }), activeTab === 'contracte' && selectedContractForDetail && !isDataTabLoading && React.createElement(ContractDetailView, {
     contract: selectedContractForDetail,
     contracts: contracts,
     empreses: empreses,
@@ -5453,7 +5385,7 @@ function App() {
       setSelectedContractForDetail(null);
     }),
     onEmpresaClick: handleEmpresaClick
-  }), activeTab === 'empresa' && selectedEmpresa && !dataLoading && React.createElement(EmpresaView, {
+  }), activeTab === 'empresa' && selectedEmpresa && !isDataTabLoading && React.createElement(EmpresaView, {
     empresa: selectedEmpresa,
     contracts: contracts,
     empreses: empreses,
@@ -5465,7 +5397,7 @@ function App() {
       setSelectedEmpresa(null);
     }),
     onContractSelect: handleDetailClick
-  }), activeTab === 'cas-fraccionament' && selectedCasoDetail && !dataLoading && React.createElement(CasFraccionamentView, {
+  }), activeTab === 'cas-fraccionament' && selectedCasoDetail && !isDataTabLoading && React.createElement(CasFraccionamentView, {
     caso: selectedCasoDetail,
     contracts: contracts,
     empreses: empreses,
@@ -5475,7 +5407,7 @@ function App() {
     }),
     onContractSelect: handleDetailClick,
     onEmpresaClick: handleEmpresaClick
-  }), activeTab === 'cas-concentracio' && selectedConcentracioDetail && !dataLoading && React.createElement(CasConcentracioView, {
+  }), activeTab === 'cas-concentracio' && selectedConcentracioDetail && !isDataTabLoading && React.createElement(CasConcentracioView, {
     caso: selectedConcentracioDetail,
     contracts: contracts,
     empreses: empreses,
@@ -5485,7 +5417,7 @@ function App() {
     }),
     onContractSelect: handleDetailClick,
     onEmpresaClick: handleEmpresaClick
-  }), activeTab === 'cas-electoralisme' && selectedElectoralismeDetail && !dataLoading && React.createElement(CasElectoralismeView, {
+  }), activeTab === 'cas-electoralisme' && selectedElectoralismeDetail && !isDataTabLoading && React.createElement(CasElectoralismeView, {
     caso: selectedElectoralismeDetail,
     contracts: contracts,
     empreses: empreses,
@@ -5495,7 +5427,7 @@ function App() {
     }),
     onContractSelect: handleDetailClick,
     onEmpresaClick: handleEmpresaClick
-  }), activeTab === 'analisi' && !dataLoading && React.createElement(React.Fragment, null, React.createElement("div", {
+  }), activeTab === 'analisi' && !isDataTabLoading && React.createElement(React.Fragment, null, React.createElement("div", {
     className: "analisi-tabs-wrapper"
   }, React.createElement("div", {
     className: "analisi-tabs",
@@ -5504,20 +5436,28 @@ function App() {
   }, React.createElement("button", {
     className: 'analisi-tab' + (analisiTab === 'fraccionament' ? ' active' : ''),
     onClick: () => setAnalisiTab('fraccionament'),
+    type: "button",
     role: "tab",
-    "aria-selected": analisiTab === 'fraccionament'
+    "aria-selected": analisiTab === 'fraccionament',
+    "aria-controls": "analisi-panel"
   }, "Fraccionament"), React.createElement("button", {
     className: 'analisi-tab' + (analisiTab === 'monopoli' ? ' active' : ''),
     onClick: () => setAnalisiTab('monopoli'),
+    type: "button",
     role: "tab",
-    "aria-selected": analisiTab === 'monopoli'
+    "aria-selected": analisiTab === 'monopoli',
+    "aria-controls": "analisi-panel"
   }, "Concentraci\xF3"), React.createElement("button", {
     className: 'analisi-tab' + (analisiTab === 'electoral' ? ' active' : ''),
     onClick: () => setAnalisiTab('electoral'),
+    type: "button",
     role: "tab",
-    "aria-selected": analisiTab === 'electoral'
+    "aria-selected": analisiTab === 'electoral',
+    "aria-controls": "analisi-panel"
   }, "Electoralisme"))), React.createElement("div", {
-    className: "container analisi-page"
+    className: "container analisi-page",
+    id: "analisi-panel",
+    role: "tabpanel"
   }, React.createElement("h1", {
     className: "page-title"
   }, "An\xE0lisi de contractes"), analisiTab === 'fraccionament' && React.createElement(React.Fragment, null, React.createElement("div", {
@@ -5602,51 +5542,21 @@ function App() {
     type: "text",
     className: "search-input",
     placeholder: "Cerca per descripci\xF3 o empresa adjudicat\xE0ria",
+    "aria-label": "Cerca casos de fraccionament",
     value: analisiSearch,
     onChange: e => setAnalisiSearch(e.target.value)
   }), analisiSearch && React.createElement("button", {
     className: "search-clear",
-    onClick: () => setAnalisiSearch('')
-  }, "\xD7")), React.createElement("div", {
-    className: "filters-mobile-actions",
-    style: {
-      display: 'none'
-    }
-  }, React.createElement("button", {
-    className: "filters-toggle-btn",
-    onClick: () => setAnalisiFiltersOpen(prev => !prev),
-    "aria-expanded": analisiFiltersOpen,
-    type: "button"
-  }, React.createElement("span", null, "Filtres"), React.createElement("span", {
-    className: "filters-toggle-meta"
-  }, activeAnalisiFiltersCount)), React.createElement("button", {
-    className: "btn-reset filters-mobile-reset",
-    onClick: resetAnalisiFilters,
-    title: "Restablir filtres",
-    type: "button"
-  }, React.createElement("svg", {
-    xmlns: "http://www.w3.org/2000/svg",
-    width: "20",
-    height: "20",
-    viewBox: "0 0 24 24",
-    fill: "none",
-    stroke: "currentColor",
-    strokeWidth: "2",
-    strokeLinecap: "round",
-    strokeLinejoin: "round"
-  }, React.createElement("path", {
-    d: "M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"
-  }), React.createElement("path", {
-    d: "M3 3v5h5"
-  })))), React.createElement("div", {
-    className: "filters filters-panel" + (!analisiFiltersOpen ? " collapsed" : ""),
-    style: {
-      display: 'flex',
-      flexWrap: 'wrap',
-      gap: '1rem',
-      alignItems: 'flex-end',
-      marginTop: '1.5rem'
-    }
+    onClick: () => setAnalisiSearch(''),
+    type: "button",
+    "aria-label": "Netejar cerca"
+  }, "\xD7")), React.createElement(FilterActions, {
+    open: analisiFiltersOpen,
+    onToggle: () => setAnalisiFiltersOpen(prev => !prev),
+    activeCount: activeAnalisiFiltersCount,
+    onReset: resetAnalisiFilters
+  }), React.createElement("div", {
+    className: "filters search-filter-panel search-filter-panel-analysis" + (!analisiFiltersOpen ? " collapsed" : "")
   }, React.createElement("div", {
     className: "filter-group",
     style: {
@@ -5660,7 +5570,8 @@ function App() {
       height: '48px'
     },
     value: analisiSort,
-    onChange: e => setAnalisiSort(e.target.value)
+    onChange: e => setAnalisiSort(e.target.value),
+    "aria-label": "Ordenar casos de fraccionament per"
   }, React.createElement("option", {
     value: "risk-desc"
   }, "Puntuaci\xF3 de risc (descendent)"), React.createElement("option", {
@@ -5691,32 +5602,7 @@ function App() {
     className: 'analisi-filter-btn risk-' + riskClass(value) + (riskFilter === value ? ' active' : ''),
     onClick: () => setRiskFilter(value),
     type: "button"
-  }, label)))), React.createElement("div", {
-    className: "filter-group filter-group-reset",
-    style: {
-      flex: '0 0 auto',
-      width: '48px',
-      margin: 0
-    }
-  }, React.createElement("button", {
-    className: "btn-reset btn-icon-square",
-    onClick: resetAnalisiFilters,
-    title: "Restablir filtres"
-  }, React.createElement("svg", {
-    xmlns: "http://www.w3.org/2000/svg",
-    width: "20",
-    height: "20",
-    viewBox: "0 0 24 24",
-    fill: "none",
-    stroke: "currentColor",
-    strokeWidth: "2",
-    strokeLinecap: "round",
-    strokeLinejoin: "round"
-  }, React.createElement("path", {
-    d: "M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"
-  }), React.createElement("path", {
-    d: "M3 3v5h5"
-  })))))), React.createElement("div", {
+  }, label)))))), React.createElement("div", {
     className: "results-count"
   }, React.createElement("span", {
     className: "results-count-total"
@@ -5946,51 +5832,21 @@ function App() {
     type: "text",
     className: "search-input",
     placeholder: "Cerca per sector o empresa adjudicat\xE0ria",
+    "aria-label": "Cerca casos de concentraci\xF3",
     value: analisiSearch,
     onChange: e => setAnalisiSearch(e.target.value)
   }), analisiSearch && React.createElement("button", {
     className: "search-clear",
-    onClick: () => setAnalisiSearch('')
-  }, "\xD7")), React.createElement("div", {
-    className: "filters-mobile-actions",
-    style: {
-      display: 'none'
-    }
-  }, React.createElement("button", {
-    className: "filters-toggle-btn",
-    onClick: () => setAnalisiFiltersOpen(prev => !prev),
-    "aria-expanded": analisiFiltersOpen,
-    type: "button"
-  }, React.createElement("span", null, "Filtres"), React.createElement("span", {
-    className: "filters-toggle-meta"
-  }, activeAnalisiFiltersCount)), React.createElement("button", {
-    className: "btn-reset filters-mobile-reset",
-    onClick: resetAnalisiFilters,
-    title: "Restablir filtres",
-    type: "button"
-  }, React.createElement("svg", {
-    xmlns: "http://www.w3.org/2000/svg",
-    width: "20",
-    height: "20",
-    viewBox: "0 0 24 24",
-    fill: "none",
-    stroke: "currentColor",
-    strokeWidth: "2",
-    strokeLinecap: "round",
-    strokeLinejoin: "round"
-  }, React.createElement("path", {
-    d: "M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"
-  }), React.createElement("path", {
-    d: "M3 3v5h5"
-  })))), React.createElement("div", {
-    className: "filters filters-panel" + (!analisiFiltersOpen ? " collapsed" : ""),
-    style: {
-      display: 'flex',
-      flexWrap: 'wrap',
-      gap: '1rem',
-      alignItems: 'flex-end',
-      marginTop: '1.5rem'
-    }
+    onClick: () => setAnalisiSearch(''),
+    type: "button",
+    "aria-label": "Netejar cerca"
+  }, "\xD7")), React.createElement(FilterActions, {
+    open: analisiFiltersOpen,
+    onToggle: () => setAnalisiFiltersOpen(prev => !prev),
+    activeCount: activeAnalisiFiltersCount,
+    onReset: resetAnalisiFilters
+  }), React.createElement("div", {
+    className: "filters search-filter-panel search-filter-panel-analysis" + (!analisiFiltersOpen ? " collapsed" : "")
   }, React.createElement("div", {
     className: "filter-group",
     style: {
@@ -6004,7 +5860,8 @@ function App() {
       height: '48px'
     },
     value: analisiSort,
-    onChange: e => setAnalisiSort(e.target.value)
+    onChange: e => setAnalisiSort(e.target.value),
+    "aria-label": "Ordenar casos de concentraci\xF3 per"
   }, React.createElement("option", {
     value: "risk-desc"
   }, "Puntuaci\xF3 de risc (descendent)"), React.createElement("option", {
@@ -6035,32 +5892,7 @@ function App() {
     className: 'analisi-filter-btn risk-' + riskClass(value) + (riskFilter === value ? ' active' : ''),
     onClick: () => setRiskFilter(value),
     type: "button"
-  }, label)))), React.createElement("div", {
-    className: "filter-group filter-group-reset",
-    style: {
-      flex: '0 0 auto',
-      width: '48px',
-      margin: 0
-    }
-  }, React.createElement("button", {
-    className: "btn-reset btn-icon-square",
-    onClick: resetAnalisiFilters,
-    title: "Restablir filtres"
-  }, React.createElement("svg", {
-    xmlns: "http://www.w3.org/2000/svg",
-    width: "20",
-    height: "20",
-    viewBox: "0 0 24 24",
-    fill: "none",
-    stroke: "currentColor",
-    strokeWidth: "2",
-    strokeLinecap: "round",
-    strokeLinejoin: "round"
-  }, React.createElement("path", {
-    d: "M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"
-  }), React.createElement("path", {
-    d: "M3 3v5h5"
-  })))))), concentracioMode === 'historic' && React.createElement(React.Fragment, null, React.createElement("div", {
+  }, label)))))), concentracioMode === 'historic' && React.createElement(React.Fragment, null, React.createElement("div", {
     className: "analisi-alert-list"
   }, concentracioHistoric.map(caso => React.createElement("a", {
     key: caso.id,
@@ -6270,51 +6102,21 @@ function App() {
     type: "text",
     className: "search-input",
     placeholder: "Cerca per descripci\xF3, empresa adjudicat\xE0ria o per\xEDode electoral",
+    "aria-label": "Cerca casos d'electoralisme",
     value: analisiSearch,
     onChange: e => setAnalisiSearch(e.target.value)
   }), analisiSearch && React.createElement("button", {
     className: "search-clear",
-    onClick: () => setAnalisiSearch('')
-  }, "\xD7")), React.createElement("div", {
-    className: "filters-mobile-actions",
-    style: {
-      display: 'none'
-    }
-  }, React.createElement("button", {
-    className: "filters-toggle-btn",
-    onClick: () => setAnalisiFiltersOpen(prev => !prev),
-    "aria-expanded": analisiFiltersOpen,
-    type: "button"
-  }, React.createElement("span", null, "Filtres"), React.createElement("span", {
-    className: "filters-toggle-meta"
-  }, activeAnalisiFiltersCount)), React.createElement("button", {
-    className: "btn-reset filters-mobile-reset",
-    onClick: resetAnalisiFilters,
-    title: "Restablir filtres",
-    type: "button"
-  }, React.createElement("svg", {
-    xmlns: "http://www.w3.org/2000/svg",
-    width: "20",
-    height: "20",
-    viewBox: "0 0 24 24",
-    fill: "none",
-    stroke: "currentColor",
-    strokeWidth: "2",
-    strokeLinecap: "round",
-    strokeLinejoin: "round"
-  }, React.createElement("path", {
-    d: "M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"
-  }), React.createElement("path", {
-    d: "M3 3v5h5"
-  })))), React.createElement("div", {
-    className: "filters filters-panel" + (!analisiFiltersOpen ? " collapsed" : ""),
-    style: {
-      display: 'flex',
-      flexWrap: 'wrap',
-      gap: '1rem',
-      alignItems: 'flex-end',
-      marginTop: '1.5rem'
-    }
+    onClick: () => setAnalisiSearch(''),
+    type: "button",
+    "aria-label": "Netejar cerca"
+  }, "\xD7")), React.createElement(FilterActions, {
+    open: analisiFiltersOpen,
+    onToggle: () => setAnalisiFiltersOpen(prev => !prev),
+    activeCount: activeAnalisiFiltersCount,
+    onReset: resetAnalisiFilters
+  }), React.createElement("div", {
+    className: "filters search-filter-panel search-filter-panel-analysis" + (!analisiFiltersOpen ? " collapsed" : "")
   }, React.createElement("div", {
     className: "filter-group",
     style: {
@@ -6328,7 +6130,8 @@ function App() {
       height: '48px'
     },
     value: analisiSort,
-    onChange: e => setAnalisiSort(e.target.value)
+    onChange: e => setAnalisiSort(e.target.value),
+    "aria-label": "Ordenar casos d'electoralisme per"
   }, React.createElement("option", {
     value: "risk-desc"
   }, "Puntuaci\xF3 de risc (descendent)"), React.createElement("option", {
@@ -6359,32 +6162,7 @@ function App() {
     className: 'analisi-filter-btn risk-' + riskClass(value) + (riskFilter === value ? ' active' : ''),
     onClick: () => setRiskFilter(value),
     type: "button"
-  }, label)))), React.createElement("div", {
-    className: "filter-group filter-group-reset",
-    style: {
-      flex: '0 0 auto',
-      width: '48px',
-      margin: 0
-    }
-  }, React.createElement("button", {
-    className: "btn-reset btn-icon-square",
-    onClick: resetAnalisiFilters,
-    title: "Restablir filtres"
-  }, React.createElement("svg", {
-    xmlns: "http://www.w3.org/2000/svg",
-    width: "20",
-    height: "20",
-    viewBox: "0 0 24 24",
-    fill: "none",
-    stroke: "currentColor",
-    strokeWidth: "2",
-    strokeLinecap: "round",
-    strokeLinejoin: "round"
-  }, React.createElement("path", {
-    d: "M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"
-  }), React.createElement("path", {
-    d: "M3 3v5h5"
-  })))))), React.createElement("div", {
+  }, label)))))), React.createElement("div", {
     className: "results-count"
   }, React.createElement("span", {
     className: "results-count-total"
@@ -6645,7 +6423,7 @@ function App() {
     className: "prose-heading"
   }, "9. Fonts normatives principals"), React.createElement("p", {
     className: "prose-paragraph"
-  }, "El present av\xEDs legal es basa, entre altres, en el Reglament (UE) 2016/679 (RGPD), la Llei 19/2013, de transpar\xE8ncia, acc\xE9s a la informaci\xF3 p\xFAblica i bon govern, i la Llei 19/2014, de transpar\xE8ncia, acc\xE9s a la informaci\xF3 p\xFAblica i bon govern de Catalunya."))), activeTab !== 'home' && React.createElement("button", {
+  }, "El present av\xEDs legal es basa, entre altres, en el Reglament (UE) 2016/679 (RGPD), la Llei 19/2013, de transpar\xE8ncia, acc\xE9s a la informaci\xF3 p\xFAblica i bon govern, i la Llei 19/2014, de transpar\xE8ncia, acc\xE9s a la informaci\xF3 p\xFAblica i bon govern de Catalunya.")))), activeTab !== 'home' && React.createElement("button", {
     type: "button",
     className: `btn-reset contracte-detail-back mobile-scroll-top${showMobileScrollTop ? ' is-visible' : ''}`,
     onClick: () => window.scrollTo({
