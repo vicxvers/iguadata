@@ -965,8 +965,11 @@ function CasoCard({ caso, onSelect }) {
 
 /* ---- CasoModal -------------------------------------------------- */
 function CasoModal({ caso, onClose }) {
+    const closeButtonRef = useRef(null);
     useEffect(() => {
+        const previousFocus = document.activeElement;
         document.body.style.overflow = 'hidden';
+        requestAnimationFrame(() => closeButtonRef.current?.focus());
         const handleKeyDown = (event) => {
             if (event.key === 'Escape') onClose();
         };
@@ -974,6 +977,7 @@ function CasoModal({ caso, onClose }) {
         return () => {
             document.body.style.overflow = '';
             window.removeEventListener('keydown', handleKeyDown);
+            previousFocus?.focus?.();
         };
     }, [onClose]);
     const rc = riskClass(caso.nivel_riesgo);
@@ -983,7 +987,7 @@ function CasoModal({ caso, onClose }) {
             <div className="modal-content" onClick={e => e.stopPropagation()} role="dialog" aria-modal="true" aria-label={`Detall de ${caso.empresa}`}>
                 <div className="modal-header">
                     <div className="modal-header-top">
-                        <button className="modal-close" onClick={onClose} type="button" aria-label="Tancar">?</button>
+                        <button ref={closeButtonRef} className="modal-close" onClick={onClose} type="button" aria-label="Tancar">?</button>
                     </div>
                     <span className={"risk-badge modal-risk-badge " + rc}>
                         {riskLabel(caso.nivel_riesgo)}
@@ -3871,13 +3875,18 @@ function App() {
 
     const renderNavTabs = (showActive = true, useTransition = false) => {
         const handleNavClick = useTransition ? handleTransitionLinkClick : handleInternalLinkClick;
+        const contractesActive = activeTab === 'buscador' || activeTab === 'contracte';
+        const empresesActive = activeTab === 'empreses' || activeTab === 'empresa';
+        const personesActive = activeTab === 'persones';
+        const analisiActive = activeTab === 'analisi' || activeTab === 'cas-fraccionament' || activeTab === 'cas-concentracio' || activeTab === 'cas-electoralisme';
+        const sobreActive = activeTab === 'sobre';
         return (
             <div className="nav">
-                <a href={buildRouteUrl('/contractes')} className={'nav-tab' + (showActive && (activeTab === 'buscador' || activeTab === 'contracte') ? ' active' : '')} onClick={(event) => handleNavClick(event, () => { handleNavigation('buscador'); setSelectedEmpresa(null); setIsMobileMenuOpen(false); })}>Contractes</a>
-                <a href={buildRouteUrl('/empreses')} className={'nav-tab' + (showActive && (activeTab === 'empreses' || activeTab === 'empresa') ? ' active' : '')} onClick={(event) => handleNavClick(event, () => { handleNavigation('empreses'); setSelectedEmpresa(null); setIsMobileMenuOpen(false); })}>Empreses</a>
-                <a href={buildRouteUrl('/persones')} className={'nav-tab' + (showActive && activeTab === 'persones' ? ' active' : '')} onClick={(event) => handleNavClick(event, () => { handleNavigation('persones'); setIsMobileMenuOpen(false); })}>Persones</a>
-                <a href={buildRouteUrl('/analisi')} className={'nav-tab' + (showActive && (activeTab === 'analisi' || activeTab === 'cas-fraccionament' || activeTab === 'cas-concentracio' || activeTab === 'cas-electoralisme') ? ' active' : '')} onClick={(event) => handleNavClick(event, handleAnalisiNavClick)}>Anàlisi</a>
-                <a href={buildRouteUrl('/sobre')} className={'nav-tab' + (showActive && activeTab === 'sobre' ? ' active' : '')} onClick={(event) => handleNavClick(event, () => { handleNavigation('sobre'); setIsMobileMenuOpen(false); })}>Sobre</a>
+                <a href={buildRouteUrl('/contractes')} className={'nav-tab' + (showActive && contractesActive ? ' active' : '')} aria-current={showActive && contractesActive ? 'page' : undefined} onClick={(event) => handleNavClick(event, () => { handleNavigation('buscador'); setSelectedEmpresa(null); setIsMobileMenuOpen(false); })}>Contractes</a>
+                <a href={buildRouteUrl('/empreses')} className={'nav-tab' + (showActive && empresesActive ? ' active' : '')} aria-current={showActive && empresesActive ? 'page' : undefined} onClick={(event) => handleNavClick(event, () => { handleNavigation('empreses'); setSelectedEmpresa(null); setIsMobileMenuOpen(false); })}>Empreses</a>
+                <a href={buildRouteUrl('/persones')} className={'nav-tab' + (showActive && personesActive ? ' active' : '')} aria-current={showActive && personesActive ? 'page' : undefined} onClick={(event) => handleNavClick(event, () => { handleNavigation('persones'); setIsMobileMenuOpen(false); })}>Persones</a>
+                <a href={buildRouteUrl('/analisi')} className={'nav-tab' + (showActive && analisiActive ? ' active' : '')} aria-current={showActive && analisiActive ? 'page' : undefined} onClick={(event) => handleNavClick(event, handleAnalisiNavClick)}>Anàlisi</a>
+                <a href={buildRouteUrl('/sobre')} className={'nav-tab' + (showActive && sobreActive ? ' active' : '')} aria-current={showActive && sobreActive ? 'page' : undefined} onClick={(event) => handleNavClick(event, () => { handleNavigation('sobre'); setIsMobileMenuOpen(false); })}>Sobre</a>
             </div>
         );
     };
@@ -4285,11 +4294,48 @@ function App() {
             setAnalisiRetry(value => value + 1);
         }
     };
-    const renderDataLoading = () => (
-        <div className="container data-loading-container">
-            <h1 className="page-title data-loading-title" role="status" aria-live="polite">Carregant dades</h1>
+    const renderSkeletonCard = (className = '') => (
+        <div className={`contract-card data-skeleton-card${className ? ` ${className}` : ''}`} aria-hidden="true">
+            <div className="data-skeleton-line data-skeleton-line-short"></div>
+            <div className="data-skeleton-line data-skeleton-line-title"></div>
+            <div className="data-skeleton-line"></div>
+            <div className="data-skeleton-line data-skeleton-line-medium"></div>
         </div>
     );
+    const renderDataLoading = () => {
+        const isAnalisiLoading = analisiTabs.includes(activeTab);
+        const pageClass =
+            activeTab === 'persones' ? 'persones-page' :
+                activeTab === 'empreses' || activeTab === 'empresa' ? 'empreses-page' :
+                    isAnalisiLoading ? 'analisi-page' :
+                        'contractes-page';
+        const cardClass =
+            activeTab === 'persones' ? 'persona-card' :
+                activeTab === 'empreses' ? 'empresa-list-card' :
+                    isAnalisiLoading ? 'fraccionament-card' :
+                        '';
+        const cardCount = activeTab === 'empresa' ? 2 : 4;
+
+        return (
+            <div className={`container data-loading-container ${pageClass}`} role="status" aria-live="polite" aria-label="Carregant dades">
+                <div className="page-title data-skeleton-title" aria-hidden="true"></div>
+                {activeTab !== 'empresa' && (
+                    <div className={`search-section data-skeleton-search${isAnalisiLoading ? ' analisi-search-section' : ''}`} aria-hidden="true">
+                        <div className="data-skeleton-input"></div>
+                        <div className="data-skeleton-actions">
+                            <div className="data-skeleton-control"></div>
+                            <div className="data-skeleton-control data-skeleton-control-square"></div>
+                        </div>
+                    </div>
+                )}
+                <div className="data-skeleton-list" aria-hidden="true">
+                    {Array.from({ length: cardCount }, (_, index) => (
+                        <React.Fragment key={index}>{renderSkeletonCard(cardClass)}</React.Fragment>
+                    ))}
+                </div>
+            </div>
+        );
+    };
     const renderDataError = () => (
         <div className="container data-loading-container">
             <div className="empty-state" role="alert">
@@ -4340,6 +4386,23 @@ function App() {
         setIsMobileMenuOpen(false);
     };
 
+    const handleAnalisiTabKeyDown = (event) => {
+        if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+        event.preventDefault();
+        const tabs = ['fraccionament', 'monopoli', 'electoral'];
+        const currentIndex = tabs.indexOf(analisiTab);
+        let nextIndex = currentIndex;
+        if (event.key === 'ArrowRight') nextIndex = (currentIndex + 1) % tabs.length;
+        if (event.key === 'ArrowLeft') nextIndex = (currentIndex - 1 + tabs.length) % tabs.length;
+        if (event.key === 'Home') nextIndex = 0;
+        if (event.key === 'End') nextIndex = tabs.length - 1;
+        setAnalisiTab(tabs[nextIndex]);
+        requestAnimationFrame(() => {
+            const tabButtons = event.currentTarget.parentElement.querySelectorAll('[role="tab"]');
+            tabButtons[nextIndex]?.focus();
+        });
+    };
+
     const handleEmpresaClick = (empresaName) => {
         setSelectedContractForDetail(null);
         setSelectedEmpresa(empresaName);
@@ -4383,7 +4446,7 @@ function App() {
             )}
 
             {activeTab !== 'home' && (
-                <main id="main-content" className="site-main">
+                <main id="main-content" className="site-main" tabIndex={-1}>
             {activeDataError ? renderDataError() : (isDataTabLoading && renderDataLoading())}
 
             {activeTab === 'buscador' && canRenderDataTab && (
@@ -4736,6 +4799,8 @@ function App() {
                             role="tab"
                             aria-selected={analisiTab === 'fraccionament'}
                             aria-controls="analisi-panel"
+                            tabIndex={analisiTab === 'fraccionament' ? 0 : -1}
+                            onKeyDown={handleAnalisiTabKeyDown}
                         >
                             Fraccionament
                         </button>
@@ -4746,6 +4811,8 @@ function App() {
                             role="tab"
                             aria-selected={analisiTab === 'monopoli'}
                             aria-controls="analisi-panel"
+                            tabIndex={analisiTab === 'monopoli' ? 0 : -1}
+                            onKeyDown={handleAnalisiTabKeyDown}
                         >
                             Concentració
                         </button>
@@ -4756,6 +4823,8 @@ function App() {
                             role="tab"
                             aria-selected={analisiTab === 'electoral'}
                             aria-controls="analisi-panel"
+                            tabIndex={analisiTab === 'electoral' ? 0 : -1}
+                            onKeyDown={handleAnalisiTabKeyDown}
                         >
                             Electoralisme
                         </button>

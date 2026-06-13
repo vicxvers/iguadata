@@ -957,8 +957,11 @@ function CasoModal({
   caso,
   onClose
 }) {
+  const closeButtonRef = useRef(null);
   useEffect(() => {
+    const previousFocus = document.activeElement;
     document.body.style.overflow = 'hidden';
+    requestAnimationFrame(() => closeButtonRef.current?.focus());
     const handleKeyDown = event => {
       if (event.key === 'Escape') onClose();
     };
@@ -966,6 +969,7 @@ function CasoModal({
     return () => {
       document.body.style.overflow = '';
       window.removeEventListener('keydown', handleKeyDown);
+      previousFocus?.focus?.();
     };
   }, [onClose]);
   const rc = riskClass(caso.nivel_riesgo);
@@ -984,6 +988,7 @@ function CasoModal({
   }, React.createElement("div", {
     className: "modal-header-top"
   }, React.createElement("button", {
+    ref: closeButtonRef,
     className: "modal-close",
     onClick: onClose,
     type: "button",
@@ -4433,11 +4438,17 @@ function App() {
   })));
   const renderNavTabs = (showActive = true, useTransition = false) => {
     const handleNavClick = useTransition ? handleTransitionLinkClick : handleInternalLinkClick;
+    const contractesActive = activeTab === 'buscador' || activeTab === 'contracte';
+    const empresesActive = activeTab === 'empreses' || activeTab === 'empresa';
+    const personesActive = activeTab === 'persones';
+    const analisiActive = activeTab === 'analisi' || activeTab === 'cas-fraccionament' || activeTab === 'cas-concentracio' || activeTab === 'cas-electoralisme';
+    const sobreActive = activeTab === 'sobre';
     return React.createElement("div", {
       className: "nav"
     }, React.createElement("a", {
       href: buildRouteUrl('/contractes'),
-      className: 'nav-tab' + (showActive && (activeTab === 'buscador' || activeTab === 'contracte') ? ' active' : ''),
+      className: 'nav-tab' + (showActive && contractesActive ? ' active' : ''),
+      "aria-current": showActive && contractesActive ? 'page' : undefined,
       onClick: event => handleNavClick(event, () => {
         handleNavigation('buscador');
         setSelectedEmpresa(null);
@@ -4445,7 +4456,8 @@ function App() {
       })
     }, "Contractes"), React.createElement("a", {
       href: buildRouteUrl('/empreses'),
-      className: 'nav-tab' + (showActive && (activeTab === 'empreses' || activeTab === 'empresa') ? ' active' : ''),
+      className: 'nav-tab' + (showActive && empresesActive ? ' active' : ''),
+      "aria-current": showActive && empresesActive ? 'page' : undefined,
       onClick: event => handleNavClick(event, () => {
         handleNavigation('empreses');
         setSelectedEmpresa(null);
@@ -4453,18 +4465,21 @@ function App() {
       })
     }, "Empreses"), React.createElement("a", {
       href: buildRouteUrl('/persones'),
-      className: 'nav-tab' + (showActive && activeTab === 'persones' ? ' active' : ''),
+      className: 'nav-tab' + (showActive && personesActive ? ' active' : ''),
+      "aria-current": showActive && personesActive ? 'page' : undefined,
       onClick: event => handleNavClick(event, () => {
         handleNavigation('persones');
         setIsMobileMenuOpen(false);
       })
     }, "Persones"), React.createElement("a", {
       href: buildRouteUrl('/analisi'),
-      className: 'nav-tab' + (showActive && (activeTab === 'analisi' || activeTab === 'cas-fraccionament' || activeTab === 'cas-concentracio' || activeTab === 'cas-electoralisme') ? ' active' : ''),
+      className: 'nav-tab' + (showActive && analisiActive ? ' active' : ''),
+      "aria-current": showActive && analisiActive ? 'page' : undefined,
       onClick: event => handleNavClick(event, handleAnalisiNavClick)
     }, "An\xE0lisi"), React.createElement("a", {
       href: buildRouteUrl('/sobre'),
-      className: 'nav-tab' + (showActive && activeTab === 'sobre' ? ' active' : ''),
+      className: 'nav-tab' + (showActive && sobreActive ? ' active' : ''),
+      "aria-current": showActive && sobreActive ? 'page' : undefined,
       onClick: event => handleNavClick(event, () => {
         handleNavigation('sobre');
         setIsMobileMenuOpen(false);
@@ -4962,13 +4977,51 @@ function App() {
       setAnalisiRetry(value => value + 1);
     }
   };
-  const renderDataLoading = () => React.createElement("div", {
-    className: "container data-loading-container"
-  }, React.createElement("h1", {
-    className: "page-title data-loading-title",
-    role: "status",
-    "aria-live": "polite"
-  }, "Carregant dades"));
+  const renderSkeletonCard = (className = '') => React.createElement("div", {
+    className: `contract-card data-skeleton-card${className ? ` ${className}` : ''}`,
+    "aria-hidden": "true"
+  }, React.createElement("div", {
+    className: "data-skeleton-line data-skeleton-line-short"
+  }), React.createElement("div", {
+    className: "data-skeleton-line data-skeleton-line-title"
+  }), React.createElement("div", {
+    className: "data-skeleton-line"
+  }), React.createElement("div", {
+    className: "data-skeleton-line data-skeleton-line-medium"
+  }));
+  const renderDataLoading = () => {
+    const isAnalisiLoading = analisiTabs.includes(activeTab);
+    const pageClass = activeTab === 'persones' ? 'persones-page' : activeTab === 'empreses' || activeTab === 'empresa' ? 'empreses-page' : isAnalisiLoading ? 'analisi-page' : 'contractes-page';
+    const cardClass = activeTab === 'persones' ? 'persona-card' : activeTab === 'empreses' ? 'empresa-list-card' : isAnalisiLoading ? 'fraccionament-card' : '';
+    const cardCount = activeTab === 'empresa' ? 2 : 4;
+    return React.createElement("div", {
+      className: `container data-loading-container ${pageClass}`,
+      role: "status",
+      "aria-live": "polite",
+      "aria-label": "Carregant dades"
+    }, React.createElement("div", {
+      className: "page-title data-skeleton-title",
+      "aria-hidden": "true"
+    }), activeTab !== 'empresa' && React.createElement("div", {
+      className: `search-section data-skeleton-search${isAnalisiLoading ? ' analisi-search-section' : ''}`,
+      "aria-hidden": "true"
+    }, React.createElement("div", {
+      className: "data-skeleton-input"
+    }), React.createElement("div", {
+      className: "data-skeleton-actions"
+    }, React.createElement("div", {
+      className: "data-skeleton-control"
+    }), React.createElement("div", {
+      className: "data-skeleton-control data-skeleton-control-square"
+    }))), React.createElement("div", {
+      className: "data-skeleton-list",
+      "aria-hidden": "true"
+    }, Array.from({
+      length: cardCount
+    }, (_, index) => React.createElement(React.Fragment, {
+      key: index
+    }, renderSkeletonCard(cardClass)))));
+  };
   const renderDataError = () => React.createElement("div", {
     className: "container data-loading-container"
   }, React.createElement("div", {
@@ -5019,6 +5072,22 @@ function App() {
     handleNavigation('analisi');
     setIsMobileMenuOpen(false);
   };
+  const handleAnalisiTabKeyDown = event => {
+    if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+    event.preventDefault();
+    const tabs = ['fraccionament', 'monopoli', 'electoral'];
+    const currentIndex = tabs.indexOf(analisiTab);
+    let nextIndex = currentIndex;
+    if (event.key === 'ArrowRight') nextIndex = (currentIndex + 1) % tabs.length;
+    if (event.key === 'ArrowLeft') nextIndex = (currentIndex - 1 + tabs.length) % tabs.length;
+    if (event.key === 'Home') nextIndex = 0;
+    if (event.key === 'End') nextIndex = tabs.length - 1;
+    setAnalisiTab(tabs[nextIndex]);
+    requestAnimationFrame(() => {
+      const tabButtons = event.currentTarget.parentElement.querySelectorAll('[role="tab"]');
+      tabButtons[nextIndex]?.focus();
+    });
+  };
   const handleEmpresaClick = empresaName => {
     setSelectedContractForDetail(null);
     setSelectedEmpresa(empresaName);
@@ -5050,7 +5119,8 @@ function App() {
     className: "home-dissolve-stage"
   }, renderHomeSection(homeIntroFading ? 'home-intro-target' : ''), homeIntroFading && renderHomeLoading(true))), activeTab !== 'home' && React.createElement("main", {
     id: "main-content",
-    className: "site-main"
+    className: "site-main",
+    tabIndex: -1
   }, activeDataError ? renderDataError() : isDataTabLoading && renderDataLoading(), activeTab === 'buscador' && canRenderDataTab && React.createElement("div", {
     className: "container contractes-page"
   }, React.createElement("h1", {
@@ -5511,21 +5581,27 @@ function App() {
     type: "button",
     role: "tab",
     "aria-selected": analisiTab === 'fraccionament',
-    "aria-controls": "analisi-panel"
+    "aria-controls": "analisi-panel",
+    tabIndex: analisiTab === 'fraccionament' ? 0 : -1,
+    onKeyDown: handleAnalisiTabKeyDown
   }, "Fraccionament"), React.createElement("button", {
     className: 'analisi-tab' + (analisiTab === 'monopoli' ? ' active' : ''),
     onClick: () => setAnalisiTab('monopoli'),
     type: "button",
     role: "tab",
     "aria-selected": analisiTab === 'monopoli',
-    "aria-controls": "analisi-panel"
+    "aria-controls": "analisi-panel",
+    tabIndex: analisiTab === 'monopoli' ? 0 : -1,
+    onKeyDown: handleAnalisiTabKeyDown
   }, "Concentraci\xF3"), React.createElement("button", {
     className: 'analisi-tab' + (analisiTab === 'electoral' ? ' active' : ''),
     onClick: () => setAnalisiTab('electoral'),
     type: "button",
     role: "tab",
     "aria-selected": analisiTab === 'electoral',
-    "aria-controls": "analisi-panel"
+    "aria-controls": "analisi-panel",
+    tabIndex: analisiTab === 'electoral' ? 0 : -1,
+    onKeyDown: handleAnalisiTabKeyDown
   }, "Electoralisme"))), React.createElement("div", {
     className: "container analisi-page",
     id: "analisi-panel",
