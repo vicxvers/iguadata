@@ -705,21 +705,19 @@ html.home-lock-scroll {
     grid-template-columns: 1fr;
 }
 
-.search-filter-panel-four {
-    grid-template-columns: repeat(4, 1fr);
-}
-
 .search-filter-panel-analysis {
     grid-template-columns: minmax(15rem, 1fr) minmax(18rem, 1.2fr);
 }
 
 .search-filter-panel-secondary {
+    grid-template-columns: repeat(4, 1fr);
     max-height: 8rem;
 }
 
 
-.filter-input-date {
+.filter-input {
     width: 100%;
+    min-height: 48px;
     padding: 0.75rem 1rem;
     border: 2px solid var(--border);
     border-radius: var(--radius);
@@ -731,11 +729,11 @@ html.home-lock-scroll {
     transition: all 0.2s;
 }
 
-.filter-input-date:hover {
+.filter-input:hover {
     border-color: var(--navy-light);
 }
 
-.filter-input-date:focus {
+.filter-input:focus {
     outline: none;
     border-color: var(--navy-light);
     background: var(--surface);
@@ -5689,7 +5687,8 @@ body.home-scroll-surface::-webkit-scrollbar {
     outline-offset: 0.35rem;
 }
 
-.contract-evolution-column:hover .contract-evolution-bar-wrap span {
+.contract-evolution-column:hover .contract-evolution-bar-wrap span,
+.contract-evolution-column.is-active .contract-evolution-bar-wrap span {
     background: var(--navy-light);
 }
 

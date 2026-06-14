@@ -1569,10 +1569,7 @@ function EmpresesView({ empreses, onEmpresaSelect, searchTerm, setSearchTerm, se
         let result = [...empreses];
 
         if (debouncedSearch) {
-            result = result.filter(e => matchesSearchQuery(
-                [e.nom, e.sector, e.categoria],
-                debouncedSearch
-            ));
+            result = result.filter(e => matchesSearchQuery(e.nom, debouncedSearch));
         }
 
         if (sectorFilter) {
@@ -1640,8 +1637,8 @@ function EmpresesView({ empreses, onEmpresaSelect, searchTerm, setSearchTerm, se
                     <input
                         type="text"
                         className="search-input"
-                        placeholder="Cerca per empresa adjudicatària"
-                        aria-label="Cerca per empresa adjudicatària"
+                        placeholder="Cerca per empresa"
+                        aria-label="Cerca per empresa"
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
                     />
@@ -1658,6 +1655,15 @@ function EmpresesView({ empreses, onEmpresaSelect, searchTerm, setSearchTerm, se
                 />
 
                 <div className={"filters search-filter-panel" + (!empresesFiltersOpen ? " collapsed" : "")}>
+                    <div className="filter-group" style={{ flex: '1 1 200px' }}>
+                        <label className="filter-label">Ordenar per</label>
+                        <select className="filter-select" style={{ height: '48px' }} value={sortBy} onChange={(e) => setSortBy(e.target.value)} aria-label="Ordenar empreses per">
+                            <option value="amount-desc">Import (descendent)</option>
+                            <option value="amount-asc">Import (ascendent)</option>
+                            <option value="contracts-desc">Nombre de contractes (descendent)</option>
+                            <option value="contracts-asc">Nombre de contractes (ascendent)</option>
+                        </select>
+                    </div>
                     <div className="filter-group" style={{ flex: '1 1 200px' }}>
                         <label className="filter-label">Sector</label>
                         <select className="filter-select" style={{ height: '48px' }} value={sectorFilter} onChange={(e) => { setSectorFilter(e.target.value); setCategoriaFilter(''); }} aria-label="Sector">
@@ -1688,15 +1694,6 @@ function EmpresesView({ empreses, onEmpresaSelect, searchTerm, setSearchTerm, se
                                 .map(cat => (
                                     <option key={cat} value={cat}>{cat === 'Altres serveis comunitaris' ? 'Altres' : cat}</option>
                                 ))}
-                        </select>
-                    </div>
-                    <div className="filter-group" style={{ flex: '1 1 200px' }}>
-                        <label className="filter-label">Ordenar per</label>
-                        <select className="filter-select" style={{ height: '48px' }} value={sortBy} onChange={(e) => setSortBy(e.target.value)} aria-label="Ordenar empreses per">
-                            <option value="amount-desc">Import (descendent)</option>
-                            <option value="amount-asc">Import (ascendent)</option>
-                            <option value="contracts-desc">Nombre de contractes (descendent)</option>
-                            <option value="contracts-asc">Nombre de contractes (ascendent)</option>
                         </select>
                     </div>
                 </div>
@@ -1872,7 +1869,10 @@ function EmpresaView({ empresa: empresaNom, contracts, empreses, administradors,
     const [debouncedSearch, setDebouncedSearch] = useState('');
     const [tipusFilter, setTipusFilter] = useState('');
     const [procedureFilter, setProcedureFilter] = useState('');
-    const [yearFilter, setYearFilter] = useState('');
+    const [dateStart, setDateStart] = useState('');
+    const [dateEnd, setDateEnd] = useState('');
+    const [amountMin, setAmountMin] = useState('');
+    const [amountMax, setAmountMax] = useState('');
     const [sortBy, setSortBy] = useState('date-desc');
     const [currentPage, setCurrentPage] = useState(1);
     const [showAllAdministradors, setShowAllAdministradors] = useState(false);
@@ -1887,26 +1887,31 @@ function EmpresaView({ empresa: empresaNom, contracts, empreses, administradors,
         return () => clearTimeout(timer);
     }, [searchTerm]);
 
-    useEffect(() => { setCurrentPage(1); }, [debouncedSearch, tipusFilter, procedureFilter, yearFilter, sortBy]);
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [debouncedSearch, tipusFilter, procedureFilter, dateStart, dateEnd, amountMin, amountMax, sortBy]);
     useEffect(() => { setShowAllAdministradors(false); }, [empresaNom]);
 
     const empresaContracts = useMemo(() => {
         let result = [...allEmpresaContracts];
         if (debouncedSearch) {
             result = result.filter(c => matchesSearchQuery(
-                [c.descripcion, c.codigo, c.tipo, c.procedimiento],
+                [c.descripcion, c.adjudicatario, c.codigo],
                 debouncedSearch
             ));
         }
-        if (yearFilter) result = result.filter(c => String(c.año || String(c.fecha || '').slice(0, 4)) === String(yearFilter));
         if (tipusFilter) result = result.filter(c => c.tipo === tipusFilter);
         if (procedureFilter) result = result.filter(c => c.procedimiento === procedureFilter);
+        if (dateStart) result = result.filter(c => new Date(c.fecha) >= new Date(dateStart));
+        if (dateEnd) result = result.filter(c => new Date(c.fecha) <= new Date(dateEnd));
+        if (amountMin !== '') result = result.filter(c => Number(c.importe) >= Number(amountMin));
+        if (amountMax !== '') result = result.filter(c => Number(c.importe) <= Number(amountMax));
         if (sortBy === 'date-desc') result.sort((a, b) => new Date(b.fecha) - new Date(a.fecha));
         else if (sortBy === 'date-asc') result.sort((a, b) => new Date(a.fecha) - new Date(b.fecha));
         else if (sortBy === 'amount-desc') result.sort((a, b) => b.importe - a.importe);
         else if (sortBy === 'amount-asc') result.sort((a, b) => a.importe - b.importe);
         return result;
-    }, [allEmpresaContracts, debouncedSearch, tipusFilter, procedureFilter, yearFilter, sortBy]);
+    }, [allEmpresaContracts, debouncedSearch, tipusFilter, procedureFilter, dateStart, dateEnd, amountMin, amountMax, sortBy]);
 
     const empresaAnnualActivity = useMemo(() => {
         const byYear = {};
@@ -1925,11 +1930,25 @@ function EmpresaView({ empresa: empresaNom, contracts, empreses, administradors,
     const totalPages = Math.ceil(empresaContracts.length / itemsPerPage);
     const contractesPaginats = empresaContracts.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
 
-    const resetFilters = () => { setSearchTerm(''); setDebouncedSearch(''); setTipusFilter(''); setProcedureFilter(''); setYearFilter(''); setSortBy('date-desc'); setCurrentPage(1); };
+    const resetFilters = () => {
+        setSearchTerm('');
+        setDebouncedSearch('');
+        setTipusFilter('');
+        setProcedureFilter('');
+        setDateStart('');
+        setDateEnd('');
+        setAmountMin('');
+        setAmountMax('');
+        setSortBy('date-desc');
+        setCurrentPage(1);
+    };
     const activeFiltersCount = [
         tipusFilter,
         procedureFilter,
-        yearFilter,
+        dateStart,
+        dateEnd,
+        amountMin,
+        amountMax,
         sortBy !== 'date-desc' ? sortBy : ''
     ].filter(Boolean).length;
 
@@ -2023,14 +2042,17 @@ function EmpresaView({ empresa: empresaNom, contracts, empreses, administradors,
                             <button
                                 key={item.year}
                                 type="button"
-                                className={"empresa-activity-column" + (String(yearFilter) === String(item.year) ? " is-active" : "")}
+                                className={"empresa-activity-column" + (dateStart === `${item.year}-01-01` && dateEnd === `${item.year}-12-31` ? " is-active" : "")}
                                 onClick={() => {
                                     setSearchTerm('');
                                     setDebouncedSearch('');
                                     setTipusFilter('');
                                     setProcedureFilter('');
+                                    setAmountMin('');
+                                    setAmountMax('');
                                     setSortBy('date-desc');
-                                    setYearFilter(String(item.year));
+                                    setDateStart(`${item.year}-01-01`);
+                                    setDateEnd(`${item.year}-12-31`);
                                     setCurrentPage(1);
                                     window.scrollTo({ top: 0, behavior: 'smooth' });
                                 }}
@@ -2056,8 +2078,8 @@ function EmpresaView({ empresa: empresaNom, contracts, empreses, administradors,
                     <input
                         type="text"
                         className="search-input"
-                        placeholder="Cerca per descripció del contracte"
-                        aria-label="Cerca per descripció del contracte"
+                        placeholder="Cerca per descripció, empresa o codi d'expedient"
+                        aria-label="Cerca per descripció, empresa o codi d'expedient"
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
                     />
@@ -2072,18 +2094,14 @@ function EmpresaView({ empresa: empresaNom, contracts, empreses, administradors,
                     onReset={resetFilters}
                 />
 
-                <div className={"filters search-filter-panel search-filter-panel-four" + (!empresaFiltersOpen ? " collapsed" : "")}>
+                <div className={"filters search-filter-panel" + (!empresaFiltersOpen ? " collapsed" : "")}>
                     <div className="filter-group" style={{ flex: '1 1 200px' }}>
-                        <label className="filter-label">Tipus</label>
-                        <select className="filter-select" style={{ height: '48px' }} value={tipusFilter} onChange={(e) => setTipusFilter(e.target.value)} aria-label="Tipus de contracte">
-                            <option value="">Tots els tipus</option>
-                            <option value="1. OBRES">Obres</option>
-                            <option value="3. SUBMINISTRAMENTS">Subministraments</option>
-                            <option value="5. SERVEIS">Serveis</option>
-                            <option value="6. ADMINISTRATIU ESPECIAL">Administratiu especial</option>
-                            <option value="2. GESTIÓ DE SERVEI PÚBLIC">Gestió de servei públic</option>
-                            <option value="8. CONCESSIÓ DE SERVEIS">Concessió de serveis</option>
-                            <option value="10. PRIVAT D'ADMINISTRACIO PUBLICA">Privat d'administració pública</option>
+                        <label className="filter-label">Ordenar per</label>
+                        <select className="filter-select" style={{ height: '48px' }} value={sortBy} onChange={(e) => setSortBy(e.target.value)} aria-label="Ordenar contractes de l'empresa per">
+                            <option value="date-desc">Data (més recents)</option>
+                            <option value="date-asc">Data (més antics)</option>
+                            <option value="amount-desc">Import (descendent)</option>
+                            <option value="amount-asc">Import (ascendent)</option>
                         </select>
                     </div>
                     <div className="filter-group" style={{ flex: '1 1 200px' }}>
@@ -2099,22 +2117,35 @@ function EmpresaView({ empresa: empresaNom, contracts, empreses, administradors,
                         </select>
                     </div>
                     <div className="filter-group" style={{ flex: '1 1 200px' }}>
-                        <label className="filter-label">Any</label>
-                        <select className="filter-select" style={{ height: '48px' }} value={yearFilter} onChange={(e) => setYearFilter(e.target.value)} aria-label="Any">
-                            <option value="">Tots els anys</option>
-                            {[...new Set(allEmpresaContracts.map(c => c.año || parseInt(String(c.fecha || '').slice(0, 4), 10)).filter(Boolean))]
-                                .sort((a, b) => b - a)
-                                .map(y => <option key={y} value={y}>{y}</option>)}
+                        <label className="filter-label">Tipus</label>
+                        <select className="filter-select" style={{ height: '48px' }} value={tipusFilter} onChange={(e) => setTipusFilter(e.target.value)} aria-label="Tipus de contracte">
+                            <option value="">Tots els tipus</option>
+                            <option value="1. OBRES">Obres</option>
+                            <option value="3. SUBMINISTRAMENTS">Subministraments</option>
+                            <option value="5. SERVEIS">Serveis</option>
+                            <option value="6. ADMINISTRATIU ESPECIAL">Administratiu especial</option>
+                            <option value="2. GESTIÓ DE SERVEI PÚBLIC">Gestió de servei públic</option>
+                            <option value="8. CONCESSIÓ DE SERVEIS">Concessió de serveis</option>
+                            <option value="10. PRIVAT D'ADMINISTRACIO PUBLICA">Privat d'administració pública</option>
                         </select>
                     </div>
+                </div>
+                <div className={"filters-row search-filter-panel search-filter-panel-secondary" + (!empresaFiltersOpen ? " collapsed" : "")}>
                     <div className="filter-group" style={{ flex: '1 1 200px' }}>
-                        <label className="filter-label">Ordenar per</label>
-                        <select className="filter-select" style={{ height: '48px' }} value={sortBy} onChange={(e) => setSortBy(e.target.value)} aria-label="Ordenar contractes de l'empresa per">
-                            <option value="date-desc">Data (més recents)</option>
-                            <option value="date-asc">Data (més antics)</option>
-                            <option value="amount-desc">Import (descendent)</option>
-                            <option value="amount-asc">Import (ascendent)</option>
-                        </select>
+                        <label className="filter-label">Data inici</label>
+                        <input type="date" className="filter-input" aria-label="Data inici" value={dateStart} onChange={(e) => setDateStart(e.target.value)} />
+                    </div>
+                    <div className="filter-group" style={{ flex: '1 1 200px' }}>
+                        <label className="filter-label">Data final</label>
+                        <input type="date" className="filter-input" aria-label="Data final" value={dateEnd} onChange={(e) => setDateEnd(e.target.value)} />
+                    </div>
+                    <div className="filter-group" style={{ flex: '1 1 200px' }}>
+                        <label className="filter-label">Des de</label>
+                        <input type="number" min="0" step="0.01" inputMode="decimal" className="filter-input" placeholder="Import mínim" aria-label="Import mínim" value={amountMin} onChange={(e) => setAmountMin(e.target.value)} />
+                    </div>
+                    <div className="filter-group" style={{ flex: '1 1 200px' }}>
+                        <label className="filter-label">Fins a</label>
+                        <input type="number" min="0" step="0.01" inputMode="decimal" className="filter-input" placeholder="Import màxim" aria-label="Import màxim" value={amountMax} onChange={(e) => setAmountMax(e.target.value)} />
                     </div>
                 </div>
             </div>
@@ -2210,7 +2241,7 @@ function PersonesView({ persones, onEmpresaSelect, onNavigateLegal, searchTerm, 
 
         if (debouncedSearch) {
             result = result.filter(p => matchesSearchQuery(
-                [p.nom, ...(p.relacions || []).flatMap(e => [e.empresa, ...(e.carrecs || [])])],
+                [p.nom, ...(p.relacions || []).map(e => e.empresa)],
                 debouncedSearch
             ));
         }
@@ -2255,8 +2286,8 @@ function PersonesView({ persones, onEmpresaSelect, onNavigateLegal, searchTerm, 
                     <input
                         type="text"
                         className="search-input"
-                        placeholder="Cerca per persona o empresa adjudicatària"
-                        aria-label="Cerca per persona o empresa adjudicatària"
+                        placeholder="Cerca per persona o empresa vinculada"
+                        aria-label="Cerca per persona o empresa vinculada"
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
                     />
@@ -2811,7 +2842,6 @@ function App() {
     const [expandedMonopolyId, setExpandedMonopolyId] = useState(null);
     const [searchTerm, setSearchTerm] = useState('');
     const [debouncedSearch, setDebouncedSearch] = useState('');
-    const [yearFilter, setYearFilter] = useState('');
     const [typeFilter, setTypeFilter] = useState('');
     const [procedureFilter, setProcedureFilter] = useState('');
     const [riskFilter, setRiskFilter] = useState('TOTS');
@@ -2826,6 +2856,8 @@ function App() {
     const analisiItemsPerPage = 25;
     const [dateStart, setDateStart] = useState('');
     const [dateEnd, setDateEnd] = useState('');
+    const [amountMin, setAmountMin] = useState('');
+    const [amountMax, setAmountMax] = useState('');
     const [sortBy, setSortBy] = useState('date-desc');
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 25;
@@ -2875,8 +2907,9 @@ function App() {
     const resetAllFilters = () => {
         // Contractes
         setSearchTerm(''); setDebouncedSearch('');
-        setYearFilter(''); setTypeFilter(''); setProcedureFilter('');
+        setTypeFilter(''); setProcedureFilter('');
         setDateStart(''); setDateEnd('');
+        setAmountMin(''); setAmountMax('');
         setSortBy('date-desc'); setCurrentPage(1);
         // Empreses
         setEmpresesSearch(''); setEmpresesSector('');
@@ -3417,12 +3450,10 @@ function App() {
 
         if (debouncedSearch) {
             result = result.filter(c => matchesSearchQuery(
-                [c.descripcion, c.adjudicatario, c.codigo, c.tipo, c.procedimiento],
+                [c.descripcion, c.adjudicatario, c.codigo],
                 debouncedSearch
             ));
         }
-
-        if (yearFilter) result = result.filter(c => c.año === parseInt(yearFilter));
 
         if (typeFilter) {
             if (typeFilter === '5. SERVEIS') {
@@ -3440,6 +3471,12 @@ function App() {
 
         if (dateEnd) {
             result = result.filter(c => new Date(c.fecha) <= new Date(dateEnd));
+        }
+        if (amountMin !== '') {
+            result = result.filter(c => Number(c.importe) >= Number(amountMin));
+        }
+        if (amountMax !== '') {
+            result = result.filter(c => Number(c.importe) <= Number(amountMax));
         }
 
         switch (sortBy) {
@@ -3460,7 +3497,7 @@ function App() {
         }
 
         return result;
-    }, [contracts, debouncedSearch, yearFilter, typeFilter, procedureFilter, dateStart, dateEnd, sortBy]);
+    }, [contracts, debouncedSearch, typeFilter, procedureFilter, dateStart, dateEnd, amountMin, amountMax, sortBy]);
 
     const totalPages = Math.ceil(contractesFiltrats.length / itemsPerPage);
     const startIndex = (currentPage - 1) * itemsPerPage;
@@ -3484,7 +3521,7 @@ function App() {
 
     useEffect(() => {
         setCurrentPage(1);
-    }, [debouncedSearch, yearFilter, typeFilter, procedureFilter, dateStart, dateEnd, sortBy]);
+    }, [debouncedSearch, typeFilter, procedureFilter, dateStart, dateEnd, amountMin, amountMax, sortBy]);
 
     const fraudesFiltrats = useMemo(() => {
         let result = fraudes.filter(f => f.nivell !== 'BAIX');
@@ -3495,7 +3532,8 @@ function App() {
             result = result.filter(f => matchesSearchQuery(
                 [
                     ...(f.empreses || []),
-                    ...(f.contractes || []).flatMap(c => [c.descripcion, c.adjudicatario, c.codigo])
+                    f.id,
+                    ...(f.contractes || []).flatMap(c => [c.descripcion, c.adjudicatario])
                 ],
                 analisiSearch
             ));
@@ -3527,24 +3565,19 @@ function App() {
         let result = [...concentracio];
         if (analisiSearch.trim()) {
             result = result.filter(f => matchesSearchQuery(
-                [f.sector, f.finestra_label, ...(f.empreses || [])],
+                [
+                    f.id,
+                    ...(f.empreses || []),
+                    ...(f.contractes || []).flatMap(c => [c.descripcion, c.adjudicatario])
+                ],
                 analisiSearch
             ));
         }
         return result;
     }, [concentracio, analisiSearch]);
 
-    const orderConcentracio = useCallback((items, { forceAlphabetic = false } = {}) => {
+    const orderConcentracio = useCallback((items) => {
         const result = [...items];
-        const bySector = (a, b) => {
-            const sectorA = (a.sector || '') === 'Altres Serveis i Subministraments' ? 'ZZZ' : (a.sector || '');
-            const sectorB = (b.sector || '') === 'Altres Serveis i Subministraments' ? 'ZZZ' : (b.sector || '');
-            return sectorA.localeCompare(sectorB, 'ca');
-        };
-        if (forceAlphabetic && analisiSort === 'risk-desc') {
-            result.sort(bySector);
-            return result;
-        }
         switch (analisiSort) {
             case 'risk-asc':
                 result.sort((a, b) => (a.risc || 0) - (b.risc || 0));
@@ -3571,8 +3604,7 @@ function App() {
         orderConcentracio(
             concentracioFiltradaBase
                 .filter(f => f.finestra === 'historic')
-                .filter(f => riskFilter === 'TOTS' || f.nivell === riskFilter || (riskFilter === 'OBSERVACIO' && f.nivell === 'BAIX')),
-            { forceAlphabetic: true }
+                .filter(f => riskFilter === 'TOTS' || f.nivell === riskFilter || (riskFilter === 'OBSERVACIO' && f.nivell === 'BAIX'))
         )
         , [concentracioFiltradaBase, orderConcentracio, riskFilter]);
 
@@ -3601,9 +3633,8 @@ function App() {
             result = result.filter(f => matchesSearchQuery(
                 [
                     f.empresa,
-                    f.periode_electoral,
-                    ...(f.motius || []),
-                    ...(f.contractes || []).flatMap(c => [c.descripcion, c.adjudicatario, c.codigo])
+                    f.id,
+                    ...(f.contractes || []).flatMap(c => [c.descripcion, c.adjudicatario])
                 ],
                 analisiSearch
             ));
@@ -3685,11 +3716,12 @@ function App() {
     const resetFilters = () => {
         setSearchTerm('');
         setDebouncedSearch('');
-        setYearFilter('');
         setTypeFilter('');
         setProcedureFilter('');
         setDateStart('');
         setDateEnd('');
+        setAmountMin('');
+        setAmountMax('');
         setSortBy('date-desc');
         setCurrentPage(1);
     };
@@ -3698,18 +3730,18 @@ function App() {
         setAnalisiSearch('');
         setRiskFilter('TOTS');
         setAnalisiSort('risk-desc');
-        setConcentracioMode('historic');
         setAnalisiPageFrac(1);
         setAnalisiPageMonop(1);
     };
-    const activeAnalisiFiltersCount = (analisiSearch.trim() ? 1 : 0) + (riskFilter !== 'TOTS' ? 1 : 0) + (analisiSort !== 'risk-desc' ? 1 : 0);
+    const activeAnalisiFiltersCount = (riskFilter !== 'TOTS' ? 1 : 0) + (analisiSort !== 'risk-desc' ? 1 : 0);
 
     const activeFiltersCount = [
-        yearFilter,
         typeFilter,
         procedureFilter,
         dateStart,
         dateEnd,
+        amountMin,
+        amountMax,
         sortBy !== 'date-desc' ? sortBy : ''
     ].filter(Boolean).length;
 
@@ -4460,8 +4492,8 @@ function App() {
                             <input
                                 type="text"
                                 className="search-input"
-                                placeholder="Cerca per descripció o empresa adjudicatària"
-                                aria-label="Cerca per descripció o empresa adjudicatària"
+                                placeholder="Cerca per descripció, empresa o codi d'expedient"
+                                aria-label="Cerca per descripció, empresa o codi d'expedient"
                                 value={searchTerm}
                                 onChange={(e) => setSearchTerm(e.target.value)}
                             />
@@ -4479,16 +4511,12 @@ function App() {
 
                         <div className={"filters search-filter-panel" + (!filtersOpen ? " collapsed" : "")}>
                             <div className="filter-group" style={{ flex: '1 1 200px' }}>
-                                <label className="filter-label">Tipus</label>
-                                <select className="filter-select" style={{ height: '48px' }} value={typeFilter} onChange={(e) => setTypeFilter(e.target.value)} aria-label="Tipus de contracte">
-                                    <option value="">Tots els tipus</option>
-                                    <option value="1. OBRES">Obres</option>
-                                    <option value="3. SUBMINISTRAMENTS">Subministraments</option>
-                                    <option value="5. SERVEIS">Serveis</option>
-                                    <option value="6. ADMINISTRATIU ESPECIAL">Administratiu especial</option>
-                                    <option value="2. GESTIÓ DE SERVEI PÚBLIC">Gestió de servei públic</option>
-                                    <option value="8. CONCESSIÓ DE SERVEIS">Concessió de serveis</option>
-                                    <option value="10. PRIVAT D'ADMINISTRACIO PUBLICA">Privat d'administració pública</option>
+                                <label className="filter-label">Ordenar per</label>
+                                <select className="filter-select" style={{ height: '48px' }} value={sortBy} onChange={(e) => setSortBy(e.target.value)} aria-label="Ordenar contractes per">
+                                    <option value="date-desc">Data (més recents)</option>
+                                    <option value="date-asc">Data (més antics)</option>
+                                    <option value="amount-desc">Import (descendent)</option>
+                                    <option value="amount-asc">Import (ascendent)</option>
                                 </select>
                             </div>
                             <div className="filter-group" style={{ flex: '1 1 200px' }}>
@@ -4504,45 +4532,48 @@ function App() {
                                 </select>
                             </div>
                             <div className="filter-group" style={{ flex: '1 1 200px' }}>
-                                <label className="filter-label">Ordenar per</label>
-                                <select className="filter-select" style={{ height: '48px' }} value={sortBy} onChange={(e) => setSortBy(e.target.value)} aria-label="Ordenar contractes per">
-                                    <option value="date-desc">Data (més recents)</option>
-                                    <option value="date-asc">Data (més antics)</option>
-                                    <option value="amount-desc">Import (descendent)</option>
-                                    <option value="amount-asc">Import (ascendent)</option>
+                                <label className="filter-label">Tipus</label>
+                                <select className="filter-select" style={{ height: '48px' }} value={typeFilter} onChange={(e) => setTypeFilter(e.target.value)} aria-label="Tipus de contracte">
+                                    <option value="">Tots els tipus</option>
+                                    <option value="1. OBRES">Obres</option>
+                                    <option value="3. SUBMINISTRAMENTS">Subministraments</option>
+                                    <option value="5. SERVEIS">Serveis</option>
+                                    <option value="6. ADMINISTRATIU ESPECIAL">Administratiu especial</option>
+                                    <option value="2. GESTIÓ DE SERVEI PÚBLIC">Gestió de servei públic</option>
+                                    <option value="8. CONCESSIÓ DE SERVEIS">Concessió de serveis</option>
+                                    <option value="10. PRIVAT D'ADMINISTRACIO PUBLICA">Privat d'administració pública</option>
                                 </select>
                             </div>
                         </div>
 
                         <div className={"filters-row search-filter-panel search-filter-panel-secondary" + (!filtersOpen ? " collapsed" : "")}>
-                            <div className="filter-group" style={{ flex: '1 1 150px' }}>
-                                <label className="filter-label">Any</label>
-                                <select className="filter-select" style={{ height: '48px' }} value={yearFilter} onChange={(e) => setYearFilter(e.target.value)} aria-label="Any">
-                                    <option value="">Tots els anys</option>
-                                    {[2026, 2025, 2024, 2023, 2022, 2021, 2020, 2019, 2018, 2017, 2016].map(y => <option key={y} value={y}>{y}</option>)}
-                                </select>
-                            </div>
-                            <div className="filter-group" style={{ flex: '1 1 150px' }}>
+                            <div className="filter-group">
                                 <label className="filter-label">Data inici</label>
                                 <input
                                     type="date"
-                                    className="filter-input-date"
+                                    className="filter-input"
                                     aria-label="Data inici"
-                                    style={{ height: '48px' }}
                                     value={dateStart}
                                     onChange={(e) => setDateStart(e.target.value)}
                                 />
                             </div>
-                            <div className="filter-group" style={{ flex: '1 1 150px' }}>
+                            <div className="filter-group">
                                 <label className="filter-label">Data final</label>
                                 <input
                                     type="date"
-                                    className="filter-input-date"
+                                    className="filter-input"
                                     aria-label="Data final"
-                                    style={{ height: '48px' }}
                                     value={dateEnd}
                                     onChange={(e) => setDateEnd(e.target.value)}
                                 />
+                            </div>
+                            <div className="filter-group">
+                                <label className="filter-label">Des de</label>
+                                <input type="number" min="0" step="0.01" inputMode="decimal" className="filter-input" placeholder="Import mínim" aria-label="Import mínim" value={amountMin} onChange={(e) => setAmountMin(e.target.value)} />
+                            </div>
+                            <div className="filter-group">
+                                <label className="filter-label">Fins a</label>
+                                <input type="number" min="0" step="0.01" inputMode="decimal" className="filter-input" placeholder="Import màxim" aria-label="Import màxim" value={amountMax} onChange={(e) => setAmountMax(e.target.value)} />
                             </div>
                         </div>
                     </div>
@@ -4653,16 +4684,17 @@ function App() {
                                     <button
                                         key={item.year}
                                         type="button"
-                                        className="contract-evolution-column"
+                                        className={"contract-evolution-column" + (dateStart === `${item.year}-01-01` && dateEnd === `${item.year}-12-31` ? " is-active" : "")}
                                         onClick={() => {
                                             setSearchTerm('');
                                             setDebouncedSearch('');
                                             setTypeFilter('');
                                             setProcedureFilter('');
-                                            setDateStart('');
-                                            setDateEnd('');
+                                            setAmountMin('');
+                                            setAmountMax('');
                                             setSortBy('date-desc');
-                                            setYearFilter(String(item.year));
+                                            setDateStart(`${item.year}-01-01`);
+                                            setDateEnd(`${item.year}-12-31`);
                                             setCurrentPage(1);
                                             window.scrollTo({ top: 0, behavior: 'smooth' });
                                         }}
@@ -4882,7 +4914,7 @@ function App() {
                                         <input
                                             type="text"
                                             className="search-input"
-                                            placeholder="Cerca per descripció o empresa adjudicatària"
+                                            placeholder="Cerca per descripció, empresa o codi de cas"
                                             aria-label="Cerca casos de fraccionament"
                                             value={analisiSearch}
                                             onChange={(e) => setAnalisiSearch(e.target.value)}
@@ -5074,8 +5106,7 @@ function App() {
                                     </button>
                                 </div>
 
-                                {concentracioMode === 'temporal' && (
-                                    <div className="search-section analisi-search-section">
+                                <div className="search-section analisi-search-section">
                                         <div className="search-input-wrapper">
                                             <span className="search-icon">
                                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
@@ -5083,7 +5114,7 @@ function App() {
                                             <input
                                                 type="text"
                                                 className="search-input"
-                                                placeholder="Cerca per sector o empresa adjudicatària"
+                                                placeholder="Cerca per descripció, empresa o codi de cas"
                                                 aria-label="Cerca casos de concentració"
                                                 value={analisiSearch}
                                                 onChange={(e) => setAnalisiSearch(e.target.value)}
@@ -5128,8 +5159,7 @@ function App() {
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                )}
+                                </div>
 
                                 {concentracioMode === 'historic' && (
                                     <>
@@ -5260,7 +5290,7 @@ function App() {
                                         <input
                                             type="text"
                                             className="search-input"
-                                            placeholder="Cerca per descripció, empresa adjudicatària o període electoral"
+                                            placeholder="Cerca per descripció, empresa o codi de cas"
                                             aria-label="Cerca casos d'electoralisme"
                                             value={analisiSearch}
                                             onChange={(e) => setAnalisiSearch(e.target.value)}

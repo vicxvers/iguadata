@@ -1948,7 +1948,7 @@ function EmpresesView({
   const empresesFiltrades = useMemo(() => {
     let result = [...empreses];
     if (debouncedSearch) {
-      result = result.filter(e => matchesSearchQuery([e.nom, e.sector, e.categoria], debouncedSearch));
+      result = result.filter(e => matchesSearchQuery(e.nom, debouncedSearch));
     }
     if (sectorFilter) {
       result = result.filter(e => e.sector === sectorFilter);
@@ -2031,8 +2031,8 @@ function EmpresesView({
   }))), React.createElement("input", {
     type: "text",
     className: "search-input",
-    placeholder: "Cerca per empresa adjudicat\xE0ria",
-    "aria-label": "Cerca per empresa adjudicat\xE0ria",
+    placeholder: "Cerca per empresa",
+    "aria-label": "Cerca per empresa",
     value: searchTerm,
     onChange: e => setSearchTerm(e.target.value)
   }), searchTerm && React.createElement("button", {
@@ -2048,6 +2048,29 @@ function EmpresesView({
   }), React.createElement("div", {
     className: "filters search-filter-panel" + (!empresesFiltersOpen ? " collapsed" : "")
   }, React.createElement("div", {
+    className: "filter-group",
+    style: {
+      flex: '1 1 200px'
+    }
+  }, React.createElement("label", {
+    className: "filter-label"
+  }, "Ordenar per"), React.createElement("select", {
+    className: "filter-select",
+    style: {
+      height: '48px'
+    },
+    value: sortBy,
+    onChange: e => setSortBy(e.target.value),
+    "aria-label": "Ordenar empreses per"
+  }, React.createElement("option", {
+    value: "amount-desc"
+  }, "Import (descendent)"), React.createElement("option", {
+    value: "amount-asc"
+  }, "Import (ascendent)"), React.createElement("option", {
+    value: "contracts-desc"
+  }, "Nombre de contractes (descendent)"), React.createElement("option", {
+    value: "contracts-asc"
+  }, "Nombre de contractes (ascendent)"))), React.createElement("div", {
     className: "filter-group",
     style: {
       flex: '1 1 200px'
@@ -2099,30 +2122,7 @@ function EmpresesView({
   }).map(cat => React.createElement("option", {
     key: cat,
     value: cat
-  }, cat === 'Altres serveis comunitaris' ? 'Altres' : cat)))), React.createElement("div", {
-    className: "filter-group",
-    style: {
-      flex: '1 1 200px'
-    }
-  }, React.createElement("label", {
-    className: "filter-label"
-  }, "Ordenar per"), React.createElement("select", {
-    className: "filter-select",
-    style: {
-      height: '48px'
-    },
-    value: sortBy,
-    onChange: e => setSortBy(e.target.value),
-    "aria-label": "Ordenar empreses per"
-  }, React.createElement("option", {
-    value: "amount-desc"
-  }, "Import (descendent)"), React.createElement("option", {
-    value: "amount-asc"
-  }, "Import (ascendent)"), React.createElement("option", {
-    value: "contracts-desc"
-  }, "Nombre de contractes (descendent)"), React.createElement("option", {
-    value: "contracts-asc"
-  }, "Nombre de contractes (ascendent)"))))), React.createElement("div", {
+  }, cat === 'Altres serveis comunitaris' ? 'Altres' : cat)))))), React.createElement("div", {
     className: "results-count"
   }, React.createElement("span", {
     className: "results-count-total"
@@ -2320,7 +2320,10 @@ function EmpresaView({
   const [debouncedSearch, setDebouncedSearch] = useState('');
   const [tipusFilter, setTipusFilter] = useState('');
   const [procedureFilter, setProcedureFilter] = useState('');
-  const [yearFilter, setYearFilter] = useState('');
+  const [dateStart, setDateStart] = useState('');
+  const [dateEnd, setDateEnd] = useState('');
+  const [amountMin, setAmountMin] = useState('');
+  const [amountMax, setAmountMax] = useState('');
   const [sortBy, setSortBy] = useState('date-desc');
   const [currentPage, setCurrentPage] = useState(1);
   const [showAllAdministradors, setShowAllAdministradors] = useState(false);
@@ -2335,21 +2338,24 @@ function EmpresaView({
   }, [searchTerm]);
   useEffect(() => {
     setCurrentPage(1);
-  }, [debouncedSearch, tipusFilter, procedureFilter, yearFilter, sortBy]);
+  }, [debouncedSearch, tipusFilter, procedureFilter, dateStart, dateEnd, amountMin, amountMax, sortBy]);
   useEffect(() => {
     setShowAllAdministradors(false);
   }, [empresaNom]);
   const empresaContracts = useMemo(() => {
     let result = [...allEmpresaContracts];
     if (debouncedSearch) {
-      result = result.filter(c => matchesSearchQuery([c.descripcion, c.codigo, c.tipo, c.procedimiento], debouncedSearch));
+      result = result.filter(c => matchesSearchQuery([c.descripcion, c.adjudicatario, c.codigo], debouncedSearch));
     }
-    if (yearFilter) result = result.filter(c => String(c.año || String(c.fecha || '').slice(0, 4)) === String(yearFilter));
     if (tipusFilter) result = result.filter(c => c.tipo === tipusFilter);
     if (procedureFilter) result = result.filter(c => c.procedimiento === procedureFilter);
+    if (dateStart) result = result.filter(c => new Date(c.fecha) >= new Date(dateStart));
+    if (dateEnd) result = result.filter(c => new Date(c.fecha) <= new Date(dateEnd));
+    if (amountMin !== '') result = result.filter(c => Number(c.importe) >= Number(amountMin));
+    if (amountMax !== '') result = result.filter(c => Number(c.importe) <= Number(amountMax));
     if (sortBy === 'date-desc') result.sort((a, b) => new Date(b.fecha) - new Date(a.fecha));else if (sortBy === 'date-asc') result.sort((a, b) => new Date(a.fecha) - new Date(b.fecha));else if (sortBy === 'amount-desc') result.sort((a, b) => b.importe - a.importe);else if (sortBy === 'amount-asc') result.sort((a, b) => a.importe - b.importe);
     return result;
-  }, [allEmpresaContracts, debouncedSearch, tipusFilter, procedureFilter, yearFilter, sortBy]);
+  }, [allEmpresaContracts, debouncedSearch, tipusFilter, procedureFilter, dateStart, dateEnd, amountMin, amountMax, sortBy]);
   const empresaAnnualActivity = useMemo(() => {
     const byYear = {};
     for (const c of allEmpresaContracts) {
@@ -2377,11 +2383,14 @@ function EmpresaView({
     setDebouncedSearch('');
     setTipusFilter('');
     setProcedureFilter('');
-    setYearFilter('');
+    setDateStart('');
+    setDateEnd('');
+    setAmountMin('');
+    setAmountMax('');
     setSortBy('date-desc');
     setCurrentPage(1);
   };
-  const activeFiltersCount = [tipusFilter, procedureFilter, yearFilter, sortBy !== 'date-desc' ? sortBy : ''].filter(Boolean).length;
+  const activeFiltersCount = [tipusFilter, procedureFilter, dateStart, dateEnd, amountMin, amountMax, sortBy !== 'date-desc' ? sortBy : ''].filter(Boolean).length;
   return React.createElement("div", {
     className: "container empresa-detail-page"
   }, React.createElement("button", {
@@ -2479,14 +2488,17 @@ function EmpresaView({
   }, empresaAnnualActivity.items.map(item => React.createElement("button", {
     key: item.year,
     type: "button",
-    className: "empresa-activity-column" + (String(yearFilter) === String(item.year) ? " is-active" : ""),
+    className: "empresa-activity-column" + (dateStart === `${item.year}-01-01` && dateEnd === `${item.year}-12-31` ? " is-active" : ""),
     onClick: () => {
       setSearchTerm('');
       setDebouncedSearch('');
       setTipusFilter('');
       setProcedureFilter('');
+      setAmountMin('');
+      setAmountMax('');
       setSortBy('date-desc');
-      setYearFilter(String(item.year));
+      setDateStart(`${item.year}-01-01`);
+      setDateEnd(`${item.year}-12-31`);
       setCurrentPage(1);
       window.scrollTo({
         top: 0,
@@ -2534,8 +2546,8 @@ function EmpresaView({
   }))), React.createElement("input", {
     type: "text",
     className: "search-input",
-    placeholder: "Cerca per descripci\xF3 del contracte",
-    "aria-label": "Cerca per descripci\xF3 del contracte",
+    placeholder: "Cerca per descripci\xF3, empresa o codi d'expedient",
+    "aria-label": "Cerca per descripci\xF3, empresa o codi d'expedient",
     value: searchTerm,
     onChange: e => setSearchTerm(e.target.value)
   }), searchTerm && React.createElement("button", {
@@ -2549,7 +2561,7 @@ function EmpresaView({
     activeCount: activeFiltersCount,
     onReset: resetFilters
   }), React.createElement("div", {
-    className: "filters search-filter-panel search-filter-panel-four" + (!empresaFiltersOpen ? " collapsed" : "")
+    className: "filters search-filter-panel" + (!empresaFiltersOpen ? " collapsed" : "")
   }, React.createElement("div", {
     className: "filter-group",
     style: {
@@ -2557,31 +2569,23 @@ function EmpresaView({
     }
   }, React.createElement("label", {
     className: "filter-label"
-  }, "Tipus"), React.createElement("select", {
+  }, "Ordenar per"), React.createElement("select", {
     className: "filter-select",
     style: {
       height: '48px'
     },
-    value: tipusFilter,
-    onChange: e => setTipusFilter(e.target.value),
-    "aria-label": "Tipus de contracte"
+    value: sortBy,
+    onChange: e => setSortBy(e.target.value),
+    "aria-label": "Ordenar contractes de l'empresa per"
   }, React.createElement("option", {
-    value: ""
-  }, "Tots els tipus"), React.createElement("option", {
-    value: "1. OBRES"
-  }, "Obres"), React.createElement("option", {
-    value: "3. SUBMINISTRAMENTS"
-  }, "Subministraments"), React.createElement("option", {
-    value: "5. SERVEIS"
-  }, "Serveis"), React.createElement("option", {
-    value: "6. ADMINISTRATIU ESPECIAL"
-  }, "Administratiu especial"), React.createElement("option", {
-    value: "2. GESTI\xD3 DE SERVEI P\xDABLIC"
-  }, "Gesti\xF3 de servei p\xFAblic"), React.createElement("option", {
-    value: "8. CONCESSI\xD3 DE SERVEIS"
-  }, "Concessi\xF3 de serveis"), React.createElement("option", {
-    value: "10. PRIVAT D'ADMINISTRACIO PUBLICA"
-  }, "Privat d'administraci\xF3 p\xFAblica"))), React.createElement("div", {
+    value: "date-desc"
+  }, "Data (m\xE9s recents)"), React.createElement("option", {
+    value: "date-asc"
+  }, "Data (m\xE9s antics)"), React.createElement("option", {
+    value: "amount-desc"
+  }, "Import (descendent)"), React.createElement("option", {
+    value: "amount-asc"
+  }, "Import (ascendent)"))), React.createElement("div", {
     className: "filter-group",
     style: {
       flex: '1 1 200px'
@@ -2617,43 +2621,93 @@ function EmpresaView({
     }
   }, React.createElement("label", {
     className: "filter-label"
-  }, "Any"), React.createElement("select", {
+  }, "Tipus"), React.createElement("select", {
     className: "filter-select",
     style: {
       height: '48px'
     },
-    value: yearFilter,
-    onChange: e => setYearFilter(e.target.value),
-    "aria-label": "Any"
+    value: tipusFilter,
+    onChange: e => setTipusFilter(e.target.value),
+    "aria-label": "Tipus de contracte"
   }, React.createElement("option", {
     value: ""
-  }, "Tots els anys"), [...new Set(allEmpresaContracts.map(c => c.año || parseInt(String(c.fecha || '').slice(0, 4), 10)).filter(Boolean))].sort((a, b) => b - a).map(y => React.createElement("option", {
-    key: y,
-    value: y
-  }, y)))), React.createElement("div", {
+  }, "Tots els tipus"), React.createElement("option", {
+    value: "1. OBRES"
+  }, "Obres"), React.createElement("option", {
+    value: "3. SUBMINISTRAMENTS"
+  }, "Subministraments"), React.createElement("option", {
+    value: "5. SERVEIS"
+  }, "Serveis"), React.createElement("option", {
+    value: "6. ADMINISTRATIU ESPECIAL"
+  }, "Administratiu especial"), React.createElement("option", {
+    value: "2. GESTI\xD3 DE SERVEI P\xDABLIC"
+  }, "Gesti\xF3 de servei p\xFAblic"), React.createElement("option", {
+    value: "8. CONCESSI\xD3 DE SERVEIS"
+  }, "Concessi\xF3 de serveis"), React.createElement("option", {
+    value: "10. PRIVAT D'ADMINISTRACIO PUBLICA"
+  }, "Privat d'administraci\xF3 p\xFAblica")))), React.createElement("div", {
+    className: "filters-row search-filter-panel search-filter-panel-secondary" + (!empresaFiltersOpen ? " collapsed" : "")
+  }, React.createElement("div", {
     className: "filter-group",
     style: {
       flex: '1 1 200px'
     }
   }, React.createElement("label", {
     className: "filter-label"
-  }, "Ordenar per"), React.createElement("select", {
-    className: "filter-select",
+  }, "Data inici"), React.createElement("input", {
+    type: "date",
+    className: "filter-input",
+    "aria-label": "Data inici",
+    value: dateStart,
+    onChange: e => setDateStart(e.target.value)
+  })), React.createElement("div", {
+    className: "filter-group",
     style: {
-      height: '48px'
-    },
-    value: sortBy,
-    onChange: e => setSortBy(e.target.value),
-    "aria-label": "Ordenar contractes de l'empresa per"
-  }, React.createElement("option", {
-    value: "date-desc"
-  }, "Data (m\xE9s recents)"), React.createElement("option", {
-    value: "date-asc"
-  }, "Data (m\xE9s antics)"), React.createElement("option", {
-    value: "amount-desc"
-  }, "Import (descendent)"), React.createElement("option", {
-    value: "amount-asc"
-  }, "Import (ascendent)"))))), React.createElement("div", {
+      flex: '1 1 200px'
+    }
+  }, React.createElement("label", {
+    className: "filter-label"
+  }, "Data final"), React.createElement("input", {
+    type: "date",
+    className: "filter-input",
+    "aria-label": "Data final",
+    value: dateEnd,
+    onChange: e => setDateEnd(e.target.value)
+  })), React.createElement("div", {
+    className: "filter-group",
+    style: {
+      flex: '1 1 200px'
+    }
+  }, React.createElement("label", {
+    className: "filter-label"
+  }, "Des de"), React.createElement("input", {
+    type: "number",
+    min: "0",
+    step: "0.01",
+    inputMode: "decimal",
+    className: "filter-input",
+    placeholder: "Import m\xEDnim",
+    "aria-label": "Import m\xEDnim",
+    value: amountMin,
+    onChange: e => setAmountMin(e.target.value)
+  })), React.createElement("div", {
+    className: "filter-group",
+    style: {
+      flex: '1 1 200px'
+    }
+  }, React.createElement("label", {
+    className: "filter-label"
+  }, "Fins a"), React.createElement("input", {
+    type: "number",
+    min: "0",
+    step: "0.01",
+    inputMode: "decimal",
+    className: "filter-input",
+    placeholder: "Import m\xE0xim",
+    "aria-label": "Import m\xE0xim",
+    value: amountMax,
+    onChange: e => setAmountMax(e.target.value)
+  })))), React.createElement("div", {
     className: "results-count"
   }, React.createElement("span", {
     className: "results-count-total"
@@ -2810,7 +2864,7 @@ function PersonesView({
   const personesFiltrades = useMemo(() => {
     let result = [...persones];
     if (debouncedSearch) {
-      result = result.filter(p => matchesSearchQuery([p.nom, ...(p.relacions || []).flatMap(e => [e.empresa, ...(e.carrecs || [])])], debouncedSearch));
+      result = result.filter(p => matchesSearchQuery([p.nom, ...(p.relacions || []).map(e => e.empresa)], debouncedSearch));
     }
     switch (sortBy) {
       case 'amount-desc':
@@ -2869,8 +2923,8 @@ function PersonesView({
   }))), React.createElement("input", {
     type: "text",
     className: "search-input",
-    placeholder: "Cerca per persona o empresa adjudicat\xE0ria",
-    "aria-label": "Cerca per persona o empresa adjudicat\xE0ria",
+    placeholder: "Cerca per persona o empresa vinculada",
+    "aria-label": "Cerca per persona o empresa vinculada",
     value: searchTerm,
     onChange: e => setSearchTerm(e.target.value)
   }), searchTerm && React.createElement("button", {
@@ -3455,7 +3509,6 @@ function App() {
   const [expandedMonopolyId, setExpandedMonopolyId] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [debouncedSearch, setDebouncedSearch] = useState('');
-  const [yearFilter, setYearFilter] = useState('');
   const [typeFilter, setTypeFilter] = useState('');
   const [procedureFilter, setProcedureFilter] = useState('');
   const [riskFilter, setRiskFilter] = useState('TOTS');
@@ -3470,6 +3523,8 @@ function App() {
   const analisiItemsPerPage = 25;
   const [dateStart, setDateStart] = useState('');
   const [dateEnd, setDateEnd] = useState('');
+  const [amountMin, setAmountMin] = useState('');
+  const [amountMax, setAmountMax] = useState('');
   const [sortBy, setSortBy] = useState('date-desc');
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 25;
@@ -3515,11 +3570,12 @@ function App() {
   const resetAllFilters = () => {
     setSearchTerm('');
     setDebouncedSearch('');
-    setYearFilter('');
     setTypeFilter('');
     setProcedureFilter('');
     setDateStart('');
     setDateEnd('');
+    setAmountMin('');
+    setAmountMax('');
     setSortBy('date-desc');
     setCurrentPage(1);
     setEmpresesSearch('');
@@ -4020,9 +4076,8 @@ function App() {
   const contractesFiltrats = useMemo(() => {
     let result = [...contracts];
     if (debouncedSearch) {
-      result = result.filter(c => matchesSearchQuery([c.descripcion, c.adjudicatario, c.codigo, c.tipo, c.procedimiento], debouncedSearch));
+      result = result.filter(c => matchesSearchQuery([c.descripcion, c.adjudicatario, c.codigo], debouncedSearch));
     }
-    if (yearFilter) result = result.filter(c => c.año === parseInt(yearFilter));
     if (typeFilter) {
       if (typeFilter === '5. SERVEIS') {
         result = result.filter(c => c.tipo === '5. SERVEIS' || c.tipo === 'SERVEIS');
@@ -4036,6 +4091,12 @@ function App() {
     }
     if (dateEnd) {
       result = result.filter(c => new Date(c.fecha) <= new Date(dateEnd));
+    }
+    if (amountMin !== '') {
+      result = result.filter(c => Number(c.importe) >= Number(amountMin));
+    }
+    if (amountMax !== '') {
+      result = result.filter(c => Number(c.importe) <= Number(amountMax));
     }
     switch (sortBy) {
       case 'date-desc':
@@ -4054,7 +4115,7 @@ function App() {
         result.sort((a, b) => new Date(b.fecha) - new Date(a.fecha));
     }
     return result;
-  }, [contracts, debouncedSearch, yearFilter, typeFilter, procedureFilter, dateStart, dateEnd, sortBy]);
+  }, [contracts, debouncedSearch, typeFilter, procedureFilter, dateStart, dateEnd, amountMin, amountMax, sortBy]);
   const totalPages = Math.ceil(contractesFiltrats.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
@@ -4083,14 +4144,14 @@ function App() {
   }, [contracts]);
   useEffect(() => {
     setCurrentPage(1);
-  }, [debouncedSearch, yearFilter, typeFilter, procedureFilter, dateStart, dateEnd, sortBy]);
+  }, [debouncedSearch, typeFilter, procedureFilter, dateStart, dateEnd, amountMin, amountMax, sortBy]);
   const fraudesFiltrats = useMemo(() => {
     let result = fraudes.filter(f => f.nivell !== 'BAIX');
     if (riskFilter !== 'TOTS') {
       result = result.filter(f => f.nivell === riskFilter || f.nivel_riesgo === riskFilter);
     }
     if (analisiSearch.trim()) {
-      result = result.filter(f => matchesSearchQuery([...(f.empreses || []), ...(f.contractes || []).flatMap(c => [c.descripcion, c.adjudicatario, c.codigo])], analisiSearch));
+      result = result.filter(f => matchesSearchQuery([...(f.empreses || []), f.id, ...(f.contractes || []).flatMap(c => [c.descripcion, c.adjudicatario])], analisiSearch));
     }
     result = [...result];
     switch (analisiSort) {
@@ -4117,23 +4178,12 @@ function App() {
   const concentracioFiltradaBase = useMemo(() => {
     let result = [...concentracio];
     if (analisiSearch.trim()) {
-      result = result.filter(f => matchesSearchQuery([f.sector, f.finestra_label, ...(f.empreses || [])], analisiSearch));
+      result = result.filter(f => matchesSearchQuery([f.id, ...(f.empreses || []), ...(f.contractes || []).flatMap(c => [c.descripcion, c.adjudicatario])], analisiSearch));
     }
     return result;
   }, [concentracio, analisiSearch]);
-  const orderConcentracio = useCallback((items, {
-    forceAlphabetic = false
-  } = {}) => {
+  const orderConcentracio = useCallback(items => {
     const result = [...items];
-    const bySector = (a, b) => {
-      const sectorA = (a.sector || '') === 'Altres Serveis i Subministraments' ? 'ZZZ' : a.sector || '';
-      const sectorB = (b.sector || '') === 'Altres Serveis i Subministraments' ? 'ZZZ' : b.sector || '';
-      return sectorA.localeCompare(sectorB, 'ca');
-    };
-    if (forceAlphabetic && analisiSort === 'risk-desc') {
-      result.sort(bySector);
-      return result;
-    }
     switch (analisiSort) {
       case 'risk-asc':
         result.sort((a, b) => (a.risc || 0) - (b.risc || 0));
@@ -4155,9 +4205,7 @@ function App() {
     }
     return result;
   }, [analisiSort]);
-  const concentracioHistoric = useMemo(() => orderConcentracio(concentracioFiltradaBase.filter(f => f.finestra === 'historic').filter(f => riskFilter === 'TOTS' || f.nivell === riskFilter || riskFilter === 'OBSERVACIO' && f.nivell === 'BAIX'), {
-    forceAlphabetic: true
-  }), [concentracioFiltradaBase, orderConcentracio, riskFilter]);
+  const concentracioHistoric = useMemo(() => orderConcentracio(concentracioFiltradaBase.filter(f => f.finestra === 'historic').filter(f => riskFilter === 'TOTS' || f.nivell === riskFilter || riskFilter === 'OBSERVACIO' && f.nivell === 'BAIX')), [concentracioFiltradaBase, orderConcentracio, riskFilter]);
   const concentracioSectorSnapshot = useMemo(() => {
     const items = [...concentracioHistoric].sort((a, b) => (b.quota_import || 0) - (a.quota_import || 0)).slice(0, 6);
     const maxQuota = items.reduce((max, item) => Math.max(max, item.quota_import || 0), 0);
@@ -4179,7 +4227,7 @@ function App() {
       result = result.filter(f => f.nivell === riskFilter);
     }
     if (analisiSearch.trim()) {
-      result = result.filter(f => matchesSearchQuery([f.empresa, f.periode_electoral, ...(f.motius || []), ...(f.contractes || []).flatMap(c => [c.descripcion, c.adjudicatario, c.codigo])], analisiSearch));
+      result = result.filter(f => matchesSearchQuery([f.empresa, f.id, ...(f.contractes || []).flatMap(c => [c.descripcion, c.adjudicatario])], analisiSearch));
     }
     result = [...result];
     switch (analisiSort) {
@@ -4269,11 +4317,12 @@ function App() {
   const resetFilters = () => {
     setSearchTerm('');
     setDebouncedSearch('');
-    setYearFilter('');
     setTypeFilter('');
     setProcedureFilter('');
     setDateStart('');
     setDateEnd('');
+    setAmountMin('');
+    setAmountMax('');
     setSortBy('date-desc');
     setCurrentPage(1);
   };
@@ -4281,12 +4330,11 @@ function App() {
     setAnalisiSearch('');
     setRiskFilter('TOTS');
     setAnalisiSort('risk-desc');
-    setConcentracioMode('historic');
     setAnalisiPageFrac(1);
     setAnalisiPageMonop(1);
   };
-  const activeAnalisiFiltersCount = (analisiSearch.trim() ? 1 : 0) + (riskFilter !== 'TOTS' ? 1 : 0) + (analisiSort !== 'risk-desc' ? 1 : 0);
-  const activeFiltersCount = [yearFilter, typeFilter, procedureFilter, dateStart, dateEnd, sortBy !== 'date-desc' ? sortBy : ''].filter(Boolean).length;
+  const activeAnalisiFiltersCount = (riskFilter !== 'TOTS' ? 1 : 0) + (analisiSort !== 'risk-desc' ? 1 : 0);
+  const activeFiltersCount = [typeFilter, procedureFilter, dateStart, dateEnd, amountMin, amountMax, sortBy !== 'date-desc' ? sortBy : ''].filter(Boolean).length;
   const homeTopSectors = useMemo(() => {
     if (!empreses.length && summary?.home?.top_sectors) {
       const rows = summary.home.top_sectors;
@@ -5153,8 +5201,8 @@ function App() {
   }))), React.createElement("input", {
     type: "text",
     className: "search-input",
-    placeholder: "Cerca per descripci\xF3 o empresa adjudicat\xE0ria",
-    "aria-label": "Cerca per descripci\xF3 o empresa adjudicat\xE0ria",
+    placeholder: "Cerca per descripci\xF3, empresa o codi d'expedient",
+    "aria-label": "Cerca per descripci\xF3, empresa o codi d'expedient",
     value: searchTerm,
     onChange: e => setSearchTerm(e.target.value)
   }), searchTerm && React.createElement("button", {
@@ -5176,31 +5224,23 @@ function App() {
     }
   }, React.createElement("label", {
     className: "filter-label"
-  }, "Tipus"), React.createElement("select", {
+  }, "Ordenar per"), React.createElement("select", {
     className: "filter-select",
     style: {
       height: '48px'
     },
-    value: typeFilter,
-    onChange: e => setTypeFilter(e.target.value),
-    "aria-label": "Tipus de contracte"
+    value: sortBy,
+    onChange: e => setSortBy(e.target.value),
+    "aria-label": "Ordenar contractes per"
   }, React.createElement("option", {
-    value: ""
-  }, "Tots els tipus"), React.createElement("option", {
-    value: "1. OBRES"
-  }, "Obres"), React.createElement("option", {
-    value: "3. SUBMINISTRAMENTS"
-  }, "Subministraments"), React.createElement("option", {
-    value: "5. SERVEIS"
-  }, "Serveis"), React.createElement("option", {
-    value: "6. ADMINISTRATIU ESPECIAL"
-  }, "Administratiu especial"), React.createElement("option", {
-    value: "2. GESTI\xD3 DE SERVEI P\xDABLIC"
-  }, "Gesti\xF3 de servei p\xFAblic"), React.createElement("option", {
-    value: "8. CONCESSI\xD3 DE SERVEIS"
-  }, "Concessi\xF3 de serveis"), React.createElement("option", {
-    value: "10. PRIVAT D'ADMINISTRACIO PUBLICA"
-  }, "Privat d'administraci\xF3 p\xFAblica"))), React.createElement("div", {
+    value: "date-desc"
+  }, "Data (m\xE9s recents)"), React.createElement("option", {
+    value: "date-asc"
+  }, "Data (m\xE9s antics)"), React.createElement("option", {
+    value: "amount-desc"
+  }, "Import (descendent)"), React.createElement("option", {
+    value: "amount-asc"
+  }, "Import (ascendent)"))), React.createElement("div", {
     className: "filter-group",
     style: {
       flex: '1 1 200px'
@@ -5236,76 +5276,80 @@ function App() {
     }
   }, React.createElement("label", {
     className: "filter-label"
-  }, "Ordenar per"), React.createElement("select", {
+  }, "Tipus"), React.createElement("select", {
     className: "filter-select",
     style: {
       height: '48px'
     },
-    value: sortBy,
-    onChange: e => setSortBy(e.target.value),
-    "aria-label": "Ordenar contractes per"
-  }, React.createElement("option", {
-    value: "date-desc"
-  }, "Data (m\xE9s recents)"), React.createElement("option", {
-    value: "date-asc"
-  }, "Data (m\xE9s antics)"), React.createElement("option", {
-    value: "amount-desc"
-  }, "Import (descendent)"), React.createElement("option", {
-    value: "amount-asc"
-  }, "Import (ascendent)")))), React.createElement("div", {
-    className: "filters-row search-filter-panel search-filter-panel-secondary" + (!filtersOpen ? " collapsed" : "")
-  }, React.createElement("div", {
-    className: "filter-group",
-    style: {
-      flex: '1 1 150px'
-    }
-  }, React.createElement("label", {
-    className: "filter-label"
-  }, "Any"), React.createElement("select", {
-    className: "filter-select",
-    style: {
-      height: '48px'
-    },
-    value: yearFilter,
-    onChange: e => setYearFilter(e.target.value),
-    "aria-label": "Any"
+    value: typeFilter,
+    onChange: e => setTypeFilter(e.target.value),
+    "aria-label": "Tipus de contracte"
   }, React.createElement("option", {
     value: ""
-  }, "Tots els anys"), [2026, 2025, 2024, 2023, 2022, 2021, 2020, 2019, 2018, 2017, 2016].map(y => React.createElement("option", {
-    key: y,
-    value: y
-  }, y)))), React.createElement("div", {
-    className: "filter-group",
-    style: {
-      flex: '1 1 150px'
-    }
+  }, "Tots els tipus"), React.createElement("option", {
+    value: "1. OBRES"
+  }, "Obres"), React.createElement("option", {
+    value: "3. SUBMINISTRAMENTS"
+  }, "Subministraments"), React.createElement("option", {
+    value: "5. SERVEIS"
+  }, "Serveis"), React.createElement("option", {
+    value: "6. ADMINISTRATIU ESPECIAL"
+  }, "Administratiu especial"), React.createElement("option", {
+    value: "2. GESTI\xD3 DE SERVEI P\xDABLIC"
+  }, "Gesti\xF3 de servei p\xFAblic"), React.createElement("option", {
+    value: "8. CONCESSI\xD3 DE SERVEIS"
+  }, "Concessi\xF3 de serveis"), React.createElement("option", {
+    value: "10. PRIVAT D'ADMINISTRACIO PUBLICA"
+  }, "Privat d'administraci\xF3 p\xFAblica")))), React.createElement("div", {
+    className: "filters-row search-filter-panel search-filter-panel-secondary" + (!filtersOpen ? " collapsed" : "")
+  }, React.createElement("div", {
+    className: "filter-group"
   }, React.createElement("label", {
     className: "filter-label"
   }, "Data inici"), React.createElement("input", {
     type: "date",
-    className: "filter-input-date",
+    className: "filter-input",
     "aria-label": "Data inici",
-    style: {
-      height: '48px'
-    },
     value: dateStart,
     onChange: e => setDateStart(e.target.value)
   })), React.createElement("div", {
-    className: "filter-group",
-    style: {
-      flex: '1 1 150px'
-    }
+    className: "filter-group"
   }, React.createElement("label", {
     className: "filter-label"
   }, "Data final"), React.createElement("input", {
     type: "date",
-    className: "filter-input-date",
+    className: "filter-input",
     "aria-label": "Data final",
-    style: {
-      height: '48px'
-    },
     value: dateEnd,
     onChange: e => setDateEnd(e.target.value)
+  })), React.createElement("div", {
+    className: "filter-group"
+  }, React.createElement("label", {
+    className: "filter-label"
+  }, "Des de"), React.createElement("input", {
+    type: "number",
+    min: "0",
+    step: "0.01",
+    inputMode: "decimal",
+    className: "filter-input",
+    placeholder: "Import m\xEDnim",
+    "aria-label": "Import m\xEDnim",
+    value: amountMin,
+    onChange: e => setAmountMin(e.target.value)
+  })), React.createElement("div", {
+    className: "filter-group"
+  }, React.createElement("label", {
+    className: "filter-label"
+  }, "Fins a"), React.createElement("input", {
+    type: "number",
+    min: "0",
+    step: "0.01",
+    inputMode: "decimal",
+    className: "filter-input",
+    placeholder: "Import m\xE0xim",
+    "aria-label": "Import m\xE0xim",
+    value: amountMax,
+    onChange: e => setAmountMax(e.target.value)
   })))), React.createElement("div", {
     className: "results-count"
   }, React.createElement("span", {
@@ -5442,16 +5486,17 @@ function App() {
   }, contractesAnnualEvolution.items.map(item => React.createElement("button", {
     key: item.year,
     type: "button",
-    className: "contract-evolution-column",
+    className: "contract-evolution-column" + (dateStart === `${item.year}-01-01` && dateEnd === `${item.year}-12-31` ? " is-active" : ""),
     onClick: () => {
       setSearchTerm('');
       setDebouncedSearch('');
       setTypeFilter('');
       setProcedureFilter('');
-      setDateStart('');
-      setDateEnd('');
+      setAmountMin('');
+      setAmountMax('');
       setSortBy('date-desc');
-      setYearFilter(String(item.year));
+      setDateStart(`${item.year}-01-01`);
+      setDateEnd(`${item.year}-12-31`);
       setCurrentPage(1);
       window.scrollTo({
         top: 0,
@@ -5690,7 +5735,7 @@ function App() {
   }))), React.createElement("input", {
     type: "text",
     className: "search-input",
-    placeholder: "Cerca per descripci\xF3 o empresa adjudicat\xE0ria",
+    placeholder: "Cerca per descripci\xF3, empresa o codi de cas",
     "aria-label": "Cerca casos de fraccionament",
     value: analisiSearch,
     onChange: e => setAnalisiSearch(e.target.value)
@@ -5953,7 +5998,7 @@ function App() {
     type: "button",
     className: 'concentracio-mode-btn' + (concentracioMode === 'temporal' ? ' active' : ''),
     onClick: () => setConcentracioMode('temporal')
-  }, "Temporals")), concentracioMode === 'temporal' && React.createElement("div", {
+  }, "Temporals")), React.createElement("div", {
     className: "search-section analisi-search-section"
   }, React.createElement("div", {
     className: "search-input-wrapper"
@@ -5980,7 +6025,7 @@ function App() {
   }))), React.createElement("input", {
     type: "text",
     className: "search-input",
-    placeholder: "Cerca per sector o empresa adjudicat\xE0ria",
+    placeholder: "Cerca per descripci\xF3, empresa o codi de cas",
     "aria-label": "Cerca casos de concentraci\xF3",
     value: analisiSearch,
     onChange: e => setAnalisiSearch(e.target.value)
@@ -6250,7 +6295,7 @@ function App() {
   }))), React.createElement("input", {
     type: "text",
     className: "search-input",
-    placeholder: "Cerca per descripci\xF3, empresa adjudicat\xE0ria o per\xEDode electoral",
+    placeholder: "Cerca per descripci\xF3, empresa o codi de cas",
     "aria-label": "Cerca casos d'electoralisme",
     value: analisiSearch,
     onChange: e => setAnalisiSearch(e.target.value)
