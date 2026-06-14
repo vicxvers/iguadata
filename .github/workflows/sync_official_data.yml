@@ -53,7 +53,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          for branch in master update; do
+          for branch in main update; do
             git fetch origin "$branch"
             git checkout -B "$branch" "origin/$branch"
             git restore --source=official/main -- "${data_files[@]}"
