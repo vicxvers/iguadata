@@ -338,8 +338,7 @@ html.home-lock-scroll {
 
 .site-chrome-brand:focus-visible,
 .home-chrome-brand:focus-visible,
-.contracte-detail-company-title:focus-visible,
-.alert-card[role="button"]:focus-visible {
+.contracte-detail-company-title:focus-visible {
     outline: 2px solid var(--navy);
     outline-offset: 4px;
 }
@@ -2819,7 +2818,7 @@ body.home-scroll-surface::-webkit-scrollbar {
 }
 
 .home-atlas {
-    --atlas-panels: 5;
+    --atlas-panels: 4;
     --atlas-progress: 0;
     position: relative;
     height: calc(var(--atlas-panels) * 122vh);
@@ -3227,12 +3226,6 @@ body.home-scroll-surface::-webkit-scrollbar {
     max-width: 420px;
 }
 
-.home-story-latest {
-    grid-template-columns: minmax(260px, 1fr) minmax(0, 2fr);
-    align-items: start;
-}
-
-.home-story-featured,
 .home-story-method,
 .home-story-trust {
     border-top: 1px solid color-mix(in srgb, var(--surface) 12%, transparent);
@@ -3244,7 +3237,6 @@ body.home-scroll-surface::-webkit-scrollbar {
     padding-top: clamp(3rem, 7vw, 5.75rem);
 }
 
-.home-featured-card,
 .home-method-panel,
 .home-trust-strip {
     border: 1px solid color-mix(in srgb, var(--surface) 18%, transparent);
@@ -3261,18 +3253,6 @@ body.home-scroll-surface::-webkit-scrollbar {
         inset 0 1px 0 color-mix(in srgb, var(--surface) 14%, transparent);
 }
 
-.home-featured-card {
-    text-decoration: none;
-    transition: border-color 0.28s, box-shadow 0.28s, transform 0.28s, background 0.28s;
-}
-
-.home-featured-card:hover {
-    border-color: color-mix(in srgb, var(--surface) 34%, transparent);
-    box-shadow: var(--shadow-hero);
-    transform: translateY(-3px);
-}
-
-.home-featured-label,
 .home-method-panel span,
 .home-trust-strip span {
     color: var(--text-muted-on-dark);
@@ -3283,57 +3263,16 @@ body.home-scroll-surface::-webkit-scrollbar {
     text-transform: uppercase;
 }
 
-.home-featured-card strong,
 .home-method-panel strong,
 .home-trust-strip strong {
     color: var(--surface);
 }
 
-.home-featured-card p,
 .home-method-panel p {
     margin: 1rem 0 0;
     color: var(--text-muted-on-dark);
     font-size: var(--text-base);
     line-height: 1.55;
-}
-
-.home-story-featured {
-    grid-template-columns: minmax(260px, 0.85fr) minmax(0, 1.15fr);
-    align-items: stretch;
-}
-
-.home-featured-card {
-    min-height: 23rem;
-    display: grid;
-    align-content: end;
-    padding: clamp(1.5rem, 3.5vw, 2.5rem);
-    background:
-        radial-gradient(circle at 10% 0%, color-mix(in srgb, var(--accent) 22%, transparent), transparent 42%),
-        radial-gradient(circle at 90% 18%, color-mix(in srgb, var(--navy-light) 32%, transparent), transparent 50%),
-        color-mix(in srgb, var(--navy) 64%, transparent);
-}
-
-.home-featured-card strong {
-    display: block;
-    max-width: 720px;
-    margin-top: 1.25rem;
-    font-family: var(--font-display);
-    font-size: clamp(2.6rem, 5.5vw, 5rem);
-    font-weight: 400;
-    line-height: 0.94;
-    letter-spacing: var(--tracking-title);
-}
-
-.home-featured-card p {
-    max-width: 520px;
-    font-size: var(--text-lg);
-}
-
-.home-featured-amount {
-    margin-top: 2.25rem;
-    font-family: var(--font-display);
-    font-size: clamp(2rem, 4vw, 3.35rem);
-    line-height: 0.95;
 }
 
 .home-method-grid {
@@ -3374,79 +3313,6 @@ body.home-scroll-surface::-webkit-scrollbar {
 .home-trust-strip strong {
     font-size: var(--text-base);
     line-height: 1.35;
-}
-
-.home-latest-list {
-    display: grid;
-    gap: 0.75rem;
-}
-
-.home-latest-card-link {
-    margin-bottom: 0;
-}
-
-.home-latest-card {
-    margin-bottom: 0;
-    padding: var(--pad-card);
-    border-color: var(--border-on-dark);
-    background:
-        radial-gradient(circle at 14% 0%, color-mix(in srgb, var(--accent) 10%, transparent), transparent 42%),
-        radial-gradient(circle at 100% 18%, color-mix(in srgb, var(--navy-light) 18%, transparent), transparent 48%),
-        color-mix(in srgb, var(--navy) 72%, transparent);
-    color: var(--surface);
-    box-shadow:
-        var(--shadow-card),
-        inset 0 1px 0 color-mix(in srgb, var(--surface) 12%, transparent);
-}
-
-.home-latest-card::before {
-    display: none;
-}
-
-.home-latest-card:hover {
-    border-color: color-mix(in srgb, var(--surface) 34%, transparent);
-    background:
-        radial-gradient(circle at 14% 0%, color-mix(in srgb, var(--accent) 14%, transparent), transparent 42%),
-        radial-gradient(circle at 100% 18%, color-mix(in srgb, var(--navy-light) 24%, transparent), transparent 48%),
-        color-mix(in srgb, var(--navy) 68%, transparent);
-    box-shadow: var(--shadow-hero);
-}
-
-.home-latest-card .contract-header {
-    gap: 2rem;
-    margin-bottom: 0;
-}
-
-.home-latest-card .contract-title {
-    color: var(--surface);
-    font-size: var(--text-lg);
-    line-height: 1.5;
-}
-
-.home-latest-card .contract-amount {
-    color: var(--surface);
-    font-size: 2.125rem;
-}
-
-.home-latest-card .contract-meta {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
-    gap: 2rem;
-    margin-top: 1.5rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid color-mix(in srgb, var(--surface) 72%, transparent);
-}
-
-.home-latest-card .contract-meta-label {
-    color: var(--text-muted-on-dark);
-}
-
-.home-latest-card .contract-meta-value {
-    color: var(--surface);
-    max-width: 100%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
 }
 
 .home-chrome-gradient {
@@ -3842,9 +3708,7 @@ body.home-scroll-surface::-webkit-scrollbar {
 
     .home-story-manifest,
     .home-story-minors,
-    .home-story-sectors,
-    .home-story-latest,
-    .home-story-featured {
+    .home-story-sectors {
         grid-template-columns: 1fr;
     }
 
@@ -4419,7 +4283,6 @@ body.home-scroll-surface::-webkit-scrollbar {
         grid-template-columns: 1fr;
     }
 
-    .home-featured-card,
     .home-method-panel {
         min-height: auto;
         padding: 1.2rem;
@@ -4449,10 +4312,6 @@ body.home-scroll-surface::-webkit-scrollbar {
 
     .home-minors-value {
         font-size: 1.45rem;
-    }
-
-    .home-featured-card strong {
-        font-size: clamp(2.35rem, 12vw, 3.5rem);
     }
 
     .home-story-header h2 {
@@ -4507,27 +4366,6 @@ body.home-scroll-surface::-webkit-scrollbar {
     .home-category-chip-6 {
         left: 30%;
         bottom: 0;
-    }
-
-    .home-latest-card .contract-header {
-        display: grid;
-        gap: 0.8rem;
-        margin-bottom: 1rem;
-        padding-bottom: 1rem;
-    }
-
-    .home-latest-card .contract-amount {
-        font-size: 2rem;
-        text-align: left;
-    }
-
-    .home-latest-card .contract-meta-value {
-        white-space: normal;
-    }
-
-    .home-latest-card .contract-meta {
-        grid-template-columns: 1fr;
-        gap: 1rem;
     }
 
 }
@@ -4990,42 +4828,6 @@ body.home-scroll-surface::-webkit-scrollbar {
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
     gap: 1.5rem;
     margin-top: 2rem;
-}
-
-.empresa-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    padding: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    cursor: pointer;
-    transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.2s;
-    position: relative;
-    overflow: hidden;
-    will-change: transform, box-shadow;
-}
-
-.empresa-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    width: 4px;
-    background: transparent;
-    transition: background 0.3s;
-}
-
-.empresa-card:hover {
-    box-shadow: 0 12px 30px -10px rgba(15, 23, 42, 0.15);
-    border-color: rgba(30, 58, 138, 0.3);
-    transform: translateY(-4px);
-}
-
-.empresa-card:hover::before {
-    background: var(--navy);
 }
 
 .sector-tissue-visual {
@@ -5790,7 +5592,7 @@ body.home-scroll-surface::-webkit-scrollbar {
     margin-left: auto;
 }
 
-.fraccionament-card {
+.electoralisme-card {
     padding: 2.25rem;
 }
 
@@ -5806,7 +5608,7 @@ body.home-scroll-surface::-webkit-scrollbar {
     line-height: 1.45;
 }
 
-.fraccionament-card .contract-amount {
+.electoralisme-card .contract-amount {
     font-size: var(--display-md);
 }
 
@@ -7624,13 +7426,13 @@ body.home-scroll-surface::-webkit-scrollbar {
         margin-bottom: 0;
     }
 
-    .fraccionament-card {
+    .electoralisme-card {
         padding: var(--mobile-card-pad) !important;
         display: flex;
         flex-direction: column;
     }
 
-    .fraccionament-card .contract-amount {
+    .electoralisme-card .contract-amount {
         font-size: var(--display-sm) !important;
         text-align: left;
         margin-bottom: 0 !important;

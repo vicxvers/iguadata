@@ -893,76 +893,6 @@ function ContractDetailView({ contract: c, contracts, empreses, onBack, onEmpres
     );
 }
 
-/* ---- CasoCard --------------------------------------------------- */
-function CasoCard({ caso, onSelect }) {
-    const rc = riskClass(caso.nivel_riesgo);
-    const pct = caso.umbral > 0 ? (caso.importe_total / caso.umbral) * 100 : 0;
-    return (
-        <div
-            className={"alert-card risk-" + rc}
-            onClick={onSelect}
-            onKeyDown={(event) => {
-                if (event.key === 'Enter' || event.key === ' ') {
-                    event.preventDefault();
-                    onSelect();
-                }
-            }}
-            role="button"
-            tabIndex={0}
-            style={{ cursor: 'pointer' }}
-        >
-            <div className="alert-header">
-                <div className="alert-header-left">
-                    <div className="alert-title">{caso.empresa}</div>
-                    <div className="alert-subtitle">
-                        {caso.año} · {caso.tipo} · {caso.num_contratos} contractes
-                    </div>
-                </div>
-                <div className="alert-header-right">
-                    <span className={"risk-badge " + rc}>{riskLabel(caso.nivel_riesgo)}</span>
-                    <span className="alert-chevron">?</span>
-                </div>
-            </div>
-            <div className="caso-metrics">
-                <div>
-                    <div className="contract-meta-label">Import total</div>
-                    <div className="caso-metric-value">
-                        {formatCurrency(caso.importe_total)}
-                    </div>
-                </div>
-                <div>
-                    <div className="contract-meta-label">Llindar legal</div>
-                    <div className="caso-metric-value">
-                        {formatCurrency(caso.umbral)}
-                    </div>
-                </div>
-                <div>
-                    <div className="contract-meta-label">Excés detectat</div>
-                    <div className="caso-metric-value caso-metric-value-danger">
-                        {formatCurrency(caso.exceso)}
-                    </div>
-                </div>
-                <div>
-                    <div className="contract-meta-label">Similitud contractes</div>
-                    <div className="caso-metric-value">
-                        {Math.round(caso.similitud_media * 100)}%
-                    </div>
-                </div>
-            </div>
-            <div className="caso-bar-row">
-                <div className="caso-bar-label">Concentració sobre límit legal</div>
-                <div className="caso-bar-bg">
-                    <div
-                        className={"caso-bar-fill" + (pct > 100 ? ' error' : ' navy')}
-                        style={{ width: Math.min(pct, 100) + '%' }}
-                    ></div>
-                </div>
-                <div className="caso-bar-pct">{Math.round(pct)}%</div>
-            </div>
-        </div>
-    );
-}
-
 /* ---- CasoModal -------------------------------------------------- */
 function CasoModal({ caso, onClose }) {
     const closeButtonRef = useRef(null);
@@ -2175,6 +2105,10 @@ function EmpresaView({ empresa: empresaNom, contracts, empreses, administradors,
                                 <span className="contract-meta-label">Data</span>
                                 <span className="contract-meta-value">{formatDate(c.fecha)}</span>
                             </div>
+                            <div className="contract-meta-item">
+                                <span className="contract-meta-label">Codi expedient</span>
+                                <span className="contract-meta-value">{c.codigo}</span>
+                            </div>
                             <div className="contract-pills">
                                 <span className="contract-pill">{formatTipus(c.tipo)}</span>
                                 <span className="contract-pill procedure">{formatProcediment(c.procedimiento)}</span>
@@ -2345,7 +2279,7 @@ function PersonesView({ persones, onEmpresaSelect, onNavigateLegal, searchTerm, 
                                             {formatCurrency(p.total_adjudicat)}
                                         </div>
                                         <div className="contract-meta-value persona-amount-caption">
-                                            Per a {p.relacions.length} {p.relacions.length === 1 ? 'empresa vinculada' : 'empreses vinculades'}
+                                            De {p.relacions.length} {p.relacions.length === 1 ? 'empresa' : 'empreses'}
                                         </div>
                                     </div>
                                     <div className={`persona-row-chevron${isExpanded ? ' is-expanded' : ''}`}>
@@ -3832,59 +3766,6 @@ function App() {
         }));
     }, [contracts]);
 
-    const homeLatestContracts = useMemo(() => {
-        return contracts
-            .filter(contract => {
-                const amount = Number(contract.importe) || 0;
-                const adjudicatario = contract.adjudicatario || '';
-                return contract.fecha && amount > 0 && !/lot desert/i.test(adjudicatario);
-            })
-            .sort((a, b) => String(b.fecha).localeCompare(String(a.fecha)))
-            .slice(0, 3);
-    }, [contracts]);
-
-    const homeFeaturedAnalysis = useMemo(() => {
-        const fraccionament = fraudes
-            .filter(item => item.nivell !== 'BAIX')
-            .map(item => ({
-                type: 'fraccionament',
-                label: 'Fraccionament',
-                title: (item.empreses || []).slice(0, 2).join(' · ') || 'Possible fraccionament',
-                text: `${item.contractes_count || item.contractes?.length || 0} contractes vinculats en ${item.dies_entre_primer_i_ultim || 0} dies.`,
-                amount: item.import_total,
-                score: item.risc || 0,
-                path: `/analisi/fraccionament/${item.id}`,
-                item
-            }));
-        const concentracioItems = concentracio
-            .filter(item => item.finestra !== 'historic')
-            .map(item => ({
-                type: 'concentracio',
-                label: 'Concentració',
-                title: item.empresa_dominant || item.sector || 'Concentració de contractes',
-                text: `${item.sector || 'Sector'} · ${Math.round((item.quota_import || 0) * 100)}% de l'import.`,
-                amount: item.import_concentrat,
-                score: item.risc || Math.round((item.quota_import || 0) * 100),
-                path: `/analisi/concentracio/${item.id}`,
-                item
-            }));
-        const electoralItems = electoral
-            .filter(item => item.nivell !== 'BAIX')
-            .map(item => ({
-                type: 'electoralisme',
-                label: 'Electoralisme',
-                title: item.empresa || 'Contractació en finestra electoral',
-                text: item.periode_electoral || 'Actuació en context electoral.',
-                amount: item.import_total,
-                score: item.risc || 0,
-                path: `/analisi/electoralisme/${item.id}`,
-                item
-            }));
-        return [...fraccionament, ...concentracioItems, ...electoralItems]
-            .filter(item => item.path && item.path.indexOf('undefined') === -1)
-            .sort((a, b) => (b.score || 0) - (a.score || 0))[0] || null;
-    }, [fraudes, concentracio, electoral]);
-
     const renderHomeChrome = (interactive = true) => (
         <div className="home-chrome">
             <div className="home-chrome-gradient is-visible" aria-hidden="true"></div>
@@ -4115,10 +3996,10 @@ function App() {
             </div>
 
             <div id="dades" className="home-landing" aria-label="Dades destacades">
-                <div className="home-atlas" style={{ '--atlas-panels': homeFeaturedAnalysis ? 6 : 5 }}>
+                <div className="home-atlas" style={{ '--atlas-panels': 4 }}>
                     <div className="home-atlas-sticky">
                         <div className="home-atlas-rail" aria-hidden="true">
-                            {Array.from({ length: homeFeaturedAnalysis ? 6 : 5 }, (_, index) => (
+                            {Array.from({ length: 4 }, (_, index) => (
                                 <span key={index}>{String(index + 1).padStart(2, '0')}</span>
                             ))}
                         </div>
@@ -4131,30 +4012,6 @@ function App() {
                                     <p>No substitueix el periodisme, l'activa: converteix informació dispersa i tècnica en una infraestructura cívica per preguntar millor com circulen els diners públics.</p>
                                 </div>
                             </section>
-
-                            {homeFeaturedAnalysis && (
-                                <section className="home-story home-atlas-panel home-story-featured">
-                                    <div className="home-story-header">
-                                        <h2>Un cas per mirar de prop</h2>
-                                        <p>Una alerta destacada per entrar a l'anàlisi amb context i traçabilitat.</p>
-                                    </div>
-                                    <a
-                                        href={buildRouteUrl(homeFeaturedAnalysis.path)}
-                                        className={`home-featured-card home-featured-${homeFeaturedAnalysis.type}`}
-                                        onClick={interactive ? ((event) => handleInternalLinkClick(event, () => {
-                                            if (homeFeaturedAnalysis.type === 'fraccionament') handleCasoClick(homeFeaturedAnalysis.item);
-                                            if (homeFeaturedAnalysis.type === 'concentracio') handleConcentracioClick(homeFeaturedAnalysis.item);
-                                            if (homeFeaturedAnalysis.type === 'electoralisme') handleElectoralismeClick(homeFeaturedAnalysis.item);
-                                        })) : ((event) => event.preventDefault())}
-                                        tabIndex={interactive ? 0 : -1}
-                                    >
-                                        <span className="home-featured-label">{homeFeaturedAnalysis.label}</span>
-                                        <strong>{homeFeaturedAnalysis.title}</strong>
-                                        <p>{homeFeaturedAnalysis.text}</p>
-                                        <span className="home-featured-amount">{formatCompactCurrency(homeFeaturedAnalysis.amount)}</span>
-                                    </a>
-                                </section>
-                            )}
 
                             <section className="home-story home-atlas-panel home-story-minors">
                                 <div className="home-story-header">
@@ -4217,40 +4074,6 @@ function App() {
                                 </div>
                             </section>
 
-                            <section className="home-story home-atlas-panel home-story-latest">
-                                <div className="home-story-header">
-                                    <h2>La fotografia viva</h2>
-                                    <p>La fotografia es mou cada dia.</p>
-                                </div>
-                                <div className="home-latest-list">
-                                    {homeLatestContracts.map((contract, index) => (
-                                        <a
-                                            key={contract.slug || contract.id || `${contract.fecha}-${index}`}
-                                            href={buildRouteUrl(`/contractes/${contract.slug}`)}
-                                            className="card-link-wrapper home-latest-card-link"
-                                            onClick={interactive ? ((event) => handleInternalLinkClick(event, () => { setSelectedContractForDetail(contract); handleNavigation('contracte', `/contractes/${contract.slug}`); })) : ((event) => event.preventDefault())}
-                                            tabIndex={interactive ? 0 : -1}
-                                        >
-                                            <div className="contract-card home-latest-card">
-                                                <div className="contract-header">
-                                                    <div className="contract-title">{contract.descripcion}</div>
-                                                    <div className="contract-amount">{formatCurrency(contract.importe)}</div>
-                                                </div>
-                                                <div className="contract-meta">
-                                                    <div className="contract-meta-item">
-                                                        <span className="contract-meta-label">Empresa adjudicatària</span>
-                                                        <span className="contract-meta-value">{contract.adjudicatario}</span>
-                                                    </div>
-                                                    <div className="contract-meta-item">
-                                                        <span className="contract-meta-label">Data</span>
-                                                        <span className="contract-meta-value">{formatDate(contract.fecha)}</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    ))}
-                                </div>
-                            </section>
                         </div>
                     </div>
                 </div>
@@ -4974,22 +4797,14 @@ function App() {
                                     {fraudesPaginats.map(caso => (
                                         <a key={caso.id} href={buildRouteUrl(`/analisi/fraccionament/${caso.id}`)} className="card-link-wrapper" onClick={(event) => handleInternalLinkClick(event, () => handleCasoClick(caso))}>
                                             <div className="contract-card fraccionament-card">
-                                                <div className="analysis-card-title">{(caso.empreses || []).slice(0, 2).join(' & ')}</div>
-                                                <div className="analysis-card-main">
-                                                    <div className="fraccionament-card-object">
-                                                        <span className="contract-meta-label">Objecte</span>
-                                                        <span className="contract-meta-value">{(caso.contractes && caso.contractes[0] && caso.contractes[0].descripcion) || ''}</span>
-                                                    </div>
+                                                <div className="contract-header">
+                                                    <div className="contract-title">{(caso.empreses || []).slice(0, 2).join(' & ')}</div>
                                                     <div className="contract-amount">{formatCurrency(caso.import_total)}</div>
                                                 </div>
-                                                <div className="contract-meta fraccionament-card-meta">
-                                                    <div className="contract-meta-item">
-                                                        <span className="contract-meta-label">{(caso.contractes_count || 0) === 1 ? 'Contracte' : 'Contractes'}</span>
-                                                        <span className="contract-meta-value">{caso.contractes_count}</span>
-                                                    </div>
-                                                    <div className="contract-meta-item">
-                                                        <span className="contract-meta-label">{(caso.contractes_count || 0) === 1 ? 'Import' : 'Similitud'}</span>
-                                                        <span className="contract-meta-value">{(caso.contractes_count || 0) === 1 && caso.limit_legal ? `${Math.round((caso.import_total / caso.limit_legal) * 100)}% límit` : `${Math.round((caso.similitud_objecte || 0) * 100)}%`}</span>
+                                                <div className="contract-meta">
+                                                    <div className="contract-meta-item fraccionament-card-object">
+                                                        <span className="contract-meta-label">Objecte</span>
+                                                        <span className="contract-meta-value">{(caso.contractes && caso.contractes[0] && caso.contractes[0].descripcion) || ''}</span>
                                                     </div>
                                                     <div className="contract-pills">
                                                         <span className={"risk-badge " + riskClass(caso.nivell)}>{riskLabel(caso.nivell)}</span>

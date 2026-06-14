@@ -886,73 +886,6 @@ function ContractDetailView({
     onClick: () => onEmpresaClick(c.adjudicatario)
   }, empresaContracts.length, " contractes")))));
 }
-function CasoCard({
-  caso,
-  onSelect
-}) {
-  const rc = riskClass(caso.nivel_riesgo);
-  const pct = caso.umbral > 0 ? caso.importe_total / caso.umbral * 100 : 0;
-  return React.createElement("div", {
-    className: "alert-card risk-" + rc,
-    onClick: onSelect,
-    onKeyDown: event => {
-      if (event.key === 'Enter' || event.key === ' ') {
-        event.preventDefault();
-        onSelect();
-      }
-    },
-    role: "button",
-    tabIndex: 0,
-    style: {
-      cursor: 'pointer'
-    }
-  }, React.createElement("div", {
-    className: "alert-header"
-  }, React.createElement("div", {
-    className: "alert-header-left"
-  }, React.createElement("div", {
-    className: "alert-title"
-  }, caso.empresa), React.createElement("div", {
-    className: "alert-subtitle"
-  }, caso.año, " \xB7 ", caso.tipo, " \xB7 ", caso.num_contratos, " contractes")), React.createElement("div", {
-    className: "alert-header-right"
-  }, React.createElement("span", {
-    className: "risk-badge " + rc
-  }, riskLabel(caso.nivel_riesgo)), React.createElement("span", {
-    className: "alert-chevron"
-  }, "?"))), React.createElement("div", {
-    className: "caso-metrics"
-  }, React.createElement("div", null, React.createElement("div", {
-    className: "contract-meta-label"
-  }, "Import total"), React.createElement("div", {
-    className: "caso-metric-value"
-  }, formatCurrency(caso.importe_total))), React.createElement("div", null, React.createElement("div", {
-    className: "contract-meta-label"
-  }, "Llindar legal"), React.createElement("div", {
-    className: "caso-metric-value"
-  }, formatCurrency(caso.umbral))), React.createElement("div", null, React.createElement("div", {
-    className: "contract-meta-label"
-  }, "Exc\xE9s detectat"), React.createElement("div", {
-    className: "caso-metric-value caso-metric-value-danger"
-  }, formatCurrency(caso.exceso))), React.createElement("div", null, React.createElement("div", {
-    className: "contract-meta-label"
-  }, "Similitud contractes"), React.createElement("div", {
-    className: "caso-metric-value"
-  }, Math.round(caso.similitud_media * 100), "%"))), React.createElement("div", {
-    className: "caso-bar-row"
-  }, React.createElement("div", {
-    className: "caso-bar-label"
-  }, "Concentraci\xF3 sobre l\xEDmit legal"), React.createElement("div", {
-    className: "caso-bar-bg"
-  }, React.createElement("div", {
-    className: "caso-bar-fill" + (pct > 100 ? ' error' : ' navy'),
-    style: {
-      width: Math.min(pct, 100) + '%'
-    }
-  })), React.createElement("div", {
-    className: "caso-bar-pct"
-  }, Math.round(pct), "%")));
-}
 function CasoModal({
   caso,
   onClose
@@ -2741,6 +2674,12 @@ function EmpresaView({
   }, "Data"), React.createElement("span", {
     className: "contract-meta-value"
   }, formatDate(c.fecha))), React.createElement("div", {
+    className: "contract-meta-item"
+  }, React.createElement("span", {
+    className: "contract-meta-label"
+  }, "Codi expedient"), React.createElement("span", {
+    className: "contract-meta-value"
+  }, c.codigo)), React.createElement("div", {
     className: "contract-pills"
   }, React.createElement("span", {
     className: "contract-pill"
@@ -2998,7 +2937,7 @@ function PersonesView({
       className: "contract-amount persona-amount"
     }, formatCurrency(p.total_adjudicat)), React.createElement("div", {
       className: "contract-meta-value persona-amount-caption"
-    }, "Per a ", p.relacions.length, " ", p.relacions.length === 1 ? 'empresa vinculada' : 'empreses vinculades')), React.createElement("div", {
+    }, "De ", p.relacions.length, " ", p.relacions.length === 1 ? 'empresa' : 'empreses')), React.createElement("div", {
       className: `persona-row-chevron${isExpanded ? ' is-expanded' : ''}`
     }, React.createElement("svg", {
       xmlns: "http://www.w3.org/2000/svg",
@@ -4423,46 +4362,6 @@ function App() {
       percentLabel: `${Math.round(row.percent * 100)}%`
     }));
   }, [contracts]);
-  const homeLatestContracts = useMemo(() => {
-    return contracts.filter(contract => {
-      const amount = Number(contract.importe) || 0;
-      const adjudicatario = contract.adjudicatario || '';
-      return contract.fecha && amount > 0 && !/lot desert/i.test(adjudicatario);
-    }).sort((a, b) => String(b.fecha).localeCompare(String(a.fecha))).slice(0, 3);
-  }, [contracts]);
-  const homeFeaturedAnalysis = useMemo(() => {
-    const fraccionament = fraudes.filter(item => item.nivell !== 'BAIX').map(item => ({
-      type: 'fraccionament',
-      label: 'Fraccionament',
-      title: (item.empreses || []).slice(0, 2).join(' · ') || 'Possible fraccionament',
-      text: `${item.contractes_count || item.contractes?.length || 0} contractes vinculats en ${item.dies_entre_primer_i_ultim || 0} dies.`,
-      amount: item.import_total,
-      score: item.risc || 0,
-      path: `/analisi/fraccionament/${item.id}`,
-      item
-    }));
-    const concentracioItems = concentracio.filter(item => item.finestra !== 'historic').map(item => ({
-      type: 'concentracio',
-      label: 'Concentració',
-      title: item.empresa_dominant || item.sector || 'Concentració de contractes',
-      text: `${item.sector || 'Sector'} · ${Math.round((item.quota_import || 0) * 100)}% de l'import.`,
-      amount: item.import_concentrat,
-      score: item.risc || Math.round((item.quota_import || 0) * 100),
-      path: `/analisi/concentracio/${item.id}`,
-      item
-    }));
-    const electoralItems = electoral.filter(item => item.nivell !== 'BAIX').map(item => ({
-      type: 'electoralisme',
-      label: 'Electoralisme',
-      title: item.empresa || 'Contractació en finestra electoral',
-      text: item.periode_electoral || 'Actuació en context electoral.',
-      amount: item.import_total,
-      score: item.risc || 0,
-      path: `/analisi/electoralisme/${item.id}`,
-      item
-    }));
-    return [...fraccionament, ...concentracioItems, ...electoralItems].filter(item => item.path && item.path.indexOf('undefined') === -1).sort((a, b) => (b.score || 0) - (a.score || 0))[0] || null;
-  }, [fraudes, concentracio, electoral]);
   const renderHomeChrome = (interactive = true) => React.createElement("div", {
     className: "home-chrome"
   }, React.createElement("div", {
@@ -4829,7 +4728,7 @@ function App() {
   }, React.createElement("div", {
     className: "home-atlas",
     style: {
-      '--atlas-panels': homeFeaturedAnalysis ? 6 : 5
+      '--atlas-panels': 4
     }
   }, React.createElement("div", {
     className: "home-atlas-sticky"
@@ -4837,7 +4736,7 @@ function App() {
     className: "home-atlas-rail",
     "aria-hidden": "true"
   }, Array.from({
-    length: homeFeaturedAnalysis ? 6 : 5
+    length: 4
   }, (_, index) => React.createElement("span", {
     key: index
   }, String(index + 1).padStart(2, '0')))), React.createElement("div", {
@@ -4846,24 +4745,7 @@ function App() {
     className: "home-story home-atlas-panel home-story-manifest"
   }, React.createElement("h2", null, "Una manera nova de mirar Igualada"), React.createElement("div", {
     className: "home-manifest-copy"
-  }, React.createElement("p", null, "Una dada pot ser p\xFAblica i continuar sent invisible. Un contracte pot estar penjat en un registre oficial i no explicar res a ning\xFA."), React.createElement("p", null, "Iguadata ordena la contractaci\xF3 municipal perqu\xE8 contractes, empreses, imports, persones vinculades i alertes es puguin llegir com un mapa."), React.createElement("p", null, "No substitueix el periodisme, l'activa: converteix informaci\xF3 dispersa i t\xE8cnica en una infraestructura c\xEDvica per preguntar millor com circulen els diners p\xFAblics."))), homeFeaturedAnalysis && React.createElement("section", {
-    className: "home-story home-atlas-panel home-story-featured"
-  }, React.createElement("div", {
-    className: "home-story-header"
-  }, React.createElement("h2", null, "Un cas per mirar de prop"), React.createElement("p", null, "Una alerta destacada per entrar a l'an\xE0lisi amb context i tra\xE7abilitat.")), React.createElement("a", {
-    href: buildRouteUrl(homeFeaturedAnalysis.path),
-    className: `home-featured-card home-featured-${homeFeaturedAnalysis.type}`,
-    onClick: interactive ? event => handleInternalLinkClick(event, () => {
-      if (homeFeaturedAnalysis.type === 'fraccionament') handleCasoClick(homeFeaturedAnalysis.item);
-      if (homeFeaturedAnalysis.type === 'concentracio') handleConcentracioClick(homeFeaturedAnalysis.item);
-      if (homeFeaturedAnalysis.type === 'electoralisme') handleElectoralismeClick(homeFeaturedAnalysis.item);
-    }) : event => event.preventDefault(),
-    tabIndex: interactive ? 0 : -1
-  }, React.createElement("span", {
-    className: "home-featured-label"
-  }, homeFeaturedAnalysis.label), React.createElement("strong", null, homeFeaturedAnalysis.title), React.createElement("p", null, homeFeaturedAnalysis.text), React.createElement("span", {
-    className: "home-featured-amount"
-  }, formatCompactCurrency(homeFeaturedAnalysis.amount)))), React.createElement("section", {
+  }, React.createElement("p", null, "Una dada pot ser p\xFAblica i continuar sent invisible. Un contracte pot estar penjat en un registre oficial i no explicar res a ning\xFA."), React.createElement("p", null, "Iguadata ordena la contractaci\xF3 municipal perqu\xE8 contractes, empreses, imports, persones vinculades i alertes es puguin llegir com un mapa."), React.createElement("p", null, "No substitueix el periodisme, l'activa: converteix informaci\xF3 dispersa i t\xE8cnica en una infraestructura c\xEDvica per preguntar millor com circulen els diners p\xFAblics."))), React.createElement("section", {
     className: "home-story home-atlas-panel home-story-minors"
   }, React.createElement("div", {
     className: "home-story-header"
@@ -4935,44 +4817,7 @@ function App() {
     tabIndex: interactive ? 0 : -1
   }, React.createElement("span", null, item.label), React.createElement("strong", null, formatCompactCurrency(item.amount))))), React.createElement("div", {
     className: "home-story-header home-story-header-offset"
-  }, React.createElement("h2", null, "Qu\xE8 compra l'Ajuntament?"), React.createElement("p", null, "Categories f\xE0cils de llegir, no codis opacs."))), React.createElement("section", {
-    className: "home-story home-atlas-panel home-story-latest"
-  }, React.createElement("div", {
-    className: "home-story-header"
-  }, React.createElement("h2", null, "La fotografia viva"), React.createElement("p", null, "La fotografia es mou cada dia.")), React.createElement("div", {
-    className: "home-latest-list"
-  }, homeLatestContracts.map((contract, index) => React.createElement("a", {
-    key: contract.slug || contract.id || `${contract.fecha}-${index}`,
-    href: buildRouteUrl(`/contractes/${contract.slug}`),
-    className: "card-link-wrapper home-latest-card-link",
-    onClick: interactive ? event => handleInternalLinkClick(event, () => {
-      setSelectedContractForDetail(contract);
-      handleNavigation('contracte', `/contractes/${contract.slug}`);
-    }) : event => event.preventDefault(),
-    tabIndex: interactive ? 0 : -1
-  }, React.createElement("div", {
-    className: "contract-card home-latest-card"
-  }, React.createElement("div", {
-    className: "contract-header"
-  }, React.createElement("div", {
-    className: "contract-title"
-  }, contract.descripcion), React.createElement("div", {
-    className: "contract-amount"
-  }, formatCurrency(contract.importe))), React.createElement("div", {
-    className: "contract-meta"
-  }, React.createElement("div", {
-    className: "contract-meta-item"
-  }, React.createElement("span", {
-    className: "contract-meta-label"
-  }, "Empresa adjudicat\xE0ria"), React.createElement("span", {
-    className: "contract-meta-value"
-  }, contract.adjudicatario)), React.createElement("div", {
-    className: "contract-meta-item"
-  }, React.createElement("span", {
-    className: "contract-meta-label"
-  }, "Data"), React.createElement("span", {
-    className: "contract-meta-value"
-  }, formatDate(contract.fecha)))))))))))), React.createElement("section", {
+  }, React.createElement("h2", null, "Qu\xE8 compra l'Ajuntament?"), React.createElement("p", null, "Categories f\xE0cils de llegir, no codis opacs.")))))), React.createElement("section", {
     className: "home-story home-story-trust"
   }, React.createElement("div", {
     className: "home-trust-strip"
@@ -5818,32 +5663,20 @@ function App() {
   }, React.createElement("div", {
     className: "contract-card fraccionament-card"
   }, React.createElement("div", {
-    className: "analysis-card-title"
-  }, (caso.empreses || []).slice(0, 2).join(' & ')), React.createElement("div", {
-    className: "analysis-card-main"
+    className: "contract-header"
   }, React.createElement("div", {
-    className: "fraccionament-card-object"
+    className: "contract-title"
+  }, (caso.empreses || []).slice(0, 2).join(' & ')), React.createElement("div", {
+    className: "contract-amount"
+  }, formatCurrency(caso.import_total))), React.createElement("div", {
+    className: "contract-meta"
+  }, React.createElement("div", {
+    className: "contract-meta-item fraccionament-card-object"
   }, React.createElement("span", {
     className: "contract-meta-label"
   }, "Objecte"), React.createElement("span", {
     className: "contract-meta-value"
   }, caso.contractes && caso.contractes[0] && caso.contractes[0].descripcion || '')), React.createElement("div", {
-    className: "contract-amount"
-  }, formatCurrency(caso.import_total))), React.createElement("div", {
-    className: "contract-meta fraccionament-card-meta"
-  }, React.createElement("div", {
-    className: "contract-meta-item"
-  }, React.createElement("span", {
-    className: "contract-meta-label"
-  }, (caso.contractes_count || 0) === 1 ? 'Contracte' : 'Contractes'), React.createElement("span", {
-    className: "contract-meta-value"
-  }, caso.contractes_count)), React.createElement("div", {
-    className: "contract-meta-item"
-  }, React.createElement("span", {
-    className: "contract-meta-label"
-  }, (caso.contractes_count || 0) === 1 ? 'Import' : 'Similitud'), React.createElement("span", {
-    className: "contract-meta-value"
-  }, (caso.contractes_count || 0) === 1 && caso.limit_legal ? `${Math.round(caso.import_total / caso.limit_legal * 100)}% límit` : `${Math.round((caso.similitud_objecte || 0) * 100)}%`)), React.createElement("div", {
     className: "contract-pills"
   }, React.createElement("span", {
     className: "risk-badge " + riskClass(caso.nivell)
