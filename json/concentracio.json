@@ -1,6 +1,6 @@
 {
   "metodologia": "concentracio_v1",
-  "generat_a": "2026-06-08",
+  "generat_a": "2026-06-15",
   "total_alertes": 44,
   "alertes": [
     {
@@ -30,39 +30,7 @@
       "data_fi": "2024-10-10",
       "contractes": [
         {
-          "id": 2192,
-          "codigo": "43/2024",
-          "descripcion": "Obres corresponents al projecte executiu d'intervencions passives per l'adpatació al canvi climàtic dels patis de centres educatius de titularitat pública de la ciutat d'Igualada. 6 LOTS",
-          "adjudicatario": "VERSATIL GREEN, SL",
-          "importe": 14342.62,
-          "fecha": "2024-10-10",
-          "tipo": "1. OBRES",
-          "procedimiento": "Obert",
-          "cpv": "45212190-4",
-          "estat_font": "actiu_socrata",
-          "preservat_iguadata": false,
-          "primera_absencia_detectada": "",
-          "font_preservacio": "",
-          "primer_snapshot_iguadata": ""
-        },
-        {
-          "id": 2191,
-          "codigo": "43/2024",
-          "descripcion": "Obres corresponents al projecte executiu d'intervencions passives per l'adpatació al canvi climàtic dels patis de centres educatius de titularitat pública de la ciutat d'Igualada. 6 LOTS",
-          "adjudicatario": "VERSATIL GREEN, SL",
-          "importe": 36076.96,
-          "fecha": "2024-10-10",
-          "tipo": "1. OBRES",
-          "procedimiento": "Obert",
-          "cpv": "45212190-4",
-          "estat_font": "actiu_socrata",
-          "preservat_iguadata": false,
-          "primera_absencia_detectada": "",
-          "font_preservacio": "",
-          "primer_snapshot_iguadata": ""
-        },
-        {
-          "id": 2190,
+          "id": 2194,
           "codigo": "43/2024",
           "descripcion": "Obres corresponents al projecte executiu d'intervencions passives per l'adpatació al canvi climàtic dels patis de centres educatius de titularitat pública de la ciutat d'Igualada. 6 LOTS",
           "adjudicatario": "VERSATIL GREEN, SL",
@@ -78,39 +46,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 2189,
-          "codigo": "43/2024",
-          "descripcion": "Obres corresponents al projecte executiu d'intervencions passives per l'adpatació al canvi climàtic dels patis de centres educatius de titularitat pública de la ciutat d'Igualada. 6 LOTS",
-          "adjudicatario": "VERSATIL GREEN, SL",
-          "importe": 34469.73,
-          "fecha": "2024-10-10",
-          "tipo": "1. OBRES",
-          "procedimiento": "Obert",
-          "cpv": "45212190-4",
-          "estat_font": "actiu_socrata",
-          "preservat_iguadata": false,
-          "primera_absencia_detectada": "",
-          "font_preservacio": "",
-          "primer_snapshot_iguadata": ""
-        },
-        {
-          "id": 2188,
-          "codigo": "43/2024",
-          "descripcion": "Obres corresponents al projecte executiu d'intervencions passives per l'adpatació al canvi climàtic dels patis de centres educatius de titularitat pública de la ciutat d'Igualada. 6 LOTS",
-          "adjudicatario": "VERSATIL GREEN, SL",
-          "importe": 40986.83,
-          "fecha": "2024-10-10",
-          "tipo": "1. OBRES",
-          "procedimiento": "Obert",
-          "cpv": "45212190-4",
-          "estat_font": "actiu_socrata",
-          "preservat_iguadata": false,
-          "primera_absencia_detectada": "",
-          "font_preservacio": "",
-          "primer_snapshot_iguadata": ""
-        },
-        {
-          "id": 2187,
+          "id": 2193,
           "codigo": "43/2024",
           "descripcion": "Obres corresponents al projecte executiu d'intervencions passives per l'adpatació al canvi climàtic dels patis de centres educatius de titularitat pública de la ciutat d'Igualada. 6 LOTS",
           "adjudicatario": "VERSATIL GREEN, SL",
@@ -126,7 +62,71 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 2235,
+          "id": 2192,
+          "codigo": "43/2024",
+          "descripcion": "Obres corresponents al projecte executiu d'intervencions passives per l'adpatació al canvi climàtic dels patis de centres educatius de titularitat pública de la ciutat d'Igualada. 6 LOTS",
+          "adjudicatario": "VERSATIL GREEN, SL",
+          "importe": 36076.96,
+          "fecha": "2024-10-10",
+          "tipo": "1. OBRES",
+          "procedimiento": "Obert",
+          "cpv": "45212190-4",
+          "estat_font": "actiu_socrata",
+          "preservat_iguadata": false,
+          "primera_absencia_detectada": "",
+          "font_preservacio": "",
+          "primer_snapshot_iguadata": ""
+        },
+        {
+          "id": 2191,
+          "codigo": "43/2024",
+          "descripcion": "Obres corresponents al projecte executiu d'intervencions passives per l'adpatació al canvi climàtic dels patis de centres educatius de titularitat pública de la ciutat d'Igualada. 6 LOTS",
+          "adjudicatario": "VERSATIL GREEN, SL",
+          "importe": 14342.62,
+          "fecha": "2024-10-10",
+          "tipo": "1. OBRES",
+          "procedimiento": "Obert",
+          "cpv": "45212190-4",
+          "estat_font": "actiu_socrata",
+          "preservat_iguadata": false,
+          "primera_absencia_detectada": "",
+          "font_preservacio": "",
+          "primer_snapshot_iguadata": ""
+        },
+        {
+          "id": 2190,
+          "codigo": "43/2024",
+          "descripcion": "Obres corresponents al projecte executiu d'intervencions passives per l'adpatació al canvi climàtic dels patis de centres educatius de titularitat pública de la ciutat d'Igualada. 6 LOTS",
+          "adjudicatario": "VERSATIL GREEN, SL",
+          "importe": 34469.73,
+          "fecha": "2024-10-10",
+          "tipo": "1. OBRES",
+          "procedimiento": "Obert",
+          "cpv": "45212190-4",
+          "estat_font": "actiu_socrata",
+          "preservat_iguadata": false,
+          "primera_absencia_detectada": "",
+          "font_preservacio": "",
+          "primer_snapshot_iguadata": ""
+        },
+        {
+          "id": 2189,
+          "codigo": "43/2024",
+          "descripcion": "Obres corresponents al projecte executiu d'intervencions passives per l'adpatació al canvi climàtic dels patis de centres educatius de titularitat pública de la ciutat d'Igualada. 6 LOTS",
+          "adjudicatario": "VERSATIL GREEN, SL",
+          "importe": 40986.83,
+          "fecha": "2024-10-10",
+          "tipo": "1. OBRES",
+          "procedimiento": "Obert",
+          "cpv": "45212190-4",
+          "estat_font": "actiu_socrata",
+          "preservat_iguadata": false,
+          "primera_absencia_detectada": "",
+          "font_preservacio": "",
+          "primer_snapshot_iguadata": ""
+        },
+        {
+          "id": 2237,
           "codigo": "2024.2.0024521.000",
           "descripcion": "Manteniment biollac Parc Central",
           "adjudicatario": "VERSATIL GREEN, SL",
@@ -142,7 +142,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 2234,
+          "id": 2236,
           "codigo": "2024.2.0024811.000",
           "descripcion": "Devesa Parc Central",
           "adjudicatario": "VERSATIL GREEN, SL",
@@ -197,7 +197,7 @@
       "data_fi": "2023-12-31",
       "contractes": [
         {
-          "id": 3174,
+          "id": 3176,
           "codigo": "2023.2.0041039.000",
           "descripcion": "Servei de vigilància a l'edifici Espai Cívic Nord durant el mes de setembre",
           "adjudicatario": "GRUP SERVEIS 08700 IGUALADA SL",
@@ -213,7 +213,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 3173,
+          "id": 3175,
           "codigo": "2023.2.0041040.000",
           "descripcion": "Servei de vigilància a l'edifici Espai Civic Nord durant el mes de novembre",
           "adjudicatario": "GRUP SERVEIS 08700 IGUALADA SL",
@@ -229,7 +229,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 3172,
+          "id": 3174,
           "codigo": "2023.2.0041042.000",
           "descripcion": "Servei de vigilància a l'edifici Espai Cívic Nord durant el mes d'octubre",
           "adjudicatario": "GRUP SERVEIS 08700 IGUALADA SL",
@@ -245,7 +245,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 3195,
+          "id": 3197,
           "codigo": "2023.2.0038998.000",
           "descripcion": "Control parc biollac i park skate agost 2023",
           "adjudicatario": "GRUP SERVEIS 08700 IGUALADA SL",
@@ -261,7 +261,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 3192,
+          "id": 3194,
           "codigo": "2023.2.0041033.000",
           "descripcion": "Servei de la inauguració de la zona del Biollac i Skate Park, es creu oporú realitzar vigilància amb dos vigilants els caps de setmana del mes de juliol.",
           "adjudicatario": "GRUP SERVEIS 08700 IGUALADA SL",
@@ -277,7 +277,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 3191,
+          "id": 3193,
           "codigo": "2023.2.0041034.000",
           "descripcion": "Servei de vigilància a la zona d'skate park del mes de setembre",
           "adjudicatario": "GRUP SERVEIS 08700 IGUALADA SL",
@@ -293,7 +293,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 3245,
+          "id": 3247,
           "codigo": "2023.2.0038997.000",
           "descripcion": "Control parc biollac i park skate juny 2023",
           "adjudicatario": "GRUP SERVEIS 08700 IGUALADA SL",
@@ -309,7 +309,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 3244,
+          "id": 3246,
           "codigo": "2023.2.0038999.000",
           "descripcion": "Control acces i vigilancia centre civic  nord, juliol 2023",
           "adjudicatario": "GRUP SERVEIS 08700 IGUALADA SL",
@@ -325,7 +325,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 3310,
+          "id": 3312,
           "codigo": "2023.2.0035806.000",
           "descripcion": "CAMPANYA DE NADAL 23_Servei de personal per a la seguretat i control de l¿ estructura decorativa de Nadal a la plaça de Cal Font.",
           "adjudicatario": "GRUP SERVEIS 08700 IGUALADA SL",
@@ -379,7 +379,7 @@
       "data_fi": "2021-04-15",
       "contractes": [
         {
-          "id": 7087,
+          "id": 7089,
           "codigo": "2021.2.0009290.000",
           "descripcion": "ENJARDINAMENT DELS PARTERRES DE L¿AVINGUDA MESTRE MONTANER: SUBMINISTRAMENT DE TERRES I ARIDS",
           "adjudicatario": "ÀRIDS ANOIA, S.L.",
@@ -395,7 +395,7 @@
           "primer_snapshot_iguadata": "2026-03-10"
         },
         {
-          "id": 7086,
+          "id": 7088,
           "codigo": "2021.2.0009292.000",
           "descripcion": "ROTONDA DEL CARRER GUIMERAES AMB CARRER LECCO: SUBMINISTRAMENT D¿ARIDS",
           "adjudicatario": "ÀRIDS ANOIA, S.L.",
@@ -411,7 +411,7 @@
           "primer_snapshot_iguadata": "2026-03-10"
         },
         {
-          "id": 7055,
+          "id": 7057,
           "codigo": "2021.2.0014412.000",
           "descripcion": "ENJARDINAMENT DELS PARTERRES DE L'AVINGUDA MESTRE MONTAER:SUBMINISTRAMENT DE TERRES I ÀRIDS",
           "adjudicatario": "ÀRIDS ANOIA, S.L.",
@@ -427,7 +427,7 @@
           "primer_snapshot_iguadata": "2026-03-10"
         },
         {
-          "id": 7098,
+          "id": 7100,
           "codigo": "2021.2.0003097.000",
           "descripcion": "SUBMINISTRAMENT DE GRAVILLA VOLCÀNICA PER FINALITZAR L'ENJARDINAMENT DE LA ZONA VERDA DE L¿AVINGUDA ANDORRA AMB MESTRE MONTANER",
           "adjudicatario": "ÀRIDS ANOIA, S.L.",
@@ -443,7 +443,7 @@
           "primer_snapshot_iguadata": "2026-03-10"
         },
         {
-          "id": 7091,
+          "id": 7093,
           "codigo": "2021.2.0014379.000",
           "descripcion": "SUBMINISTRAMENT DE GRAVILLA VOLCÀNICA PER FINALITZAR L'ENJARDINAMENT DE LA ZONA VERDA DE L'AVINGUA ANDORRA AMB MESTR MONTANER",
           "adjudicatario": "ÀRIDS ANOIA, S.L.",
@@ -497,7 +497,7 @@
       "data_fi": "2025-03-03",
       "contractes": [
         {
-          "id": 1502,
+          "id": 1504,
           "codigo": "2025.2.0005366.000",
           "descripcion": "ZONA VERDA ESPAI CIVIC CENTRE: SUBMINISTRAMENT DE 4 COLUMNES, 10 LLUMINARIES INNOVA I 6 PROJECTORS DE 140 W",
           "adjudicatario": "BENITO URBAN, S.L. UNIPERSONAL",
@@ -513,7 +513,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 1501,
+          "id": 1503,
           "codigo": "2025.2.0005367.000",
           "descripcion": "SUBMINISTRAMENT DE 20 PROJECTORS LED I 10 LLUMINARIES INNOVA 40 WATS PER ESTOC DE MAGATZEM",
           "adjudicatario": "BENITO URBAN, S.L. UNIPERSONAL",
@@ -529,7 +529,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 1536,
+          "id": 1538,
           "codigo": "2025.2.0004278.000",
           "descripcion": "AVINGUDA PASTEUR: SUBMINISTRAMENT D'11 LLUMINARIES LED DE 150 WATS",
           "adjudicatario": "BENITO URBAN, S.L. UNIPERSONAL",
@@ -545,7 +545,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 1535,
+          "id": 1537,
           "codigo": "2025.2.0004279.000",
           "descripcion": "SUBMINISTRAMENT DE 40 PROJECTORS LED DE 30 WATS PEL CAMI DE L¿ACCES EST",
           "adjudicatario": "BENITO URBAN, S.L. UNIPERSONAL",
@@ -561,7 +561,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 1534,
+          "id": 1536,
           "codigo": "2025.2.0004280.000",
           "descripcion": "CARRER COMARCA ENTRE DR PASTEUR I BRUC: SUBMINISTRAMENT DE 48 LLUMINARIES LED",
           "adjudicatario": "BENITO URBAN, S.L. UNIPERSONAL",
@@ -615,7 +615,7 @@
       "data_fi": "2022-08-11",
       "contractes": [
         {
-          "id": 5241,
+          "id": 5243,
           "codigo": "2022.2.0020869.000",
           "descripcion": "Reparació de la canonada aigua i canvi d'aspiració de les bombes d'aigua del dipòsit d¿aigua sanitària general CE Les Comes",
           "adjudicatario": "ELM, SL",
@@ -631,7 +631,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 5240,
+          "id": 5242,
           "codigo": "2022.2.0020875.000",
           "descripcion": "Subministre de bescanviador per aigua calenta sanitària amb plaques de titani, juntes NBR, marca Suicalsa de 23 plaques al Nou Pavelló.",
           "adjudicatario": "ELM, SL",
@@ -647,7 +647,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 5238,
+          "id": 5240,
           "codigo": "2022.2.0020884.000",
           "descripcion": "Subministre i col.locació d'intercanviador Cipriani S-125+M+29 plaques de de Titani del CE Les Comes.",
           "adjudicatario": "ELM, SL",
@@ -663,7 +663,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 5232,
+          "id": 5234,
           "codigo": "2022.2.0020974.000",
           "descripcion": "Canviar llums a led dels quadres ubicats a la planta primera.",
           "adjudicatario": "ELM, SL",
@@ -679,7 +679,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 5206,
+          "id": 5208,
           "codigo": "2022.2.0023565.000",
           "descripcion": "MANTENIMENT AIRE CONDICIONAT EDIFICI AJUNTAMENT 2022.",
           "adjudicatario": "ELM, SL",
@@ -733,7 +733,7 @@
       "data_fi": "2022-05-20",
       "contractes": [
         {
-          "id": 5542,
+          "id": 5544,
           "codigo": "2022.2.0011109.000",
           "descripcion": "REPARAR I TORNAR A IMPERMEABILITZAR LA SUPERFICIE DE LAMINA D'AIGUA DEL PARC DE L¿ESTACIO VELLA",
           "adjudicatario": "TALLER AURIA, SCCL",
@@ -749,7 +749,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 5528,
+          "id": 5530,
           "codigo": "2022.2.0014051.000",
           "descripcion": "Personal neteja i vigilància camps de futbol \"Les Comes\" del 28 d'abril al 30 de juny 2022",
           "adjudicatario": "TALLER AURIA, SCCL",
@@ -765,7 +765,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 5552,
+          "id": 5554,
           "codigo": "8/2022",
           "descripcion": "Serveis de consergeria, neteja i manteniment de diferents instal·lacions esportives municipals del servei d'esports de l'Ajuntament d'Igualada mitjançant l'ocupació de persones amb discapacitats amb especials dificultats per a la seva inclusió laboral",
           "adjudicatario": "TALLER AURIA, SCCL",
@@ -781,7 +781,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 5588,
+          "id": 5590,
           "codigo": "2022.2.0011909.000",
           "descripcion": "Trampeix de velutina (vespa aisiàtica)a10 punts de la ciutat",
           "adjudicatario": "TALLER AURIA, SCCL",
@@ -797,7 +797,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 5624,
+          "id": 5626,
           "codigo": "2022.2.0010950.000",
           "descripcion": "IMPERMEABILITZACIÓ SUPERIOR QUADRES ELÈCTRICS SOTERRANIS DEL CE LES COMES",
           "adjudicatario": "TALLER AURIA, SCCL",
@@ -852,7 +852,7 @@
       "data_fi": "2023-01-01",
       "contractes": [
         {
-          "id": 4631,
+          "id": 4633,
           "codigo": "2023.2.0000117.000",
           "descripcion": "Lloguer de grups electrògens pel Saló de la Infància 2022-2023",
           "adjudicatario": "MIRALLESTRES",
@@ -868,7 +868,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 4654,
+          "id": 4656,
           "codigo": "2022.2.0039981.000",
           "descripcion": "CAMPANYA DE NADAL_ LLOGUER PLATAFORMA ELEVADORA PER EL MUNTATGE DE LA IL·LUMINACIÓ DE LA RAMBLA.",
           "adjudicatario": "MIRALLESTRES",
@@ -884,7 +884,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 4698,
+          "id": 4700,
           "codigo": "2022.2.0038847.000",
           "descripcion": "LLOGUER DE PLATAFORMA ELEVADORA DE 16M PER LA PODA DEL MES DE NOVEMBRE DE 2022",
           "adjudicatario": "MIRALLESTRES",
@@ -900,7 +900,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 4697,
+          "id": 4699,
           "codigo": "2022.2.0038848.000",
           "descripcion": "LLOGUER DE PLATAFORMA ELEVADORA PER LA TALA D¿ARBRAT AL PARC VALLDAURA",
           "adjudicatario": "MIRALLESTRES",
@@ -916,7 +916,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 4852,
+          "id": 4854,
           "codigo": "2022.2.0035086.000",
           "descripcion": "Lloguer de grups electrògens pel Saló de la Infància 2022-2023",
           "adjudicatario": "MIRALLESTRES",
@@ -970,7 +970,7 @@
       "data_fi": "2022-03-23",
       "contractes": [
         {
-          "id": 5725,
+          "id": 5727,
           "codigo": "2022.2.0008283.000",
           "descripcion": "PATRONAT D'ESPORTS: SUBMINISTRAMENT DE 25 PROJECTORS LED PER SUBSTITUIR ELS PROJECTORS DE VAPOR DE SODI",
           "adjudicatario": "NOVATILU, SLU",
@@ -986,7 +986,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 5724,
+          "id": 5726,
           "codigo": "2022.2.0008327.000",
           "descripcion": "PARC VALLBONA: SUBMINISTRAMENT DE 37 LLUMINARIES LED",
           "adjudicatario": "NOVATILU, SLU",
@@ -1002,7 +1002,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 5843,
+          "id": 5845,
           "codigo": "2022.2.0004290.000",
           "descripcion": "C/CARESMAR: SUBMINISTRAMENT DE 8 LLUMINÂRIES LED",
           "adjudicatario": "NOVATILU, SLU",
@@ -1018,7 +1018,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 5842,
+          "id": 5844,
           "codigo": "2022.2.0004291.000",
           "descripcion": "QUADRE I-037 SUBMINISTRAMENT DE 53 LLUMINARIES LED",
           "adjudicatario": "NOVATILU, SLU",
@@ -1034,7 +1034,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 5840,
+          "id": 5842,
           "codigo": "2022.2.0004354.000",
           "descripcion": "C/GERMANS MUSSET I FERRER: SUBMINISTRAMENT DE 15 LLUMINÂRIES LED DE 30 WATS.",
           "adjudicatario": "NOVATILU, SLU",
@@ -1088,7 +1088,7 @@
       "data_fi": "2024-06-18",
       "contractes": [
         {
-          "id": 2537,
+          "id": 2539,
           "codigo": "2024.2.0017240.000",
           "descripcion": "Servei de vigilància a l'edifici Espai Cívic Nord durant el mes de maig de 2024",
           "adjudicatario": "GRUP SERVEIS 08700 IGUALADA SL",
@@ -1104,7 +1104,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 2633,
+          "id": 2635,
           "codigo": "2024.2.0014293.000",
           "descripcion": "Servei de vigilància a l'edifici ESPAI CIVIC NORD durant el mes d'ABRIL de 2024",
           "adjudicatario": "GRUP SERVEIS 08700 IGUALADA SL",
@@ -1120,7 +1120,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 2713,
+          "id": 2715,
           "codigo": "2024.2.0002369.000",
           "descripcion": "Servei de vigilància a l'edifici Espai Cívic Nord durant el mes de desembre 2023",
           "adjudicatario": "GRUP SERVEIS 08700 IGUALADA SL",
@@ -1136,7 +1136,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 2763,
+          "id": 2765,
           "codigo": "2024.2.0010637.000",
           "descripcion": "Servei de vigilància a l'edifici Espai Civic Nord durant el mes de març de 2024",
           "adjudicatario": "GRUP SERVEIS 08700 IGUALADA SL",
@@ -1152,7 +1152,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 2805,
+          "id": 2807,
           "codigo": "2024.2.0007855.000",
           "descripcion": "Servei de vigilància a l'edifici Espai Cívic Nord durant el mes de febrer de 2024",
           "adjudicatario": "GRUP SERVEIS 08700 IGUALADA SL",
@@ -1168,7 +1168,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 2876,
+          "id": 2878,
           "codigo": "2024.2.0007854.000",
           "descripcion": "Servei de vigilància a l'edifici Espai Cívic Nord, durant el mes de gener de 2024",
           "adjudicatario": "GRUP SERVEIS 08700 IGUALADA SL",
@@ -1184,7 +1184,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 3174,
+          "id": 3176,
           "codigo": "2023.2.0041039.000",
           "descripcion": "Servei de vigilància a l'edifici Espai Cívic Nord durant el mes de setembre",
           "adjudicatario": "GRUP SERVEIS 08700 IGUALADA SL",
@@ -1200,7 +1200,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 3173,
+          "id": 3175,
           "codigo": "2023.2.0041040.000",
           "descripcion": "Servei de vigilància a l'edifici Espai Civic Nord durant el mes de novembre",
           "adjudicatario": "GRUP SERVEIS 08700 IGUALADA SL",
@@ -1216,7 +1216,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 3172,
+          "id": 3174,
           "codigo": "2023.2.0041042.000",
           "descripcion": "Servei de vigilància a l'edifici Espai Cívic Nord durant el mes d'octubre",
           "adjudicatario": "GRUP SERVEIS 08700 IGUALADA SL",
@@ -1232,7 +1232,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 3195,
+          "id": 3197,
           "codigo": "2023.2.0038998.000",
           "descripcion": "Control parc biollac i park skate agost 2023",
           "adjudicatario": "GRUP SERVEIS 08700 IGUALADA SL",
@@ -1248,7 +1248,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 3192,
+          "id": 3194,
           "codigo": "2023.2.0041033.000",
           "descripcion": "Servei de la inauguració de la zona del Biollac i Skate Park, es creu oporú realitzar vigilància amb dos vigilants els caps de setmana del mes de juliol.",
           "adjudicatario": "GRUP SERVEIS 08700 IGUALADA SL",
@@ -1264,7 +1264,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 3191,
+          "id": 3193,
           "codigo": "2023.2.0041034.000",
           "descripcion": "Servei de vigilància a la zona d'skate park del mes de setembre",
           "adjudicatario": "GRUP SERVEIS 08700 IGUALADA SL",
@@ -1280,7 +1280,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 3245,
+          "id": 3247,
           "codigo": "2023.2.0038997.000",
           "descripcion": "Control parc biollac i park skate juny 2023",
           "adjudicatario": "GRUP SERVEIS 08700 IGUALADA SL",
@@ -1296,7 +1296,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 3244,
+          "id": 3246,
           "codigo": "2023.2.0038999.000",
           "descripcion": "Control acces i vigilancia centre civic  nord, juliol 2023",
           "adjudicatario": "GRUP SERVEIS 08700 IGUALADA SL",
@@ -1350,7 +1350,7 @@
       "data_fi": "2021-08-05",
       "contractes": [
         {
-          "id": 6630,
+          "id": 6632,
           "codigo": "21/2021",
           "descripcion": "Servei d'Informació i assessorament a la ciutadania en materia de consum - OMIC",
           "adjudicatario": "FUNDACIÓ SOCIOCULTURAL",
@@ -1366,7 +1366,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 6648,
+          "id": 6650,
           "codigo": "2021.2.0020812.000",
           "descripcion": "Programam comunitari de prevenció a les addiccions",
           "adjudicatario": "FUNDACIÓ SOCIOCULTURAL",
@@ -1382,7 +1382,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 6710,
+          "id": 6712,
           "codigo": "2021.2.0019707.000",
           "descripcion": "CONTRACTACIÓ DIMANITZADORA COMUNITÀRIA ESPAI CÍVIC CENTRE DE JULIOL A OCTUBRE 2021",
           "adjudicatario": "FUNDACIÓ SOCIOCULTURAL",
@@ -1398,7 +1398,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 6708,
+          "id": 6710,
           "codigo": "2021.2.0019709.000",
           "descripcion": "CONTRACTACIÓ DINAMITZADORA COMUNITÀRIA CENTRE CÍVIC DE FÀTIMA DE JULIOL A OCTUBRE 2021",
           "adjudicatario": "FUNDACIÓ SOCIOCULTURAL",
@@ -1414,7 +1414,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 6836,
+          "id": 6838,
           "codigo": "2021.2.0017197.000",
           "descripcion": "Contractació de l'assessorament a la ciutadania en temes de CONSUM. Maig-Juliol 21",
           "adjudicatario": "FUNDACIÓ SOCIOCULTURAL",
@@ -1430,7 +1430,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 6910,
+          "id": 6912,
           "codigo": "2021.2.0015167.000",
           "descripcion": "GESTIÓ DEL MÒDUL C. CONEIXEMENT DE LA SOCIETAT CATALANA I EL SEU MARC JURÍDIC. SERVEI DE PRIMERA ACOLLIDA (SEGON SEMESTRE)",
           "adjudicatario": "FUNDACIÓ SOCIOCULTURAL",
@@ -1485,7 +1485,7 @@
       "data_fi": "2021-12-29",
       "contractes": [
         {
-          "id": 6154,
+          "id": 6156,
           "codigo": "84/2021 CMS",
           "descripcion": "Contractació d'una pòlissa d'assegurança per al vehicle amb matrícula 9017JBT destinat a la Policia Local d'Igualada. Nova flota FIATC. durant els primers 15 dies de gener de 2022.",
           "adjudicatario": "FIATC, MUTUA DE SEGUROS GENERALES",
@@ -1501,7 +1501,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 6153,
+          "id": 6155,
           "codigo": "85/2021 CMS",
           "descripcion": "Contractació d'una pòlissa d'assegurança per al vehicle amb matricula 9024JBT destinat a la Policia Local d'Igualada. Flota-Fiatc. durant els primers 15 dies de gener  de 2022.",
           "adjudicatario": "FIATC, MUTUA DE SEGUROS GENERALES",
@@ -1517,7 +1517,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 6166,
+          "id": 6168,
           "codigo": "77/2021 CMS",
           "descripcion": "Contractació d'una pòlissa d'assegurança per al vehicle amb matrícula 4064JBL destinat al Servei de la Policia Local d'Igualada.",
           "adjudicatario": "FIATC, MUTUA DE SEGUROS GENERALES",
@@ -1533,7 +1533,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 6165,
+          "id": 6167,
           "codigo": "78/2021 CMS",
           "descripcion": "Contractació d'una pòlissa d'assegurança per al vehicle amb matricula 4065JBL destinat a la Policia Local d'Igualada.",
           "adjudicatario": "FIATC, MUTUA DE SEGUROS GENERALES",
@@ -1549,7 +1549,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 6164,
+          "id": 6166,
           "codigo": "79/2021 CMS",
           "descripcion": "Contractació d'una pòlissa d'assegurança per al vehicle amb matricula 5669JBN destinat al Servei de la Policia Local d'Igualada.",
           "adjudicatario": "FIATC, MUTUA DE SEGUROS GENERALES",
@@ -1565,7 +1565,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 6163,
+          "id": 6165,
           "codigo": "80/2021 CMS",
           "descripcion": "Contractació d'una pòlidda d'assegurança per al vehicle amb matricula 5681JBN destinat al Servei de la policia Local d'Igualada.",
           "adjudicatario": "FIATC, MUTUA DE SEGUROS GENERALES",
@@ -1581,7 +1581,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 6180,
+          "id": 6182,
           "codigo": "70/2021 CMS",
           "descripcion": "Contractació d'una pòlissa d'assegurança per al vehicle amb matrícula 4813HVB destinat a la Policia Local d'Igualada.",
           "adjudicatario": "FIATC, MUTUA DE SEGUROS GENERALES",
@@ -1597,7 +1597,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 6179,
+          "id": 6181,
           "codigo": "72/2021 CMS",
           "descripcion": "Contractació d'una pòlissa d'assegurança per al vehicle amb matrícula 4819HVB destinat a la Policia Local d'Igualada.",
           "adjudicatario": "FIATC, MUTUA DE SEGUROS GENERALES",
@@ -1613,7 +1613,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 6178,
+          "id": 6180,
           "codigo": "73/2021 CMS",
           "descripcion": "Contractació d'una pòlissa d'assegurança per al vehicle amb matricula 4820HVB destinat al Servei de la Policia Local d'Igualada",
           "adjudicatario": "FIATC, MUTUA DE SEGUROS GENERALES",
@@ -1629,7 +1629,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 6177,
+          "id": 6179,
           "codigo": "74/2021 CMS",
           "descripcion": "Contractació d'una pòlissa d'assegurança per al vehicle amb matricula 4821HVB destinat al Servei de Policia Local d'Igualada.",
           "adjudicatario": "FIATC, MUTUA DE SEGUROS GENERALES",
@@ -1660,12 +1660,12 @@
       "sector": "Altres Serveis i Subministraments",
       "finestra": "historic",
       "finestra_label": "Històric complet",
-      "import_sector": 15638706.93,
-      "contractes_sector": 273,
-      "empreses_sector": 110,
-      "cr1": 0.7998,
-      "cr3": 0.879,
-      "hhi": 6435,
+      "import_sector": 15679406.93,
+      "contractes_sector": 274,
+      "empreses_sector": 111,
+      "cr1": 0.7978,
+      "cr3": 0.8767,
+      "hhi": 6402,
       "tipus_concentracio": "xarxa",
       "empreses": [
         "FCC MEDIO AMBIENTE",
@@ -1684,13 +1684,13 @@
       ],
       "import_concentrat": 13135162.56,
       "contractes_concentrats": 3,
-      "quota_import": 0.8399,
-      "quota_contractes": 0.011,
+      "quota_import": 0.8377,
+      "quota_contractes": 0.0109,
       "data_inici": "2025-06-17",
       "data_fi": "2025-12-30",
       "contractes": [
         {
-          "id": 334,
+          "id": 336,
           "codigo": "79/2025",
           "descripcion": "Servei de recepció i disposició final dels residus de la fracció de voluminosos i de la neteja viaria del municipi d'Igualada",
           "adjudicatario": "PREZERO GESTIÓN DE RESIDUOS, SA",
@@ -1706,7 +1706,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 490,
+          "id": 492,
           "codigo": "68/2024",
           "descripcion": "Servei públic de recollida de residus i neteja viària",
           "adjudicatario": "FCC MEDIO AMBIENTE",
@@ -1722,7 +1722,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 1042,
+          "id": 1044,
           "codigo": "68/2024",
           "descripcion": "Servei públic de recollida de residus i neteja viària",
           "adjudicatario": "FCC MEDIO AMBIENTE",
@@ -1776,7 +1776,7 @@
       "data_fi": "2025-12-31",
       "contractes": [
         {
-          "id": 312,
+          "id": 314,
           "codigo": "2025.2.0039644.000",
           "descripcion": "TRANS DIEMA,SL",
           "adjudicatario": "TRANS DIEMA,SL",
@@ -1792,7 +1792,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 450,
+          "id": 452,
           "codigo": "2025.2.0033292.000",
           "descripcion": "TRANS DIEMA,SL",
           "adjudicatario": "TRANS DIEMA,SL",
@@ -1808,7 +1808,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 449,
+          "id": 451,
           "codigo": "2025.2.0033293.000",
           "descripcion": "TRANS DIEMA,SL",
           "adjudicatario": "TRANS DIEMA,SL",
@@ -1824,7 +1824,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 444,
+          "id": 446,
           "codigo": "2025.2.0033385.000",
           "descripcion": "TRANS DIEMA,SL",
           "adjudicatario": "TRANS DIEMA,SL",
@@ -1840,7 +1840,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 443,
+          "id": 445,
           "codigo": "2025.2.0033386.000",
           "descripcion": "TRANS DIEMA,SL",
           "adjudicatario": "TRANS DIEMA,SL",
@@ -1856,7 +1856,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 442,
+          "id": 444,
           "codigo": "2025.2.0033387.000",
           "descripcion": "TRANS DIEMA,SL",
           "adjudicatario": "TRANS DIEMA,SL",
@@ -1872,7 +1872,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 441,
+          "id": 443,
           "codigo": "2025.2.0033389.000",
           "descripcion": "TRANS DIEMA,SL",
           "adjudicatario": "TRANS DIEMA,SL",
@@ -1926,7 +1926,7 @@
       "data_fi": "2023-11-15",
       "contractes": [
         {
-          "id": 3415,
+          "id": 3417,
           "codigo": "2023.2.0027670.000",
           "descripcion": "Adquisició vestuari protecció per a la Brigada Municipal, hivern 2023",
           "adjudicatario": "LA MARCA DE GRÀFIQUES VILANOVA, S.L.",
@@ -1942,7 +1942,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 3414,
+          "id": 3416,
           "codigo": "2023.2.0027674.000",
           "descripcion": "Subministrament vestuari Pla Ocupació juliol 2023",
           "adjudicatario": "LA MARCA DE GRÀFIQUES VILANOVA, S.L.",
@@ -1958,7 +1958,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 3409,
+          "id": 3411,
           "codigo": "2023.2.0029527.000",
           "descripcion": "Vestuari pel Pla Ocupació, octubre 2023",
           "adjudicatario": "LA MARCA DE GRÀFIQUES VILANOVA, S.L.",
@@ -1974,7 +1974,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 3407,
+          "id": 3409,
           "codigo": "2023.2.0029565.000",
           "descripcion": "Adquisició de sabates de seguretat per la Brigada Municipal d'Igualada, hivern 2023",
           "adjudicatario": "LA MARCA DE GRÀFIQUES VILANOVA, S.L.",
@@ -2028,7 +2028,7 @@
       "data_fi": "2024-02-23",
       "contractes": [
         {
-          "id": 3043,
+          "id": 3045,
           "codigo": "2024.2.0002257.000",
           "descripcion": "RECOLLIDA DE 23 CONTENIDORS DE RESIDUS DE JARDINERIA DURANT EL MES DE NOVEMBRE DE 2023",
           "adjudicatario": "TRANSPORTES DIEGO NOGUERA, S.L.",
@@ -2044,7 +2044,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 3014,
+          "id": 3016,
           "codigo": "2024.2.0004053.000",
           "descripcion": "RECOLLIDA DE 21 CONTENIDORS DE RESIDUS DE JARDINERIA DURANT EL MES DE SETEMBRE DE 2023",
           "adjudicatario": "TRANSPORTES DIEGO NOGUERA, S.L.",
@@ -2060,7 +2060,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 3075,
+          "id": 3077,
           "codigo": "2024.2.0002448.000",
           "descripcion": "RECOLLIDA DE 19 CONTENIDORS DE RESIDUS DE JARDINERIA DURANT EL MES DE DESEMBRE DE 2023",
           "adjudicatario": "TRANSPORTES DIEGO NOGUERA, S.L.",
@@ -2076,7 +2076,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 3267,
+          "id": 3269,
           "codigo": "2023.2.0037737.000",
           "descripcion": "RECOLLIDA DE 26 CONTENIDORS DE RESIDUS DE JARDINERIA DURANT EL MES D¿AGOST DE 2023",
           "adjudicatario": "TRANSPORTES DIEGO NOGUERA, S.L.",
@@ -2092,7 +2092,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 3251,
+          "id": 3253,
           "codigo": "2023.2.0038161.000",
           "descripcion": "RECOLLIDA DE 24 CONTENIDORS DE RESIDUS DE JARDINERIA DURANT EL MES D¿OCTUBRE DE 2023",
           "adjudicatario": "TRANSPORTES DIEGO NOGUERA, S.L.",
@@ -2146,7 +2146,7 @@
       "data_fi": "2022-04-28",
       "contractes": [
         {
-          "id": 5602,
+          "id": 5604,
           "codigo": "2022.2.0012262.000",
           "descripcion": "LLOGUER DE PLATAFORMA ELEVADORA DE 16M PER LA PODA DURANT EL MES DE MARÇ DE 2022",
           "adjudicatario": "MIRALLESTRES",
@@ -2162,7 +2162,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 5692,
+          "id": 5694,
           "codigo": "2022.2.0008543.000",
           "descripcion": "LLOGUER DE PLATAFORMA ELEVADORA DE 16M PER LA PODA DEL MES DE NOVEMBRE DE 2021",
           "adjudicatario": "MIRALLESTRES",
@@ -2178,7 +2178,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 5755,
+          "id": 5757,
           "codigo": "2022.2.0008130.000",
           "descripcion": "REPARACIO DE PLATAFORMA ELEVADORA",
           "adjudicatario": "MIRALLESTRES",
@@ -2194,7 +2194,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 5869,
+          "id": 5871,
           "codigo": "2022.2.0004362.000",
           "descripcion": "LLOGUER DE PLATAFORMA ELEVADORA DE 16M PER LA PODA DES DE L¿1 DE DESEMBRE DE 2021 FINS AL 31 DE GENER DE 2022",
           "adjudicatario": "MIRALLESTRES",
@@ -2210,7 +2210,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 5868,
+          "id": 5870,
           "codigo": "2022.2.0004363.000",
           "descripcion": "REPARACIÓ DE PLATAFORMA ELEVADORA",
           "adjudicatario": "MIRALLESTRES",
@@ -2263,7 +2263,7 @@
       "data_fi": "2025-08-19",
       "contractes": [
         {
-          "id": 839,
+          "id": 841,
           "codigo": "2025.2.0023201.000",
           "descripcion": "SERVEIS PREVENTIUS actes FEsta Major 2025",
           "adjudicatario": "CRUZ ROJA",
@@ -2279,7 +2279,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 914,
+          "id": 916,
           "codigo": "2025.2.0020149.000",
           "descripcion": "Cobertura de serveis preventius per l'EUROPEAN BALLOON FESTIVAL",
           "adjudicatario": "CRUZ ROJA",
@@ -2295,7 +2295,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 912,
+          "id": 914,
           "codigo": "2025.2.0020155.000",
           "descripcion": "Cobertura dels serveis preventius de la flama del Canigó",
           "adjudicatario": "CRUZ ROJA",
@@ -2311,7 +2311,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 1004,
+          "id": 1006,
           "codigo": "2025.2.0010114.000",
           "descripcion": "Serveis previntius per a la Final Four de Hoquei dies 29 i 30 de maig 2025",
           "adjudicatario": "CRUZ ROJA",
@@ -2365,7 +2365,7 @@
       "data_fi": "2026-05-14",
       "contractes": [
         {
-          "id": 13,
+          "id": 15,
           "codigo": "20/2026",
           "descripcion": "Serveis i subministraments destinats a l'organització tècnica, producció i logística del Festival Anòlia 2026",
           "adjudicatario": "INICIATIVES EVENTS, SL",
@@ -2381,7 +2381,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 18,
+          "id": 20,
           "codigo": "32/2026",
           "descripcion": "Servei d'organització, execució i desenvolupament de l'esdeveniment PREMIS NEPTÚ 2026 IGUALADA",
           "adjudicatario": "INICIATIVES EVENTS, SL",
@@ -2397,7 +2397,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 39,
+          "id": 41,
           "codigo": "15/2026",
           "descripcion": "Serveis de producció i coordinació tècnica, sonorització, il·luminació i muntatge i desmuntatge dels espais d'actuació de la 37a Mostra Igualada, Fira d'espectacles infantils i juvenils",
           "adjudicatario": "INICIATIVES EVENTS, SL",
@@ -2413,7 +2413,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 41,
+          "id": 43,
           "codigo": "10/2026",
           "descripcion": "Servei de so de la festa de Sant Jordi 2026",
           "adjudicatario": "INICIATIVES EVENTS, SL",
@@ -2429,7 +2429,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 48,
+          "id": 50,
           "codigo": "8/2026",
           "descripcion": "Servei d'assistència tècnica, suport i manteniment en muntatge d'escenografia, so, il·luminació, audiovisual i porteria/acomodament del teatre municipal l'Ateneu d'Igualada",
           "adjudicatario": "INICIATIVES EVENTS, SL",
@@ -2483,7 +2483,7 @@
       "data_fi": "2022-10-21",
       "contractes": [
         {
-          "id": 5038,
+          "id": 5040,
           "codigo": "2022.2.0011092.000",
           "descripcion": "Servei d¿organització del circuit running escolar.",
           "adjudicatario": "CONSELL ESPORTIU DE L'ANOIA",
@@ -2499,7 +2499,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 5019,
+          "id": 5021,
           "codigo": "2022.2.0029183.000",
           "descripcion": "PROJECTE PATIS OBRETS RAMON CASTELLTORT",
           "adjudicatario": "CONSELL ESPORTIU DE L'ANOIA",
@@ -2515,7 +2515,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 5051,
+          "id": 5053,
           "codigo": "2022.2.0021929.000",
           "descripcion": "ESPORT I VALORS 2022-2023",
           "adjudicatario": "CONSELL ESPORTIU DE L'ANOIA",
@@ -2531,7 +2531,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 5059,
+          "id": 5061,
           "codigo": "2022.2.0011085.000",
           "descripcion": "Organització del Torneig Caga Tió 2022",
           "adjudicatario": "CONSELL ESPORTIU DE L'ANOIA",
@@ -2547,7 +2547,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 5058,
+          "id": 5060,
           "codigo": "2022.2.0011091.000",
           "descripcion": "Servei d¿organització de la Cursa Popular d¿Igualada 2022",
           "adjudicatario": "CONSELL ESPORTIU DE L'ANOIA",
@@ -2563,7 +2563,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 5057,
+          "id": 5059,
           "codigo": "2022.2.0022365.000",
           "descripcion": "Activa't caminant reallitzant rutes i cirucuïts saludables a Igualada",
           "adjudicatario": "CONSELL ESPORTIU DE L'ANOIA",
@@ -2617,7 +2617,7 @@
       "data_fi": "2022-12-16",
       "contractes": [
         {
-          "id": 4811,
+          "id": 4813,
           "codigo": "2022.2.0037040.000",
           "descripcion": "Subministrament de bancs per a la Rambla de Sant Isidre",
           "adjudicatario": "PARQUES Y JARDINES FABREGAS, SA",
@@ -2633,7 +2633,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 4808,
+          "id": 4810,
           "codigo": "2022.2.0037043.000",
           "descripcion": "Subministrament de bancs per a la placeta Capità Muntané",
           "adjudicatario": "PARQUES Y JARDINES FABREGAS, SA",
@@ -2649,7 +2649,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 4807,
+          "id": 4809,
           "codigo": "2022.2.0037044.000",
           "descripcion": "Subministrament de bancs per a la plaça del Sant Crist",
           "adjudicatario": "PARQUES Y JARDINES FABREGAS, SA",
@@ -2665,7 +2665,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 4908,
+          "id": 4910,
           "codigo": "2022.2.0032427.000",
           "descripcion": "Subministrament de fonts i dispensador per a la ZEG del Sant Crist",
           "adjudicatario": "PARQUES Y JARDINES FABREGAS, SA",
@@ -2719,7 +2719,7 @@
       "data_fi": "2025-10-13",
       "contractes": [
         {
-          "id": 646,
+          "id": 648,
           "codigo": "2026.2.0000090.000",
           "descripcion": "PROGRAMA LECXIT.dinamitzador projecte. De gener a juliol 2026",
           "adjudicatario": "FUNDACIÓ SOCIOCULTURAL",
@@ -2735,7 +2735,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 645,
+          "id": 647,
           "codigo": "2026.2.0000091.000",
           "descripcion": "Acompanyament matricula viva. Dinamització projecte. De gener a juliol 2026",
           "adjudicatario": "FUNDACIÓ SOCIOCULTURAL",
@@ -2751,7 +2751,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 757,
+          "id": 759,
           "codigo": "2025.2.0023302.000",
           "descripcion": "Acompanyament Matricula Viva ( 1 Dinamitzadora del Projecte)",
           "adjudicatario": "FUNDACIÓ SOCIOCULTURAL",
@@ -2767,7 +2767,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 838,
+          "id": 840,
           "codigo": "2025.2.0023304.000",
           "descripcion": "Programa Lecxit (1 dinamitzadora del Projecte)",
           "adjudicatario": "FUNDACIÓ SOCIOCULTURAL",
@@ -2783,7 +2783,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 919,
+          "id": 921,
           "codigo": "2025.2.0020126.000",
           "descripcion": "REACTIVACIO COMERCIAL_Servei de visites del programa AIRE al Mercat de la Masuca",
           "adjudicatario": "FUNDACIÓ SOCIOCULTURAL",
@@ -2799,7 +2799,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 915,
+          "id": 917,
           "codigo": "2025.2.0020148.000",
           "descripcion": "Projecte joves en salut. Formació de joves en diferents temes i l'aplicació d'aquests aprenentatges en les nits de festa de la ciutat.",
           "adjudicatario": "FUNDACIÓ SOCIOCULTURAL",
@@ -2854,7 +2854,7 @@
       "data_fi": "2023-01-27",
       "contractes": [
         {
-          "id": 4558,
+          "id": 4560,
           "codigo": "2023.2.0002499.000",
           "descripcion": "SUBMINISTRAMENT DE BOMBONES DE BUTÀ PER A LES PERSONES DERIVADES DES DEL DEPARTAMENT DE SERVEIS SOCIALS",
           "adjudicatario": "PETROMIRALLES, S.L.",
@@ -2870,7 +2870,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 4627,
+          "id": 4629,
           "codigo": "2023.2.0000122.000",
           "descripcion": "Gasoil per dipòsits calefacció i grups electrògens del Saló de la Infància 2022-2023",
           "adjudicatario": "PETROMIRALLES, S.L.",
@@ -2886,7 +2886,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 4664,
+          "id": 4666,
           "codigo": "2022.2.0035365.000",
           "descripcion": "Adquisició carburant per als vehicles de la Policia Local d'Igualada",
           "adjudicatario": "PETROMIRALLES, S.L.",
@@ -2902,7 +2902,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 4649,
+          "id": 4651,
           "codigo": "2022.2.0042334.000",
           "descripcion": "Contractació subministrament gasoil A pel consum del departament de Via Pública de la Brigada de l'Ajuntament durant el mes de desembre de 2022.",
           "adjudicatario": "PETROMIRALLES, S.L.",
@@ -2918,7 +2918,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 4648,
+          "id": 4650,
           "codigo": "2022.2.0042336.000",
           "descripcion": "Contractació subministrament gasoil A pel consum del departament d'Obres de la Brigada de l'Ajuntament durant el mes de desembre de 2022",
           "adjudicatario": "PETROMIRALLES, S.L.",
@@ -2934,7 +2934,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 4647,
+          "id": 4649,
           "codigo": "2022.2.0042337.000",
           "descripcion": "Contractació subministrament gasoil A per omplir el dipòsit que s'utilitza pel consum del departament de Via Pública de la Brigada Municipal de l'Ajuntament d'Igualada.",
           "adjudicatario": "PETROMIRALLES, S.L.",
@@ -2988,7 +2988,7 @@
       "data_fi": "2024-05-06",
       "contractes": [
         {
-          "id": 2734,
+          "id": 2736,
           "codigo": "14/2024 CMS",
           "descripcion": "Contractació d'una pòlissa d'assegurança per al vehicle amb matrícula 6055LSD destinat al Servei de la Brigada de parcs i jardins de l'Ajuntament d'Igualada.",
           "adjudicatario": "REALE SEGUROS GENERALES, SA",
@@ -3004,7 +3004,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 2733,
+          "id": 2735,
           "codigo": "15/2024 CMS",
           "descripcion": "Contractació d'una pòlissa d'assegurança per al vehicle amb matrícula 7240LSD destinat al Servei de la Brigada de parcs i jardins de l'Ajuntament d'Igualada.",
           "adjudicatario": "REALE SEGUROS GENERALES, SA",
@@ -3020,7 +3020,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 2741,
+          "id": 2743,
           "codigo": "503083",
           "descripcion": "ASSEGURANÇA EDIFICI PLAÇA DEL REI",
           "adjudicatario": "REALE SEGUROS GENERALES, SA",
@@ -3036,7 +3036,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 2740,
+          "id": 2742,
           "codigo": "503086",
           "descripcion": "ASSEGURANÇA EDIFICI NARDS",
           "adjudicatario": "REALE SEGUROS GENERALES, SA",
@@ -3052,7 +3052,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 2739,
+          "id": 2741,
           "codigo": "503209",
           "descripcion": "ASSEGURANÇA PARQUING GARCIA FOSSAS",
           "adjudicatario": "REALE SEGUROS GENERALES, SA",
@@ -3105,7 +3105,7 @@
       "data_fi": "2023-03-08",
       "contractes": [
         {
-          "id": 4385,
+          "id": 4387,
           "codigo": "2023.2.0005918.000",
           "descripcion": "MILLORA DEL DREANTGE SUPERFICIAL PER EVITAR ACUMULACIÓ DE TERRES SOBRE ELS PAVIMENTS DE FORMIGÓ DE LA PISTA SITUADA EN L¿ENTORN DE L¿IES BADIA I MARGARIT",
           "adjudicatario": "BOSCIREM, S.L.",
@@ -3121,7 +3121,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 4358,
+          "id": 4360,
           "codigo": "2023.2.0006828.000",
           "descripcion": "ACTUACIONS D¿ASFALTATGE DELS DOS PUNTS D¿ACCÉS AL PARC GARCIA FOSSAS D'IGUALADA",
           "adjudicatario": "BOSCIREM, S.L.",
@@ -3137,7 +3137,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 4406,
+          "id": 4408,
           "codigo": "10/2023 CMO",
           "descripcion": "Contractació corresponent a la Memòria valorada de les obres per a la millora de les voreres del C/ Maria Trulls Algué entre C/ Travnik i C/ Joan Llacuna.",
           "adjudicatario": "BOSCIREM, S.L.",
@@ -3153,7 +3153,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 4405,
+          "id": 4407,
           "codigo": "12/2023 CMO",
           "descripcion": "Contractació de les obres de la Memòria valorada per a les millores en voreres del C/ Parlament de Catalunya nord i accessibilitat.",
           "adjudicatario": "BOSCIREM, S.L.",
@@ -3169,7 +3169,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 4396,
+          "id": 4398,
           "codigo": "9/2023 CMO",
           "descripcion": "Contractació corresponent a la Memòria valorada de les obres per a l'adaptació d'accessibilitat de l'entorn de l'Avinguda Generalitat i el C/ Capità Muntaner.",
           "adjudicatario": "BOSCIREM, S.L.",
@@ -3185,7 +3185,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 4442,
+          "id": 4444,
           "codigo": "7/2023 CMO",
           "descripcion": "Memòria valorada de les obres per a l'adequació del solar situat a la cantonada del Carrer de Les Comes amb el Carrer de la Pobla de Claramunt com a aparcament provisional.",
           "adjudicatario": "BOSCIREM, S.L.",
@@ -3239,7 +3239,7 @@
       "data_fi": "2025-03-26",
       "contractes": [
         {
-          "id": 1394,
+          "id": 1396,
           "codigo": "2025.2.0008209.000",
           "descripcion": "INCREMENT PUNTUAL DE RECORREGUT DEL BUS URBA D¿IGUALADA EN LES LINIES CIRCULARS URBANES LC1 I LC2 PER ARRIBADA AL PLA DE LA MASSA I AL MOLI NOU ¿ ANY 2025",
           "adjudicatario": "SOCIEDAD ANONIMA MASATS-TRANSPORTS GENERALS, UNIPERSONAL",
@@ -3255,7 +3255,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 1772,
+          "id": 1774,
           "codigo": "2024.2.0042271.000",
           "descripcion": "Contractació publicitat Conca d'Òdena: Campanya Moixiganguers Igualada concurs octubre n 2024",
           "adjudicatario": "SOCIEDAD ANONIMA MASATS-TRANSPORTS GENERALS, UNIPERSONAL",
@@ -3271,7 +3271,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 1838,
+          "id": 1840,
           "codigo": "2024.2.0038598.000",
           "descripcion": "Bitlletatge línia circular urbana interior ¿ dia sense cotxe 2024 % bitllet senzill",
           "adjudicatario": "SOCIEDAD ANONIMA MASATS-TRANSPORTS GENERALS, UNIPERSONAL",
@@ -3287,7 +3287,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 1835,
+          "id": 1837,
           "codigo": "2024.2.0038604.000",
           "descripcion": "REFORÇ ESCOLAR DEL RECORREGUT DEL BUS URBA EN LES LINIES CIRCULARS URBANES LC1 I LC2 DURANT EL MES D¿OCTUBRE I NOVEMBRE DE 2024",
           "adjudicatario": "SOCIEDAD ANONIMA MASATS-TRANSPORTS GENERALS, UNIPERSONAL",
@@ -3303,7 +3303,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 1833,
+          "id": 1835,
           "codigo": "2024.2.0038608.000",
           "descripcion": "Gestió de publicitat Conca d'Òdena: Campanya Moixiganguers Igualada concurs octubre 2024",
           "adjudicatario": "SOCIEDAD ANONIMA MASATS-TRANSPORTS GENERALS, UNIPERSONAL",
@@ -3357,7 +3357,7 @@
       "data_fi": "2025-04-16",
       "contractes": [
         {
-          "id": 1291,
+          "id": 1293,
           "codigo": "2025.2.0010170.000",
           "descripcion": "PETROMIRALLES_2600 litres gasoil per la calefacció d¿IG-NOVA Ocupació",
           "adjudicatario": "PETROMIRALLES, S.L.",
@@ -3373,7 +3373,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 1427,
+          "id": 1429,
           "codigo": "2025.2.0007033.000",
           "descripcion": "Adquisició carburant per als vehicles de la Policia Local d'Igualada.",
           "adjudicatario": "PETROMIRALLES, S.L.",
@@ -3389,7 +3389,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 1454,
+          "id": 1456,
           "codigo": "2025.2.0005167.000",
           "descripcion": "Adquisició carburant per als vehicles de la Policia Local d'Igualada.",
           "adjudicatario": "PETROMIRALLES, S.L.",
@@ -3405,7 +3405,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 1453,
+          "id": 1455,
           "codigo": "2025.2.0005176.000",
           "descripcion": "Adquisició carburant per als vehicles de la Policia Local d'Igualada.",
           "adjudicatario": "PETROMIRALLES, S.L.",
@@ -3437,12 +3437,12 @@
       "sector": "Altres Serveis i Subministraments",
       "finestra": "historic",
       "finestra_label": "Històric complet",
-      "import_sector": 15638706.93,
-      "contractes_sector": 273,
-      "empreses_sector": 110,
-      "cr1": 0.7998,
-      "cr3": 0.879,
-      "hhi": 6435,
+      "import_sector": 15679406.93,
+      "contractes_sector": 274,
+      "empreses_sector": 111,
+      "cr1": 0.7978,
+      "cr3": 0.8767,
+      "hhi": 6402,
       "tipus_concentracio": "empresa",
       "empreses": [
         "FCC MEDIO AMBIENTE"
@@ -3451,13 +3451,13 @@
       "administradors_comuns": [],
       "import_concentrat": 12508558.56,
       "contractes_concentrats": 2,
-      "quota_import": 0.7998,
+      "quota_import": 0.7978,
       "quota_contractes": 0.0073,
       "data_inici": "2025-06-17",
       "data_fi": "2025-11-25",
       "contractes": [
         {
-          "id": 490,
+          "id": 492,
           "codigo": "68/2024",
           "descripcion": "Servei públic de recollida de residus i neteja viària",
           "adjudicatario": "FCC MEDIO AMBIENTE",
@@ -3473,7 +3473,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 1042,
+          "id": 1044,
           "codigo": "68/2024",
           "descripcion": "Servei públic de recollida de residus i neteja viària",
           "adjudicatario": "FCC MEDIO AMBIENTE",
@@ -3524,7 +3524,7 @@
       "data_fi": "2025-08-28",
       "contractes": [
         {
-          "id": 831,
+          "id": 833,
           "codigo": "38/2025",
           "descripcion": "Concessió del servei públic d'escoles bressol municipals d'Igualada",
           "adjudicatario": "FUNDACIÓ PIA INSTITUT PERE TARRÉS D'EDUCACIÓ EN L' ESPLAI",
@@ -3540,7 +3540,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 5151,
+          "id": 5153,
           "codigo": "38/2022",
           "descripcion": "Concessió del servei públic d'escoles bressol municipals d'Igualada",
           "adjudicatario": "FUNDACIÓ PIA INSTITUT PERE TARRÉS D'EDUCACIÓ EN L' ESPLAI",
@@ -3556,7 +3556,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 6133,
+          "id": 6135,
           "codigo": "2021.2.0035856.000",
           "descripcion": "Tallers estudi assistit alumnes primària",
           "adjudicatario": "FUNDACIÓ PIA INSTITUT PERE TARRÉS D'EDUCACIÓ EN L' ESPLAI",
@@ -3572,7 +3572,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 6557,
+          "id": 6559,
           "codigo": "39/2021",
           "descripcion": "Concessió del servei públic d'escoles bressol municipals d'Igualada",
           "adjudicatario": "FUNDACIÓ PIA INSTITUT PERE TARRÉS D'EDUCACIÓ EN L' ESPLAI",
@@ -3588,7 +3588,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 7085,
+          "id": 7087,
           "codigo": "2021.2.0009321.000",
           "descripcion": "Docència del curs Potencia la formació digital: infografia, mapes interactius, pissarres digitals, ....",
           "adjudicatario": "FUNDACIÓ PIA INSTITUT PERE TARRÉS D'EDUCACIÓ EN L' ESPLAI",
@@ -3641,7 +3641,7 @@
       "data_fi": "2023-03-27",
       "contractes": [
         {
-          "id": 4216,
+          "id": 4218,
           "codigo": "2023.2.0008426.000",
           "descripcion": "Subministrament i instal¿lació de diversos jocs infantils a la plaça Pau Muntadas 87",
           "adjudicatario": "HAPPYLUDIC PLAYGROUND AND URBAN EQUIPMENT SL",
@@ -3657,7 +3657,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 4210,
+          "id": 4212,
           "codigo": "2023.2.0008465.000",
           "descripcion": "Subministrament i instal¿lació d¿un pack agility per ZEG Guimaraes",
           "adjudicatario": "HAPPYLUDIC PLAYGROUND AND URBAN EQUIPMENT SL",
@@ -3673,7 +3673,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 4194,
+          "id": 4196,
           "codigo": "2023.2.0008813.000",
           "descripcion": "Subministrament i instal¿lació de diversos jocs infantils al parc de la Duna",
           "adjudicatario": "HAPPYLUDIC PLAYGROUND AND URBAN EQUIPMENT SL",
@@ -3689,7 +3689,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 4191,
+          "id": 4193,
           "codigo": "2023.2.0008931.000",
           "descripcion": "Subministrament i instal¿lació de diversos jocs infantils a la plaça Serenet",
           "adjudicatario": "HAPPYLUDIC PLAYGROUND AND URBAN EQUIPMENT SL",
@@ -3705,7 +3705,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 4238,
+          "id": 4240,
           "codigo": "2022.2.0039534.000",
           "descripcion": "Subministrament i instal·lació joc inclusiu parc Garcia Fossas",
           "adjudicatario": "HAPPYLUDIC PLAYGROUND AND URBAN EQUIPMENT SL",
@@ -3721,7 +3721,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 4383,
+          "id": 4385,
           "codigo": "2023.2.0005953.000",
           "descripcion": "Subministrament i instal¿lació d¿un pack agility per ZEG França",
           "adjudicatario": "HAPPYLUDIC PLAYGROUND AND URBAN EQUIPMENT SL",
@@ -3737,7 +3737,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 4381,
+          "id": 4383,
           "codigo": "2023.2.0005959.000",
           "descripcion": "Subministrament i instal¿lació de diversos jocs infantils al parc de Pobla de Claramunt",
           "adjudicatario": "HAPPYLUDIC PLAYGROUND AND URBAN EQUIPMENT SL",
@@ -3753,7 +3753,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 4370,
+          "id": 4372,
           "codigo": "2023.2.0006209.000",
           "descripcion": "Subministrament i instal¿lació de diversos jocs infantils als parcs del Pg. Verdaguer",
           "adjudicatario": "HAPPYLUDIC PLAYGROUND AND URBAN EQUIPMENT SL",
@@ -3807,7 +3807,7 @@
       "data_fi": "2025-04-04",
       "contractes": [
         {
-          "id": 1347,
+          "id": 1349,
           "codigo": "14/2025 CMA",
           "descripcion": "Adquisició d'un ordinador portàtil i perifèrics en el marc del Projecte de sensibilització dels objectius de l'Agenda 2030.",
           "adjudicatario": "SERVICIOS MICROINFORMÁTICA, SA",
@@ -3823,7 +3823,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 1420,
+          "id": 1422,
           "codigo": "2025.2.0007979.000",
           "descripcion": "Servei de suport remot a usuaris ANYDESK",
           "adjudicatario": "SERVICIOS MICROINFORMÁTICA, SA",
@@ -3839,7 +3839,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 1444,
+          "id": 1446,
           "codigo": "2025.2.0007030.000",
           "descripcion": "Servei Adobe Creative Cloud",
           "adjudicatario": "SERVICIOS MICROINFORMÁTICA, SA",
@@ -3855,7 +3855,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 1443,
+          "id": 1445,
           "codigo": "2025.2.0007031.000",
           "descripcion": "Subscripció de set llicències d'us del producte Adobe Acrobat Professional.",
           "adjudicatario": "SERVICIOS MICROINFORMÁTICA, SA",
@@ -3909,7 +3909,7 @@
       "data_fi": "2024-10-14",
       "contractes": [
         {
-          "id": 2162,
+          "id": 2164,
           "codigo": "2024.2.0027008.000",
           "descripcion": "Serveis preventius de tots els actes de la FESTA MAJOR 2024",
           "adjudicatario": "CRUZ ROJA",
@@ -3925,7 +3925,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 2243,
+          "id": 2245,
           "codigo": "2024.2.0022753.000",
           "descripcion": "Activitats extraescolars - Oportunitats educatives més enllà de l'escola. Finançat per la Unió Europea-Next Generation EU.",
           "adjudicatario": "CRUZ ROJA",
@@ -3941,7 +3941,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 2395,
+          "id": 2397,
           "codigo": "2024.2.0017270.000",
           "descripcion": "PROJECTE LLURE INCLUSIU 2023-2024",
           "adjudicatario": "CRUZ ROJA",
@@ -3957,7 +3957,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 2354,
+          "id": 2356,
           "codigo": "2024.2.0021095.000",
           "descripcion": "Serveis preventius per cobrit la Flama del Canigó 2024",
           "adjudicatario": "CRUZ ROJA",
@@ -3973,7 +3973,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 2353,
+          "id": 2355,
           "codigo": "2024.2.0021096.000",
           "descripcion": "Serveis preventius per cobrir l'Europen Balloon FEstival 2024",
           "adjudicatario": "CRUZ ROJA",
@@ -4027,7 +4027,7 @@
       "data_fi": "2023-07-06",
       "contractes": [
         {
-          "id": 3743,
+          "id": 3745,
           "codigo": "2023.2.0020773.000",
           "descripcion": "RECOLLIDA DE 12 CONTENIDORS DE RESIDUS DE DURANT EL MES DE MAIG DEL 2023",
           "adjudicatario": "TRANS DIEMA,SL",
@@ -4043,7 +4043,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 3873,
+          "id": 3875,
           "codigo": "2023.2.0017357.000",
           "descripcion": "RECOLLIDA DE 14 CONTENIDORS DE RESIDUS DE JARDINERIA I UN CONTENIDOR PER RETIRADA DE NIUS DE COTORRES AL CEMENTIRI VELL DURANT EL MES D¿ABRIL DEL 2023",
           "adjudicatario": "TRANS DIEMA,SL",
@@ -4059,7 +4059,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 3872,
+          "id": 3874,
           "codigo": "2023.2.0017358.000",
           "descripcion": "RECOLLIDA DE 5 CONTENIDORS DE RUNA, 1 DE FERRALLA, 1 BIDÓ 1m3 I 2 DE BANALS DURANT EL MES D¿ABRIL DE 2023",
           "adjudicatario": "TRANS DIEMA,SL",
@@ -4075,7 +4075,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 3923,
+          "id": 3925,
           "codigo": "2023.2.0017045.000",
           "descripcion": "RECOLLIDA DE 22 CONTENIDORS DE RESIDUS DE JARDINERIA I UN CANVI D¿UBICACIÓ DURANT EL MES DE MARÇ DEL 2023",
           "adjudicatario": "TRANS DIEMA,SL",
@@ -4091,7 +4091,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 3922,
+          "id": 3924,
           "codigo": "2023.2.0017046.000",
           "descripcion": "RECOLLIDA D¿UNA PATERA DE 12m3, 14 CONTENIDORS DE RUNA I 1 DE BANALS DURANT EL MES DE MARÇ DE 2023",
           "adjudicatario": "TRANS DIEMA,SL",
@@ -4145,7 +4145,7 @@
       "data_fi": "2026-02-16",
       "contractes": [
         {
-          "id": 158,
+          "id": 160,
           "codigo": "77/2025",
           "descripcion": "Instal·lació solar fotovoltaica col·lectiva escola Gabriel Castellà, finançat pel Pla de Recuperació, Transformació i Resiliència (PRTR) ¿ Next Generation EU",
           "adjudicatario": "RENEWABLE ENERGY FORWARD SL",
@@ -4161,7 +4161,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 157,
+          "id": 159,
           "codigo": "77/2025",
           "descripcion": "Instal·lació solar fotovoltaica col·lectiva escola Gabriel Castellà, finançat pel Pla de Recuperació, Transformació i Resiliència (PRTR) ¿ Next Generation EU",
           "adjudicatario": "RENEWABLE ENERGY FORWARD SL",
@@ -4177,7 +4177,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 156,
+          "id": 158,
           "codigo": "78/2025",
           "descripcion": "Instal·lació solar fotovoltaica col·lectiva escola Garcia Fossas, finançat pel Pla de Recuperació, Transformació i Resiliència (PRTR) ¿ Next Generation EU",
           "adjudicatario": "RENEWABLE ENERGY FORWARD SL",
@@ -4193,7 +4193,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 155,
+          "id": 157,
           "codigo": "78/2025",
           "descripcion": "Instal·lació solar fotovoltaica col·lectiva escola Garcia Fossas, finançat pel Pla de Recuperació, Transformació i Resiliència (PRTR) ¿ Next Generation EU",
           "adjudicatario": "RENEWABLE ENERGY FORWARD SL",
@@ -4245,7 +4245,7 @@
       "data_fi": "2024-11-28",
       "contractes": [
         {
-          "id": 1984,
+          "id": 1986,
           "codigo": "2/2024",
           "descripcion": "Servei de vigilància i seguretat privada, sense armes, de l'edifici de l'Ajuntament d'Igualada, de l'Espai Cívic Centre i Centre Cívic Nord",
           "adjudicatario": "CONSULTORES Y ASESORES EN SEGURIDAD INTEGRAL EUROPEA SL",
@@ -4296,7 +4296,7 @@
       "data_fi": "2026-02-25",
       "contractes": [
         {
-          "id": 83,
+          "id": 85,
           "codigo": "2/2026",
           "descripcion": "Serveis de jardineria de quatre rotondes del municipi d'Igualada",
           "adjudicatario": "TALLER AURIA, SCCL",
@@ -4312,7 +4312,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 120,
+          "id": 122,
           "codigo": "2026.2.0003984.000",
           "descripcion": "NETEJA DE LAVABOS PUBLICS",
           "adjudicatario": "TALLER AURIA, SCCL",
@@ -4328,7 +4328,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 211,
+          "id": 213,
           "codigo": "2026.2.0002358.000",
           "descripcion": "TREBALLS DE NETEJA I DESBROSSADA DE VORALS A L¿AVDA. ÀNGEL GUIMERÀ",
           "adjudicatario": "TALLER AURIA, SCCL",
@@ -4344,7 +4344,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 278,
+          "id": 280,
           "codigo": "2025.2.0042209.000",
           "descripcion": "TALLER AURIA, SCCL.",
           "adjudicatario": "TALLER AURIA, SCCL",
@@ -4360,7 +4360,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 370,
+          "id": 372,
           "codigo": "2025.2.0034530.000",
           "descripcion": "TALLER AURIA, SCCL.",
           "adjudicatario": "TALLER AURIA, SCCL",
@@ -4376,7 +4376,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 452,
+          "id": 454,
           "codigo": "2025.2.0033290.000",
           "descripcion": "TALLER AURIA, SCCL.",
           "adjudicatario": "TALLER AURIA, SCCL",
@@ -4392,7 +4392,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 451,
+          "id": 453,
           "codigo": "2025.2.0033291.000",
           "descripcion": "NETEJA DE LAVABOS PUBLICS SETEMBRE I OCTUBRE",
           "adjudicatario": "TALLER AURIA, SCCL",
@@ -4408,7 +4408,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 537,
+          "id": 539,
           "codigo": "2025.2.0029970.000",
           "descripcion": "NETEJA DEL PARC CENTRAL I REFORÇ A LA CIUTAT DURANT LA FESTA MAJOR 2025",
           "adjudicatario": "TALLER AURIA, SCCL",
@@ -4424,7 +4424,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 585,
+          "id": 587,
           "codigo": "2025.2.0028749.000",
           "descripcion": "Construcció d¿un refugi de biodiversitat al parc de Vallbona",
           "adjudicatario": "TALLER AURIA, SCCL",
@@ -4440,7 +4440,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 812,
+          "id": 814,
           "codigo": "2025.2.0024341.000",
           "descripcion": "NETEJA DE LAVABOS PUBLICS DURANT 2 MESOS",
           "adjudicatario": "TALLER AURIA, SCCL",
@@ -4456,7 +4456,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 903,
+          "id": 905,
           "codigo": "2025.2.0020360.000",
           "descripcion": "NETEJA D¿ESPAIS VERDS PUBLICS DE L'1 AL 17 DE JUNY",
           "adjudicatario": "TALLER AURIA, SCCL",
@@ -4472,7 +4472,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 902,
+          "id": 904,
           "codigo": "2025.2.0020362.000",
           "descripcion": "TREBALLS DE NETEJA I DESBROSSADA DE VORALS A L¿AVDA. ANGEL GUIMERA",
           "adjudicatario": "TALLER AURIA, SCCL",
@@ -4488,7 +4488,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 1086,
+          "id": 1088,
           "codigo": "27/2025",
           "descripcion": "Servei del manteniment dels parcs Garcia Fossas i Xipreret, mitjançant l'ocupació de persones amb discapacitat amb especials dificultats per la seva inclusió laboral",
           "adjudicatario": "TALLER AURIA, SCCL",
@@ -4504,7 +4504,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 1085,
+          "id": 1087,
           "codigo": "29/2025",
           "descripcion": "Servei d'eliminació de les herbes adventícies del sistema viari de la ciutat d'Igualada mitjançant l'ocupació de persones amb discapacitat amb especials dificultats per a la seva inclusió laboral",
           "adjudicatario": "TALLER AURIA, SCCL",
@@ -4520,7 +4520,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 1084,
+          "id": 1086,
           "codigo": "30/2025",
           "descripcion": "Servei de neteja d'espais verds públics municipals de la ciutat d'Igualada mitjançant l'ocupació de persones amb discapacitat amb especial dificultats per a la seva inclusió laboral",
           "adjudicatario": "TALLER AURIA, SCCL",
@@ -4536,7 +4536,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 1104,
+          "id": 1106,
           "codigo": "28/2025",
           "descripcion": "Serveis de manteniment de les següents zones verdes d'Igualada: parc de l'Enxub, parc del Serenet, parc de Vallbona, parc de l'Estació Vella, parc de Valldaura, talús del carrer Pare Vilaseca, rotonda de la ronda de Fàtima, talús del parc de Valldaura, passeig Verdaguer 173-175, espais de sauló de la ronda de Fàtima i la zona enjardinada de l'entorn del cementiri, mitjançant l'ocupació de persones amb discapacitat amb especials dificultats per la seva inclusió laboral",
           "adjudicatario": "TALLER AURIA, SCCL",
@@ -4552,7 +4552,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 1116,
+          "id": 1118,
           "codigo": "2025.2.0014890.000",
           "descripcion": "NETEJA D¿ESPAIS VERDS PUBLICS",
           "adjudicatario": "TALLER AURIA, SCCL",
@@ -4568,7 +4568,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 1294,
+          "id": 1296,
           "codigo": "2025.2.0010115.000",
           "descripcion": "SUBSTITUCIO DE TERRES D¿EMPOSTISSATS",
           "adjudicatario": "TALLER AURIA, SCCL",
@@ -4584,7 +4584,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 1382,
+          "id": 1384,
           "codigo": "2025.2.0008215.000",
           "descripcion": "Servei de neteja dels espais d¿actuació per a La Mostra d¿Igualada 36a - Fira de teatre infantil i juvenil.",
           "adjudicatario": "TALLER AURIA, SCCL",
@@ -4600,7 +4600,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 1442,
+          "id": 1444,
           "codigo": "2025.2.0007893.000",
           "descripcion": "Plantació de 33 arbres al parc President Pau Claris",
           "adjudicatario": "TALLER AURIA, SCCL",
@@ -4616,7 +4616,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 1485,
+          "id": 1487,
           "codigo": "2025.2.0005224.000",
           "descripcion": "C/MOLI DE L'ABADIA: NETEJA I DESBROSSADA DE CANYA AMERICANA",
           "adjudicatario": "TALLER AURIA, SCCL",
@@ -4632,7 +4632,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 1512,
+          "id": 1514,
           "codigo": "2025.2.0005311.000",
           "descripcion": "Instal·lació de reg gota a gota en el camp d¿oliveres Fase IV",
           "adjudicatario": "TALLER AURIA, SCCL",
@@ -4648,7 +4648,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 1570,
+          "id": 1572,
           "codigo": "2025.2.0003144.000",
           "descripcion": "NETEJA DEL PARC CENTRAL I ZONA BIOLLAC (PASTILLA 1)",
           "adjudicatario": "TALLER AURIA, SCCL",
@@ -4664,7 +4664,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 1569,
+          "id": 1571,
           "codigo": "2025.2.0003150.000",
           "descripcion": "PREPARACIO DE TERRENY PER PLANTAR OLIVERES",
           "adjudicatario": "TALLER AURIA, SCCL",
@@ -4680,7 +4680,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 1652,
+          "id": 1654,
           "codigo": "2025.2.0001492.000",
           "descripcion": "Servei de neteja de l'Oficina d'Habitatge.Del 01/01/2025 al 30/06/2025",
           "adjudicatario": "TALLER AURIA, SCCL",
@@ -4696,7 +4696,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 1651,
+          "id": 1653,
           "codigo": "2025.2.0001500.000",
           "descripcion": "Neteja de la Caseta del Parc per Servei de Cangur",
           "adjudicatario": "TALLER AURIA, SCCL",
@@ -4712,7 +4712,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 1748,
+          "id": 1750,
           "codigo": "2025.2.0000130.000",
           "descripcion": "Neteja del Saló de la Infància 2025",
           "adjudicatario": "TALLER AURIA, SCCL",
@@ -4728,7 +4728,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 1959,
+          "id": 1961,
           "codigo": "2024.2.0034415.000",
           "descripcion": "Neteja del Saló de la Infància 2024-2025",
           "adjudicatario": "TALLER AURIA, SCCL",
@@ -4744,7 +4744,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 2167,
+          "id": 2169,
           "codigo": "2024.2.0026947.000",
           "descripcion": "EBF'24_ Accions de neteja del Parc Central durant els dies de l'esdeveniment de l'European Ballon Festival'24.",
           "adjudicatario": "TALLER AURIA, SCCL",
@@ -4760,7 +4760,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 2210,
+          "id": 2212,
           "codigo": "2023/00/2687",
           "descripcion": "PINTURA PLACES ZONA TARONJA",
           "adjudicatario": "TALLER AURIA, SCCL",
@@ -4776,7 +4776,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 2225,
+          "id": 2227,
           "codigo": "2024.2.0025384.000",
           "descripcion": "TALA D¿ARBRAT AL C/TORRENT DE L¿ESPELT",
           "adjudicatario": "TALLER AURIA, SCCL",
@@ -4792,7 +4792,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 2219,
+          "id": 2221,
           "codigo": "2024.2.0025835.000",
           "descripcion": "NETEJA DEL PARC CENTRAL I REFORÇ A LA CIUTAT DURANT LA FESTA MAJOR 2024",
           "adjudicatario": "TALLER AURIA, SCCL",
@@ -4808,7 +4808,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 2281,
+          "id": 2283,
           "codigo": "2024.2.0023613.000",
           "descripcion": "SENYALITZACIÓ VIÀRIA AL POLÍGON INDUSTRIAL DE LES COMES, D¿IGUALADA",
           "adjudicatario": "TALLER AURIA, SCCL",
@@ -4824,7 +4824,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 2399,
+          "id": 2401,
           "codigo": "36/2024",
           "descripcion": "Serveis de suport a la brigada municipal mitjançant l'ocupació de persones amb discapacitat amb especials dificultats per a la seva inclusió laboral",
           "adjudicatario": "TALLER AURIA, SCCL",
@@ -4840,7 +4840,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 2480,
+          "id": 2482,
           "codigo": "2024/00/1175",
           "descripcion": "PINTURA PLACES ZONA TARONJA",
           "adjudicatario": "TALLER AURIA, SCCL",
@@ -4856,7 +4856,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 2520,
+          "id": 2522,
           "codigo": "21/2024",
           "descripcion": "Obres corresponents a la memòria valorada de la campanya d'asfaltatge 2024.",
           "adjudicatario": "TALLER AURIA, SCCL",
@@ -4872,7 +4872,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 2544,
+          "id": 2546,
           "codigo": "2024.2.0009699.000",
           "descripcion": "1995 ¿ Servei de neteja d¿ instal·lacions a la Piscina Les Comes, d¿Igualada",
           "adjudicatario": "TALLER AURIA, SCCL",
@@ -4888,7 +4888,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 2540,
+          "id": 2542,
           "codigo": "2024.2.0017233.000",
           "descripcion": "Subministrament de materials per empostissats",
           "adjudicatario": "TALLER AURIA, SCCL",
@@ -4904,7 +4904,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 2587,
+          "id": 2589,
           "codigo": "2024.2.0014141.000",
           "descripcion": "AVDA ANGEL GUIMERA: TREBALLS DE NETEJA I DESBROSSADA DE VORALS",
           "adjudicatario": "TALLER AURIA, SCCL",
@@ -4920,7 +4920,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 2626,
+          "id": 2628,
           "codigo": "2024.2.0014709.000",
           "descripcion": "CAMP OLIVERES FASE III: INSTAL·LACIÓ DE REG PER GOTEIG",
           "adjudicatario": "TALLER AURIA, SCCL",
@@ -4936,7 +4936,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 2700,
+          "id": 2702,
           "codigo": "2024.2.0012224.000",
           "descripcion": "ELIMINACIO DE LA TANCA METAL·LICA PERIMETRAL DE CAN MASARNAU",
           "adjudicatario": "TALLER AURIA, SCCL",
@@ -4952,7 +4952,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 2754,
+          "id": 2756,
           "codigo": "2024.2.0010873.000",
           "descripcion": "Servei de neteja dels espais d¿actuació per a La Mostra d¿Igualada 34a - Fira de teatre infantil i juvenil.",
           "adjudicatario": "TALLER AURIA, SCCL",
@@ -4968,7 +4968,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 2840,
+          "id": 2842,
           "codigo": "2024.2.0006674.000",
           "descripcion": "Construcció del nou enjardinament del parc Garcia Fossas",
           "adjudicatario": "TALLER AURIA, SCCL",
@@ -4984,7 +4984,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 2942,
+          "id": 2944,
           "codigo": "2024.2.0002256.000",
           "descripcion": "SUBMINISTRAMENT D¿ESCALA PER ACCEDIR AL FONS DE L¿SKATE PARK",
           "adjudicatario": "TALLER AURIA, SCCL",
@@ -5000,7 +5000,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 2960,
+          "id": 2962,
           "codigo": "2024.2.0005481.000",
           "descripcion": "Construcció de nous drenatges al parc del Xipreret",
           "adjudicatario": "TALLER AURIA, SCCL",
@@ -5016,7 +5016,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 3040,
+          "id": 3042,
           "codigo": "2024.2.0002344.001",
           "descripcion": "AD10-132 - SERVEI NETEJA SALÓ - AMPLIACIÓ",
           "adjudicatario": "TALLER AURIA, SCCL",
@@ -5032,7 +5032,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 3039,
+          "id": 3041,
           "codigo": "2024.2.0002368.000",
           "descripcion": "SERVEI DE NETEJA CASETA DEL PARC",
           "adjudicatario": "TALLER AURIA, SCCL",
@@ -5048,7 +5048,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 3022,
+          "id": 3024,
           "codigo": "2024.2.0004019.000",
           "descripcion": "NETEJA DEL PARC CENTRAL I ZONA BIOLLAC (PASTILLA 1)",
           "adjudicatario": "TALLER AURIA, SCCL",
@@ -5064,7 +5064,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 3021,
+          "id": 3023,
           "codigo": "2024.2.0004021.000",
           "descripcion": "NETEJA DE PINTADES AL PARC CENTRAL",
           "adjudicatario": "TALLER AURIA, SCCL",
@@ -5080,7 +5080,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 3077,
+          "id": 3079,
           "codigo": "2024.2.0002397.000",
           "descripcion": "Servei de neteja 2024 per l'Oficina d'Habitatge d'Igualada.",
           "adjudicatario": "TALLER AURIA, SCCL",
@@ -5096,7 +5096,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 3134,
+          "id": 3136,
           "codigo": "2024.2.0002344.000",
           "descripcion": "AD10-132 - SERVEI NETEJA SALÓ",
           "adjudicatario": "TALLER AURIA, SCCL",
@@ -5112,7 +5112,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 3155,
+          "id": 3157,
           "codigo": "2024.2.0043445.000",
           "descripcion": "Material de jardineria",
           "adjudicatario": "TALLER AURIA, SCCL",
@@ -5128,7 +5128,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 3359,
+          "id": 3361,
           "codigo": "2023.2.0033642.000",
           "descripcion": "CONTRACTE DE NETEJA DEL SALÓ DE LA INFÀNCIA",
           "adjudicatario": "TALLER AURIA, SCCL",
@@ -5144,7 +5144,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 3358,
+          "id": 3360,
           "codigo": "2024.2.0000132.000",
           "descripcion": "SERVEI DE NETEJA SALÓ DE LA INFÀNCIA",
           "adjudicatario": "TALLER AURIA, SCCL",
@@ -5160,7 +5160,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 3389,
+          "id": 3391,
           "codigo": "2023.2.0033063.000",
           "descripcion": "NETEJA DEL PARC CENTRAL DURANT LA FESTA MAJOR",
           "adjudicatario": "TALLER AURIA, SCCL",
@@ -5176,7 +5176,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 3599,
+          "id": 3601,
           "codigo": "1/2023",
           "descripcion": "Servei de neteja i manteniment de les zones d'esbarjo de gossos d'Igualada",
           "adjudicatario": "TALLER AURIA, SCCL",
@@ -5192,7 +5192,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 3742,
+          "id": 3744,
           "codigo": "2023.2.0020775.000",
           "descripcion": "NETEJA DEL PARC CENTRAL I ZONA BIOLLAC (PASTILLA 1)",
           "adjudicatario": "TALLER AURIA, SCCL",
@@ -5208,7 +5208,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 3794,
+          "id": 3796,
           "codigo": "2023.2.0018922.000",
           "descripcion": "Contracte de servei de muntatge i desmuntatge de la carpa gran de 10 x 20 x 3h al Parc Central, per el festival del European Ballon Festival 2023.",
           "adjudicatario": "TALLER AURIA, SCCL",
@@ -5224,7 +5224,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 4017,
+          "id": 4019,
           "codigo": "2023.2.0013704.000",
           "descripcion": "Neteja del camp de futbol Can Masarnau (Fàtima) d¿Abril a Juliol",
           "adjudicatario": "TALLER AURIA, SCCL",
@@ -5240,7 +5240,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 4076,
+          "id": 4078,
           "codigo": "17/2023",
           "descripcion": "Servei de manteniment del polígon industrial \"Les Comes\" d'Iguaalada",
           "adjudicatario": "TALLER AURIA, SCCL",
@@ -5256,7 +5256,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 4051,
+          "id": 4053,
           "codigo": "23/2023",
           "descripcion": "Serveis de suport en jardineria",
           "adjudicatario": "TALLER AURIA, SCCL",
@@ -5272,7 +5272,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 4135,
+          "id": 4137,
           "codigo": "2023.2.0010628.000",
           "descripcion": "Servei de neteja dels espais d¿actuació per a La Mostra d¿Igualada 34a - Fira de teatre infantil i juvenil.",
           "adjudicatario": "TALLER AURIA, SCCL",
@@ -5288,7 +5288,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 4173,
+          "id": 4175,
           "codigo": "2023.2.0009829.000",
           "descripcion": "COL·LOCACIÓ I CONTROL DE TRAMPES PER A LA VESPA ASIÀTICA",
           "adjudicatario": "TALLER AURIA, SCCL",
@@ -5304,7 +5304,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 4298,
+          "id": 4300,
           "codigo": "2022.2.0004204.000",
           "descripcion": "Obres de preparació del terreny per plantació",
           "adjudicatario": "TALLER AURIA, SCCL",
@@ -5320,7 +5320,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 4295,
+          "id": 4297,
           "codigo": "2022.2.0011109.000",
           "descripcion": "REPARAR I TORNAR A IMPERMEABILITZAR LA SUPERFICIE DE LAMINA D'AIGUA DEL PARC DE L¿ESTACIO VELLA",
           "adjudicatario": "TALLER AURIA, SCCL",
@@ -5336,7 +5336,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 4397,
+          "id": 4399,
           "codigo": "5/2023",
           "descripcion": "Servei de manteniment integral de l'anella verda exterior d'Igualada",
           "adjudicatario": "TALLER AURIA, SCCL",
@@ -5352,7 +5352,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 4507,
+          "id": 4509,
           "codigo": "2023.2.0003776.000",
           "descripcion": "SERVEI NETEJA CASETA DEL PARC - SERVEI DE CANGURS",
           "adjudicatario": "TALLER AURIA, SCCL",
@@ -5368,7 +5368,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 4632,
+          "id": 4634,
           "codigo": "2023.2.0000116.000",
           "descripcion": "Servei de neteja del recinte de l'Escorxador durant el funcionament del Saló de la Infància",
           "adjudicatario": "TALLER AURIA, SCCL",
@@ -5384,7 +5384,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 4652,
+          "id": 4654,
           "codigo": "2022.2.0040405.000",
           "descripcion": "NETEJA ESTIUET 2022",
           "adjudicatario": "TALLER AURIA, SCCL",
@@ -5400,7 +5400,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 4827,
+          "id": 4829,
           "codigo": "000002/2023",
           "descripcion": "modificació i ampliació rampa accés aparcament Igualada Nord 2a planta",
           "adjudicatario": "TALLER AURIA, SCCL",
@@ -5416,7 +5416,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 4853,
+          "id": 4855,
           "codigo": "2022.2.0035060.000",
           "descripcion": "Servei de neteja del recinte de l'Escorxador durant el funcionament del Saló de la Infància 2022-2023",
           "adjudicatario": "TALLER AURIA, SCCL",
@@ -5432,7 +5432,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 5253,
+          "id": 5255,
           "codigo": "2022.2.0021953.000",
           "descripcion": "SERVEI NETEJA CASETA DEL PARC",
           "adjudicatario": "TALLER AURIA, SCCL",
@@ -5448,7 +5448,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 5323,
+          "id": 5325,
           "codigo": "2022.2.0019522.000",
           "descripcion": "EBF'22 Contracte de serveis lloguer, muntatge i desmuntatge de 5 carpes de 3x3 per als pilots, i una de 3x10x20.",
           "adjudicatario": "TALLER AURIA, SCCL",
@@ -5464,7 +5464,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 5376,
+          "id": 5378,
           "codigo": "25/2022",
           "descripcion": "Obres corresponents a la memòria valorada de la campanya d'asfaltatge 2022",
           "adjudicatario": "TALLER AURIA, SCCL",
@@ -5480,7 +5480,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 5542,
+          "id": 5544,
           "codigo": "2022.2.0011109.000",
           "descripcion": "REPARAR I TORNAR A IMPERMEABILITZAR LA SUPERFICIE DE LAMINA D'AIGUA DEL PARC DE L¿ESTACIO VELLA",
           "adjudicatario": "TALLER AURIA, SCCL",
@@ -5531,7 +5531,7 @@
       "data_fi": "2026-02-25",
       "contractes": [
         {
-          "id": 82,
+          "id": 84,
           "codigo": "2/2026",
           "descripcion": "Serveis de jardineria de quatre rotondes del municipi d'Igualada",
           "adjudicatario": "VERSATIL GREEN, SL",
@@ -5547,7 +5547,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 175,
+          "id": 177,
           "codigo": "2026.2.0002469.000",
           "descripcion": "Subministrament de torretes i planta arbustiva i arbrat per diferents ubicacions del centre",
           "adjudicatario": "VERSATIL GREEN, SL",
@@ -5563,7 +5563,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 209,
+          "id": 211,
           "codigo": "2026.2.0002392.000",
           "descripcion": "Enjardinament del pati de l¿escola Gaspar Camps",
           "adjudicatario": "VERSATIL GREEN, SL",
@@ -5579,7 +5579,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 255,
+          "id": 257,
           "codigo": "64/2025",
           "descripcion": "Serveis de manteniment de diferents zones verdes d'Igualada",
           "adjudicatario": "VERSATIL GREEN, SL",
@@ -5595,7 +5595,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 389,
+          "id": 391,
           "codigo": "2025.2.0033391.000",
           "descripcion": "VERSATIL GREEN, SL",
           "adjudicatario": "VERSATIL GREEN, SL",
@@ -5611,7 +5611,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 742,
+          "id": 744,
           "codigo": "2025.2.0024642.000",
           "descripcion": "Obres d¿enjardinament de la font i travessia de Sant Jaume",
           "adjudicatario": "VERSATIL GREEN, SL",
@@ -5627,7 +5627,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 763,
+          "id": 765,
           "codigo": "2025.2.0024587.000",
           "descripcion": "Lloguer de tres unitats de refugis climàtics barri Sant Crist",
           "adjudicatario": "VERSATIL GREEN, SL",
@@ -5643,7 +5643,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 760,
+          "id": 762,
           "codigo": "2025.2.0024605.000",
           "descripcion": "Actuacions de millora de la qualitat de l¿aigua del biollac",
           "adjudicatario": "VERSATIL GREEN, SL",
@@ -5659,7 +5659,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 905,
+          "id": 907,
           "codigo": "2025.2.0020357.000",
           "descripcion": "Manteniment parterres d¿Av. Països Catalans i Av. Europa, rotonda Tanatori, Pl. Dr. Mercader i Pl. Francesc Bedós mes de juny",
           "adjudicatario": "VERSATIL GREEN, SL",
@@ -5675,7 +5675,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 1139,
+          "id": 1141,
           "codigo": "2025.2.0013952.000",
           "descripcion": "Obres de millora al Parc Central 1",
           "adjudicatario": "VERSATIL GREEN, SL",
@@ -5691,7 +5691,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 1110,
+          "id": 1112,
           "codigo": "2025.2.0015199.000",
           "descripcion": "2427 10 ¿ Subministrament i col·locació de vímet per cobriment de pèrgoles existent en 6escoles (Emili Vallès / Garcia Fossas / Ramon Castelltort / Gabriel Castellà / Ateneu Igualadí / Dolors Martí)",
           "adjudicatario": "VERSATIL GREEN, SL",
@@ -5707,7 +5707,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 1268,
+          "id": 1270,
           "codigo": "2025.2.0010332.000",
           "descripcion": "Subministrament de torretes i planta arbustiva i arbrat per la pl. Ajuntament",
           "adjudicatario": "VERSATIL GREEN, SL",
@@ -5723,7 +5723,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 1532,
+          "id": 1534,
           "codigo": "2025.2.0005095.000",
           "descripcion": "Subministrament i plantació arbrat viari al districte Centre",
           "adjudicatario": "VERSATIL GREEN, SL",
@@ -5739,7 +5739,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 1562,
+          "id": 1564,
           "codigo": "2025.2.0003375.000",
           "descripcion": "MANTENIMENT DEL BIOLLAC I ENTORN DEL PARC CENTRAL",
           "adjudicatario": "VERSATIL GREEN, SL",
@@ -5755,7 +5755,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 1839,
+          "id": 1841,
           "codigo": "2024.2.0038597.000",
           "descripcion": "SUBMINISTRAMENT I COL·LOCACIO DE PLANTA DE TEMPORADA A LES TORRES FLORALS DE L¿ENTRADA DE L¿AJUNTAMENT",
           "adjudicatario": "VERSATIL GREEN, SL",
@@ -5771,7 +5771,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 2017,
+          "id": 2019,
           "codigo": "2024.2.0032629.000",
           "descripcion": "Lloguer de tres unitats de refugis climàtics",
           "adjudicatario": "VERSATIL GREEN, SL",
@@ -5787,39 +5787,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 2192,
-          "codigo": "43/2024",
-          "descripcion": "Obres corresponents al projecte executiu d'intervencions passives per l'adpatació al canvi climàtic dels patis de centres educatius de titularitat pública de la ciutat d'Igualada. 6 LOTS",
-          "adjudicatario": "VERSATIL GREEN, SL",
-          "importe": 14342.62,
-          "fecha": "2024-10-10",
-          "tipo": "1. OBRES",
-          "procedimiento": "Obert",
-          "cpv": "45212190-4",
-          "estat_font": "actiu_socrata",
-          "preservat_iguadata": false,
-          "primera_absencia_detectada": "",
-          "font_preservacio": "",
-          "primer_snapshot_iguadata": ""
-        },
-        {
-          "id": 2191,
-          "codigo": "43/2024",
-          "descripcion": "Obres corresponents al projecte executiu d'intervencions passives per l'adpatació al canvi climàtic dels patis de centres educatius de titularitat pública de la ciutat d'Igualada. 6 LOTS",
-          "adjudicatario": "VERSATIL GREEN, SL",
-          "importe": 36076.96,
-          "fecha": "2024-10-10",
-          "tipo": "1. OBRES",
-          "procedimiento": "Obert",
-          "cpv": "45212190-4",
-          "estat_font": "actiu_socrata",
-          "preservat_iguadata": false,
-          "primera_absencia_detectada": "",
-          "font_preservacio": "",
-          "primer_snapshot_iguadata": ""
-        },
-        {
-          "id": 2190,
+          "id": 2194,
           "codigo": "43/2024",
           "descripcion": "Obres corresponents al projecte executiu d'intervencions passives per l'adpatació al canvi climàtic dels patis de centres educatius de titularitat pública de la ciutat d'Igualada. 6 LOTS",
           "adjudicatario": "VERSATIL GREEN, SL",
@@ -5835,39 +5803,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 2189,
-          "codigo": "43/2024",
-          "descripcion": "Obres corresponents al projecte executiu d'intervencions passives per l'adpatació al canvi climàtic dels patis de centres educatius de titularitat pública de la ciutat d'Igualada. 6 LOTS",
-          "adjudicatario": "VERSATIL GREEN, SL",
-          "importe": 34469.73,
-          "fecha": "2024-10-10",
-          "tipo": "1. OBRES",
-          "procedimiento": "Obert",
-          "cpv": "45212190-4",
-          "estat_font": "actiu_socrata",
-          "preservat_iguadata": false,
-          "primera_absencia_detectada": "",
-          "font_preservacio": "",
-          "primer_snapshot_iguadata": ""
-        },
-        {
-          "id": 2188,
-          "codigo": "43/2024",
-          "descripcion": "Obres corresponents al projecte executiu d'intervencions passives per l'adpatació al canvi climàtic dels patis de centres educatius de titularitat pública de la ciutat d'Igualada. 6 LOTS",
-          "adjudicatario": "VERSATIL GREEN, SL",
-          "importe": 40986.83,
-          "fecha": "2024-10-10",
-          "tipo": "1. OBRES",
-          "procedimiento": "Obert",
-          "cpv": "45212190-4",
-          "estat_font": "actiu_socrata",
-          "preservat_iguadata": false,
-          "primera_absencia_detectada": "",
-          "font_preservacio": "",
-          "primer_snapshot_iguadata": ""
-        },
-        {
-          "id": 2187,
+          "id": 2193,
           "codigo": "43/2024",
           "descripcion": "Obres corresponents al projecte executiu d'intervencions passives per l'adpatació al canvi climàtic dels patis de centres educatius de titularitat pública de la ciutat d'Igualada. 6 LOTS",
           "adjudicatario": "VERSATIL GREEN, SL",
@@ -5883,7 +5819,71 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 2235,
+          "id": 2192,
+          "codigo": "43/2024",
+          "descripcion": "Obres corresponents al projecte executiu d'intervencions passives per l'adpatació al canvi climàtic dels patis de centres educatius de titularitat pública de la ciutat d'Igualada. 6 LOTS",
+          "adjudicatario": "VERSATIL GREEN, SL",
+          "importe": 36076.96,
+          "fecha": "2024-10-10",
+          "tipo": "1. OBRES",
+          "procedimiento": "Obert",
+          "cpv": "45212190-4",
+          "estat_font": "actiu_socrata",
+          "preservat_iguadata": false,
+          "primera_absencia_detectada": "",
+          "font_preservacio": "",
+          "primer_snapshot_iguadata": ""
+        },
+        {
+          "id": 2191,
+          "codigo": "43/2024",
+          "descripcion": "Obres corresponents al projecte executiu d'intervencions passives per l'adpatació al canvi climàtic dels patis de centres educatius de titularitat pública de la ciutat d'Igualada. 6 LOTS",
+          "adjudicatario": "VERSATIL GREEN, SL",
+          "importe": 14342.62,
+          "fecha": "2024-10-10",
+          "tipo": "1. OBRES",
+          "procedimiento": "Obert",
+          "cpv": "45212190-4",
+          "estat_font": "actiu_socrata",
+          "preservat_iguadata": false,
+          "primera_absencia_detectada": "",
+          "font_preservacio": "",
+          "primer_snapshot_iguadata": ""
+        },
+        {
+          "id": 2190,
+          "codigo": "43/2024",
+          "descripcion": "Obres corresponents al projecte executiu d'intervencions passives per l'adpatació al canvi climàtic dels patis de centres educatius de titularitat pública de la ciutat d'Igualada. 6 LOTS",
+          "adjudicatario": "VERSATIL GREEN, SL",
+          "importe": 34469.73,
+          "fecha": "2024-10-10",
+          "tipo": "1. OBRES",
+          "procedimiento": "Obert",
+          "cpv": "45212190-4",
+          "estat_font": "actiu_socrata",
+          "preservat_iguadata": false,
+          "primera_absencia_detectada": "",
+          "font_preservacio": "",
+          "primer_snapshot_iguadata": ""
+        },
+        {
+          "id": 2189,
+          "codigo": "43/2024",
+          "descripcion": "Obres corresponents al projecte executiu d'intervencions passives per l'adpatació al canvi climàtic dels patis de centres educatius de titularitat pública de la ciutat d'Igualada. 6 LOTS",
+          "adjudicatario": "VERSATIL GREEN, SL",
+          "importe": 40986.83,
+          "fecha": "2024-10-10",
+          "tipo": "1. OBRES",
+          "procedimiento": "Obert",
+          "cpv": "45212190-4",
+          "estat_font": "actiu_socrata",
+          "preservat_iguadata": false,
+          "primera_absencia_detectada": "",
+          "font_preservacio": "",
+          "primer_snapshot_iguadata": ""
+        },
+        {
+          "id": 2237,
           "codigo": "2024.2.0024521.000",
           "descripcion": "Manteniment biollac Parc Central",
           "adjudicatario": "VERSATIL GREEN, SL",
@@ -5899,7 +5899,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 2234,
+          "id": 2236,
           "codigo": "2024.2.0024811.000",
           "descripcion": "Devesa Parc Central",
           "adjudicatario": "VERSATIL GREEN, SL",
@@ -5915,7 +5915,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 2543,
+          "id": 2545,
           "codigo": "2024.2.0015726.000",
           "descripcion": "2427_ REFUGIS CLIMÀTICS EN PATIS ESCOLES_Plantació arbrat pista poliesportiva Gabriel Castellà / Badia i Margarit",
           "adjudicatario": "VERSATIL GREEN, SL",
@@ -5931,7 +5931,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 2598,
+          "id": 2600,
           "codigo": "15488",
           "descripcion": "Enjardinament rotonda tanatori.",
           "adjudicatario": "VERSATIL GREEN, SL",
@@ -5947,7 +5947,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 2656,
+          "id": 2658,
           "codigo": "2024.2.0014708.000",
           "descripcion": "SUBMINISTRAMENT I COL·LOCACIÓ DE PLANTA DE TEMPORADA A LES JARDINERES PENJANTS DEL NUCLI ANTIC, LES TORRES FLORALS DE LA FAÇANA DE L¿AJUNTAMENT I LA PLAÇA DE LA CREU",
           "adjudicatario": "VERSATIL GREEN, SL",
@@ -5963,7 +5963,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 2667,
+          "id": 2669,
           "codigo": "14721",
           "descripcion": "Enjardinament plaça Francesc Bedós",
           "adjudicatario": "VERSATIL GREEN, SL",
@@ -5979,7 +5979,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 2712,
+          "id": 2714,
           "codigo": "2024.2.0005707.001",
           "descripcion": "Plantació arbrat i instal·lació del reg a la Ronda del Rec",
           "adjudicatario": "VERSATIL GREEN, SL",
@@ -5995,7 +5995,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 2806,
+          "id": 2808,
           "codigo": "2024.2.0007852.000",
           "descripcion": "Obres de millora al Parc Central 1",
           "adjudicatario": "VERSATIL GREEN, SL",
@@ -6011,7 +6011,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 2844,
+          "id": 2846,
           "codigo": "2024.2.0005352.000",
           "descripcion": "MANTENIMENT DE LES JARDINERES PENJANTS DEL CENTRE",
           "adjudicatario": "VERSATIL GREEN, SL",
@@ -6027,7 +6027,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 2843,
+          "id": 2845,
           "codigo": "2024.2.0005357.000",
           "descripcion": "MANTENIMENT DEL BIOLLAC I DEL SEU ENTORN",
           "adjudicatario": "VERSATIL GREEN, SL",
@@ -6043,7 +6043,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 2842,
+          "id": 2844,
           "codigo": "2024.2.0005707.000",
           "descripcion": "Plantació arbrat i instal·lació del reg a la Ronda del Rec",
           "adjudicatario": "VERSATIL GREEN, SL",
@@ -6059,7 +6059,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 2902,
+          "id": 2904,
           "codigo": "2024.2.0005351.000",
           "descripcion": "MANTENIMENT DE LES TORRES FLORALS PER A LA FAÇANA DE L'AJUNTAMENT",
           "adjudicatario": "VERSATIL GREEN, SL",
@@ -6075,7 +6075,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 2901,
+          "id": 2903,
           "codigo": "2024.2.0005354.000",
           "descripcion": "MANTENIMENT DE DUES ROTONDES A L¿AVINGUDA CATALUNYA, AMB LLEIDA I AMB ST JOSEP",
           "adjudicatario": "VERSATIL GREEN, SL",
@@ -6091,7 +6091,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 2900,
+          "id": 2902,
           "codigo": "2024.2.0005355.000",
           "descripcion": "MANTENIMENT DEL PARTERRE DE L¿AVINGUDA MONTSERRAT",
           "adjudicatario": "VERSATIL GREEN, SL",
@@ -6107,7 +6107,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 2965,
+          "id": 2967,
           "codigo": "2024.2.0005466.000",
           "descripcion": "Plantació arbrat viari barri de les Flors",
           "adjudicatario": "VERSATIL GREEN, SL",
@@ -6123,7 +6123,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 3020,
+          "id": 3022,
           "codigo": "2024.2.0004022.000",
           "descripcion": "MANTENIMENT PARTERRES AV EUROPA",
           "adjudicatario": "VERSATIL GREEN, SL",
@@ -6139,7 +6139,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 3328,
+          "id": 3330,
           "codigo": "2023.2.0035579.000",
           "descripcion": "Enjardinament Parc del Trànsit 2",
           "adjudicatario": "VERSATIL GREEN, SL",
@@ -6155,7 +6155,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 3416,
+          "id": 3418,
           "codigo": "2023.2.0021400.000",
           "descripcion": "VERSATIL GREEN, SL",
           "adjudicatario": "VERSATIL GREEN, SL",
@@ -6171,7 +6171,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 3508,
+          "id": 3510,
           "codigo": "2023.2.0029491.000",
           "descripcion": "Enjardinament de la nova zona verda d¿av. Dr. Pasteur amb c. Masquefa",
           "adjudicatario": "VERSATIL GREEN, SL",
@@ -6187,7 +6187,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 3733,
+          "id": 3735,
           "codigo": "2023.2.0021401.000",
           "descripcion": "Enjardinament dels parterres del carrer Carles Riba",
           "adjudicatario": "VERSATIL GREEN, SL",
@@ -6203,7 +6203,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 3807,
+          "id": 3809,
           "codigo": "2023.2.0018712.000",
           "descripcion": "SUBMINISTRAMENT I COL·LOCACIÓ DE PLANTA DE TEMPORADA A LES JARDINERES PENJANTS DEL NUCLI ANTIC",
           "adjudicatario": "VERSATIL GREEN, SL",
@@ -6219,7 +6219,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 3806,
+          "id": 3808,
           "codigo": "2023.2.0018713.000",
           "descripcion": "SUBMINISTRAMENT I COL·LOCACIÓ DE PLANTA DE TEMPORADA A LES TORRES FLORALS DE L¿ENTRADA DE L¿AJUNTAMENT",
           "adjudicatario": "VERSATIL GREEN, SL",
@@ -6235,7 +6235,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 3939,
+          "id": 3941,
           "codigo": "2023.2.0014205.000",
           "descripcion": "MANTENIMENT DEL BIOLLAC I PARC CENTRAL 1 DES DEL MES D'ABRIL A DESEMBRE",
           "adjudicatario": "VERSATIL GREEN, SL",
@@ -6251,7 +6251,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 3927,
+          "id": 3929,
           "codigo": "2023.2.0016962.000",
           "descripcion": "Enjardinament dels parterres de l¿av. Països Catalans",
           "adjudicatario": "VERSATIL GREEN, SL",
@@ -6267,7 +6267,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 4366,
+          "id": 4368,
           "codigo": "2023.2.0006235.000",
           "descripcion": "Enjardinament dels parterres del parc del carrer Pau Muntades 87",
           "adjudicatario": "VERSATIL GREEN, SL",
@@ -6283,7 +6283,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 4449,
+          "id": 4451,
           "codigo": "2023.2.0005172.000",
           "descripcion": "MANTENIMENT DEL PARTERRE DE L¿AVINGUDA MONTSERRAT",
           "adjudicatario": "VERSATIL GREEN, SL",
@@ -6299,7 +6299,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 4540,
+          "id": 4542,
           "codigo": "2023.2.0003286.000",
           "descripcion": "Subministrament i plantació arbrat viari al barri de les Flors, Centre i dispers",
           "adjudicatario": "VERSATIL GREEN, SL",
@@ -6315,7 +6315,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 4539,
+          "id": 4541,
           "codigo": "2023.2.0003288.000",
           "descripcion": "MANTENIMENT DE LES TORRES FLORALS PER A LA FAÇANA DE L¿AJUNTAMENT",
           "adjudicatario": "VERSATIL GREEN, SL",
@@ -6331,7 +6331,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 4538,
+          "id": 4540,
           "codigo": "2023.2.0003289.000",
           "descripcion": "MANTENIMENT DE LES JARDINERES PENJANTS DEL CENTRE",
           "adjudicatario": "VERSATIL GREEN, SL",
@@ -6347,7 +6347,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 4536,
+          "id": 4538,
           "codigo": "2023.2.0003291.000",
           "descripcion": "MANTENIMENT DE DUES ROTONDES A L¿AVINGUDA CATALUNYA, AMB LLEIDA I AMB ST JOSEP",
           "adjudicatario": "VERSATIL GREEN, SL",
@@ -6363,7 +6363,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 4653,
+          "id": 4655,
           "codigo": "2022.2.0040021.000",
           "descripcion": "AJUNTAMENT: CONTRACTACIÓ DEL LLOGUER, COL·LOCACIÓ I RETIRADA DE DECORACIÓ NADALENCA",
           "adjudicatario": "VERSATIL GREEN, SL",
@@ -6379,7 +6379,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 4702,
+          "id": 4704,
           "codigo": "2022.2.0038842.000",
           "descripcion": "VARIACIO DE PLANTA PER A LES TORRES FLORALS DE LA FAÇANA",
           "adjudicatario": "VERSATIL GREEN, SL",
@@ -6395,7 +6395,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 4689,
+          "id": 4691,
           "codigo": "2022.2.0039080.000",
           "descripcion": "SUBMINISTRAMENT DE RAMS DE NADAL PER GUARNIR ELS DIFERENTS DEPARTAMENTS",
           "adjudicatario": "VERSATIL GREEN, SL",
@@ -6411,7 +6411,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 4687,
+          "id": 4689,
           "codigo": "2022.2.0039082.000",
           "descripcion": "Subministrament de terres i instal¿lació del reg als parterres de l¿av. Europa",
           "adjudicatario": "VERSATIL GREEN, SL",
@@ -6427,7 +6427,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 5027,
+          "id": 5029,
           "codigo": "2022.2.0028508.000",
           "descripcion": "Enjardinament de la font de la plaça de la Creu",
           "adjudicatario": "VERSATIL GREEN, SL",
@@ -6443,7 +6443,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 5337,
+          "id": 5339,
           "codigo": "2022.2.0018503.000",
           "descripcion": "MANTENIMENT DE LES TORRES FLORALS DE LA FAÇANA DE L'AJUNTAMENT",
           "adjudicatario": "VERSATIL GREEN, SL",
@@ -6459,7 +6459,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 5336,
+          "id": 5338,
           "codigo": "2022.2.0018504.000",
           "descripcion": "MANTENIMENT DE LES JARDINERES PENJANTS DEL CENTRE",
           "adjudicatario": "VERSATIL GREEN, SL",
@@ -6475,7 +6475,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 5328,
+          "id": 5330,
           "codigo": "2022.2.0018605.000",
           "descripcion": "MANTENIMENT DE DUES ROTONDES: NII AMB C/FRANÇA I NII AMB C/ST JOSEP",
           "adjudicatario": "VERSATIL GREEN, SL",
@@ -6491,7 +6491,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 5403,
+          "id": 5405,
           "codigo": "2022.2.0016781.000",
           "descripcion": "PL JOAN BAS I JORDI: OBRES D'ENJARDINAMENT",
           "adjudicatario": "VERSATIL GREEN, SL",
@@ -6507,7 +6507,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 5481,
+          "id": 5483,
           "codigo": "2022.2.0015282.000",
           "descripcion": "ROTONDA C. ST JOSEP AMB AVDA. CATALUNYA: OBRES D'ENJARDINAMENT",
           "adjudicatario": "VERSATIL GREEN, SL",
@@ -6523,7 +6523,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 5690,
+          "id": 5692,
           "codigo": "2022.2.0008739.000",
           "descripcion": "SUBMINISTRAMENT DE TORRES FLORALS PER A LA FAÇANA DE L'AJUNTAMENT",
           "adjudicatario": "VERSATIL GREEN, SL",
@@ -6539,7 +6539,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 5686,
+          "id": 5688,
           "codigo": "2022.2.0008951.000",
           "descripcion": "OBRES ENJARDINAMENT ROTONDA AVDA CATALUNYA AMB CARRER LLEIDA",
           "adjudicatario": "VERSATIL GREEN, SL",
@@ -6555,7 +6555,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 5853,
+          "id": 5855,
           "codigo": "2022.2.0003966.000",
           "descripcion": "PARC LES COMES: SUBMINISTRAMENT DE PLANTES",
           "adjudicatario": "VERSATIL GREEN, SL",
@@ -6571,7 +6571,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 5867,
+          "id": 5869,
           "codigo": "2022.2.0004364.000",
           "descripcion": "Substitució de les jardineres penjants dels carrers del centre de la ciutat",
           "adjudicatario": "VERSATIL GREEN, SL",
@@ -6587,7 +6587,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 6052,
+          "id": 6054,
           "codigo": "2021.2.0029855.001",
           "descripcion": "Subministrament i plantació arbrat viari al barri de St. Crist i dispers",
           "adjudicatario": "VERSATIL GREEN, SL",
@@ -6603,7 +6603,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 6104,
+          "id": 6106,
           "codigo": "2021.2.0037561.000",
           "descripcion": "SUBMINISTRAMENT I COL·LOCACIO DE JARDINERES PER L¿EDIFICI IGUALADA FASHION LAB",
           "adjudicatario": "VERSATIL GREEN, SL",
@@ -6619,7 +6619,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 6088,
+          "id": 6090,
           "codigo": "2021.2.0037891.000",
           "descripcion": "Subministrament i plantació arbrat viari a la rotonda d¿av. Europa amb c. Dinamarca",
           "adjudicatario": "VERSATIL GREEN, SL",
@@ -6635,7 +6635,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 6086,
+          "id": 6088,
           "codigo": "2021.2.0037903.000",
           "descripcion": "CTRA ODENA: OBRES DE MILLORA D'ENJARDINAMENT DEL TALUS",
           "adjudicatario": "VERSATIL GREEN, SL",
@@ -6651,7 +6651,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 6365,
+          "id": 6367,
           "codigo": "2021.2.0029855.000",
           "descripcion": "Subministrament i plantació arbrat viari al barri de St. Crist i dispers",
           "adjudicatario": "VERSATIL GREEN, SL",
@@ -6667,7 +6667,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 6418,
+          "id": 6420,
           "codigo": "2021.2.0027367.000",
           "descripcion": "AVDA MESTRE MONTANER AMB BALMES: OBRES D'ENJARDINAMENT",
           "adjudicatario": "VERSATIL GREEN, SL",
@@ -6683,7 +6683,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 6468,
+          "id": 6470,
           "codigo": "2021.2.0025042.000",
           "descripcion": "AVDA ANDORRA AMB MESTRE MONTANER: OBRES D'ENJARDINAMENT",
           "adjudicatario": "VERSATIL GREEN, SL",
@@ -6699,7 +6699,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 6570,
+          "id": 6572,
           "codigo": "2021.2.0022039.000",
           "descripcion": "OBRES D'ENJARDINAMENT I ADEQUACIO DEL MURAL FONTCUBERTA A LA ZONA VERDA D'AURORA 90",
           "adjudicatario": "VERSATIL GREEN, SL",
@@ -6730,8 +6730,8 @@
       "sector": "Construcció i Infraestructures",
       "finestra": "historic",
       "finestra_label": "Històric complet",
-      "import_sector": 43253586.72,
-      "contractes_sector": 1766,
+      "import_sector": 43257566.72,
+      "contractes_sector": 1767,
       "empreses_sector": 259,
       "cr1": 0.1232,
       "cr3": 0.338,
@@ -6750,7 +6750,7 @@
       "data_fi": "2026-04-16",
       "contractes": [
         {
-          "id": 33,
+          "id": 35,
           "codigo": "7/2026",
           "descripcion": "Obres corresponents al projecte executiu d'urbanització d'un tram del carrer de la Torre, entre el carrer de Sebastià Artés, i el carrer de Santa Caterina, terme municipal d'Igualada",
           "adjudicatario": "BOSCIREM, S.L.",
@@ -6766,7 +6766,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 42,
+          "id": 44,
           "codigo": "81/2025",
           "descripcion": "Obres corresponents al projecte bàsic i d'execució urbanització dels entorns edifici carrer sant carles 62-72, finançat per la Unió Europea amb fons Next Generation, PROGRAMA 1- ERRP IGUALADA subàmbit Masuca, dins del Pla de Recuperació, Transformació i Resiliència",
           "adjudicatario": "BOSCIREM, S.L.",
@@ -6782,7 +6782,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 335,
+          "id": 337,
           "codigo": "67/2025",
           "descripcion": "Obres corresponents a la memòria valorada per a l'adequació dels paviments del pati de l'edifici del Museu de la Pell d'Igualafa i Comarcal de l'Anoia, edifici Cal Boyer",
           "adjudicatario": "BOSCIREM, S.L.",
@@ -6798,7 +6798,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 774,
+          "id": 776,
           "codigo": "40/2025",
           "descripcion": "Obres corresponents al projecte d'arranjament dels talussos al parc central, avinguda Catalunya entre els carrers Guimaraes i Itàlia a Igualada",
           "adjudicatario": "BOSCIREM, S.L.",
@@ -6814,7 +6814,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 773,
+          "id": 775,
           "codigo": "42/2025",
           "descripcion": "Obres corresponents al projecte executiu per a la millora de l'accessibilitat del tram del carrer Creueta situat entre el carrer del Sol i la ronda del Rec d'Igualada",
           "adjudicatario": "BOSCIREM, S.L.",
@@ -6830,7 +6830,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 940,
+          "id": 942,
           "codigo": "31/2025 CMO",
           "descripcion": "Memòria valorada de l'arranjament de la pavimentació a la cruïlla del carrer d'Òdena amb la Rambla.",
           "adjudicatario": "BOSCIREM, S.L.",
@@ -6846,7 +6846,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 1177,
+          "id": 1179,
           "codigo": "35/2025",
           "descripcion": "Obres corresponents a la memòria valorada pels treballs de construcció d'un dipòsit regulador d'aigua freatica pel reg, a situar al costat de l'INS Badia i Margarit, i bombament fins al dipòsit des del punt de captació del freàtic al talús del camí de la riera d'Òdena",
           "adjudicatario": "BOSCIREM, S.L.",
@@ -6862,7 +6862,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 1311,
+          "id": 1313,
           "codigo": "18/2025 CMO",
           "descripcion": "Memòria valorada de les obres per a l'adequació del traçat del carrer del Sol en la seva trobada amb la baixada de Sant Nicolau a la ciutat d'Igualada.",
           "adjudicatario": "BOSCIREM, S.L.",
@@ -6878,7 +6878,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 2115,
+          "id": 2117,
           "codigo": "45/2024",
           "descripcion": "Obres corresponents al projecte executiu per a la millora de l'accessibilitat del tram del carrer Joan Godó i Llucià situat entre plaça Joan Bas i Jordi i el carrer de la Creueta i del tram del carrer del Sol situat entre el carrer de la Creueta i la baixada de Sant Nicolau, \"en el marc del Pla de Recuperació, Transformació i Resiliència - finançat per la Unió Europea - Next Generation EU\"",
           "adjudicatario": "BOSCIREM, S.L.",
@@ -6894,7 +6894,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 2146,
+          "id": 2148,
           "codigo": "46/2024",
           "descripcion": "Obres corresponents a la memòria valorada per la millora de l'accessibilitat del tram del carrer Sant Carles situat entre el carrer d'Òdena i el carrer de Sant Josep",
           "adjudicatario": "BOSCIREM, S.L.",
@@ -6910,7 +6910,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 2240,
+          "id": 2242,
           "codigo": "40/2024 CMO",
           "descripcion": "Contractació corresponent a la Memòria valorada de les obres per a l'adaptació d'accessibilitat del Carrer Copons entre els Carrers Collbató i Les Comes.",
           "adjudicatario": "BOSCIREM, S.L.",
@@ -6926,7 +6926,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 2239,
+          "id": 2241,
           "codigo": "46/2024 CMO",
           "descripcion": "Contractació corresponent a la Memòria valorada de les obres per a les millores a la vorera nord de la Ronda del Rec entre els Carrers Traginers i Dr. Joan Mercader.",
           "adjudicatario": "BOSCIREM, S.L.",
@@ -6942,7 +6942,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 2314,
+          "id": 2316,
           "codigo": "40/2024",
           "descripcion": "Obres corresponents a la memòria valorada per a l'adaptació d'accessibilitat del carrer Gaspar Camps entre Bisbe Robuster i Av. Vilanova",
           "adjudicatario": "BOSCIREM, S.L.",
@@ -6958,7 +6958,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 2414,
+          "id": 2416,
           "codigo": "17/2024",
           "descripcion": "Obres corresponents a la memòria valorada per a la millora de la xarxa d'aigües pluvials procedents de les parcel·les industrials entre el carrer Guimaraes i el carrer Itàlia, en el tram 1 del Parc Central, al terme municipal d'Igualada",
           "adjudicatario": "BOSCIREM, S.L.",
@@ -6974,7 +6974,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 2428,
+          "id": 2430,
           "codigo": "2024.2.0011838.001",
           "descripcion": "Renovació rampa formigó Dr. Botet",
           "adjudicatario": "BOSCIREM, S.L.",
@@ -6990,7 +6990,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 2420,
+          "id": 2422,
           "codigo": "2024.2.0018873.000",
           "descripcion": "Execució d'una nova canalització d'enllumenat Públic per a la col·locació e 2 nous Bàculs a la Illeta central de parada de Bus de les Piscines de les Comes",
           "adjudicatario": "BOSCIREM, S.L.",
@@ -7006,7 +7006,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 2721,
+          "id": 2723,
           "codigo": "2024.2.0011838.000",
           "descripcion": "Renovació rampa formigó Dr. Botet",
           "adjudicatario": "BOSCIREM, S.L.",
@@ -7022,7 +7022,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 2761,
+          "id": 2763,
           "codigo": "2024.2.0010799.000",
           "descripcion": "1242_24_02 Obres de reparació d¿un tram de la tanca de pedra entre la llar d¿infants La Lluna i el carrer del Bruc, d'Igualada.",
           "adjudicatario": "BOSCIREM, S.L.",
@@ -7038,7 +7038,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 2760,
+          "id": 2762,
           "codigo": "2024.2.0010822.000",
           "descripcion": "Escales parc Accés Est",
           "adjudicatario": "BOSCIREM, S.L.",
@@ -7054,7 +7054,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 2819,
+          "id": 2821,
           "codigo": "44/2023 CMO",
           "descripcion": "Memòria valorada de les obres per a l'adaptació d'accessibilitat del Carrer Prat de la Riba entre Joan Llimona i Milà i Fontanals.",
           "adjudicatario": "BOSCIREM, S.L.",
@@ -7070,7 +7070,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 2924,
+          "id": 2926,
           "codigo": "2024.2.0008922.000",
           "descripcion": "MV REFORMA DE LA VORERA NORD DE L'EDIFICI DE LA PISCINA SITUADA AL COMPLEX ESPORTIU \"LES COMES\" D'IGUALADA (DA 13.03.2024).",
           "adjudicatario": "BOSCIREM, S.L.",
@@ -7086,7 +7086,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 2923,
+          "id": 2925,
           "codigo": "4/2024 CMO",
           "descripcion": "Memòria valorada de la reforma de la vorera nord de l'edifici de la piscina situada al complex esportiu \"Les Comes\" d'Igualada.",
           "adjudicatario": "BOSCIREM, S.L.",
@@ -7102,7 +7102,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 2982,
+          "id": 2984,
           "codigo": "55/2023 CMO",
           "descripcion": "Contractació corresponent a la Memòria valorada de les obres per a l'adaptació d'accessibilitat de l'entorn de l'Escola Garcia Fossas.",
           "adjudicatario": "BOSCIREM, S.L.",
@@ -7118,7 +7118,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 3384,
+          "id": 3386,
           "codigo": "2023.2.0033115.000",
           "descripcion": "BOSCIREM, S.L.",
           "adjudicatario": "BOSCIREM, S.L.",
@@ -7134,7 +7134,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 3476,
+          "id": 3478,
           "codigo": "48/2023 CMO",
           "descripcion": "Contractació corresponent a les obres de la Memòria valorada per a l'adaptació del pas central del Passeig Verdaguer amb l'Avinguda Pau Casals.",
           "adjudicatario": "BOSCIREM, S.L.",
@@ -7150,7 +7150,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 3673,
+          "id": 3675,
           "codigo": "43/2023 CMO",
           "descripcion": "Contractació de les obres de la Memòria valorada per a l'arranjament del parc del trànsit sud, entre els carrers Margarides i Pau Muntades.",
           "adjudicatario": "BOSCIREM, S.L.",
@@ -7166,7 +7166,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 3745,
+          "id": 3747,
           "codigo": "2023.2.0020757.000",
           "descripcion": "OBRA D¿ACCESSIBILITAT DE VORERES AL CARRER CARLES RIBA I C. JOAN SERRA I CONSTANSÓ, D¿IGUALADA",
           "adjudicatario": "BOSCIREM, S.L.",
@@ -7182,7 +7182,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 3740,
+          "id": 3742,
           "codigo": "2023.2.0020783.000",
           "descripcion": "OBRA PER DESVIAR LES AIGÜES D¿ESCORRENTIA DE LA ZONA BLANCA DE L¿ASIL, D¿IGUALADA AMB EL MUR DEL C/ JOAN LLIMONA",
           "adjudicatario": "BOSCIREM, S.L.",
@@ -7198,7 +7198,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 3837,
+          "id": 3839,
           "codigo": "27/2023 CMO",
           "descripcion": "Obres de la Memòria valorada per a la reforma de zona pública a l'Avinguda Doctor Pasteur, 100.",
           "adjudicatario": "BOSCIREM, S.L.",
@@ -7214,7 +7214,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 3908,
+          "id": 3910,
           "codigo": "24/2023 CMO",
           "descripcion": "Contractació corresponent a la Memòria Valorada de les obres per a la millora de l'accessibilitat al C/ de l'Empordà, C/ de l'Ermita i C/ del Bages.",
           "adjudicatario": "BOSCIREM, S.L.",
@@ -7230,7 +7230,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 4233,
+          "id": 4235,
           "codigo": "2023.2.0002903.000",
           "descripcion": "Obres d¿ampliació de la ZEG del c. França",
           "adjudicatario": "BOSCIREM, S.L.",
@@ -7246,7 +7246,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 4225,
+          "id": 4227,
           "codigo": "2023.2.0007547.000",
           "descripcion": "SUBSTITUCIÓ COMPLETA DE LES TOVES CERÀMIQUES DE L¿ENTRADA DEL PARC GARCIA FOSSAS D'IGUALADA DES DE LA CRTA, DE MANRESA",
           "adjudicatario": "BOSCIREM, S.L.",
@@ -7262,7 +7262,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 4223,
+          "id": 4225,
           "codigo": "2023.2.0007687.000",
           "descripcion": "Accessibilitat av. Vilanova davant Z.B. Sant Crist",
           "adjudicatario": "BOSCIREM, S.L.",
@@ -7278,7 +7278,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 4189,
+          "id": 4191,
           "codigo": "2023.2.0008982.000",
           "descripcion": "Obres adequació de la ZEG del c. Guimaraes",
           "adjudicatario": "BOSCIREM, S.L.",
@@ -7294,7 +7294,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 4254,
+          "id": 4256,
           "codigo": "2022.2.0035247.000",
           "descripcion": "TANCA PER LA PRACEL·LA D'ACCÉS A LA PART SUPERIOR DEL CCN.",
           "adjudicatario": "BOSCIREM, S.L.",
@@ -7310,7 +7310,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 4385,
+          "id": 4387,
           "codigo": "2023.2.0005918.000",
           "descripcion": "MILLORA DEL DREANTGE SUPERFICIAL PER EVITAR ACUMULACIÓ DE TERRES SOBRE ELS PAVIMENTS DE FORMIGÓ DE LA PISTA SITUADA EN L¿ENTORN DE L¿IES BADIA I MARGARIT",
           "adjudicatario": "BOSCIREM, S.L.",
@@ -7326,7 +7326,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 4358,
+          "id": 4360,
           "codigo": "2023.2.0006828.000",
           "descripcion": "ACTUACIONS D¿ASFALTATGE DELS DOS PUNTS D¿ACCÉS AL PARC GARCIA FOSSAS D'IGUALADA",
           "adjudicatario": "BOSCIREM, S.L.",
@@ -7342,7 +7342,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 4406,
+          "id": 4408,
           "codigo": "10/2023 CMO",
           "descripcion": "Contractació corresponent a la Memòria valorada de les obres per a la millora de les voreres del C/ Maria Trulls Algué entre C/ Travnik i C/ Joan Llacuna.",
           "adjudicatario": "BOSCIREM, S.L.",
@@ -7358,7 +7358,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 4405,
+          "id": 4407,
           "codigo": "12/2023 CMO",
           "descripcion": "Contractació de les obres de la Memòria valorada per a les millores en voreres del C/ Parlament de Catalunya nord i accessibilitat.",
           "adjudicatario": "BOSCIREM, S.L.",
@@ -7374,7 +7374,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 4396,
+          "id": 4398,
           "codigo": "9/2023 CMO",
           "descripcion": "Contractació corresponent a la Memòria valorada de les obres per a l'adaptació d'accessibilitat de l'entorn de l'Avinguda Generalitat i el C/ Capità Muntaner.",
           "adjudicatario": "BOSCIREM, S.L.",
@@ -7390,7 +7390,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 4442,
+          "id": 4444,
           "codigo": "7/2023 CMO",
           "descripcion": "Memòria valorada de les obres per a l'adequació del solar situat a la cantonada del Carrer de Les Comes amb el Carrer de la Pobla de Claramunt com a aparcament provisional.",
           "adjudicatario": "BOSCIREM, S.L.",
@@ -7406,7 +7406,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 4591,
+          "id": 4593,
           "codigo": "60/2022 CMO",
           "descripcion": "Contractació corresponent a la Memòria Valorada de les obres per a la pavimentació de carril bici al nord de l'Avinguda Catalunya entre els carrers Itàlia i Guimaraes.",
           "adjudicatario": "BOSCIREM, S.L.",
@@ -7422,7 +7422,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 4595,
+          "id": 4597,
           "codigo": "40/2022 CMO",
           "descripcion": "Memòria valorada per a les millores en voreres de l'Avinguda Balmes entre l'Avinguda Barcelona i l'Avinguda Mestre montaner.",
           "adjudicatario": "BOSCIREM, S.L.",
@@ -7438,7 +7438,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 4836,
+          "id": 4838,
           "codigo": "2022.2.0035247.000",
           "descripcion": "TANCA PER LA PRACEL·LA D'ACCÉS A LA PART SUPERIOR DEL CCN.",
           "adjudicatario": "BOSCIREM, S.L.",
@@ -7454,7 +7454,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 4846,
+          "id": 4848,
           "codigo": "50/2022 CMO",
           "descripcion": "Memòria valorada de les obres pel pas de les instal·lacions d'enllumenat i telefonia a la voravia nord del solar en desús al barri del Centre Ponent d'Igualada.",
           "adjudicatario": "BOSCIREM, S.L.",
@@ -7470,7 +7470,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 4986,
+          "id": 4988,
           "codigo": "2022.2.0029174.000",
           "descripcion": "SUBMINISTRAMENT DE VORADA DE GRANET TALLADA EN CORVA DE 5 METRES DE RADI I DE SECCIÓ 20X15 CMS AMB DUES CARES FLAMEJADES ¿ MISERICÒRDIA - SOLEDAT",
           "adjudicatario": "BOSCIREM, S.L.",
@@ -7486,7 +7486,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 5044,
+          "id": 5046,
           "codigo": "45/2022",
           "descripcion": "Obres corresponents al projecte executiu del tram de l'Anella Verda d'Igualada, Guixera Can Masarnau",
           "adjudicatario": "BOSCIREM, S.L.",
@@ -7502,7 +7502,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 5099,
+          "id": 5101,
           "codigo": "2022.2.0023753.000",
           "descripcion": "REALITZACIÓ DE DUES RASES PER A LA SUPRESSIÓ DE DOS AERIS A L'AVINGUDA BARCELONA",
           "adjudicatario": "BOSCIREM, S.L.",
@@ -7518,7 +7518,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 5102,
+          "id": 5104,
           "codigo": "41/2022",
           "descripcion": "Obres corresponents a la memòria valorada per la construcció d'una tanca perimetral al parc Garica Fossas",
           "adjudicatario": "BOSCIREM, S.L.",
@@ -7534,7 +7534,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 5119,
+          "id": 5121,
           "codigo": "29/2022 CMO",
           "descripcion": "Contractació de les obres corresponents a la Memòria valorada per a l'adaptació de Les Comes Residencial entre el C/Guixeres i J. Serra Constansó.",
           "adjudicatario": "BOSCIREM, S.L.",
@@ -7550,7 +7550,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 5202,
+          "id": 5204,
           "codigo": "10/2022",
           "descripcion": "Obres corresponents al projecte d'adeqüació de l'interior de l'illa enfront l'Asil per a Zona Blanca.",
           "adjudicatario": "BOSCIREM, S.L.",
@@ -7566,7 +7566,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 5200,
+          "id": 5202,
           "codigo": "33/2022",
           "descripcion": "Obres corresponents l'actualització del projecte executiu d'urbanització de la vorera nord de l'Av. Europa, entre el carrer d'Irlanda i la rotonda de can Roca, al polígon industrial de Les Comes",
           "adjudicatario": "BOSCIREM, S.L.",
@@ -7582,7 +7582,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 5208,
+          "id": 5210,
           "codigo": "2022.2.0023562.000",
           "descripcion": "ADEQUACIÓ DE PLAÇA DE PÀRQUING ADAPTADA AL CARRER SANT MARTÍ DE TOUS",
           "adjudicatario": "BOSCIREM, S.L.",
@@ -7598,7 +7598,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 5248,
+          "id": 5250,
           "codigo": "31/2022 CMO",
           "descripcion": "Obres de la Memòria valorada per a la reforma de zona pública al Carrer Pau Muntadas, 87 d'Igualada.",
           "adjudicatario": "BOSCIREM, S.L.",
@@ -7614,7 +7614,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 5283,
+          "id": 5285,
           "codigo": "2022.2.0020334.000",
           "descripcion": "Obres per desplaçament quadre elèctric Parc Central",
           "adjudicatario": "BOSCIREM, S.L.",
@@ -7630,7 +7630,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 5401,
+          "id": 5403,
           "codigo": "2022.2.0017181.000",
           "descripcion": "Subministra i col·locació de fonts a l¿entorn del Ies Badia i Margarit",
           "adjudicatario": "BOSCIREM, S.L.",
@@ -7646,7 +7646,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 5400,
+          "id": 5402,
           "codigo": "2022.2.0017182.000",
           "descripcion": "PROTOTIP TANCA PARC GARCIA FOSSAS",
           "adjudicatario": "BOSCIREM, S.L.",
@@ -7662,7 +7662,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 5490,
+          "id": 5492,
           "codigo": "2022.2.0012181.000",
           "descripcion": "Obres per instal¿lació cablejat av. Generalitat vorera sud",
           "adjudicatario": "BOSCIREM, S.L.",
@@ -7678,7 +7678,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 5571,
+          "id": 5573,
           "codigo": "15/2022",
           "descripcion": "Obres corresponents a la memòria valorada per l'actuació de condicionament i millora del paviment al cementiri vell en la zona est.",
           "adjudicatario": "BOSCIREM, S.L.",
@@ -7694,7 +7694,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 5553,
+          "id": 5555,
           "codigo": "5/2022",
           "descripcion": "Obres corresponents al projecte de reurbanització de la plaça Sant Crist",
           "adjudicatario": "BOSCIREM, S.L.",
@@ -7710,7 +7710,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 5643,
+          "id": 5645,
           "codigo": "7/2022 CMO",
           "descripcion": "Contractació de les obres de la Memòria Valorada per a l'arranjament de la vorera nord de l'Avinguda Mestre Montaner entre el carrer Lleida i plaça Mossèn Segura.",
           "adjudicatario": "BOSCIREM, S.L.",
@@ -7726,7 +7726,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 5748,
+          "id": 5750,
           "codigo": "2022.2.0007616.000",
           "descripcion": "Accessibilitat de la cantonada c. Champagnat amb c. Sant Carles",
           "adjudicatario": "BOSCIREM, S.L.",
@@ -7742,7 +7742,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 5768,
+          "id": 5770,
           "codigo": "8/2022 CMO",
           "descripcion": "Obres de la Memòria valorada per a la pavimentació de carril bici al nord de l'Avinguda Catalunya entre els carrers França i Itàlia.",
           "adjudicatario": "BOSCIREM, S.L.",
@@ -7758,7 +7758,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 5884,
+          "id": 5886,
           "codigo": "5/2022 CMO",
           "descripcion": "Obres de la Memòria valorada per l'arranjament de la plaça Joan Bas i Jordi.",
           "adjudicatario": "BOSCIREM, S.L.",
@@ -7774,7 +7774,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 5955,
+          "id": 5957,
           "codigo": "1/2022 CMO",
           "descripcion": "Obres de la Memòria valorada per a l'adaptació del carrer Sant Carles i Carrer Pere Valls a l'est del carrer Santa Joaquima de Vedruna.",
           "adjudicatario": "BOSCIREM, S.L.",
@@ -7790,7 +7790,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 6289,
+          "id": 6291,
           "codigo": "2021.2.0032759.000",
           "descripcion": "Col·locació vorada de formigó i protecció pavelló polivalent CE les Comes",
           "adjudicatario": "BOSCIREM, S.L.",
@@ -7806,7 +7806,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 6336,
+          "id": 6338,
           "codigo": "21/2021 CMO",
           "descripcion": "Obres de la Memòria valorada per a les millores en escorrenties superficials d'aigua del parc del carrer Sant Pere Sallavinera.",
           "adjudicatario": "BOSCIREM, S.L.",
@@ -7822,7 +7822,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 6355,
+          "id": 6357,
           "codigo": "41/2021",
           "descripcion": "Obres corresponents al projecte executiu per a la urbanització dels entorns de l'IES Badia i Margarit. TM d'Igualada. Fase 1",
           "adjudicatario": "BOSCIREM, S.L.",
@@ -7838,7 +7838,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 6382,
+          "id": 6384,
           "codigo": "60/2021 CMO",
           "descripcion": "Obres de la Memòria valorada per a la millora del pas del carrer Itàlia sud entre el carrer Alemanya i l'Avinguda Catalunya.",
           "adjudicatario": "BOSCIREM, S.L.",
@@ -7854,7 +7854,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 6463,
+          "id": 6465,
           "codigo": "2021.2.0025127.000",
           "descripcion": "Construcció de vorada granítica c. Guimaraes",
           "adjudicatario": "BOSCIREM, S.L.",
@@ -7870,7 +7870,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 6447,
+          "id": 6449,
           "codigo": "2021.2.0026635.000",
           "descripcion": "ADAPTACIÓ GUAL DESGUÀS EN TRAM DE VORERA A L¿AVINGUDA NOSTRA SENYORA DE LA PIETAT,73",
           "adjudicatario": "BOSCIREM, S.L.",
@@ -7886,7 +7886,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 6500,
+          "id": 6502,
           "codigo": "26/2021 CMO",
           "descripcion": "Contractació de les obres corresponents a la Memòria valorada per a l'adaptació dels carrers Pobla de Claramunt i Masquefa entre Montmaneu i Pujalt.",
           "adjudicatario": "BOSCIREM, S.L.",
@@ -7902,7 +7902,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 6536,
+          "id": 6538,
           "codigo": "2021.2.0022184.000",
           "descripcion": "Fer solera i suport de formigó per col  col¿locar regulador de semàfors al c/ de les Comes amb avda. Catalunya (banda nord).",
           "adjudicatario": "BOSCIREM, S.L.",
@@ -7918,7 +7918,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 6577,
+          "id": 6579,
           "codigo": "2021.2.0012796.001",
           "descripcion": "Millora del clavegueram de la carretera de Manresa",
           "adjudicatario": "BOSCIREM, S.L.",
@@ -7934,7 +7934,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 6609,
+          "id": 6611,
           "codigo": "2021.2.0020977.000",
           "descripcion": "MILLORA DE L¿ACCÉS A LES GRADES DE LES PISTES EXTERIORS COBERTES DEL POLIESPORTIU ¿LES COMES¿.",
           "adjudicatario": "BOSCIREM, S.L.",
@@ -7984,7 +7984,7 @@
       "data_fi": "2023-09-26",
       "contractes": [
         {
-          "id": 3573,
+          "id": 3575,
           "codigo": "2/2023",
           "descripcion": "Constitució de Dret de Superfície sobre sól i construcció damunt seu de titularitat municipal, destinat a la promoció, construcció i gestió d'habitatges de protecció pública d'arrendament assequible en règim de cessió d'ús",
           "adjudicatario": "LA TORRETA IGUALADA, SCCL",
@@ -8034,7 +8034,7 @@
       "data_fi": "2026-05-14",
       "contractes": [
         {
-          "id": 13,
+          "id": 15,
           "codigo": "20/2026",
           "descripcion": "Serveis i subministraments destinats a l'organització tècnica, producció i logística del Festival Anòlia 2026",
           "adjudicatario": "INICIATIVES EVENTS, SL",
@@ -8050,7 +8050,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 18,
+          "id": 20,
           "codigo": "32/2026",
           "descripcion": "Servei d'organització, execució i desenvolupament de l'esdeveniment PREMIS NEPTÚ 2026 IGUALADA",
           "adjudicatario": "INICIATIVES EVENTS, SL",
@@ -8066,7 +8066,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 39,
+          "id": 41,
           "codigo": "15/2026",
           "descripcion": "Serveis de producció i coordinació tècnica, sonorització, il·luminació i muntatge i desmuntatge dels espais d'actuació de la 37a Mostra Igualada, Fira d'espectacles infantils i juvenils",
           "adjudicatario": "INICIATIVES EVENTS, SL",
@@ -8082,7 +8082,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 41,
+          "id": 43,
           "codigo": "10/2026",
           "descripcion": "Servei de so de la festa de Sant Jordi 2026",
           "adjudicatario": "INICIATIVES EVENTS, SL",
@@ -8098,7 +8098,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 48,
+          "id": 50,
           "codigo": "8/2026",
           "descripcion": "Servei d'assistència tècnica, suport i manteniment en muntatge d'escenografia, so, il·luminació, audiovisual i porteria/acomodament del teatre municipal l'Ateneu d'Igualada",
           "adjudicatario": "INICIATIVES EVENTS, SL",
@@ -8114,7 +8114,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 165,
+          "id": 167,
           "codigo": "1/2026",
           "descripcion": "Serveis i subministraments amb motiu de la rua de carnaval d'Igualada 2026",
           "adjudicatario": "INICIATIVES EVENTS, SL",
@@ -8130,7 +8130,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 200,
+          "id": 202,
           "codigo": "2026.2.0002296.000",
           "descripcion": "Muntatge arribada del Patge Faruk a Igualada 2025",
           "adjudicatario": "INICIATIVES EVENTS, SL",
@@ -8146,7 +8146,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 307,
+          "id": 309,
           "codigo": "2025.2.0039965.000",
           "descripcion": "INICIATIVES EVENTS, SL",
           "adjudicatario": "INICIATIVES EVENTS, SL",
@@ -8162,7 +8162,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 338,
+          "id": 340,
           "codigo": "73/2025",
           "descripcion": "Serveis i subministraments per al concert d'orgue de cap d'any i dels concerts del festival internacional d'orgue 2026",
           "adjudicatario": "INICIATIVES EVENTS, SL",
@@ -8178,7 +8178,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 387,
+          "id": 389,
           "codigo": "2025.2.0037242.000",
           "descripcion": "Contractació del rider tècnic i de producció del grup musical Auxili (so, il·luminació,infraestructura, hospitality, etc...) pel concert del Nadal Rock 2025",
           "adjudicatario": "INICIATIVES EVENTS, SL",
@@ -8194,7 +8194,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 507,
+          "id": 509,
           "codigo": "2025.2.0032194.000",
           "descripcion": "Sonorització cantada de Nadales 2025",
           "adjudicatario": "INICIATIVES EVENTS, SL",
@@ -8210,7 +8210,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 896,
+          "id": 898,
           "codigo": "37/2025",
           "descripcion": "Serveis i subministraments destinats a l'organització tècnica, producció i logística de la Festa Major d'Igualada 2025",
           "adjudicatario": "INICIATIVES EVENTS, SL",
@@ -8226,7 +8226,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 1006,
+          "id": 1008,
           "codigo": "2025.2.0010092.000",
           "descripcion": "Lloguer i muntatge de material per la Recepció IHC Campions a l¿Ajuntament d¿Igualada pel dilluns dia 31 de març de 2025.",
           "adjudicatario": "INICIATIVES EVENTS, SL",
@@ -8242,7 +8242,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 1101,
+          "id": 1103,
           "codigo": "15/2025",
           "descripcion": "Serveis i subministraments destinats a l'organització tècnica, producció i logística del Festival Anòlia 2025",
           "adjudicatario": "INICIATIVES EVENTS, SL",
@@ -8258,7 +8258,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 1200,
+          "id": 1202,
           "codigo": "20/2025",
           "descripcion": "Serveis i subministraments destinats a l'organització tècnica, producció i logística de l'European Ballon Festival 2025",
           "adjudicatario": "INICIATIVES EVENTS, SL",
@@ -8274,7 +8274,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 1344,
+          "id": 1346,
           "codigo": "2025.2.0008191.000",
           "descripcion": "Lloguer i muntatge de material espectacle audiovisual mapping del 19 de desembre al 22 de desembre 2024",
           "adjudicatario": "INICIATIVES EVENTS, SL",
@@ -8290,7 +8290,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 1438,
+          "id": 1440,
           "codigo": "13/2025",
           "descripcion": "Serveis de producció i coordinació tècnica, sonorització, il·luminació i muntantge i desmuntatge dels espais d'actuació de la 36a Mostra Igualada, Fira d'Espectacles Infantils i Juvenils",
           "adjudicatario": "INICIATIVES EVENTS, SL",
@@ -8306,7 +8306,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 1474,
+          "id": 1476,
           "codigo": "8/2025",
           "descripcion": "Servei de so de la festa de Sant Jordi 2025",
           "adjudicatario": "INICIATIVES EVENTS, SL",
@@ -8322,7 +8322,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 1653,
+          "id": 1655,
           "codigo": "2025.2.0001486.000",
           "descripcion": "Muntatge sortida cavalcada de Reis 2025",
           "adjudicatario": "INICIATIVES EVENTS, SL",
@@ -8338,7 +8338,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 1626,
+          "id": 1628,
           "codigo": "2025.2.0002752.000",
           "descripcion": "Servei d¿equipaments tècnics del Carnaval 2025",
           "adjudicatario": "INICIATIVES EVENTS, SL",
@@ -8354,7 +8354,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 1940,
+          "id": 1942,
           "codigo": "2024.2.0034416.000",
           "descripcion": "Muntatge megafonia per al nucli antic d¿Igualada Nadal 2024-25.",
           "adjudicatario": "INICIATIVES EVENTS, SL",
@@ -8370,7 +8370,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 1937,
+          "id": 1939,
           "codigo": "2024.2.0036376.000",
           "descripcion": "Contractació dels elements de so i il·luminació per a l¿ENCESA DE LLUMS de NADAL 2024",
           "adjudicatario": "INICIATIVES EVENTS, SL",
@@ -8386,7 +8386,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 2410,
+          "id": 2412,
           "codigo": "31/2024",
           "descripcion": "Serveis i subministraments destinats a l'organització tècnica, producció i logística de  la Festa Major d'Igualada 2024.",
           "adjudicatario": "INICIATIVES EVENTS, SL",
@@ -8402,7 +8402,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 2467,
+          "id": 2469,
           "codigo": "27/2024",
           "descripcion": "Contracte dels serveis i subministraments destinats a l'organització tècnica, producció i logística de l'European Balloon Festival 2024.",
           "adjudicatario": "INICIATIVES EVENTS, SL",
@@ -8418,7 +8418,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 2527,
+          "id": 2529,
           "codigo": "13/2024",
           "descripcion": "Serveis i subministraments destinats a l'organització tècnica, producció, i logística del Festival Anòlia, 2024",
           "adjudicatario": "INICIATIVES EVENTS, SL",
@@ -8434,7 +8434,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 2554,
+          "id": 2556,
           "codigo": "2024.2.0017230.000",
           "descripcion": "Servei de producció i execució Premis Neptú 2024",
           "adjudicatario": "INICIATIVES EVENTS, SL",
@@ -8450,7 +8450,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 2747,
+          "id": 2749,
           "codigo": "2024.2.0011712.000",
           "descripcion": "Servei de sonorització per la Festa de Sant Jordi 2024.",
           "adjudicatario": "INICIATIVES EVENTS, SL",
@@ -8466,7 +8466,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 2915,
+          "id": 2917,
           "codigo": "8/2024",
           "descripcion": "Serveis de producció i coordinació tècnica, sonorització, il·luminació i muntatge i desmuntatge dels espais d'actuació de la 35a Mostra Igualada, Fira d'Espectacles Infantils i Juvenils",
           "adjudicatario": "INICIATIVES EVENTS, SL",
@@ -8482,7 +8482,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 3032,
+          "id": 3034,
           "codigo": "2024.2.0003769.000",
           "descripcion": "Servei d¿equipaments tècnics del Carnaval 2024",
           "adjudicatario": "INICIATIVES EVENTS, SL",
@@ -8498,7 +8498,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 3023,
+          "id": 3025,
           "codigo": "2024.2.0004017.000",
           "descripcion": "MUNTATGE EQUIPAMENTS DE VIDEO PER ALS CONCERTS DEL FESTIVAL D¿ORGUE DE LA BASÍLICA DE SANTA MARIA.",
           "adjudicatario": "INICIATIVES EVENTS, SL",
@@ -8514,7 +8514,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 3307,
+          "id": 3309,
           "codigo": "2023.2.0035818.000",
           "descripcion": "CAMPANYA DE NADAL 23_Servei de so, il·luminació, infraestructura , personal tècnic i transport, per l¿ espectacle de l¿ encesa de llums dins la Campanya de NADAL 2023.",
           "adjudicatario": "INICIATIVES EVENTS, SL",
@@ -8530,7 +8530,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 3298,
+          "id": 3300,
           "codigo": "2024.2.0000143.000",
           "descripcion": "Lloguer, transport i muntatge de la megafonia, cantades de Nadal i cavalcada de Reis",
           "adjudicatario": "INICIATIVES EVENTS, SL",
@@ -8546,7 +8546,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 3400,
+          "id": 3402,
           "codigo": "2023.2.0031889.000",
           "descripcion": "Adquisició d'un micròfon inalàmbric i una taula de so per a la Sala de Plens de l'Ajuntament.",
           "adjudicatario": "INICIATIVES EVENTS, SL",
@@ -8562,7 +8562,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 3875,
+          "id": 3877,
           "codigo": "2023.2.0017352.000",
           "descripcion": "LLOGUER D¿ESCENARI PER AL FESTIVAL ANOLIA I PER A LA FESTA MAJOR D¿IGUALADA",
           "adjudicatario": "INICIATIVES EVENTS, SL",
@@ -8578,7 +8578,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 3896,
+          "id": 3898,
           "codigo": "30/2023",
           "descripcion": "Servei de so, illuminació, muntatge d'estructures i producció d'activitats per a la Festa Major d'Igualada 2023",
           "adjudicatario": "INICIATIVES EVENTS, SL",
@@ -8594,7 +8594,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 3943,
+          "id": 3945,
           "codigo": "26/2023",
           "descripcion": "Servei de muntatge d'estructures, so i illuminació per a l'European Balloon Festival",
           "adjudicatario": "INICIATIVES EVENTS, SL",
@@ -8610,7 +8610,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 3969,
+          "id": 3971,
           "codigo": "2023.2.0015783.000",
           "descripcion": "Servei d¿equipaments tècnics de llum i so per al Festival Anòlia 2023",
           "adjudicatario": "INICIATIVES EVENTS, SL",
@@ -8626,7 +8626,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 3985,
+          "id": 3987,
           "codigo": "25/2023",
           "descripcion": "Servei de manteniment i l'assistència tècnica del saló de sessions de l'Ajuntament d'Igualada",
           "adjudicatario": "INICIATIVES EVENTS, SL",
@@ -8642,7 +8642,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 4019,
+          "id": 4021,
           "codigo": "2023.2.0013672.000",
           "descripcion": "Servei de sonorització per la Festa de Sant Jordi 2023",
           "adjudicatario": "INICIATIVES EVENTS, SL",
@@ -8658,7 +8658,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 4302,
+          "id": 4304,
           "codigo": "12/2023",
           "descripcion": "Serveis de producció i coordinació tècnica, sonorització, illuminació i muntatge i desmuntatge dels espais d'actuació de la 34a MOSTRA IGUALADA, FIRA D'ESPECTACLES INFANTILS I JUVENILS",
           "adjudicatario": "INICIATIVES EVENTS, SL",
@@ -8674,7 +8674,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 4362,
+          "id": 4364,
           "codigo": "2023.2.0006416.000",
           "descripcion": "Servei d¿equipaments tècnics del Carnaval 2023.",
           "adjudicatario": "INICIATIVES EVENTS, SL",
@@ -8690,7 +8690,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 4494,
+          "id": 4496,
           "codigo": "2023.2.0003971.000",
           "descripcion": "MUNTATGE EQUIPAMENTS DE VIDEO PER ALS CONCERTS DEL FESTIVAL  D¿ORGUE A LA BASÍLICA DE SANTA MARIA",
           "adjudicatario": "INICIATIVES EVENTS, SL",
@@ -8706,7 +8706,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 4626,
+          "id": 4628,
           "codigo": "2023.2.0000126.000",
           "descripcion": "Lloguer, transport i muntatge de la megafonia, cantades de Nadal i cavalcada de Reis Nadal 2022-23",
           "adjudicatario": "INICIATIVES EVENTS, SL",
@@ -8722,7 +8722,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 4789,
+          "id": 4791,
           "codigo": "2022.2.0035353.000",
           "descripcion": "CAMPANYA DE NADAL2022_Proposta so , il·luminació, infraestructura , personal tècnic i transport, per l¿ espectacle de l¿ encesa de llums dins la Campanya de NADAL 2022.",
           "adjudicatario": "INICIATIVES EVENTS, SL",
@@ -8738,7 +8738,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 5430,
+          "id": 5432,
           "codigo": "26/2022",
           "descripcion": "Servei de só, il·luminació, muntatge d'estructures i producció d'activitats per a la Festa Major d'Igualada 2022",
           "adjudicatario": "INICIATIVES EVENTS, SL",
@@ -8754,7 +8754,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 5461,
+          "id": 5463,
           "codigo": "2022.2.0015516.000",
           "descripcion": "Producció tècnica per la conferència de Carme Pinós al Cementiri Nou. 150 cadires, equips de so, 3 televisors per projecció i enregistrament al Cementiri Nou .CAPITAL CULTURAL CATALANA 2022",
           "adjudicatario": "INICIATIVES EVENTS, SL",
@@ -8770,7 +8770,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 5469,
+          "id": 5471,
           "codigo": "22/2022",
           "descripcion": "Servei de muntathe d'estructures, so i il·luminació per l'European Balloon Festival",
           "adjudicatario": "INICIATIVES EVENTS, SL",
@@ -8786,7 +8786,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 5520,
+          "id": 5522,
           "codigo": "2022.2.0012254.000",
           "descripcion": "Servei de sonorització per la Festa de Sant Jordi 2022",
           "adjudicatario": "INICIATIVES EVENTS, SL",
@@ -8802,7 +8802,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 5570,
+          "id": 5572,
           "codigo": "2022.2.0012253.000",
           "descripcion": "Servei d¿equipaments tècnics de llum i so per al Festival Anòlia 2022",
           "adjudicatario": "INICIATIVES EVENTS, SL",
@@ -8818,7 +8818,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 5806,
+          "id": 5808,
           "codigo": "2022.2.0005963.000",
           "descripcion": "Servei Muntatge i lloguer d¿escenari, tarimes per a concert del Llibre Vermell de Jordi Savall, servei d¿acomodadors i controladors i producció de senyalística per al concert que es realitzarà a Sta. Maria",
           "adjudicatario": "INICIATIVES EVENTS, SL",
@@ -8834,7 +8834,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 5803,
+          "id": 5805,
           "codigo": "3/2022",
           "descripcion": "Serveis de producció i coordinació tècnica, sonorització, il·luminació i muntatge i desmuntatge dels espais d'actuació de la 33a Mostra Igualada. Fira d'espectacles infantils i juvenils.",
           "adjudicatario": "INICIATIVES EVENTS, SL",
@@ -8850,7 +8850,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 5923,
+          "id": 5925,
           "codigo": "2022.2.0003991.000",
           "descripcion": "MUNTATGE EQUIPAMENTS DE VIDEO PER ALS CONCERTS D¿ORGUE DE LA BASÍLICA DE SANTA MARIA",
           "adjudicatario": "INICIATIVES EVENTS, SL",
@@ -8866,7 +8866,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 6023,
+          "id": 6025,
           "codigo": "2022.2.0001269.000",
           "descripcion": "Lloguer, transport i muntatge de la megafonia i il·luminació del nucli antic, cantades de Nadal i cavalcada de Reis.",
           "adjudicatario": "INICIATIVES EVENTS, SL",
@@ -8882,7 +8882,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 6096,
+          "id": 6098,
           "codigo": "2021.2.0037628.000",
           "descripcion": "Servei de contractació del servei de llum i so per la presentació de l¿ encesa de llums de Nadal 2021.",
           "adjudicatario": "INICIATIVES EVENTS, SL",
@@ -8898,7 +8898,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 6221,
+          "id": 6223,
           "codigo": "62/2021",
           "descripcion": "Servei d'assistència, suport i manteniment en muntatge, so, illuminació i porteria/acomodament del Teatre Municipal l'Ateneu d'Igualada",
           "adjudicatario": "INICIATIVES EVENTS, SL",
@@ -8914,7 +8914,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 6662,
+          "id": 6664,
           "codigo": "44/2021",
           "descripcion": "Servei de so, illuminació, muntatge d'estructures i producció d'activitats per a la Festa Major d'Igualada 2021",
           "adjudicatario": "INICIATIVES EVENTS, SL",
@@ -8930,7 +8930,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 6727,
+          "id": 6729,
           "codigo": "38/2021",
           "descripcion": "Servei de so, il.luminació, muntatge d'estructures i organització d'activitats per l'European Balloon festival 2021",
           "adjudicatario": "INICIATIVES EVENTS, SL",
@@ -8946,7 +8946,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 6755,
+          "id": 6757,
           "codigo": "2021.2.0018211.000",
           "descripcion": "Servei d¿equipaments tècnics sonorització Anòlia 2021",
           "adjudicatario": "INICIATIVES EVENTS, SL",
@@ -8962,7 +8962,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 6934,
+          "id": 6936,
           "codigo": "10/2021",
           "descripcion": "Serveis de producció i coordinació tècnica, sonorització, illuminació i muntatge i desmuntatge dels espais d'actuació de la 32a Mostra Igualada, Fira d'Espectacles Infantils i Juvenils",
           "adjudicatario": "INICIATIVES EVENTS, SL",
@@ -8978,7 +8978,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 6991,
+          "id": 6993,
           "codigo": "2021.2.0012738.000",
           "descripcion": "Servei de sonorització per la Festa de Sant Jordi 2021",
           "adjudicatario": "INICIATIVES EVENTS, SL",
@@ -9028,7 +9028,7 @@
       "data_fi": "2023-01-01",
       "contractes": [
         {
-          "id": 4642,
+          "id": 4644,
           "codigo": "20/2023",
           "descripcion": "Encàrrec de gestió del servei de suport personal i del servei de suport domèstic dins del servei de l'ajuda a domicili a favor del Consorci Sociosanitari d'Igualada",
           "adjudicatario": "CONSORCI SOCIOSANITARI D'IGUALADA",
@@ -9044,7 +9044,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 5598,
+          "id": 5600,
           "codigo": "66/2022",
           "descripcion": "Encàrrec de gestió del servei de suport personal i del servei de suport domèstic dins del servei de l'ajuda a domicili a favor del Consorci Sociosanitari d'Igualada",
           "adjudicatario": "CONSORCI SOCIOSANITARI D'IGUALADA",
@@ -9060,7 +9060,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 7251,
+          "id": 7253,
           "codigo": "42/2020",
           "descripcion": "Encàrrec de gestió del servei de suport personal i del servei de suport domèstic, dins del servei de l'ajuda a domicili a favor del Consorci Sociosanitari d'Igualada.",
           "adjudicatario": "CONSORCI SOCIOSANITARI D'IGUALADA",
@@ -9110,7 +9110,7 @@
       "data_fi": "2025-10-14",
       "contractes": [
         {
-          "id": 627,
+          "id": 629,
           "codigo": "2025.2.0028011.000",
           "descripcion": "Subministrament i instal·lació d¿un tobogan al parc de Vallbona",
           "adjudicatario": "HAPPYLUDIC PLAYGROUND AND URBAN EQUIPMENT SL",
@@ -9126,7 +9126,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 953,
+          "id": 955,
           "codigo": "2025.2.0019969.000",
           "descripcion": "Subministrament i instal·lació tanca parc infantil carrer del Sol",
           "adjudicatario": "HAPPYLUDIC PLAYGROUND AND URBAN EQUIPMENT SL",
@@ -9142,7 +9142,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 2013,
+          "id": 2015,
           "codigo": "2024.2.0032772.000",
           "descripcion": "Subministrament i instal·lació jocs infantils av. Pietat 85",
           "adjudicatario": "HAPPYLUDIC PLAYGROUND AND URBAN EQUIPMENT SL",
@@ -9158,7 +9158,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 2245,
+          "id": 2247,
           "codigo": "30/2024",
           "descripcion": "Subministrament i muntatge d'un multijoc de tres torres per al Parc Central d'Igualada",
           "adjudicatario": "HAPPYLUDIC PLAYGROUND AND URBAN EQUIPMENT SL",
@@ -9174,7 +9174,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 2330,
+          "id": 2332,
           "codigo": "2024.2.0022643.000",
           "descripcion": "Subministrament i instal·lació nous elements infantils parc de les Comes",
           "adjudicatario": "HAPPYLUDIC PLAYGROUND AND URBAN EQUIPMENT SL",
@@ -9190,7 +9190,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 2708,
+          "id": 2710,
           "codigo": "2024.2.0011846.000",
           "descripcion": "Reparació del llit elàstic del parc del Centre Cívic Nord",
           "adjudicatario": "HAPPYLUDIC PLAYGROUND AND URBAN EQUIPMENT SL",
@@ -9206,7 +9206,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 2793,
+          "id": 2795,
           "codigo": "2024.2.0008941.000",
           "descripcion": "Rehabilitació dels parcs infantils de Salvador Espriu i la Pobla de Claramunt",
           "adjudicatario": "HAPPYLUDIC PLAYGROUND AND URBAN EQUIPMENT SL",
@@ -9222,7 +9222,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 2837,
+          "id": 2839,
           "codigo": "6/2024",
           "descripcion": "Subministrament i muntatge dels elements infantils per al parc del consell dels infants",
           "adjudicatario": "HAPPYLUDIC PLAYGROUND AND URBAN EQUIPMENT SL",
@@ -9238,7 +9238,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 3651,
+          "id": 3653,
           "codigo": "2023.2.0022762.000",
           "descripcion": "Subministrament i instal·lació de diversos jocs infantils a la plaça Serenet",
           "adjudicatario": "HAPPYLUDIC PLAYGROUND AND URBAN EQUIPMENT SL",
@@ -9254,7 +9254,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 3874,
+          "id": 3876,
           "codigo": "2023.2.0017356.000",
           "descripcion": "LLAR D¿INFANTS DE LA LLUNA: SUBMINISTRAMENT DE LONA PER UMBRACLE",
           "adjudicatario": "HAPPYLUDIC PLAYGROUND AND URBAN EQUIPMENT SL",
@@ -9270,7 +9270,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 3926,
+          "id": 3928,
           "codigo": "2023.2.0017042.000",
           "descripcion": "Subministrament i instal¿lació de diversos jocs infantils al parc Paquita Madriguera",
           "adjudicatario": "HAPPYLUDIC PLAYGROUND AND URBAN EQUIPMENT SL",
@@ -9286,7 +9286,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 3916,
+          "id": 3918,
           "codigo": "2023.2.0017064.000",
           "descripcion": "Subministrament i instal¿lació d¿un multijoc al parc del Trànsit 2",
           "adjudicatario": "HAPPYLUDIC PLAYGROUND AND URBAN EQUIPMENT SL",
@@ -9302,7 +9302,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 4216,
+          "id": 4218,
           "codigo": "2023.2.0008426.000",
           "descripcion": "Subministrament i instal¿lació de diversos jocs infantils a la plaça Pau Muntadas 87",
           "adjudicatario": "HAPPYLUDIC PLAYGROUND AND URBAN EQUIPMENT SL",
@@ -9318,7 +9318,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 4210,
+          "id": 4212,
           "codigo": "2023.2.0008465.000",
           "descripcion": "Subministrament i instal¿lació d¿un pack agility per ZEG Guimaraes",
           "adjudicatario": "HAPPYLUDIC PLAYGROUND AND URBAN EQUIPMENT SL",
@@ -9334,7 +9334,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 4194,
+          "id": 4196,
           "codigo": "2023.2.0008813.000",
           "descripcion": "Subministrament i instal¿lació de diversos jocs infantils al parc de la Duna",
           "adjudicatario": "HAPPYLUDIC PLAYGROUND AND URBAN EQUIPMENT SL",
@@ -9350,7 +9350,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 4191,
+          "id": 4193,
           "codigo": "2023.2.0008931.000",
           "descripcion": "Subministrament i instal¿lació de diversos jocs infantils a la plaça Serenet",
           "adjudicatario": "HAPPYLUDIC PLAYGROUND AND URBAN EQUIPMENT SL",
@@ -9366,7 +9366,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 4238,
+          "id": 4240,
           "codigo": "2022.2.0039534.000",
           "descripcion": "Subministrament i instal·lació joc inclusiu parc Garcia Fossas",
           "adjudicatario": "HAPPYLUDIC PLAYGROUND AND URBAN EQUIPMENT SL",
@@ -9382,7 +9382,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 4383,
+          "id": 4385,
           "codigo": "2023.2.0005953.000",
           "descripcion": "Subministrament i instal¿lació d¿un pack agility per ZEG França",
           "adjudicatario": "HAPPYLUDIC PLAYGROUND AND URBAN EQUIPMENT SL",
@@ -9398,7 +9398,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 4381,
+          "id": 4383,
           "codigo": "2023.2.0005959.000",
           "descripcion": "Subministrament i instal¿lació de diversos jocs infantils al parc de Pobla de Claramunt",
           "adjudicatario": "HAPPYLUDIC PLAYGROUND AND URBAN EQUIPMENT SL",
@@ -9414,7 +9414,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 4370,
+          "id": 4372,
           "codigo": "2023.2.0006209.000",
           "descripcion": "Subministrament i instal¿lació de diversos jocs infantils als parcs del Pg. Verdaguer",
           "adjudicatario": "HAPPYLUDIC PLAYGROUND AND URBAN EQUIPMENT SL",
@@ -9430,7 +9430,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 4658,
+          "id": 4660,
           "codigo": "2022.2.0039534.000",
           "descripcion": "Subministrament i instal·lació joc inclusiu parc Garcia Fossas",
           "adjudicatario": "HAPPYLUDIC PLAYGROUND AND URBAN EQUIPMENT SL",
@@ -9446,7 +9446,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 5025,
+          "id": 5027,
           "codigo": "2022.2.0028972.000",
           "descripcion": "Subministrament i instal¿lació d¿un pack agility per ZEG Sant Crist",
           "adjudicatario": "HAPPYLUDIC PLAYGROUND AND URBAN EQUIPMENT SL",
@@ -9462,7 +9462,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 5073,
+          "id": 5075,
           "codigo": "2022.2.0023744.000",
           "descripcion": "Subministrament i instal¿lació d¿un multijoc a la plaça del Sant Crist",
           "adjudicatario": "HAPPYLUDIC PLAYGROUND AND URBAN EQUIPMENT SL",
@@ -9478,7 +9478,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 5147,
+          "id": 5149,
           "codigo": "37/2022",
           "descripcion": "Subministrament i muntatge dels elements infantils per al parc Garcia Fossas",
           "adjudicatario": "HAPPYLUDIC PLAYGROUND AND URBAN EQUIPMENT SL",
@@ -9494,7 +9494,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 5325,
+          "id": 5327,
           "codigo": "2022.2.0018997.000",
           "descripcion": "Subministrament i instal¿lació de jocs infantils al carrer Capità Muntané",
           "adjudicatario": "HAPPYLUDIC PLAYGROUND AND URBAN EQUIPMENT SL",
@@ -9510,7 +9510,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 5485,
+          "id": 5487,
           "codigo": "2022.2.0015268.000",
           "descripcion": "Subministrament i instal¿lació de jocs infantils a la Plaça Joan Bas i Jordi",
           "adjudicatario": "HAPPYLUDIC PLAYGROUND AND URBAN EQUIPMENT SL",
@@ -9526,7 +9526,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 5927,
+          "id": 5929,
           "codigo": "2022.2.0003942.000",
           "descripcion": "Subministrament i instal·lació de jocs infantils al carrer Sant Pere Sallavinera",
           "adjudicatario": "HAPPYLUDIC PLAYGROUND AND URBAN EQUIPMENT SL",
@@ -9542,7 +9542,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 6469,
+          "id": 6471,
           "codigo": "2021.2.0025030.000",
           "descripcion": "C/AURORA, 90 SUBMINISTRAMENT DE MOBILIARI URBÀ",
           "adjudicatario": "HAPPYLUDIC PLAYGROUND AND URBAN EQUIPMENT SL",
@@ -9558,7 +9558,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 6795,
+          "id": 6797,
           "codigo": "2021.2.0017364.000",
           "descripcion": "Subministrament i instal¿lació d¿un joc infantil a pati de Ciutat Àgora",
           "adjudicatario": "HAPPYLUDIC PLAYGROUND AND URBAN EQUIPMENT SL",
@@ -9574,7 +9574,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 7218,
+          "id": 7220,
           "codigo": "2021.2.0007624.000",
           "descripcion": "Subministrament i instal¿lació d¿un joc infantil al parc de l¿Enxub",
           "adjudicatario": "HAPPYLUDIC PLAYGROUND AND URBAN EQUIPMENT SL",
@@ -9624,7 +9624,7 @@
       "data_fi": "2025-11-19",
       "contractes": [
         {
-          "id": 529,
+          "id": 531,
           "codigo": "65/2025",
           "descripcion": "Servei de manteniment de les aplicacions informàtiques de padró d'habitants, comptabilitat, ingressos, eleccions, conformació electrònica de factures i signatura de documents comptables de l'Ajuntament d'Igualada",
           "adjudicatario": "SPAI INNOVA ASTIGITAS, SL",
@@ -9640,7 +9640,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 1419,
+          "id": 1421,
           "codigo": "2025.2.0007980.000",
           "descripcion": "Contractació de la presentació de serveis de subscripció al sistema de conformació electrònica de factures i signatura en documents comptables.",
           "adjudicatario": "SPAI INNOVA ASTIGITAS, SL",
@@ -9656,7 +9656,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 2958,
+          "id": 2960,
           "codigo": "2024.2.0005687.000",
           "descripcion": "Contractació de la prestació de serveis de subscripció al sistema de conformació electrònica de factures i signatura en documents comptables.",
           "adjudicatario": "SPAI INNOVA ASTIGITAS, SL",
@@ -9672,7 +9672,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 3401,
+          "id": 3403,
           "codigo": "2023.2.0031623.000",
           "descripcion": "Contractació dels serveis de desenvolupament de canvis i millores a l'aplicació SPAI Ingressos.",
           "adjudicatario": "SPAI INNOVA ASTIGITAS, SL",
@@ -9688,7 +9688,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 4084,
+          "id": 4086,
           "codigo": "2023.2.0012626.000",
           "descripcion": "Contractació del servei d'assistència tècnica per a la migració dels servidors virtuals actuals de les aplicaciones SPAI (aplicacions i base de dades) als nous servidors creats dins de la infraestructura tècnica de l'Ajuntament.",
           "adjudicatario": "SPAI INNOVA ASTIGITAS, SL",
@@ -9704,7 +9704,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 4083,
+          "id": 4085,
           "codigo": "2023.2.0012627.000",
           "descripcion": "Contractació dels serveis de desenvolupament de canvis i millores a l'aplicació SPAI Ingressos.",
           "adjudicatario": "SPAI INNOVA ASTIGITAS, SL",
@@ -9720,7 +9720,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 4434,
+          "id": 4436,
           "codigo": "2023.2.0005004.000",
           "descripcion": "Contractació de la prestació de serveis de subscripció al sistema de conformació electrònica de factures i signatura en documents comptables.",
           "adjudicatario": "SPAI INNOVA ASTIGITAS, SL",
@@ -9736,7 +9736,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 5612,
+          "id": 5614,
           "codigo": "2022.2.0011923.000",
           "descripcion": "Contractació de la prestació de serveis de subscripció al sistema de conformació electrònica de factures i signatura en documents comptables.",
           "adjudicatario": "SPAI INNOVA ASTIGITAS, SL",
@@ -9752,7 +9752,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 5665,
+          "id": 5667,
           "codigo": "2022.2.0008855.000",
           "descripcion": "Contractació de prestació de serveis per a la obtenció de certificats electrònics signats amb signatura per segell d'òrgan, desde SPAI Població.",
           "adjudicatario": "SPAI INNOVA ASTIGITAS, SL",
@@ -9768,7 +9768,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 5995,
+          "id": 5997,
           "codigo": "2022.2.0001912.000",
           "descripcion": "Contractació del manteniment i suport de l'aplicació informàtica SPAI Sical, SPAI Població, SPAI Ingressos i SPAI Eleccions perl període d'un mes entre la finalització del contrcte vell i el nou.",
           "adjudicatario": "SPAI INNOVA ASTIGITAS, SL",
@@ -9784,7 +9784,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 6339,
+          "id": 6341,
           "codigo": "51/2021",
           "descripcion": "Servei de manteniment de les aplicacions informàtiques de padró d'habitants, comptabilitat, ingressos i eleccions de l'Ajuntament d'Igualada",
           "adjudicatario": "SPAI INNOVA ASTIGITAS, SL",
@@ -9800,7 +9800,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 6367,
+          "id": 6369,
           "codigo": "2021.2.0029829.000",
           "descripcion": "Contractació de l'actualització tecnològica del sistema de gestió del Padró Municipal d'Habitants i el sistema de gestió d'eleccions.",
           "adjudicatario": "SPAI INNOVA ASTIGITAS, SL",
@@ -9850,7 +9850,7 @@
       "data_fi": "2025-02-21",
       "contractes": [
         {
-          "id": 1552,
+          "id": 1554,
           "codigo": "77/2024",
           "descripcion": "Subministrament de lluminàries i accessoris per a l'enllumenat del barri del Rec de la ciutat d'Igualada, en el marc del Pla de Sostenibilitat Turística en Destinacions (PSTD), Eix 2 - Eficiència Energètica, actuació 3 - Il·luminació eficient al barri del Rec, en el marc del Pla de Recuperació, Transformació i Resiliència, finançat per la Unió Europea - Next Generation EU",
           "adjudicatario": "MUNTATGES LLEIDA, SA",
@@ -9866,7 +9866,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 2328,
+          "id": 2330,
           "codigo": "25/2024",
           "descripcion": "Projecte del canvi torres i enllumenat a tecnologia led del camp inferior de futbol de les Comes. Igualada",
           "adjudicatario": "MUNTATGES LLEIDA, SA",
@@ -9916,7 +9916,7 @@
       "data_fi": "2024-03-08",
       "contractes": [
         {
-          "id": 2925,
+          "id": 2927,
           "codigo": "9/2024",
           "descripcion": "Subministrament de vehicles de la brigada municipal d'Igualada",
           "adjudicatario": "REMM GUITART, SL",
@@ -9932,7 +9932,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 3078,
+          "id": 3080,
           "codigo": "2024.2.0002395.000",
           "descripcion": "RENTING D¿UN VEHICLE TIPUS TURISME PER A DIFERENTS DEPARTAMENTS FINS AL 31.05.2024",
           "adjudicatario": "REMM GUITART, SL",
@@ -9948,7 +9948,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 3422,
+          "id": 3424,
           "codigo": "2023.2.0005169.000",
           "descripcion": "RENTING DE DOS VEHICLES TIPUS FURGONETA DE SIS PLACES PER LA BRIGADA DE PARC I JARDINS",
           "adjudicatario": "REMM GUITART, SL",
@@ -9964,7 +9964,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 3421,
+          "id": 3423,
           "codigo": "2023.2.0005170.000",
           "descripcion": "RENTING D¿UN VEHICLE TIPUS TURISME PER A DIFERENTS DEPARTAMENTS",
           "adjudicatario": "REMM GUITART, SL",
@@ -9980,7 +9980,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 4099,
+          "id": 4101,
           "codigo": "02/2023",
           "descripcion": "Subministrament d'un vehicle adaptat pel transport de gent gran al Consorci Sociosanitari d'Igualada",
           "adjudicatario": "REMM GUITART, SL",
@@ -9996,7 +9996,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 4752,
+          "id": 4754,
           "codigo": "2022.2.0015829.000",
           "descripcion": "RENTING D¿UN VEHICLE TIPUS TURISME PER A DIFERENTS DEPARTAMENTS",
           "adjudicatario": "REMM GUITART, SL",
@@ -10012,7 +10012,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 5838,
+          "id": 5840,
           "codigo": "2022.2.0005122.000",
           "descripcion": "RENTING DE DOS VEHICLES TIPUS FURGONETA DE SIS PLACES PER LA BRIGADA DE PARC I JARDINS",
           "adjudicatario": "REMM GUITART, SL",
@@ -10028,7 +10028,7 @@
           "primer_snapshot_iguadata": ""
         },
         {
-          "id": 6706,
+          "id": 6708,
           "codigo": "2021.2.0019764.000",
           "descripcion": "RENTING DE DOS VEHICLES TIPUS FURGONETA DE SIS PLACES PER LA BRIGADA DE PARC I JARDINS",
           "adjudicatario": "REMM GUITART, SL",
