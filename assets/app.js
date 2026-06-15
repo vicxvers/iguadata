@@ -6113,23 +6113,126 @@ function App() {
   }))), activeTab !== 'home' && React.createElement("footer", {
     className: "footer"
   }, React.createElement("div", {
-    className: "footer-content"
+    className: `footer-content${activeTab === 'sobre' || activeTab === 'legal' ? ' footer-content-prose' : ''}`
   }, React.createElement("div", {
-    className: "footer-copyright"
-  }, "\xA9 2026 IGUADATA"), React.createElement("div", {
-    className: "footer-line"
+    className: "footer-main"
+  }, React.createElement("div", {
+    className: "footer-brand"
   }, React.createElement("a", {
+    href: BASE + '/',
+    onClick: e => {
+      e.preventDefault();
+      handleNavigation('home');
+    },
+    className: "footer-logo-link",
+    "aria-label": "Iguadata, inici"
+  }, React.createElement("img", {
+    src: assetUrl('/assets/iguadata.svg'),
+    alt: "Iguadata",
+    className: "footer-logo"
+  })), React.createElement("p", {
+    className: "footer-tagline"
+  }, "El projecte de transpar\xE8ncia d'Igualada"), React.createElement("div", {
+    className: "footer-social"
+  }, React.createElement("a", {
+    href: "https://www.instagram.com/iguadata/",
+    target: "_blank",
+    rel: "noopener noreferrer",
+    className: "footer-social-link",
+    "aria-label": "Iguadata a Instagram"
+  }, React.createElement("svg", {
+    viewBox: "0 0 24 24",
+    "aria-hidden": "true"
+  }, React.createElement("rect", {
+    x: "3",
+    y: "3",
+    width: "18",
+    height: "18",
+    rx: "5"
+  }), React.createElement("circle", {
+    cx: "12",
+    cy: "12",
+    r: "4"
+  }), React.createElement("circle", {
+    cx: "17.5",
+    cy: "6.5",
+    r: "1",
+    className: "footer-social-fill"
+  }))), React.createElement("a", {
+    href: "mailto:hola@iguadata.cat",
+    className: "footer-social-link",
+    "aria-label": "Escriu a Iguadata"
+  }, React.createElement("svg", {
+    viewBox: "0 0 24 24",
+    "aria-hidden": "true"
+  }, React.createElement("rect", {
+    x: "3",
+    y: "5",
+    width: "18",
+    height: "14",
+    rx: "2"
+  }), React.createElement("path", {
+    d: "m4 7 8 6 8-6"
+  }))))), React.createElement("nav", {
+    className: "footer-nav",
+    "aria-label": "Navegaci\xF3 del peu de p\xE0gina"
+  }, React.createElement("div", {
+    className: "footer-nav-column"
+  }, React.createElement("a", {
+    href: BASE + '/contractes',
+    onClick: e => {
+      e.preventDefault();
+      handleNavigation('buscador');
+    },
+    className: "footer-link"
+  }, "Contractes"), React.createElement("a", {
+    href: BASE + '/empreses',
+    onClick: e => {
+      e.preventDefault();
+      handleNavigation('empreses');
+    },
+    className: "footer-link"
+  }, "Empreses"), React.createElement("a", {
+    href: BASE + '/persones',
+    onClick: e => {
+      e.preventDefault();
+      handleNavigation('persones');
+    },
+    className: "footer-link"
+  }, "Persones"), React.createElement("a", {
+    href: BASE + '/analisi',
+    onClick: e => {
+      e.preventDefault();
+      handleNavigation('analisi');
+    },
+    className: "footer-link"
+  }, "An\xE0lisi")), React.createElement("div", {
+    className: "footer-nav-column"
+  }, React.createElement("a", {
+    href: BASE + '/sobre',
+    onClick: e => {
+      e.preventDefault();
+      handleNavigation('sobre');
+    },
+    className: "footer-link"
+  }, "Sobre"), React.createElement("a", {
+    href: "mailto:hola@iguadata.cat",
+    className: "footer-link"
+  }, "Contacte"), React.createElement("a", {
+    href: "https://github.com/vicxvers/iguadata",
+    target: "_blank",
+    rel: "noopener noreferrer",
+    className: "footer-link"
+  }, "Codi obert"), React.createElement("a", {
     href: BASE + '/avis-legal',
     onClick: e => {
       e.preventDefault();
       handleNavigation('legal');
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
     },
     className: "footer-link"
-  }, "Av\xEDs Legal")))));
+  }, "Av\xEDs legal")))), React.createElement("div", {
+    className: "footer-copyright"
+  }, "\xA9 2026 Iguadata. Tots els drets reservats."))));
 }
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(React.createElement(App, null));
