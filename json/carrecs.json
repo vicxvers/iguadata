@@ -45749,6 +45749,50 @@
       "tipo_entidad": "persona"
     }
   ],
+  "DIVISEGUR CATALUNYA, S.L.": [
+    {
+      "nombre": "RAMIREZ GALLEGO ALBERTOS CARLOS",
+      "cargo": "PRESIDENTE",
+      "fecha_nombramiento": "2022-03-29",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "RAMIREZ GALLEGO ALBERTOS ANTONIO",
+      "cargo": "CONSEJERO",
+      "fecha_nombramiento": "2022-03-29",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "RAMIREZ GALLEGO ALBERTOS CARLOS",
+      "cargo": "CONSEJERO",
+      "fecha_nombramiento": "2022-03-29",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "MORA FERNANDEZ CABALLERO JUAN",
+      "cargo": "CONSEJERO",
+      "fecha_nombramiento": "2022-03-29",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "RAMIREZ GALLEGO ALBERTOS ANTONIO",
+      "cargo": "SECRETARIO",
+      "fecha_nombramiento": "2022-03-29",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "MORA FERNANDEZ CABALLERO JUAN",
+      "cargo": "CONS.DEL.SOL",
+      "fecha_nombramiento": "2022-03-29",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "JHO AUDITORES SLP",
+      "cargo": "AUDIT.CUENT.",
+      "fecha_nombramiento": "2014-08-26",
+      "tipo_entidad": "empresa"
+    }
+  ],
   "GLOBAL PRODUCTION AUDIOVISUALS SL": [
     {
       "nombre": "MARIMON CAPARROS GUILLEM",

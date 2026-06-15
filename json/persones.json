@@ -40855,6 +40855,48 @@
     ]
   },
   {
+    "nom": "RAMIREZ GALLEGO ALBERTOS CARLOS",
+    "total_adjudicat": 40700.0,
+    "relacions": [
+      {
+        "empresa": "DIVISEGUR CATALUNYA, S.L.",
+        "import_empresa": 40700.0,
+        "carrecs": [
+          "PRESIDENTE",
+          "CONSEJERO"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "RAMIREZ GALLEGO ALBERTOS ANTONIO",
+    "total_adjudicat": 40700.0,
+    "relacions": [
+      {
+        "empresa": "DIVISEGUR CATALUNYA, S.L.",
+        "import_empresa": 40700.0,
+        "carrecs": [
+          "CONSEJERO",
+          "SECRETARIO"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "MORA FERNANDEZ CABALLERO JUAN",
+    "total_adjudicat": 40700.0,
+    "relacions": [
+      {
+        "empresa": "DIVISEGUR CATALUNYA, S.L.",
+        "import_empresa": 40700.0,
+        "carrecs": [
+          "CONSEJERO",
+          "CONS.DEL.SOL"
+        ]
+      }
+    ]
+  },
+  {
     "nom": "DE LAS CASAS GIMENEZ DE AZCARATE VICTORIA",
     "total_adjudicat": 39947.0,
     "relacions": [
