@@ -5400,11 +5400,47 @@ function App() {
             {
                 activeTab !== 'home' && (
                     <footer className="footer">
-                        <div className="footer-content">
-                            <div className="footer-copyright">© 2026 IGUADATA</div>
-                            <div className="footer-line">
-                                <a href={BASE + '/avis-legal'} onClick={(e) => { e.preventDefault(); handleNavigation('legal'); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="footer-link">Avís Legal</a>
+                        <div className={`footer-content${activeTab === 'sobre' || activeTab === 'legal' ? ' footer-content-prose' : ''}`}>
+                            <div className="footer-main">
+                                <div className="footer-brand">
+                                    <a href={BASE + '/'} onClick={(e) => { e.preventDefault(); handleNavigation('home'); }} className="footer-logo-link" aria-label="Iguadata, inici">
+                                        <img src={assetUrl('/assets/iguadata.svg')} alt="Iguadata" className="footer-logo" />
+                                    </a>
+                                    <p className="footer-tagline">El projecte de transparència d'Igualada</p>
+                                    <div className="footer-social">
+                                        <a href="https://www.instagram.com/iguadata/" target="_blank" rel="noopener noreferrer" className="footer-social-link" aria-label="Iguadata a Instagram">
+                                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                                <rect x="3" y="3" width="18" height="18" rx="5" />
+                                                <circle cx="12" cy="12" r="4" />
+                                                <circle cx="17.5" cy="6.5" r="1" className="footer-social-fill" />
+                                            </svg>
+                                        </a>
+                                        <a href="mailto:hola@iguadata.cat" className="footer-social-link" aria-label="Escriu a Iguadata">
+                                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                                <rect x="3" y="5" width="18" height="14" rx="2" />
+                                                <path d="m4 7 8 6 8-6" />
+                                            </svg>
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <nav className="footer-nav" aria-label="Navegació del peu de pàgina">
+                                    <div className="footer-nav-column">
+                                        <a href={BASE + '/contractes'} onClick={(e) => { e.preventDefault(); handleNavigation('buscador'); }} className="footer-link">Contractes</a>
+                                        <a href={BASE + '/empreses'} onClick={(e) => { e.preventDefault(); handleNavigation('empreses'); }} className="footer-link">Empreses</a>
+                                        <a href={BASE + '/persones'} onClick={(e) => { e.preventDefault(); handleNavigation('persones'); }} className="footer-link">Persones</a>
+                                        <a href={BASE + '/analisi'} onClick={(e) => { e.preventDefault(); handleNavigation('analisi'); }} className="footer-link">Anàlisi</a>
+                                    </div>
+                                    <div className="footer-nav-column">
+                                        <a href={BASE + '/sobre'} onClick={(e) => { e.preventDefault(); handleNavigation('sobre'); }} className="footer-link">Sobre</a>
+                                        <a href="mailto:hola@iguadata.cat" className="footer-link">Contacte</a>
+                                        <a href="https://github.com/vicxvers/iguadata" target="_blank" rel="noopener noreferrer" className="footer-link">Codi obert</a>
+                                        <a href={BASE + '/avis-legal'} onClick={(e) => { e.preventDefault(); handleNavigation('legal'); }} className="footer-link">Avís legal</a>
+                                    </div>
+                                </nav>
                             </div>
+
+                            <div className="footer-copyright">© 2026 Iguadata. Tots els drets reservats.</div>
                         </div>
                     </footer>
                 )
