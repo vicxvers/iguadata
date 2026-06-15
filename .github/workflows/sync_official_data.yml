@@ -1,7 +1,7 @@
 name: Sync official data
 
 # Production (vicxvers/iguadata) is the canonical data source.
-# This workflow updates data files in both development branches without
+# This workflow updates data files in the development branch without
 # replacing application code or in-progress design changes.
 on:
   schedule:
@@ -32,7 +32,7 @@ jobs:
           git remote add official https://github.com/vicxvers/iguadata.git
           git fetch --depth=1 official main:refs/remotes/official/main
 
-      - name: Sync data into development branches
+      - name: Sync data into development branch
         run: |
           set -euo pipefail
 
@@ -53,12 +53,9 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          for branch in main update; do
-            git fetch origin "$branch"
-            git checkout -B "$branch" "origin/$branch"
-            git restore --source=official/main -- "${data_files[@]}"
+          git restore --source=official/main -- "${data_files[@]}"
 
-            python - "${data_files[@]}" <<'PY'
+          python - "${data_files[@]}" <<'PY'
           import json
           import sys
           from pathlib import Path
@@ -72,13 +69,13 @@ jobs:
               print(f"OK {path}: {path.stat().st_size} bytes")
           PY
 
-            git add -- "${data_files[@]}"
-            if git diff --staged --quiet; then
-              echo "$branch already matches official data."
-              continue
-            fi
+          git add -- "${data_files[@]}"
+          if git diff --staged --quiet; then
+            echo "main already matches official data."
+            exit 0
+          fi
 
-            sync_date=$(python - <<'PY'
+          sync_date=$(python - <<'PY'
           import json
           from pathlib import Path
 
@@ -86,6 +83,5 @@ jobs:
           print(payload["generated_at"][:10])
           PY
           )
-            git commit -m "chore(data): sincronitza dades oficials ($sync_date)"
-            git push origin "HEAD:$branch"
-          done
+          git commit -m "chore(data): sincronitza dades oficials ($sync_date)"
+          git push origin HEAD:main
