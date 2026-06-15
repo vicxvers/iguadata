@@ -2437,6 +2437,7 @@ function App() {
     const [homeIntroFading, setHomeIntroFading] = useState(false);
     const [threeReadyTick, setThreeReadyTick] = useState(0);
     const [showMobileScrollTop, setShowMobileScrollTop] = useState(false);
+    const [isPageTop, setIsPageTop] = useState(() => window.scrollY < 24);
     const [homeRouteTransition, setHomeRouteTransition] = useState('');
     const [homeMetricTransition, setHomeMetricTransition] = useState(null);
     const homeIntroPlayedRef = useRef(false);
@@ -2761,6 +2762,7 @@ function App() {
 
     useEffect(() => {
         const updateScrollTopButton = () => {
+            setIsPageTop(window.scrollY < 24);
             setShowMobileScrollTop(activeTab !== 'home' && window.matchMedia('(max-width: 768px)').matches && window.scrollY > 180);
         };
         updateScrollTopButton();
@@ -3622,7 +3624,8 @@ function App() {
     }), [fraudes]);
 
     const goToHome = () => {
-        if (activeTab === 'home') {
+        if (activeTab === 'home' || !isPageTop) {
+            setIsMobileMenuOpen(false);
             window.scrollTo({ top: 0, behavior: 'smooth' });
             return;
         }
@@ -4645,7 +4648,7 @@ function App() {
 
             {activeTab === 'analisi' && canRenderDataTab && (
                 <>
-                    <div className="analisi-tabs-wrapper">
+                    <div className={'analisi-tabs-wrapper' + (!isPageTop ? ' is-hidden-on-scroll' : '')}>
                         <div className="analisi-tabs" role="tablist" aria-label="Tipus d'anàlisi">
                         <button
                             className={'analisi-tab' + (analisiTab === 'fraccionament' ? ' active' : '')}
@@ -4686,14 +4689,23 @@ function App() {
                         </div>
                     </div>
 
-                    <div className="container analisi-page" id="analisi-panel" role="tabpanel">
-                        <h1 className="page-title">Anàlisi de contractes</h1>
+                    <div
+                        className={`container analisi-page analisi-page-reordered analisi-page-${analisiTab}${analisiTab === 'monopoli' ? ` concentracio-mode-${concentracioMode}` : ''}`}
+                        id="analisi-panel"
+                        role="tabpanel"
+                    >
+                        <h1 className="page-title">
+                            {analisiTab === 'fraccionament'
+                                ? 'Anàlisi de fraccionament'
+                                : analisiTab === 'monopoli'
+                                    ? 'Anàlisi de concentració'
+                                    : "Anàlisi d'electoralisme"}
+                        </h1>
 
                         {analisiTab === 'fraccionament' && (
                             <>
                                 <div className="metodologia-wrapper">
                                     <div className="metodologia">
-                                        <div className="metodologia-algo-title">Fraccionament</div>
                                         <h3 className="metodologia-title">Metodologia</h3>
                                         <p className="metodologia-intro">L'algoritme Iguadata de fraccionament detecta grups de contractes menors que poden ser compatibles amb una possible divisió d'un mateix encàrrec en diversos contractes per evitar el concurs públic. També incorpora contractes menors individuals molt propers al límit legal, imports rodons o ajustats al llindar i repeticions multianuals del mateix objecte. La identificació de patrons estadísticament rellevants i les alertes generades no impliquen cap irregularitat legal confirmada i han de ser interpretades en context.</p>
                                         <div className="metodologia-steps-compact">
@@ -4801,9 +4813,8 @@ function App() {
                                                     <div className="contract-title">{(caso.empreses || []).slice(0, 2).join(' & ')}</div>
                                                     <div className="contract-amount">{formatCurrency(caso.import_total)}</div>
                                                 </div>
-                                                <div className="contract-meta">
+                                                <div className="contract-meta fraccionament-alert-meta">
                                                     <div className="contract-meta-item fraccionament-card-object">
-                                                        <span className="contract-meta-label">Objecte</span>
                                                         <span className="contract-meta-value">{(caso.contractes && caso.contractes[0] && caso.contractes[0].descripcion) || ''}</span>
                                                     </div>
                                                     <div className="contract-pills">
@@ -4832,7 +4843,6 @@ function App() {
                             <>
                                 <div className="metodologia-wrapper">
                                     <div className="metodologia">
-                                        <div className="metodologia-algo-title">Concentració</div>
                                         <h3 className="metodologia-title">Metodologia</h3>
                                         <p className="metodologia-intro">L'algoritme Iguadata de concentració identifica quines empreses tenen més pes dins de cada sector i detecta períodes curts en què una mateixa empresa acumula un nombre elevat de contractes. La identificació de patrons estadísticament rellevants i les alertes generades no impliquen cap irregularitat legal confirmada i han de ser interpretades en context.</p>
                                         <div className="metodologia-steps-compact">
@@ -5069,7 +5079,6 @@ function App() {
                             <>
                                 <div className="metodologia-wrapper">
                                     <div className="metodologia">
-                                        <div className="metodologia-algo-title">Electoralisme</div>
                                         <h3 className="metodologia-title">Metodologia</h3>
                                         <p className="metodologia-intro">L'algoritme Iguadata d'electoralisme detecta contractes de comunicació, difusió, publicitat institucional o actes públics adjudicats durant períodes electorals. La identificació de patrons estadísticament rellevants i les alertes generades no impliquen cap irregularitat legal confirmada i han de ser interpretades en context.</p>
                                         <div className="metodologia-steps-compact">

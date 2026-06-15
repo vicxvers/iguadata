@@ -3116,6 +3116,7 @@ function App() {
   const [homeIntroFading, setHomeIntroFading] = useState(false);
   const [threeReadyTick, setThreeReadyTick] = useState(0);
   const [showMobileScrollTop, setShowMobileScrollTop] = useState(false);
+  const [isPageTop, setIsPageTop] = useState(() => window.scrollY < 24);
   const [homeRouteTransition, setHomeRouteTransition] = useState('');
   const [homeMetricTransition, setHomeMetricTransition] = useState(null);
   const homeIntroPlayedRef = useRef(false);
@@ -3432,6 +3433,7 @@ function App() {
   }, [activeTab, loading, threeReadyTick]);
   useEffect(() => {
     const updateScrollTopButton = () => {
+      setIsPageTop(window.scrollY < 24);
       setShowMobileScrollTop(activeTab !== 'home' && window.matchMedia('(max-width: 768px)').matches && window.scrollY > 180);
     };
     updateScrollTopButton();
@@ -4223,7 +4225,8 @@ function App() {
     totalVisible: fraudes.filter(f => f.nivell !== 'BAIX').length
   }), [fraudes]);
   const goToHome = () => {
-    if (activeTab === 'home') {
+    if (activeTab === 'home' || !isPageTop) {
+      setIsMobileMenuOpen(false);
       window.scrollTo({
         top: 0,
         behavior: 'smooth'
@@ -5461,7 +5464,7 @@ function App() {
     onContractSelect: handleDetailClick,
     onEmpresaClick: handleEmpresaClick
   }), activeTab === 'analisi' && canRenderDataTab && React.createElement(React.Fragment, null, React.createElement("div", {
-    className: "analisi-tabs-wrapper"
+    className: 'analisi-tabs-wrapper' + (!isPageTop ? ' is-hidden-on-scroll' : '')
   }, React.createElement("div", {
     className: "analisi-tabs",
     role: "tablist",
@@ -5494,18 +5497,16 @@ function App() {
     tabIndex: analisiTab === 'electoral' ? 0 : -1,
     onKeyDown: handleAnalisiTabKeyDown
   }, "Electoralisme"))), React.createElement("div", {
-    className: "container analisi-page",
+    className: `container analisi-page analisi-page-reordered analisi-page-${analisiTab}${analisiTab === 'monopoli' ? ` concentracio-mode-${concentracioMode}` : ''}`,
     id: "analisi-panel",
     role: "tabpanel"
   }, React.createElement("h1", {
     className: "page-title"
-  }, "An\xE0lisi de contractes"), analisiTab === 'fraccionament' && React.createElement(React.Fragment, null, React.createElement("div", {
+  }, analisiTab === 'fraccionament' ? 'Anàlisi de fraccionament' : analisiTab === 'monopoli' ? 'Anàlisi de concentració' : "Anàlisi d'electoralisme"), analisiTab === 'fraccionament' && React.createElement(React.Fragment, null, React.createElement("div", {
     className: "metodologia-wrapper"
   }, React.createElement("div", {
     className: "metodologia"
-  }, React.createElement("div", {
-    className: "metodologia-algo-title"
-  }, "Fraccionament"), React.createElement("h3", {
+  }, React.createElement("h3", {
     className: "metodologia-title"
   }, "Metodologia"), React.createElement("p", {
     className: "metodologia-intro"
@@ -5669,12 +5670,10 @@ function App() {
   }, (caso.empreses || []).slice(0, 2).join(' & ')), React.createElement("div", {
     className: "contract-amount"
   }, formatCurrency(caso.import_total))), React.createElement("div", {
-    className: "contract-meta"
+    className: "contract-meta fraccionament-alert-meta"
   }, React.createElement("div", {
     className: "contract-meta-item fraccionament-card-object"
   }, React.createElement("span", {
-    className: "contract-meta-label"
-  }, "Objecte"), React.createElement("span", {
     className: "contract-meta-value"
   }, caso.contractes && caso.contractes[0] && caso.contractes[0].descripcion || '')), React.createElement("div", {
     className: "contract-pills"
@@ -5734,9 +5733,7 @@ function App() {
     className: "metodologia-wrapper"
   }, React.createElement("div", {
     className: "metodologia"
-  }, React.createElement("div", {
-    className: "metodologia-algo-title"
-  }, "Concentraci\xF3"), React.createElement("h3", {
+  }, React.createElement("h3", {
     className: "metodologia-title"
   }, "Metodologia"), React.createElement("p", {
     className: "metodologia-intro"
@@ -6063,9 +6060,7 @@ function App() {
     className: "metodologia-wrapper"
   }, React.createElement("div", {
     className: "metodologia"
-  }, React.createElement("div", {
-    className: "metodologia-algo-title"
-  }, "Electoralisme"), React.createElement("h3", {
+  }, React.createElement("h3", {
     className: "metodologia-title"
   }, "Metodologia"), React.createElement("p", {
     className: "metodologia-intro"

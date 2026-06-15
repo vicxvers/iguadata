@@ -728,6 +728,11 @@ html.home-lock-scroll {
     transition: all 0.2s;
 }
 
+.filter-input[type="number"]::placeholder {
+    color: var(--navy);
+    opacity: 1;
+}
+
 .filter-input:hover {
     border-color: var(--navy-light);
 }
@@ -3316,6 +3321,7 @@ body.home-scroll-surface::-webkit-scrollbar {
 }
 
 .home-chrome-gradient {
+    --chrome-blur-mask: linear-gradient(180deg, #000 0%, rgba(0, 0, 0, 0.92) 42%, transparent 100%);
     position: fixed;
     top: 0;
     left: 0;
@@ -3326,6 +3332,21 @@ body.home-scroll-surface::-webkit-scrollbar {
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.22s;
+}
+
+.home-chrome-gradient::before,
+.site-chrome-gradient::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    mask-image: var(--chrome-blur-mask);
+    -webkit-mask-image: var(--chrome-blur-mask);
+    pointer-events: none;
 }
 
 .home-chrome-gradient.is-visible {
@@ -3341,6 +3362,7 @@ body.home-scroll-surface::-webkit-scrollbar {
 }
 
 .site-chrome-gradient {
+    --chrome-blur-mask: linear-gradient(180deg, #000 0%, rgba(0, 0, 0, 0.92) 48%, transparent 100%);
     position: fixed;
     top: 0;
     left: 0;
@@ -4637,8 +4659,20 @@ body.home-scroll-surface::-webkit-scrollbar {
 @media (min-width: 769px) {
     .analisi-tabs-wrapper {
         position: sticky;
-        top: 9.75rem;
+        top: 10.25rem;
         z-index: 99;
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+        transition: opacity 0.2s ease, transform 0.2s ease, visibility 0s;
+    }
+
+    .analisi-tabs-wrapper.is-hidden-on-scroll {
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-0.75rem);
+        pointer-events: none;
+        transition: opacity 0.2s ease, transform 0.2s ease, visibility 0s linear 0.2s;
     }
 }
 
@@ -5172,6 +5206,44 @@ body.home-scroll-surface::-webkit-scrollbar {
     margin-top: 3.75rem;
 }
 
+.analisi-page-reordered {
+    display: flex;
+    flex-direction: column;
+}
+
+.analisi-page-reordered>.page-title {
+    margin-bottom: 0;
+}
+
+.analisi-page-reordered>.sector-concentration-visual {
+    order: 90;
+}
+
+.analisi-page-reordered>.metodologia-wrapper {
+    order: 100;
+    margin-top: 3rem;
+}
+
+.analisi-page-reordered>.pagination,
+.analisi-page-reordered>*>.pagination {
+    margin-top: 3rem;
+    margin-bottom: 0;
+}
+
+.analisi-page-reordered .analisi-alert-list .card-link-wrapper:last-child .contract-card {
+    margin-bottom: 0;
+}
+
+.analisi-page-reordered.concentracio-mode-temporal>.sector-concentration-visual {
+    margin-top: 0;
+    border-top: 0;
+}
+
+.analisi-page-reordered .metodologia-title {
+    padding-top: 0;
+    border-top: 0;
+}
+
 .analisi-risk-filters {
     display: flex;
     flex-wrap: wrap;
@@ -5606,6 +5678,21 @@ body.home-scroll-surface::-webkit-scrollbar {
 .fraccionament-card-object .contract-meta-value {
     font-size: var(--text-md);
     line-height: 1.45;
+}
+
+@media (min-width: 769px) {
+    .fraccionament-alert-meta {
+        flex-wrap: nowrap;
+        align-items: center;
+    }
+
+    .fraccionament-alert-meta .fraccionament-card-object {
+        flex: 1 1 0;
+    }
+
+    .fraccionament-alert-meta .contract-pills {
+        flex: 0 0 auto;
+    }
 }
 
 .electoralisme-card .contract-amount {
@@ -6438,6 +6525,13 @@ body.home-scroll-surface::-webkit-scrollbar {
     }
 
     .site-chrome-gradient {
+        --chrome-blur-mask: linear-gradient(
+            180deg,
+            #000 0%,
+            rgba(0, 0, 0, 0.98) 55%,
+            rgba(0, 0, 0, 0.82) 78%,
+            transparent 100%
+        );
         height: 9.25rem;
         background: linear-gradient(
             180deg,
@@ -6548,14 +6642,19 @@ body.home-scroll-surface::-webkit-scrollbar {
         gap: 0.35rem;
         overflow: visible;
         opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
         padding: 0;
-        transition: max-height 0.28s ease, opacity 0.2s ease, padding-bottom 0.28s ease;
+        transition: max-height 0.28s ease, opacity 0.2s ease, padding-bottom 0.28s ease, visibility 0s linear 0.28s;
     }
 
     .site-dock-nav.open .nav {
         max-height: 22rem;
         opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
         padding-top: 0.35rem;
+        transition-delay: 0s;
     }
 
     .site-dock-nav .nav-tab {
@@ -6634,6 +6733,37 @@ body.home-scroll-surface::-webkit-scrollbar {
 
     .contract-card:not(.persona-card) .contract-amount {
         margin-bottom: 1.35rem;
+    }
+
+    .analisi-alert-list .fraccionament-card {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .analisi-alert-list .fraccionament-card .contract-header,
+    .analisi-alert-list .fraccionament-alert-meta {
+        display: contents;
+    }
+
+    .analisi-alert-list .fraccionament-alert-meta .contract-pills {
+        order: 1;
+        align-self: flex-start;
+        margin: 0 0 var(--mobile-rule-gap);
+    }
+
+    .analisi-alert-list .fraccionament-card .contract-title {
+        order: 2;
+        margin-bottom: 1.125rem;
+    }
+
+    .analisi-alert-list .fraccionament-card .contract-amount {
+        order: 3;
+    }
+
+    .analisi-alert-list .fraccionament-card-object {
+        order: 4;
+        padding-top: var(--mobile-rule-gap);
+        border-top: 1px solid var(--border);
     }
 
     .analisi-page .concentracio-card-historic .contract-amount {
@@ -7129,12 +7259,12 @@ body.home-scroll-surface::-webkit-scrollbar {
         font-size: clamp(2.65rem, 11vw, 3.35rem) !important;
         line-height: 0.98;
         margin-top: 0.75rem;
-        margin-bottom: 1.5rem;
+        margin-bottom: 0;
         text-align: center;
     }
 
-    .analisi-page .metodologia-wrapper {
-        margin-top: 0;
+    .analisi-page-reordered>.metodologia-wrapper {
+        margin-top: var(--mobile-section-gap);
     }
 
     .analisi-page .metodologia {
@@ -7214,8 +7344,10 @@ body.home-scroll-surface::-webkit-scrollbar {
         margin-top: 1rem;
     }
 
-    .analisi-page .pagination {
+    .analisi-page-reordered>.pagination,
+    .analisi-page-reordered>*>.pagination {
         margin-top: var(--mobile-section-gap);
+        margin-bottom: 0;
     }
 
     .concentracio-card {
