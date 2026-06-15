@@ -33,6 +33,25 @@ def data_version():
     return digest.hexdigest()[:16]
 
 
+def top_company_totals(empreses, field, limit):
+    totals = {}
+    for empresa in empreses:
+        label = empresa.get(field) or "Sense classificar"
+        amount = float(empresa.get("total_importe") or 0)
+        if not amount or label == "Sense classificar":
+            continue
+        totals[label] = totals.get(label, 0) + amount
+
+    return [
+        {"label": label, "amount": amount}
+        for label, amount in sorted(
+            totals.items(),
+            key=lambda item: item[1],
+            reverse=True,
+        )[:limit]
+    ]
+
+
 def main():
     contractes = load_json("contractes.json")
     empreses = load_json("empreses.json")
@@ -49,6 +68,15 @@ def main():
         item for item in electoralisme.get("alertes", [])
         if item.get("nivell") != "BAIX"
     ]
+    totes_alertes = (
+        fraccionament.get("alertes", [])
+        + concentracio.get("alertes", [])
+        + electoralisme.get("alertes", [])
+    )
+    nivells = [
+        str(item.get("nivell") or "").upper()
+        for item in totes_alertes
+    ]
 
     resum = {
         "version": data_version(),
@@ -63,6 +91,15 @@ def main():
                 + len(concentracio.get("alertes", []))
                 + len(alertes_electoralisme)
             ),
+        },
+        "home": {
+            "top_sectors": top_company_totals(empreses, "sector", 5),
+            "top_categories": top_company_totals(empreses, "categoria", 6),
+            "risk_counts": {
+                "alt": sum(level == "CRITIC" for level in nivells),
+                "mitja": sum(level == "ALT" for level in nivells),
+                "baix": sum(level in {"OBSERVACIO", "BAIX"} for level in nivells),
+            },
         },
     }
 
