@@ -25,6 +25,7 @@
     <title>Iguadata | El projecte de transparència d'Igualada</title>
     <script>
         window.__IGUADATA_BASE__ = window.location.hostname.endsWith('github.io') ? '/iguadata-dev' : '';
+        document.write('<base href="' + (window.__IGUADATA_BASE__ ? window.__IGUADATA_BASE__ + '/' : '/') + '">');
         window.__IGUADATA_ASSET__ = function (path) {
             return window.__IGUADATA_BASE__ + path;
         };
