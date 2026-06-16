@@ -7,6 +7,7 @@ administradors mercantils ja filtrats per Iguadata.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import math
 import re
@@ -119,6 +120,21 @@ def enrich_contract(c: dict) -> dict:
 def expediente_key(c: dict) -> str:
     code = re.sub(r"\s+", " ", str(c.get("codigo") or "")).strip()
     return code or f"id:{c.get('id')}"
+
+
+def stable_contract_key(c: dict) -> str:
+    code = re.sub(r"\s+", " ", str(c.get("codigo") or "")).strip()
+    if code:
+        parts = [code, c.get("fecha"), c.get("importe")]
+    else:
+        parts = [c.get("fecha"), c.get("importe"), c.get("adjudicatario")]
+    return "|".join("" if v is None else str(v).strip() for v in parts)
+
+
+def stable_case_id(prefix: str, kind: str, rows: list[dict]) -> str:
+    signature = "|".join([kind, *sorted(stable_contract_key(c) for c in rows)])
+    digest = hashlib.sha1(signature.encode("utf-8")).hexdigest()[:10].upper()
+    return f"{prefix}-{digest}"
 
 
 def dedupe_expedients(rows: list[dict]) -> list[dict]:
@@ -418,9 +434,8 @@ def build_cases(contractes: list[dict], administradors: dict) -> list[dict]:
 
             kinds = {c["_kind"] for c in selected}
             limit_kind = "obres" if kinds == {"obres"} else "serveis"
-            case_id = f"FR-{len(cases) + 1:04d}"
             cases.append({
-                "id": case_id,
+                "id": stable_case_id("FR", "fraccionament", selected),
                 "tipus_alerta": "fraccionament",
                 "risc": score,
                 "nivell": risk_label(score),
@@ -519,7 +534,7 @@ def build_cases(contractes: list[dict], administradors: dict) -> list[dict]:
 
             score = min(score, 100)
             cases.append({
-                "id": f"FR-{len(cases) + 1:04d}",
+                "id": stable_case_id("FR", "repeticio_multianual", selected),
                 "tipus_alerta": "repeticio_multianual",
                 "risc": score,
                 "nivell": risk_label(score),
@@ -568,7 +583,7 @@ def build_cases(contractes: list[dict], administradors: dict) -> list[dict]:
             motius.append("Imports rodons o ajustats al llindar")
 
         cases.append({
-            "id": f"FR-{len(cases) + 1:04d}",
+            "id": stable_case_id("FR", "contracte_proper_limit", [c]),
             "tipus_alerta": "contracte_proper_limit",
             "risc": score,
             "nivell": risk_label(score),

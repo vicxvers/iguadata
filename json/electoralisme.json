@@ -1,6 +1,6 @@
 {
   "metodologia": "electoralisme_v1",
-  "generat_a": "2026-06-15",
+  "generat_a": "2026-06-16",
   "eleccions_municipals": [
     {
       "any": 2011,
@@ -41,7 +41,7 @@
   "total_alertes": 70,
   "alertes": [
     {
-      "id": "EL-0001",
+      "id": "EL-7E47A9781E",
       "tipus_alerta": "electoralisme",
       "risc": 79,
       "nivell": "ALT",
@@ -101,7 +101,7 @@
       ]
     },
     {
-      "id": "EL-0002",
+      "id": "EL-B7E3667614",
       "tipus_alerta": "electoralisme",
       "risc": 68,
       "nivell": "ALT",
@@ -160,7 +160,7 @@
       ]
     },
     {
-      "id": "EL-0003",
+      "id": "EL-BB658D265E",
       "tipus_alerta": "electoralisme",
       "risc": 66,
       "nivell": "ALT",
@@ -216,7 +216,7 @@
       ]
     },
     {
-      "id": "EL-0004",
+      "id": "EL-3C6E2024C9",
       "tipus_alerta": "electoralisme",
       "risc": 66,
       "nivell": "ALT",
@@ -273,7 +273,7 @@
       ]
     },
     {
-      "id": "EL-0005",
+      "id": "EL-3151481D91",
       "tipus_alerta": "electoralisme",
       "risc": 64,
       "nivell": "OBSERVACIO",
@@ -333,7 +333,7 @@
       ]
     },
     {
-      "id": "EL-0006",
+      "id": "EL-CE4BC13176",
       "tipus_alerta": "electoralisme",
       "risc": 63,
       "nivell": "OBSERVACIO",
@@ -392,7 +392,7 @@
       ]
     },
     {
-      "id": "EL-0007",
+      "id": "EL-A54972CB2C",
       "tipus_alerta": "electoralisme",
       "risc": 63,
       "nivell": "OBSERVACIO",
@@ -450,7 +450,7 @@
       ]
     },
     {
-      "id": "EL-0008",
+      "id": "EL-0DC8FA1E8D",
       "tipus_alerta": "electoralisme",
       "risc": 62,
       "nivell": "OBSERVACIO",
@@ -508,7 +508,7 @@
       ]
     },
     {
-      "id": "EL-0009",
+      "id": "EL-BD51103DC4",
       "tipus_alerta": "electoralisme",
       "risc": 62,
       "nivell": "OBSERVACIO",
@@ -567,7 +567,7 @@
       ]
     },
     {
-      "id": "EL-0010",
+      "id": "EL-8D09E8614A",
       "tipus_alerta": "electoralisme",
       "risc": 61,
       "nivell": "OBSERVACIO",
@@ -625,7 +625,7 @@
       ]
     },
     {
-      "id": "EL-0011",
+      "id": "EL-BE968FCD0C",
       "tipus_alerta": "electoralisme",
       "risc": 61,
       "nivell": "OBSERVACIO",
@@ -683,7 +683,7 @@
       ]
     },
     {
-      "id": "EL-0012",
+      "id": "EL-ED5AB971E2",
       "tipus_alerta": "electoralisme",
       "risc": 60,
       "nivell": "OBSERVACIO",
@@ -741,7 +741,7 @@
       ]
     },
     {
-      "id": "EL-0013",
+      "id": "EL-794299016D",
       "tipus_alerta": "electoralisme",
       "risc": 58,
       "nivell": "OBSERVACIO",
@@ -800,7 +800,7 @@
       ]
     },
     {
-      "id": "EL-0014",
+      "id": "EL-1C57F6A24A",
       "tipus_alerta": "electoralisme",
       "risc": 58,
       "nivell": "OBSERVACIO",
@@ -856,7 +856,7 @@
       ]
     },
     {
-      "id": "EL-0015",
+      "id": "EL-79A4B26750",
       "tipus_alerta": "electoralisme",
       "risc": 58,
       "nivell": "OBSERVACIO",
@@ -915,7 +915,7 @@
       ]
     },
     {
-      "id": "EL-0016",
+      "id": "EL-D45DE372B7",
       "tipus_alerta": "electoralisme",
       "risc": 58,
       "nivell": "OBSERVACIO",
@@ -971,7 +971,7 @@
       ]
     },
     {
-      "id": "EL-0017",
+      "id": "EL-1A44C3FB2B",
       "tipus_alerta": "electoralisme",
       "risc": 56,
       "nivell": "OBSERVACIO",
@@ -1028,7 +1028,7 @@
       ]
     },
     {
-      "id": "EL-0018",
+      "id": "EL-92C5F4BBB3",
       "tipus_alerta": "electoralisme",
       "risc": 56,
       "nivell": "OBSERVACIO",
@@ -1086,7 +1086,7 @@
       ]
     },
     {
-      "id": "EL-0019",
+      "id": "EL-87C6CEF328",
       "tipus_alerta": "electoralisme",
       "risc": 55,
       "nivell": "OBSERVACIO",
@@ -1145,7 +1145,7 @@
       ]
     },
     {
-      "id": "EL-0020",
+      "id": "EL-5C8F06B8D4",
       "tipus_alerta": "electoralisme",
       "risc": 55,
       "nivell": "OBSERVACIO",
@@ -1203,7 +1203,7 @@
       ]
     },
     {
-      "id": "EL-0021",
+      "id": "EL-A7A1B967D4",
       "tipus_alerta": "electoralisme",
       "risc": 55,
       "nivell": "OBSERVACIO",
@@ -1261,7 +1261,7 @@
       ]
     },
     {
-      "id": "EL-0022",
+      "id": "EL-B15E7B2C5D",
       "tipus_alerta": "electoralisme",
       "risc": 54,
       "nivell": "OBSERVACIO",
@@ -1317,7 +1317,7 @@
       ]
     },
     {
-      "id": "EL-0023",
+      "id": "EL-13D4C1B9AB",
       "tipus_alerta": "electoralisme",
       "risc": 54,
       "nivell": "OBSERVACIO",
@@ -1374,7 +1374,7 @@
       ]
     },
     {
-      "id": "EL-0024",
+      "id": "EL-12658C9BDC",
       "tipus_alerta": "electoralisme",
       "risc": 54,
       "nivell": "OBSERVACIO",
@@ -1432,7 +1432,7 @@
       ]
     },
     {
-      "id": "EL-0025",
+      "id": "EL-AB4463BBC5",
       "tipus_alerta": "electoralisme",
       "risc": 54,
       "nivell": "OBSERVACIO",
@@ -1489,7 +1489,7 @@
       ]
     },
     {
-      "id": "EL-0026",
+      "id": "EL-9F83B2985F",
       "tipus_alerta": "electoralisme",
       "risc": 54,
       "nivell": "OBSERVACIO",
@@ -1547,7 +1547,7 @@
       ]
     },
     {
-      "id": "EL-0027",
+      "id": "EL-3FB8DBED3C",
       "tipus_alerta": "electoralisme",
       "risc": 54,
       "nivell": "OBSERVACIO",
@@ -1604,7 +1604,7 @@
       ]
     },
     {
-      "id": "EL-0028",
+      "id": "EL-3A2702F25A",
       "tipus_alerta": "electoralisme",
       "risc": 54,
       "nivell": "OBSERVACIO",
@@ -1662,7 +1662,7 @@
       ]
     },
     {
-      "id": "EL-0029",
+      "id": "EL-204EA964DC",
       "tipus_alerta": "electoralisme",
       "risc": 52,
       "nivell": "OBSERVACIO",
@@ -1722,7 +1722,7 @@
       ]
     },
     {
-      "id": "EL-0030",
+      "id": "EL-4736A21F99",
       "tipus_alerta": "electoralisme",
       "risc": 50,
       "nivell": "OBSERVACIO",
@@ -1780,7 +1780,7 @@
       ]
     },
     {
-      "id": "EL-0031",
+      "id": "EL-C7DD5DE593",
       "tipus_alerta": "electoralisme",
       "risc": 50,
       "nivell": "OBSERVACIO",
@@ -1837,7 +1837,7 @@
       ]
     },
     {
-      "id": "EL-0032",
+      "id": "EL-9899C1A299",
       "tipus_alerta": "electoralisme",
       "risc": 50,
       "nivell": "OBSERVACIO",
@@ -1893,7 +1893,7 @@
       ]
     },
     {
-      "id": "EL-0033",
+      "id": "EL-92DACA72E3",
       "tipus_alerta": "electoralisme",
       "risc": 50,
       "nivell": "OBSERVACIO",
@@ -1950,7 +1950,7 @@
       ]
     },
     {
-      "id": "EL-0034",
+      "id": "EL-EC15889802",
       "tipus_alerta": "electoralisme",
       "risc": 50,
       "nivell": "OBSERVACIO",
@@ -2006,7 +2006,7 @@
       ]
     },
     {
-      "id": "EL-0035",
+      "id": "EL-FF3B3B4571",
       "tipus_alerta": "electoralisme",
       "risc": 50,
       "nivell": "OBSERVACIO",
@@ -2063,7 +2063,7 @@
       ]
     },
     {
-      "id": "EL-0036",
+      "id": "EL-E645C4DBAF",
       "tipus_alerta": "electoralisme",
       "risc": 50,
       "nivell": "OBSERVACIO",
@@ -2120,7 +2120,7 @@
       ]
     },
     {
-      "id": "EL-0037",
+      "id": "EL-04177A64D9",
       "tipus_alerta": "electoralisme",
       "risc": 50,
       "nivell": "OBSERVACIO",
@@ -2177,7 +2177,7 @@
       ]
     },
     {
-      "id": "EL-0038",
+      "id": "EL-AA253698AB",
       "tipus_alerta": "electoralisme",
       "risc": 48,
       "nivell": "OBSERVACIO",
@@ -2234,7 +2234,7 @@
       ]
     },
     {
-      "id": "EL-0039",
+      "id": "EL-90E0ADC44B",
       "tipus_alerta": "electoralisme",
       "risc": 48,
       "nivell": "OBSERVACIO",
@@ -2294,7 +2294,7 @@
       ]
     },
     {
-      "id": "EL-0040",
+      "id": "EL-00A9A2AA0C",
       "tipus_alerta": "electoralisme",
       "risc": 48,
       "nivell": "OBSERVACIO",
@@ -2351,7 +2351,7 @@
       ]
     },
     {
-      "id": "EL-0041",
+      "id": "EL-800FAE78E7",
       "tipus_alerta": "electoralisme",
       "risc": 48,
       "nivell": "OBSERVACIO",
@@ -2408,7 +2408,7 @@
       ]
     },
     {
-      "id": "EL-0042",
+      "id": "EL-9480E02CF6",
       "tipus_alerta": "electoralisme",
       "risc": 48,
       "nivell": "OBSERVACIO",
@@ -2465,7 +2465,7 @@
       ]
     },
     {
-      "id": "EL-0043",
+      "id": "EL-14428E91F8",
       "tipus_alerta": "electoralisme",
       "risc": 48,
       "nivell": "OBSERVACIO",
@@ -2522,7 +2522,7 @@
       ]
     },
     {
-      "id": "EL-0044",
+      "id": "EL-9045E06618",
       "tipus_alerta": "electoralisme",
       "risc": 48,
       "nivell": "OBSERVACIO",
@@ -2579,7 +2579,7 @@
       ]
     },
     {
-      "id": "EL-0045",
+      "id": "EL-183658E5C2",
       "tipus_alerta": "electoralisme",
       "risc": 46,
       "nivell": "OBSERVACIO",
@@ -2636,7 +2636,7 @@
       ]
     },
     {
-      "id": "EL-0046",
+      "id": "EL-835C08DFF2",
       "tipus_alerta": "electoralisme",
       "risc": 46,
       "nivell": "OBSERVACIO",
@@ -2693,7 +2693,7 @@
       ]
     },
     {
-      "id": "EL-0047",
+      "id": "EL-94624517AC",
       "tipus_alerta": "electoralisme",
       "risc": 46,
       "nivell": "OBSERVACIO",
@@ -2750,7 +2750,7 @@
       ]
     },
     {
-      "id": "EL-0048",
+      "id": "EL-B0D4973599",
       "tipus_alerta": "electoralisme",
       "risc": 46,
       "nivell": "OBSERVACIO",
@@ -2807,7 +2807,7 @@
       ]
     },
     {
-      "id": "EL-0049",
+      "id": "EL-7FCBF7E814",
       "tipus_alerta": "electoralisme",
       "risc": 46,
       "nivell": "OBSERVACIO",
@@ -2864,7 +2864,7 @@
       ]
     },
     {
-      "id": "EL-0050",
+      "id": "EL-5F42DB50C9",
       "tipus_alerta": "electoralisme",
       "risc": 46,
       "nivell": "OBSERVACIO",
@@ -2921,7 +2921,7 @@
       ]
     },
     {
-      "id": "EL-0051",
+      "id": "EL-14CA716DF7",
       "tipus_alerta": "electoralisme",
       "risc": 46,
       "nivell": "OBSERVACIO",
@@ -2978,7 +2978,7 @@
       ]
     },
     {
-      "id": "EL-0052",
+      "id": "EL-C1ADF8D952",
       "tipus_alerta": "electoralisme",
       "risc": 46,
       "nivell": "OBSERVACIO",
@@ -3035,7 +3035,7 @@
       ]
     },
     {
-      "id": "EL-0053",
+      "id": "EL-7462FA99EE",
       "tipus_alerta": "electoralisme",
       "risc": 46,
       "nivell": "OBSERVACIO",
@@ -3092,7 +3092,7 @@
       ]
     },
     {
-      "id": "EL-0054",
+      "id": "EL-F454E344C8",
       "tipus_alerta": "electoralisme",
       "risc": 46,
       "nivell": "OBSERVACIO",
@@ -3149,7 +3149,7 @@
       ]
     },
     {
-      "id": "EL-0055",
+      "id": "EL-043743948E",
       "tipus_alerta": "electoralisme",
       "risc": 46,
       "nivell": "OBSERVACIO",
@@ -3206,7 +3206,7 @@
       ]
     },
     {
-      "id": "EL-0056",
+      "id": "EL-CE5536D7E1",
       "tipus_alerta": "electoralisme",
       "risc": 46,
       "nivell": "OBSERVACIO",
@@ -3263,7 +3263,7 @@
       ]
     },
     {
-      "id": "EL-0057",
+      "id": "EL-852E120910",
       "tipus_alerta": "electoralisme",
       "risc": 46,
       "nivell": "OBSERVACIO",
@@ -3320,7 +3320,7 @@
       ]
     },
     {
-      "id": "EL-0058",
+      "id": "EL-7F715EB7B4",
       "tipus_alerta": "electoralisme",
       "risc": 46,
       "nivell": "OBSERVACIO",
@@ -3377,7 +3377,7 @@
       ]
     },
     {
-      "id": "EL-0059",
+      "id": "EL-2990D62F7F",
       "tipus_alerta": "electoralisme",
       "risc": 45,
       "nivell": "OBSERVACIO",
@@ -3435,7 +3435,7 @@
       ]
     },
     {
-      "id": "EL-0060",
+      "id": "EL-B17ABAF7F8",
       "tipus_alerta": "electoralisme",
       "risc": 44,
       "nivell": "OBSERVACIO",
@@ -3495,7 +3495,7 @@
       ]
     },
     {
-      "id": "EL-0061",
+      "id": "EL-4AB7882F8E",
       "tipus_alerta": "electoralisme",
       "risc": 42,
       "nivell": "OBSERVACIO",
@@ -3551,7 +3551,7 @@
       ]
     },
     {
-      "id": "EL-0062",
+      "id": "EL-AD60685D00",
       "tipus_alerta": "electoralisme",
       "risc": 42,
       "nivell": "OBSERVACIO",
@@ -3610,7 +3610,7 @@
       ]
     },
     {
-      "id": "EL-0063",
+      "id": "EL-299C06C73C",
       "tipus_alerta": "electoralisme",
       "risc": 42,
       "nivell": "OBSERVACIO",
@@ -3666,7 +3666,7 @@
       ]
     },
     {
-      "id": "EL-0064",
+      "id": "EL-32B13B31C0",
       "tipus_alerta": "electoralisme",
       "risc": 42,
       "nivell": "OBSERVACIO",
@@ -3724,7 +3724,7 @@
       ]
     },
     {
-      "id": "EL-0065",
+      "id": "EL-C44CE6EBBA",
       "tipus_alerta": "electoralisme",
       "risc": 42,
       "nivell": "OBSERVACIO",
@@ -3780,7 +3780,7 @@
       ]
     },
     {
-      "id": "EL-0066",
+      "id": "EL-14950D0790",
       "tipus_alerta": "electoralisme",
       "risc": 40,
       "nivell": "OBSERVACIO",
@@ -3835,7 +3835,7 @@
       ]
     },
     {
-      "id": "EL-0067",
+      "id": "EL-279B98658B",
       "tipus_alerta": "electoralisme",
       "risc": 40,
       "nivell": "OBSERVACIO",
@@ -3892,7 +3892,7 @@
       ]
     },
     {
-      "id": "EL-0068",
+      "id": "EL-0B51BAA498",
       "tipus_alerta": "electoralisme",
       "risc": 40,
       "nivell": "OBSERVACIO",
@@ -3949,7 +3949,7 @@
       ]
     },
     {
-      "id": "EL-0069",
+      "id": "EL-79C0538CEB",
       "tipus_alerta": "electoralisme",
       "risc": 40,
       "nivell": "OBSERVACIO",
@@ -4006,7 +4006,7 @@
       ]
     },
     {
-      "id": "EL-0070",
+      "id": "EL-8D92893AC2",
       "tipus_alerta": "electoralisme",
       "risc": 40,
       "nivell": "OBSERVACIO",

@@ -1,6 +1,6 @@
 {
   "metodologia": "concentracio_v1",
-  "generat_a": "2026-06-15",
+  "generat_a": "2026-06-16",
   "total_alertes": 44,
   "alertes": [
     {
@@ -168,7 +168,7 @@
         "Ritme d'adjudicació molt superior al patró històric de l'empresa",
         "Import acumulat rellevant"
       ],
-      "id": "CO-0001"
+      "id": "CO-6DA285A0DE"
     },
     {
       "tipus_alerta": "concentracio",
@@ -350,7 +350,7 @@
         "Acumulació concentrada en menys de 30 dies",
         "Ritme d'adjudicació molt superior al patró històric de l'empresa"
       ],
-      "id": "CO-0002"
+      "id": "CO-153BA0B99A"
     },
     {
       "tipus_alerta": "concentracio",
@@ -468,7 +468,7 @@
         "Acumulació concentrada en menys de 30 dies",
         "Ritme d'adjudicació molt superior al patró històric de l'empresa"
       ],
-      "id": "CO-0003"
+      "id": "CO-AD7976CC1D"
     },
     {
       "tipus_alerta": "concentracio",
@@ -586,7 +586,7 @@
         "Acumulació concentrada en menys de 30 dies",
         "Ritme d'adjudicació molt superior al patró històric de l'empresa"
       ],
-      "id": "CO-0004"
+      "id": "CO-664C228DB1"
     },
     {
       "tipus_alerta": "concentracio",
@@ -704,7 +704,7 @@
         "Acumulació concentrada en menys de 30 dies",
         "Ritme d'adjudicació molt superior al patró històric de l'empresa"
       ],
-      "id": "CO-0005"
+      "id": "CO-4F56AE16C1"
     },
     {
       "tipus_alerta": "concentracio",
@@ -823,7 +823,7 @@
         "Ritme d'adjudicació molt superior al patró històric de l'empresa",
         "Import acumulat rellevant"
       ],
-      "id": "CO-0006"
+      "id": "CO-0E69180C9D"
     },
     {
       "tipus_alerta": "concentracio",
@@ -941,7 +941,7 @@
         "Acumulació concentrada en menys de 30 dies",
         "Ritme d'adjudicació molt superior al patró històric de l'empresa"
       ],
-      "id": "CO-0007"
+      "id": "CO-53E0C8868E"
     },
     {
       "tipus_alerta": "concentracio",
@@ -1059,7 +1059,7 @@
         "Acumulació concentrada en menys de 30 dies",
         "Ritme d'adjudicació molt superior al patró històric de l'empresa"
       ],
-      "id": "CO-0008"
+      "id": "CO-7AD808549F"
     },
     {
       "tipus_alerta": "concentracio",
@@ -1321,7 +1321,7 @@
         "Acumulació concentrada en menys de 180 dies",
         "Ritme d'adjudicació superior al patró històric de l'empresa"
       ],
-      "id": "CO-0009"
+      "id": "CO-54AB4F0789"
     },
     {
       "tipus_alerta": "concentracio",
@@ -1456,7 +1456,7 @@
         "Ritme d'adjudicació molt superior al patró històric de l'empresa",
         "Import acumulat significatiu"
       ],
-      "id": "CO-0010"
+      "id": "CO-12BA0E7820"
     },
     {
       "tipus_alerta": "concentracio",
@@ -1653,7 +1653,7 @@
         "Acumulació concentrada en menys de 30 dies",
         "Ritme d'adjudicació molt superior al patró històric de l'empresa"
       ],
-      "id": "CO-0011"
+      "id": "CO-76E0785833"
     },
     {
       "tipus_alerta": "concentracio",
@@ -1747,7 +1747,7 @@
         "Patró observat en una finestra temporal estructural",
         "Import acumulat rellevant"
       ],
-      "id": "CO-0012"
+      "id": "CO-7C95686AA9"
     },
     {
       "tipus_alerta": "concentracio",
@@ -1897,7 +1897,7 @@
         "Acumulació concentrada en menys de 30 dies",
         "Ritme d'adjudicació molt superior al patró històric de l'empresa"
       ],
-      "id": "CO-0013"
+      "id": "CO-F801E50802"
     },
     {
       "tipus_alerta": "concentracio",
@@ -1999,7 +1999,7 @@
         "Acumulació concentrada en menys de 30 dies",
         "Ritme d'adjudicació molt superior al patró històric de l'empresa"
       ],
-      "id": "CO-0014"
+      "id": "CO-BD0AF17152"
     },
     {
       "tipus_alerta": "concentracio",
@@ -2117,7 +2117,7 @@
         "Acumulació concentrada en menys de 90 dies",
         "Ritme d'adjudicació molt superior al patró històric de l'empresa"
       ],
-      "id": "CO-0015"
+      "id": "CO-39FACE473A"
     },
     {
       "tipus_alerta": "concentracio",
@@ -2234,7 +2234,7 @@
         "Quota econòmica molt alta dins la finestra",
         "Acumulació concentrada en menys de 90 dies"
       ],
-      "id": "CO-0016"
+      "id": "CO-2A67C0E337"
     },
     {
       "tipus_alerta": "concentracio",
@@ -2336,7 +2336,7 @@
         "Acumulació concentrada en menys de 90 dies",
         "Ritme d'adjudicació molt superior al patró històric de l'empresa"
       ],
-      "id": "CO-0017"
+      "id": "CO-F01642787D"
     },
     {
       "tipus_alerta": "concentracio",
@@ -2454,7 +2454,7 @@
         "Acumulació concentrada en menys de 90 dies",
         "Import acumulat rellevant"
       ],
-      "id": "CO-0018"
+      "id": "CO-97A3715150"
     },
     {
       "tipus_alerta": "concentracio",
@@ -2588,7 +2588,7 @@
         "Acumulació concentrada en menys de 30 dies",
         "Ritme d'adjudicació molt superior al patró històric de l'empresa"
       ],
-      "id": "CO-0019"
+      "id": "CO-D3D0E434FF"
     },
     {
       "tipus_alerta": "concentracio",
@@ -2690,7 +2690,7 @@
         "Acumulació concentrada en menys de 30 dies",
         "Ritme d'adjudicació molt superior al patró històric de l'empresa"
       ],
-      "id": "CO-0020"
+      "id": "CO-F7D4EB1AC4"
     },
     {
       "tipus_alerta": "concentracio",
@@ -2825,7 +2825,7 @@
         "Ritme d'adjudicació molt superior al patró històric de l'empresa",
         "Import acumulat significatiu"
       ],
-      "id": "CO-0021"
+      "id": "CO-C3B3499F40"
     },
     {
       "tipus_alerta": "concentracio",
@@ -2959,7 +2959,7 @@
         "Acumulació concentrada en menys de 30 dies",
         "Ritme d'adjudicació superior al patró històric de l'empresa"
       ],
-      "id": "CO-0022"
+      "id": "CO-802430C5A0"
     },
     {
       "tipus_alerta": "concentracio",
@@ -3076,7 +3076,7 @@
         "Acumulació concentrada en menys de 30 dies",
         "Ritme d'adjudicació molt superior al patró històric de l'empresa"
       ],
-      "id": "CO-0023"
+      "id": "CO-0A73FD715D"
     },
     {
       "tipus_alerta": "concentracio",
@@ -3210,7 +3210,7 @@
         "Ritme d'adjudicació molt superior al patró històric de l'empresa",
         "Import acumulat rellevant"
       ],
-      "id": "CO-0024"
+      "id": "CO-F73EC7E9C5"
     },
     {
       "tipus_alerta": "concentracio",
@@ -3328,7 +3328,7 @@
         "Acumulació concentrada en menys de 90 dies",
         "Ritme d'adjudicació molt superior al patró històric de l'empresa"
       ],
-      "id": "CO-0025"
+      "id": "CO-C4778668DE"
     },
     {
       "tipus_alerta": "concentracio",
@@ -3430,7 +3430,7 @@
         "Acumulació concentrada en menys de 30 dies",
         "Ritme d'adjudicació superior al patró històric de l'empresa"
       ],
-      "id": "CO-0026"
+      "id": "CO-F5D7BCE7DC"
     },
     {
       "tipus_alerta": "concentracio",
@@ -3497,7 +3497,7 @@
         "Patró observat en una finestra temporal estructural",
         "Import acumulat rellevant"
       ],
-      "id": "CO-0027"
+      "id": "CO-E3D00A7007"
     },
     {
       "tipus_alerta": "concentracio",
@@ -3612,7 +3612,7 @@
         "Patró observat en una finestra temporal estructural",
         "Import acumulat rellevant"
       ],
-      "id": "CO-0028"
+      "id": "CO-A200B0A763"
     },
     {
       "tipus_alerta": "concentracio",
@@ -3778,7 +3778,7 @@
         "Ritme d'adjudicació molt superior al patró històric de l'empresa",
         "Import acumulat significatiu"
       ],
-      "id": "CO-0029"
+      "id": "CO-BB1B11BC28"
     },
     {
       "tipus_alerta": "concentracio",
@@ -3880,7 +3880,7 @@
         "Acumulació concentrada en menys de 30 dies",
         "Ritme d'adjudicació molt superior al patró històric de l'empresa"
       ],
-      "id": "CO-0030"
+      "id": "CO-B74A7C5E2F"
     },
     {
       "tipus_alerta": "concentracio",
@@ -3998,7 +3998,7 @@
         "Acumulació concentrada en menys de 90 dies",
         "Ritme d'adjudicació superior al patró històric de l'empresa"
       ],
-      "id": "CO-0031"
+      "id": "CO-30E3229C7B"
     },
     {
       "tipus_alerta": "concentracio",
@@ -4116,7 +4116,7 @@
         "Acumulació concentrada en menys de 90 dies",
         "Ritme d'adjudicació superior al patró històric de l'empresa"
       ],
-      "id": "CO-0032"
+      "id": "CO-47BC580882"
     },
     {
       "tipus_alerta": "concentracio",
@@ -4218,7 +4218,7 @@
         "Acumulació concentrada en menys de 30 dies",
         "Import acumulat rellevant"
       ],
-      "id": "CO-0033"
+      "id": "CO-21B2A1349E"
     },
     {
       "tipus_alerta": "concentracio",
@@ -4269,7 +4269,7 @@
         "Patró observat en una finestra temporal estructural",
         "Import acumulat rellevant"
       ],
-      "id": "CO-0034"
+      "id": "CO-83339B3BA4"
     },
     {
       "tipus_alerta": "concentracio",
@@ -5504,7 +5504,7 @@
         "Patró observat en una finestra temporal estructural",
         "Import acumulat rellevant"
       ],
-      "id": "CO-0035"
+      "id": "CO-233AAFE817"
     },
     {
       "tipus_alerta": "concentracio",
@@ -6723,7 +6723,7 @@
         "Patró observat en una finestra temporal estructural",
         "Import acumulat rellevant"
       ],
-      "id": "CO-0036"
+      "id": "CO-F3BFC035CA"
     },
     {
       "tipus_alerta": "concentracio",
@@ -7957,7 +7957,7 @@
         "Import acumulat rellevant",
         "Empresa amb major pes relatiu dins del sector"
       ],
-      "id": "CO-0037"
+      "id": "CO-2A94EDF85F"
     },
     {
       "tipus_alerta": "concentracio",
@@ -8007,7 +8007,7 @@
         "Import acumulat rellevant",
         "Empresa amb major pes relatiu dins del sector"
       ],
-      "id": "CO-0038"
+      "id": "CO-E10E64C5DC"
     },
     {
       "tipus_alerta": "concentracio",
@@ -9001,7 +9001,7 @@
         "Import acumulat rellevant",
         "Empresa amb major pes relatiu dins del sector"
       ],
-      "id": "CO-0039"
+      "id": "CO-E42D6CA840"
     },
     {
       "tipus_alerta": "concentracio",
@@ -9083,7 +9083,7 @@
         "Import acumulat rellevant",
         "Empresa amb major pes relatiu dins del sector"
       ],
-      "id": "CO-0040"
+      "id": "CO-CE70ABE647"
     },
     {
       "tipus_alerta": "concentracio",
@@ -9597,7 +9597,7 @@
         "Import acumulat rellevant",
         "Empresa amb major pes relatiu dins del sector"
       ],
-      "id": "CO-0041"
+      "id": "CO-1CC16F8B93"
     },
     {
       "tipus_alerta": "concentracio",
@@ -9823,7 +9823,7 @@
         "Import acumulat rellevant",
         "Empresa amb major pes relatiu dins del sector"
       ],
-      "id": "CO-0042"
+      "id": "CO-D79AE0347D"
     },
     {
       "tipus_alerta": "concentracio",
@@ -9889,7 +9889,7 @@
         "Import acumulat rellevant",
         "Empresa amb major pes relatiu dins del sector"
       ],
-      "id": "CO-0043"
+      "id": "CO-5068E8E4FD"
     },
     {
       "tipus_alerta": "concentracio",
@@ -10051,7 +10051,7 @@
         "Import acumulat rellevant",
         "Empresa amb major pes relatiu dins del sector"
       ],
-      "id": "CO-0044"
+      "id": "CO-D86EEC4615"
     }
   ]
 }

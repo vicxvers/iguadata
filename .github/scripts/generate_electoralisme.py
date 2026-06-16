@@ -7,6 +7,7 @@ períodes electorals municipals i de la seva recurrència històrica.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import math
 import re
@@ -173,6 +174,21 @@ def parse_date(value: str) -> date | None:
         return date.fromisoformat(value[:10])
     except ValueError:
         return None
+
+
+def stable_contract_key(c: dict) -> str:
+    code = re.sub(r"\s+", " ", str(c.get("codigo") or "")).strip()
+    if code:
+        parts = [code, c.get("fecha"), c.get("importe")]
+    else:
+        parts = [c.get("fecha"), c.get("importe"), c.get("adjudicatario")]
+    return "|".join("" if v is None else str(v).strip() for v in parts)
+
+
+def stable_case_id(prefix: str, kind: str, c: dict) -> str:
+    signature = f"{kind}|{stable_contract_key(c)}"
+    digest = hashlib.sha1(signature.encode("utf-8")).hexdigest()[:10].upper()
+    return f"{prefix}-{digest}"
 
 
 def election_windows() -> list[dict]:
@@ -394,9 +410,8 @@ def build_cases(contractes: list[dict]) -> list[dict]:
             fase_temporal = "Finestra administrativa prèvia"
         elif is_post_electoral:
             fase_temporal = "Finestra administrativa posterior"
-        case_id = f"EL-{len(cases) + 1:04d}"
         cases.append({
-            "id": case_id,
+            "id": stable_case_id("EL", "electoralisme", c),
             "tipus_alerta": "electoralisme",
             "risc": score,
             "nivell": risk_label(score),
@@ -435,8 +450,6 @@ def build_cases(contractes: list[dict]) -> list[dict]:
             }],
         })
     cases = sorted(cases, key=lambda c: (-c["risc"], -c["import_total"], c["data_inici"]))
-    for index, case in enumerate(cases, 1):
-        case["id"] = f"EL-{index:04d}"
     return cases
 
 
