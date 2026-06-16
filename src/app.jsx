@@ -2476,6 +2476,8 @@ function PersonesView({ persones, onEmpresaSelect, onNavigateLegal, searchTerm, 
 
 function CasosView() {
     const [casos, setCasos] = useState(CASOS_INVESTIGACIO_FALLBACK);
+    const featuredCaso = casos[0];
+    const gridCasos = casos.slice(1);
 
     useEffect(() => {
         let cancelled = false;
@@ -2497,24 +2499,50 @@ function CasosView() {
         <div className="container casos-page">
             <h1 className="page-title">Casos d'investigació</h1>
             <div className="casos-editorial-list" aria-label="Casos d'investigació publicats">
-                {casos.map((caso, idx) => (
-                    <article key={caso.slug} className={`caso-editorial-card${idx === 0 ? ' caso-editorial-card-featured' : ''}`}>
-                        <div className="caso-editorial-image-frame">
-                            <img
-                                src={assetUrl(caso.image)}
-                                alt={`${caso.title}: ${caso.subtitle}`}
-                                className="caso-editorial-image"
-                                loading={idx === 0 ? 'eager' : 'lazy'}
-                            />
-                        </div>
-                        <div className="caso-editorial-copy">
-                            <h2 className="caso-editorial-title">{caso.title}</h2>
-                            <p className="caso-editorial-subtitle">{caso.subtitle}</p>
-                        </div>
-                    </article>
+                {featuredCaso && (
+                    <CasoEditorialCard caso={featuredCaso} idx={0} className="caso-editorial-card-featured" />
+                )}
+                <aside className="casos-editorial-note" aria-label="Criteri editorial dels casos">
+                    Selecció de casos treballats a partir de dades de contractació pública, alertes algorítmiques i revisió documental.
+                </aside>
+                {gridCasos.map((caso, idx) => (
+                    <CasoEditorialCard key={caso.slug} caso={caso} idx={idx + 1} />
                 ))}
             </div>
         </div>
+    );
+}
+
+function CasoEditorialCard({ caso, idx, className = '' }) {
+    return (
+        <article className={`contract-card caso-editorial-card${className ? ' ' + className : ''}${caso.url ? ' caso-editorial-card-linkable' : ''}`}>
+            {caso.url ? (
+                <a href={caso.url} className="caso-editorial-link">
+                    <CasoEditorialContent caso={caso} idx={idx} />
+                </a>
+            ) : (
+                <CasoEditorialContent caso={caso} idx={idx} />
+            )}
+        </article>
+    );
+}
+
+function CasoEditorialContent({ caso, idx }) {
+    return (
+        <>
+            <div className="caso-editorial-image-frame">
+                <img
+                    src={assetUrl(caso.image)}
+                    alt={`${caso.title}: ${caso.subtitle}`}
+                    className="caso-editorial-image"
+                    loading={idx === 0 ? 'eager' : 'lazy'}
+                />
+            </div>
+            <div className="caso-editorial-copy">
+                <h2 className="caso-editorial-title">{caso.title}</h2>
+                <p className="caso-editorial-subtitle">{caso.subtitle}</p>
+            </div>
+        </>
     );
 }
 

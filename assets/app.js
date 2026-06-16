@@ -3152,6 +3152,8 @@ function PersonesView({
 }
 function CasosView() {
   const [casos, setCasos] = useState(CASOS_INVESTIGACIO_FALLBACK);
+  const featuredCaso = casos[0];
+  const gridCasos = casos.slice(1);
   useEffect(() => {
     let cancelled = false;
     fetch(jsonAssetUrl('/json/casos.json')).then(res => {
@@ -3173,10 +3175,42 @@ function CasosView() {
   }, "Casos d'investigaci\xF3"), React.createElement("div", {
     className: "casos-editorial-list",
     "aria-label": "Casos d'investigaci\xF3 publicats"
-  }, casos.map((caso, idx) => React.createElement("article", {
+  }, featuredCaso && React.createElement(CasoEditorialCard, {
+    caso: featuredCaso,
+    idx: 0,
+    className: "caso-editorial-card-featured"
+  }), React.createElement("aside", {
+    className: "casos-editorial-note",
+    "aria-label": "Criteri editorial dels casos"
+  }, "Selecci\xF3 de casos treballats a partir de dades de contractaci\xF3 p\xFAblica, alertes algor\xEDtmiques i revisi\xF3 documental."), gridCasos.map((caso, idx) => React.createElement(CasoEditorialCard, {
     key: caso.slug,
-    className: `caso-editorial-card${idx === 0 ? ' caso-editorial-card-featured' : ''}`
-  }, React.createElement("div", {
+    caso: caso,
+    idx: idx + 1
+  }))));
+}
+function CasoEditorialCard({
+  caso,
+  idx,
+  className = ''
+}) {
+  return React.createElement("article", {
+    className: `contract-card caso-editorial-card${className ? ' ' + className : ''}${caso.url ? ' caso-editorial-card-linkable' : ''}`
+  }, caso.url ? React.createElement("a", {
+    href: caso.url,
+    className: "caso-editorial-link"
+  }, React.createElement(CasoEditorialContent, {
+    caso: caso,
+    idx: idx
+  })) : React.createElement(CasoEditorialContent, {
+    caso: caso,
+    idx: idx
+  }));
+}
+function CasoEditorialContent({
+  caso,
+  idx
+}) {
+  return React.createElement(React.Fragment, null, React.createElement("div", {
     className: "caso-editorial-image-frame"
   }, React.createElement("img", {
     src: assetUrl(caso.image),
@@ -3189,7 +3223,7 @@ function CasosView() {
     className: "caso-editorial-title"
   }, caso.title), React.createElement("p", {
     className: "caso-editorial-subtitle"
-  }, caso.subtitle))))));
+  }, caso.subtitle)));
 }
 function App() {
   const getRoute = () => {
