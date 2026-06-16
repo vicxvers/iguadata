@@ -175,6 +175,7 @@ jobs:
         run: |
           python .github/scripts/generate_carrecs.py
           python .github/scripts/generate_persones.py
+          python .github/scripts/generate_empresa_aliases.py
           python .github/scripts/generate_fraccionament.py
           python .github/scripts/generate_concentracio.py
           python .github/scripts/generate_electoralisme.py
@@ -190,6 +191,7 @@ jobs:
               "json/contractes.json": 500_000,
               "json/contractes_arxiu.json": 2,
               "json/empreses.json": 50_000,
+              "json/empresa_aliases.json": 100,
               "json/carrecs.json": 100_000,
               "json/persones.json": 100_000,
               "json/fraccionament.json": 10_000,
@@ -220,7 +222,7 @@ jobs:
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add json/carrecs.json json/persones.json json/carrecs_eliminats.json
-          git add json/empreses.json json/contractes.json json/contractes_arxiu.json json/fraccionament.json json/concentracio.json json/electoralisme.json
+          git add json/empreses.json json/empresa_aliases.json json/contractes.json json/contractes_arxiu.json json/fraccionament.json json/concentracio.json json/electoralisme.json
           git add json/resum.json
           git add .github/scripts/alias_empreses.json
           if git diff --staged --quiet; then

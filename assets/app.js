@@ -271,15 +271,45 @@ function cyrb53(str) {
 function slugify(str) {
   return (str || '').toString().normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/['"`´]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 60);
 }
+function stableHash(values) {
+  const canonical = values.map(v => v == null ? '' : String(v).trim()).join('|');
+  return cyrb53(canonical).toString(36).padStart(11, '0').slice(-7);
+}
 function buildContractSlug(c) {
   const date = (c.fecha || '0000-00-00').slice(0, 10);
+  const codeSlug = slugify(c.codigo);
+  if (codeSlug) return `${date}-${codeSlug}`;
   const empSlug = slugify(c.adjudicatario) || 'sense-adjudicatari';
-  const canonical = [c.codigo, c.adjudicatario, c.fecha, c.importe, c.cpv, c.descripcion].map(v => v == null ? '' : String(v)).join('|');
-  const h = cyrb53(canonical).toString(36).padStart(11, '0').slice(-7);
+  const h = stableHash([c.fecha, c.importe, c.adjudicatario]);
   return `${date}-${empSlug}-${h}`;
+}
+function buildLegacyContractSlug(c) {
+  const date = (c.fecha || '0000-00-00').slice(0, 10);
+  const empSlug = slugify(c.adjudicatario) || 'sense-adjudicatari';
+  const h = stableHash([c.codigo, c.adjudicatario, c.fecha, c.importe, c.cpv, c.descripcion]);
+  return `${date}-${empSlug}-${h}`;
+}
+function contractMatchesSlug(contract, slug) {
+  return contract.slug === slug || (contract.slug_aliases || []).includes(slug);
 }
 function buildEmpresaSlug(name) {
   return slugify(name) || 'sense-nom';
+}
+function empresaMatchesSlug(empresa, slug) {
+  return empresa.slug === slug || (empresa.slug_aliases || []).includes(slug);
+}
+function buildEmpresaAliasSlugMap(empreses, empresaAliases) {
+  const byName = new Map(empreses.map(e => [String(e.nom || '').trim().toUpperCase(), e]));
+  const result = new Map();
+  for (const [currentName, aliases] of Object.entries(empresaAliases && empresaAliases.aliases || {})) {
+    const empresa = byName.get(String(currentName || '').trim().toUpperCase());
+    if (!empresa || !empresa.slug) continue;
+    for (const alias of aliases || []) {
+      const aliasSlug = buildEmpresaSlug(alias);
+      if (aliasSlug && aliasSlug !== empresa.slug) result.set(aliasSlug, empresa.slug);
+    }
+  }
+  return result;
 }
 function findMatchingContract(contracts, partial) {
   const sameFingerprint = ct => String(ct.adjudicatario || '').trim() === String(partial.adjudicatario || '').trim() && String(ct.fecha || '').slice(0, 10) === String(partial.fecha || '').slice(0, 10) && Math.abs((Number(ct.importe) || 0) - (Number(partial.importe) || 0)) < 0.01;
@@ -434,7 +464,7 @@ async function fetchAllContracts() {
     return (b.adjudicatari || '').localeCompare(a.adjudicatari || '');
   });
 }
-const CONTRACTS_CACHE_KEY = 'iguadata_contracts_cache_v1';
+const CONTRACTS_CACHE_KEY = 'iguadata_contracts_cache_v2';
 async function fetchStaticContractsBackup() {
   const data = await fetchStaticContractsSnapshot();
   return data.map(c => ({
@@ -454,6 +484,22 @@ async function fetchArchivedContracts() {
   if (!resp.ok) return [];
   const data = await resp.json();
   return Array.isArray(data) ? data : [];
+}
+async function fetchEmpresaAliases() {
+  try {
+    const resp = await fetch(jsonAssetUrl('/json/empresa_aliases.json'));
+    if (!resp.ok) return {
+      aliases: {}
+    };
+    const data = await resp.json();
+    return data && data.aliases ? data : {
+      aliases: {}
+    };
+  } catch (e) {
+    return {
+      aliases: {}
+    };
+  }
 }
 async function fetchAllContractsCached() {
   const today = new Date().toISOString().slice(0, 10);
@@ -3765,7 +3811,7 @@ function App() {
     Promise.all([fetchAllContractsCached(), fetch(jsonAssetUrl('/json/empreses.json')).then(res => {
       if (!res.ok) throw new Error(`Empreses HTTP ${res.status}`);
       return res.json();
-    }), fetchArchivedContracts()]).then(async ([socrataRows, existingEmpreses, archiveRows]) => {
+    }), fetchArchivedContracts(), fetchEmpresaAliases()]).then(async ([socrataRows, existingEmpreses, archiveRows, empresaAliases]) => {
       if (cancelled) return;
       let contractsData = socrataRows.map((row, i) => row && row.__iguadataInternalContract ? Object.fromEntries(Object.entries(row).filter(([key]) => key !== '__iguadataInternalContract')) : mapSocrataContract(row, i + 1));
       contractsData = mergeArchivedContracts(contractsData, archiveRows);
@@ -3776,14 +3822,20 @@ function App() {
         contractsData = mergeMissingSnapshotContracts(contractsData, snapshotRows);
       }
       {
-        const seen = new Map();
+        const slugCounts = new Map();
+        const legacySeen = new Map();
         for (const c of contractsData) {
-          if (!c.slug || String(c.slug).startsWith('undefined')) {
-            c.slug = buildContractSlug(c);
-          }
-          const n = (seen.get(c.slug) || 0) + 1;
-          seen.set(c.slug, n);
-          if (n > 1) c.slug = `${c.slug}-${n}`;
+          const baseSlug = buildContractSlug(c);
+          slugCounts.set(baseSlug, (slugCounts.get(baseSlug) || 0) + 1);
+        }
+        for (const c of contractsData) {
+          const baseSlug = buildContractSlug(c);
+          const legacyBaseSlug = buildLegacyContractSlug(c);
+          c.slug = slugCounts.get(baseSlug) > 1 ? `${baseSlug}-${stableHash([c.fecha, c.importe, c.adjudicatario])}` : baseSlug;
+          const legacyN = (legacySeen.get(legacyBaseSlug) || 0) + 1;
+          legacySeen.set(legacyBaseSlug, legacyN);
+          const legacySlug = legacyN > 1 ? `${legacyBaseSlug}-${legacyN}` : legacyBaseSlug;
+          c.slug_aliases = Array.from(new Set([legacyBaseSlug, legacySlug].filter(s => s && s !== c.slug)));
         }
       }
       setContracts(contractsData);
@@ -3809,6 +3861,10 @@ function App() {
           seen.set(s, n);
           if (n > 1) s = `${s}-${n}`;
           e.slug = s;
+        }
+        const aliasSlugMap = buildEmpresaAliasSlugMap(empresesData, empresaAliases);
+        for (const e of empresesData) {
+          e.slug_aliases = Array.from(aliasSlugMap.entries()).filter(([, targetSlug]) => targetSlug === e.slug).map(([aliasSlug]) => aliasSlug);
         }
       }
       setEmpreses(empresesData);
@@ -3918,9 +3974,14 @@ function App() {
   }, []);
   useEffect(() => {
     if (contracts.length > 0 && pendingContractSlug) {
-      const c = contracts.find(c => c.slug === pendingContractSlug);
+      const c = contracts.find(c => contractMatchesSlug(c, pendingContractSlug));
       if (c) {
         setSelectedContractForDetail(c);
+        if (c.slug !== pendingContractSlug) {
+          handleNavigation('contracte', `/contractes/${c.slug}`, {
+            replace: true
+          });
+        }
       } else {
         handleNavigation('buscador', null, {
           replace: true
@@ -3931,9 +3992,14 @@ function App() {
   }, [contracts, pendingContractSlug]);
   useEffect(() => {
     if (empreses.length > 0 && pendingEmpresaSlug) {
-      const emp = empreses.find(e => e.slug === pendingEmpresaSlug);
+      const emp = empreses.find(e => empresaMatchesSlug(e, pendingEmpresaSlug));
       if (emp) {
         setSelectedEmpresa(emp.nom);
+        if (emp.slug !== pendingEmpresaSlug) {
+          handleNavigation('empresa', `/empreses/${emp.slug}`, {
+            replace: true
+          });
+        }
       } else {
         handleNavigation('empreses', null, {
           replace: true
