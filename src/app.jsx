@@ -203,6 +203,7 @@ function resolveRoute(path) {
     if (path === '/empreses') return { tab: 'empreses', canonicalPath: '/empreses' };
     if (path === '/persones') return { tab: 'persones', canonicalPath: '/persones' };
     if (path === '/analisi') return { tab: 'analisi', canonicalPath: '/analisi' };
+    if (path === '/casos') return { tab: 'casos', canonicalPath: '/casos' };
     if (path === '/sobre') return { tab: 'sobre', canonicalPath: '/sobre' };
     if (path === '/avis-legal') return { tab: 'legal', canonicalPath: '/avis-legal' };
     if (path.startsWith('/contractes/')) return { tab: 'contracte', canonicalPath: path };
@@ -265,6 +266,45 @@ function stableHash(values) {
         .join('|');
     return cyrb53(canonical).toString(36).padStart(11, '0').slice(-7);
 }
+
+const CASOS_INVESTIGACIO_FALLBACK = [
+    {
+        slug: 'neteja-parc-central',
+        title: 'Neteja del Parc Central',
+        subtitle: "Un contracte il·legal després d'anys al límit",
+        image: '/assets/casos/neteja-parc-central.png'
+    },
+    {
+        slug: 'llums-de-nadal',
+        title: 'Llums de Nadal',
+        subtitle: 'Quatre anys, un mateix proveïdor i preus calcats al límit legal',
+        image: '/assets/casos/llums-de-nadal.png'
+    },
+    {
+        slug: 'igualada-urban-running',
+        title: 'Igualada Urban Running',
+        subtitle: 'Cursa de contractes amb un sol guanyador durant anys',
+        image: '/assets/casos/igualada-urban-running.png'
+    },
+    {
+        slug: 'la-masuca',
+        title: 'La Masuca',
+        subtitle: 'Dos contractes per a dues empreses connectades',
+        image: '/assets/casos/la-masuca.png'
+    },
+    {
+        slug: 'zones-verdes-igualada',
+        title: "Zones verdes d'Igualada",
+        subtitle: 'Set contractes, un mateix servei i imports al límit legal',
+        image: '/assets/casos/zones-verdes-igualada.png'
+    },
+    {
+        slug: 'parc-central',
+        title: 'Parc Central',
+        subtitle: 'Quatre contractes, una mateixa actuació i imports al límit legal',
+        image: '/assets/casos/parc-central.png'
+    }
+];
 
 // Slug estable per a contractes: YYYY-MM-DD-codi-expedient
 function buildContractSlug(c) {
@@ -2434,6 +2474,50 @@ function PersonesView({ persones, onEmpresaSelect, onNavigateLegal, searchTerm, 
     );
 }
 
+function CasosView() {
+    const [casos, setCasos] = useState(CASOS_INVESTIGACIO_FALLBACK);
+
+    useEffect(() => {
+        let cancelled = false;
+        fetch(jsonAssetUrl('/json/casos.json'))
+            .then(res => {
+                if (!res.ok) throw new Error(`Casos HTTP ${res.status}`);
+                return res.json();
+            })
+            .then(data => {
+                if (!cancelled && Array.isArray(data) && data.length) setCasos(data);
+            })
+            .catch(err => {
+                console.warn('Error loading casos:', err);
+            });
+        return () => { cancelled = true; };
+    }, []);
+
+    return (
+        <div className="container casos-page">
+            <h1 className="page-title">Casos d'investigació</h1>
+            <div className="casos-editorial-list" aria-label="Casos d'investigació publicats">
+                {casos.map((caso, idx) => (
+                    <article key={caso.slug} className={`caso-editorial-card${idx === 0 ? ' caso-editorial-card-featured' : ''}`}>
+                        <div className="caso-editorial-image-frame">
+                            <img
+                                src={assetUrl(caso.image)}
+                                alt={`${caso.title}: ${caso.subtitle}`}
+                                className="caso-editorial-image"
+                                loading={idx === 0 ? 'eager' : 'lazy'}
+                            />
+                        </div>
+                        <div className="caso-editorial-copy">
+                            <h2 className="caso-editorial-title">{caso.title}</h2>
+                            <p className="caso-editorial-subtitle">{caso.subtitle}</p>
+                        </div>
+                    </article>
+                ))}
+            </div>
+        </div>
+    );
+}
+
 function App() {
     // Treu el prefix BASE i normalitza la URL actual
     const getRoute = () => {
@@ -2953,6 +3037,7 @@ function App() {
             'analisi': '/analisi',
             'cas-fraccionament': '/analisi/fraccionament',
             'cas-concentracio': '/analisi/concentracio',
+            'casos': '/casos',
             'sobre': '/sobre',
             'legal': '/avis-legal'
         };
@@ -3443,6 +3528,7 @@ function App() {
             empreses: 'Empreses | Iguadata',
             persones: 'Persones | Iguadata',
             analisi: 'Anàlisi | Iguadata',
+            casos: 'Casos | Iguadata',
             sobre: 'Sobre | Iguadata',
             legal: 'Iguadata'
         };
@@ -3714,6 +3800,7 @@ function App() {
         'cas-fraccionament': 'Anàlisi',
         'cas-concentracio': 'Anàlisi',
         'cas-electoralisme': 'Anàlisi',
+        casos: 'Casos',
         sobre: 'Sobre',
         legal: 'Avís legal'
     }[activeTab] || 'Iguadata';
@@ -3863,14 +3950,14 @@ function App() {
         const empresesActive = activeTab === 'empreses' || activeTab === 'empresa';
         const personesActive = activeTab === 'persones';
         const analisiActive = activeTab === 'analisi' || activeTab === 'cas-fraccionament' || activeTab === 'cas-concentracio' || activeTab === 'cas-electoralisme';
-        const sobreActive = activeTab === 'sobre';
+        const casosActive = activeTab === 'casos';
         return (
             <div className="nav">
                 <a href={buildRouteUrl('/contractes')} className={'nav-tab' + (showActive && contractesActive ? ' active' : '')} aria-current={showActive && contractesActive ? 'page' : undefined} onClick={(event) => handleNavClick(event, () => { handleNavigation('buscador'); setSelectedEmpresa(null); setIsMobileMenuOpen(false); })}>Contractes</a>
                 <a href={buildRouteUrl('/empreses')} className={'nav-tab' + (showActive && empresesActive ? ' active' : '')} aria-current={showActive && empresesActive ? 'page' : undefined} onClick={(event) => handleNavClick(event, () => { handleNavigation('empreses'); setSelectedEmpresa(null); setIsMobileMenuOpen(false); })}>Empreses</a>
                 <a href={buildRouteUrl('/persones')} className={'nav-tab' + (showActive && personesActive ? ' active' : '')} aria-current={showActive && personesActive ? 'page' : undefined} onClick={(event) => handleNavClick(event, () => { handleNavigation('persones'); setIsMobileMenuOpen(false); })}>Persones</a>
                 <a href={buildRouteUrl('/analisi')} className={'nav-tab' + (showActive && analisiActive ? ' active' : '')} aria-current={showActive && analisiActive ? 'page' : undefined} onClick={(event) => handleNavClick(event, handleAnalisiNavClick)}>Anàlisi</a>
-                <a href={buildRouteUrl('/sobre')} className={'nav-tab' + (showActive && sobreActive ? ' active' : '')} aria-current={showActive && sobreActive ? 'page' : undefined} onClick={(event) => handleNavClick(event, () => { handleNavigation('sobre'); setIsMobileMenuOpen(false); })}>Sobre</a>
+                <a href={buildRouteUrl('/casos')} className={'nav-tab' + (showActive && casosActive ? ' active' : '')} aria-current={showActive && casosActive ? 'page' : undefined} onClick={(event) => handleNavClick(event, () => { handleNavigation('casos'); setIsMobileMenuOpen(false); })}>Casos</a>
             </div>
         );
     };
@@ -4658,6 +4745,10 @@ function App() {
                     expandedIdx={personesExpanded}
                     setExpandedIdx={setPersonesExpanded}
                 />
+            )}
+
+            {activeTab === 'casos' && (
+                <CasosView />
             )}
 
             {activeTab === 'contracte' && selectedContractForDetail && canRenderDataTab && (
@@ -5498,6 +5589,7 @@ function App() {
                                         <a href={BASE + '/empreses'} onClick={(e) => { e.preventDefault(); handleNavigation('empreses'); }} className="footer-link">Empreses</a>
                                         <a href={BASE + '/persones'} onClick={(e) => { e.preventDefault(); handleNavigation('persones'); }} className="footer-link">Persones</a>
                                         <a href={BASE + '/analisi'} onClick={(e) => { e.preventDefault(); handleNavigation('analisi'); }} className="footer-link">Anàlisi</a>
+                                        <a href={BASE + '/casos'} onClick={(e) => { e.preventDefault(); handleNavigation('casos'); }} className="footer-link">Casos</a>
                                     </div>
                                     <div className="footer-nav-column">
                                         <a href={BASE + '/sobre'} onClick={(e) => { e.preventDefault(); handleNavigation('sobre'); }} className="footer-link">Sobre</a>

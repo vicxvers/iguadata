@@ -1,0 +1,38 @@
+[
+  {
+    "slug": "neteja-parc-central",
+    "title": "Neteja del Parc Central",
+    "subtitle": "Un contracte il·legal després d'anys al límit",
+    "image": "/assets/casos/neteja-parc-central.png"
+  },
+  {
+    "slug": "llums-de-nadal",
+    "title": "Llums de Nadal",
+    "subtitle": "Quatre anys, un mateix proveïdor i preus calcats al límit legal",
+    "image": "/assets/casos/llums-de-nadal.png"
+  },
+  {
+    "slug": "igualada-urban-running",
+    "title": "Igualada Urban Running",
+    "subtitle": "Cursa de contractes amb un sol guanyador durant anys",
+    "image": "/assets/casos/igualada-urban-running.png"
+  },
+  {
+    "slug": "la-masuca",
+    "title": "La Masuca",
+    "subtitle": "Dos contractes per a dues empreses connectades",
+    "image": "/assets/casos/la-masuca.png"
+  },
+  {
+    "slug": "zones-verdes-igualada",
+    "title": "Zones verdes d'Igualada",
+    "subtitle": "Set contractes, un mateix servei i imports al límit legal",
+    "image": "/assets/casos/zones-verdes-igualada.png"
+  },
+  {
+    "slug": "parc-central",
+    "title": "Parc Central",
+    "subtitle": "Quatre contractes, una mateixa actuació i imports al límit legal",
+    "image": "/assets/casos/parc-central.png"
+  }
+]

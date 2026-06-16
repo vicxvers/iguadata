@@ -210,6 +210,10 @@ function resolveRoute(path) {
     tab: 'analisi',
     canonicalPath: '/analisi'
   };
+  if (path === '/casos') return {
+    tab: 'casos',
+    canonicalPath: '/casos'
+  };
   if (path === '/sobre') return {
     tab: 'sobre',
     canonicalPath: '/sobre'
@@ -275,6 +279,37 @@ function stableHash(values) {
   const canonical = values.map(v => v == null ? '' : String(v).trim()).join('|');
   return cyrb53(canonical).toString(36).padStart(11, '0').slice(-7);
 }
+const CASOS_INVESTIGACIO_FALLBACK = [{
+  slug: 'neteja-parc-central',
+  title: 'Neteja del Parc Central',
+  subtitle: "Un contracte il·legal després d'anys al límit",
+  image: '/assets/casos/neteja-parc-central.png'
+}, {
+  slug: 'llums-de-nadal',
+  title: 'Llums de Nadal',
+  subtitle: 'Quatre anys, un mateix proveïdor i preus calcats al límit legal',
+  image: '/assets/casos/llums-de-nadal.png'
+}, {
+  slug: 'igualada-urban-running',
+  title: 'Igualada Urban Running',
+  subtitle: 'Cursa de contractes amb un sol guanyador durant anys',
+  image: '/assets/casos/igualada-urban-running.png'
+}, {
+  slug: 'la-masuca',
+  title: 'La Masuca',
+  subtitle: 'Dos contractes per a dues empreses connectades',
+  image: '/assets/casos/la-masuca.png'
+}, {
+  slug: 'zones-verdes-igualada',
+  title: "Zones verdes d'Igualada",
+  subtitle: 'Set contractes, un mateix servei i imports al límit legal',
+  image: '/assets/casos/zones-verdes-igualada.png'
+}, {
+  slug: 'parc-central',
+  title: 'Parc Central',
+  subtitle: 'Quatre contractes, una mateixa actuació i imports al límit legal',
+  image: '/assets/casos/parc-central.png'
+}];
 function buildContractSlug(c) {
   const date = (c.fecha || '0000-00-00').slice(0, 10);
   const codeSlug = slugify(c.codigo);
@@ -3115,6 +3150,47 @@ function PersonesView({
     className: "prose-link"
   }, "Av\xEDs legal"), ". El dret de supressi\xF3 (dret a l'oblit) queda limitat per l'art. 17.3.b) del RGPD quan les dades figuren en registres oficials p\xFAblics o en documentaci\xF3 administrativa de contractaci\xF3 p\xFAblica, sense perjudici del dret a sol\xB7licitar la revisi\xF3 de possibles errors factuals."))));
 }
+function CasosView() {
+  const [casos, setCasos] = useState(CASOS_INVESTIGACIO_FALLBACK);
+  useEffect(() => {
+    let cancelled = false;
+    fetch(jsonAssetUrl('/json/casos.json')).then(res => {
+      if (!res.ok) throw new Error(`Casos HTTP ${res.status}`);
+      return res.json();
+    }).then(data => {
+      if (!cancelled && Array.isArray(data) && data.length) setCasos(data);
+    }).catch(err => {
+      console.warn('Error loading casos:', err);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+  return React.createElement("div", {
+    className: "container casos-page"
+  }, React.createElement("h1", {
+    className: "page-title"
+  }, "Casos d'investigaci\xF3"), React.createElement("div", {
+    className: "casos-editorial-list",
+    "aria-label": "Casos d'investigaci\xF3 publicats"
+  }, casos.map((caso, idx) => React.createElement("article", {
+    key: caso.slug,
+    className: `caso-editorial-card${idx === 0 ? ' caso-editorial-card-featured' : ''}`
+  }, React.createElement("div", {
+    className: "caso-editorial-image-frame"
+  }, React.createElement("img", {
+    src: assetUrl(caso.image),
+    alt: `${caso.title}: ${caso.subtitle}`,
+    className: "caso-editorial-image",
+    loading: idx === 0 ? 'eager' : 'lazy'
+  })), React.createElement("div", {
+    className: "caso-editorial-copy"
+  }, React.createElement("h2", {
+    className: "caso-editorial-title"
+  }, caso.title), React.createElement("p", {
+    className: "caso-editorial-subtitle"
+  }, caso.subtitle))))));
+}
 function App() {
   const getRoute = () => {
     let p = window.location.pathname;
@@ -3627,6 +3703,7 @@ function App() {
       'analisi': '/analisi',
       'cas-fraccionament': '/analisi/fraccionament',
       'cas-concentracio': '/analisi/concentracio',
+      'casos': '/casos',
       'sobre': '/sobre',
       'legal': '/avis-legal'
     };
@@ -4075,6 +4152,7 @@ function App() {
       empreses: 'Empreses | Iguadata',
       persones: 'Persones | Iguadata',
       analisi: 'Anàlisi | Iguadata',
+      casos: 'Casos | Iguadata',
       sobre: 'Sobre | Iguadata',
       legal: 'Iguadata'
     };
@@ -4319,6 +4397,7 @@ function App() {
     'cas-fraccionament': 'Anàlisi',
     'cas-concentracio': 'Anàlisi',
     'cas-electoralisme': 'Anàlisi',
+    casos: 'Casos',
     sobre: 'Sobre',
     legal: 'Avís legal'
   }[activeTab] || 'Iguadata';
@@ -4458,7 +4537,7 @@ function App() {
     const empresesActive = activeTab === 'empreses' || activeTab === 'empresa';
     const personesActive = activeTab === 'persones';
     const analisiActive = activeTab === 'analisi' || activeTab === 'cas-fraccionament' || activeTab === 'cas-concentracio' || activeTab === 'cas-electoralisme';
-    const sobreActive = activeTab === 'sobre';
+    const casosActive = activeTab === 'casos';
     return React.createElement("div", {
       className: "nav"
     }, React.createElement("a", {
@@ -4493,14 +4572,14 @@ function App() {
       "aria-current": showActive && analisiActive ? 'page' : undefined,
       onClick: event => handleNavClick(event, handleAnalisiNavClick)
     }, "An\xE0lisi"), React.createElement("a", {
-      href: buildRouteUrl('/sobre'),
-      className: 'nav-tab' + (showActive && sobreActive ? ' active' : ''),
-      "aria-current": showActive && sobreActive ? 'page' : undefined,
+      href: buildRouteUrl('/casos'),
+      className: 'nav-tab' + (showActive && casosActive ? ' active' : ''),
+      "aria-current": showActive && casosActive ? 'page' : undefined,
       onClick: event => handleNavClick(event, () => {
-        handleNavigation('sobre');
+        handleNavigation('casos');
         setIsMobileMenuOpen(false);
       })
-    }, "Sobre"));
+    }, "Casos"));
   };
   const renderSiteChrome = () => React.createElement("div", {
     className: 'site-chrome site-chrome-light' + (isMobileMenuOpen ? ' mobile-menu-open' : '')
@@ -5476,7 +5555,7 @@ function App() {
     setCurrentPage: setPersonesPage,
     expandedIdx: personesExpanded,
     setExpandedIdx: setPersonesExpanded
-  }), activeTab === 'contracte' && selectedContractForDetail && canRenderDataTab && React.createElement(ContractDetailView, {
+  }), activeTab === 'casos' && React.createElement(CasosView, null), activeTab === 'contracte' && selectedContractForDetail && canRenderDataTab && React.createElement(ContractDetailView, {
     contract: selectedContractForDetail,
     contracts: contracts,
     empreses: empreses,
@@ -6634,7 +6713,14 @@ function App() {
       handleNavigation('analisi');
     },
     className: "footer-link"
-  }, "An\xE0lisi")), React.createElement("div", {
+  }, "An\xE0lisi"), React.createElement("a", {
+    href: BASE + '/casos',
+    onClick: e => {
+      e.preventDefault();
+      handleNavigation('casos');
+    },
+    className: "footer-link"
+  }, "Casos")), React.createElement("div", {
     className: "footer-nav-column"
   }, React.createElement("a", {
     href: BASE + '/sobre',
