@@ -7,6 +7,7 @@ i administradors mercantils ja filtrats per Iguadata.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import re
 import unicodedata
@@ -52,6 +53,21 @@ def parse_date(value: str) -> date | None:
         return date.fromisoformat(value[:10])
     except ValueError:
         return None
+
+
+def stable_contract_key(c: dict) -> str:
+    code = re.sub(r"\s+", " ", str(c.get("codigo") or "")).strip()
+    if code:
+        parts = [code, c.get("fecha"), c.get("importe")]
+    else:
+        parts = [c.get("fecha"), c.get("importe"), c.get("adjudicatario")]
+    return "|".join("" if v is None else str(v).strip() for v in parts)
+
+
+def stable_case_id(prefix: str, *parts: object) -> str:
+    signature = "|".join("" if part is None else str(part).strip() for part in parts)
+    digest = hashlib.sha1(signature.encode("utf-8")).hexdigest()[:10].upper()
+    return f"{prefix}-{digest}"
 
 
 def risk_label(score: int) -> str:
@@ -523,8 +539,18 @@ def build_cases(contractes: list[dict], empreses: list[dict], administradors: di
     cases.extend(build_temporal_cases(rows, company_meta))
 
     cases = sorted(cases, key=lambda c: (-c["risc"], -c["import_concentrat"], c["sector"], c["finestra"]))
-    for index, case in enumerate(cases, 1):
-        case["id"] = f"CO-{index:04d}"
+    for case in cases:
+        contract_keys = ",".join(sorted(stable_contract_key(c) for c in case["contractes"]))
+        case["id"] = stable_case_id(
+            "CO",
+            case.get("tipus_concentracio"),
+            case.get("sector"),
+            case.get("finestra"),
+            case.get("entity_key"),
+            case.get("data_inici"),
+            case.get("data_fi"),
+            contract_keys,
+        )
         case.pop("entity_key", None)
     return cases
 
