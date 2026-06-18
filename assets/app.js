@@ -3205,7 +3205,9 @@ function CasoPrincipalInvestigacio({
     className: "caso-principal-title"
   }, caso.title), React.createElement("p", {
     className: "caso-principal-subtitle"
-  }, caso.subtitle)));
+  }, caso.subtitle), Number.isFinite(Number(caso.importe)) && React.createElement("div", {
+    className: "caso-principal-amount"
+  }, formatCurrency(Number(caso.importe)))));
   return React.createElement("article", {
     className: `caso-principal${caso.url ? ' caso-principal-linkable' : ''}`
   }, caso.url ? React.createElement("a", {

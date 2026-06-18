@@ -2530,6 +2530,9 @@ function CasoPrincipalInvestigacio({ caso }) {
             <div className="caso-principal-copy">
                 <h2 className="caso-principal-title">{caso.title}</h2>
                 <p className="caso-principal-subtitle">{caso.subtitle}</p>
+                {Number.isFinite(Number(caso.importe)) && (
+                    <div className="caso-principal-amount">{formatCurrency(Number(caso.importe))}</div>
+                )}
             </div>
         </>
     );
