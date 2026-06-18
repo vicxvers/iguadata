@@ -5287,8 +5287,26 @@ body.home-scroll-surface::-webkit-scrollbar {
 .caso-principal-image-frame {
     aspect-ratio: 3 / 4;
     overflow: hidden;
+    border: 1px solid transparent;
     border-radius: var(--radius-lg);
     background: var(--navy);
+    transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.2s;
+    will-change: transform, box-shadow;
+}
+
+.caso-principal-image-frame,
+.caso-principal-image-frame .caso-editorial-image,
+.caso-principal-copy,
+.caso-principal-title,
+.caso-principal-subtitle,
+.caso-principal-amount {
+    cursor: pointer;
+}
+
+.caso-principal-image-frame:hover {
+    box-shadow: 0 12px 30px -10px rgba(15, 23, 42, 0.15);
+    border-color: rgba(30, 58, 138, 0.3);
+    transform: translateY(-4px);
 }
 
 .caso-principal-copy {
@@ -7159,6 +7177,10 @@ body.home-scroll-surface::-webkit-scrollbar {
 
     .contract-card:hover {
         transform: translateY(-2px) !important;
+    }
+
+    .caso-principal-image-frame:hover {
+        transform: translateY(-2px);
     }
 
     .contract-header {
