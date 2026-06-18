@@ -210,9 +210,9 @@ function resolveRoute(path) {
     tab: 'analisi',
     canonicalPath: '/analisi'
   };
-  if (path === '/casos') return {
+  if (path === '/investigacio') return {
     tab: 'casos',
-    canonicalPath: '/casos'
+    canonicalPath: '/investigacio'
   };
   if (path === '/sobre') return {
     tab: 'sobre',
@@ -283,32 +283,38 @@ const CASOS_INVESTIGACIO_FALLBACK = [{
   slug: 'neteja-parc-central',
   title: 'Neteja del Parc Central',
   subtitle: "Un contracte il·legal després d'anys al límit",
-  image: '/assets/casos/neteja-parc-central.png'
+  image: '/assets/investigacio/neteja-parc-central.png',
+  importe: 58062.93
 }, {
   slug: 'llums-de-nadal',
   title: 'Llums de Nadal',
   subtitle: 'Quatre anys, un mateix proveïdor i preus calcats al límit legal',
-  image: '/assets/casos/llums-de-nadal.png'
+  image: '/assets/investigacio/llums-de-nadal.png',
+  importe: 59171.05
 }, {
   slug: 'igualada-urban-running',
   title: 'Igualada Urban Running',
   subtitle: 'Cursa de contractes amb un sol guanyador durant anys',
-  image: '/assets/casos/igualada-urban-running.png'
+  image: '/assets/investigacio/igualada-urban-running.png',
+  importe: 66413.80
 }, {
   slug: 'la-masuca',
   title: 'La Masuca',
   subtitle: 'Dos contractes per a dues empreses connectades',
-  image: '/assets/casos/la-masuca.png'
+  image: '/assets/investigacio/la-masuca.png',
+  importe: 29700
 }, {
   slug: 'zones-verdes-igualada',
   title: "Zones verdes d'Igualada",
   subtitle: 'Set contractes, un mateix servei i imports al límit legal',
-  image: '/assets/casos/zones-verdes-igualada.png'
+  image: '/assets/investigacio/zones-verdes-igualada.png',
+  importe: 104260
 }, {
   slug: 'parc-central',
   title: 'Parc Central',
   subtitle: 'Quatre contractes, una mateixa actuació i imports al límit legal',
-  image: '/assets/casos/parc-central.png'
+  image: '/assets/investigacio/parc-central.png',
+  importe: 58900
 }];
 function buildContractSlug(c) {
   const date = (c.fecha || '0000-00-00').slice(0, 10);
@@ -3156,13 +3162,13 @@ function CasosView() {
   const gridCasos = casos.slice(1);
   useEffect(() => {
     let cancelled = false;
-    fetch(jsonAssetUrl('/json/casos.json')).then(res => {
-      if (!res.ok) throw new Error(`Casos HTTP ${res.status}`);
+    fetch(jsonAssetUrl('/json/investigacio.json')).then(res => {
+      if (!res.ok) throw new Error(`Investigacio HTTP ${res.status}`);
       return res.json();
     }).then(data => {
       if (!cancelled && Array.isArray(data) && data.length) setCasos(data);
     }).catch(err => {
-      console.warn('Error loading casos:', err);
+      console.warn('Error loading investigacio:', err);
     });
     return () => {
       cancelled = true;
@@ -3172,26 +3178,46 @@ function CasosView() {
     className: "container casos-page"
   }, React.createElement("h1", {
     className: "page-title"
-  }, "Casos d'investigaci\xF3"), React.createElement("div", {
+  }, "Casos d'investigaci\xF3"), featuredCaso && React.createElement(CasoPrincipalInvestigacio, {
+    caso: featuredCaso
+  }), React.createElement("div", {
     className: "casos-editorial-list",
-    "aria-label": "Casos d'investigaci\xF3 publicats"
-  }, featuredCaso && React.createElement(CasoEditorialCard, {
-    caso: featuredCaso,
-    idx: 0,
-    className: "caso-editorial-card-featured"
-  }), React.createElement("aside", {
-    className: "casos-editorial-note",
-    "aria-label": "Criteri editorial dels casos"
-  }, "Selecci\xF3 de casos treballats a partir de dades de contractaci\xF3 p\xFAblica, alertes algor\xEDtmiques i revisi\xF3 documental."), gridCasos.map((caso, idx) => React.createElement(CasoEditorialCard, {
+    "aria-label": "Investigacions publicades"
+  }, gridCasos.map((caso, idx) => React.createElement(CasoEditorialCard, {
     key: caso.slug,
     caso: caso,
     idx: idx + 1
   }))));
 }
+function CasoPrincipalInvestigacio({
+  caso
+}) {
+  const content = React.createElement(React.Fragment, null, React.createElement("div", {
+    className: "caso-principal-image-frame"
+  }, React.createElement("img", {
+    src: assetUrl(caso.image),
+    alt: `${caso.title}: ${caso.subtitle}`,
+    className: "caso-editorial-image",
+    loading: "eager"
+  })), React.createElement("div", {
+    className: "caso-principal-copy"
+  }, React.createElement("h2", {
+    className: "caso-principal-title"
+  }, caso.title), React.createElement("p", {
+    className: "caso-principal-subtitle"
+  }, caso.subtitle)));
+  return React.createElement("article", {
+    className: `caso-principal${caso.url ? ' caso-principal-linkable' : ''}`
+  }, caso.url ? React.createElement("a", {
+    href: caso.url,
+    className: "caso-principal-link"
+  }, content) : content);
+}
 function CasoEditorialCard({
   caso,
   idx,
-  className = ''
+  className = '',
+  showImage = false
 }) {
   return React.createElement("article", {
     className: `contract-card caso-editorial-card${className ? ' ' + className : ''}${caso.url ? ' caso-editorial-card-linkable' : ''}`
@@ -3200,17 +3226,33 @@ function CasoEditorialCard({
     className: "caso-editorial-link"
   }, React.createElement(CasoEditorialContent, {
     caso: caso,
-    idx: idx
+    idx: idx,
+    showImage: showImage
   })) : React.createElement(CasoEditorialContent, {
     caso: caso,
-    idx: idx
+    idx: idx,
+    showImage: showImage
   }));
 }
 function CasoEditorialContent({
   caso,
-  idx
+  idx,
+  showImage
 }) {
-  return React.createElement(React.Fragment, null, React.createElement("div", {
+  if (!showImage) {
+    return React.createElement("div", {
+      className: "contract-header caso-list-header"
+    }, React.createElement("div", {
+      className: "caso-list-copy"
+    }, React.createElement("div", {
+      className: "contract-title caso-editorial-title"
+    }, caso.title), React.createElement("div", {
+      className: "caso-editorial-subtitle"
+    }, caso.subtitle)), Number.isFinite(Number(caso.importe)) && React.createElement("div", {
+      className: "contract-amount caso-list-amount"
+    }, formatCurrency(Number(caso.importe))));
+  }
+  return React.createElement(React.Fragment, null, showImage && React.createElement("div", {
     className: "caso-editorial-image-frame"
   }, React.createElement("img", {
     src: assetUrl(caso.image),
@@ -3737,7 +3779,7 @@ function App() {
       'analisi': '/analisi',
       'cas-fraccionament': '/analisi/fraccionament',
       'cas-concentracio': '/analisi/concentracio',
-      'casos': '/casos',
+      'casos': '/investigacio',
       'sobre': '/sobre',
       'legal': '/avis-legal'
     };
@@ -4186,7 +4228,7 @@ function App() {
       empreses: 'Empreses | Iguadata',
       persones: 'Persones | Iguadata',
       analisi: 'Anàlisi | Iguadata',
-      casos: 'Casos | Iguadata',
+      casos: "Casos d'investigació | Iguadata",
       sobre: 'Sobre | Iguadata',
       legal: 'Iguadata'
     };
@@ -4431,7 +4473,7 @@ function App() {
     'cas-fraccionament': 'Anàlisi',
     'cas-concentracio': 'Anàlisi',
     'cas-electoralisme': 'Anàlisi',
-    casos: 'Casos',
+    casos: 'Investigació',
     sobre: 'Sobre',
     legal: 'Avís legal'
   }[activeTab] || 'Iguadata';
@@ -4606,14 +4648,14 @@ function App() {
       "aria-current": showActive && analisiActive ? 'page' : undefined,
       onClick: event => handleNavClick(event, handleAnalisiNavClick)
     }, "An\xE0lisi"), React.createElement("a", {
-      href: buildRouteUrl('/casos'),
+      href: buildRouteUrl('/investigacio'),
       className: 'nav-tab' + (showActive && casosActive ? ' active' : ''),
       "aria-current": showActive && casosActive ? 'page' : undefined,
       onClick: event => handleNavClick(event, () => {
         handleNavigation('casos');
         setIsMobileMenuOpen(false);
       })
-    }, "Casos"));
+    }, "Investigaci\xF3"));
   };
   const renderSiteChrome = () => React.createElement("div", {
     className: 'site-chrome site-chrome-light' + (isMobileMenuOpen ? ' mobile-menu-open' : '')
@@ -6748,13 +6790,13 @@ function App() {
     },
     className: "footer-link"
   }, "An\xE0lisi"), React.createElement("a", {
-    href: BASE + '/casos',
+    href: BASE + '/investigacio',
     onClick: e => {
       e.preventDefault();
       handleNavigation('casos');
     },
     className: "footer-link"
-  }, "Casos")), React.createElement("div", {
+  }, "Investigaci\xF3")), React.createElement("div", {
     className: "footer-nav-column"
   }, React.createElement("a", {
     href: BASE + '/sobre',

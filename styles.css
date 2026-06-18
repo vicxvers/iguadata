@@ -5233,25 +5233,76 @@ body.home-scroll-surface::-webkit-scrollbar {
     padding-bottom: 5rem;
 }
 
-.casos-editorial-list {
+.caso-principal,
+.caso-principal-link {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: var(--space-xl);
-    align-items: stretch;
+    grid-template-columns: minmax(22rem, 30rem) fit-content(34rem);
+    gap: 5rem;
+    align-items: center;
+    width: fit-content;
+    max-width: 100%;
     margin-top: var(--pad-card);
+    margin-right: auto;
+    margin-left: auto;
+    color: inherit;
+    text-decoration: none;
+}
+
+.caso-principal-link {
+    margin-top: 0;
+    margin-right: 0;
+    margin-left: 0;
+    width: 100%;
+}
+
+.caso-principal-image-frame {
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+    background: var(--navy);
+}
+
+.caso-principal-copy {
+    max-width: 34rem;
+    min-width: 0;
+}
+
+.caso-principal-title {
+    max-width: 11ch;
+    font-family: var(--font-display);
+    font-size: 5rem;
+    font-weight: 400;
+    line-height: 0.95;
+    letter-spacing: var(--tracking-title);
+    color: var(--navy);
+    text-wrap: balance;
+    overflow-wrap: anywhere;
+}
+
+.caso-principal-subtitle {
+    max-width: 34rem;
+    margin-top: var(--space-xl);
+    color: var(--text-light);
+    font-size: 1.5rem;
+    font-weight: 500;
+    line-height: 1.3;
+    text-wrap: balance;
+    overflow-wrap: anywhere;
+}
+
+.casos-editorial-list {
+    display: block;
+    margin-top: 3.5rem;
 }
 
 .caso-editorial-card {
-    display: grid;
-    grid-template-rows: auto 1fr;
     min-width: 0;
-    height: 100%;
-    padding: 0;
-    margin-bottom: 0;
+    height: auto;
 }
 
 .caso-editorial-card-featured {
     grid-column: span 2;
+    grid-template-rows: auto 1fr;
 }
 
 .casos-editorial-note {
@@ -5270,7 +5321,7 @@ body.home-scroll-surface::-webkit-scrollbar {
 }
 
 .caso-editorial-link {
-    display: grid;
+    display: block;
     color: inherit;
     text-decoration: none;
 }
@@ -5278,6 +5329,8 @@ body.home-scroll-surface::-webkit-scrollbar {
 .caso-editorial-image-frame {
     aspect-ratio: 4 / 3;
     overflow: hidden;
+    margin-bottom: var(--space-xl);
+    border-radius: var(--radius);
     background: var(--navy);
 }
 
@@ -5294,11 +5347,6 @@ body.home-scroll-surface::-webkit-scrollbar {
 
 .caso-editorial-copy {
     min-width: 0;
-    padding: var(--space-xl);
-}
-
-.caso-editorial-card:not(.caso-editorial-card-featured) .caso-editorial-copy {
-    min-height: calc(var(--pad-card-lg) * 3);
 }
 
 .caso-editorial-title {
@@ -5311,6 +5359,14 @@ body.home-scroll-surface::-webkit-scrollbar {
     text-wrap: balance;
 }
 
+.caso-editorial-card:not(.caso-editorial-card-featured) .caso-editorial-title {
+    font-family: inherit;
+    font-size: var(--text-lg);
+    font-weight: 500;
+    line-height: inherit;
+    letter-spacing: inherit;
+}
+
 .caso-editorial-subtitle {
     max-width: 28ch;
     margin-top: var(--text-sm);
@@ -5320,6 +5376,33 @@ body.home-scroll-surface::-webkit-scrollbar {
     line-height: 1.35;
     color: var(--text-light);
     text-wrap: balance;
+}
+
+.caso-editorial-card:not(.caso-editorial-card-featured) .caso-editorial-subtitle {
+    max-width: none;
+    margin-top: 0;
+    padding-top: 0;
+    border-top: 0;
+    color: var(--navy);
+    font-size: var(--text-base);
+    font-weight: 400;
+}
+
+.caso-list-header {
+    align-items: center;
+    margin-bottom: 0;
+}
+
+.caso-list-copy {
+    display: flex;
+    min-width: 0;
+    flex: 1;
+    flex-direction: column;
+    gap: 0.45rem;
+}
+
+.caso-list-amount {
+    margin-left: auto;
 }
 
 .caso-editorial-card-featured .caso-editorial-title {
@@ -6939,9 +7022,30 @@ body.home-scroll-surface::-webkit-scrollbar {
     }
 
     .casos-editorial-list {
+        margin-top: 1.5rem;
+    }
+
+    .caso-principal,
+    .caso-principal-link {
         grid-template-columns: 1fr;
         gap: var(--space-xl);
         margin-top: 1.5rem;
+    }
+
+    .caso-principal-link {
+        margin-top: 0;
+    }
+
+    .caso-principal-title {
+        max-width: 12ch;
+        font-size: var(--display-lg);
+    }
+
+    .caso-principal-subtitle {
+        width: auto;
+        max-width: 28ch;
+        margin-top: 1rem;
+        font-size: var(--text-md);
     }
 
     .caso-editorial-card,
@@ -6957,9 +7061,12 @@ body.home-scroll-surface::-webkit-scrollbar {
         line-height: 1.35;
     }
 
-    .caso-editorial-title,
-    .caso-editorial-card:not(.caso-editorial-card-featured) .caso-editorial-title {
+    .caso-editorial-title {
         font-size: var(--display-sm);
+    }
+
+    .caso-editorial-card:not(.caso-editorial-card-featured) .caso-editorial-title {
+        font-size: var(--text-lg);
     }
 
     .caso-editorial-card-featured .caso-editorial-title {
@@ -6967,10 +7074,14 @@ body.home-scroll-surface::-webkit-scrollbar {
         font-size: var(--display-lg);
     }
 
-    .caso-editorial-subtitle,
-    .caso-editorial-card:not(.caso-editorial-card-featured) .caso-editorial-subtitle {
+    .caso-editorial-subtitle {
         max-width: 28ch;
         font-size: var(--text-md);
+    }
+
+    .caso-editorial-card:not(.caso-editorial-card-featured) .caso-editorial-subtitle {
+        max-width: none;
+        font-size: var(--text-base);
     }
 
     .card-link-wrapper {
