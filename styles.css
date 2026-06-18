@@ -7074,7 +7074,7 @@ body.home-scroll-surface::-webkit-scrollbar {
     .persones-page,
     .analisi-page,
     .casos-page {
-        --page-title-space-top: 0.5rem;
+        --page-title-space-top: 1.4rem;
         --page-title-space-bottom: 3rem;
         --analisi-title-space-bottom: 1rem;
         --concentracio-switch-space: 1rem;
@@ -7478,15 +7478,15 @@ body.home-scroll-surface::-webkit-scrollbar {
     }
 
     .prose-page {
-        --page-title-space-top: 0.5rem;
+        --page-title-space-top: 1.4rem;
         --page-title-space-bottom: 3rem;
         padding-top: var(--page-title-space-top);
     }
 
     .prose-page .page-title {
         width: auto;
-        font-size: clamp(2.25rem, 9vw, 2.75rem);
-        line-height: 1;
+        font-size: clamp(2.65rem, 11vw, 3.35rem) !important;
+        line-height: 0.98;
         margin: 0 0 var(--page-title-space-bottom);
         text-align: left;
     }
