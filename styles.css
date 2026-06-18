@@ -321,7 +321,7 @@ html.home-lock-scroll {
     font-size: 3.5rem;
     font-weight: 400;
     color: var(--navy);
-    margin-bottom: 1.5rem;
+    margin: 0.67em 0;
     letter-spacing: var(--tracking-title);
 }
 
@@ -330,7 +330,19 @@ html.home-lock-scroll {
 .persones-page .page-title,
 .analisi-page .page-title,
 .casos-page .page-title {
+    line-height: 1;
+    margin: 0 0 var(--page-title-space-bottom, 3.75rem);
     text-align: center;
+}
+
+.contractes-page,
+.empreses-page,
+.persones-page,
+.analisi-page,
+.casos-page {
+    --page-title-space-top: 3rem;
+    --page-title-space-bottom: 3.75rem;
+    padding-top: var(--page-title-space-top);
 }
 
 .data-loading-container {
@@ -371,6 +383,16 @@ html.home-lock-scroll {
     margin-right: auto;
     margin-left: auto;
     border-radius: var(--radius);
+}
+
+.contractes-page .data-skeleton-title,
+.empreses-page .data-skeleton-title,
+.persones-page .data-skeleton-title,
+.analisi-page .data-skeleton-title,
+.casos-page .data-skeleton-title {
+    margin-right: auto;
+    margin-bottom: var(--page-title-space-bottom, 3.75rem);
+    margin-left: auto;
 }
 
 .data-skeleton-search {
@@ -4906,11 +4928,18 @@ body.home-scroll-surface::-webkit-scrollbar {
     margin-right: auto;
 }
 
+.prose-page {
+    --page-title-space-top: 3rem;
+    --page-title-space-bottom: 3.75rem;
+    padding-top: var(--page-title-space-top);
+}
+
 .prose-page .page-title {
     width: 62.5vw;
     max-width: none;
-    margin-left: auto;
-    margin-right: auto;
+    line-height: 1;
+    margin: 0 auto var(--page-title-space-bottom, 3.75rem);
+    text-align: left;
 }
 
 .prose-intro {
@@ -5498,7 +5527,7 @@ body.home-scroll-surface::-webkit-scrollbar {
 }
 
 .analisi-search-section {
-    margin-top: 3.75rem;
+    margin-top: 0;
 }
 
 .analisi-page-reordered {
@@ -5507,7 +5536,7 @@ body.home-scroll-surface::-webkit-scrollbar {
 }
 
 .analisi-page-reordered>.page-title {
-    margin-bottom: 0;
+    margin-bottom: var(--analisi-title-space-bottom, 3rem);
 }
 
 .analisi-page-reordered>.sector-concentration-visual {
@@ -5661,7 +5690,7 @@ body.home-scroll-surface::-webkit-scrollbar {
     justify-content: center;
     gap: 0.35rem;
     width: fit-content;
-    margin: 3rem auto 0;
+    margin: 0 auto var(--concentracio-switch-space, 3rem);
     padding: 0.35rem;
     border: 1px solid var(--border);
     border-radius: var(--radius-pill);
@@ -7026,9 +7055,30 @@ body.home-scroll-surface::-webkit-scrollbar {
     .casos-page .page-title {
         font-size: clamp(2.65rem, 11vw, 3.35rem) !important;
         line-height: 0.98;
-        margin-top: 0.75rem;
-        margin-bottom: 1.5rem;
+        margin: 0 0 var(--page-title-space-bottom, 2.5rem);
         text-align: center;
+    }
+
+    .contractes-page .data-skeleton-title,
+    .empreses-page .data-skeleton-title,
+    .persones-page .data-skeleton-title,
+    .analisi-page .data-skeleton-title,
+    .casos-page .data-skeleton-title {
+        margin-right: auto;
+        margin-bottom: var(--page-title-space-bottom, 3rem);
+        margin-left: auto;
+    }
+
+    .contractes-page,
+    .empreses-page,
+    .persones-page,
+    .analisi-page,
+    .casos-page {
+        --page-title-space-top: 0.5rem;
+        --page-title-space-bottom: 3rem;
+        --analisi-title-space-bottom: 1rem;
+        --concentracio-switch-space: 1rem;
+        padding-top: var(--page-title-space-top);
     }
 
     .casos-editorial-list {
@@ -7428,14 +7478,16 @@ body.home-scroll-surface::-webkit-scrollbar {
     }
 
     .prose-page {
-        padding-top: 2rem;
+        --page-title-space-top: 0.5rem;
+        --page-title-space-bottom: 3rem;
+        padding-top: var(--page-title-space-top);
     }
 
     .prose-page .page-title {
         width: auto;
         font-size: clamp(2.25rem, 9vw, 2.75rem);
-        line-height: 1.05;
-        margin: 0 0 2.5rem;
+        line-height: 1;
+        margin: 0 0 var(--page-title-space-bottom);
         text-align: left;
     }
 
@@ -7651,15 +7703,23 @@ body.home-scroll-surface::-webkit-scrollbar {
     }
 
     .analisi-page {
-        padding-top: 2rem;
+        --analisi-mobile-title-top: 2rem;
+        --analisi-title-space-bottom: 2rem;
+        --concentracio-switch-space: 2rem;
+        padding-top: var(--analisi-mobile-title-top);
     }
 
     .analisi-page .page-title {
         font-size: clamp(2.65rem, 11vw, 3.35rem) !important;
         line-height: 0.98;
-        margin-top: 0.75rem;
-        margin-bottom: 0;
+        margin: 0 0 var(--analisi-title-space-bottom, 2rem);
         text-align: center;
+    }
+
+    .analisi-page .data-skeleton-title {
+        margin-right: auto;
+        margin-bottom: var(--analisi-title-space-bottom, 2.5rem);
+        margin-left: auto;
     }
 
     .analisi-page-reordered>.metodologia-wrapper {
@@ -7724,7 +7784,7 @@ body.home-scroll-surface::-webkit-scrollbar {
     }
 
     .analisi-search-section {
-        margin-top: var(--mobile-section-gap);
+        margin-top: 0;
     }
 
     .analisi-risk-filters {
@@ -7757,8 +7817,8 @@ body.home-scroll-surface::-webkit-scrollbar {
 
     .concentracio-mode-switch {
         width: 100%;
-        margin-top: var(--mobile-section-gap);
-        margin-bottom: var(--mobile-section-gap);
+        margin-top: 0;
+        margin-bottom: var(--concentracio-switch-space, 2rem);
     }
 
     .concentracio-mode-btn {
