@@ -1,0 +1,87 @@
+name: Sync official data
+
+# Production (vicxvers/iguadata) is the canonical data source.
+# This workflow updates data files in the development branch without
+# replacing application code or in-progress design changes.
+on:
+  schedule:
+    # Production starts at 23:00 UTC and has a four-hour timeout.
+    - cron: '0 4 * * 1'
+  workflow_dispatch:
+
+concurrency:
+  group: sync-official-data
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout development repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Fetch official data
+        run: |
+          git remote add official https://github.com/vicxvers/iguadata.git
+          git fetch --depth=1 official main:refs/remotes/official/main
+
+      - name: Sync data into development branch
+        run: |
+          set -euo pipefail
+
+          data_files=(
+            json/carrecs.json
+            json/carrecs_eliminats.json
+            json/concentracio.json
+            json/contractes.json
+            json/contractes_arxiu.json
+            json/electoralisme.json
+            json/empreses.json
+            json/fraccionament.json
+            json/persones.json
+            json/resum.json
+            .github/scripts/alias_empreses.json
+          )
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git restore --source=official/main -- "${data_files[@]}"
+
+          python - "${data_files[@]}" <<'PY'
+          import json
+          import sys
+          from pathlib import Path
+
+          for raw_path in sys.argv[1:]:
+              path = Path(raw_path)
+              if not path.is_file() or path.stat().st_size == 0:
+                  raise SystemExit(f"Missing or empty data file: {path}")
+              with path.open("r", encoding="utf-8") as handle:
+                  json.load(handle)
+              print(f"OK {path}: {path.stat().st_size} bytes")
+          PY
+
+          git add -- "${data_files[@]}"
+          if git diff --staged --quiet; then
+            echo "main already matches official data."
+            exit 0
+          fi
+
+          sync_date=$(python - <<'PY'
+          import json
+          from pathlib import Path
+
+          payload = json.loads(Path("json/resum.json").read_text(encoding="utf-8"))
+          print(payload["generated_at"][:10])
+          PY
+          )
+          git commit -m "chore(data): sincronitza dades oficials ($sync_date)"
+          git push origin HEAD:main

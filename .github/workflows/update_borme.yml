@@ -1,10 +1,8 @@
 name: Update BORME data
 
-# Runs every Sunday at 23:00 UTC (Monday 00:00/01:00 Madrid time, depending on DST).
-# Also triggerable manually from the GitHub Actions UI ("Run workflow").
+# Development fallback only. Production is the canonical data pipeline.
+# Run manually only when explicitly testing BORME changes in this repository.
 on:
-  schedule:
-    - cron: '0 23 * * 0'
   workflow_dispatch:
     inputs:
       start_date:

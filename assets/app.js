@@ -210,6 +210,10 @@ function resolveRoute(path) {
     tab: 'analisi',
     canonicalPath: '/analisi'
   };
+  if (path === '/investigacio') return {
+    tab: 'casos',
+    canonicalPath: '/investigacio'
+  };
   if (path === '/sobre') return {
     tab: 'sobre',
     canonicalPath: '/sobre'
@@ -275,6 +279,43 @@ function stableHash(values) {
   const canonical = values.map(v => v == null ? '' : String(v).trim()).join('|');
   return cyrb53(canonical).toString(36).padStart(11, '0').slice(-7);
 }
+const CASOS_INVESTIGACIO_FALLBACK = [{
+  slug: 'neteja-parc-central',
+  title: 'Neteja del Parc Central',
+  subtitle: "Un contracte il·legal després d'anys al límit",
+  image: '/assets/investigacio/neteja-parc-central.png',
+  importe: 58062.93
+}, {
+  slug: 'llums-de-nadal',
+  title: 'Llums de Nadal',
+  subtitle: 'Quatre anys, un mateix proveïdor i preus calcats al límit legal',
+  image: '/assets/investigacio/llums-de-nadal.png',
+  importe: 59171.05
+}, {
+  slug: 'igualada-urban-running',
+  title: 'Igualada Urban Running',
+  subtitle: 'Cursa de contractes amb un sol guanyador durant anys',
+  image: '/assets/investigacio/igualada-urban-running.png',
+  importe: 66413.80
+}, {
+  slug: 'la-masuca',
+  title: 'La Masuca',
+  subtitle: 'Dos contractes per a dues empreses connectades',
+  image: '/assets/investigacio/la-masuca.png',
+  importe: 29700
+}, {
+  slug: 'zones-verdes-igualada',
+  title: "Zones verdes d'Igualada",
+  subtitle: 'Set contractes, un mateix servei i imports al límit legal',
+  image: '/assets/investigacio/zones-verdes-igualada.png',
+  importe: 104260
+}, {
+  slug: 'parc-central',
+  title: 'Parc Central',
+  subtitle: 'Quatre contractes, una mateixa actuació i imports al límit legal',
+  image: '/assets/investigacio/parc-central.png',
+  importe: 58900
+}];
 function buildContractSlug(c) {
   const date = (c.fecha || '0000-00-00').slice(0, 10);
   const codeSlug = slugify(c.codigo);
@@ -3115,6 +3156,119 @@ function PersonesView({
     className: "prose-link"
   }, "Av\xEDs legal"), ". El dret de supressi\xF3 (dret a l'oblit) queda limitat per l'art. 17.3.b) del RGPD quan les dades figuren en registres oficials p\xFAblics o en documentaci\xF3 administrativa de contractaci\xF3 p\xFAblica, sense perjudici del dret a sol\xB7licitar la revisi\xF3 de possibles errors factuals."))));
 }
+function CasosView() {
+  const [casos, setCasos] = useState(CASOS_INVESTIGACIO_FALLBACK);
+  const featuredCaso = casos[0];
+  const gridCasos = casos.slice(1);
+  useEffect(() => {
+    let cancelled = false;
+    fetch(jsonAssetUrl('/json/investigacio.json')).then(res => {
+      if (!res.ok) throw new Error(`Investigacio HTTP ${res.status}`);
+      return res.json();
+    }).then(data => {
+      if (!cancelled && Array.isArray(data) && data.length) setCasos(data);
+    }).catch(err => {
+      console.warn('Error loading investigacio:', err);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+  return React.createElement("div", {
+    className: "container casos-page"
+  }, React.createElement("h1", {
+    className: "page-title"
+  }, "Casos d'investigaci\xF3"), featuredCaso && React.createElement(CasoPrincipalInvestigacio, {
+    caso: featuredCaso
+  }), React.createElement("div", {
+    className: "casos-editorial-list",
+    "aria-label": "Investigacions publicades"
+  }, gridCasos.map((caso, idx) => React.createElement(CasoEditorialCard, {
+    key: caso.slug,
+    caso: caso,
+    idx: idx + 1
+  }))));
+}
+function CasoPrincipalInvestigacio({
+  caso
+}) {
+  const content = React.createElement(React.Fragment, null, React.createElement("div", {
+    className: "caso-principal-image-frame"
+  }, React.createElement("img", {
+    src: assetUrl(caso.image),
+    alt: `${caso.title}: ${caso.subtitle}`,
+    className: "caso-editorial-image",
+    loading: "eager"
+  })), React.createElement("div", {
+    className: "caso-principal-copy"
+  }, React.createElement("h2", {
+    className: "caso-principal-title"
+  }, caso.title), React.createElement("p", {
+    className: "caso-principal-subtitle"
+  }, caso.subtitle), Number.isFinite(Number(caso.importe)) && React.createElement("div", {
+    className: "caso-principal-amount"
+  }, formatCurrency(Number(caso.importe)))));
+  return React.createElement("article", {
+    className: `caso-principal${caso.url ? ' caso-principal-linkable' : ''}`
+  }, caso.url ? React.createElement("a", {
+    href: caso.url,
+    className: "caso-principal-link"
+  }, content) : content);
+}
+function CasoEditorialCard({
+  caso,
+  idx,
+  className = '',
+  showImage = false
+}) {
+  return React.createElement("article", {
+    className: `contract-card caso-editorial-card${className ? ' ' + className : ''}${caso.url ? ' caso-editorial-card-linkable' : ''}`
+  }, caso.url ? React.createElement("a", {
+    href: caso.url,
+    className: "caso-editorial-link"
+  }, React.createElement(CasoEditorialContent, {
+    caso: caso,
+    idx: idx,
+    showImage: showImage
+  })) : React.createElement(CasoEditorialContent, {
+    caso: caso,
+    idx: idx,
+    showImage: showImage
+  }));
+}
+function CasoEditorialContent({
+  caso,
+  idx,
+  showImage
+}) {
+  if (!showImage) {
+    return React.createElement("div", {
+      className: "contract-header caso-list-header"
+    }, React.createElement("div", {
+      className: "caso-list-copy"
+    }, React.createElement("div", {
+      className: "contract-title caso-editorial-title"
+    }, caso.title), React.createElement("div", {
+      className: "caso-editorial-subtitle"
+    }, caso.subtitle)), Number.isFinite(Number(caso.importe)) && React.createElement("div", {
+      className: "contract-amount caso-list-amount"
+    }, formatCurrency(Number(caso.importe))));
+  }
+  return React.createElement(React.Fragment, null, showImage && React.createElement("div", {
+    className: "caso-editorial-image-frame"
+  }, React.createElement("img", {
+    src: assetUrl(caso.image),
+    alt: `${caso.title}: ${caso.subtitle}`,
+    className: "caso-editorial-image",
+    loading: idx === 0 ? 'eager' : 'lazy'
+  })), React.createElement("div", {
+    className: "caso-editorial-copy"
+  }, React.createElement("h2", {
+    className: "caso-editorial-title"
+  }, caso.title), React.createElement("p", {
+    className: "caso-editorial-subtitle"
+  }, caso.subtitle)));
+}
 function App() {
   const getRoute = () => {
     let p = window.location.pathname;
@@ -3627,6 +3781,7 @@ function App() {
       'analisi': '/analisi',
       'cas-fraccionament': '/analisi/fraccionament',
       'cas-concentracio': '/analisi/concentracio',
+      'casos': '/investigacio',
       'sobre': '/sobre',
       'legal': '/avis-legal'
     };
@@ -4075,6 +4230,7 @@ function App() {
       empreses: 'Empreses | Iguadata',
       persones: 'Persones | Iguadata',
       analisi: 'Anàlisi | Iguadata',
+      casos: "Casos d'investigació | Iguadata",
       sobre: 'Sobre | Iguadata',
       legal: 'Iguadata'
     };
@@ -4182,7 +4338,8 @@ function App() {
     }
     return result;
   }, [fraudes, riskFilter, analisiSearch, analisiSort]);
-  const concentracioFiltradaBase = useMemo(() => {
+  const concentracioFiltradaBase = useMemo(() => [...concentracio], [concentracio]);
+  const concentracioTemporalBase = useMemo(() => {
     let result = [...concentracio];
     if (analisiSearch.trim()) {
       result = result.filter(f => matchesSearchQuery([f.id, ...(f.empreses || []), ...(f.contractes || []).flatMap(c => [c.descripcion, c.adjudicatario])], analisiSearch));
@@ -4212,7 +4369,28 @@ function App() {
     }
     return result;
   }, [analisiSort]);
-  const concentracioHistoric = useMemo(() => orderConcentracio(concentracioFiltradaBase.filter(f => f.finestra === 'historic').filter(f => riskFilter === 'TOTS' || f.nivell === riskFilter || riskFilter === 'OBSERVACIO' && f.nivell === 'BAIX')), [concentracioFiltradaBase, orderConcentracio, riskFilter]);
+  const bestConcentracioBySector = useCallback(items => {
+    const isBetterRepresentative = (candidate, current) => {
+      if (!current) return true;
+      const candidateScore = [candidate.risc || 0, candidate.quota_import || 0, candidate.import_concentrat || 0];
+      const currentScore = [current.risc || 0, current.quota_import || 0, current.import_concentrat || 0];
+      for (let i = 0; i < candidateScore.length; i += 1) {
+        if (candidateScore[i] !== currentScore[i]) return candidateScore[i] > currentScore[i];
+      }
+      return false;
+    };
+    const bySector = new Map();
+    items.forEach(caso => {
+      const key = caso.sector || 'Altres Serveis i Subministraments';
+      const current = bySector.get(key);
+      if (isBetterRepresentative(caso, current)) bySector.set(key, caso);
+    });
+    return [...bySector.values()];
+  }, []);
+  const concentracioHistoric = useMemo(() => {
+    const filtered = concentracioFiltradaBase.filter(f => f.finestra === 'historic');
+    return bestConcentracioBySector(filtered).sort((a, b) => (b.quota_import || 0) - (a.quota_import || 0));
+  }, [bestConcentracioBySector, concentracioFiltradaBase]);
   const concentracioSectorSnapshot = useMemo(() => {
     const items = [...concentracioHistoric].sort((a, b) => (b.quota_import || 0) - (a.quota_import || 0)).slice(0, 6);
     const maxQuota = items.reduce((max, item) => Math.max(max, item.quota_import || 0), 0);
@@ -4222,12 +4400,12 @@ function App() {
     };
   }, [concentracioHistoric]);
   const concentracioTemporal = useMemo(() => {
-    let result = concentracioFiltradaBase.filter(f => f.finestra !== 'historic');
+    let result = concentracioTemporalBase.filter(f => f.finestra !== 'historic');
     if (riskFilter !== 'TOTS') {
       result = result.filter(f => f.nivell === riskFilter || riskFilter === 'OBSERVACIO' && f.nivell === 'BAIX');
     }
     return orderConcentracio(result);
-  }, [concentracioFiltradaBase, orderConcentracio, riskFilter]);
+  }, [concentracioTemporalBase, orderConcentracio, riskFilter]);
   const electoralFiltrats = useMemo(() => {
     let result = electoral.filter(f => f.nivell !== 'BAIX');
     if (riskFilter !== 'TOTS') {
@@ -4319,6 +4497,7 @@ function App() {
     'cas-fraccionament': 'Anàlisi',
     'cas-concentracio': 'Anàlisi',
     'cas-electoralisme': 'Anàlisi',
+    casos: 'Investigació',
     sobre: 'Sobre',
     legal: 'Avís legal'
   }[activeTab] || 'Iguadata';
@@ -4400,6 +4579,9 @@ function App() {
     }));
   }, [empreses, summary]);
   const homeMinorContractTrend = useMemo(() => {
+    if (!contracts.length && summary?.home?.minor_contract_trend) {
+      return summary.home.minor_contract_trend;
+    }
     const years = new Map();
     const currentYear = new Date().getFullYear();
     contracts.forEach(contract => {
@@ -4430,7 +4612,7 @@ function App() {
       barScale: Math.max(0.08, row.percent / maxPercent),
       percentLabel: `${Math.round(row.percent * 100)}%`
     }));
-  }, [contracts]);
+  }, [contracts, summary]);
   const renderHomeChrome = (interactive = true) => React.createElement("div", {
     className: "home-chrome"
   }, React.createElement("div", {
@@ -4458,7 +4640,7 @@ function App() {
     const empresesActive = activeTab === 'empreses' || activeTab === 'empresa';
     const personesActive = activeTab === 'persones';
     const analisiActive = activeTab === 'analisi' || activeTab === 'cas-fraccionament' || activeTab === 'cas-concentracio' || activeTab === 'cas-electoralisme';
-    const sobreActive = activeTab === 'sobre';
+    const casosActive = activeTab === 'casos';
     return React.createElement("div", {
       className: "nav"
     }, React.createElement("a", {
@@ -4493,14 +4675,14 @@ function App() {
       "aria-current": showActive && analisiActive ? 'page' : undefined,
       onClick: event => handleNavClick(event, handleAnalisiNavClick)
     }, "An\xE0lisi"), React.createElement("a", {
-      href: buildRouteUrl('/sobre'),
-      className: 'nav-tab' + (showActive && sobreActive ? ' active' : ''),
-      "aria-current": showActive && sobreActive ? 'page' : undefined,
+      href: buildRouteUrl('/investigacio'),
+      className: 'nav-tab' + (showActive && casosActive ? ' active' : ''),
+      "aria-current": showActive && casosActive ? 'page' : undefined,
       onClick: event => handleNavClick(event, () => {
-        handleNavigation('sobre');
+        handleNavigation('casos');
         setIsMobileMenuOpen(false);
       })
-    }, "Sobre"));
+    }, "Investigaci\xF3"));
   };
   const renderSiteChrome = () => React.createElement("div", {
     className: 'site-chrome site-chrome-light' + (isMobileMenuOpen ? ' mobile-menu-open' : '')
@@ -5476,7 +5658,7 @@ function App() {
     setCurrentPage: setPersonesPage,
     expandedIdx: personesExpanded,
     setExpandedIdx: setPersonesExpanded
-  }), activeTab === 'contracte' && selectedContractForDetail && canRenderDataTab && React.createElement(ContractDetailView, {
+  }), activeTab === 'casos' && React.createElement(CasosView, null), activeTab === 'contracte' && selectedContractForDetail && canRenderDataTab && React.createElement(ContractDetailView, {
     contract: selectedContractForDetail,
     contracts: contracts,
     empreses: empreses,
@@ -5894,7 +6076,7 @@ function App() {
     type: "button",
     className: 'concentracio-mode-btn' + (concentracioMode === 'temporal' ? ' active' : ''),
     onClick: () => setConcentracioMode('temporal')
-  }, "Temporals")), React.createElement("div", {
+  }, "Temporals")), concentracioMode === 'temporal' && React.createElement("div", {
     className: "search-section analisi-search-section"
   }, React.createElement("div", {
     className: "search-input-wrapper"
@@ -6634,7 +6816,14 @@ function App() {
       handleNavigation('analisi');
     },
     className: "footer-link"
-  }, "An\xE0lisi")), React.createElement("div", {
+  }, "An\xE0lisi"), React.createElement("a", {
+    href: BASE + '/investigacio',
+    onClick: e => {
+      e.preventDefault();
+      handleNavigation('casos');
+    },
+    className: "footer-link"
+  }, "Investigaci\xF3")), React.createElement("div", {
     className: "footer-nav-column"
   }, React.createElement("a", {
     href: BASE + '/sobre',
