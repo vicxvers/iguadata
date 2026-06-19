@@ -3728,7 +3728,9 @@ function App() {
         return result;
     }, [fraudes, riskFilter, analisiSearch, analisiSort]);
 
-    const concentracioFiltradaBase = useMemo(() => {
+    const concentracioFiltradaBase = useMemo(() => [...concentracio], [concentracio]);
+
+    const concentracioTemporalBase = useMemo(() => {
         let result = [...concentracio];
         if (analisiSearch.trim()) {
             result = result.filter(f => matchesSearchQuery(
@@ -3767,13 +3769,30 @@ function App() {
         return result;
     }, [analisiSort]);
 
-    const concentracioHistoric = useMemo(() =>
-        orderConcentracio(
-            concentracioFiltradaBase
-                .filter(f => f.finestra === 'historic')
-                .filter(f => riskFilter === 'TOTS' || f.nivell === riskFilter || (riskFilter === 'OBSERVACIO' && f.nivell === 'BAIX'))
-        )
-        , [concentracioFiltradaBase, orderConcentracio, riskFilter]);
+    const bestConcentracioBySector = useCallback((items) => {
+        const isBetterRepresentative = (candidate, current) => {
+            if (!current) return true;
+            const candidateScore = [candidate.risc || 0, candidate.quota_import || 0, candidate.import_concentrat || 0];
+            const currentScore = [current.risc || 0, current.quota_import || 0, current.import_concentrat || 0];
+            for (let i = 0; i < candidateScore.length; i += 1) {
+                if (candidateScore[i] !== currentScore[i]) return candidateScore[i] > currentScore[i];
+            }
+            return false;
+        };
+        const bySector = new Map();
+        items.forEach(caso => {
+            const key = caso.sector || 'Altres Serveis i Subministraments';
+            const current = bySector.get(key);
+            if (isBetterRepresentative(caso, current)) bySector.set(key, caso);
+        });
+        return [...bySector.values()];
+    }, []);
+
+    const concentracioHistoric = useMemo(() => {
+        const filtered = concentracioFiltradaBase.filter(f => f.finestra === 'historic');
+        return bestConcentracioBySector(filtered)
+            .sort((a, b) => (b.quota_import || 0) - (a.quota_import || 0));
+    }, [bestConcentracioBySector, concentracioFiltradaBase]);
 
     const concentracioSectorSnapshot = useMemo(() => {
         const items = [...concentracioHistoric]
@@ -3784,12 +3803,12 @@ function App() {
     }, [concentracioHistoric]);
 
     const concentracioTemporal = useMemo(() => {
-        let result = concentracioFiltradaBase.filter(f => f.finestra !== 'historic');
+        let result = concentracioTemporalBase.filter(f => f.finestra !== 'historic');
         if (riskFilter !== 'TOTS') {
             result = result.filter(f => f.nivell === riskFilter || (riskFilter === 'OBSERVACIO' && f.nivell === 'BAIX'));
         }
         return orderConcentracio(result);
-    }, [concentracioFiltradaBase, orderConcentracio, riskFilter]);
+    }, [concentracioTemporalBase, orderConcentracio, riskFilter]);
 
     const electoralFiltrats = useMemo(() => {
         let result = electoral.filter(f => f.nivell !== 'BAIX');
@@ -3971,6 +3990,9 @@ function App() {
     }, [empreses, summary]);
 
     const homeMinorContractTrend = useMemo(() => {
+        if (!contracts.length && summary?.home?.minor_contract_trend) {
+            return summary.home.minor_contract_trend;
+        }
         const years = new Map();
         const currentYear = new Date().getFullYear();
         contracts.forEach(contract => {
@@ -3999,7 +4021,7 @@ function App() {
             barScale: Math.max(0.08, row.percent / maxPercent),
             percentLabel: `${Math.round(row.percent * 100)}%`
         }));
-    }, [contracts]);
+    }, [contracts, summary]);
 
     const renderHomeChrome = (interactive = true) => (
         <div className="home-chrome">
@@ -5167,6 +5189,7 @@ function App() {
                                     </button>
                                 </div>
 
+                                {concentracioMode === 'temporal' && (
                                 <div className="search-section analisi-search-section">
                                         <div className="search-input-wrapper">
                                             <span className="search-icon">
@@ -5221,6 +5244,8 @@ function App() {
                                             </div>
                                         </div>
                                 </div>
+
+                                )}
 
                                 {concentracioMode === 'historic' && (
                                     <>

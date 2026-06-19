@@ -1716,6 +1716,7 @@ html.home-lock-scroll {
 }
 
 .home {
+    --home-title-y: 50%;
     position: relative;
     min-height: 100dvh;
     overflow: visible;
@@ -1829,7 +1830,7 @@ body.home-scroll-surface::-webkit-scrollbar {
 
 .home-loading-screen .home-loading-copy {
     position: absolute;
-    top: 50%;
+    top: var(--home-title-y);
     left: 50%;
     z-index: 2;
     width: min(920px, calc(100% - 4rem));
@@ -1960,8 +1961,10 @@ body.home-scroll-surface::-webkit-scrollbar {
     z-index: 1;
     width: 13rem;
     min-height: 5.5rem;
-    display: grid;
-    align-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     gap: 0.45rem;
     padding: 0.75rem 0.9rem;
     border: 0;
@@ -1979,8 +1982,8 @@ body.home-scroll-surface::-webkit-scrollbar {
 .home-metric::before {
     content: "";
     position: absolute;
-    left: 50%;
-    top: 50%;
+    left: calc(50% + var(--metric-dot-x, 1.6rem));
+    top: var(--metric-dot-y, 2.35rem);
     z-index: -1;
     width: 0.72rem;
     height: 0.72rem;
@@ -1988,8 +1991,9 @@ body.home-scroll-surface::-webkit-scrollbar {
     border-radius: 50%;
     background: color-mix(in srgb, var(--surface) 18%, transparent);
     box-shadow: 0 0 28px color-mix(in srgb, var(--surface) 22%, transparent);
+    opacity: 0;
     transform: translate(-50%, -50%);
-    transition: width 0.22s, height 0.22s, border-color 0.22s, background 0.22s, box-shadow 0.22s;
+    transition: width 0.22s, height 0.22s, border-color 0.22s, background 0.22s, box-shadow 0.22s, opacity 0.22s;
 }
 
 .home-metric:hover {
@@ -2000,6 +2004,7 @@ body.home-scroll-surface::-webkit-scrollbar {
 .home-metric:hover::before {
     width: 5.6rem;
     height: 5.6rem;
+    opacity: 1;
     border-color: color-mix(in srgb, var(--surface) 48%, transparent);
     background: transparent;
     box-shadow:
@@ -2043,13 +2048,34 @@ body.home-scroll-surface::-webkit-scrollbar {
 }
 
 .home-metric-value {
-    display: block;
+    position: relative;
+    display: inline-block;
+    width: fit-content;
     font-family: var(--font-display);
     font-size: clamp(2.35rem, 4vw, 3.45rem);
     font-weight: 400;
     line-height: 0.9;
     letter-spacing: var(--tracking-amount);
     white-space: nowrap;
+}
+
+.home-metric-value::after {
+    content: "";
+    position: absolute;
+    right: -0.52rem;
+    top: 0.72em;
+    width: 0.72rem;
+    height: 0.72rem;
+    border: 1px solid color-mix(in srgb, var(--surface) 42%, transparent);
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--surface) 18%, transparent);
+    box-shadow: 0 0 28px color-mix(in srgb, var(--surface) 22%, transparent);
+    transform: translate(50%, -50%);
+    transition: opacity 0.22s;
+}
+
+.home-metric:hover .home-metric-value::after {
+    opacity: 0;
 }
 
 .home-metric-label {
@@ -2065,29 +2091,34 @@ body.home-scroll-surface::-webkit-scrollbar {
 .metric-contractes {
     --node-x: 22%;
     --node-y: 31%;
+    --metric-dot-x: 2.8rem;
 }
 
 .metric-import {
     --node-x: 78%;
     --node-y: 29%;
+    --metric-dot-x: 3.55rem;
     --float-delay: -2.2s;
 }
 
 .metric-empreses {
     --node-x: 22%;
     --node-y: 67%;
+    --metric-dot-x: 2.8rem;
     --float-delay: -4.4s;
 }
 
 .metric-persones {
     --node-x: 78%;
     --node-y: 68%;
+    --metric-dot-x: 2.8rem;
     --float-delay: -1.2s;
 }
 
 .metric-alertes {
     --node-x: 52.25%;
     --node-y: 80%;
+    --metric-dot-x: 2.8rem;
     --float-delay: -5.8s;
 }
 
@@ -2114,8 +2145,14 @@ body.home-scroll-surface::-webkit-scrollbar {
 
 .home-intro-scene {
     z-index: 2;
-    display: grid;
-    place-items: center;
+}
+
+.home-intro-scene .home-copy {
+    position: absolute;
+    top: var(--home-title-y);
+    left: 50%;
+    width: min(920px, calc(100% - 4rem));
+    translate: -50% -50%;
 }
 
 .home-chapter {
@@ -3864,8 +3901,8 @@ body.home-scroll-surface::-webkit-scrollbar {
         padding: 4.75rem 1rem 1.25rem;
     }
 
-    .home-loading-screen .home-loading-copy {
-        top: calc(50% - 1.125rem);
+    .home {
+        --home-title-y: calc(50% - 1.125rem);
     }
 
     .home-hero::before,
@@ -3898,6 +3935,17 @@ body.home-scroll-surface::-webkit-scrollbar {
         width: 100%;
         max-width: 25rem;
         text-align: center;
+    }
+
+    .home-intro-scene .home-copy,
+    .home-loading-screen .home-loading-copy {
+        width: calc(100vw - 2rem);
+        max-width: none;
+    }
+
+    .home-intro-scene .home-title,
+    .home-loading-screen .home-title {
+        white-space: nowrap;
     }
 
     .home-brand {
@@ -3943,6 +3991,7 @@ body.home-scroll-surface::-webkit-scrollbar {
     .home-metric:hover::before {
         width: 0.6rem;
         height: 0.6rem;
+        opacity: 0;
         border-color: color-mix(in srgb, var(--surface) 42%, transparent);
         background: color-mix(in srgb, var(--surface) 18%, transparent);
         box-shadow: 0 0 28px color-mix(in srgb, var(--surface) 22%, transparent);
@@ -3952,6 +4001,10 @@ body.home-scroll-surface::-webkit-scrollbar {
         font-size: clamp(1.85rem, 8.5vw, 2.35rem);
     }
 
+    .home-metric:hover .home-metric-value::after {
+        opacity: 1;
+    }
+
     .home-metric-label {
         font-size: 0.58rem;
         letter-spacing: 0.12em;
@@ -3959,6 +4012,7 @@ body.home-scroll-surface::-webkit-scrollbar {
 
     .home-intro-scene .metric-contractes {
         --node-y: 30%;
+        --metric-dot-x: 3.55rem;
         --float-delay: -0.8s;
         left: 1.25rem;
         justify-items: center;
@@ -3968,6 +4022,7 @@ body.home-scroll-surface::-webkit-scrollbar {
 
     .home-intro-scene .metric-import {
         --node-y: 25%;
+        --metric-dot-x: 3.55rem;
         --float-delay: -3.2s;
         left: auto;
         right: 1.25rem;
@@ -3978,6 +4033,7 @@ body.home-scroll-surface::-webkit-scrollbar {
 
     .home-intro-scene .metric-empreses {
         --node-y: 68%;
+        --metric-dot-x: 2.8rem;
         --float-delay: -5.1s;
         left: 1.25rem;
         justify-items: center;
@@ -3987,6 +4043,7 @@ body.home-scroll-surface::-webkit-scrollbar {
 
     .home-intro-scene .metric-persones {
         --node-y: 64%;
+        --metric-dot-x: 2.8rem;
         --float-delay: -1.9s;
         left: auto;
         right: 1.25rem;
@@ -3998,6 +4055,7 @@ body.home-scroll-surface::-webkit-scrollbar {
     .home-intro-scene .metric-alertes {
         --node-x: 50%;
         --node-y: 81%;
+        --metric-dot-x: 2.8rem;
         --float-delay: -6.7s;
         justify-items: center;
         text-align: center;
@@ -4425,8 +4483,8 @@ body.home-scroll-surface::-webkit-scrollbar {
         padding-top: 5.25rem;
     }
 
-    .home-loading-screen .home-loading-copy {
-        top: calc(50% - 0.875rem);
+    .home {
+        --home-title-y: calc(50% - 0.875rem);
     }
 }
 
@@ -5648,7 +5706,6 @@ body.home-scroll-surface::-webkit-scrollbar {
     display: flex;
     flex-direction: column;
     gap: 0;
-    margin-top: 1.75rem;
 }
 
 .analisi-alert-link {
@@ -5724,16 +5781,21 @@ body.home-scroll-surface::-webkit-scrollbar {
     cursor: pointer;
     font-family: var(--font-mono);
     font-size: 0.72rem;
-    font-weight: 600;
-    letter-spacing: 0.08em;
+    font-weight: 500;
+    letter-spacing: 0.05em;
     min-width: 8.5rem;
     padding: 0.72rem 1.1rem;
     text-transform: uppercase;
     transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.concentracio-mode-btn.active,
 .concentracio-mode-btn:hover {
+    background: var(--bg);
+    color: var(--navy);
+}
+
+.concentracio-mode-btn.active,
+.concentracio-mode-btn.active:hover {
     background: var(--navy);
     color: var(--surface);
     box-shadow: 0 8px 18px -14px rgba(15, 23, 42, 0.55);
@@ -7100,18 +7162,29 @@ body.home-scroll-surface::-webkit-scrollbar {
     }
 
     .casos-editorial-list {
-        margin-top: var(--space-xl);
+        margin-top: calc(var(--space-xl) * 1.8);
     }
 
     .caso-principal,
     .caso-principal-link {
         grid-template-columns: 1fr;
-        gap: var(--space-xl);
+        align-items: stretch;
+        gap: 1.35rem;
+        width: 100%;
+        max-width: 100%;
         margin-top: var(--space-xl);
     }
 
     .caso-principal-link {
         margin-top: 0;
+    }
+
+    .caso-principal-image-frame {
+        width: 100%;
+    }
+
+    .caso-principal-copy {
+        gap: 1.15rem;
     }
 
     .caso-principal-title {
@@ -7123,6 +7196,17 @@ body.home-scroll-surface::-webkit-scrollbar {
         width: auto;
         max-width: calc(var(--pad-card-lg) * 13.6);
         font-size: var(--text-md);
+    }
+
+    .casos-page .caso-list-header {
+        align-items: flex-start !important;
+    }
+
+    .casos-page .contract-card .caso-list-amount {
+        width: 100%;
+        margin-left: 0;
+        margin-bottom: 0 !important;
+        text-align: left;
     }
 
     .caso-editorial-card,
@@ -7822,7 +7906,6 @@ body.home-scroll-surface::-webkit-scrollbar {
 
     .analisi-alert-list {
         gap: 1rem;
-        margin-top: 1rem;
     }
 
     .analisi-page-reordered>.pagination,

@@ -52,6 +52,35 @@ def top_company_totals(empreses, field, limit):
     ]
 
 
+def minor_contract_trend(contractes):
+    current_year = datetime.now(timezone.utc).year
+    years = {}
+    for contracte in contractes:
+        year = str(contracte.get("fecha") or "")[:4]
+        if not year.isdigit() or int(year) >= current_year:
+            continue
+        current = years.setdefault(year, {"year": year, "total": 0, "minor": 0, "minorAmount": 0.0})
+        amount = float(contracte.get("importe") or 0)
+        current["total"] += 1
+        if "menor" in str(contracte.get("procedimiento") or "").lower():
+            current["minor"] += 1
+            current["minorAmount"] += amount
+
+    rows = [
+        {**row, "percent": row["minor"] / row["total"] if row["total"] else 0}
+        for row in sorted(years.values(), key=lambda item: item["year"])
+        if row["total"] >= 50
+    ]
+    max_percent = max((row["percent"] for row in rows), default=0.01)
+    return [
+        {
+            **row,
+            "barScale": max(0.08, row["percent"] / max_percent),
+            "percentLabel": f"{round(row['percent'] * 100)}%",
+        }
+        for row in rows
+    ]
+
 def main():
     contractes = load_json("contractes.json")
     empreses = load_json("empreses.json")
@@ -95,6 +124,7 @@ def main():
         "home": {
             "top_sectors": top_company_totals(empreses, "sector", 5),
             "top_categories": top_company_totals(empreses, "categoria", 6),
+"minor_contract_trend": minor_contract_trend(contractes),
             "risk_counts": {
                 "alt": sum(level == "CRITIC" for level in nivells),
                 "mitja": sum(level == "ALT" for level in nivells),
