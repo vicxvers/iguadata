@@ -269,45 +269,46 @@ function stableHash(values) {
 
 const CASOS_INVESTIGACIO_FALLBACK = [
     {
+        slug: 'passeig-verdaguer',
+        title: 'Passeig Verdaguer',
+        subtitle: 'Cinc contractes a dit per començar la remodelació',
+        image: '/assets/investigacio.png',
+        importe: 65500
+    },
+    {
         slug: 'neteja-parc-central',
         title: 'Neteja del Parc Central',
         subtitle: "Un contracte il·legal després d'anys al límit",
-        image: '/assets/investigacio/neteja-parc-central.png',
         importe: 58062.93
     },
     {
         slug: 'llums-de-nadal',
         title: 'Llums de Nadal',
         subtitle: 'Quatre anys, un mateix proveïdor i preus calcats al límit legal',
-        image: '/assets/investigacio/llums-de-nadal.png',
         importe: 59171.05
     },
     {
         slug: 'igualada-urban-running',
         title: 'Igualada Urban Running',
         subtitle: 'Cursa de contractes amb un sol guanyador durant anys',
-        image: '/assets/investigacio/igualada-urban-running.png',
         importe: 66413.80
     },
     {
         slug: 'la-masuca',
         title: 'La Masuca',
         subtitle: 'Dos contractes per a dues empreses connectades',
-        image: '/assets/investigacio/la-masuca.png',
         importe: 29700
     },
     {
         slug: 'zones-verdes-igualada',
         title: "Zones verdes d'Igualada",
         subtitle: 'Set contractes, un mateix servei i imports al límit legal',
-        image: '/assets/investigacio/zones-verdes-igualada.png',
         importe: 104260
     },
     {
         slug: 'parc-central',
         title: 'Parc Central',
         subtitle: 'Quatre contractes, una mateixa actuació i imports al límit legal',
-        image: '/assets/investigacio/parc-central.png',
         importe: 58900
     }
 ];
