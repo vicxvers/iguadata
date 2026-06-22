@@ -1,8 +1,10 @@
 name: Update BORME data
 
-# Development fallback only. Production is the canonical data pipeline.
-# Run manually only when explicitly testing BORME changes in this repository.
+# Runs every Sunday at 23:00 UTC in production.
+# The development repository keeps manual runs available but skips scheduled jobs.
 on:
+  schedule:
+    - cron: '0 23 * * 0'
   workflow_dispatch:
     inputs:
       start_date:
@@ -28,6 +30,7 @@ permissions:
 
 jobs:
   update:
+    if: github.repository == 'vicxvers/iguadata' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     timeout-minutes: 240  # 4h hard cap — weekly increment should be < 20 min
 
