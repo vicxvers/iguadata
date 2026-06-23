@@ -29,10 +29,15 @@
     --text-base: 0.9375rem;
     --text-md: 1rem;
     --text-lg: 1.25rem;
+    --text-xl: 1.5rem;
     --display-sm: 2rem;
     --display-md: 2.5rem;
     --display-lg: 3rem;
     --display-xl: 3.75rem;
+    --leading-display: 1;
+    --leading-heading: 1.08;
+    --leading-subtitle: 1.2;
+    --leading-body: 1.65;
     --tracking-title: -0.03em;
     --tracking-amount: -0.02em;
 
@@ -42,7 +47,9 @@
     --radius-pill: 999px;
 
     /* â”€â”€â”€ Spacing & layout â”€â”€â”€ */
+    --space-md: 1rem;
     --space-xl: 1.625rem;
+    --space-2xl: 2rem;
     --pad-card: 2.25rem;
     --pad-card-lg: 2.5rem;
     --control-h: 48px;
@@ -8422,4 +8429,189 @@ body.home-scroll-surface::-webkit-scrollbar {
     }
 
     /* FASE 4 overrides â€” telÃ¨fons petits */
+}
+
+/* Investigation detail */
+.investigacio-detail-page {
+    padding-bottom: calc(var(--pad-card-lg) * 2);
+}
+
+.investigacio-detail-page > .page-title,
+.investigacio-detail-page > .prose-wrapper {
+    width: 50vw;
+}
+
+.investigacio-detail-page > .page-title {
+    font-size: calc(var(--display-xl) + var(--text-md));
+    line-height: var(--leading-display);
+    margin-bottom: var(--space-xl);
+    text-align: center;
+}
+
+.investigacio-detail-subtitle {
+    max-width: none;
+    font-size: var(--text-xl);
+    line-height: var(--leading-subtitle);
+    margin-bottom: var(--space-xl);
+    text-align: center;
+    cursor: default;
+}
+
+.investigacio-date {
+    color: var(--navy);
+    font-size: var(--text-md);
+    font-weight: 400;
+    line-height: var(--leading-body);
+    margin-bottom: var(--space-xl);
+    text-align: center;
+}
+
+.investigacio-copy {
+    color: var(--navy);
+    font-size: var(--text-lg);
+    font-weight: 500;
+    line-height: var(--leading-body);
+    margin-bottom: var(--space-2xl);
+}
+
+.investigacio-detail-page .prose-heading {
+    color: var(--navy);
+    font-size: var(--display-lg);
+    line-height: var(--leading-heading);
+    margin-top: calc(var(--space-xl) * 2);
+    margin-bottom: var(--space-md);
+}
+
+.investigacio-featured-image-frame {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    margin-bottom: var(--pad-card-lg);
+    border-radius: var(--radius-lg);
+    background: var(--navy);
+}
+
+.investigacio-featured-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.investigacio-embed .contract-card {
+    margin-top: 0;
+}
+
+.investigacio-card-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    width: 62.5vw;
+    margin: var(--pad-card-lg) 0;
+    margin-left: 50%;
+    transform: translateX(-50%);
+}
+
+.investigacio-loading > .data-skeleton-title {
+    width: 50vw;
+    height: calc(var(--display-xl) + var(--text-md));
+    margin: 0 auto var(--space-xl);
+}
+
+.investigacio-skeleton-subtitle {
+    width: 75%;
+    height: var(--text-xl);
+    margin-right: auto;
+    margin-bottom: var(--space-xl);
+    margin-left: auto;
+}
+
+.investigacio-skeleton-media {
+    aspect-ratio: 4 / 3;
+    height: auto;
+    margin-bottom: var(--pad-card-lg);
+}
+
+.investigacio-skeleton-heading {
+    width: calc(100% / 3);
+    height: var(--display-lg);
+    margin-top: calc(var(--space-xl) * 2);
+    margin-bottom: var(--space-md);
+}
+
+.investigacio-skeleton-date {
+    width: calc(100% / 3);
+    height: var(--text-md);
+    margin-right: auto;
+    margin-bottom: var(--space-xl);
+    margin-left: auto;
+}
+
+.investigacio-skeleton-copy {
+    margin-bottom: var(--space-2xl);
+}
+
+.investigacio-skeleton-copy .data-skeleton-line:last-child {
+    margin-bottom: 0;
+}
+
+.investigacio-skeleton-stack {
+    gap: 0;
+    width: 62.5vw;
+    margin: var(--pad-card-lg) 0;
+    margin-left: 50%;
+    transform: translateX(-50%);
+}
+
+.investigacio-detail-page .card-link-wrapper:active .contract-card {
+    transform: translateY(0);
+}
+
+@media (max-width: 768px) {
+    .investigacio-detail-page > .page-title,
+    .investigacio-detail-page > .prose-wrapper {
+        width: auto;
+    }
+
+    .investigacio-detail-page > .page-title {
+        font-size: var(--display-lg) !important;
+    }
+
+    .investigacio-detail-subtitle {
+        font-size: var(--text-lg);
+    }
+
+    .investigacio-featured-image-frame {
+        aspect-ratio: 3 / 4;
+    }
+
+    .investigacio-loading > .data-skeleton-title {
+        width: 100%;
+        height: var(--display-lg);
+        margin-left: auto;
+    }
+
+    .investigacio-skeleton-media {
+        aspect-ratio: 3 / 4;
+    }
+
+    .investigacio-card-stack,
+    .investigacio-skeleton-stack {
+        width: auto;
+        margin-left: 0;
+        transform: none;
+    }
+
+    .investigacio-embed .contract-header {
+        align-items: flex-start;
+    }
+
+    .investigacio-embed .contract-amount {
+        width: 100%;
+        text-align: left;
+    }
+
+    .investigacio-detail-page .contract-pills {
+        display: none;
+    }
 }
