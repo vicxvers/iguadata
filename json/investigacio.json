@@ -3,43 +3,495 @@
     "slug": "passeig-verdaguer",
     "title": "Passeig Verdaguer",
     "subtitle": "Cinc contractes a dit per començar la remodelació",
-    "image": "/assets/investigacio.png",
-    "importe": 65500
+    "date": "22 de juny de 2026",
+    "publishedAt": "2026-06-22",
+    "image": "/assets/investigacio/passeig-verdaguer.png",
+    "importe": 65500,
+    "content": [
+      {
+        "type": "paragraph",
+        "text": "Aquest 2026, l’Ajuntament d’Igualada ha començat a preparar la remodelació del Passeig Verdaguer. I abans de les obres, s’ha hagut de redactar el projecte de la primera fase. Però aquesta feina no s’ha fet amb un encàrrec, sinó que apareix dividida en cinc contractes menors.",
+        "skeletonLines": 3
+      },
+      {
+        "type": "heading",
+        "text": "Què destaca?"
+      },
+      {
+        "type": "paragraph",
+        "text": "Els contractes es donen d’alta en un mateix dia. Gairebé tots estan al límit legal, tots són per al mateix projecte i tots s’adjudiquen directament. En total, 65.500 € pagats sense concurs públic per començar la reforma.",
+        "skeletonLines": 3
+      },
+      {
+        "type": "contracts",
+        "ariaLabel": "Contractes del projecte del Passeig Verdaguer",
+        "slugs": [
+          "2026-01-23-9-2026-cms",
+          "2026-01-23-8-2026-cms",
+          "2026-01-23-7-2026-cms",
+          "2026-01-23-6-2026-cms",
+          "2026-01-23-10-2026-cms"
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "Els contractes no parlen de cinc projectes diferents. Parlen de parts del mateix projecte del Passeig Verdaguer. Mirat per separat, cada encàrrec pot semblar únic. Però en conjunt, el que apareix és un projecte gran fraccionat en parts petites.",
+        "skeletonLines": 3
+      },
+      {
+        "type": "heading",
+        "text": "Quina és l’alerta?"
+      },
+      {
+        "type": "paragraph",
+        "text": "Un contracte menor permet adjudicar directament una feina petita sense concurs. Però quan una necessitat gran es coneix des del principi, la llei no permet dividir l’encàrrec en peces per evitar un procés obert.",
+        "skeletonLines": 3
+      },
+      {
+        "type": "paragraph",
+        "text": "Un projecte pot necessitar arquitectura, jardineria, llum, drenatge o pressupostos. Però si tot forma part del mateix, la via legal era un concurs públic que, fins i tot, es pot dividir en lots. No convertir una mateixa remodelació en cinc contractes petits adjudicats de forma opaca.",
+        "skeletonLines": 4
+      },
+      {
+        "type": "heading",
+        "text": "El cas mereix una explicació pública"
+      },
+      {
+        "type": "paragraph",
+        "text": "Per què es va dividir el mateix projecte per remodelar el Passeig en contractes menors adjudicats directament? I per què la preparació d’una reforma tan important no es va treure a concurs públic?",
+        "skeletonLines": 3
+      }
+    ]
   },
   {
     "slug": "neteja-parc-central",
     "title": "Neteja del Parc Central",
     "subtitle": "Un contracte il·legal després d'anys al límit",
-    "importe": 58062.93
+    "image": "/assets/investigacio/neteja-parc-central.png",
+    "importe": 58062.93,
+    "date": "15 de juny de 2026",
+    "publishedAt": "2026-06-15",
+    "content": [
+      {
+        "type": "paragraph",
+        "text": "Des del 2023, l’Ajuntament d’Igualada adjudica cada any una neteja especial del Parc Central i el biollac. El servei es paga amb contractes menors adjudicats directament sense concurs. I en aquests contractes, un destaca sobre la resta.",
+        "skeletonLines": 3
+      },
+      {
+        "type": "heading",
+        "text": "Per què?"
+      },
+      {
+        "type": "paragraph",
+        "text": "El 21 de febrer de 2025, l’Ajuntament paga la neteja del Parc Central i el biollac amb un contracte d’import exacte de 15.000 €. Però la llei només permet contractes menors de serveis amb un valor obligatòriament inferior a aquesta xifra.",
+        "skeletonLines": 4
+      },
+      {
+        "type": "paragraph",
+        "text": "Això vol dir que aquest contracte no podia tramitar-se com a menor. L’Ajuntament va incórrer en una il·legalitat administrativa i la conseqüència és greu. Un servei públic es va adjudicar directament sense concurs per una via que ja no es podia utilitzar.",
+        "skeletonLines": 4
+      },
+      {
+        "type": "heading",
+        "text": "Com s’hi arriba?"
+      },
+      {
+        "type": "paragraph",
+        "text": "El contracte il·legal no apareix del no-res. Abans hi ha una seqüència d’anys pagant la mateixa neteja, a la mateixa empresa i amb imports al límit. En només tres anys, s’adjudiquen 44.971,52 € sense concurs per un servei recurrent.",
+        "skeletonLines": 4
+      },
+      {
+        "type": "contracts",
+        "ariaLabel": "Contractes anuals de neteja del Parc Central i el biollac",
+        "slugs": [
+          "2025-02-21-2025-2-0003144-000",
+          "2024-02-23-2024-2-0004019-000",
+          "2023-07-06-2023-2-0020775-000"
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "De nou, la neteja ordinària és una necessitat previsible, repetida i planificable. Mirat per separat, cada contracte pot semblar una adjudicació menor més. Però mirat en conjunt, el que apareix és un patró sistemàtic on una necessitat anual es porta al límit legal fins a trencar-lo.",
+        "skeletonLines": 4
+      },
+      {
+        "type": "heading",
+        "text": "Què s’afegeix?"
+      },
+      {
+        "type": "paragraph",
+        "text": "Iguadata també localitza altres contractes de neteja del Parc Central pagats a la mateixa empresa. Són reforços per la Festa Major i el Balloon Festival. Serveis extraordinaris, però lligats a esdeveniments que es repeteixen al calendari. En tot el conjunt del cas, 58.062,93 € sense concurs per un servei previsible.",
+        "skeletonLines": 4
+      },
+      {
+        "type": "contracts",
+        "ariaLabel": "Altres contractes de neteja del Parc Central",
+        "slugs": [
+          "2025-11-19-2025-2-0029970-000",
+          "2024-10-14-2024-2-0026947-000",
+          "2024-09-27-2024-2-0025835-000",
+          "2023-11-15-2023-2-0033063-000",
+          "2021-10-11-2021-2-0024765-000"
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "La funció social d’una empresa no justifica esquivar la llei. La contractació pública ja permet reservar contractes a entitats socials. Però això s’ha de fer amb publicitat, concurrència i garanties legals, no forçant contractes menors al límit.",
+        "skeletonLines": 3
+      },
+      {
+        "type": "heading",
+        "text": "El cas mereix una explicació pública"
+      },
+      {
+        "type": "paragraph",
+        "text": "Per què l’Ajuntament d’Igualada va tramitar com a menor un contracte de 15.000 € si la llei exigeix que l’import sigui inferior? I per què neteges anuals i previsibles s’han pagat amb contractes menors?",
+        "skeletonLines": 3
+      }
+    ]
   },
   {
     "slug": "llums-de-nadal",
     "title": "Llums de Nadal",
     "subtitle": "Quatre anys, un mateix proveïdor i preus calcats al límit legal",
-    "importe": 59171.05
+    "image": "/assets/investigacio/llums-de-nadal.png",
+    "importe": 59171.05,
+    "date": "8 de juny de 2026",
+    "publishedAt": "2026-06-08",
+    "content": [
+      {
+        "type": "paragraph",
+        "text": "Cada any, l’Ajuntament d’Igualada necessita el muntatge i desmuntatge dels llums de Nadal als carrers de la ciutat. Entre les campanyes de 2022 i 2026, aquest servei recurrent es paga encadenant contractes menors directes.",
+        "skeletonLines": 3
+      },
+      {
+        "type": "heading",
+        "text": "Què destaca?"
+      },
+      {
+        "type": "paragraph",
+        "text": "Tots els contractes s’adjudiquen a la mateixa empresa consecutivament. En total, es destinen 59.171,05 € sense concurs públic per una feina que es repeteix cada hivern.",
+        "skeletonLines": 3
+      },
+      {
+        "type": "contracts",
+        "ariaLabel": "Contractes de muntatge i desmuntatge dels llums de Nadal",
+        "slugs": [
+          "2022-12-20-2022-2-0035360-000",
+          "2023-10-18-2023-2-0029558-000",
+          "2024-10-14-2024-2-0026949-000",
+          "2025-07-10-2025-2-0018271-000"
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "A més, en tres de les quatre campanyes, l'Ajuntament paga exactament el mateix import de 14.948,05 €. En conjunt, tots els imports es queden reiteradament a molt poca distància de superar el límit legal dels 15.000 € que faria obrir un concurs públic.",
+        "skeletonLines": 4
+      },
+      {
+        "type": "heading",
+        "text": "Per què es detecta?"
+      },
+      {
+        "type": "paragraph",
+        "text": "Els contractes menors estan dissenyats per a necessitats puntuals i imprevistes. El muntatge de Nadal és un servei periòdic, estructural i cíclic. L'acumulació de contractes sota aquest patró és un escenari de risc per a la transparència.",
+        "skeletonLines": 3
+      },
+      {
+        "type": "heading",
+        "text": "El cas mereix una explicació pública"
+      },
+      {
+        "type": "paragraph",
+        "text": "Si el muntatge del Nadal és una necessitat permanent, per què es va fragmentar en quatre contractes menors de forma directa en lloc d’obrir un concurs públic?",
+        "skeletonLines": 3
+      }
+    ]
   },
   {
     "slug": "igualada-urban-running",
     "title": "Igualada Urban Running",
     "subtitle": "Cursa de contractes amb un sol guanyador durant anys",
-    "importe": 66413.8
+    "image": "/assets/investigacio/igualada-urban-running.png",
+    "importe": 66413.8,
+    "date": "4 de juny de 2026",
+    "publishedAt": "2026-06-04",
+    "content": [
+      {
+        "type": "paragraph",
+        "text": "Durant molts anys, l'Ajuntament d'Igualada contracta l’organització de la Igualada Urban Running. La cursa es converteix en un gran esdeveniment anual i, tot i això, es paga any rere any amb contractes directes a la mateixa empresa.",
+        "skeletonLines": 3
+      },
+      {
+        "type": "heading",
+        "text": "Què destaca?"
+      },
+      {
+        "type": "paragraph",
+        "text": "Els contractes localitzats corresponen a les edicions de 2021, 2022, 2024 i 2025*. En total, s'hi destinen 53.890,00 € sense concurs a una mateixa empresa per a l'organització d'un mateix esdeveniment esportiu. * Dades no públiques a les edicions anteriors i el 2023.",
+        "skeletonLines": 4
+      },
+      {
+        "type": "contracts",
+        "ariaLabel": "Contractes d’organització de la Igualada Urban Running",
+        "slugs": [
+          "2025-03-28-2025-2-0008345-000",
+          "2024-05-07-2024-2-0011835-000",
+          "2022-08-23-2022-2-0023761-000",
+          "2021-10-15-2021-2-0026799-000"
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "De nou, els imports es mouen molt a prop del límit legal de 15.000 € que faria obrir un concurs públic. Però la qüestió no és només l’import dels contractes. El que destaca és el patró sistemàtic: una mateixa cursa, diferents edicions i sempre la mateixa empresa que ho organitza.",
+        "skeletonLines": 4
+      },
+      {
+        "type": "heading",
+        "text": "Què s’afegeix?"
+      },
+      {
+        "type": "paragraph",
+        "text": "La investigació no acaba amb l'empresa organitzadora. Iguadata també localitza més contractes menors vinculats a les curses amb altres proveïdors. Això amplia el cost total pagat durant anys amb contractes directes fins a, com a mínim, 66.413,80 €.",
+        "skeletonLines": 3
+      },
+      {
+        "type": "contracts",
+        "ariaLabel": "Altres contractes vinculats a la Igualada Urban Running",
+        "slugs": [
+          "2025-06-03-2025-2-0013162-000",
+          "2024-06-04-2024-2-0015509-000",
+          "2023-05-26-37-2023",
+          "2023-04-28-2023-2-0013617-000",
+          "2022-11-09-2022-2-0032308-000"
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "Quina és l’alerta?"
+      },
+      {
+        "type": "paragraph",
+        "text": "Mirat per separat, cada contracte pot semblar un tràmit independent. Però mirat en conjunt, el que apareix és un mateix gran esdeveniment dividit en moltes petites peces al llarg dels anys.",
+        "skeletonLines": 3
+      },
+      {
+        "type": "paragraph",
+        "text": "En resum, un contracte menor està pensat per a necessitats puntuals. I una cursa que es repeteix en diferents anys és una necessitat previsible. Quan el mateix servei, el mateix proveïdor i imports propers al límit legal reapareixen any rere any, es desvirtua la transparència.",
+        "skeletonLines": 4
+      },
+      {
+        "type": "paragraph",
+        "text": "Aquest 2026, després d'anys de contractes directes, l'Ajuntament d'Igualada ha obert un concurs públic per adjudicar l'organització de la cursa. Un canvi que demostra que la via dels contractes directes no era la forma correcta ni legalment sostenible de fer-ho.",
+        "skeletonLines": 4
+      },
+      {
+        "type": "heading",
+        "text": "El cas mereix una explicació pública"
+      },
+      {
+        "type": "paragraph",
+        "text": "Si l'Igualada Urban Running forma part del calendari esportiu de la ciutat, per què es va tramitar durant anys amb contractes menors per a la mateixa empresa?",
+        "skeletonLines": 3
+      }
+    ]
   },
   {
     "slug": "la-masuca",
     "title": "La Masuca",
     "subtitle": "Dos contractes per a dues empreses connectades",
-    "importe": 29700
+    "image": "/assets/investigacio/la-masuca.png",
+    "importe": 29700,
+    "date": "27 de maig de 2026",
+    "publishedAt": "2026-05-27",
+    "content": [
+      {
+        "type": "paragraph",
+        "text": "L’octubre de 2025, l’Ajuntament d’Igualada adjudica el seguiment de la remodelació del Mercat de la Masuca. El servei es paga amb dos contractes menors del mateix import exacte.",
+        "skeletonLines": 3
+      },
+      {
+        "type": "heading",
+        "text": "Què destaca?"
+      },
+      {
+        "type": "paragraph",
+        "text": "Els dos contractes són de 14.850 €, just per sota del límit legal de 15.000 €. Un contracte va a l’empresa A i l’altre a l’empresa B. A simple vista són empreses diferents, però realment estan connectades.",
+        "skeletonLines": 3
+      },
+      {
+        "type": "contracts",
+        "ariaLabel": "Contractes vinculats al seguiment de la remodelació de la Masuca",
+        "slugs": [
+          "2025-10-03-57-2025-cms",
+          "2025-10-03-56-2025-cms"
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "Com es descobreix?"
+      },
+      {
+        "type": "paragraph",
+        "text": "L’adjudicació repartida entre dues empreses diferents fa que sigui més difícil detectar el cas. Però l’encreuament de dades d’Iguadata revela que darrere de les empreses hi ha les mateixes persones.",
+        "skeletonLines": 3
+      },
+      {
+        "type": "paragraph",
+        "text": "No només es divideix una mateixa actuació en dos contractes al límit legal. Les dades demostren també que aquests contractes van a parar als mateixos beneficiaris. Adjudicar contractes públics a sigles diferents, però en el fons iguals, posa dificultats a la transparència.",
+        "skeletonLines": 4
+      },
+      {
+        "type": "heading",
+        "text": "El cas mereix una explicació pública"
+      },
+      {
+        "type": "paragraph",
+        "text": "Si seguir la remodelació del Mercat era un projecte únic, per què es va adjudicar sense concurs públic a dues empreses connectades?",
+        "skeletonLines": 2
+      }
+    ]
   },
   {
     "slug": "zones-verdes-igualada",
     "title": "Zones verdes d'Igualada",
     "subtitle": "Set contractes, un mateix servei i imports al límit legal",
-    "importe": 104260
+    "image": "/assets/investigacio/zones-verdes-igualada.png",
+    "importe": 104260,
+    "date": "29 de maig de 2026",
+    "publishedAt": "2026-05-29",
+    "content": [
+      {
+        "type": "paragraph",
+        "text": "Entre 2024 i 2026, l’Ajuntament d’Igualada canvia el manteniment de les zones verdes de la ciutat. El nou servei, tot i ser recurrent i allargar-se en el temps, es paga a partir d’una successió de contractes menors.",
+        "skeletonLines": 3
+      },
+      {
+        "type": "heading",
+        "text": "Què destaca?"
+      },
+      {
+        "type": "paragraph",
+        "text": "Tots els contractes s'adjudiquen de manera consecutiva a la mateixa empresa. En total, es desemborsen 104.260,00 € sense concurs públic per a feines periòdiques de jardineria.",
+        "skeletonLines": 3
+      },
+      {
+        "type": "contracts",
+        "ariaLabel": "Contractes de manteniment de les zones verdes d’Igualada",
+        "slugs": [
+          "2026-01-29-2026-2-0002338-000",
+          "2025-12-10-2025-2-0033296-000",
+          "2025-07-28-2025-2-0020359-000",
+          "2025-06-03-2025-2-0011482-000",
+          "2025-03-05-2025-2-0006510-000",
+          "2024-10-14-2024-2-0027922-000",
+          "2024-08-01-2024-2-0021000-000"
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "Quina és l’alerta?"
+      },
+      {
+        "type": "paragraph",
+        "text": "L’any 2024 s'emeten dos contractes de 14.980 €. El 2025 i 2026, s'enllacen cinc contractes de 14.860 € cadascun. Tots els imports es queden sistemàticament molt a prop de superar el límit legal de 15.000 € que obligaria a obrir un concurs públic.",
+        "skeletonLines": 4
+      },
+      {
+        "type": "paragraph",
+        "text": "Els contractes menors estan dissenyats per a necessitats puntuals i imprevistes. El manteniment de les zones verdes de la ciutat és un servei ordinari, estructural i previsible que es repeteix any rere any.",
+        "skeletonLines": 3
+      },
+      {
+        "type": "heading",
+        "text": "Per què es detecta?"
+      },
+      {
+        "type": "paragraph",
+        "text": "Els algoritmes d’Iguadata seleccionen el cas per la repetició constant d’objecte, proveïdor i imports. L'acumulació de factures idèntiques sota aquest patró és un escenari de risc per a la transparència.",
+        "skeletonLines": 3
+      },
+      {
+        "type": "heading",
+        "text": "El cas mereix una explicació pública"
+      },
+      {
+        "type": "paragraph",
+        "text": "Si el manteniment dels espais verds d’Igualada és una necessitat permanent, per què es va fragmentar en set contractes menors de forma directa en lloc d'un concurs obert?",
+        "skeletonLines": 3
+      }
+    ]
   },
   {
     "slug": "parc-central",
     "title": "Parc Central",
     "subtitle": "Quatre contractes, una mateixa actuació i imports al límit legal",
-    "importe": 58900
+    "image": "/assets/investigacio/parc-central.png",
+    "importe": 58900,
+    "date": "25 de maig de 2026",
+    "publishedAt": "2026-05-25",
+    "content": [
+      {
+        "type": "paragraph",
+        "text": "Entre 2024 i 2025, l’Ajuntament d’Igualada prepara una nova ampliació del Parc Central. El procés dura uns 10 mesos i es paga, en una part, amb quatre contractes menors.",
+        "skeletonLines": 3
+      },
+      {
+        "type": "heading",
+        "text": "Què destaca?"
+      },
+      {
+        "type": "paragraph",
+        "text": "Tots els contractes s’adjudiquen a la mateixa empresa. I, a més, amb imports molt propers al límit legal de 15.000 € que obligaria a convocar un concurs públic. En total, s’adjudiquen 58.900 € vinculats a una mateixa actuació dividida en quatre parts.",
+        "skeletonLines": 3
+      },
+      {
+        "type": "contracts",
+        "ariaLabel": "Contractes vinculats a l’ampliació del Parc Central",
+        "slugs": [
+          "2024-12-31-2024-2-0039913-000",
+          "2025-03-28-2025-2-0008204-000",
+          "2025-04-09-2025-2-0009749-000",
+          "2025-10-14-2025-2-0026681-000"
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "Quina és la cronologia?"
+      },
+      {
+        "type": "paragraph",
+        "text": "El 31 de desembre s’adjudica l’estudi de les obres. El 28 de març i el 9 d’abril, el projecte d’obra, repartit entre dues SL diferents que, en el fons, són la mateixa. El 14 d’octubre s’adjudica la direcció de les obres.",
+        "skeletonLines": 3
+      },
+      {
+        "type": "paragraph",
+        "text": "Els contractes no són serveis aïllats. Un estudi, un projecte i una direcció d’obra són fases que normalment formen part del mateix procés. Mirats en conjunt, comparteixen espai, calendari i finalitat.",
+        "skeletonLines": 3
+      },
+      {
+        "type": "heading",
+        "text": "Per què es detecta?"
+      },
+      {
+        "type": "paragraph",
+        "text": "Un contracte menor és adjudicar directament un servei sense concurs públic. La llei ho permet per a feines petites i puntuals. El problema apareix quan una mateixa actuació gran es divideix en diversos contractes petits.",
+        "skeletonLines": 3
+      },
+      {
+        "type": "paragraph",
+        "text": "En aquest cas, els quatre contractes tenen elements en comú. Tots fan referència al Parc Central, al riu Catalunya i a l’entorn entre els carrers Guimerà i Itàlia. I tots parlen d’estudis, projectes o direcció d’obra per preparar l’arranjament d’aquests espais.",
+        "skeletonLines": 4
+      },
+      {
+        "type": "heading",
+        "text": "El cas mereix una explicació pública"
+      },
+      {
+        "type": "paragraph",
+        "text": "Si tot formava part d’una mateixa fase del Parc Central, per què es va tramitar en quatre contractes menors?",
+        "skeletonLines": 2
+      }
+    ]
   }
 ]

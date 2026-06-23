@@ -204,6 +204,7 @@ function resolveRoute(path) {
     if (path === '/persones') return { tab: 'persones', canonicalPath: '/persones' };
     if (path === '/analisi') return { tab: 'analisi', canonicalPath: '/analisi' };
     if (path === '/investigacio') return { tab: 'casos', canonicalPath: '/investigacio' };
+    if (path.startsWith('/investigacio/')) return { tab: 'cas-investigacio', canonicalPath: path };
     if (path === '/sobre') return { tab: 'sobre', canonicalPath: '/sobre' };
     if (path === '/avis-legal') return { tab: 'legal', canonicalPath: '/avis-legal' };
     if (path.startsWith('/contractes/')) return { tab: 'contracte', canonicalPath: path };
@@ -272,7 +273,8 @@ const CASOS_INVESTIGACIO_FALLBACK = [
         slug: 'passeig-verdaguer',
         title: 'Passeig Verdaguer',
         subtitle: 'Cinc contractes a dit per començar la remodelació',
-        image: '/assets/investigacio.png',
+        publishedAt: '2026-06-22',
+        image: '/assets/investigacio/passeig-verdaguer.png',
         importe: 65500
     },
     {
@@ -2481,49 +2483,42 @@ function PersonesView({ persones, onEmpresaSelect, onNavigateLegal, searchTerm, 
     );
 }
 
-function CasosView() {
-    const [casos, setCasos] = useState(CASOS_INVESTIGACIO_FALLBACK);
-    const featuredCaso = casos[0];
-    const gridCasos = casos.slice(1);
-
-    useEffect(() => {
-        let cancelled = false;
-        fetch(jsonAssetUrl('/json/investigacio.json'))
-            .then(res => {
-                if (!res.ok) throw new Error(`Investigacio HTTP ${res.status}`);
-                return res.json();
-            })
-            .then(data => {
-                if (!cancelled && Array.isArray(data) && data.length) setCasos(data);
-            })
-            .catch(err => {
-                console.warn('Error loading investigacio:', err);
-            });
-        return () => { cancelled = true; };
-    }, []);
+function CasosView({ casos, onCasoSelect }) {
+    const casosOrdenats = casos
+        .map((caso, index) => ({ caso, index }))
+        .sort((a, b) => {
+            const dateA = Date.parse(a.caso.publishedAt || '');
+            const dateB = Date.parse(b.caso.publishedAt || '');
+            if (Number.isFinite(dateA) && Number.isFinite(dateB) && dateA !== dateB) return dateB - dateA;
+            if (Number.isFinite(dateA) !== Number.isFinite(dateB)) return Number.isFinite(dateA) ? -1 : 1;
+            return a.index - b.index;
+        })
+        .map(item => item.caso);
+    const featuredCaso = casosOrdenats[0];
+    const gridCasos = casosOrdenats.slice(1);
 
     return (
         <div className="container casos-page">
             <h1 className="page-title">Casos d'investigació</h1>
             {featuredCaso && (
-                <CasoPrincipalInvestigacio caso={featuredCaso} />
+                <CasoPrincipalInvestigacio caso={featuredCaso} onSelect={onCasoSelect} />
             )}
             <div className="casos-editorial-list" aria-label="Investigacions publicades">
                 {gridCasos.map((caso, idx) => (
-                    <CasoEditorialCard key={caso.slug} caso={caso} idx={idx + 1} />
+                    <CasoEditorialCard key={caso.slug} caso={caso} idx={idx + 1} onSelect={onCasoSelect} />
                 ))}
             </div>
         </div>
     );
 }
 
-function CasoPrincipalInvestigacio({ caso }) {
+function CasoPrincipalInvestigacio({ caso, onSelect }) {
     const content = (
         <>
             <div className="caso-principal-image-frame">
                 <img
                     src={assetUrl(caso.image)}
-                    alt={`${caso.title}: ${caso.subtitle}`}
+                    alt={caso.title + ': ' + caso.subtitle}
                     className="caso-editorial-image"
                     loading="eager"
                 />
@@ -2539,28 +2534,29 @@ function CasoPrincipalInvestigacio({ caso }) {
     );
 
     return (
-        <article className={`caso-principal${caso.url ? ' caso-principal-linkable' : ''}`}>
-            {caso.url ? (
-                <a href={caso.url} className="caso-principal-link">{content}</a>
-            ) : content}
-        </article>
+        <a
+            href={buildRouteUrl('/investigacio/' + caso.slug)}
+            className="caso-principal caso-principal-linkable"
+            onClick={(event) => handleInternalLinkClick(event, () => onSelect(caso))}
+        >
+            {content}
+        </a>
     );
 }
 
-function CasoEditorialCard({ caso, idx, className = '', showImage = false }) {
+function CasoEditorialCard({ caso, idx, className = '', showImage = false, onSelect }) {
     return (
-        <article className={`contract-card caso-editorial-card${className ? ' ' + className : ''}${caso.url ? ' caso-editorial-card-linkable' : ''}`}>
-            {caso.url ? (
-                <a href={caso.url} className="caso-editorial-link">
-                    <CasoEditorialContent caso={caso} idx={idx} showImage={showImage} />
-                </a>
-            ) : (
+        <article className={'contract-card caso-editorial-card caso-editorial-card-linkable' + (className ? ' ' + className : '')}>
+            <a
+                href={buildRouteUrl('/investigacio/' + caso.slug)}
+                className="caso-editorial-link"
+                onClick={(event) => handleInternalLinkClick(event, () => onSelect(caso))}
+            >
                 <CasoEditorialContent caso={caso} idx={idx} showImage={showImage} />
-            )}
+            </a>
         </article>
     );
 }
-
 function CasoEditorialContent({ caso, idx, showImage }) {
     if (!showImage) {
         return (
@@ -2596,6 +2592,75 @@ function CasoEditorialContent({ caso, idx, showImage }) {
     );
 }
 
+function InvestigacioContractCard({ contract, onSelect }) {
+    return (
+        <a href={buildRouteUrl('/contractes/' + contract.slug)} className="card-link-wrapper" onClick={(event) => handleInternalLinkClick(event, () => onSelect(contract))}>
+            <div className="contract-card">
+                <div className="contract-header">
+                    <div className="contract-title">{contract.descripcion}</div>
+                    <div className="contract-amount">{formatCurrency(contract.importe)}</div>
+                </div>
+                <div className="contract-meta">
+                    <div className="contract-meta-item">
+                        <span className="contract-meta-label">Empresa adjudicatària</span>
+                        <span className="contract-meta-value">{contract.adjudicatario}</span>
+                    </div>
+                    <div className="contract-meta-item">
+                        <span className="contract-meta-label">Data</span>
+                        <span className="contract-meta-value">{formatDate(contract.fecha)}</span>
+                    </div>
+                    <div className="contract-pills">
+                        <span className="contract-pill">{formatTipus(contract.tipo)}</span>
+                        <span className="contract-pill procedure">{formatProcediment(contract.procedimiento)}</span>
+                    </div>
+                </div>
+            </div>
+        </a>
+    );
+}
+
+function InvestigacioCaseView({ caso, contracts, onContractSelect }) {
+    return (
+        <article className="container prose-page investigacio-detail-page">
+            <h1 className="page-title">{caso.title}</h1>
+
+            <div className="prose-wrapper investigacio-story">
+                <p className="caso-principal-subtitle investigacio-detail-subtitle">{caso.subtitle}</p>
+                {caso.date && <p className="prose-intro investigacio-date">{caso.date}</p>}
+                {caso.image && (
+                    <div className="investigacio-featured-image-frame">
+                        <img
+                            src={assetUrl(caso.image)}
+                            alt={caso.title + ': ' + caso.subtitle}
+                            className="investigacio-featured-image"
+                        />
+                    </div>
+                )}
+                {(caso.content || []).map((block, index) => {
+                    const key = block.id || block.type + '-' + index;
+                    if (block.type === 'heading') {
+                        return <h2 key={key} className="prose-heading">{block.text}</h2>;
+                    }
+                    if (block.type === 'paragraph') {
+                        return <p key={key} className="prose-intro investigacio-copy">{block.text}</p>;
+                    }
+                    if (block.type === 'contracts') {
+                        const blockContracts = (block.slugs || [])
+                            .map(slug => contracts.find(contract => contractMatchesSlug(contract, slug)))
+                            .filter(Boolean)
+                            .sort((a, b) => String(a.fecha || '').localeCompare(String(b.fecha || '')));
+                        return (
+                            <section key={key} className="investigacio-embed investigacio-card-stack" aria-label={block.ariaLabel || 'Contractes relacionats'}>
+                                {blockContracts.map(contract => <InvestigacioContractCard key={contract.slug} contract={contract} onSelect={onContractSelect} />)}
+                            </section>
+                        );
+                    }
+                    return null;
+                })}
+            </div>
+        </article>
+    );
+}
 function App() {
     // Treu el prefix BASE i normalitza la URL actual
     const getRoute = () => {
@@ -2631,14 +2696,18 @@ function App() {
     const [personesLoaded, setPersonesLoaded] = useState(false);
     const [administradorsLoaded, setAdministradorsLoaded] = useState(false);
     const [analisiLoaded, setAnalisiLoaded] = useState(false);
+    const [casosInvestigacio, setCasosInvestigacio] = useState(CASOS_INVESTIGACIO_FALLBACK);
+    const [investigacioLoaded, setInvestigacioLoaded] = useState(false);
     const [coreDataError, setCoreDataError] = useState(false);
     const [personesError, setPersonesError] = useState(false);
     const [administradorsError, setAdministradorsError] = useState(false);
     const [analisiError, setAnalisiError] = useState(false);
+    const [investigacioError, setInvestigacioError] = useState(false);
     const [coreRetry, setCoreRetry] = useState(0);
     const [personesRetry, setPersonesRetry] = useState(0);
     const [administradorsRetry, setAdministradorsRetry] = useState(0);
     const [analisiRetry, setAnalisiRetry] = useState(0);
+    const [investigacioRetry, setInvestigacioRetry] = useState(0);
     const [summary, setSummary] = useState(null);
     const [summaryResolved, setSummaryResolved] = useState(false);
     const [loadingProgress, setLoadingProgress] = useState(0);
@@ -2649,6 +2718,35 @@ function App() {
     const [homeRouteTransition, setHomeRouteTransition] = useState('');
     const [homeMetricTransition, setHomeMetricTransition] = useState(null);
     const homeIntroPlayedRef = useRef(false);
+    const activeInvestigacioSlug = getRoute().startsWith('/investigacio/')
+        ? getRoute().slice('/investigacio/'.length)
+        : null;
+    const activeInvestigacioCase = casosInvestigacio.find(item => item.slug === activeInvestigacioSlug)
+        || CASOS_INVESTIGACIO_FALLBACK.find(item => item.slug === activeInvestigacioSlug)
+        || CASOS_INVESTIGACIO_FALLBACK[0];
+
+    useEffect(() => {
+        let cancelled = false;
+        setInvestigacioLoaded(false);
+        setInvestigacioError(false);
+        fetch(jsonAssetUrl('/json/investigacio.json'))
+            .then(res => {
+                if (!res.ok) throw new Error('Investigacio HTTP ' + res.status);
+                return res.json();
+            })
+            .then(data => {
+                if (cancelled) return;
+                if (!Array.isArray(data) || !data.length) throw new Error('Investigacio JSON buit');
+                setCasosInvestigacio(data);
+                setInvestigacioLoaded(true);
+            })
+            .catch(err => {
+                if (cancelled) return;
+                console.warn('Error loading investigacio:', err);
+                setInvestigacioError(true);
+            });
+        return () => { cancelled = true; };
+    }, [investigacioRetry]);
 
     useEffect(() => {
         if (!loading) return;
@@ -3115,6 +3213,7 @@ function App() {
             'analisi': '/analisi',
             'cas-fraccionament': '/analisi/fraccionament',
             'cas-concentracio': '/analisi/concentracio',
+            'cas-investigacio': '/investigacio/passeig-verdaguer',
             'casos': '/investigacio',
             'sobre': '/sobre',
             'legal': '/avis-legal'
@@ -3599,6 +3698,10 @@ function App() {
             document.title = formatPageTitle(`Cas #${selectedElectoralismeDetail.id}`);
             return;
         }
+        if (activeTab === 'cas-investigacio') {
+            document.title = formatPageTitle(activeInvestigacioCase?.title || 'Investigació');
+            return;
+        }
         const titles = {
             'home': "Iguadata | El projecte de transparència d'Igualada",
             'loading': 'Iguadata',
@@ -3611,7 +3714,7 @@ function App() {
             legal: 'Iguadata'
         };
         document.title = titles[activeTab] || 'Iguadata';
-    }, [activeTab, selectedContractForDetail, selectedEmpresa, selectedCasoDetail, selectedConcentracioDetail, selectedElectoralismeDetail]);
+    }, [activeTab, selectedContractForDetail, selectedEmpresa, selectedCasoDetail, selectedConcentracioDetail, selectedElectoralismeDetail, activeInvestigacioCase]);
 
     const contractesFiltrats = useMemo(() => {
         let result = [...contracts];
@@ -3898,6 +4001,7 @@ function App() {
         'cas-concentracio': 'Anàlisi',
         'cas-electoralisme': 'Anàlisi',
         casos: 'Investigació',
+        'cas-investigacio': 'Investigació',
         sobre: 'Sobre',
         legal: 'Avís legal'
     }[activeTab] || 'Iguadata';
@@ -4050,7 +4154,7 @@ function App() {
         const empresesActive = activeTab === 'empreses' || activeTab === 'empresa';
         const personesActive = activeTab === 'persones';
         const analisiActive = activeTab === 'analisi' || activeTab === 'cas-fraccionament' || activeTab === 'cas-concentracio' || activeTab === 'cas-electoralisme';
-        const casosActive = activeTab === 'casos';
+        const casosActive = activeTab === 'casos' || activeTab === 'cas-investigacio';
         return (
             <div className="nav">
                 <a href={buildRouteUrl('/contractes')} className={'nav-tab' + (showActive && contractesActive ? ' active' : '')} aria-current={showActive && contractesActive ? 'page' : undefined} onClick={(event) => handleNavClick(event, () => { handleNavigation('buscador'); setSelectedEmpresa(null); setIsMobileMenuOpen(false); })}>Contractes</a>
@@ -4371,16 +4475,18 @@ function App() {
         </div>
     );
 
-    const dataTabs = ['buscador', 'empreses', 'persones', 'contracte', 'empresa', 'analisi', 'cas-fraccionament', 'cas-concentracio', 'cas-electoralisme'];
+    const dataTabs = ['buscador', 'empreses', 'persones', 'contracte', 'empresa', 'analisi', 'cas-fraccionament', 'cas-concentracio', 'cas-electoralisme', 'cas-investigacio'];
     const analisiTabs = ['analisi', 'cas-fraccionament', 'cas-concentracio', 'cas-electoralisme'];
     const activeDataError =
         (dataTabs.includes(activeTab) && coreDataError) ||
         (activeTab === 'persones' && personesError) ||
         (activeTab === 'empresa' && administradorsError) ||
+        (activeTab === 'cas-investigacio' && investigacioError) ||
         (analisiTabs.includes(activeTab) && analisiError);
     const isSupplementalDataLoading =
         (activeTab === 'persones' && !personesLoaded) ||
         (activeTab === 'empresa' && !administradorsLoaded) ||
+        (activeTab === 'cas-investigacio' && !investigacioLoaded) ||
         (analisiTabs.includes(activeTab) && !analisiLoaded);
     const isDataTabLoading = dataTabs.includes(activeTab) && (dataLoading || isSupplementalDataLoading);
     const canRenderDataTab = !isDataTabLoading && !activeDataError;
@@ -4401,6 +4507,11 @@ function App() {
             setAdministradorsRetry(value => value + 1);
             return;
         }
+        if (activeTab === 'cas-investigacio') {
+            setInvestigacioError(false);
+            setInvestigacioRetry(value => value + 1);
+            return;
+        }
         if (analisiTabs.includes(activeTab)) {
             setAnalisiLoaded(false);
             setAnalisiError(false);
@@ -4415,7 +4526,38 @@ function App() {
             <div className="data-skeleton-line data-skeleton-line-medium"></div>
         </div>
     );
+    const renderInvestigacioSkeletonCopy = (lines = 3) => (
+        <div className="investigacio-skeleton-copy">
+            {Array.from({ length: lines }, (_, index) => (
+                <div key={index} className={`data-skeleton-line${index === lines - 1 ? ' data-skeleton-line-medium' : ''}`}></div>
+            ))}
+        </div>
+    );
+    const renderInvestigacioLoading = (caso) => (
+        <article className="container prose-page investigacio-detail-page investigacio-loading" role="status" aria-live="polite" aria-label="Carregant la investigació">
+            <div className="page-title data-skeleton-title" aria-hidden="true"></div>
+            <div className="prose-wrapper" aria-hidden="true">
+                <div className="data-skeleton-line investigacio-skeleton-subtitle"></div>
+                {caso?.date && <div className="data-skeleton-line investigacio-skeleton-date"></div>}
+                {caso?.image && <div className="data-skeleton-input investigacio-skeleton-media"></div>}
+                {(caso?.content || []).map((block, index) => {
+                    const key = block.id || block.type + '-' + index;
+                    if (block.type === 'heading') return <div key={key} className="data-skeleton-line investigacio-skeleton-heading"></div>;
+                    if (block.type === 'paragraph') return <React.Fragment key={key}>{renderInvestigacioSkeletonCopy(block.skeletonLines || 3)}</React.Fragment>;
+                    if (block.type === 'contracts') {
+                        return (
+                            <div key={key} className="data-skeleton-list investigacio-skeleton-stack">
+                                {Array.from({ length: (block.slugs || []).length }, (_, cardIndex) => <React.Fragment key={cardIndex}>{renderSkeletonCard()}</React.Fragment>)}
+                            </div>
+                        );
+                    }
+                    return null;
+                })}
+            </div>
+        </article>
+    );
     const renderDataLoading = () => {
+        if (activeTab === 'cas-investigacio') return renderInvestigacioLoading(activeInvestigacioCase);
         const isAnalisiLoading = analisiTabs.includes(activeTab);
         const pageClass =
             activeTab === 'persones' ? 'persones-page' :
@@ -4484,6 +4626,10 @@ function App() {
     const handleElectoralismeClick = (caso) => {
         setSelectedElectoralismeDetail(caso);
         handleNavigation('cas-electoralisme', `/analisi/electoralisme/${caso.id}`);
+    };
+
+    const handleInvestigacioClick = (caso) => {
+        handleNavigation('cas-investigacio', '/investigacio/' + caso.slug);
     };
 
     const handleAnalisiNavClick = () => {
@@ -4848,9 +4994,17 @@ function App() {
             )}
 
             {activeTab === 'casos' && (
-                <CasosView />
+                <CasosView casos={casosInvestigacio} onCasoSelect={handleInvestigacioClick} />
             )}
 
+
+            {activeTab === 'cas-investigacio' && canRenderDataTab && (
+                <InvestigacioCaseView
+                    caso={activeInvestigacioCase}
+                    contracts={contracts}
+                    onContractSelect={handleDetailClick}
+                />
+            )}
             {activeTab === 'contracte' && selectedContractForDetail && canRenderDataTab && (
                 <ContractDetailView
                     contract={selectedContractForDetail}
@@ -5662,7 +5816,7 @@ function App() {
             {
                 activeTab !== 'home' && (
                     <footer className="footer">
-                        <div className={`footer-content${activeTab === 'sobre' || activeTab === 'legal' ? ' footer-content-prose' : ''}`}>
+                        <div className={`footer-content${activeTab === 'sobre' || activeTab === 'legal' || activeTab === 'cas-investigacio' ? ' footer-content-prose' : ''}`}>
                             <div className="footer-main">
                                 <div className="footer-brand">
                                     <a href={BASE + '/'} onClick={(e) => { e.preventDefault(); handleNavigation('home'); }} className="footer-logo-link" aria-label="Iguadata, inici">
