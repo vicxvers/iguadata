@@ -1,6 +1,6 @@
 {
   "metodologia": "fraccionament_v2",
-  "generat_a": "2026-06-22",
+  "generat_a": "2026-06-29",
   "total_alertes": 936,
   "alertes": [
     {
@@ -55215,10 +55215,10 @@
           "tipo": "5. SERVEIS",
           "procedimiento": "Menor",
           "cpv": "",
-          "estat_font": "actiu_socrata",
-          "preservat_iguadata": false,
-          "primera_absencia_detectada": "",
-          "font_preservacio": "",
+          "estat_font": "preservat_desaparegut_socrata",
+          "preservat_iguadata": true,
+          "primera_absencia_detectada": "2026-06-29",
+          "font_preservacio": "json/contractes.json anterior",
           "primer_snapshot_iguadata": ""
         },
         {

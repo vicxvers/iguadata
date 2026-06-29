@@ -347,7 +347,7 @@
     "fecha": "2026-05-11",
     "año": 2026,
     "mes": 5,
-    "cpv": "79823000-9",
+    "cpv": "90919300-5",
     "estat_font": "actiu_socrata",
     "preservat_iguadata": false
   },
@@ -379,7 +379,7 @@
     "fecha": "2026-05-11",
     "año": 2026,
     "mes": 5,
-    "cpv": "90919300-5",
+    "cpv": "79823000-9",
     "estat_font": "actiu_socrata",
     "preservat_iguadata": false
   },
@@ -428,8 +428,10 @@
     "año": 2026,
     "mes": 5,
     "cpv": "55320000-9",
-    "estat_font": "actiu_socrata",
-    "preservat_iguadata": false
+    "estat_font": "preservat_desaparegut_socrata",
+    "preservat_iguadata": true,
+    "primera_absencia_detectada": "2026-06-29",
+    "font_preservacio": "json/contractes.json anterior"
   },
   {
     "id": 28,
@@ -854,7 +856,7 @@
     "tipo": "5. SERVEIS",
     "procedimiento": "Obert",
     "descripcion": "Servei de reparació i posada a punt dels vehicles del servei de neteja viària i recollida de residus de l'Ajuntament d'Igualada",
-    "importe": 38135.21,
+    "importe": 8400.0,
     "adjudicatario": "TALLERES LLIÇA S.L.",
     "fecha": "2026-03-03",
     "año": 2026,
@@ -870,7 +872,7 @@
     "tipo": "5. SERVEIS",
     "procedimiento": "Obert",
     "descripcion": "Servei de reparació i posada a punt dels vehicles del servei de neteja viària i recollida de residus de l'Ajuntament d'Igualada",
-    "importe": 8400.0,
+    "importe": 38135.21,
     "adjudicatario": "TALLERES LLIÇA S.L.",
     "fecha": "2026-03-03",
     "año": 2026,
@@ -2518,7 +2520,7 @@
     "tipo": "1. OBRES",
     "procedimiento": "Obert",
     "descripcion": "Instal·lació solar fotovoltaica col·lectiva escola Garcia Fossas, finançat pel Pla de Recuperació, Transformació i Resiliència (PRTR) ¿ Next Generation EU",
-    "importe": 89964.0,
+    "importe": 14829.53,
     "adjudicatario": "RENEWABLE ENERGY FORWARD SL",
     "fecha": "2026-02-16",
     "año": 2026,
@@ -2534,7 +2536,7 @@
     "tipo": "1. OBRES",
     "procedimiento": "Obert",
     "descripcion": "Instal·lació solar fotovoltaica col·lectiva escola Garcia Fossas, finançat pel Pla de Recuperació, Transformació i Resiliència (PRTR) ¿ Next Generation EU",
-    "importe": 14829.53,
+    "importe": 89964.0,
     "adjudicatario": "RENEWABLE ENERGY FORWARD SL",
     "fecha": "2026-02-16",
     "año": 2026,
@@ -2550,7 +2552,7 @@
     "tipo": "1. OBRES",
     "procedimiento": "Obert",
     "descripcion": "Instal·lació solar fotovoltaica col·lectiva escola Gabriel Castellà, finançat pel Pla de Recuperació, Transformació i Resiliència (PRTR) ¿ Next Generation EU",
-    "importe": 88807.6,
+    "importe": 5930.95,
     "adjudicatario": "RENEWABLE ENERGY FORWARD SL",
     "fecha": "2026-02-16",
     "año": 2026,
@@ -2566,7 +2568,7 @@
     "tipo": "1. OBRES",
     "procedimiento": "Obert",
     "descripcion": "Instal·lació solar fotovoltaica col·lectiva escola Gabriel Castellà, finançat pel Pla de Recuperació, Transformació i Resiliència (PRTR) ¿ Next Generation EU",
-    "importe": 5930.95,
+    "importe": 88807.6,
     "adjudicatario": "RENEWABLE ENERGY FORWARD SL",
     "fecha": "2026-02-16",
     "año": 2026,
@@ -14331,7 +14333,7 @@
     "fecha": "2025-07-29",
     "año": 2025,
     "mes": 7,
-    "cpv": "55400000-4",
+    "cpv": "90910000-9",
     "estat_font": "actiu_socrata",
     "preservat_iguadata": false
   },
@@ -14347,7 +14349,7 @@
     "fecha": "2025-07-29",
     "año": 2025,
     "mes": 7,
-    "cpv": "79823000-9",
+    "cpv": "55400000-4",
     "estat_font": "actiu_socrata",
     "preservat_iguadata": false
   },
@@ -14363,7 +14365,7 @@
     "fecha": "2025-07-29",
     "año": 2025,
     "mes": 7,
-    "cpv": "90910000-9",
+    "cpv": "79823000-9",
     "estat_font": "actiu_socrata",
     "preservat_iguadata": false
   },
@@ -17611,7 +17613,7 @@
     "fecha": "2025-06-09",
     "año": 2025,
     "mes": 6,
-    "cpv": "79823000-9",
+    "cpv": "",
     "estat_font": "actiu_socrata",
     "preservat_iguadata": false
   },
@@ -17627,7 +17629,7 @@
     "fecha": "2025-06-09",
     "año": 2025,
     "mes": 6,
-    "cpv": "",
+    "cpv": "79823000-9",
     "estat_font": "actiu_socrata",
     "preservat_iguadata": false
   },
@@ -35046,7 +35048,7 @@
     "tipo": "1. OBRES",
     "procedimiento": "Obert",
     "descripcion": "Obres corresponents al projecte executiu d'intervencions passives per l'adpatació al canvi climàtic dels patis de centres educatius de titularitat pública de la ciutat d'Igualada. 6 LOTS",
-    "importe": 52646.06,
+    "importe": 36115.32,
     "adjudicatario": "VERSATIL GREEN, SL",
     "fecha": "2024-10-10",
     "año": 2024,
@@ -35062,7 +35064,7 @@
     "tipo": "1. OBRES",
     "procedimiento": "Obert",
     "descripcion": "Obres corresponents al projecte executiu d'intervencions passives per l'adpatació al canvi climàtic dels patis de centres educatius de titularitat pública de la ciutat d'Igualada. 6 LOTS",
-    "importe": 14342.62,
+    "importe": 52646.06,
     "adjudicatario": "VERSATIL GREEN, SL",
     "fecha": "2024-10-10",
     "año": 2024,
@@ -35078,7 +35080,7 @@
     "tipo": "1. OBRES",
     "procedimiento": "Obert",
     "descripcion": "Obres corresponents al projecte executiu d'intervencions passives per l'adpatació al canvi climàtic dels patis de centres educatius de titularitat pública de la ciutat d'Igualada. 6 LOTS",
-    "importe": 36115.32,
+    "importe": 36076.96,
     "adjudicatario": "VERSATIL GREEN, SL",
     "fecha": "2024-10-10",
     "año": 2024,
@@ -35094,7 +35096,7 @@
     "tipo": "1. OBRES",
     "procedimiento": "Obert",
     "descripcion": "Obres corresponents al projecte executiu d'intervencions passives per l'adpatació al canvi climàtic dels patis de centres educatius de titularitat pública de la ciutat d'Igualada. 6 LOTS",
-    "importe": 34469.73,
+    "importe": 14342.62,
     "adjudicatario": "VERSATIL GREEN, SL",
     "fecha": "2024-10-10",
     "año": 2024,
@@ -35110,7 +35112,7 @@
     "tipo": "1. OBRES",
     "procedimiento": "Obert",
     "descripcion": "Obres corresponents al projecte executiu d'intervencions passives per l'adpatació al canvi climàtic dels patis de centres educatius de titularitat pública de la ciutat d'Igualada. 6 LOTS",
-    "importe": 36076.96,
+    "importe": 34469.73,
     "adjudicatario": "VERSATIL GREEN, SL",
     "fecha": "2024-10-10",
     "año": 2024,
@@ -38523,7 +38525,7 @@
     "fecha": "2024-07-19",
     "año": 2024,
     "mes": 7,
-    "cpv": "79961000-8",
+    "cpv": "55400000-4",
     "estat_font": "actiu_socrata",
     "preservat_iguadata": false
   },
@@ -38539,7 +38541,7 @@
     "fecha": "2024-07-19",
     "año": 2024,
     "mes": 7,
-    "cpv": "90910000-9",
+    "cpv": "44411000-4",
     "estat_font": "actiu_socrata",
     "preservat_iguadata": false
   },
@@ -38555,7 +38557,7 @@
     "fecha": "2024-07-19",
     "año": 2024,
     "mes": 7,
-    "cpv": "55400000-4",
+    "cpv": "90910000-9",
     "estat_font": "actiu_socrata",
     "preservat_iguadata": false
   },
@@ -38587,7 +38589,7 @@
     "fecha": "2024-07-19",
     "año": 2024,
     "mes": 7,
-    "cpv": "44411000-4",
+    "cpv": "79961000-8",
     "estat_font": "actiu_socrata",
     "preservat_iguadata": false
   },
@@ -40411,7 +40413,7 @@
     "fecha": "2024-06-19",
     "año": 2024,
     "mes": 6,
-    "cpv": "79710000-4",
+    "cpv": "90910000-9",
     "estat_font": "actiu_socrata",
     "preservat_iguadata": false
   },
@@ -40459,7 +40461,7 @@
     "fecha": "2024-06-19",
     "año": 2024,
     "mes": 6,
-    "cpv": "90910000-9",
+    "cpv": "79710000-4",
     "estat_font": "actiu_socrata",
     "preservat_iguadata": false
   },
@@ -108956,8 +108958,10 @@
     "año": 2021,
     "mes": 6,
     "cpv": "45233222-1",
-    "estat_font": "actiu_socrata",
-    "preservat_iguadata": false
+    "estat_font": "preservat_desaparegut_socrata",
+    "preservat_iguadata": true,
+    "primera_absencia_detectada": "2026-06-29",
+    "font_preservacio": "json/contractes.json anterior"
   },
   {
     "id": 6811,
@@ -108972,8 +108976,10 @@
     "año": 2021,
     "mes": 6,
     "cpv": "",
-    "estat_font": "actiu_socrata",
-    "preservat_iguadata": false
+    "estat_font": "preservat_desaparegut_socrata",
+    "preservat_iguadata": true,
+    "primera_absencia_detectada": "2026-06-29",
+    "font_preservacio": "json/contractes.json anterior"
   },
   {
     "id": 6812,
@@ -108988,8 +108994,10 @@
     "año": 2021,
     "mes": 6,
     "cpv": "",
-    "estat_font": "actiu_socrata",
-    "preservat_iguadata": false
+    "estat_font": "preservat_desaparegut_socrata",
+    "preservat_iguadata": true,
+    "primera_absencia_detectada": "2026-06-29",
+    "font_preservacio": "json/contractes.json anterior"
   },
   {
     "id": 6813,
@@ -109004,8 +109012,10 @@
     "año": 2021,
     "mes": 6,
     "cpv": "",
-    "estat_font": "actiu_socrata",
-    "preservat_iguadata": false
+    "estat_font": "preservat_desaparegut_socrata",
+    "preservat_iguadata": true,
+    "primera_absencia_detectada": "2026-06-29",
+    "font_preservacio": "json/contractes.json anterior"
   },
   {
     "id": 6814,
@@ -109020,8 +109030,10 @@
     "año": 2021,
     "mes": 6,
     "cpv": "",
-    "estat_font": "actiu_socrata",
-    "preservat_iguadata": false
+    "estat_font": "preservat_desaparegut_socrata",
+    "preservat_iguadata": true,
+    "primera_absencia_detectada": "2026-06-29",
+    "font_preservacio": "json/contractes.json anterior"
   },
   {
     "id": 6815,
@@ -109036,8 +109048,10 @@
     "año": 2021,
     "mes": 6,
     "cpv": "45200000-9",
-    "estat_font": "actiu_socrata",
-    "preservat_iguadata": false
+    "estat_font": "preservat_desaparegut_socrata",
+    "preservat_iguadata": true,
+    "primera_absencia_detectada": "2026-06-29",
+    "font_preservacio": "json/contractes.json anterior"
   },
   {
     "id": 6816,
@@ -109052,8 +109066,10 @@
     "año": 2021,
     "mes": 6,
     "cpv": "",
-    "estat_font": "actiu_socrata",
-    "preservat_iguadata": false
+    "estat_font": "preservat_desaparegut_socrata",
+    "preservat_iguadata": true,
+    "primera_absencia_detectada": "2026-06-29",
+    "font_preservacio": "json/contractes.json anterior"
   },
   {
     "id": 6817,
@@ -109068,8 +109084,10 @@
     "año": 2021,
     "mes": 6,
     "cpv": "",
-    "estat_font": "actiu_socrata",
-    "preservat_iguadata": false
+    "estat_font": "preservat_desaparegut_socrata",
+    "preservat_iguadata": true,
+    "primera_absencia_detectada": "2026-06-29",
+    "font_preservacio": "json/contractes.json anterior"
   },
   {
     "id": 6818,
@@ -109084,8 +109102,10 @@
     "año": 2021,
     "mes": 6,
     "cpv": "45316000-5",
-    "estat_font": "actiu_socrata",
-    "preservat_iguadata": false
+    "estat_font": "preservat_desaparegut_socrata",
+    "preservat_iguadata": true,
+    "primera_absencia_detectada": "2026-06-29",
+    "font_preservacio": "json/contractes.json anterior"
   },
   {
     "id": 6819,

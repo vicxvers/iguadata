@@ -9098,5 +9098,225 @@
       "estat_font": "actiu_socrata",
       "preservat_iguadata": false
     }
+  },
+  {
+    "estat_font": "desaparegut_socrata",
+    "primera_absencia_detectada": "2026-06-29",
+    "font_preservacio": "json/contractes.json anterior",
+    "exclos_analisis": false,
+    "contracte_original": {
+      "id": 6818,
+      "codigo": "34/2021 CMO",
+      "organismo": "Ajuntament d'Igualada",
+      "tipo": "1. OBRES",
+      "procedimiento": "Menor",
+      "descripcion": "Memòria valorada de les obres de substitució de l'enllumenat per leds en aules de planta baixa i planta primera al CEIP Ramon Castelltort.",
+      "importe": 6802.92,
+      "adjudicatario": "GTEKNICS SL",
+      "fecha": "2021-06-16",
+      "año": 2021,
+      "mes": 6,
+      "cpv": "45316000-5",
+      "estat_font": "actiu_socrata",
+      "preservat_iguadata": false
+    }
+  },
+  {
+    "estat_font": "desaparegut_socrata",
+    "primera_absencia_detectada": "2026-06-29",
+    "font_preservacio": "json/contractes.json anterior",
+    "exclos_analisis": false,
+    "contracte_original": {
+      "id": 6817,
+      "codigo": "2021.2.0018503.000",
+      "organismo": "Ajuntament d'Igualada",
+      "tipo": "5. SERVEIS",
+      "procedimiento": "Menor",
+      "descripcion": "CANTADA D'HAVANERES DIA 30 AGOST PER FESTA MAJOR",
+      "importe": 743.8,
+      "adjudicatario": "GRUP D'HAVANERES MAR I VENT",
+      "fecha": "2021-06-17",
+      "año": 2021,
+      "mes": 6,
+      "cpv": "",
+      "estat_font": "actiu_socrata",
+      "preservat_iguadata": false
+    }
+  },
+  {
+    "estat_font": "desaparegut_socrata",
+    "primera_absencia_detectada": "2026-06-29",
+    "font_preservacio": "json/contractes.json anterior",
+    "exclos_analisis": false,
+    "contracte_original": {
+      "id": 6816,
+      "codigo": "2021.2.0018522.000",
+      "organismo": "Ajuntament d'Igualada",
+      "tipo": "5. SERVEIS",
+      "procedimiento": "Menor",
+      "descripcion": "ACTUACIÓ DE LA COBLA ALMOGAVARENCA CONCERT DIA 26 AGOST PER FESTA MAJOR",
+      "importe": 1694.21,
+      "adjudicatario": "ASSOCIACIO CULTURAL COBLA ALMOGAVARENCA",
+      "fecha": "2021-06-17",
+      "año": 2021,
+      "mes": 6,
+      "cpv": "",
+      "estat_font": "actiu_socrata",
+      "preservat_iguadata": false
+    }
+  },
+  {
+    "estat_font": "desaparegut_socrata",
+    "primera_absencia_detectada": "2026-06-29",
+    "font_preservacio": "json/contractes.json anterior",
+    "exclos_analisis": false,
+    "contracte_original": {
+      "id": 6815,
+      "codigo": "2021.2.0018630.000",
+      "organismo": "Ajuntament d'Igualada",
+      "tipo": "1. OBRES",
+      "procedimiento": "Menor",
+      "descripcion": "NOVA AD PER CANVI DE NOM DE LA AD 13903, OBRES D'ENJARDINAMENT DE LA ROTONDA DEL C. DINAMARCA",
+      "importe": 25521.73,
+      "adjudicatario": "GARDEN ANOIA JARDINERIA SL",
+      "fecha": "2021-06-18",
+      "año": 2021,
+      "mes": 6,
+      "cpv": "45200000-9",
+      "estat_font": "actiu_socrata",
+      "preservat_iguadata": false
+    }
+  },
+  {
+    "estat_font": "desaparegut_socrata",
+    "primera_absencia_detectada": "2026-06-29",
+    "font_preservacio": "json/contractes.json anterior",
+    "exclos_analisis": false,
+    "contracte_original": {
+      "id": 6814,
+      "codigo": "37/2021 CMS",
+      "organismo": "Ajuntament d'Igualada",
+      "tipo": "5. SERVEIS",
+      "procedimiento": "Menor",
+      "descripcion": "Contractació d'una pòlissa d'assegurança per al concert de l'European Blloon Festival 2021.",
+      "importe": 408.15,
+      "adjudicatario": "SEGUROS CATALANA OCCIDENTE SA DE SEGUROS Y REASEGUROS, SOCIEDAD UNIPERSONAL",
+      "fecha": "2021-06-18",
+      "año": 2021,
+      "mes": 6,
+      "cpv": "",
+      "estat_font": "actiu_socrata",
+      "preservat_iguadata": false
+    }
+  },
+  {
+    "estat_font": "desaparegut_socrata",
+    "primera_absencia_detectada": "2026-06-29",
+    "font_preservacio": "json/contractes.json anterior",
+    "exclos_analisis": false,
+    "contracte_original": {
+      "id": 6813,
+      "codigo": "98053",
+      "organismo": "Consorci Sociosanitari d'Igualada",
+      "tipo": "5. SERVEIS",
+      "procedimiento": "Menor",
+      "descripcion": "Assegurança Pyme Centre 4D HEALTH",
+      "importe": 4270.61,
+      "adjudicatario": "ZURICH INSURANCE PLC SUCURSAL EN ESPAÑA",
+      "fecha": "2021-06-18",
+      "año": 2021,
+      "mes": 6,
+      "cpv": "",
+      "estat_font": "actiu_socrata",
+      "preservat_iguadata": false
+    }
+  },
+  {
+    "estat_font": "desaparegut_socrata",
+    "primera_absencia_detectada": "2026-06-29",
+    "font_preservacio": "json/contractes.json anterior",
+    "exclos_analisis": false,
+    "contracte_original": {
+      "id": 6812,
+      "codigo": "130903890",
+      "organismo": "Consorci Sociosanitari d'Igualada",
+      "tipo": "5. SERVEIS",
+      "procedimiento": "Menor",
+      "descripcion": "Asegurança Directius",
+      "importe": 4504.45,
+      "adjudicatario": "AIG EUROPE , S. A. SUCURSAL EN ESPAÑA",
+      "fecha": "2021-06-21",
+      "año": 2021,
+      "mes": 6,
+      "cpv": "",
+      "estat_font": "actiu_socrata",
+      "preservat_iguadata": false
+    }
+  },
+  {
+    "estat_font": "desaparegut_socrata",
+    "primera_absencia_detectada": "2026-06-29",
+    "font_preservacio": "json/contractes.json anterior",
+    "exclos_analisis": false,
+    "contracte_original": {
+      "id": 6811,
+      "codigo": "2021.2.0018747.000",
+      "organismo": "Ajuntament d'Igualada",
+      "tipo": "5. SERVEIS",
+      "procedimiento": "Menor",
+      "descripcion": "CONCERT DIA 15 JULIOL \"PAUNEZZ\" AL PATI DEL MUSEU, DINS DEL  FESTIVAL DE MÚSICA ANÒLIA",
+      "importe": 800.0,
+      "adjudicatario": "PAUNE SERRA, CARLES",
+      "fecha": "2021-06-22",
+      "año": 2021,
+      "mes": 6,
+      "cpv": "",
+      "estat_font": "actiu_socrata",
+      "preservat_iguadata": false
+    }
+  },
+  {
+    "estat_font": "desaparegut_socrata",
+    "primera_absencia_detectada": "2026-06-29",
+    "font_preservacio": "json/contractes.json anterior",
+    "exclos_analisis": false,
+    "contracte_original": {
+      "id": 6810,
+      "codigo": "39/2021 CMO",
+      "organismo": "Ajuntament d'Igualada",
+      "tipo": "1. OBRES",
+      "procedimiento": "Menor",
+      "descripcion": "Obres de la Memòria valorada per a l'adequació de l'accés al Complex Esportiu de Les Comes en el carrer Carles Riba amb el carrer de Les Guixeres.",
+      "importe": 30185.94,
+      "adjudicatario": "FIRTEC, SA",
+      "fecha": "2021-06-25",
+      "año": 2021,
+      "mes": 6,
+      "cpv": "45233222-1",
+      "estat_font": "actiu_socrata",
+      "preservat_iguadata": false
+    }
+  },
+  {
+    "estat_font": "desaparegut_socrata",
+    "primera_absencia_detectada": "2026-06-29",
+    "font_preservacio": "json/contractes.json anterior",
+    "exclos_analisis": false,
+    "contracte_original": {
+      "id": 27,
+      "codigo": "26/2026",
+      "organismo": "Ajuntament d'Igualada",
+      "tipo": "6. ADMINISTRATIU ESPECIAL",
+      "procedimiento": "Menor",
+      "descripcion": "Selecció de food trucks per a l'European Balloon Festival 2026",
+      "importe": 900.0,
+      "adjudicatario": "AJUNTAMENT D'IGUALADA",
+      "fecha": "2026-05-06",
+      "año": 2026,
+      "mes": 5,
+      "cpv": "55320000-9",
+      "estat_font": "actiu_socrata",
+      "preservat_iguadata": false
+    }
   }
 ]
