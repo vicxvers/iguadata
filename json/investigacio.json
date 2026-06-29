@@ -1,5 +1,246 @@
 [
   {
+    "slug": "la-gaspar",
+    "title": "La Gaspar",
+    "subtitle": "Una escola, 129 contractes menors: cinc anys de classes adjudicades a trossos",
+    "date": "29 de juny de 2026",
+    "publishedAt": "2026-06-29",
+    "image": "/assets/investigacio/la-gaspar.png",
+    "importe": 445242.7,
+    "content": [
+      {
+        "type": "paragraph",
+        "text": "A Igualada, alguna cosa no s'està fent bé. Serveis públics adjudicats a dit, sense concurs i amb massa preguntes pendents que ja no semblen casos aïllats. Semblen un sistema. Aquí, Iguadata presenta la investigació més gran i profunda de tota la trama.",
+        "skeletonLines": 4
+      },
+      {
+        "type": "heading",
+        "text": "Els fets"
+      },
+      {
+        "type": "paragraph",
+        "text": "Entre 2021 i 2025, l'Ajuntament d'Igualada va pagar, amb 129 contractes menors i sense concurs públic, més de 445.000 € en classes per a la Gaspar. I Antifrau ja investiga un possible fraccionament de contractes i l'ús de falsos autònoms per cobrir necessitats estructurals.",
+        "skeletonLines": 4
+      },
+      {
+        "type": "paragraph",
+        "text": "Els contractes menors són legals per a una necessitat concreta, puntual i no recurrent. El que no es pot fer mai és dividir una necessitat gran en encàrrecs petits per evitar el concurs públic. Si la necessitat de docents era periòdica i repetida, no podia cobrir-se amb una gran irregularitat estructural de petits encàrrecs successius adjudicats a dit.",
+        "skeletonLines": 5
+      },
+      {
+        "type": "heading",
+        "text": "Quina és l'alerta?"
+      },
+      {
+        "type": "paragraph",
+        "text": "De gener a juny. De setembre a desembre. Acaba un semestre, s'adjudiquen contractes i les classes continuen. Durant almenys cinc anys, aquest ha estat el sistema.",
+        "skeletonLines": 3
+      },
+      {
+        "type": "paragraph",
+        "text": "L'Ajuntament, a més, va creuar una altra línia, atribuint a autònoms les responsabilitats pròpies del personal estable. Les dades mostren responsabilitats i trajectòries que es repeteixen durant anys. Dels 37 docents, 28 van rebre més d'un contracte i 22 almenys tres.",
+        "skeletonLines": 4
+      },
+      {
+        "type": "heading",
+        "text": "La reclamació"
+      },
+      {
+        "type": "paragraph",
+        "text": "El cas té una contradicció especialment reveladora. L'any 2022, la mateixa escola va deixar per escrit una demanda que avui pren una altra dimensió. El projecte de direcció per al mandat 2022-2026 reclamava a l'Ajuntament corregir la situació del professorat.",
+        "skeletonLines": 4
+      },
+      {
+        "type": "paragraph",
+        "text": "De fet, l'agost de 2022 es van convocar tres concursos oberts que demostren que la docència es podia agrupar, planificar i treure a concurs. Però aquell model no es va consolidar. Després dels concursos oberts, els contractes menors van continuar i, fins i tot, créixer.",
+        "skeletonLines": 4
+      },
+      {
+        "type": "heading",
+        "text": "Antifrau i altres casos"
+      },
+      {
+        "type": "paragraph",
+        "text": "L'Oficina Antifrau ha obert un expedient d'investigació i ja té totes les dades del cas. Però Igualada no apareix en el buit. A Catalunya ja hi ha precedents similars que han acabat sota la lupa judicial, política i administrativa.",
+        "skeletonLines": 4
+      },
+      {
+        "type": "paragraph",
+        "text": "A Altafulla, es va obligar a regularitzar el professorat de l'Escola Municipal d'Adults, bloquejant l'inici de curs i deixant uns vuitanta alumnes sense classes.",
+        "skeletonLines": 3
+      },
+      {
+        "type": "paragraph",
+        "text": "A Canovelles, una sentència judicial va reconèixer que quatre docents del Centre Cultural que facturaven com a autònoms es trobaven en frau de llei, obligant el consistori a incorporar-los a la plantilla.",
+        "skeletonLines": 3
+      },
+      {
+        "type": "paragraph",
+        "text": "Les responsabilitats no recauen sobre la Gaspar o la seva comunitat educativa. Els contractes van ser adjudicats i el sistema va ser establert per l'OAMEAI, una entitat pública de l'Ajuntament d'Igualada. Presidida per l'alcalde i amb participació de tots els grups polítics del consistori i persones del camp artístic.",
+        "skeletonLines": 4
+      },
+      {
+        "type": "heading",
+        "text": "La resposta no pot seguir sent el silenci"
+      },
+      {
+        "type": "paragraph",
+        "text": "Quin control va exercir l'OAMEAI sobre aquesta contractació? Es va detectar o advertir del risc de fraccionament o relació laboral encoberta? Es va estudiar regularitzar la situació del professorat?",
+        "skeletonLines": 3
+      },
+      {
+        "type": "heading",
+        "text": "Properament, reportatge complet"
+      },
+      {
+        "type": "paragraph",
+        "text": "El sistema que va adjudicar a dit més de 445.000 €, al descobert amb totes les dades, documents i testimonis.",
+        "skeletonLines": 2
+      },
+      {
+        "type": "heading",
+        "text": "Els contractes"
+      },
+      {
+        "type": "contracts_paginated",
+        "ariaLabel": "Contractes del cas La Gaspar",
+        "itemsPerPage": 25,
+        "hideAdjudicatario": true,
+        "codes": [
+          "2021.2.0000328.000",
+          "2021.2.0000977.000",
+          "2021.2.0000976.000",
+          "2021.2.0000975.000",
+          "2021.2.0000974.000",
+          "2021.2.0000973.000",
+          "2021.2.0000972.000",
+          "2021.2.0000971.000",
+          "2021.2.0001167.000",
+          "2021.2.0001166.000",
+          "2021.2.0001165.000",
+          "2021.2.0001164.000",
+          "2021.2.0001163.000",
+          "2021.2.0001162.000",
+          "2021.2.0001161.000",
+          "2021.2.0001160.000",
+          "2021.2.0001159.000",
+          "2021.2.0001158.000",
+          "2021.2.0001156.000",
+          "2021.2.0001296.000",
+          "2022.2.0000246.000",
+          "2022.2.0000245.000",
+          "2022.2.0000244.000",
+          "2022.2.0000243.000",
+          "2022.2.0000242.000",
+          "2022.2.0000241.000",
+          "2022.2.0000240.000",
+          "2022.2.0000239.000",
+          "2022.2.0000238.000",
+          "2022.2.0000237.000",
+          "2022.2.0000236.000",
+          "2022.2.0000235.000",
+          "2022.2.0000234.000",
+          "2022.2.0001201.000",
+          "2022.2.0001200.000",
+          "2022.2.0001199.000",
+          "2022.2.0001198.000",
+          "2022.2.0001197.000",
+          "2022.2.0001196.000",
+          "2022.2.0001195.000",
+          "2022.2.0001194.000",
+          "2022.2.0001296.000",
+          "2022.2.0001295.000",
+          "2022.2.0001382.000",
+          "2023.2.0001088.000",
+          "2023.2.0001087.000",
+          "2023.2.0001060.000",
+          "2023.2.0001032.000",
+          "2023.2.0001031.000",
+          "2023.2.0001030.000",
+          "2023.2.0001029.000",
+          "2023.2.0001158.000",
+          "2023.2.0001059.000",
+          "2023.2.0001037.000",
+          "2023.2.0001036.000",
+          "2023.2.0001035.000",
+          "2023.2.0001034.000",
+          "2023.2.0001033.000",
+          "2023.2.0001201.000",
+          "2024.2.0000131.000",
+          "2024.2.0000130.000",
+          "2024.2.0000129.000",
+          "2024.2.0000128.000",
+          "2024.2.0000127.000",
+          "2024.2.0000126.000",
+          "2024.2.0000125.000",
+          "2024.2.0000124.000",
+          "2024.2.0000123.000",
+          "2024.2.0000122.000",
+          "2024.2.0000121.000",
+          "2024.2.0000120.000",
+          "2024.2.0000119.000",
+          "2024.2.0000160.000",
+          "2024.2.0000159.000",
+          "2024.2.0000303.000",
+          "2024.2.0000131.001",
+          "2024.0001359.000",
+          "2024.2.0001115.000",
+          "2024.2.0001114.000",
+          "2024.2.0001113.000",
+          "2024.2.0001112.000",
+          "2024.2.0001111.000",
+          "2024.2.0001110.000",
+          "2024.2.0001109.000",
+          "2024.2.0001108.000",
+          "2024.2.0001107.000",
+          "2024.2.0001106.000",
+          "2024.2.0001105.000",
+          "2024.2.0001104.000",
+          "2024.2.0001103.000",
+          "2024.2.0001102.000",
+          "2024.2.0001101.000",
+          "2024.2.0001099.000",
+          "2024.2.0001271.000",
+          "2025.2.0000121.000",
+          "2025.2.0000120.000",
+          "2025.2.0000119.000",
+          "2025.2.0000118.000",
+          "2025.2.0000117.000",
+          "2025.2.0000116.000",
+          "2025.2.0000115.000",
+          "2025.2.0000114.000",
+          "2025.2.0000113.000",
+          "2025.2.0000112.000",
+          "2025.2.0000111.000",
+          "2025.2.0000110.000",
+          "2025.2.0000109.000",
+          "2025.2.0000108.000",
+          "2025.2.0000107.000",
+          "2025.2.0000106.000",
+          "2025.2.0000105.000",
+          "2025.2.0001010.000",
+          "2025.2.0001009.000",
+          "2025.2.0001008.000",
+          "2025.2.0001007.000",
+          "2025.2.0001006.000",
+          "2025.2.0001005.000",
+          "2025.2.0001004.000",
+          "2025.2.0001003.000",
+          "2025.2.0001002.000",
+          "2025.2.0001001.000",
+          "2025.2.0001000.000",
+          "2025.2.0000999.000",
+          "2025.2.0000998.000",
+          "2025.2.0000997.000",
+          "2025.2.0000996.000",
+          "2025.2.0001153.000",
+          "2025.2.0001200.000",
+          "2025.2.0001305.000"
+        ]
+      }
+    ]
+  },
+  {
     "slug": "passeig-verdaguer",
     "title": "Passeig Verdaguer",
     "subtitle": "Cinc contractes a dit per començar la remodelació",

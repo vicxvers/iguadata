@@ -1257,11 +1257,11 @@ function CasFraccionamentView({ caso, contracts, empreses, onBack, onContractSel
             ))}
             {casContracts.length > itemsPerPage && (
                 <div className="pagination">
-                    <button className="pagination-btn" onClick={() => { setCurrentPage(1); window.scrollTo({ top: 0, behavior: 'smooth' }); }} disabled={currentPage === 1}>«</button>
-                    <button className="pagination-btn" onClick={() => { setCurrentPage(p => Math.max(p - 1, 1)); window.scrollTo({ top: 0, behavior: 'smooth' }); }} disabled={currentPage === 1}>‹</button>
+                    <button className="pagination-btn" onClick={() => { setCurrentPage(1) }} disabled={currentPage === 1}>«</button>
+                    <button className="pagination-btn" onClick={() => { setCurrentPage(p => Math.max(p - 1, 1)) }} disabled={currentPage === 1}>‹</button>
                     <span className="pagination-info">Pàgina <strong>{currentPage}</strong> de <strong>{totalPages}</strong></span>
-                    <button className="pagination-btn" onClick={() => { setCurrentPage(p => Math.min(p + 1, totalPages)); window.scrollTo({ top: 0, behavior: 'smooth' }); }} disabled={currentPage === totalPages}>›</button>
-                    <button className="pagination-btn" onClick={() => { setCurrentPage(totalPages); window.scrollTo({ top: 0, behavior: 'smooth' }); }} disabled={currentPage === totalPages}>»</button>
+                    <button className="pagination-btn" onClick={() => { setCurrentPage(p => Math.min(p + 1, totalPages)) }} disabled={currentPage === totalPages}>›</button>
+                    <button className="pagination-btn" onClick={() => { setCurrentPage(totalPages) }} disabled={currentPage === totalPages}>»</button>
                 </div>
             )}
         </div>
@@ -1405,11 +1405,11 @@ function CasConcentracioView({ caso, contracts, empreses, onBack, onContractSele
             ))}
             {casContracts.length > itemsPerPage && (
                 <div className="pagination">
-                    <button className="pagination-btn" onClick={() => { setCurrentPage(1); window.scrollTo({ top: 0, behavior: 'smooth' }); }} disabled={currentPage === 1}>«</button>
-                    <button className="pagination-btn" onClick={() => { setCurrentPage(p => Math.max(p - 1, 1)); window.scrollTo({ top: 0, behavior: 'smooth' }); }} disabled={currentPage === 1}>‹</button>
+                    <button className="pagination-btn" onClick={() => { setCurrentPage(1) }} disabled={currentPage === 1}>«</button>
+                    <button className="pagination-btn" onClick={() => { setCurrentPage(p => Math.max(p - 1, 1)) }} disabled={currentPage === 1}>‹</button>
                     <span className="pagination-info">Pàgina <strong>{currentPage}</strong> de <strong>{totalPages}</strong></span>
-                    <button className="pagination-btn" onClick={() => { setCurrentPage(p => Math.min(p + 1, totalPages)); window.scrollTo({ top: 0, behavior: 'smooth' }); }} disabled={currentPage === totalPages}>›</button>
-                    <button className="pagination-btn" onClick={() => { setCurrentPage(totalPages); window.scrollTo({ top: 0, behavior: 'smooth' }); }} disabled={currentPage === totalPages}>»</button>
+                    <button className="pagination-btn" onClick={() => { setCurrentPage(p => Math.min(p + 1, totalPages)) }} disabled={currentPage === totalPages}>›</button>
+                    <button className="pagination-btn" onClick={() => { setCurrentPage(totalPages) }} disabled={currentPage === totalPages}>»</button>
                 </div>
             )}
         </div>
@@ -1786,7 +1786,7 @@ function EmpresesView({ empreses, onEmpresaSelect, searchTerm, setSearchTerm, se
                 <div className="pagination">
                     <button
                         className="pagination-btn"
-                        onClick={() => { setCurrentPage(1); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                        onClick={() => { setCurrentPage(1) }}
                         disabled={currentPage === 1}
                         title="Primera pàgina"
                     >
@@ -1794,7 +1794,7 @@ function EmpresesView({ empreses, onEmpresaSelect, searchTerm, setSearchTerm, se
                     </button>
                     <button
                         className="pagination-btn"
-                        onClick={() => { setCurrentPage(prev => Math.max(prev - 1, 1)); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                        onClick={() => { setCurrentPage(prev => Math.max(prev - 1, 1)) }}
                         disabled={currentPage === 1}
                         title="Pàgina anterior"
                     >
@@ -1805,7 +1805,7 @@ function EmpresesView({ empreses, onEmpresaSelect, searchTerm, setSearchTerm, se
                     </span>
                     <button
                         className="pagination-btn"
-                        onClick={() => { setCurrentPage(prev => Math.min(prev + 1, totalPages)); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                        onClick={() => { setCurrentPage(prev => Math.min(prev + 1, totalPages)) }}
                         disabled={currentPage === totalPages}
                         title="Pàgina següent"
                     >
@@ -1813,7 +1813,7 @@ function EmpresesView({ empreses, onEmpresaSelect, searchTerm, setSearchTerm, se
                     </button>
                     <button
                         className="pagination-btn"
-                        onClick={() => { setCurrentPage(totalPages); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                        onClick={() => { setCurrentPage(totalPages) }}
                         disabled={currentPage === totalPages}
                         title="Última pàgina"
                     >
@@ -2226,11 +2226,11 @@ function EmpresaView({ empresa: empresaNom, contracts, empreses, administradors,
             )}
             {empresaContracts.length > itemsPerPage && (
                 <div className="pagination">
-                    <button className="pagination-btn" onClick={() => { setCurrentPage(1); window.scrollTo({ top: 0, behavior: 'smooth' }); }} disabled={currentPage === 1} title="Primera pàgina">«</button>
-                    <button className="pagination-btn" onClick={() => { setCurrentPage(prev => Math.max(prev - 1, 1)); window.scrollTo({ top: 0, behavior: 'smooth' }); }} disabled={currentPage === 1} title="Pàgina anterior">‹</button>
+                    <button className="pagination-btn" onClick={() => { setCurrentPage(1) }} disabled={currentPage === 1} title="Primera pàgina">«</button>
+                    <button className="pagination-btn" onClick={() => { setCurrentPage(prev => Math.max(prev - 1, 1)) }} disabled={currentPage === 1} title="Pàgina anterior">‹</button>
                     <span className="pagination-info">Pàgina <strong>{currentPage}</strong> de <strong>{totalPages}</strong></span>
-                    <button className="pagination-btn" onClick={() => { setCurrentPage(prev => Math.min(prev + 1, totalPages)); window.scrollTo({ top: 0, behavior: 'smooth' }); }} disabled={currentPage === totalPages} title="Pàgina següent">›</button>
-                    <button className="pagination-btn" onClick={() => { setCurrentPage(totalPages); window.scrollTo({ top: 0, behavior: 'smooth' }); }} disabled={currentPage === totalPages} title="Última pàgina">»</button>
+                    <button className="pagination-btn" onClick={() => { setCurrentPage(prev => Math.min(prev + 1, totalPages)) }} disabled={currentPage === totalPages} title="Pàgina següent">›</button>
+                    <button className="pagination-btn" onClick={() => { setCurrentPage(totalPages) }} disabled={currentPage === totalPages} title="Última pàgina">»</button>
                 </div>
             )}
         </div>
@@ -2426,7 +2426,7 @@ function PersonesView({ persones, onEmpresaSelect, onNavigateLegal, searchTerm, 
                 <div className="pagination">
                     <button
                         className="pagination-btn"
-                        onClick={() => { setCurrentPage(1); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                        onClick={() => { setCurrentPage(1) }}
                         disabled={currentPage === 1}
                         title="Primera pàgina"
                     >
@@ -2434,7 +2434,7 @@ function PersonesView({ persones, onEmpresaSelect, onNavigateLegal, searchTerm, 
                     </button>
                     <button
                         className="pagination-btn"
-                        onClick={() => { setCurrentPage(prev => Math.max(prev - 1, 1)); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                        onClick={() => { setCurrentPage(prev => Math.max(prev - 1, 1)) }}
                         disabled={currentPage === 1}
                         title="Pàgina anterior"
                     >
@@ -2445,7 +2445,7 @@ function PersonesView({ persones, onEmpresaSelect, onNavigateLegal, searchTerm, 
                     </span>
                     <button
                         className="pagination-btn"
-                        onClick={() => { setCurrentPage(prev => Math.min(prev + 1, totalPages)); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                        onClick={() => { setCurrentPage(prev => Math.min(prev + 1, totalPages)) }}
                         disabled={currentPage === totalPages}
                         title="Pàgina següent"
                     >
@@ -2453,7 +2453,7 @@ function PersonesView({ persones, onEmpresaSelect, onNavigateLegal, searchTerm, 
                     </button>
                     <button
                         className="pagination-btn"
-                        onClick={() => { setCurrentPage(totalPages); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                        onClick={() => { setCurrentPage(totalPages) }}
                         disabled={currentPage === totalPages}
                         title="Última pàgina"
                     >
@@ -2592,7 +2592,7 @@ function CasoEditorialContent({ caso, idx, showImage }) {
     );
 }
 
-function InvestigacioContractCard({ contract, onSelect }) {
+function InvestigacioContractCard({ contract, onSelect, hideAdjudicatario = false }) {
     return (
         <a href={buildRouteUrl('/contractes/' + contract.slug)} className="card-link-wrapper" onClick={(event) => handleInternalLinkClick(event, () => onSelect(contract))}>
             <div className="contract-card">
@@ -2601,10 +2601,12 @@ function InvestigacioContractCard({ contract, onSelect }) {
                     <div className="contract-amount">{formatCurrency(contract.importe)}</div>
                 </div>
                 <div className="contract-meta">
+                    {!hideAdjudicatario && (
                     <div className="contract-meta-item">
                         <span className="contract-meta-label">Empresa adjudicatària</span>
                         <span className="contract-meta-value">{contract.adjudicatario}</span>
                     </div>
+                    )}
                     <div className="contract-meta-item">
                         <span className="contract-meta-label">Data</span>
                         <span className="contract-meta-value">{formatDate(contract.fecha)}</span>
@@ -2616,6 +2618,49 @@ function InvestigacioContractCard({ contract, onSelect }) {
                 </div>
             </div>
         </a>
+    );
+}
+
+function InvestigacioPaginatedContracts({ block, contracts, onContractSelect }) {
+    const itemsPerPage = block.itemsPerPage || 25;
+    const [currentPage, setCurrentPage] = useState(1);
+    const sectionRef = useRef(null);
+    const codes = block.codes || [];
+    const contractByCode = useMemo(() => {
+        const map = new Map();
+        contracts.forEach(contract => {
+            const code = String(contract.codigo || '').trim();
+            if (code && !map.has(code)) map.set(code, contract);
+        });
+        return map;
+    }, [contracts]);
+    const blockContracts = useMemo(() =>
+        codes
+            .map(code => contractByCode.get(String(code || '').trim()))
+            .filter(Boolean)
+        , [codes, contractByCode]);
+    const totalPages = Math.ceil(blockContracts.length / itemsPerPage);
+    const pageContracts = blockContracts.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+    const goToPage = (page) => {
+        const nextPage = Math.max(1, Math.min(page, totalPages || 1));
+        setCurrentPage(nextPage);
+    };
+
+    if (!blockContracts.length) return null;
+
+    return (
+        <section ref={sectionRef} className="investigacio-embed investigacio-card-stack" aria-label={block.ariaLabel || 'Contractes relacionats'}>
+            {pageContracts.map(contract => <InvestigacioContractCard key={contract.slug} contract={contract} onSelect={onContractSelect} hideAdjudicatario={Boolean(block.hideAdjudicatario)} />)}
+            {blockContracts.length > itemsPerPage && (
+                <div className="pagination">
+                    <button className="pagination-btn" onClick={() => goToPage(1)} disabled={currentPage === 1} title="Primera pàgina">«</button>
+                    <button className="pagination-btn" onClick={() => goToPage(currentPage - 1)} disabled={currentPage === 1} title="Pàgina anterior">‹</button>
+                    <span className="pagination-info">Pàgina <strong>{currentPage}</strong> de <strong>{totalPages}</strong></span>
+                    <button className="pagination-btn" onClick={() => goToPage(currentPage + 1)} disabled={currentPage === totalPages} title="Pàgina següent">›</button>
+                    <button className="pagination-btn" onClick={() => goToPage(totalPages)} disabled={currentPage === totalPages} title="Última pàgina">»</button>
+                </div>
+            )}
+        </section>
     );
 }
 
@@ -2654,6 +2699,9 @@ function InvestigacioCaseView({ caso, contracts, onContractSelect }) {
                                 {blockContracts.map(contract => <InvestigacioContractCard key={contract.slug} contract={contract} onSelect={onContractSelect} />)}
                             </section>
                         );
+                    }
+                    if (block.type === 'contracts_paginated') {
+                        return <InvestigacioPaginatedContracts key={key} block={block} contracts={contracts} onContractSelect={onContractSelect} />;
                     }
                     return null;
                 })}
@@ -4859,7 +4907,7 @@ function App() {
                         <div className="pagination">
                             <button
                                 className="pagination-btn"
-                                onClick={() => { setCurrentPage(1); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                                onClick={() => { setCurrentPage(1) }}
                                 disabled={currentPage === 1}
                                 title="Primera pàgina"
                             >
@@ -4867,7 +4915,7 @@ function App() {
                             </button>
                             <button
                                 className="pagination-btn"
-                                onClick={() => { setCurrentPage(currentPage - 1); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                                onClick={() => { setCurrentPage(currentPage - 1) }}
                                 disabled={currentPage === 1}
                                 title="Pàgina anterior"
                             >
@@ -4880,7 +4928,7 @@ function App() {
 
                             <button
                                 className="pagination-btn"
-                                onClick={() => { setCurrentPage(currentPage + 1); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                                onClick={() => { setCurrentPage(currentPage + 1) }}
                                 disabled={currentPage === totalPages}
                                 title="Pàgina següent"
                             >
@@ -4888,7 +4936,7 @@ function App() {
                             </button>
                             <button
                                 className="pagination-btn"
-                                onClick={() => { setCurrentPage(totalPages); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                                onClick={() => { setCurrentPage(totalPages) }}
                                 disabled={currentPage === totalPages}
                                 title="Última pàgina"
                             >
@@ -5242,11 +5290,11 @@ function App() {
 
                                 {fraudesFiltrats.length > analisiItemsPerPage && (
                                     <div className="pagination">
-                                        <button className="pagination-btn" onClick={() => { setAnalisiPageFrac(1); window.scrollTo({ top: 0, behavior: 'smooth' }); }} disabled={analisiPageFrac === 1} title="Primera pàgina">«</button>
-                                        <button className="pagination-btn" onClick={() => { setAnalisiPageFrac(prev => Math.max(prev - 1, 1)); window.scrollTo({ top: 0, behavior: 'smooth' }); }} disabled={analisiPageFrac === 1} title="Pàgina anterior">‹</button>
+                                        <button className="pagination-btn" onClick={() => { setAnalisiPageFrac(1) }} disabled={analisiPageFrac === 1} title="Primera pàgina">«</button>
+                                        <button className="pagination-btn" onClick={() => { setAnalisiPageFrac(prev => Math.max(prev - 1, 1)) }} disabled={analisiPageFrac === 1} title="Pàgina anterior">‹</button>
                                         <span className="pagination-info">Pàgina <strong>{analisiPageFrac}</strong> de <strong>{totalPagesFrac}</strong></span>
-                                        <button className="pagination-btn" onClick={() => { setAnalisiPageFrac(prev => Math.min(prev + 1, totalPagesFrac)); window.scrollTo({ top: 0, behavior: 'smooth' }); }} disabled={analisiPageFrac === totalPagesFrac} title="Pàgina següent">›</button>
-                                        <button className="pagination-btn" onClick={() => { setAnalisiPageFrac(totalPagesFrac); window.scrollTo({ top: 0, behavior: 'smooth' }); }} disabled={analisiPageFrac === totalPagesFrac} title="Última pàgina">»</button>
+                                        <button className="pagination-btn" onClick={() => { setAnalisiPageFrac(prev => Math.min(prev + 1, totalPagesFrac)) }} disabled={analisiPageFrac === totalPagesFrac} title="Pàgina següent">›</button>
+                                        <button className="pagination-btn" onClick={() => { setAnalisiPageFrac(totalPagesFrac) }} disabled={analisiPageFrac === totalPagesFrac} title="Última pàgina">»</button>
                                     </div>
                                 )}
                             </>
@@ -5479,11 +5527,11 @@ function App() {
 
                                         {concentracioTemporal.length > analisiItemsPerPage && (
                                             <div className="pagination">
-                                                <button className="pagination-btn" onClick={() => { setAnalisiPageMonop(1); window.scrollTo({ top: 0, behavior: 'smooth' }); }} disabled={analisiPageMonop === 1} title="Primera pàgina">«</button>
-                                                <button className="pagination-btn" onClick={() => { setAnalisiPageMonop(prev => Math.max(prev - 1, 1)); window.scrollTo({ top: 0, behavior: 'smooth' }); }} disabled={analisiPageMonop === 1} title="Pàgina anterior">‹</button>
+                                                <button className="pagination-btn" onClick={() => { setAnalisiPageMonop(1) }} disabled={analisiPageMonop === 1} title="Primera pàgina">«</button>
+                                                <button className="pagination-btn" onClick={() => { setAnalisiPageMonop(prev => Math.max(prev - 1, 1)) }} disabled={analisiPageMonop === 1} title="Pàgina anterior">‹</button>
                                                 <span className="pagination-info">Pàgina <strong>{analisiPageMonop}</strong> de <strong>{totalPagesMonop}</strong></span>
-                                                <button className="pagination-btn" onClick={() => { setAnalisiPageMonop(prev => Math.min(prev + 1, totalPagesMonop)); window.scrollTo({ top: 0, behavior: 'smooth' }); }} disabled={analisiPageMonop === totalPagesMonop} title="Pàgina següent">›</button>
-                                                <button className="pagination-btn" onClick={() => { setAnalisiPageMonop(totalPagesMonop); window.scrollTo({ top: 0, behavior: 'smooth' }); }} disabled={analisiPageMonop === totalPagesMonop} title="Última pàgina">»</button>
+                                                <button className="pagination-btn" onClick={() => { setAnalisiPageMonop(prev => Math.min(prev + 1, totalPagesMonop)) }} disabled={analisiPageMonop === totalPagesMonop} title="Pàgina següent">›</button>
+                                                <button className="pagination-btn" onClick={() => { setAnalisiPageMonop(totalPagesMonop) }} disabled={analisiPageMonop === totalPagesMonop} title="Última pàgina">»</button>
                                             </div>
                                         )}
                                     </>
@@ -5629,11 +5677,11 @@ function App() {
 
                                 {electoralFiltrats.length > analisiItemsPerPage && (
                                     <div className="pagination">
-                                        <button className="pagination-btn" onClick={() => { setAnalisiPageElect(1); window.scrollTo({ top: 0, behavior: 'smooth' }); }} disabled={analisiPageElect === 1} title="Primera pàgina">«</button>
-                                        <button className="pagination-btn" onClick={() => { setAnalisiPageElect(prev => Math.max(prev - 1, 1)); window.scrollTo({ top: 0, behavior: 'smooth' }); }} disabled={analisiPageElect === 1} title="Pàgina anterior">‹</button>
+                                        <button className="pagination-btn" onClick={() => { setAnalisiPageElect(1) }} disabled={analisiPageElect === 1} title="Primera pàgina">«</button>
+                                        <button className="pagination-btn" onClick={() => { setAnalisiPageElect(prev => Math.max(prev - 1, 1)) }} disabled={analisiPageElect === 1} title="Pàgina anterior">‹</button>
                                         <span className="pagination-info">Pàgina <strong>{analisiPageElect}</strong> de <strong>{totalPagesElect}</strong></span>
-                                        <button className="pagination-btn" onClick={() => { setAnalisiPageElect(prev => Math.min(prev + 1, totalPagesElect)); window.scrollTo({ top: 0, behavior: 'smooth' }); }} disabled={analisiPageElect === totalPagesElect} title="Pàgina següent">›</button>
-                                        <button className="pagination-btn" onClick={() => { setAnalisiPageElect(totalPagesElect); window.scrollTo({ top: 0, behavior: 'smooth' }); }} disabled={analisiPageElect === totalPagesElect} title="Última pàgina">»</button>
+                                        <button className="pagination-btn" onClick={() => { setAnalisiPageElect(prev => Math.min(prev + 1, totalPagesElect)) }} disabled={analisiPageElect === totalPagesElect} title="Pàgina següent">›</button>
+                                        <button className="pagination-btn" onClick={() => { setAnalisiPageElect(totalPagesElect) }} disabled={analisiPageElect === totalPagesElect} title="Última pàgina">»</button>
                                     </div>
                                 )}
                             </>

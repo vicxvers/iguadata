@@ -55,11 +55,11 @@ function renderPage(caso) {
     <link rel="stylesheet" href="../../styles.css">
     <script defer src="../../assets/vendor/react.production.min.js"></script>
     <script defer src="../../assets/vendor/react-dom.production.min.js"></script>
-    <script defer src="../../assets/app.js?v=20260623-investigacio-content"></script>
+    <script defer src="../../assets/app.js?v=20260629-pagination-no-scroll"></script>
 </head>
 
 <body>
-    <div id="root"></div>
+    <div id="root" data-nosnippet></div>
 </body>
 
 </html>

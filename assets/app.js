@@ -1356,20 +1356,12 @@ function CasFraccionamentView({
     className: "pagination-btn",
     onClick: () => {
       setCurrentPage(1);
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
     },
     disabled: currentPage === 1
   }, "\xAB"), React.createElement("button", {
     className: "pagination-btn",
     onClick: () => {
       setCurrentPage(p => Math.max(p - 1, 1));
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
     },
     disabled: currentPage === 1
   }, "\u2039"), React.createElement("span", {
@@ -1378,20 +1370,12 @@ function CasFraccionamentView({
     className: "pagination-btn",
     onClick: () => {
       setCurrentPage(p => Math.min(p + 1, totalPages));
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
     },
     disabled: currentPage === totalPages
   }, "\u203A"), React.createElement("button", {
     className: "pagination-btn",
     onClick: () => {
       setCurrentPage(totalPages);
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
     },
     disabled: currentPage === totalPages
   }, "\xBB")));
@@ -1654,20 +1638,12 @@ function CasConcentracioView({
     className: "pagination-btn",
     onClick: () => {
       setCurrentPage(1);
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
     },
     disabled: currentPage === 1
   }, "\xAB"), React.createElement("button", {
     className: "pagination-btn",
     onClick: () => {
       setCurrentPage(p => Math.max(p - 1, 1));
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
     },
     disabled: currentPage === 1
   }, "\u2039"), React.createElement("span", {
@@ -1676,20 +1652,12 @@ function CasConcentracioView({
     className: "pagination-btn",
     onClick: () => {
       setCurrentPage(p => Math.min(p + 1, totalPages));
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
     },
     disabled: currentPage === totalPages
   }, "\u203A"), React.createElement("button", {
     className: "pagination-btn",
     onClick: () => {
       setCurrentPage(totalPages);
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
     },
     disabled: currentPage === totalPages
   }, "\xBB")));
@@ -2231,10 +2199,6 @@ function EmpresesView({
     className: "pagination-btn",
     onClick: () => {
       setCurrentPage(1);
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
     },
     disabled: currentPage === 1,
     title: "Primera p\xE0gina"
@@ -2242,10 +2206,6 @@ function EmpresesView({
     className: "pagination-btn",
     onClick: () => {
       setCurrentPage(prev => Math.max(prev - 1, 1));
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
     },
     disabled: currentPage === 1,
     title: "P\xE0gina anterior"
@@ -2255,10 +2215,6 @@ function EmpresesView({
     className: "pagination-btn",
     onClick: () => {
       setCurrentPage(prev => Math.min(prev + 1, totalPages));
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
     },
     disabled: currentPage === totalPages,
     title: "P\xE0gina seg\xFCent"
@@ -2266,10 +2222,6 @@ function EmpresesView({
     className: "pagination-btn",
     onClick: () => {
       setCurrentPage(totalPages);
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
     },
     disabled: currentPage === totalPages,
     title: "\xDAltima p\xE0gina"
@@ -2814,10 +2766,6 @@ function EmpresaView({
     className: "pagination-btn",
     onClick: () => {
       setCurrentPage(1);
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
     },
     disabled: currentPage === 1,
     title: "Primera p\xE0gina"
@@ -2825,10 +2773,6 @@ function EmpresaView({
     className: "pagination-btn",
     onClick: () => {
       setCurrentPage(prev => Math.max(prev - 1, 1));
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
     },
     disabled: currentPage === 1,
     title: "P\xE0gina anterior"
@@ -2838,10 +2782,6 @@ function EmpresaView({
     className: "pagination-btn",
     onClick: () => {
       setCurrentPage(prev => Math.min(prev + 1, totalPages));
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
     },
     disabled: currentPage === totalPages,
     title: "P\xE0gina seg\xFCent"
@@ -2849,10 +2789,6 @@ function EmpresaView({
     className: "pagination-btn",
     onClick: () => {
       setCurrentPage(totalPages);
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
     },
     disabled: currentPage === totalPages,
     title: "\xDAltima p\xE0gina"
@@ -3096,10 +3032,6 @@ function PersonesView({
     className: "pagination-btn",
     onClick: () => {
       setCurrentPage(1);
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
     },
     disabled: currentPage === 1,
     title: "Primera p\xE0gina"
@@ -3107,10 +3039,6 @@ function PersonesView({
     className: "pagination-btn",
     onClick: () => {
       setCurrentPage(prev => Math.max(prev - 1, 1));
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
     },
     disabled: currentPage === 1,
     title: "P\xE0gina anterior"
@@ -3120,10 +3048,6 @@ function PersonesView({
     className: "pagination-btn",
     onClick: () => {
       setCurrentPage(prev => Math.min(prev + 1, totalPages));
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
     },
     disabled: currentPage === totalPages,
     title: "P\xE0gina seg\xFCent"
@@ -3131,10 +3055,6 @@ function PersonesView({
     className: "pagination-btn",
     onClick: () => {
       setCurrentPage(totalPages);
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
     },
     disabled: currentPage === totalPages,
     title: "\xDAltima p\xE0gina"
@@ -3274,7 +3194,8 @@ function CasoEditorialContent({
 }
 function InvestigacioContractCard({
   contract,
-  onSelect
+  onSelect,
+  hideAdjudicatario = false
 }) {
   return React.createElement("a", {
     href: buildRouteUrl('/contractes/' + contract.slug),
@@ -3290,7 +3211,7 @@ function InvestigacioContractCard({
     className: "contract-amount"
   }, formatCurrency(contract.importe))), React.createElement("div", {
     className: "contract-meta"
-  }, React.createElement("div", {
+  }, !hideAdjudicatario && React.createElement("div", {
     className: "contract-meta-item"
   }, React.createElement("span", {
     className: "contract-meta-label"
@@ -3309,6 +3230,66 @@ function InvestigacioContractCard({
   }, formatTipus(contract.tipo)), React.createElement("span", {
     className: "contract-pill procedure"
   }, formatProcediment(contract.procedimiento))))));
+}
+function InvestigacioPaginatedContracts({
+  block,
+  contracts,
+  onContractSelect
+}) {
+  const itemsPerPage = block.itemsPerPage || 25;
+  const [currentPage, setCurrentPage] = useState(1);
+  const sectionRef = useRef(null);
+  const codes = block.codes || [];
+  const contractByCode = useMemo(() => {
+    const map = new Map();
+    contracts.forEach(contract => {
+      const code = String(contract.codigo || '').trim();
+      if (code && !map.has(code)) map.set(code, contract);
+    });
+    return map;
+  }, [contracts]);
+  const blockContracts = useMemo(() => codes.map(code => contractByCode.get(String(code || '').trim())).filter(Boolean), [codes, contractByCode]);
+  const totalPages = Math.ceil(blockContracts.length / itemsPerPage);
+  const pageContracts = blockContracts.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+  const goToPage = page => {
+    const nextPage = Math.max(1, Math.min(page, totalPages || 1));
+    setCurrentPage(nextPage);
+  };
+  if (!blockContracts.length) return null;
+  return React.createElement("section", {
+    ref: sectionRef,
+    className: "investigacio-embed investigacio-card-stack",
+    "aria-label": block.ariaLabel || 'Contractes relacionats'
+  }, pageContracts.map(contract => React.createElement(InvestigacioContractCard, {
+    key: contract.slug,
+    contract: contract,
+    onSelect: onContractSelect,
+    hideAdjudicatario: Boolean(block.hideAdjudicatario)
+  })), blockContracts.length > itemsPerPage && React.createElement("div", {
+    className: "pagination"
+  }, React.createElement("button", {
+    className: "pagination-btn",
+    onClick: () => goToPage(1),
+    disabled: currentPage === 1,
+    title: "Primera p\xE0gina"
+  }, "\xAB"), React.createElement("button", {
+    className: "pagination-btn",
+    onClick: () => goToPage(currentPage - 1),
+    disabled: currentPage === 1,
+    title: "P\xE0gina anterior"
+  }, "\u2039"), React.createElement("span", {
+    className: "pagination-info"
+  }, "P\xE0gina ", React.createElement("strong", null, currentPage), " de ", React.createElement("strong", null, totalPages)), React.createElement("button", {
+    className: "pagination-btn",
+    onClick: () => goToPage(currentPage + 1),
+    disabled: currentPage === totalPages,
+    title: "P\xE0gina seg\xFCent"
+  }, "\u203A"), React.createElement("button", {
+    className: "pagination-btn",
+    onClick: () => goToPage(totalPages),
+    disabled: currentPage === totalPages,
+    title: "\xDAltima p\xE0gina"
+  }, "\xBB")));
 }
 function InvestigacioCaseView({
   caso,
@@ -3356,6 +3337,14 @@ function InvestigacioCaseView({
         contract: contract,
         onSelect: onContractSelect
       })));
+    }
+    if (block.type === 'contracts_paginated') {
+      return React.createElement(InvestigacioPaginatedContracts, {
+        key: key,
+        block: block,
+        contracts: contracts,
+        onContractSelect: onContractSelect
+      });
     }
     return null;
   })));
@@ -5707,10 +5696,6 @@ function App() {
     className: "pagination-btn",
     onClick: () => {
       setCurrentPage(1);
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
     },
     disabled: currentPage === 1,
     title: "Primera p\xE0gina"
@@ -5718,10 +5703,6 @@ function App() {
     className: "pagination-btn",
     onClick: () => {
       setCurrentPage(currentPage - 1);
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
     },
     disabled: currentPage === 1,
     title: "P\xE0gina anterior"
@@ -5731,10 +5712,6 @@ function App() {
     className: "pagination-btn",
     onClick: () => {
       setCurrentPage(currentPage + 1);
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
     },
     disabled: currentPage === totalPages,
     title: "P\xE0gina seg\xFCent"
@@ -5742,10 +5719,6 @@ function App() {
     className: "pagination-btn",
     onClick: () => {
       setCurrentPage(totalPages);
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
     },
     disabled: currentPage === totalPages,
     title: "\xDAltima p\xE0gina"
@@ -6121,10 +6094,6 @@ function App() {
     className: "pagination-btn",
     onClick: () => {
       setAnalisiPageFrac(1);
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
     },
     disabled: analisiPageFrac === 1,
     title: "Primera p\xE0gina"
@@ -6132,10 +6101,6 @@ function App() {
     className: "pagination-btn",
     onClick: () => {
       setAnalisiPageFrac(prev => Math.max(prev - 1, 1));
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
     },
     disabled: analisiPageFrac === 1,
     title: "P\xE0gina anterior"
@@ -6145,10 +6110,6 @@ function App() {
     className: "pagination-btn",
     onClick: () => {
       setAnalisiPageFrac(prev => Math.min(prev + 1, totalPagesFrac));
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
     },
     disabled: analisiPageFrac === totalPagesFrac,
     title: "P\xE0gina seg\xFCent"
@@ -6156,10 +6117,6 @@ function App() {
     className: "pagination-btn",
     onClick: () => {
       setAnalisiPageFrac(totalPagesFrac);
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
     },
     disabled: analisiPageFrac === totalPagesFrac,
     title: "\xDAltima p\xE0gina"
@@ -6448,10 +6405,6 @@ function App() {
     className: "pagination-btn",
     onClick: () => {
       setAnalisiPageMonop(1);
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
     },
     disabled: analisiPageMonop === 1,
     title: "Primera p\xE0gina"
@@ -6459,10 +6412,6 @@ function App() {
     className: "pagination-btn",
     onClick: () => {
       setAnalisiPageMonop(prev => Math.max(prev - 1, 1));
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
     },
     disabled: analisiPageMonop === 1,
     title: "P\xE0gina anterior"
@@ -6472,10 +6421,6 @@ function App() {
     className: "pagination-btn",
     onClick: () => {
       setAnalisiPageMonop(prev => Math.min(prev + 1, totalPagesMonop));
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
     },
     disabled: analisiPageMonop === totalPagesMonop,
     title: "P\xE0gina seg\xFCent"
@@ -6483,10 +6428,6 @@ function App() {
     className: "pagination-btn",
     onClick: () => {
       setAnalisiPageMonop(totalPagesMonop);
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
     },
     disabled: analisiPageMonop === totalPagesMonop,
     title: "\xDAltima p\xE0gina"
@@ -6691,10 +6632,6 @@ function App() {
     className: "pagination-btn",
     onClick: () => {
       setAnalisiPageElect(1);
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
     },
     disabled: analisiPageElect === 1,
     title: "Primera p\xE0gina"
@@ -6702,10 +6639,6 @@ function App() {
     className: "pagination-btn",
     onClick: () => {
       setAnalisiPageElect(prev => Math.max(prev - 1, 1));
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
     },
     disabled: analisiPageElect === 1,
     title: "P\xE0gina anterior"
@@ -6715,10 +6648,6 @@ function App() {
     className: "pagination-btn",
     onClick: () => {
       setAnalisiPageElect(prev => Math.min(prev + 1, totalPagesElect));
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
     },
     disabled: analisiPageElect === totalPagesElect,
     title: "P\xE0gina seg\xFCent"
@@ -6726,10 +6655,6 @@ function App() {
     className: "pagination-btn",
     onClick: () => {
       setAnalisiPageElect(totalPagesElect);
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
     },
     disabled: analisiPageElect === totalPagesElect,
     title: "\xDAltima p\xE0gina"
