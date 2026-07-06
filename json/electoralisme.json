@@ -1,6 +1,6 @@
 {
   "metodologia": "electoralisme_v1",
-  "generat_a": "2026-06-29",
+  "generat_a": "2026-07-06",
   "eleccions_municipals": [
     {
       "any": 2011,
@@ -68,10 +68,10 @@
         "video"
       ],
       "recurrencia": {
-        "comparables": 70,
+        "comparables": 73,
         "mateixa_empresa": 2,
         "objecte_similar": 0,
-        "mitjana_import_window": 24414.62,
+        "mitjana_import_window": 23498.73,
         "mitjana_import_empresa": 1700.0
       },
       "motius": [
@@ -83,7 +83,7 @@
       ],
       "contractes": [
         {
-          "id": 3985,
+          "id": 4125,
           "codigo": "2023.2.0000477.000",
           "descripcion": "Campanya de publicitat, inscripcions Ecmmi, concepte de campanya, vídeo publicitari, tòtem, díptic, disseny i producció",
           "adjudicatario": "QUARTADA ESTUDI, SCP",
@@ -126,10 +126,10 @@
         "informativa"
       ],
       "recurrencia": {
-        "comparables": 70,
+        "comparables": 73,
         "mateixa_empresa": 2,
         "objecte_similar": 0,
-        "mitjana_import_window": 24414.62,
+        "mitjana_import_window": 23498.73,
         "mitjana_import_empresa": 2512.27
       },
       "motius": [
@@ -142,7 +142,7 @@
       ],
       "contractes": [
         {
-          "id": 4216,
+          "id": 4356,
           "codigo": "2023.2.0008457.000",
           "descripcion": "MAILING PER CAMPANYA INFORMATIVA AJUTS I RECURSOS HABITATGE. Plegar circular, agrupar, ensobrar, tancar i repartir a totes les cases.",
           "adjudicatario": "BRAVO RAICH ANNA",
@@ -184,10 +184,10 @@
         "campanya"
       ],
       "recurrencia": {
-        "comparables": 70,
+        "comparables": 73,
         "mateixa_empresa": 0,
         "objecte_similar": 0,
-        "mitjana_import_window": 24414.62,
+        "mitjana_import_window": 23498.73,
         "mitjana_import_empresa": 0
       },
       "motius": [
@@ -198,7 +198,7 @@
       ],
       "contractes": [
         {
-          "id": 3984,
+          "id": 4124,
           "codigo": "2023.2.0010889.000",
           "descripcion": "Campanya de captació, informació o selecció de masovers_ FASE 0",
           "adjudicatario": "OBRINT PORTES, SCCL",
@@ -241,10 +241,10 @@
         "video"
       ],
       "recurrencia": {
-        "comparables": 70,
+        "comparables": 73,
         "mateixa_empresa": 0,
         "objecte_similar": 0,
-        "mitjana_import_window": 24414.62,
+        "mitjana_import_window": 23498.73,
         "mitjana_import_empresa": 0
       },
       "motius": [
@@ -255,7 +255,7 @@
       ],
       "contractes": [
         {
-          "id": 3962,
+          "id": 4102,
           "codigo": "2023.2.0015698.000",
           "descripcion": "Disseny i desenvolupament d¿un teaser promocional del joc educatiu ¿Max i la Càpsula del temps¿ (Cal Granotes i Barri del Rec) i la locució del vídeo",
           "adjudicatario": "CUBUS GAMES, SL",
@@ -299,10 +299,10 @@
         "promocio"
       ],
       "recurrencia": {
-        "comparables": 70,
+        "comparables": 73,
         "mateixa_empresa": 0,
         "objecte_similar": 0,
-        "mitjana_import_window": 24414.62,
+        "mitjana_import_window": 23498.73,
         "mitjana_import_empresa": 0
       },
       "motius": [
@@ -315,7 +315,7 @@
       ],
       "contractes": [
         {
-          "id": 4152,
+          "id": 4292,
           "codigo": "2023.2.0009832.000",
           "descripcion": "Servei de suport per la difusió i promoció del pla anual d¿execució, en el marc del projecte ACTE: Apostem per enfortir la indústria tèxtil.",
           "adjudicatario": "LOPEZ PUIG, MIGUEL ANGEL",
@@ -359,10 +359,10 @@
         "grafic"
       ],
       "recurrencia": {
-        "comparables": 70,
+        "comparables": 73,
         "mateixa_empresa": 0,
         "objecte_similar": 0,
-        "mitjana_import_window": 24414.62,
+        "mitjana_import_window": 23498.73,
         "mitjana_import_empresa": 0
       },
       "motius": [
@@ -374,7 +374,7 @@
       ],
       "contractes": [
         {
-          "id": 3890,
+          "id": 4030,
           "codigo": "2023.2.0017055.000",
           "descripcion": "Disseny gràfic de les bases dels Premis Ciutat d¿Igualada 2023 i dels suports i invitació per l¿acte de lliurament 2023. I oferta per replicar el disseny 3 edicions més.",
           "adjudicatario": "SILVIA GUILLEN DESING & COMUNICATION STUDIO",
@@ -417,10 +417,10 @@
         "impressio"
       ],
       "recurrencia": {
-        "comparables": 70,
+        "comparables": 73,
         "mateixa_empresa": 1,
         "objecte_similar": 0,
-        "mitjana_import_window": 24414.62,
+        "mitjana_import_window": 23498.73,
         "mitjana_import_empresa": 2486.55
       },
       "motius": [
@@ -432,7 +432,7 @@
       ],
       "contractes": [
         {
-          "id": 3891,
+          "id": 4031,
           "codigo": "2023.2.0016947.000",
           "descripcion": "Actualització de la campanya de comerç de proximitat ¿Jo compro a casa¿ i impressió del material",
           "adjudicatario": "GLEYAL&MORE, SL",
@@ -475,10 +475,10 @@
         "senyalitzacio"
       ],
       "recurrencia": {
-        "comparables": 70,
+        "comparables": 73,
         "mateixa_empresa": 4,
         "objecte_similar": 1,
-        "mitjana_import_window": 24414.62,
+        "mitjana_import_window": 23498.73,
         "mitjana_import_empresa": 4615.8
       },
       "motius": [
@@ -490,7 +490,7 @@
       ],
       "contractes": [
         {
-          "id": 3963,
+          "id": 4103,
           "codigo": "2023.2.0015697.000",
           "descripcion": "Retolació d¿elements publicitaris principals i secundaris per les exposicions amb Foam i altres elements de senyalització de les exposicions del Fineart 2023",
           "adjudicatario": "INICIATIVES BARCELONA SPORTS CONSUL",
@@ -533,10 +533,10 @@
         "impressio"
       ],
       "recurrencia": {
-        "comparables": 70,
+        "comparables": 73,
         "mateixa_empresa": 1,
         "objecte_similar": 0,
-        "mitjana_import_window": 24414.62,
+        "mitjana_import_window": 23498.73,
         "mitjana_import_empresa": 2868.4
       },
       "motius": [
@@ -549,7 +549,7 @@
       ],
       "contractes": [
         {
-          "id": 4366,
+          "id": 4506,
           "codigo": "2023.2.0006260.000",
           "descripcion": "Confecció i impressió de 900 catàlegs, i 24.000 programes complementaris del festival de fotografia Fineart 2023",
           "adjudicatario": "FELIP UNIGRAFIC, SL",
@@ -592,10 +592,10 @@
         "disseny"
       ],
       "recurrencia": {
-        "comparables": 70,
+        "comparables": 73,
         "mateixa_empresa": 0,
         "objecte_similar": 0,
-        "mitjana_import_window": 24414.62,
+        "mitjana_import_window": 23498.73,
         "mitjana_import_empresa": 0
       },
       "motius": [
@@ -607,7 +607,7 @@
       ],
       "contractes": [
         {
-          "id": 4168,
+          "id": 4308,
           "codigo": "2023.2.0000315.000",
           "descripcion": "IDENTITAT I COMUNICACIÓ PORTES OBERTES 2023 ESCOLA MUNICIPAL D'ART I DISSENY LA GASPAR",
           "adjudicatario": "VICTOR LAVEGA PLAU",
@@ -650,10 +650,10 @@
         "inauguracio"
       ],
       "recurrencia": {
-        "comparables": 70,
+        "comparables": 73,
         "mateixa_empresa": 0,
         "objecte_similar": 0,
-        "mitjana_import_window": 24414.62,
+        "mitjana_import_window": 23498.73,
         "mitjana_import_empresa": 0
       },
       "motius": [
@@ -665,7 +665,7 @@
       ],
       "contractes": [
         {
-          "id": 4173,
+          "id": 4313,
           "codigo": "2023.2.0010053.000",
           "descripcion": "Contractació del servei de catèring xocolatada, aigues i tovallons en l'acte d'inauguració del Parc infantil Garcia Fossas",
           "adjudicatario": "PASTISSERIA PLA S.L.",
@@ -707,10 +707,10 @@
         "impressio"
       ],
       "recurrencia": {
-        "comparables": 70,
+        "comparables": 73,
         "mateixa_empresa": 1,
         "objecte_similar": 0,
-        "mitjana_import_window": 24414.62,
+        "mitjana_import_window": 23498.73,
         "mitjana_import_empresa": 2868.4
       },
       "motius": [
@@ -723,7 +723,7 @@
       ],
       "contractes": [
         {
-          "id": 4155,
+          "id": 4295,
           "codigo": "2023.2.0008766.000",
           "descripcion": "Confecció i impressió del llibre ¿Igualada, teva, meva i nostra. L¿epidermis de la ciutat. 22 anys del segle XXI de: 220 mm. Ample: per 240 mm. de 216 pàgines, tapa dura, 500 exemplars.Caremel·la Planell.",
           "adjudicatario": "FELIP UNIGRAFIC, SL",
@@ -766,10 +766,10 @@
         "monolits"
       ],
       "recurrencia": {
-        "comparables": 70,
+        "comparables": 73,
         "mateixa_empresa": 6,
         "objecte_similar": 0,
-        "mitjana_import_window": 24414.62,
+        "mitjana_import_window": 23498.73,
         "mitjana_import_empresa": 4012.5
       },
       "motius": [
@@ -782,7 +782,7 @@
       ],
       "contractes": [
         {
-          "id": 3802,
+          "id": 3942,
           "codigo": "2023.2.0018854.000",
           "descripcion": "Subministrament i instal·lació monòlits ampliació Parc Central",
           "adjudicatario": "4M VISUAL SCP",
@@ -824,10 +824,10 @@
         "premsa"
       ],
       "recurrencia": {
-        "comparables": 70,
+        "comparables": 73,
         "mateixa_empresa": 0,
         "objecte_similar": 0,
-        "mitjana_import_window": 24414.62,
+        "mitjana_import_window": 23498.73,
         "mitjana_import_empresa": 0
       },
       "motius": [
@@ -838,7 +838,7 @@
       ],
       "contractes": [
         {
-          "id": 3983,
+          "id": 4123,
           "codigo": "2023.2.0013321.000",
           "descripcion": "Reserva i contractació d¿habitacions d¿hotel per allotjar a les companyies, programadors i premsa que assisteix a la 34 Mostra Igualada. Fira d¿espectacles infantils i juvenils",
           "adjudicatario": "HOTEL BRUC SL",
@@ -881,10 +881,10 @@
         "promoure"
       ],
       "recurrencia": {
-        "comparables": 70,
+        "comparables": 73,
         "mateixa_empresa": 3,
         "objecte_similar": 0,
-        "mitjana_import_window": 24414.62,
+        "mitjana_import_window": 23498.73,
         "mitjana_import_empresa": 5830.0
       },
       "motius": [
@@ -897,7 +897,7 @@
       ],
       "contractes": [
         {
-          "id": 4503,
+          "id": 4643,
           "codigo": "2023.2.0003810.000",
           "descripcion": "Reactivacio comercial_Servei de comunicació geolocalitzada per promoure el comerç Igualadí",
           "adjudicatario": "DIGITAL LIDERA COMUNICACIÓ, SL",
@@ -939,10 +939,10 @@
         "comunicacio"
       ],
       "recurrencia": {
-        "comparables": 70,
+        "comparables": 73,
         "mateixa_empresa": 0,
         "objecte_similar": 0,
-        "mitjana_import_window": 24414.62,
+        "mitjana_import_window": 23498.73,
         "mitjana_import_empresa": 0
       },
       "motius": [
@@ -953,7 +953,7 @@
       ],
       "contractes": [
         {
-          "id": 3992,
+          "id": 4132,
           "codigo": "2023.2.0015528.000",
           "descripcion": "Comunicació ¿ PUBLICACIÓ PUBLIREPORTATGE A L¿ENLLAÇ",
           "adjudicatario": "ENLLAÇ DELS ANOIENCS",
@@ -995,10 +995,10 @@
         "radio"
       ],
       "recurrencia": {
-        "comparables": 70,
+        "comparables": 73,
         "mateixa_empresa": 1,
         "objecte_similar": 0,
-        "mitjana_import_window": 24414.62,
+        "mitjana_import_window": 23498.73,
         "mitjana_import_empresa": 2450.0
       },
       "motius": [
@@ -1010,7 +1010,7 @@
       ],
       "contractes": [
         {
-          "id": 4122,
+          "id": 4262,
           "codigo": "2023.2.0010052.000",
           "descripcion": "Fira de l¿ Ensenyament 2023 d¿Igualada  Serveis audiovisuals per la Fira (RADIO SALA)",
           "adjudicatario": "AUDIOVISUAL RESOURCES, SL",
@@ -1053,10 +1053,10 @@
         "cartell"
       ],
       "recurrencia": {
-        "comparables": 70,
+        "comparables": 73,
         "mateixa_empresa": 0,
         "objecte_similar": 0,
-        "mitjana_import_window": 24414.62,
+        "mitjana_import_window": 23498.73,
         "mitjana_import_empresa": 0
       },
       "motius": [
@@ -1068,7 +1068,7 @@
       ],
       "contractes": [
         {
-          "id": 3794,
+          "id": 3934,
           "codigo": "2023.2.0018931.000",
           "descripcion": "Cartell anunci European Ballon Festival 2023",
           "adjudicatario": "EVVO RETAIL, SL",
@@ -1112,10 +1112,10 @@
         "revista"
       ],
       "recurrencia": {
-        "comparables": 70,
+        "comparables": 73,
         "mateixa_empresa": 0,
         "objecte_similar": 0,
-        "mitjana_import_window": 24414.62,
+        "mitjana_import_window": 23498.73,
         "mitjana_import_empresa": 0
       },
       "motius": [
@@ -1127,7 +1127,7 @@
       ],
       "contractes": [
         {
-          "id": 4485,
+          "id": 4625,
           "codigo": "2023.2.0004548.000",
           "descripcion": "Disseny revista N. 46 Activitats Equipaments Cívics febrer/juliol 2023 + impressió 21.000 unitats",
           "adjudicatario": "AURELI SENDRA SOLER",
@@ -1170,10 +1170,10 @@
         "cartell"
       ],
       "recurrencia": {
-        "comparables": 70,
+        "comparables": 73,
         "mateixa_empresa": 0,
         "objecte_similar": 0,
-        "mitjana_import_window": 24414.62,
+        "mitjana_import_window": 23498.73,
         "mitjana_import_empresa": 0
       },
       "motius": [
@@ -1185,7 +1185,7 @@
       ],
       "contractes": [
         {
-          "id": 4511,
+          "id": 4651,
           "codigo": "2023.2.0003732.000",
           "descripcion": "Creació del cartell i campanya comunicativa per la 34a Mostra d¿Igualada. Fira de teatre infantil i juvenil 2023.",
           "adjudicatario": "SR. RAMON ENRICH JORBA",
@@ -1228,10 +1228,10 @@
         "premsa"
       ],
       "recurrencia": {
-        "comparables": 70,
+        "comparables": 73,
         "mateixa_empresa": 0,
         "objecte_similar": 0,
-        "mitjana_import_window": 24414.62,
+        "mitjana_import_window": 23498.73,
         "mitjana_import_empresa": 0
       },
       "motius": [
@@ -1243,7 +1243,7 @@
       ],
       "contractes": [
         {
-          "id": 4426,
+          "id": 4566,
           "codigo": "2023.2.0005165.000",
           "descripcion": "Contractació servei de gestió de premsa durant la baixa per paternitat del Sr. Albert Caballe, cap de comunicació de l'Ajuntament d'Igualada",
           "adjudicatario": "JUBERT RUIZ, INMACULADA",
@@ -1285,10 +1285,10 @@
         "campanya"
       ],
       "recurrencia": {
-        "comparables": 70,
+        "comparables": 73,
         "mateixa_empresa": 0,
         "objecte_similar": 0,
-        "mitjana_import_window": 24414.62,
+        "mitjana_import_window": 23498.73,
         "mitjana_import_empresa": 0
       },
       "motius": [
@@ -1299,7 +1299,7 @@
       ],
       "contractes": [
         {
-          "id": 4127,
+          "id": 4267,
           "codigo": "15/2023",
           "descripcion": "Obres corresponents a la memòria valorada de la campanya d'asfaltatge 2023.",
           "adjudicatario": "PAVIMENTOS BARCELONA, SA",
@@ -1341,10 +1341,10 @@
         "campanya"
       ],
       "recurrencia": {
-        "comparables": 70,
+        "comparables": 73,
         "mateixa_empresa": 0,
         "objecte_similar": 0,
-        "mitjana_import_window": 24414.62,
+        "mitjana_import_window": 23498.73,
         "mitjana_import_empresa": 0
       },
       "motius": [
@@ -1356,7 +1356,7 @@
       ],
       "contractes": [
         {
-          "id": 4258,
+          "id": 4398,
           "codigo": "2022.2.0035136.000",
           "descripcion": "CAMPANYA DE NADAL 2022_Subministrament de diferents tipus d¿il·luminació per a decoració del Nadal.",
           "adjudicatario": "SALTOKI IGUALADA,SL",
@@ -1399,10 +1399,10 @@
         "triptic"
       ],
       "recurrencia": {
-        "comparables": 70,
+        "comparables": 73,
         "mateixa_empresa": 0,
         "objecte_similar": 0,
-        "mitjana_import_window": 24414.62,
+        "mitjana_import_window": 23498.73,
         "mitjana_import_empresa": 0
       },
       "motius": [
@@ -1414,7 +1414,7 @@
       ],
       "contractes": [
         {
-          "id": 4166,
+          "id": 4306,
           "codigo": "2023.2.0005891.000",
           "descripcion": "Honoraris pel disseny d¿un expositor i tríptic explicatiu de l¿element Fòssil: Calliderma Atagensis",
           "adjudicatario": "SR. RAMON ENRICH JORBA",
@@ -1456,10 +1456,10 @@
         "comunicacio"
       ],
       "recurrencia": {
-        "comparables": 70,
+        "comparables": 73,
         "mateixa_empresa": 0,
         "objecte_similar": 0,
-        "mitjana_import_window": 24414.62,
+        "mitjana_import_window": 23498.73,
         "mitjana_import_empresa": 0
       },
       "motius": [
@@ -1471,7 +1471,7 @@
       ],
       "contractes": [
         {
-          "id": 4362,
+          "id": 4502,
           "codigo": "2023.2.0006778.000",
           "descripcion": "Coordinació de les activitats culturals que es realitzaran a Igualada en el marc de la Capital Cultural Catalana durant el 2022, incloent-hi la redacció de continguts, gestió d¿activitats, comunicació, redacció de memòria etc.",
           "adjudicatario": "GEORGINA RODRÍGUEZ MIRÓ",
@@ -1513,10 +1513,10 @@
         "video"
       ],
       "recurrencia": {
-        "comparables": 70,
+        "comparables": 73,
         "mateixa_empresa": 1,
         "objecte_similar": 0,
-        "mitjana_import_window": 24414.62,
+        "mitjana_import_window": 23498.73,
         "mitjana_import_empresa": 1456.0
       },
       "motius": [
@@ -1529,7 +1529,7 @@
       ],
       "contractes": [
         {
-          "id": 4497,
+          "id": 4637,
           "codigo": "2023.2.0003971.000",
           "descripcion": "MUNTATGE EQUIPAMENTS DE VIDEO PER ALS CONCERTS DEL FESTIVAL  D¿ORGUE A LA BASÍLICA DE SANTA MARIA",
           "adjudicatario": "INICIATIVES EVENTS, SL",
@@ -1571,10 +1571,10 @@
         "difusio"
       ],
       "recurrencia": {
-        "comparables": 70,
+        "comparables": 73,
         "mateixa_empresa": 0,
         "objecte_similar": 0,
-        "mitjana_import_window": 24414.62,
+        "mitjana_import_window": 23498.73,
         "mitjana_import_empresa": 0
       },
       "motius": [
@@ -1586,7 +1586,7 @@
       ],
       "contractes": [
         {
-          "id": 4364,
+          "id": 4504,
           "codigo": "2023.2.0006776.000",
           "descripcion": "Contractació difusió cultural amb banners i reportatges al mitjà \"SURT DE CASA\"",
           "adjudicatario": "SURTDECASA, SCCL",
@@ -1629,10 +1629,10 @@
         "fotografia"
       ],
       "recurrencia": {
-        "comparables": 70,
+        "comparables": 73,
         "mateixa_empresa": 0,
         "objecte_similar": 0,
-        "mitjana_import_window": 24414.62,
+        "mitjana_import_window": 23498.73,
         "mitjana_import_empresa": 0
       },
       "motius": [
@@ -1644,7 +1644,7 @@
       ],
       "contractes": [
         {
-          "id": 4207,
+          "id": 4347,
           "codigo": "2023.2.0008488.000",
           "descripcion": "Maquetació del programa i catàleg i altres elements complementaris de comunicació dels espais de la 10a edició del festival de fotografia Fineart.",
           "adjudicatario": "CLARAMUNT RIBA, LAIA",
@@ -1687,10 +1687,10 @@
         "senyalitzacio"
       ],
       "recurrencia": {
-        "comparables": 70,
+        "comparables": 73,
         "mateixa_empresa": 1,
         "objecte_similar": 0,
-        "mitjana_import_window": 24414.62,
+        "mitjana_import_window": 23498.73,
         "mitjana_import_empresa": 2486.55
       },
       "motius": [
@@ -1704,7 +1704,7 @@
       ],
       "contractes": [
         {
-          "id": 3695,
+          "id": 3835,
           "codigo": "2023.2.0021425.000",
           "descripcion": "Retolació i senyalització Campus Universitari Salut d'Igualada.",
           "adjudicatario": "GLEYAL&MORE, SL",
@@ -1746,10 +1746,10 @@
         "campanya"
       ],
       "recurrencia": {
-        "comparables": 70,
+        "comparables": 73,
         "mateixa_empresa": 2,
         "objecte_similar": 1,
-        "mitjana_import_window": 24414.62,
+        "mitjana_import_window": 23498.73,
         "mitjana_import_empresa": 1767.2
       },
       "motius": [
@@ -1762,7 +1762,7 @@
       ],
       "contractes": [
         {
-          "id": 4396,
+          "id": 4536,
           "codigo": "2023.2.0005197.000",
           "descripcion": "LLOGUER DE DUES PLATAFORMES ELEVADORES DE 16M PER LA CAMPANYA DE PODA 2022-2023",
           "adjudicatario": "MIRALLESTRES",
@@ -1804,10 +1804,10 @@
         "comunicacio"
       ],
       "recurrencia": {
-        "comparables": 70,
+        "comparables": 73,
         "mateixa_empresa": 3,
         "objecte_similar": 0,
-        "mitjana_import_window": 24414.62,
+        "mitjana_import_window": 23498.73,
         "mitjana_import_empresa": 5830.0
       },
       "motius": [
@@ -1819,7 +1819,7 @@
       ],
       "contractes": [
         {
-          "id": 3763,
+          "id": 3903,
           "codigo": "2023.2.0018921.000",
           "descripcion": "Comunicació European Ballon Festival 2023",
           "adjudicatario": "DIGITAL LIDERA COMUNICACIÓ, SL",
@@ -1861,10 +1861,10 @@
         "difusio"
       ],
       "recurrencia": {
-        "comparables": 70,
+        "comparables": 73,
         "mateixa_empresa": 0,
         "objecte_similar": 0,
-        "mitjana_import_window": 24414.62,
+        "mitjana_import_window": 23498.73,
         "mitjana_import_empresa": 0
       },
       "motius": [
@@ -1875,7 +1875,7 @@
       ],
       "contractes": [
         {
-          "id": 4091,
+          "id": 4231,
           "codigo": "2023.2.0012530.000",
           "descripcion": "Per poder emetre música a l¿emissora municipal, i fer-ne difusió d¿aquesta, cal fer el pagament dels drets dels autors musicals.",
           "adjudicatario": "SOCIETAT GENERAL",
@@ -1918,10 +1918,10 @@
         "presentacio"
       ],
       "recurrencia": {
-        "comparables": 70,
+        "comparables": 73,
         "mateixa_empresa": 1,
         "objecte_similar": 0,
-        "mitjana_import_window": 24414.62,
+        "mitjana_import_window": 23498.73,
         "mitjana_import_empresa": 2486.55
       },
       "motius": [
@@ -1932,7 +1932,7 @@
       ],
       "contractes": [
         {
-          "id": 4116,
+          "id": 4256,
           "codigo": "2023.2.0010714.000",
           "descripcion": "Camins Escolars a Igualada. Disseny de la imatge corporativa. Disseny, creació i maquetació de la presentació del projecte inicial.",
           "adjudicatario": "GLEYAL&MORE, SL",
@@ -1974,10 +1974,10 @@
         "impressio"
       ],
       "recurrencia": {
-        "comparables": 70,
+        "comparables": 73,
         "mateixa_empresa": 0,
         "objecte_similar": 0,
-        "mitjana_import_window": 24414.62,
+        "mitjana_import_window": 23498.73,
         "mitjana_import_empresa": 0
       },
       "motius": [
@@ -1988,7 +1988,7 @@
       ],
       "contractes": [
         {
-          "id": 4000,
+          "id": 4140,
           "codigo": "2023.2.0014189.000",
           "descripcion": "Adquisició 20.000 sobres A4 (bosses), paper reciclat, mida 229x324mm, amb logotip Ajuntament, impressió a una tinta i tira silicona.",
           "adjudicatario": "CODORNIU, ARTS GRÀFIQUES, SL",
@@ -2030,10 +2030,10 @@
         "comunicacio"
       ],
       "recurrencia": {
-        "comparables": 70,
+        "comparables": 73,
         "mateixa_empresa": 0,
         "objecte_similar": 0,
-        "mitjana_import_window": 24414.62,
+        "mitjana_import_window": 23498.73,
         "mitjana_import_empresa": 0
       },
       "motius": [
@@ -2045,7 +2045,7 @@
       ],
       "contractes": [
         {
-          "id": 3693,
+          "id": 3833,
           "codigo": "2023.2.0021755.000",
           "descripcion": "Comunicació ¿ MEDI AMBIENT I MOBILITAT",
           "adjudicatario": "MIRIAM SALAZAR PÉREZ",
@@ -2088,10 +2088,10 @@
         "web"
       ],
       "recurrencia": {
-        "comparables": 70,
+        "comparables": 73,
         "mateixa_empresa": 3,
         "objecte_similar": 0,
-        "mitjana_import_window": 24414.62,
+        "mitjana_import_window": 23498.73,
         "mitjana_import_empresa": 5830.0
       },
       "motius": [
@@ -2102,7 +2102,7 @@
       ],
       "contractes": [
         {
-          "id": 4120,
+          "id": 4260,
           "codigo": "2023.2.0010055.000",
           "descripcion": "Fira de l¿ Ensenyament 2023 d¿Igualada   Serveis de comunicació, actualització domini i pàgina web firaensenyamentigualada.cat",
           "adjudicatario": "DIGITAL LIDERA COMUNICACIÓ, SL",
@@ -2145,10 +2145,10 @@
         "retolacio"
       ],
       "recurrencia": {
-        "comparables": 70,
+        "comparables": 73,
         "mateixa_empresa": 4,
         "objecte_similar": 0,
-        "mitjana_import_window": 24414.62,
+        "mitjana_import_window": 23498.73,
         "mitjana_import_empresa": 4615.8
       },
       "motius": [
@@ -2159,7 +2159,7 @@
       ],
       "contractes": [
         {
-          "id": 4123,
+          "id": 4263,
           "codigo": "2023.2.0010047.000",
           "descripcion": "Fira de L¿Ensenyament de d¿Igualada 2023._Serveis retolació, cartells informatius i de ambientació per la Fira",
           "adjudicatario": "INICIATIVES BARCELONA SPORTS CONSUL",
@@ -2201,10 +2201,10 @@
         "xarxes"
       ],
       "recurrencia": {
-        "comparables": 70,
+        "comparables": 73,
         "mateixa_empresa": 0,
         "objecte_similar": 0,
-        "mitjana_import_window": 24414.62,
+        "mitjana_import_window": 23498.73,
         "mitjana_import_empresa": 0
       },
       "motius": [
@@ -2216,7 +2216,7 @@
       ],
       "contractes": [
         {
-          "id": 3864,
+          "id": 4004,
           "codigo": "2023.2.0017670.000",
           "descripcion": "Subministrament i muntatge xarxes plaça Montserrat",
           "adjudicatario": "MALLA RÀPID",
@@ -2260,10 +2260,10 @@
         "retols"
       ],
       "recurrencia": {
-        "comparables": 70,
+        "comparables": 73,
         "mateixa_empresa": 6,
         "objecte_similar": 2,
-        "mitjana_import_window": 24414.62,
+        "mitjana_import_window": 23498.73,
         "mitjana_import_empresa": 4012.5
       },
       "motius": [
@@ -2276,7 +2276,7 @@
       ],
       "contractes": [
         {
-          "id": 3870,
+          "id": 4010,
           "codigo": "2023.2.0017400.000",
           "descripcion": "Subministrament i instal·lació de rètols a Parc Central Igualada (monòlits ampliació)",
           "adjudicatario": "4M VISUAL SCP",
@@ -2318,10 +2318,10 @@
         "premsa"
       ],
       "recurrencia": {
-        "comparables": 70,
+        "comparables": 73,
         "mateixa_empresa": 0,
         "objecte_similar": 0,
-        "mitjana_import_window": 24414.62,
+        "mitjana_import_window": 23498.73,
         "mitjana_import_empresa": 0
       },
       "motius": [
@@ -2333,7 +2333,7 @@
       ],
       "contractes": [
         {
-          "id": 3843,
+          "id": 3983,
           "codigo": "2023.2.0018520.000",
           "descripcion": "Reserva i contractació d¿habitacions d¿hotel per allotjar a les companyies, programadors i premsa que assisteix a la 34 Mostra Igualada. Fira d¿espectacles infantils i juvenils",
           "adjudicatario": "HOTEL BRUC SL",
@@ -2375,10 +2375,10 @@
         "lona"
       ],
       "recurrencia": {
-        "comparables": 70,
+        "comparables": 73,
         "mateixa_empresa": 0,
         "objecte_similar": 0,
-        "mitjana_import_window": 24414.62,
+        "mitjana_import_window": 23498.73,
         "mitjana_import_empresa": 0
       },
       "motius": [
@@ -2390,7 +2390,7 @@
       ],
       "contractes": [
         {
-          "id": 3877,
+          "id": 4017,
           "codigo": "2023.2.0017356.000",
           "descripcion": "LLAR D¿INFANTS DE LA LLUNA: SUBMINISTRAMENT DE LONA PER UMBRACLE",
           "adjudicatario": "HAPPYLUDIC PLAYGROUND AND URBAN EQUIPMENT SL",
@@ -2432,10 +2432,10 @@
         "monolits"
       ],
       "recurrencia": {
-        "comparables": 70,
+        "comparables": 73,
         "mateixa_empresa": 6,
         "objecte_similar": 0,
-        "mitjana_import_window": 24414.62,
+        "mitjana_import_window": 23498.73,
         "mitjana_import_empresa": 4012.5
       },
       "motius": [
@@ -2447,7 +2447,7 @@
       ],
       "contractes": [
         {
-          "id": 3847,
+          "id": 3987,
           "codigo": "2023.2.0018507.000",
           "descripcion": "Subministrament de monòlits a Parc Central Igualada (Biollac)",
           "adjudicatario": "4M VISUAL SCP",
@@ -2489,10 +2489,10 @@
         "campanya"
       ],
       "recurrencia": {
-        "comparables": 70,
+        "comparables": 73,
         "mateixa_empresa": 0,
         "objecte_similar": 0,
-        "mitjana_import_window": 24414.62,
+        "mitjana_import_window": 23498.73,
         "mitjana_import_empresa": 0
       },
       "motius": [
@@ -2504,7 +2504,7 @@
       ],
       "contractes": [
         {
-          "id": 4405,
+          "id": 4545,
           "codigo": "2023.2.0006243.000",
           "descripcion": "LLOGUER I INSTAL·LACIÓ DE DOS ARBRES LED PER L¿EDIFICI DE L'AJUNTAMENT D¿IGUALADA I EL PATRONAT D¿ESPORTS PER LA CAMPANYA DE NADAL 2022-2023",
           "adjudicatario": "AERONAVAL DE CONSTRUCCIONES E INSTALACIONES, SA",
@@ -2546,10 +2546,10 @@
         "audiovisual"
       ],
       "recurrencia": {
-        "comparables": 70,
+        "comparables": 73,
         "mateixa_empresa": 1,
         "objecte_similar": 0,
-        "mitjana_import_window": 24414.62,
+        "mitjana_import_window": 23498.73,
         "mitjana_import_empresa": 2450.0
       },
       "motius": [
@@ -2561,7 +2561,7 @@
       ],
       "contractes": [
         {
-          "id": 3886,
+          "id": 4026,
           "codigo": "2023.2.0017326.000",
           "descripcion": "Abastiment del servei audiovisual al Igualada Ioga Músic.",
           "adjudicatario": "AUDIOVISUAL RESOURCES, SL",
@@ -2603,10 +2603,10 @@
         "xarxes"
       ],
       "recurrencia": {
-        "comparables": 70,
+        "comparables": 73,
         "mateixa_empresa": 0,
         "objecte_similar": 0,
-        "mitjana_import_window": 24414.62,
+        "mitjana_import_window": 23498.73,
         "mitjana_import_empresa": 0
       },
       "motius": [
@@ -2618,7 +2618,7 @@
       ],
       "contractes": [
         {
-          "id": 4151,
+          "id": 4291,
           "codigo": "2023.2.0009834.000",
           "descripcion": "Docència de l¿aprenentatge específic de l¿acció grupal 31-03 Tècnic en instal·lacions i manteniment en xarxes de fibra òptica 250h. (exp T7C-04/22).",
           "adjudicatario": "SOLUCIONES Y APLIC. TECNOLÓGICAS INTEGRALES, SL",
@@ -2660,10 +2660,10 @@
         "xarxes"
       ],
       "recurrencia": {
-        "comparables": 70,
+        "comparables": 73,
         "mateixa_empresa": 0,
         "objecte_similar": 0,
-        "mitjana_import_window": 24414.62,
+        "mitjana_import_window": 23498.73,
         "mitjana_import_empresa": 0
       },
       "motius": [
@@ -2675,7 +2675,7 @@
       ],
       "contractes": [
         {
-          "id": 4309,
+          "id": 4449,
           "codigo": "2023.2.0008369.000",
           "descripcion": "Rehabilització del panell de fusta dels vestidors i dels pals de suport de xarxes i marcador del camp de futbol de Fàtima",
           "adjudicatario": "JUAN CARLOS CERÓN MORENO",
@@ -2717,10 +2717,10 @@
         "radio"
       ],
       "recurrencia": {
-        "comparables": 70,
+        "comparables": 73,
         "mateixa_empresa": 0,
         "objecte_similar": 0,
-        "mitjana_import_window": 24414.62,
+        "mitjana_import_window": 23498.73,
         "mitjana_import_empresa": 0
       },
       "motius": [
@@ -2732,7 +2732,7 @@
       ],
       "contractes": [
         {
-          "id": 4233,
+          "id": 4373,
           "codigo": "2023.2.0006226.000",
           "descripcion": "Manteniment dels equips tècnics de Ràdio Igualada i control del correcte funcionament de l¿emissió a través d¿Internet",
           "adjudicatario": "AMAT JUSTE, XAVIER",
@@ -2774,10 +2774,10 @@
         "xarxes"
       ],
       "recurrencia": {
-        "comparables": 70,
+        "comparables": 73,
         "mateixa_empresa": 0,
         "objecte_similar": 0,
-        "mitjana_import_window": 24414.62,
+        "mitjana_import_window": 23498.73,
         "mitjana_import_empresa": 0
       },
       "motius": [
@@ -2789,7 +2789,7 @@
       ],
       "contractes": [
         {
-          "id": 4200,
+          "id": 4340,
           "codigo": "2023.2.0008728.000",
           "descripcion": "Material fungible i lloguer de maquinària específica de fibra pels alumnes del curs 31-03 Tècnic/a en instal·lacions i manteniment de xarxes de fibra òptica Ref. Exp.T7C-04/22",
           "adjudicatario": "CABLERAPID SL",
@@ -2831,10 +2831,10 @@
         "presentacio"
       ],
       "recurrencia": {
-        "comparables": 70,
+        "comparables": 73,
         "mateixa_empresa": 0,
         "objecte_similar": 0,
-        "mitjana_import_window": 24414.62,
+        "mitjana_import_window": 23498.73,
         "mitjana_import_empresa": 0
       },
       "motius": [
@@ -2846,7 +2846,7 @@
       ],
       "contractes": [
         {
-          "id": 4218,
+          "id": 4358,
           "codigo": "2023.2.0008430.000",
           "descripcion": "REACTIVACIO COMERCIAL: (Next-Gen)  Servei d¿acompanyament, planejament, redacció i presentació de la SolSubv a la convocatòria ¿Ayudas para el apoyo a mercados, zonas urbanascomerciales, comercio no sedentario y canales cortos de comercialización\"",
           "adjudicatario": "F. INICIATIVAS ESPAÑA I MAS D MAS I, S.L.U",
@@ -2888,10 +2888,10 @@
         "disseny"
       ],
       "recurrencia": {
-        "comparables": 70,
+        "comparables": 73,
         "mateixa_empresa": 0,
         "objecte_similar": 0,
-        "mitjana_import_window": 24414.62,
+        "mitjana_import_window": 23498.73,
         "mitjana_import_empresa": 0
       },
       "motius": [
@@ -2903,7 +2903,7 @@
       ],
       "contractes": [
         {
-          "id": 4160,
+          "id": 4300,
           "codigo": "2023.2.0008549.000",
           "descripcion": "Disseny i maquetació del llibre: ¿Igualada, teva, meva i nostra. L¿epidermis de la ciutat. 22 anys del segle XXI¿ de 220 mm. Ample, per 240 mm. de 216 pàgines",
           "adjudicatario": "JUBERT GUILERA, LLUIS",
@@ -2945,10 +2945,10 @@
         "impressio"
       ],
       "recurrencia": {
-        "comparables": 70,
+        "comparables": 73,
         "mateixa_empresa": 0,
         "objecte_similar": 0,
-        "mitjana_import_window": 24414.62,
+        "mitjana_import_window": 23498.73,
         "mitjana_import_empresa": 0
       },
       "motius": [
@@ -2960,7 +2960,7 @@
       ],
       "contractes": [
         {
-          "id": 4172,
+          "id": 4312,
           "codigo": "2023.2.0010057.000",
           "descripcion": "Contractació de la compra  i impressió de 1000 motxilles amb el logo d'Igualada, per lliurar com a regal als diferents grups, nens o persones que visiten l'Ajuntament d'Igualada com a regal institucional per promocionar igualada",
           "adjudicatario": "AREA ESTUDI DE PUBLICITAT",
@@ -3002,10 +3002,10 @@
         "disseny"
       ],
       "recurrencia": {
-        "comparables": 70,
+        "comparables": 73,
         "mateixa_empresa": 0,
         "objecte_similar": 0,
-        "mitjana_import_window": 24414.62,
+        "mitjana_import_window": 23498.73,
         "mitjana_import_empresa": 0
       },
       "motius": [
@@ -3017,7 +3017,7 @@
       ],
       "contractes": [
         {
-          "id": 4350,
+          "id": 4490,
           "codigo": "2023.2.0000204.000",
           "descripcion": "REPARACIÓ DE L'ASCENSOR DE L'ESCOLA MUNICIPAL D'ART I DISSENY LA GASPAR",
           "adjudicatario": "KONE ELEVADORES, SA",
@@ -3059,10 +3059,10 @@
         "xarxes"
       ],
       "recurrencia": {
-        "comparables": 70,
+        "comparables": 73,
         "mateixa_empresa": 0,
         "objecte_similar": 0,
-        "mitjana_import_window": 24414.62,
+        "mitjana_import_window": 23498.73,
         "mitjana_import_empresa": 0
       },
       "motius": [
@@ -3074,7 +3074,7 @@
       ],
       "contractes": [
         {
-          "id": 4335,
+          "id": 4475,
           "codigo": "2023.2.0006240.000",
           "descripcion": "Roba laboral pels alumnes del curs 31-03 Tècnic/a en instal.lacions i manteniment de xarxes de fibra òptica Exp.T7C-04/22 15 alumnes",
           "adjudicatario": "BATA TOT BATA, SL",
@@ -3116,10 +3116,10 @@
         "impressio"
       ],
       "recurrencia": {
-        "comparables": 70,
+        "comparables": 73,
         "mateixa_empresa": 0,
         "objecte_similar": 0,
-        "mitjana_import_window": 24414.62,
+        "mitjana_import_window": 23498.73,
         "mitjana_import_empresa": 0
       },
       "motius": [
@@ -3131,7 +3131,7 @@
       ],
       "contractes": [
         {
-          "id": 4231,
+          "id": 4371,
           "codigo": "2023.2.0007256.000",
           "descripcion": "IMPRESSIÓ \"GUIA DELS CENTRES EDUCATIUS D'IGUALADA\" 2023",
           "adjudicatario": "XAVIER MÉNDEZ CORTÉS",
@@ -3173,10 +3173,10 @@
         "senyalitzacio"
       ],
       "recurrencia": {
-        "comparables": 70,
+        "comparables": 73,
         "mateixa_empresa": 1,
         "objecte_similar": 0,
-        "mitjana_import_window": 24414.62,
+        "mitjana_import_window": 23498.73,
         "mitjana_import_empresa": 4927.16
       },
       "motius": [
@@ -3188,7 +3188,7 @@
       ],
       "contractes": [
         {
-          "id": 4319,
+          "id": 4459,
           "codigo": "2023.2.0008282.000",
           "descripcion": "SUBMINISTRAMENT DE SENYALITZACIO PER COMPLIR AMB L'AUDITORIA DE FGC",
           "adjudicatario": "SERVEIS VIALS DEL VALLÈS, SL, UNIPERSONAL",
@@ -3230,10 +3230,10 @@
         "disseny"
       ],
       "recurrencia": {
-        "comparables": 70,
+        "comparables": 73,
         "mateixa_empresa": 0,
         "objecte_similar": 0,
-        "mitjana_import_window": 24414.62,
+        "mitjana_import_window": 23498.73,
         "mitjana_import_empresa": 0
       },
       "motius": [
@@ -3245,7 +3245,7 @@
       ],
       "contractes": [
         {
-          "id": 4234,
+          "id": 4374,
           "codigo": "2023.2.0005906.000",
           "descripcion": "Disseny i edició \"Guia dels Centres Educatius d'Igualada\" 2023",
           "adjudicatario": "XAVIER MÉNDEZ CORTÉS",
@@ -3287,10 +3287,10 @@
         "impressio"
       ],
       "recurrencia": {
-        "comparables": 70,
+        "comparables": 73,
         "mateixa_empresa": 3,
         "objecte_similar": 0,
-        "mitjana_import_window": 24414.62,
+        "mitjana_import_window": 23498.73,
         "mitjana_import_empresa": 5830.0
       },
       "motius": [
@@ -3302,7 +3302,7 @@
       ],
       "contractes": [
         {
-          "id": 4162,
+          "id": 4302,
           "codigo": "2023.2.0008475.000",
           "descripcion": "Impressió de flyers i maquetació i impressió carta regidora",
           "adjudicatario": "DIGITAL LIDERA COMUNICACIÓ, SL",
@@ -3344,10 +3344,10 @@
         "disseny"
       ],
       "recurrencia": {
-        "comparables": 70,
+        "comparables": 73,
         "mateixa_empresa": 0,
         "objecte_similar": 0,
-        "mitjana_import_window": 24414.62,
+        "mitjana_import_window": 23498.73,
         "mitjana_import_empresa": 0
       },
       "motius": [
@@ -3359,7 +3359,7 @@
       ],
       "contractes": [
         {
-          "id": 4141,
+          "id": 4281,
           "codigo": "2023.2.0010133.000",
           "descripcion": "Contractar el servei de disseny i actualització de la inscripció automatitzada de les acreditacions professionals, i el directori professional per la Mostra Igualada. Fira d¿espectacles infantil i juvenils 2023",
           "adjudicatario": "PRACTICS BUSINESS SOLUTIONS, SL",
@@ -3402,10 +3402,10 @@
         "revista"
       ],
       "recurrencia": {
-        "comparables": 70,
+        "comparables": 73,
         "mateixa_empresa": 1,
         "objecte_similar": 1,
-        "mitjana_import_window": 24414.62,
+        "mitjana_import_window": 23498.73,
         "mitjana_import_empresa": 2500.0
       },
       "motius": [
@@ -3417,7 +3417,7 @@
       ],
       "contractes": [
         {
-          "id": 3835,
+          "id": 3975,
           "codigo": "2023.2.0016051.000",
           "descripcion": "Inserció publicitat sobre l¿Anòlia revista Enderrock",
           "adjudicatario": "GRUP ENDERROCK",
@@ -3460,10 +3460,10 @@
         "nou"
       ],
       "recurrencia": {
-        "comparables": 70,
+        "comparables": 73,
         "mateixa_empresa": 0,
         "objecte_similar": 0,
-        "mitjana_import_window": 24414.62,
+        "mitjana_import_window": 23498.73,
         "mitjana_import_empresa": 0
       },
       "motius": [
@@ -3477,7 +3477,7 @@
       ],
       "contractes": [
         {
-          "id": 3786,
+          "id": 3926,
           "codigo": "34/2023",
           "descripcion": "Contracte de subministrament i muntatge del material informàtic i audiovisual dels espais del nou edifici del campus de ciències de la salut de la Universitat de Lleida. Campus UDL Igualada Passeig Verdaguer",
           "adjudicatario": "NEXTEC TECHNOLOGICAL PROJECTS SL",
@@ -3519,10 +3519,10 @@
         "video"
       ],
       "recurrencia": {
-        "comparables": 70,
+        "comparables": 73,
         "mateixa_empresa": 0,
         "objecte_similar": 0,
-        "mitjana_import_window": 24414.62,
+        "mitjana_import_window": 23498.73,
         "mitjana_import_empresa": 0
       },
       "motius": [
@@ -3533,7 +3533,7 @@
       ],
       "contractes": [
         {
-          "id": 4130,
+          "id": 4270,
           "codigo": "2023.2.0007556.000",
           "descripcion": "CONTRACTACIÓ DEL SERVEI DE RETRANSMISSIÓ EN VIDEO ON LINE CAVALCADA DE REIS IGUALADA 2023",
           "adjudicatario": "GLOBAL PRODUCTION AUDIOVISUALS SL",
@@ -3575,10 +3575,10 @@
         "senyaletica"
       ],
       "recurrencia": {
-        "comparables": 70,
+        "comparables": 73,
         "mateixa_empresa": 1,
         "objecte_similar": 0,
-        "mitjana_import_window": 24414.62,
+        "mitjana_import_window": 23498.73,
         "mitjana_import_empresa": 2486.55
       },
       "motius": [
@@ -3592,7 +3592,7 @@
       ],
       "contractes": [
         {
-          "id": 4261,
+          "id": 4401,
           "codigo": "2022.2.0035093.000",
           "descripcion": "ESTUDI D¿IDENTITAT I SENYALÈTICA EDIFICI ¿CAMPUS SALUT¿.",
           "adjudicatario": "GLEYAL&MORE, SL",
@@ -3634,10 +3634,10 @@
         "impressio"
       ],
       "recurrencia": {
-        "comparables": 70,
+        "comparables": 73,
         "mateixa_empresa": 0,
         "objecte_similar": 0,
-        "mitjana_import_window": 24414.62,
+        "mitjana_import_window": 23498.73,
         "mitjana_import_empresa": 0
       },
       "motius": [
@@ -3648,7 +3648,7 @@
       ],
       "contractes": [
         {
-          "id": 4108,
+          "id": 4248,
           "codigo": "2023.2.0012120.000",
           "descripcion": "Contractació de la compre i impressió de 1.200 samarretes per \"La Caminada Anella verda\" 19.03.2023",
           "adjudicatario": "AREA ESTUDI DE PUBLICITAT",
@@ -3690,10 +3690,10 @@
         "campanya"
       ],
       "recurrencia": {
-        "comparables": 70,
+        "comparables": 73,
         "mateixa_empresa": 0,
         "objecte_similar": 0,
-        "mitjana_import_window": 24414.62,
+        "mitjana_import_window": 23498.73,
         "mitjana_import_empresa": 0
       },
       "motius": [
@@ -3706,7 +3706,7 @@
       ],
       "contractes": [
         {
-          "id": 4210,
+          "id": 4350,
           "codigo": "2023.2.0008469.000",
           "descripcion": "2353_23 - COORDINACIÓ DE SEGURETAT I SALUT EN FASE D¿EXECUCIÓ PER A LA CAMPANYA D'ASFALTATGE 2023",
           "adjudicatario": "CARLES CALLIZO I MANUEL",
@@ -3748,10 +3748,10 @@
         "impressio"
       ],
       "recurrencia": {
-        "comparables": 70,
+        "comparables": 73,
         "mateixa_empresa": 0,
         "objecte_similar": 0,
-        "mitjana_import_window": 24414.62,
+        "mitjana_import_window": 23498.73,
         "mitjana_import_empresa": 0
       },
       "motius": [
@@ -3762,7 +3762,7 @@
       ],
       "contractes": [
         {
-          "id": 4095,
+          "id": 4235,
           "codigo": "2023.2.0010688.000",
           "descripcion": "SERVEI D'IMPRESSIÓ DELS PROGRAMES DE PRIMAVERA - ESTIU DE JOVENTUT",
           "adjudicatario": "CODORNIU, ARTS GRÀFIQUES, SL",
@@ -3804,10 +3804,10 @@
         "campanya"
       ],
       "recurrencia": {
-        "comparables": 70,
+        "comparables": 73,
         "mateixa_empresa": 0,
         "objecte_similar": 0,
-        "mitjana_import_window": 24414.62,
+        "mitjana_import_window": 23498.73,
         "mitjana_import_empresa": 0
       },
       "motius": [
@@ -3817,7 +3817,7 @@
       ],
       "contractes": [
         {
-          "id": 4052,
+          "id": 4192,
           "codigo": "15/2023",
           "descripcion": "Obres corresponents a la memòria valorada de la campanya d'asfaltatge 2023.",
           "adjudicatario": "EUROSEÑAL SL",
@@ -3859,10 +3859,10 @@
         "disseny"
       ],
       "recurrencia": {
-        "comparables": 70,
+        "comparables": 73,
         "mateixa_empresa": 0,
         "objecte_similar": 0,
-        "mitjana_import_window": 24414.62,
+        "mitjana_import_window": 23498.73,
         "mitjana_import_empresa": 0
       },
       "motius": [
@@ -3874,7 +3874,7 @@
       ],
       "contractes": [
         {
-          "id": 4417,
+          "id": 4557,
           "codigo": "2023.2.0005890.000",
           "descripcion": "Disseny i muntatge de l¿espai de La Llotja per a la Mostra d¿Igualada 34a - Fira d¿espectacles infantils i juvenils.",
           "adjudicatario": "DEL JUNCO PEÑACOBA, TERESA",
@@ -3916,10 +3916,10 @@
         "radio"
       ],
       "recurrencia": {
-        "comparables": 70,
+        "comparables": 73,
         "mateixa_empresa": 0,
         "objecte_similar": 0,
-        "mitjana_import_window": 24414.62,
+        "mitjana_import_window": 23498.73,
         "mitjana_import_empresa": 0
       },
       "motius": [
@@ -3931,7 +3931,7 @@
       ],
       "contractes": [
         {
-          "id": 4458,
+          "id": 4598,
           "codigo": "2023.2.0005003.000",
           "descripcion": "Servei d¿informació meteorològica a l¿emissora municipal Ràdio Igualada",
           "adjudicatario": "ALBERT BORRÀS GONZÀLEZ",
@@ -3973,10 +3973,10 @@
         "disseny"
       ],
       "recurrencia": {
-        "comparables": 70,
+        "comparables": 73,
         "mateixa_empresa": 0,
         "objecte_similar": 0,
-        "mitjana_import_window": 24414.62,
+        "mitjana_import_window": 23498.73,
         "mitjana_import_empresa": 0
       },
       "motius": [
@@ -3988,7 +3988,7 @@
       ],
       "contractes": [
         {
-          "id": 4506,
+          "id": 4646,
           "codigo": "2023.2.0003795.000",
           "descripcion": "Contractar el servei de disseny i programació de la integració de la plataforma de ticketing Koobin a l¿actual base de dades, i actualització de les acreditacions professionals, i el directori professional per la Mostra",
           "adjudicatario": "PRACTICS BUSINESS SOLUTIONS, SL",
@@ -4030,10 +4030,10 @@
         "lones"
       ],
       "recurrencia": {
-        "comparables": 70,
+        "comparables": 73,
         "mateixa_empresa": 0,
         "objecte_similar": 0,
-        "mitjana_import_window": 24414.62,
+        "mitjana_import_window": 23498.73,
         "mitjana_import_empresa": 0
       },
       "motius": [
@@ -4045,7 +4045,7 @@
       ],
       "contractes": [
         {
-          "id": 4412,
+          "id": 4552,
           "codigo": "2023.2.0006098.000",
           "descripcion": "Fabricació de tub 60 x 60mm amb suport i rodilla amb trípode i rodes amb fre per recollir lones/moquetes",
           "adjudicatario": "TALLER CRISTOBAL TERRON, SL.",
