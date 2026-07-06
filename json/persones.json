@@ -41,7 +41,7 @@
         "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
         "import_empresa": 626604.0,
         "carrecs": [
-          "Apoderado"
+          "Apo.Manc."
         ]
       }
     ]
@@ -61,26 +61,7 @@
         "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
         "import_empresa": 626604.0,
         "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "NAVARRO REVERTER GARCIA GERMAN ANTONIO",
-    "total_adjudicat": 13135162.56,
-    "relacions": [
-      {
-        "empresa": "FCC MEDIO AMBIENTE",
-        "import_empresa": 12508558.56,
-        "carrecs": [
-          "Apo.Sol."
-        ]
-      },
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
+          "Apo.Manc.",
           "Apoderado"
         ]
       }
@@ -101,7 +82,7 @@
         "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
         "import_empresa": 626604.0,
         "carrecs": [
-          "Apoderado"
+          "Apo.Manc."
         ]
       }
     ]
@@ -121,6 +102,7 @@
         "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
         "import_empresa": 626604.0,
         "carrecs": [
+          "Apo.Manc.",
           "Apoderado"
         ]
       }
@@ -141,6 +123,7 @@
         "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
         "import_empresa": 626604.0,
         "carrecs": [
+          "Apo.Manc.",
           "Apoderado"
         ]
       }
@@ -161,6 +144,28 @@
         "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
         "import_empresa": 626604.0,
         "carrecs": [
+          "Apo.Manc.",
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "VIGO OLLER ELISENDA",
+    "total_adjudicat": 13135162.56,
+    "relacions": [
+      {
+        "empresa": "FCC MEDIO AMBIENTE",
+        "import_empresa": 12508558.56,
+        "carrecs": [
+          "Apo.Sol."
+        ]
+      },
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Manc.",
           "Apoderado"
         ]
       }
@@ -188,26 +193,6 @@
   },
   {
     "nom": "GONZALEZ RODRIGUEZ BEATRIZ",
-    "total_adjudicat": 13135162.56,
-    "relacions": [
-      {
-        "empresa": "FCC MEDIO AMBIENTE",
-        "import_empresa": 12508558.56,
-        "carrecs": [
-          "Apo.Sol."
-        ]
-      },
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "VIGO OLLER ELISENDA",
     "total_adjudicat": 13135162.56,
     "relacions": [
       {
@@ -304,6 +289,26 @@
         "import_empresa": 626604.0,
         "carrecs": [
           "Adm. Mancom."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "NAVARRO REVERTER GARCIA GERMAN ANTONIO",
+    "total_adjudicat": 13135162.56,
+    "relacions": [
+      {
+        "empresa": "FCC MEDIO AMBIENTE",
+        "import_empresa": 12508558.56,
+        "carrecs": [
+          "Apo.Sol."
+        ]
+      },
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apoderado"
         ]
       }
     ]
@@ -570,7 +575,7 @@
   },
   {
     "nom": "HOMS MIRALPEIX MATEU",
-    "total_adjudicat": 12804350.04,
+    "total_adjudicat": 12806087.94,
     "relacions": [
       {
         "empresa": "FCC MEDIO AMBIENTE",
@@ -588,7 +593,7 @@
       },
       {
         "empresa": "BENITO URBAN, S.L. UNIPERSONAL",
-        "import_empresa": 133638.01,
+        "import_empresa": 135375.91,
         "carrecs": [
           "ADM.UNICO"
         ]
@@ -597,7 +602,7 @@
   },
   {
     "nom": "MOLIST FONT ROGER",
-    "total_adjudicat": 12642196.57,
+    "total_adjudicat": 12643934.47,
     "relacions": [
       {
         "empresa": "FCC MEDIO AMBIENTE",
@@ -608,7 +613,7 @@
       },
       {
         "empresa": "BENITO URBAN, S.L. UNIPERSONAL",
-        "import_empresa": 133638.01,
+        "import_empresa": 135375.91,
         "carrecs": [
           "APODERAD.SOL"
         ]
@@ -7273,46 +7278,6 @@
     ]
   },
   {
-    "nom": "TERESA SEQUEROS ARNO",
-    "total_adjudicat": 4671257.63,
-    "relacions": [
-      {
-        "empresa": "BENITO ARNÓ E HIJOS, SA, SOCIEDAD UNIPERSONAL",
-        "import_empresa": 4671257.63,
-        "carrecs": [
-          "Consejero"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "ARNO FERRER JAIME",
-    "total_adjudicat": 4671257.63,
-    "relacions": [
-      {
-        "empresa": "BENITO ARNÓ E HIJOS, SA, SOCIEDAD UNIPERSONAL",
-        "import_empresa": 4671257.63,
-        "carrecs": [
-          "Presidente",
-          "Consejero"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "CLOS SEGURA GISEL",
-    "total_adjudicat": 4671257.63,
-    "relacions": [
-      {
-        "empresa": "BENITO ARNÓ E HIJOS, SA, SOCIEDAD UNIPERSONAL",
-        "import_empresa": 4671257.63,
-        "carrecs": [
-          "SecreNoConsj"
-        ]
-      }
-    ]
-  },
-  {
     "nom": "TORRUBIANO ROMERO GUSTAVO",
     "total_adjudicat": 4671257.63,
     "relacions": [
@@ -8431,7 +8396,7 @@
   },
   {
     "nom": "CALSINA GASSO MIGUEL",
-    "total_adjudicat": 1731212.28,
+    "total_adjudicat": 1735082.28,
     "relacions": [
       {
         "empresa": "VERSATIL GREEN, SL",
@@ -8442,7 +8407,7 @@
       },
       {
         "empresa": "PUNT NET ANOIA SL",
-        "import_empresa": 52043.14,
+        "import_empresa": 55913.14,
         "carrecs": [
           "ADM.CONJUNTO"
         ]
@@ -16624,6 +16589,278 @@
     ]
   },
   {
+    "nom": "RODRIGUEZ PEDRERO JOSE MARIA",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "LOPEZ ALIAS JOSE MANUEL",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli",
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "MENOR GOMEZ MARCOS",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli",
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "REDONDO ARANDA PABLO",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli",
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "LEON GARCIA IVAN",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli",
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "MONDEJAR PEREZ JOSE-ANGEL",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "DOCAMPO SEOANE MANUEL ANDRES",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli",
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "BLANCO ALVAREZ OSCAR",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "CARDENAS PAIZ RAUL IGNACIO",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli",
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "NIEVES LAMAS SALVADOR",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "SANCHEZ ARROYO TEODORO",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "GARCIA PARRA MEIFREN DAVID",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "PEREZ GUERRERO JESUS ANTONIO",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "SANCHEZ GAMERO RAFAEL",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "CAÑETE LOPEZ GONZALO",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Manc.",
+          "Apoderado",
+          "Adm. Mancom."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "GONZALEZ DE CANALES MOYANO FERNANDO JUAN",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Manc.",
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "CAPEL ARNAU VANESSA",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Manc.",
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "MARTIN ZORITA FRANCISCO DE BORJA",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Manc.",
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "CABALLERO LAGRU PABLO",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Manc.",
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "PARADA CASALEIRO BEGOÑA",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Manc."
+        ]
+      }
+    ]
+  },
+  {
     "nom": "RAMOS MONGE MONICA",
     "total_adjudicat": 626604.0,
     "relacions": [
@@ -16631,7 +16868,513 @@
         "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
         "import_empresa": 626604.0,
         "carrecs": [
+          "Apo.Manc.",
           "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "VALBUENA GARCIA JESUS ANGEL",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Manc."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "NAVARRO-REVERTER GARCIA- GERMAN ANTONIO",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Manc."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "ALVAREZ IGLESIAS CARLOS",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Manc.",
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "MUNTANER PEDROSA ALBERTO JOSE",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Manc."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "ALDASORO BIENCINTO ANGEL",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Manc."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "MARIN GARDE MARIA GLORIA",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Manc.",
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "GONZALEZ RODRIGUEZ MARIA BEATRIZ",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Manc.",
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "LUQUE HURTADO DIEGO LUIS",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Manc."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "LOPEZ DE HAGO ROJO RICARDO",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "COELLO GARCIA MARIA JOSEFA",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli",
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "RIVERO SAINZ-PARDO RUTH",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "DE NICOLAS GARCIA JUAN JAVIER",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "CABRE ALCOVERRO JAIME",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "ZARATE ZARATE PABLO",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "BEJERANO DOMINGUEZ DIEGO",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli",
+          "Apo.Sol."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "CANO MIRO CAMILO VICENTE",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "TALAVERA MURILLO JAVIER",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli",
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "GONZALEZ MOLINA JAVIER ADRIAN",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "FERNANDEZ LOPEZ CRISTINA",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "MUÑOZ CAMPOS SANDRA",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli",
+          "Apo.Sol."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "RODRIGUEZ PEDRERO DOMINGO",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli",
+          "Apo.Sol."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "BAENA CUBERO JOSE RUBEN",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli",
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "BAXERAS BLANES MARIA DOLORES",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli",
+          "Apo.Sol."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "AGUSTI GARCIA ROGER",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "ESPINOSA BARBERA CARLOS",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "MODENA NADAL MARC",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "CARMONA FERNANDEZ LUIS",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "JIMENEZ COLOMA ELENA",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "JIMENEZ MARIN FRANCISCO",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "GIRALDA MARTIN ROBERTO",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "PORTO PEREZ DAVID",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "CEPEDA GONZALEZ LUIS-JAVIER",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "GRANDE ALVAREZ ALEJANDRO-JOSE",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "MOYA REINA MIGUEL",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "CLARES PLANELLS JAVIER",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "REBOLLO GRAUPERA OMAR",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "SANCHEZ RODRIGUEZ RUTH",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "CLARES PLANELS RAFAEL",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli",
+          "Apo.Sol."
         ]
       }
     ]
@@ -16859,151 +17602,6 @@
   },
   {
     "nom": "SORIANO ARGUELLO FERNANDO MANUEL",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "CAÑETE LOPEZ GONZALO",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apoderado",
-          "Adm. Mancom."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "GONZALEZ DE CANALES MOYANO FERNANDO JUAN",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "CAPEL ARNAU VANESSA",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "MARTIN ZORITA FRANCISCO DE BORJA",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "CABALLERO LAGRU PABLO",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "PARADA CASALEIRO BEGOÑA",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "VALBUENA GARCIA JESUS ANGEL",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apoderado",
-          "Apo.Manc."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "ALVAREZ IGLESIAS CARLOS",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "MUNTANER PEDROSA ALBERTO-JOSE",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "ALDASORO BIENCINTO ANGEL",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "LUQUE HURTADO DIEGO LUIS",
     "total_adjudicat": 626604.0,
     "relacions": [
       {
@@ -17297,32 +17895,6 @@
   },
   {
     "nom": "RODRIGUEZ MARTINEZ DE ALEGRIA MARIA PALOMA",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "MARIN GARDE MARIA-GLORIA",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "GONZALEZ RODRIGUEZ MARIA BEATRIZ",
     "total_adjudicat": 626604.0,
     "relacions": [
       {
@@ -17949,19 +18521,6 @@
     ]
   },
   {
-    "nom": "LOPEZ DE HAGO ROJO RICARDO",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
     "nom": "RODRIGUEZ LOUREIRO MONICA",
     "total_adjudicat": 626604.0,
     "relacions": [
@@ -18001,258 +18560,7 @@
     ]
   },
   {
-    "nom": "DE NICOLAS GARCIA JUAN JAVIER",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "SANCHEZ RODRIGUEZ RUTH",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "BEJERANO DOMINGUEZ DIEGO",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apoderado",
-          "Apo.Sol."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "CANO MIRO CAMILO VICENTE",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "TALAVERA MURILLO JAVIER",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "GONZALEZ MOLINA JAVIER ADRIAN",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "FERNANDEZ LOPEZ CRISTINA",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "MUÑOZ CAMPOS SANDRA",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apoderado",
-          "Apo.Sol."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "RODRIGUEZ PEDRERO DOMINGO",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apoderado",
-          "Apo.Sol."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "BAXERAS BLANES MARIA DOLORES",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apoderado",
-          "Apo.Sol."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "AGUSTI GARCIA ROGER",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "ESPINOSA BARBERA CARLOS",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "MODENA NADAL MARC",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "CARMONA FERNANDEZ LUIS",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
     "nom": "GARCIA LOPEZ ALFREDO",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "ZARATE ZARATE PABLO",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apo.Sol."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "JIMENEZ COLOMA ELENA",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "MOYA REINA MIGUEL",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "REDONDO ARANDA PABLO",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "BLANCO ALVAREZ OSCAR",
     "total_adjudicat": 626604.0,
     "relacions": [
       {
@@ -18450,19 +18758,6 @@
     ]
   },
   {
-    "nom": "MARIN GARDE MARIA GLORIA",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
     "nom": "BARCENA ROJI IÑIGO JOAQUIN",
     "total_adjudicat": 626604.0,
     "relacions": [
@@ -18477,6 +18772,19 @@
   },
   {
     "nom": "CABELLOS DE FRANCISCO SERGIO",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "MUNTANER PEDROSA ALBERTO-JOSE",
     "total_adjudicat": 626604.0,
     "relacions": [
       {
@@ -18593,71 +18901,6 @@
     ]
   },
   {
-    "nom": "DOCAMPO SEOANE MANUEL ANDRES",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "MENOR GOMEZ MARCOS",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "CARDENAS PAIZ RAUL IGNACIO",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "LOPEZ ALIAS JOSE MANUEL",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "LEON GARCIA IVAN",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
     "nom": "JAIME BLANCO ALFREDO",
     "total_adjudicat": 626604.0,
     "relacions": [
@@ -18724,19 +18967,6 @@
   },
   {
     "nom": "SEGURA FONTCUBERTA ANTONIO CARLOS",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "BAENA CUBERO JOSE RUBEN",
     "total_adjudicat": 626604.0,
     "relacions": [
       {
@@ -18861,19 +19091,6 @@
         "import_empresa": 626604.0,
         "carrecs": [
           "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "CLARES PLANELS RAFAEL",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apo.Sol."
         ]
       }
     ]
@@ -19186,19 +19403,6 @@
         "import_empresa": 626604.0,
         "carrecs": [
           "ADM.CONJUNTO"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "COELLO GARCIA MARIA JOSEFA",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "APODERAD.SOL"
         ]
       }
     ]
@@ -19667,11 +19871,11 @@
   },
   {
     "nom": "PONJOAN DE SAGARRA ALBERTO",
-    "total_adjudicat": 520334.08,
+    "total_adjudicat": 522634.08,
     "relacions": [
       {
         "empresa": "SERVICIOS DEPEC, SLU",
-        "import_empresa": 311816.84,
+        "import_empresa": 314116.84,
         "carrecs": [
           "APODERAD.SOL"
         ]
@@ -19694,11 +19898,11 @@
   },
   {
     "nom": "MARGETS SOLER CARLES",
-    "total_adjudicat": 514506.96,
+    "total_adjudicat": 516309.05,
     "relacions": [
       {
         "empresa": "ELM, SL",
-        "import_empresa": 485327.56,
+        "import_empresa": 487129.65,
         "carrecs": [
           "APODERAD.SOL"
         ]
@@ -19714,11 +19918,11 @@
   },
   {
     "nom": "ARMENGOU FAL CONDE FERNANDO JAVIER",
-    "total_adjudicat": 512796.84,
+    "total_adjudicat": 515096.84,
     "relacions": [
       {
         "empresa": "SERVICIOS DEPEC, SLU",
-        "import_empresa": 311816.84,
+        "import_empresa": 314116.84,
         "carrecs": [
           "APODERAD.SOL"
         ]
@@ -19779,11 +19983,11 @@
   },
   {
     "nom": "MARGETS MIQUEL JOSEP",
-    "total_adjudicat": 485327.56,
+    "total_adjudicat": 487129.65,
     "relacions": [
       {
         "empresa": "ELM, SL",
-        "import_empresa": 485327.56,
+        "import_empresa": 487129.65,
         "carrecs": [
           "APODERADO"
         ]
@@ -19818,11 +20022,11 @@
   },
   {
     "nom": "FABREGAS TORRES CARLOTA",
-    "total_adjudicat": 449995.67,
+    "total_adjudicat": 453385.67,
     "relacions": [
       {
         "empresa": "PLUMARIDS, SL",
-        "import_empresa": 449995.67,
+        "import_empresa": 453385.67,
         "carrecs": [
           "APODERAD.SOL"
         ]
@@ -19831,11 +20035,11 @@
   },
   {
     "nom": "RIBA BACARDIT MOISES",
-    "total_adjudicat": 449995.67,
+    "total_adjudicat": 453385.67,
     "relacions": [
       {
         "empresa": "PLUMARIDS, SL",
-        "import_empresa": 449995.67,
+        "import_empresa": 453385.67,
         "carrecs": [
           "APODERAD.SOL"
         ]
@@ -20412,11 +20616,11 @@
   },
   {
     "nom": "MATESANZ RUIZ DAVID",
-    "total_adjudicat": 319354.08,
+    "total_adjudicat": 321654.08,
     "relacions": [
       {
         "empresa": "SERVICIOS DEPEC, SLU",
-        "import_empresa": 311816.84,
+        "import_empresa": 314116.84,
         "carrecs": [
           "APODERAD.SOL"
         ]
@@ -20432,11 +20636,11 @@
   },
   {
     "nom": "MARTIN ORCAJO MIGUEL ANGEL",
-    "total_adjudicat": 319354.08,
+    "total_adjudicat": 321654.08,
     "relacions": [
       {
         "empresa": "SERVICIOS DEPEC, SLU",
-        "import_empresa": 311816.84,
+        "import_empresa": 314116.84,
         "carrecs": [
           "APODERAD.SOL"
         ]
@@ -20452,11 +20656,11 @@
   },
   {
     "nom": "MATA GARCIA CESAR ERNESTO",
-    "total_adjudicat": 319354.08,
+    "total_adjudicat": 321654.08,
     "relacions": [
       {
         "empresa": "SERVICIOS DEPEC, SLU",
-        "import_empresa": 311816.84,
+        "import_empresa": 314116.84,
         "carrecs": [
           "APODERAD.SOL"
         ]
@@ -20472,11 +20676,11 @@
   },
   {
     "nom": "BALSELLS SUDOL JORGE",
-    "total_adjudicat": 319354.08,
+    "total_adjudicat": 321654.08,
     "relacions": [
       {
         "empresa": "SERVICIOS DEPEC, SLU",
-        "import_empresa": 311816.84,
+        "import_empresa": 314116.84,
         "carrecs": [
           "APODERAD.SOL"
         ]
@@ -20492,11 +20696,11 @@
   },
   {
     "nom": "CALDERON VIELBA LUIS",
-    "total_adjudicat": 319354.08,
+    "total_adjudicat": 321654.08,
     "relacions": [
       {
         "empresa": "SERVICIOS DEPEC, SLU",
-        "import_empresa": 311816.84,
+        "import_empresa": 314116.84,
         "carrecs": [
           "APODERAD.SOL"
         ]
@@ -20512,11 +20716,11 @@
   },
   {
     "nom": "PLAZA LLORENTE MERCEDES",
-    "total_adjudicat": 319354.08,
+    "total_adjudicat": 321654.08,
     "relacions": [
       {
         "empresa": "SERVICIOS DEPEC, SLU",
-        "import_empresa": 311816.84,
+        "import_empresa": 314116.84,
         "carrecs": [
           "APODERAD.SOL"
         ]
@@ -20532,11 +20736,11 @@
   },
   {
     "nom": "FERREIRA OUTERELO ENRIQUE",
-    "total_adjudicat": 319354.08,
+    "total_adjudicat": 321654.08,
     "relacions": [
       {
         "empresa": "SERVICIOS DEPEC, SLU",
-        "import_empresa": 311816.84,
+        "import_empresa": 314116.84,
         "carrecs": [
           "APODERAD.SOL"
         ]
@@ -20552,11 +20756,11 @@
   },
   {
     "nom": "FERNANDEZ RUBIO MARIA ANGELES",
-    "total_adjudicat": 319354.08,
+    "total_adjudicat": 321654.08,
     "relacions": [
       {
         "empresa": "SERVICIOS DEPEC, SLU",
-        "import_empresa": 311816.84,
+        "import_empresa": 314116.84,
         "carrecs": [
           "APODERAD.SOL"
         ]
@@ -20572,11 +20776,11 @@
   },
   {
     "nom": "ATIENZA GARCIA JOAQUIN",
-    "total_adjudicat": 319354.08,
+    "total_adjudicat": 321654.08,
     "relacions": [
       {
         "empresa": "SERVICIOS DEPEC, SLU",
-        "import_empresa": 311816.84,
+        "import_empresa": 314116.84,
         "carrecs": [
           "APODERAD.SOL"
         ]
@@ -20592,11 +20796,11 @@
   },
   {
     "nom": "RAMOS SANCHEZ MARIA VERONICA",
-    "total_adjudicat": 319354.08,
+    "total_adjudicat": 321654.08,
     "relacions": [
       {
         "empresa": "SERVICIOS DEPEC, SLU",
-        "import_empresa": 311816.84,
+        "import_empresa": 314116.84,
         "carrecs": [
           "APODERAD.SOL"
         ]
@@ -20612,11 +20816,11 @@
   },
   {
     "nom": "CABALLERO SANZ RAFAEL",
-    "total_adjudicat": 319354.08,
+    "total_adjudicat": 321654.08,
     "relacions": [
       {
         "empresa": "SERVICIOS DEPEC, SLU",
-        "import_empresa": 311816.84,
+        "import_empresa": 314116.84,
         "carrecs": [
           "APODERAD.SOL"
         ]
@@ -20632,11 +20836,11 @@
   },
   {
     "nom": "GARCIA NAHARRO MERCEDES",
-    "total_adjudicat": 319354.08,
+    "total_adjudicat": 321654.08,
     "relacions": [
       {
         "empresa": "SERVICIOS DEPEC, SLU",
-        "import_empresa": 311816.84,
+        "import_empresa": 314116.84,
         "carrecs": [
           "APODERAD.SOL"
         ]
@@ -20652,11 +20856,11 @@
   },
   {
     "nom": "QUINTAS GULOHOMAL BEATRIZ",
-    "total_adjudicat": 319354.08,
+    "total_adjudicat": 321654.08,
     "relacions": [
       {
         "empresa": "SERVICIOS DEPEC, SLU",
-        "import_empresa": 311816.84,
+        "import_empresa": 314116.84,
         "carrecs": [
           "APODERAD.SOL"
         ]
@@ -20672,11 +20876,11 @@
   },
   {
     "nom": "PORSET LLANTADA EDUARDO",
-    "total_adjudicat": 319354.08,
+    "total_adjudicat": 321654.08,
     "relacions": [
       {
         "empresa": "SERVICIOS DEPEC, SLU",
-        "import_empresa": 311816.84,
+        "import_empresa": 314116.84,
         "carrecs": [
           "APODERAD.SOL"
         ]
@@ -20692,11 +20896,11 @@
   },
   {
     "nom": "CORELLA LOPEZ ENRIQUE",
-    "total_adjudicat": 319354.08,
+    "total_adjudicat": 321654.08,
     "relacions": [
       {
         "empresa": "SERVICIOS DEPEC, SLU",
-        "import_empresa": 311816.84,
+        "import_empresa": 314116.84,
         "carrecs": [
           "APODERAD.SOL"
         ]
@@ -20712,11 +20916,11 @@
   },
   {
     "nom": "PEREZ TORREGROSA JUAN ANTONIO",
-    "total_adjudicat": 319354.08,
+    "total_adjudicat": 321654.08,
     "relacions": [
       {
         "empresa": "SERVICIOS DEPEC, SLU",
-        "import_empresa": 311816.84,
+        "import_empresa": 314116.84,
         "carrecs": [
           "APODERAD.SOL"
         ]
@@ -20732,11 +20936,11 @@
   },
   {
     "nom": "GARCIA MURCIA ALFREDO",
-    "total_adjudicat": 319354.08,
+    "total_adjudicat": 321654.08,
     "relacions": [
       {
         "empresa": "SERVICIOS DEPEC, SLU",
-        "import_empresa": 311816.84,
+        "import_empresa": 314116.84,
         "carrecs": [
           "APODERAD.SOL"
         ]
@@ -20752,11 +20956,11 @@
   },
   {
     "nom": "CAMPOS PASTOR YOLANDA",
-    "total_adjudicat": 319354.08,
+    "total_adjudicat": 321654.08,
     "relacions": [
       {
         "empresa": "SERVICIOS DEPEC, SLU",
-        "import_empresa": 311816.84,
+        "import_empresa": 314116.84,
         "carrecs": [
           "APODERAD.SOL"
         ]
@@ -20772,11 +20976,11 @@
   },
   {
     "nom": "GALLEGO GONZALEZ ESTHER",
-    "total_adjudicat": 319354.08,
+    "total_adjudicat": 321654.08,
     "relacions": [
       {
         "empresa": "SERVICIOS DEPEC, SLU",
-        "import_empresa": 311816.84,
+        "import_empresa": 314116.84,
         "carrecs": [
           "APODERAD.SOL"
         ]
@@ -20792,11 +20996,11 @@
   },
   {
     "nom": "PENA DOVALE ENRIQUE",
-    "total_adjudicat": 319354.08,
+    "total_adjudicat": 321654.08,
     "relacions": [
       {
         "empresa": "SERVICIOS DEPEC, SLU",
-        "import_empresa": 311816.84,
+        "import_empresa": 314116.84,
         "carrecs": [
           "APODERAD.SOL"
         ]
@@ -20812,11 +21016,11 @@
   },
   {
     "nom": "LASANTA JIMENO PILAR",
-    "total_adjudicat": 319354.08,
+    "total_adjudicat": 321654.08,
     "relacions": [
       {
         "empresa": "SERVICIOS DEPEC, SLU",
-        "import_empresa": 311816.84,
+        "import_empresa": 314116.84,
         "carrecs": [
           "APODERAD.SOL"
         ]
@@ -20832,11 +21036,11 @@
   },
   {
     "nom": "TORTONDA MAYO TERESA JESUS",
-    "total_adjudicat": 319354.08,
+    "total_adjudicat": 321654.08,
     "relacions": [
       {
         "empresa": "SERVICIOS DEPEC, SLU",
-        "import_empresa": 311816.84,
+        "import_empresa": 314116.84,
         "carrecs": [
           "APODERAD.SOL"
         ]
@@ -20852,11 +21056,11 @@
   },
   {
     "nom": "AGUIRRE UNAMUNO ANA CARMEN",
-    "total_adjudicat": 319354.08,
+    "total_adjudicat": 321654.08,
     "relacions": [
       {
         "empresa": "SERVICIOS DEPEC, SLU",
-        "import_empresa": 311816.84,
+        "import_empresa": 314116.84,
         "carrecs": [
           "APODERAD.SOL"
         ]
@@ -20872,11 +21076,11 @@
   },
   {
     "nom": "MENENDEZ RODRIGUEZ FERNANDO",
-    "total_adjudicat": 319354.08,
+    "total_adjudicat": 321654.08,
     "relacions": [
       {
         "empresa": "SERVICIOS DEPEC, SLU",
-        "import_empresa": 311816.84,
+        "import_empresa": 314116.84,
         "carrecs": [
           "APODERAD.SOL"
         ]
@@ -20892,11 +21096,11 @@
   },
   {
     "nom": "FERNANDEZ LOPEZ MAGDALENA",
-    "total_adjudicat": 319354.08,
+    "total_adjudicat": 321654.08,
     "relacions": [
       {
         "empresa": "SERVICIOS DEPEC, SLU",
-        "import_empresa": 311816.84,
+        "import_empresa": 314116.84,
         "carrecs": [
           "APODERAD.SOL"
         ]
@@ -20912,11 +21116,11 @@
   },
   {
     "nom": "ANAYA DE LA ROSA JOSE ANTONIO",
-    "total_adjudicat": 319354.08,
+    "total_adjudicat": 321654.08,
     "relacions": [
       {
         "empresa": "SERVICIOS DEPEC, SLU",
-        "import_empresa": 311816.84,
+        "import_empresa": 314116.84,
         "carrecs": [
           "APODERAD.SOL"
         ]
@@ -20932,11 +21136,11 @@
   },
   {
     "nom": "RIVERA QUERO FELIPE",
-    "total_adjudicat": 319354.08,
+    "total_adjudicat": 321654.08,
     "relacions": [
       {
         "empresa": "SERVICIOS DEPEC, SLU",
-        "import_empresa": 311816.84,
+        "import_empresa": 314116.84,
         "carrecs": [
           "APODERAD.SOL"
         ]
@@ -20952,11 +21156,11 @@
   },
   {
     "nom": "BALSELLS SUDOL JORGE MIGUEL",
-    "total_adjudicat": 311816.84,
+    "total_adjudicat": 314116.84,
     "relacions": [
       {
         "empresa": "SERVICIOS DEPEC, SLU",
-        "import_empresa": 311816.84,
+        "import_empresa": 314116.84,
         "carrecs": [
           "APODERAD.SOL"
         ]
@@ -20965,11 +21169,11 @@
   },
   {
     "nom": "ATIENZA GARCIA JOAQUIN BERNARDO",
-    "total_adjudicat": 311816.84,
+    "total_adjudicat": 314116.84,
     "relacions": [
       {
         "empresa": "SERVICIOS DEPEC, SLU",
-        "import_empresa": 311816.84,
+        "import_empresa": 314116.84,
         "carrecs": [
           "APODERAD.SOL"
         ]
@@ -20978,11 +21182,11 @@
   },
   {
     "nom": "SILVAN RODRIGUEZ FRANCISCO JAVIER",
-    "total_adjudicat": 311816.84,
+    "total_adjudicat": 314116.84,
     "relacions": [
       {
         "empresa": "SERVICIOS DEPEC, SLU",
-        "import_empresa": 311816.84,
+        "import_empresa": 314116.84,
         "carrecs": [
           "APODERAD.SOL"
         ]
@@ -20991,11 +21195,11 @@
   },
   {
     "nom": "ESTEBAN GARCIA BERNALT CARMEN",
-    "total_adjudicat": 311816.84,
+    "total_adjudicat": 314116.84,
     "relacions": [
       {
         "empresa": "SERVICIOS DEPEC, SLU",
-        "import_empresa": 311816.84,
+        "import_empresa": 314116.84,
         "carrecs": [
           "APODERAD.SOL"
         ]
@@ -21004,11 +21208,11 @@
   },
   {
     "nom": "VIVIANA MARIA MARTINEZ BEJARANO",
-    "total_adjudicat": 311816.84,
+    "total_adjudicat": 314116.84,
     "relacions": [
       {
         "empresa": "SERVICIOS DEPEC, SLU",
-        "import_empresa": 311816.84,
+        "import_empresa": 314116.84,
         "carrecs": [
           "APODERAD.SOL"
         ]
@@ -21017,11 +21221,11 @@
   },
   {
     "nom": "ADRIANA DEL PILAR CHISCO PINILLA",
-    "total_adjudicat": 311816.84,
+    "total_adjudicat": 314116.84,
     "relacions": [
       {
         "empresa": "SERVICIOS DEPEC, SLU",
-        "import_empresa": 311816.84,
+        "import_empresa": 314116.84,
         "carrecs": [
           "APODERAD.SOL"
         ]
@@ -21030,11 +21234,11 @@
   },
   {
     "nom": "LEARRETA OLARRA ALVARO",
-    "total_adjudicat": 311816.84,
+    "total_adjudicat": 314116.84,
     "relacions": [
       {
         "empresa": "SERVICIOS DEPEC, SLU",
-        "import_empresa": 311816.84,
+        "import_empresa": 314116.84,
         "carrecs": [
           "APODERAD.SOL"
         ]
@@ -21043,11 +21247,11 @@
   },
   {
     "nom": "MUÑUMEL GORDILLO MARIA CARMEN",
-    "total_adjudicat": 311816.84,
+    "total_adjudicat": 314116.84,
     "relacions": [
       {
         "empresa": "SERVICIOS DEPEC, SLU",
-        "import_empresa": 311816.84,
+        "import_empresa": 314116.84,
         "carrecs": [
           "APODERAD.SOL"
         ]
@@ -21056,11 +21260,11 @@
   },
   {
     "nom": "GARRIGA SOLE JOAN",
-    "total_adjudicat": 311816.84,
+    "total_adjudicat": 314116.84,
     "relacions": [
       {
         "empresa": "SERVICIOS DEPEC, SLU",
-        "import_empresa": 311816.84,
+        "import_empresa": 314116.84,
         "carrecs": [
           "APODERAD.SOL"
         ]
@@ -21069,11 +21273,11 @@
   },
   {
     "nom": "RAMOS CUETO LUIS ANGEL",
-    "total_adjudicat": 311816.84,
+    "total_adjudicat": 314116.84,
     "relacions": [
       {
         "empresa": "SERVICIOS DEPEC, SLU",
-        "import_empresa": 311816.84,
+        "import_empresa": 314116.84,
         "carrecs": [
           "APODERAD.SOL"
         ]
@@ -21082,11 +21286,11 @@
   },
   {
     "nom": "MUÑOZ ESTEBAN CONCEPCION",
-    "total_adjudicat": 311816.84,
+    "total_adjudicat": 314116.84,
     "relacions": [
       {
         "empresa": "SERVICIOS DEPEC, SLU",
-        "import_empresa": 311816.84,
+        "import_empresa": 314116.84,
         "carrecs": [
           "APODERAD.SOL"
         ]
@@ -21095,11 +21299,11 @@
   },
   {
     "nom": "VALDELVIRA GARCIA MARIA DOLORES",
-    "total_adjudicat": 311816.84,
+    "total_adjudicat": 314116.84,
     "relacions": [
       {
         "empresa": "SERVICIOS DEPEC, SLU",
-        "import_empresa": 311816.84,
+        "import_empresa": 314116.84,
         "carrecs": [
           "APODERAD.SOL"
         ]
@@ -21108,11 +21312,11 @@
   },
   {
     "nom": "ERWAN TALHOUET ETENAUD",
-    "total_adjudicat": 311816.84,
+    "total_adjudicat": 314116.84,
     "relacions": [
       {
         "empresa": "SERVICIOS DEPEC, SLU",
-        "import_empresa": 311816.84,
+        "import_empresa": 314116.84,
         "carrecs": [
           "APODERAD.SOL"
         ]
@@ -21121,11 +21325,11 @@
   },
   {
     "nom": "PORCAR RAMON LUIS MIGUEL",
-    "total_adjudicat": 311816.84,
+    "total_adjudicat": 314116.84,
     "relacions": [
       {
         "empresa": "SERVICIOS DEPEC, SLU",
-        "import_empresa": 311816.84,
+        "import_empresa": 314116.84,
         "carrecs": [
           "APODERAD.SOL"
         ]
@@ -21134,11 +21338,11 @@
   },
   {
     "nom": "AMAURY CARYL AUDRI BOULIN",
-    "total_adjudicat": 311816.84,
+    "total_adjudicat": 314116.84,
     "relacions": [
       {
         "empresa": "SERVICIOS DEPEC, SLU",
-        "import_empresa": 311816.84,
+        "import_empresa": 314116.84,
         "carrecs": [
           "APODERAD.SOL"
         ]
@@ -21147,11 +21351,11 @@
   },
   {
     "nom": "GARCIA LAJARA CALVO MARTA",
-    "total_adjudicat": 311816.84,
+    "total_adjudicat": 314116.84,
     "relacions": [
       {
         "empresa": "SERVICIOS DEPEC, SLU",
-        "import_empresa": 311816.84,
+        "import_empresa": 314116.84,
         "carrecs": [
           "APODERAD.SOL"
         ]
@@ -21160,11 +21364,11 @@
   },
   {
     "nom": "CERVANTES PEREZ JOSE",
-    "total_adjudicat": 311816.84,
+    "total_adjudicat": 314116.84,
     "relacions": [
       {
         "empresa": "SERVICIOS DEPEC, SLU",
-        "import_empresa": 311816.84,
+        "import_empresa": 314116.84,
         "carrecs": [
           "APODERAD.SOL"
         ]
@@ -21173,11 +21377,11 @@
   },
   {
     "nom": "LACORT RAMIREZ XAVIER",
-    "total_adjudicat": 311816.84,
+    "total_adjudicat": 314116.84,
     "relacions": [
       {
         "empresa": "SERVICIOS DEPEC, SLU",
-        "import_empresa": 311816.84,
+        "import_empresa": 314116.84,
         "carrecs": [
           "APODERAD.SOL"
         ]
@@ -21186,11 +21390,11 @@
   },
   {
     "nom": "CASAMICHANA VELAZQUEZ OSCAR",
-    "total_adjudicat": 311816.84,
+    "total_adjudicat": 314116.84,
     "relacions": [
       {
         "empresa": "SERVICIOS DEPEC, SLU",
-        "import_empresa": 311816.84,
+        "import_empresa": 314116.84,
         "carrecs": [
           "APODERAD.SOL"
         ]
@@ -21199,11 +21403,11 @@
   },
   {
     "nom": "PINA SOLANO VICTOR",
-    "total_adjudicat": 311816.84,
+    "total_adjudicat": 314116.84,
     "relacions": [
       {
         "empresa": "SERVICIOS DEPEC, SLU",
-        "import_empresa": 311816.84,
+        "import_empresa": 314116.84,
         "carrecs": [
           "APODERAD.SOL"
         ]
@@ -21212,11 +21416,11 @@
   },
   {
     "nom": "RANDOLPH CARTER",
-    "total_adjudicat": 311816.84,
+    "total_adjudicat": 314116.84,
     "relacions": [
       {
         "empresa": "SERVICIOS DEPEC, SLU",
-        "import_empresa": 311816.84,
+        "import_empresa": 314116.84,
         "carrecs": [
           "ADM.SOLIDAR."
         ]
@@ -21225,11 +21429,11 @@
   },
   {
     "nom": "ALAIN DENIS J MONFFROID",
-    "total_adjudicat": 311816.84,
+    "total_adjudicat": 314116.84,
     "relacions": [
       {
         "empresa": "SERVICIOS DEPEC, SLU",
-        "import_empresa": 311816.84,
+        "import_empresa": 314116.84,
         "carrecs": [
           "ADM.SOLIDAR."
         ]
@@ -21238,7 +21442,7 @@
   },
   {
     "nom": "DANTI GUMI EUDALD",
-    "total_adjudicat": 295791.48,
+    "total_adjudicat": 297529.38,
     "relacions": [
       {
         "empresa": "NOVATILU, SLU",
@@ -21249,7 +21453,7 @@
       },
       {
         "empresa": "BENITO URBAN, S.L. UNIPERSONAL",
-        "import_empresa": 133638.01,
+        "import_empresa": 135375.91,
         "carrecs": [
           "APOD.SOL/MAN"
         ]
@@ -21258,7 +21462,7 @@
   },
   {
     "nom": "CASALS FAJA NURIA",
-    "total_adjudicat": 295791.48,
+    "total_adjudicat": 297529.38,
     "relacions": [
       {
         "empresa": "NOVATILU, SLU",
@@ -21269,7 +21473,7 @@
       },
       {
         "empresa": "BENITO URBAN, S.L. UNIPERSONAL",
-        "import_empresa": 133638.01,
+        "import_empresa": 135375.91,
         "carrecs": [
           "APOD.SOL/MAN"
         ]
@@ -21278,7 +21482,7 @@
   },
   {
     "nom": "BENITO BOVE JESUS",
-    "total_adjudicat": 295791.48,
+    "total_adjudicat": 297529.38,
     "relacions": [
       {
         "empresa": "NOVATILU, SLU",
@@ -21289,7 +21493,7 @@
       },
       {
         "empresa": "BENITO URBAN, S.L. UNIPERSONAL",
-        "import_empresa": 133638.01,
+        "import_empresa": 135375.91,
         "carrecs": [
           "APODERAD.SOL",
           "APODERADO"
@@ -21332,6 +21536,27 @@
         "import_empresa": 276127.82,
         "carrecs": [
           "Adm. Solid."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "TORRENS RIU JOSEP",
+    "total_adjudicat": 271914.67,
+    "relacions": [
+      {
+        "empresa": "PETROMIRALLES, S.L.",
+        "import_empresa": 146490.97,
+        "carrecs": [
+          "ADM.SOLIDAR.",
+          "APODERAD.SOL"
+        ]
+      },
+      {
+        "empresa": "MIRALLESTRES",
+        "import_empresa": 125423.7,
+        "carrecs": [
+          "ADM.SOLIDAR."
         ]
       }
     ]
@@ -21384,27 +21609,6 @@
         "import_empresa": 271265.39,
         "carrecs": [
           "Adm. Solid."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "TORRENS RIU JOSEP",
-    "total_adjudicat": 261121.34,
-    "relacions": [
-      {
-        "empresa": "PETROMIRALLES, S.L.",
-        "import_empresa": 143643.07,
-        "carrecs": [
-          "ADM.SOLIDAR.",
-          "APODERAD.SOL"
-        ]
-      },
-      {
-        "empresa": "MIRALLESTRES",
-        "import_empresa": 117478.27,
-        "carrecs": [
-          "ADM.SOLIDAR."
         ]
       }
     ]
@@ -24940,6 +25144,87 @@
     ]
   },
   {
+    "nom": "LOPEZ GOMBAU OSCAR",
+    "total_adjudicat": 174296.12,
+    "relacions": [
+      {
+        "empresa": "SERVICIOS MICROINFORMÁTICA, SA",
+        "import_empresa": 124145.76,
+        "carrecs": [
+          "Apoderado"
+        ]
+      },
+      {
+        "empresa": "ECITYCLIC SOLUTIONS, SL.",
+        "import_empresa": 41647.0,
+        "carrecs": [
+          "Presidente",
+          "Consejero",
+          "Cons.Del.Sol"
+        ]
+      },
+      {
+        "empresa": "ECONOCOM SEMIC, S.A.U",
+        "import_empresa": 8503.36,
+        "carrecs": [
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "GABARRO CALVET JOSEP MARIA",
+    "total_adjudicat": 171644.74,
+    "relacions": [
+      {
+        "empresa": "MATERIALS IGUALADA, S.L.",
+        "import_empresa": 171644.74,
+        "carrecs": [
+          "REPR.143 RRM"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "GABARRO CALVET JOSE MARIA",
+    "total_adjudicat": 171644.74,
+    "relacions": [
+      {
+        "empresa": "MATERIALS IGUALADA, S.L.",
+        "import_empresa": 171644.74,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "GABARRO CALVET JORDI",
+    "total_adjudicat": 171644.74,
+    "relacions": [
+      {
+        "empresa": "MATERIALS IGUALADA, S.L.",
+        "import_empresa": 171644.74,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "GABARRO TOMAS XAVIER",
+    "total_adjudicat": 171644.74,
+    "relacions": [
+      {
+        "empresa": "MATERIALS IGUALADA, S.L.",
+        "import_empresa": 171644.74,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
     "nom": "JONATHAN ACEVEDO RODRIGUEZ",
     "total_adjudicat": 171416.89,
     "relacions": [
@@ -24975,87 +25260,6 @@
         "import_empresa": 3545.0,
         "carrecs": [
           "ADM.UNICO"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "GABARRO CALVET JOSEP MARIA",
-    "total_adjudicat": 170190.2,
-    "relacions": [
-      {
-        "empresa": "MATERIALS IGUALADA, S.L.",
-        "import_empresa": 170190.2,
-        "carrecs": [
-          "REPR.143 RRM"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "GABARRO CALVET JOSE MARIA",
-    "total_adjudicat": 170190.2,
-    "relacions": [
-      {
-        "empresa": "MATERIALS IGUALADA, S.L.",
-        "import_empresa": 170190.2,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "GABARRO CALVET JORDI",
-    "total_adjudicat": 170190.2,
-    "relacions": [
-      {
-        "empresa": "MATERIALS IGUALADA, S.L.",
-        "import_empresa": 170190.2,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "GABARRO TOMAS XAVIER",
-    "total_adjudicat": 170190.2,
-    "relacions": [
-      {
-        "empresa": "MATERIALS IGUALADA, S.L.",
-        "import_empresa": 170190.2,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "LOPEZ GOMBAU OSCAR",
-    "total_adjudicat": 166564.01,
-    "relacions": [
-      {
-        "empresa": "SERVICIOS MICROINFORMÁTICA, SA",
-        "import_empresa": 124145.76,
-        "carrecs": [
-          "Apoderado"
-        ]
-      },
-      {
-        "empresa": "ECITYCLIC SOLUTIONS, SL.",
-        "import_empresa": 39947.0,
-        "carrecs": [
-          "Presidente",
-          "Consejero",
-          "Cons.Del.Sol"
-        ]
-      },
-      {
-        "empresa": "ECONOCOM SEMIC, S.A.U",
-        "import_empresa": 2471.25,
-        "carrecs": [
-          "Apoderado"
         ]
       }
     ]
@@ -25202,6 +25406,32 @@
         "import_empresa": 160760.77,
         "carrecs": [
           "ADM.UNICO"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "LLANSANA ROSICH MARINA",
+    "total_adjudicat": 160341.0,
+    "relacions": [
+      {
+        "empresa": "DIGITAL LIDERA COMUNICACIÓ, SL",
+        "import_empresa": 160341.0,
+        "carrecs": [
+          "ADM.SOLIDAR."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "SOLA SOLA ORIOL",
+    "total_adjudicat": 160341.0,
+    "relacions": [
+      {
+        "empresa": "DIGITAL LIDERA COMUNICACIÓ, SL",
+        "import_empresa": 160341.0,
+        "carrecs": [
+          "ADM.SOLIDAR."
         ]
       }
     ]
@@ -25387,32 +25617,6 @@
         "import_empresa": 158339.74,
         "carrecs": [
           "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "LLANSANA ROSICH MARINA",
-    "total_adjudicat": 158141.0,
-    "relacions": [
-      {
-        "empresa": "DIGITAL LIDERA COMUNICACIÓ, SL",
-        "import_empresa": 158141.0,
-        "carrecs": [
-          "ADM.SOLIDAR."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "SOLA SOLA ORIOL",
-    "total_adjudicat": 158141.0,
-    "relacions": [
-      {
-        "empresa": "DIGITAL LIDERA COMUNICACIÓ, SL",
-        "import_empresa": 158141.0,
-        "carrecs": [
-          "ADM.SOLIDAR."
         ]
       }
     ]
@@ -25947,6 +26151,205 @@
     ]
   },
   {
+    "nom": "TOMA SAS ELENA",
+    "total_adjudicat": 135375.91,
+    "relacions": [
+      {
+        "empresa": "BENITO URBAN, S.L. UNIPERSONAL",
+        "import_empresa": 135375.91,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "CARANDELL PEREZ JOAQUIM",
+    "total_adjudicat": 135375.91,
+    "relacions": [
+      {
+        "empresa": "BENITO URBAN, S.L. UNIPERSONAL",
+        "import_empresa": 135375.91,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "ESPONA ARUMI JORDI",
+    "total_adjudicat": 135375.91,
+    "relacions": [
+      {
+        "empresa": "BENITO URBAN, S.L. UNIPERSONAL",
+        "import_empresa": 135375.91,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "TESTAR CARBO DAVID",
+    "total_adjudicat": 135375.91,
+    "relacions": [
+      {
+        "empresa": "BENITO URBAN, S.L. UNIPERSONAL",
+        "import_empresa": 135375.91,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "ARMERO MONTES MARIO",
+    "total_adjudicat": 135375.91,
+    "relacions": [
+      {
+        "empresa": "BENITO URBAN, S.L. UNIPERSONAL",
+        "import_empresa": 135375.91,
+        "carrecs": [
+          "PRESIDENTE",
+          "CONSEJERO"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "NICOLA ZAMBON",
+    "total_adjudicat": 135375.91,
+    "relacions": [
+      {
+        "empresa": "BENITO URBAN, S.L. UNIPERSONAL",
+        "import_empresa": 135375.91,
+        "carrecs": [
+          "VICEPRESIDEN",
+          "CONSEJERO"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "CARRASQUILLA DOROW MARCOS",
+    "total_adjudicat": 135375.91,
+    "relacions": [
+      {
+        "empresa": "BENITO URBAN, S.L. UNIPERSONAL",
+        "import_empresa": 135375.91,
+        "carrecs": [
+          "CONS. DELEG.",
+          "CONSEJERO",
+          "APODERADO"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "EMANUELE LEMBO",
+    "total_adjudicat": 135375.91,
+    "relacions": [
+      {
+        "empresa": "BENITO URBAN, S.L. UNIPERSONAL",
+        "import_empresa": 135375.91,
+        "carrecs": [
+          "CONSEJERO"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "FABRIZIO GUALDI",
+    "total_adjudicat": 135375.91,
+    "relacions": [
+      {
+        "empresa": "BENITO URBAN, S.L. UNIPERSONAL",
+        "import_empresa": 135375.91,
+        "carrecs": [
+          "CONSEJERO"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "ARIS WATELER",
+    "total_adjudicat": 135375.91,
+    "relacions": [
+      {
+        "empresa": "BENITO URBAN, S.L. UNIPERSONAL",
+        "import_empresa": 135375.91,
+        "carrecs": [
+          "CONSEJERO"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "MASSIMO LONGONI",
+    "total_adjudicat": 135375.91,
+    "relacions": [
+      {
+        "empresa": "BENITO URBAN, S.L. UNIPERSONAL",
+        "import_empresa": 135375.91,
+        "carrecs": [
+          "ADM.UNICO"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "ACOSTA RAMIREZ MIGUEL PEDRO",
+    "total_adjudicat": 135375.91,
+    "relacions": [
+      {
+        "empresa": "BENITO URBAN, S.L. UNIPERSONAL",
+        "import_empresa": 135375.91,
+        "carrecs": [
+          "SECR.NO CONS"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "MARTIN GARCIA JOSE MANUEL",
+    "total_adjudicat": 135375.91,
+    "relacions": [
+      {
+        "empresa": "BENITO URBAN, S.L. UNIPERSONAL",
+        "import_empresa": 135375.91,
+        "carrecs": [
+          "V-SEC NO CON"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "SALLERAS LLUIS JAVIER",
+    "total_adjudicat": 135375.91,
+    "relacions": [
+      {
+        "empresa": "BENITO URBAN, S.L. UNIPERSONAL",
+        "import_empresa": 135375.91,
+        "carrecs": [
+          "APODERADO"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "SALAT AUMATELL ANTONIO",
+    "total_adjudicat": 135375.91,
+    "relacions": [
+      {
+        "empresa": "BENITO URBAN, S.L. UNIPERSONAL",
+        "import_empresa": 135375.91,
+        "carrecs": [
+          "APODERADO"
+        ]
+      }
+    ]
+  },
+  {
     "nom": "HIRZEL BARBARA",
     "total_adjudicat": 134985.56,
     "relacions": [
@@ -26377,207 +26780,8 @@
     ]
   },
   {
-    "nom": "TOMA SAS ELENA",
-    "total_adjudicat": 133638.01,
-    "relacions": [
-      {
-        "empresa": "BENITO URBAN, S.L. UNIPERSONAL",
-        "import_empresa": 133638.01,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "CARANDELL PEREZ JOAQUIM",
-    "total_adjudicat": 133638.01,
-    "relacions": [
-      {
-        "empresa": "BENITO URBAN, S.L. UNIPERSONAL",
-        "import_empresa": 133638.01,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "ESPONA ARUMI JORDI",
-    "total_adjudicat": 133638.01,
-    "relacions": [
-      {
-        "empresa": "BENITO URBAN, S.L. UNIPERSONAL",
-        "import_empresa": 133638.01,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "TESTAR CARBO DAVID",
-    "total_adjudicat": 133638.01,
-    "relacions": [
-      {
-        "empresa": "BENITO URBAN, S.L. UNIPERSONAL",
-        "import_empresa": 133638.01,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "ARMERO MONTES MARIO",
-    "total_adjudicat": 133638.01,
-    "relacions": [
-      {
-        "empresa": "BENITO URBAN, S.L. UNIPERSONAL",
-        "import_empresa": 133638.01,
-        "carrecs": [
-          "PRESIDENTE",
-          "CONSEJERO"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "NICOLA ZAMBON",
-    "total_adjudicat": 133638.01,
-    "relacions": [
-      {
-        "empresa": "BENITO URBAN, S.L. UNIPERSONAL",
-        "import_empresa": 133638.01,
-        "carrecs": [
-          "VICEPRESIDEN",
-          "CONSEJERO"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "CARRASQUILLA DOROW MARCOS",
-    "total_adjudicat": 133638.01,
-    "relacions": [
-      {
-        "empresa": "BENITO URBAN, S.L. UNIPERSONAL",
-        "import_empresa": 133638.01,
-        "carrecs": [
-          "CONS. DELEG.",
-          "CONSEJERO",
-          "APODERADO"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "EMANUELE LEMBO",
-    "total_adjudicat": 133638.01,
-    "relacions": [
-      {
-        "empresa": "BENITO URBAN, S.L. UNIPERSONAL",
-        "import_empresa": 133638.01,
-        "carrecs": [
-          "CONSEJERO"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "FABRIZIO GUALDI",
-    "total_adjudicat": 133638.01,
-    "relacions": [
-      {
-        "empresa": "BENITO URBAN, S.L. UNIPERSONAL",
-        "import_empresa": 133638.01,
-        "carrecs": [
-          "CONSEJERO"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "ARIS WATELER",
-    "total_adjudicat": 133638.01,
-    "relacions": [
-      {
-        "empresa": "BENITO URBAN, S.L. UNIPERSONAL",
-        "import_empresa": 133638.01,
-        "carrecs": [
-          "CONSEJERO"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "MASSIMO LONGONI",
-    "total_adjudicat": 133638.01,
-    "relacions": [
-      {
-        "empresa": "BENITO URBAN, S.L. UNIPERSONAL",
-        "import_empresa": 133638.01,
-        "carrecs": [
-          "ADM.UNICO"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "ACOSTA RAMIREZ MIGUEL PEDRO",
-    "total_adjudicat": 133638.01,
-    "relacions": [
-      {
-        "empresa": "BENITO URBAN, S.L. UNIPERSONAL",
-        "import_empresa": 133638.01,
-        "carrecs": [
-          "SECR.NO CONS"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "MARTIN GARCIA JOSE MANUEL",
-    "total_adjudicat": 133638.01,
-    "relacions": [
-      {
-        "empresa": "BENITO URBAN, S.L. UNIPERSONAL",
-        "import_empresa": 133638.01,
-        "carrecs": [
-          "V-SEC NO CON"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "SALLERAS LLUIS JAVIER",
-    "total_adjudicat": 133638.01,
-    "relacions": [
-      {
-        "empresa": "BENITO URBAN, S.L. UNIPERSONAL",
-        "import_empresa": 133638.01,
-        "carrecs": [
-          "APODERADO"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "SALAT AUMATELL ANTONIO",
-    "total_adjudicat": 133638.01,
-    "relacions": [
-      {
-        "empresa": "BENITO URBAN, S.L. UNIPERSONAL",
-        "import_empresa": 133638.01,
-        "carrecs": [
-          "APODERADO"
-        ]
-      }
-    ]
-  },
-  {
     "nom": "RENAULD PHILIPPE",
-    "total_adjudicat": 126617.01,
+    "total_adjudicat": 132649.12,
     "relacions": [
       {
         "empresa": "SERVICIOS MICROINFORMÁTICA, SA",
@@ -26588,7 +26792,7 @@
       },
       {
         "empresa": "ECONOCOM SEMIC, S.A.U",
-        "import_empresa": 2471.25,
+        "import_empresa": 8503.36,
         "carrecs": [
           "Consejero"
         ]
@@ -26597,7 +26801,7 @@
   },
   {
     "nom": "RODRIGUEZ DE LA FLOR Y DEL TORO LUIS MARIA",
-    "total_adjudicat": 126617.01,
+    "total_adjudicat": 132649.12,
     "relacions": [
       {
         "empresa": "SERVICIOS MICROINFORMÁTICA, SA",
@@ -26608,7 +26812,7 @@
       },
       {
         "empresa": "ECONOCOM SEMIC, S.A.U",
-        "import_empresa": 2471.25,
+        "import_empresa": 8503.36,
         "carrecs": [
           "SecreNoConsj"
         ]
@@ -26617,7 +26821,7 @@
   },
   {
     "nom": "PEREZ HERCE GARCIA CARLOS ANTONIO",
-    "total_adjudicat": 126617.01,
+    "total_adjudicat": 132649.12,
     "relacions": [
       {
         "empresa": "SERVICIOS MICROINFORMÁTICA, SA",
@@ -26628,7 +26832,7 @@
       },
       {
         "empresa": "ECONOCOM SEMIC, S.A.U",
-        "import_empresa": 2471.25,
+        "import_empresa": 8503.36,
         "carrecs": [
           "Con.Delegado"
         ]
@@ -26637,7 +26841,7 @@
   },
   {
     "nom": "GUIU RIUS RAMON",
-    "total_adjudicat": 126617.01,
+    "total_adjudicat": 132649.12,
     "relacions": [
       {
         "empresa": "SERVICIOS MICROINFORMÁTICA, SA",
@@ -26649,7 +26853,7 @@
       },
       {
         "empresa": "ECONOCOM SEMIC, S.A.U",
-        "import_empresa": 2471.25,
+        "import_empresa": 8503.36,
         "carrecs": [
           "Aud.Supl.",
           "Auditor"
@@ -26659,7 +26863,7 @@
   },
   {
     "nom": "PEIRO PASCUAL JOSE NARCISO",
-    "total_adjudicat": 126617.01,
+    "total_adjudicat": 132649.12,
     "relacions": [
       {
         "empresa": "SERVICIOS MICROINFORMÁTICA, SA",
@@ -26670,9 +26874,22 @@
       },
       {
         "empresa": "ECONOCOM SEMIC, S.A.U",
-        "import_empresa": 2471.25,
+        "import_empresa": 8503.36,
         "carrecs": [
           "Aud.Supl."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "CARTAGENA BISBAL JORDI",
+    "total_adjudicat": 125423.7,
+    "relacions": [
+      {
+        "empresa": "MIRALLESTRES",
+        "import_empresa": 125423.7,
+        "carrecs": [
+          "APODERAD.SOL"
         ]
       }
     ]
@@ -26971,19 +27188,6 @@
         "import_empresa": 117905.19,
         "carrecs": [
           "ADM.UNICO"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "CARTAGENA BISBAL JORDI",
-    "total_adjudicat": 117478.27,
-    "relacions": [
-      {
-        "empresa": "MIRALLESTRES",
-        "import_empresa": 117478.27,
-        "carrecs": [
-          "APODERAD.SOL"
         ]
       }
     ]
@@ -28777,6 +28981,68 @@
     ]
   },
   {
+    "nom": "ALOY NOGUERA ALBERT",
+    "total_adjudicat": 109934.2,
+    "relacions": [
+      {
+        "empresa": "TRANS DIEMA,SL",
+        "import_empresa": 93414.2,
+        "carrecs": [
+          "ADM.UNICO",
+          "APODERAD.SOL"
+        ]
+      },
+      {
+        "empresa": "TRANSPORTES DIEGO NOGUERA, S.L.",
+        "import_empresa": 16520.0,
+        "carrecs": [
+          "ADM.UNICO",
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "NOGUERA NOGUERA JUANA",
+    "total_adjudicat": 109934.2,
+    "relacions": [
+      {
+        "empresa": "TRANS DIEMA,SL",
+        "import_empresa": 93414.2,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      },
+      {
+        "empresa": "TRANSPORTES DIEGO NOGUERA, S.L.",
+        "import_empresa": 16520.0,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "NOGUERA NOGUERA MARIA",
+    "total_adjudicat": 109934.2,
+    "relacions": [
+      {
+        "empresa": "TRANS DIEMA,SL",
+        "import_empresa": 93414.2,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      },
+      {
+        "empresa": "TRANSPORTES DIEGO NOGUERA, S.L.",
+        "import_empresa": 16520.0,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
     "nom": "DIAZ FLORES FERNANDO",
     "total_adjudicat": 109824.73,
     "relacions": [
@@ -30169,74 +30435,12 @@
     ]
   },
   {
-    "nom": "ALOY NOGUERA ALBERT",
-    "total_adjudicat": 104803.73,
-    "relacions": [
-      {
-        "empresa": "TRANS DIEMA,SL",
-        "import_empresa": 88283.73,
-        "carrecs": [
-          "ADM.UNICO",
-          "APODERAD.SOL"
-        ]
-      },
-      {
-        "empresa": "TRANSPORTES DIEGO NOGUERA, S.L.",
-        "import_empresa": 16520.0,
-        "carrecs": [
-          "ADM.UNICO",
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "NOGUERA NOGUERA JUANA",
-    "total_adjudicat": 104803.73,
-    "relacions": [
-      {
-        "empresa": "TRANS DIEMA,SL",
-        "import_empresa": 88283.73,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      },
-      {
-        "empresa": "TRANSPORTES DIEGO NOGUERA, S.L.",
-        "import_empresa": 16520.0,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "NOGUERA NOGUERA MARIA",
-    "total_adjudicat": 104803.73,
-    "relacions": [
-      {
-        "empresa": "TRANS DIEMA,SL",
-        "import_empresa": 88283.73,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      },
-      {
-        "empresa": "TRANSPORTES DIEGO NOGUERA, S.L.",
-        "import_empresa": 16520.0,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
     "nom": "RAMIS BALLABRIGA MIQUEL",
-    "total_adjudicat": 104695.73,
+    "total_adjudicat": 105991.73,
     "relacions": [
       {
         "empresa": "ZOOETHICS, ETHICAL ANIMAL PROJECTS, SL",
-        "import_empresa": 104695.73,
+        "import_empresa": 105991.73,
         "carrecs": [
           "ADM.UNICO"
         ]
@@ -30245,11 +30449,11 @@
   },
   {
     "nom": "CASTELLTORT PANADES JOSEP",
-    "total_adjudicat": 104695.73,
+    "total_adjudicat": 105991.73,
     "relacions": [
       {
         "empresa": "ZOOETHICS, ETHICAL ANIMAL PROJECTS, SL",
-        "import_empresa": 104695.73,
+        "import_empresa": 105991.73,
         "carrecs": [
           "ADM.UNICO"
         ]
@@ -30258,11 +30462,11 @@
   },
   {
     "nom": "RAMIS BALLABRIGA MIGUEL",
-    "total_adjudicat": 104695.73,
+    "total_adjudicat": 105991.73,
     "relacions": [
       {
         "empresa": "ZOOETHICS, ETHICAL ANIMAL PROJECTS, SL",
-        "import_empresa": 104695.73,
+        "import_empresa": 105991.73,
         "carrecs": [
           "APODERAD.SOL"
         ]
@@ -33266,6 +33470,112 @@
     ]
   },
   {
+    "nom": "ARANA URCELAY RICARDO",
+    "total_adjudicat": 96963.18,
+    "relacions": [
+      {
+        "empresa": "KALAMAZOO PRODUCTOS DE OFICINA SL",
+        "import_empresa": 96963.18,
+        "carrecs": [
+          "Presidente"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "MARCOVICI DANIELE ROSE",
+    "total_adjudicat": 96963.18,
+    "relacions": [
+      {
+        "empresa": "KALAMAZOO PRODUCTOS DE OFICINA SL",
+        "import_empresa": 96963.18,
+        "carrecs": [
+          "Consejero"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "GALLEGO NEIRA JORGE",
+    "total_adjudicat": 96963.18,
+    "relacions": [
+      {
+        "empresa": "KALAMAZOO PRODUCTOS DE OFICINA SL",
+        "import_empresa": 96963.18,
+        "carrecs": [
+          "Apoderado",
+          "Consejero",
+          "Secretario"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "ARANA UCELAY RICARDO",
+    "total_adjudicat": 96963.18,
+    "relacions": [
+      {
+        "empresa": "KALAMAZOO PRODUCTOS DE OFICINA SL",
+        "import_empresa": 96963.18,
+        "carrecs": [
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "GOMEZ LOPEZ PABLO JOAQUIN",
+    "total_adjudicat": 96963.18,
+    "relacions": [
+      {
+        "empresa": "KALAMAZOO PRODUCTOS DE OFICINA SL",
+        "import_empresa": 96963.18,
+        "carrecs": [
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "SALCEDO BILBAO MARTA",
+    "total_adjudicat": 96963.18,
+    "relacions": [
+      {
+        "empresa": "KALAMAZOO PRODUCTOS DE OFICINA SL",
+        "import_empresa": 96963.18,
+        "carrecs": [
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "RIOS RUBIN MARIA JESUS",
+    "total_adjudicat": 96963.18,
+    "relacions": [
+      {
+        "empresa": "KALAMAZOO PRODUCTOS DE OFICINA SL",
+        "import_empresa": 96963.18,
+        "carrecs": [
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "PEREZ HERNANDEZ NURIA",
+    "total_adjudicat": 96963.18,
+    "relacions": [
+      {
+        "empresa": "KALAMAZOO PRODUCTOS DE OFICINA SL",
+        "import_empresa": 96963.18,
+        "carrecs": [
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
     "nom": "ROMAN GONZALEZ SILVIA",
     "total_adjudicat": 95337.9,
     "relacions": [
@@ -33386,112 +33696,6 @@
     ]
   },
   {
-    "nom": "ARANA URCELAY RICARDO",
-    "total_adjudicat": 94221.07,
-    "relacions": [
-      {
-        "empresa": "KALAMAZOO PRODUCTOS DE OFICINA SL",
-        "import_empresa": 94221.07,
-        "carrecs": [
-          "Presidente"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "MARCOVICI DANIELE ROSE",
-    "total_adjudicat": 94221.07,
-    "relacions": [
-      {
-        "empresa": "KALAMAZOO PRODUCTOS DE OFICINA SL",
-        "import_empresa": 94221.07,
-        "carrecs": [
-          "Consejero"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "GALLEGO NEIRA JORGE",
-    "total_adjudicat": 94221.07,
-    "relacions": [
-      {
-        "empresa": "KALAMAZOO PRODUCTOS DE OFICINA SL",
-        "import_empresa": 94221.07,
-        "carrecs": [
-          "Apoderado",
-          "Consejero",
-          "Secretario"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "ARANA UCELAY RICARDO",
-    "total_adjudicat": 94221.07,
-    "relacions": [
-      {
-        "empresa": "KALAMAZOO PRODUCTOS DE OFICINA SL",
-        "import_empresa": 94221.07,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "GOMEZ LOPEZ PABLO JOAQUIN",
-    "total_adjudicat": 94221.07,
-    "relacions": [
-      {
-        "empresa": "KALAMAZOO PRODUCTOS DE OFICINA SL",
-        "import_empresa": 94221.07,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "SALCEDO BILBAO MARTA",
-    "total_adjudicat": 94221.07,
-    "relacions": [
-      {
-        "empresa": "KALAMAZOO PRODUCTOS DE OFICINA SL",
-        "import_empresa": 94221.07,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "RIOS RUBIN MARIA JESUS",
-    "total_adjudicat": 94221.07,
-    "relacions": [
-      {
-        "empresa": "KALAMAZOO PRODUCTOS DE OFICINA SL",
-        "import_empresa": 94221.07,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "PEREZ HERNANDEZ NURIA",
-    "total_adjudicat": 94221.07,
-    "relacions": [
-      {
-        "empresa": "KALAMAZOO PRODUCTOS DE OFICINA SL",
-        "import_empresa": 94221.07,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
     "nom": "MIQUEL VILANOVA MARIA ANGELS",
     "total_adjudicat": 91904.77,
     "relacions": [
@@ -33566,6 +33770,362 @@
         "import_empresa": 89560.0,
         "carrecs": [
           "ADM.SOLIDAR."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "LLOBET YLL FEDERICO",
+    "total_adjudicat": 88416.24,
+    "relacions": [
+      {
+        "empresa": "SOCIEDAD ANONIMA MASATS-TRANSPORTS GENERALS, UNIPERSONAL",
+        "import_empresa": 80245.95,
+        "carrecs": [
+          "PRESIDENTE",
+          "CONSEJERO",
+          "APOD.MANCOMU"
+        ]
+      },
+      {
+        "empresa": "SOCIEDAD ANONIMA MASATS TRANSPORTS GENERALS",
+        "import_empresa": 8170.29,
+        "carrecs": [
+          "PRESIDENTE",
+          "CONSEJERO",
+          "APOD.MANCOMU"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "SANCHO BLASCO MIGUEL ANGEL",
+    "total_adjudicat": 88416.24,
+    "relacions": [
+      {
+        "empresa": "SOCIEDAD ANONIMA MASATS-TRANSPORTS GENERALS, UNIPERSONAL",
+        "import_empresa": 80245.95,
+        "carrecs": [
+          "CONSEJERO",
+          "APOD.MANCOMU"
+        ]
+      },
+      {
+        "empresa": "SOCIEDAD ANONIMA MASATS TRANSPORTS GENERALS",
+        "import_empresa": 8170.29,
+        "carrecs": [
+          "CONSEJERO",
+          "APOD.MANCOMU"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "VILADOT CASTELL MARIA CINTA",
+    "total_adjudicat": 88416.24,
+    "relacions": [
+      {
+        "empresa": "SOCIEDAD ANONIMA MASATS-TRANSPORTS GENERALS, UNIPERSONAL",
+        "import_empresa": 80245.95,
+        "carrecs": [
+          "CONSEJERO",
+          "APOD.MANCOMU"
+        ]
+      },
+      {
+        "empresa": "SOCIEDAD ANONIMA MASATS TRANSPORTS GENERALS",
+        "import_empresa": 8170.29,
+        "carrecs": [
+          "CONSEJERO",
+          "APOD.MANCOMU"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "GONZALEZ ORDOÑEZ FRANCISCO JOSE",
+    "total_adjudicat": 88416.24,
+    "relacions": [
+      {
+        "empresa": "SOCIEDAD ANONIMA MASATS-TRANSPORTS GENERALS, UNIPERSONAL",
+        "import_empresa": 80245.95,
+        "carrecs": [
+          "CONSEJERO",
+          "APOD.MANCOMU"
+        ]
+      },
+      {
+        "empresa": "SOCIEDAD ANONIMA MASATS TRANSPORTS GENERALS",
+        "import_empresa": 8170.29,
+        "carrecs": [
+          "CONSEJERO",
+          "APOD.MANCOMU"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "BERNAL IRIARTE IRIS",
+    "total_adjudicat": 88416.24,
+    "relacions": [
+      {
+        "empresa": "SOCIEDAD ANONIMA MASATS-TRANSPORTS GENERALS, UNIPERSONAL",
+        "import_empresa": 80245.95,
+        "carrecs": [
+          "CONSEJERO",
+          "APOD.MANCOMU"
+        ]
+      },
+      {
+        "empresa": "SOCIEDAD ANONIMA MASATS TRANSPORTS GENERALS",
+        "import_empresa": 8170.29,
+        "carrecs": [
+          "CONSEJERO",
+          "APOD.MANCOMU"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "ABADIA ARPAL JORDI",
+    "total_adjudicat": 88416.24,
+    "relacions": [
+      {
+        "empresa": "SOCIEDAD ANONIMA MASATS-TRANSPORTS GENERALS, UNIPERSONAL",
+        "import_empresa": 80245.95,
+        "carrecs": [
+          "CONSEJERO",
+          "APOD.MANCOMU"
+        ]
+      },
+      {
+        "empresa": "SOCIEDAD ANONIMA MASATS TRANSPORTS GENERALS",
+        "import_empresa": 8170.29,
+        "carrecs": [
+          "CONSEJERO",
+          "APOD.MANCOMU"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "GUERRERO MACHO JUAN",
+    "total_adjudicat": 88416.24,
+    "relacions": [
+      {
+        "empresa": "SOCIEDAD ANONIMA MASATS-TRANSPORTS GENERALS, UNIPERSONAL",
+        "import_empresa": 80245.95,
+        "carrecs": [
+          "CONSEJERO",
+          "APOD.MANCOMU"
+        ]
+      },
+      {
+        "empresa": "SOCIEDAD ANONIMA MASATS TRANSPORTS GENERALS",
+        "import_empresa": 8170.29,
+        "carrecs": [
+          "CONSEJERO",
+          "APOD.MANCOMU"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "FABREGAS AGUSTI CARLOS",
+    "total_adjudicat": 88416.24,
+    "relacions": [
+      {
+        "empresa": "SOCIEDAD ANONIMA MASATS-TRANSPORTS GENERALS, UNIPERSONAL",
+        "import_empresa": 80245.95,
+        "carrecs": [
+          "APOD.MANCOMU"
+        ]
+      },
+      {
+        "empresa": "SOCIEDAD ANONIMA MASATS TRANSPORTS GENERALS",
+        "import_empresa": 8170.29,
+        "carrecs": [
+          "APOD.MANCOMU"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "PARRA EXPOSITO JOSE MARIA",
+    "total_adjudicat": 88416.24,
+    "relacions": [
+      {
+        "empresa": "SOCIEDAD ANONIMA MASATS-TRANSPORTS GENERALS, UNIPERSONAL",
+        "import_empresa": 80245.95,
+        "carrecs": [
+          "APOD.MANCOMU"
+        ]
+      },
+      {
+        "empresa": "SOCIEDAD ANONIMA MASATS TRANSPORTS GENERALS",
+        "import_empresa": 8170.29,
+        "carrecs": [
+          "APOD.MANCOMU"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "RODRIGUEZ CAZORLA FRANCISCO",
+    "total_adjudicat": 88416.24,
+    "relacions": [
+      {
+        "empresa": "SOCIEDAD ANONIMA MASATS-TRANSPORTS GENERALS, UNIPERSONAL",
+        "import_empresa": 80245.95,
+        "carrecs": [
+          "APOD.MANCOMU"
+        ]
+      },
+      {
+        "empresa": "SOCIEDAD ANONIMA MASATS TRANSPORTS GENERALS",
+        "import_empresa": 8170.29,
+        "carrecs": [
+          "APOD.MANCOMU"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "MIERA NARANJO RAFAEL",
+    "total_adjudicat": 88416.24,
+    "relacions": [
+      {
+        "empresa": "SOCIEDAD ANONIMA MASATS-TRANSPORTS GENERALS, UNIPERSONAL",
+        "import_empresa": 80245.95,
+        "carrecs": [
+          "APOD.MANCOMU"
+        ]
+      },
+      {
+        "empresa": "SOCIEDAD ANONIMA MASATS TRANSPORTS GENERALS",
+        "import_empresa": 8170.29,
+        "carrecs": [
+          "APOD.MANCOMU"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "ALVAREZ ONTIVERO LORENZO",
+    "total_adjudicat": 88416.24,
+    "relacions": [
+      {
+        "empresa": "SOCIEDAD ANONIMA MASATS-TRANSPORTS GENERALS, UNIPERSONAL",
+        "import_empresa": 80245.95,
+        "carrecs": [
+          "APOD.MANCOMU"
+        ]
+      },
+      {
+        "empresa": "SOCIEDAD ANONIMA MASATS TRANSPORTS GENERALS",
+        "import_empresa": 8170.29,
+        "carrecs": [
+          "APOD.MANCOMU"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "PROS VARELA CARMEN",
+    "total_adjudicat": 88416.24,
+    "relacions": [
+      {
+        "empresa": "SOCIEDAD ANONIMA MASATS-TRANSPORTS GENERALS, UNIPERSONAL",
+        "import_empresa": 80245.95,
+        "carrecs": [
+          "APOD.MANCOMU"
+        ]
+      },
+      {
+        "empresa": "SOCIEDAD ANONIMA MASATS TRANSPORTS GENERALS",
+        "import_empresa": 8170.29,
+        "carrecs": [
+          "APOD.MANCOMU"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "SAENZ IBAÑEZ ANA ROSA",
+    "total_adjudicat": 88416.24,
+    "relacions": [
+      {
+        "empresa": "SOCIEDAD ANONIMA MASATS-TRANSPORTS GENERALS, UNIPERSONAL",
+        "import_empresa": 80245.95,
+        "carrecs": [
+          "SE.TEC.NO CO"
+        ]
+      },
+      {
+        "empresa": "SOCIEDAD ANONIMA MASATS TRANSPORTS GENERALS",
+        "import_empresa": 8170.29,
+        "carrecs": [
+          "SE.TEC.NO CO"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "DE MIGUEL DAPIA MARIA JOSE",
+    "total_adjudicat": 88416.24,
+    "relacions": [
+      {
+        "empresa": "SOCIEDAD ANONIMA MASATS-TRANSPORTS GENERALS, UNIPERSONAL",
+        "import_empresa": 80245.95,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      },
+      {
+        "empresa": "SOCIEDAD ANONIMA MASATS TRANSPORTS GENERALS",
+        "import_empresa": 8170.29,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "BISBAL ANSALDO MARC",
+    "total_adjudicat": 88416.24,
+    "relacions": [
+      {
+        "empresa": "SOCIEDAD ANONIMA MASATS-TRANSPORTS GENERALS, UNIPERSONAL",
+        "import_empresa": 80245.95,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      },
+      {
+        "empresa": "SOCIEDAD ANONIMA MASATS TRANSPORTS GENERALS",
+        "import_empresa": 8170.29,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "PROS VARELA CARME",
+    "total_adjudicat": 88416.24,
+    "relacions": [
+      {
+        "empresa": "SOCIEDAD ANONIMA MASATS-TRANSPORTS GENERALS, UNIPERSONAL",
+        "import_empresa": 80245.95,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      },
+      {
+        "empresa": "SOCIEDAD ANONIMA MASATS TRANSPORTS GENERALS",
+        "import_empresa": 8170.29,
+        "carrecs": [
+          "APODERAD.SOL"
         ]
       }
     ]
@@ -33852,362 +34412,6 @@
         "import_empresa": 86279.81,
         "carrecs": [
           "ADM.UNICO"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "LLOBET YLL FEDERICO",
-    "total_adjudicat": 84856.62,
-    "relacions": [
-      {
-        "empresa": "SOCIEDAD ANONIMA MASATS-TRANSPORTS GENERALS, UNIPERSONAL",
-        "import_empresa": 76686.33,
-        "carrecs": [
-          "PRESIDENTE",
-          "CONSEJERO",
-          "APOD.MANCOMU"
-        ]
-      },
-      {
-        "empresa": "SOCIEDAD ANONIMA MASATS TRANSPORTS GENERALS",
-        "import_empresa": 8170.29,
-        "carrecs": [
-          "PRESIDENTE",
-          "CONSEJERO",
-          "APOD.MANCOMU"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "SANCHO BLASCO MIGUEL ANGEL",
-    "total_adjudicat": 84856.62,
-    "relacions": [
-      {
-        "empresa": "SOCIEDAD ANONIMA MASATS-TRANSPORTS GENERALS, UNIPERSONAL",
-        "import_empresa": 76686.33,
-        "carrecs": [
-          "CONSEJERO",
-          "APOD.MANCOMU"
-        ]
-      },
-      {
-        "empresa": "SOCIEDAD ANONIMA MASATS TRANSPORTS GENERALS",
-        "import_empresa": 8170.29,
-        "carrecs": [
-          "CONSEJERO",
-          "APOD.MANCOMU"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "VILADOT CASTELL MARIA CINTA",
-    "total_adjudicat": 84856.62,
-    "relacions": [
-      {
-        "empresa": "SOCIEDAD ANONIMA MASATS-TRANSPORTS GENERALS, UNIPERSONAL",
-        "import_empresa": 76686.33,
-        "carrecs": [
-          "CONSEJERO",
-          "APOD.MANCOMU"
-        ]
-      },
-      {
-        "empresa": "SOCIEDAD ANONIMA MASATS TRANSPORTS GENERALS",
-        "import_empresa": 8170.29,
-        "carrecs": [
-          "CONSEJERO",
-          "APOD.MANCOMU"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "GONZALEZ ORDOÑEZ FRANCISCO JOSE",
-    "total_adjudicat": 84856.62,
-    "relacions": [
-      {
-        "empresa": "SOCIEDAD ANONIMA MASATS-TRANSPORTS GENERALS, UNIPERSONAL",
-        "import_empresa": 76686.33,
-        "carrecs": [
-          "CONSEJERO",
-          "APOD.MANCOMU"
-        ]
-      },
-      {
-        "empresa": "SOCIEDAD ANONIMA MASATS TRANSPORTS GENERALS",
-        "import_empresa": 8170.29,
-        "carrecs": [
-          "CONSEJERO",
-          "APOD.MANCOMU"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "BERNAL IRIARTE IRIS",
-    "total_adjudicat": 84856.62,
-    "relacions": [
-      {
-        "empresa": "SOCIEDAD ANONIMA MASATS-TRANSPORTS GENERALS, UNIPERSONAL",
-        "import_empresa": 76686.33,
-        "carrecs": [
-          "CONSEJERO",
-          "APOD.MANCOMU"
-        ]
-      },
-      {
-        "empresa": "SOCIEDAD ANONIMA MASATS TRANSPORTS GENERALS",
-        "import_empresa": 8170.29,
-        "carrecs": [
-          "CONSEJERO",
-          "APOD.MANCOMU"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "ABADIA ARPAL JORDI",
-    "total_adjudicat": 84856.62,
-    "relacions": [
-      {
-        "empresa": "SOCIEDAD ANONIMA MASATS-TRANSPORTS GENERALS, UNIPERSONAL",
-        "import_empresa": 76686.33,
-        "carrecs": [
-          "CONSEJERO",
-          "APOD.MANCOMU"
-        ]
-      },
-      {
-        "empresa": "SOCIEDAD ANONIMA MASATS TRANSPORTS GENERALS",
-        "import_empresa": 8170.29,
-        "carrecs": [
-          "CONSEJERO",
-          "APOD.MANCOMU"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "GUERRERO MACHO JUAN",
-    "total_adjudicat": 84856.62,
-    "relacions": [
-      {
-        "empresa": "SOCIEDAD ANONIMA MASATS-TRANSPORTS GENERALS, UNIPERSONAL",
-        "import_empresa": 76686.33,
-        "carrecs": [
-          "CONSEJERO",
-          "APOD.MANCOMU"
-        ]
-      },
-      {
-        "empresa": "SOCIEDAD ANONIMA MASATS TRANSPORTS GENERALS",
-        "import_empresa": 8170.29,
-        "carrecs": [
-          "CONSEJERO",
-          "APOD.MANCOMU"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "FABREGAS AGUSTI CARLOS",
-    "total_adjudicat": 84856.62,
-    "relacions": [
-      {
-        "empresa": "SOCIEDAD ANONIMA MASATS-TRANSPORTS GENERALS, UNIPERSONAL",
-        "import_empresa": 76686.33,
-        "carrecs": [
-          "APOD.MANCOMU"
-        ]
-      },
-      {
-        "empresa": "SOCIEDAD ANONIMA MASATS TRANSPORTS GENERALS",
-        "import_empresa": 8170.29,
-        "carrecs": [
-          "APOD.MANCOMU"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "PARRA EXPOSITO JOSE MARIA",
-    "total_adjudicat": 84856.62,
-    "relacions": [
-      {
-        "empresa": "SOCIEDAD ANONIMA MASATS-TRANSPORTS GENERALS, UNIPERSONAL",
-        "import_empresa": 76686.33,
-        "carrecs": [
-          "APOD.MANCOMU"
-        ]
-      },
-      {
-        "empresa": "SOCIEDAD ANONIMA MASATS TRANSPORTS GENERALS",
-        "import_empresa": 8170.29,
-        "carrecs": [
-          "APOD.MANCOMU"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "RODRIGUEZ CAZORLA FRANCISCO",
-    "total_adjudicat": 84856.62,
-    "relacions": [
-      {
-        "empresa": "SOCIEDAD ANONIMA MASATS-TRANSPORTS GENERALS, UNIPERSONAL",
-        "import_empresa": 76686.33,
-        "carrecs": [
-          "APOD.MANCOMU"
-        ]
-      },
-      {
-        "empresa": "SOCIEDAD ANONIMA MASATS TRANSPORTS GENERALS",
-        "import_empresa": 8170.29,
-        "carrecs": [
-          "APOD.MANCOMU"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "MIERA NARANJO RAFAEL",
-    "total_adjudicat": 84856.62,
-    "relacions": [
-      {
-        "empresa": "SOCIEDAD ANONIMA MASATS-TRANSPORTS GENERALS, UNIPERSONAL",
-        "import_empresa": 76686.33,
-        "carrecs": [
-          "APOD.MANCOMU"
-        ]
-      },
-      {
-        "empresa": "SOCIEDAD ANONIMA MASATS TRANSPORTS GENERALS",
-        "import_empresa": 8170.29,
-        "carrecs": [
-          "APOD.MANCOMU"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "ALVAREZ ONTIVERO LORENZO",
-    "total_adjudicat": 84856.62,
-    "relacions": [
-      {
-        "empresa": "SOCIEDAD ANONIMA MASATS-TRANSPORTS GENERALS, UNIPERSONAL",
-        "import_empresa": 76686.33,
-        "carrecs": [
-          "APOD.MANCOMU"
-        ]
-      },
-      {
-        "empresa": "SOCIEDAD ANONIMA MASATS TRANSPORTS GENERALS",
-        "import_empresa": 8170.29,
-        "carrecs": [
-          "APOD.MANCOMU"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "PROS VARELA CARMEN",
-    "total_adjudicat": 84856.62,
-    "relacions": [
-      {
-        "empresa": "SOCIEDAD ANONIMA MASATS-TRANSPORTS GENERALS, UNIPERSONAL",
-        "import_empresa": 76686.33,
-        "carrecs": [
-          "APOD.MANCOMU"
-        ]
-      },
-      {
-        "empresa": "SOCIEDAD ANONIMA MASATS TRANSPORTS GENERALS",
-        "import_empresa": 8170.29,
-        "carrecs": [
-          "APOD.MANCOMU"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "SAENZ IBAÑEZ ANA ROSA",
-    "total_adjudicat": 84856.62,
-    "relacions": [
-      {
-        "empresa": "SOCIEDAD ANONIMA MASATS-TRANSPORTS GENERALS, UNIPERSONAL",
-        "import_empresa": 76686.33,
-        "carrecs": [
-          "SE.TEC.NO CO"
-        ]
-      },
-      {
-        "empresa": "SOCIEDAD ANONIMA MASATS TRANSPORTS GENERALS",
-        "import_empresa": 8170.29,
-        "carrecs": [
-          "SE.TEC.NO CO"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "DE MIGUEL DAPIA MARIA JOSE",
-    "total_adjudicat": 84856.62,
-    "relacions": [
-      {
-        "empresa": "SOCIEDAD ANONIMA MASATS-TRANSPORTS GENERALS, UNIPERSONAL",
-        "import_empresa": 76686.33,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      },
-      {
-        "empresa": "SOCIEDAD ANONIMA MASATS TRANSPORTS GENERALS",
-        "import_empresa": 8170.29,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "BISBAL ANSALDO MARC",
-    "total_adjudicat": 84856.62,
-    "relacions": [
-      {
-        "empresa": "SOCIEDAD ANONIMA MASATS-TRANSPORTS GENERALS, UNIPERSONAL",
-        "import_empresa": 76686.33,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      },
-      {
-        "empresa": "SOCIEDAD ANONIMA MASATS TRANSPORTS GENERALS",
-        "import_empresa": 8170.29,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "PROS VARELA CARME",
-    "total_adjudicat": 84856.62,
-    "relacions": [
-      {
-        "empresa": "SOCIEDAD ANONIMA MASATS-TRANSPORTS GENERALS, UNIPERSONAL",
-        "import_empresa": 76686.33,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      },
-      {
-        "empresa": "SOCIEDAD ANONIMA MASATS TRANSPORTS GENERALS",
-        "import_empresa": 8170.29,
-        "carrecs": [
-          "APODERAD.SOL"
         ]
       }
     ]
@@ -35296,6 +35500,26 @@
     ]
   },
   {
+    "nom": "VICTORI BLAYA XAVIER",
+    "total_adjudicat": 83515.0,
+    "relacions": [
+      {
+        "empresa": "PRODUCCIONS ARTÍSTIQUES VICTORI, SL",
+        "import_empresa": 76325.0,
+        "carrecs": [
+          "ADM.UNICO"
+        ]
+      },
+      {
+        "empresa": "LA BONA PARTY SL",
+        "import_empresa": 7190.0,
+        "carrecs": [
+          "ADM.SOLIDAR."
+        ]
+      }
+    ]
+  },
+  {
     "nom": "GARCIA SUAREZ CARLOS",
     "total_adjudicat": 82842.51,
     "relacions": [
@@ -35318,6 +35542,58 @@
         "import_empresa": 82842.51,
         "carrecs": [
           "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "PUJOL ARBOIX JOSEFINA",
+    "total_adjudicat": 82416.13,
+    "relacions": [
+      {
+        "empresa": "FLORS ROSET, SL",
+        "import_empresa": 82416.13,
+        "carrecs": [
+          "ADM.SOLIDAR."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "ROSET PUJOL JOSE MARIA",
+    "total_adjudicat": 82416.13,
+    "relacions": [
+      {
+        "empresa": "FLORS ROSET, SL",
+        "import_empresa": 82416.13,
+        "carrecs": [
+          "ADM.SOLIDAR."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "ROSET PUJOL ENRIQUE",
+    "total_adjudicat": 82416.13,
+    "relacions": [
+      {
+        "empresa": "FLORS ROSET, SL",
+        "import_empresa": 82416.13,
+        "carrecs": [
+          "ADM.SOLIDAR."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "ROSET PUJOL OSCAR",
+    "total_adjudicat": 82416.13,
+    "relacions": [
+      {
+        "empresa": "FLORS ROSET, SL",
+        "import_empresa": 82416.13,
+        "carrecs": [
+          "ADM.SOLIDAR."
         ]
       }
     ]
@@ -35498,58 +35774,6 @@
         "import_empresa": 80622.06,
         "carrecs": [
           "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "PUJOL ARBOIX JOSEFINA",
-    "total_adjudicat": 80386.13,
-    "relacions": [
-      {
-        "empresa": "FLORS ROSET, SL",
-        "import_empresa": 80386.13,
-        "carrecs": [
-          "ADM.SOLIDAR."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "ROSET PUJOL JOSE MARIA",
-    "total_adjudicat": 80386.13,
-    "relacions": [
-      {
-        "empresa": "FLORS ROSET, SL",
-        "import_empresa": 80386.13,
-        "carrecs": [
-          "ADM.SOLIDAR."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "ROSET PUJOL ENRIQUE",
-    "total_adjudicat": 80386.13,
-    "relacions": [
-      {
-        "empresa": "FLORS ROSET, SL",
-        "import_empresa": 80386.13,
-        "carrecs": [
-          "ADM.SOLIDAR."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "ROSET PUJOL OSCAR",
-    "total_adjudicat": 80386.13,
-    "relacions": [
-      {
-        "empresa": "FLORS ROSET, SL",
-        "import_empresa": 80386.13,
-        "carrecs": [
-          "ADM.SOLIDAR."
         ]
       }
     ]
@@ -35933,12 +36157,51 @@
     ]
   },
   {
-    "nom": "VOGEL MICHAEL RENE",
-    "total_adjudicat": 67014.24,
+    "nom": "DE CARLOS PEÑA RAFAEL",
+    "total_adjudicat": 68739.24,
     "relacions": [
       {
         "empresa": "OBRAS Y PAVIMENTOS ESPECIALES, SA",
-        "import_empresa": 67014.24,
+        "import_empresa": 68739.24,
+        "carrecs": [
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "QUIJADA GRACIA SERGIO",
+    "total_adjudicat": 68739.24,
+    "relacions": [
+      {
+        "empresa": "OBRAS Y PAVIMENTOS ESPECIALES, SA",
+        "import_empresa": 68739.24,
+        "carrecs": [
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "VISANZAI GENE RAMON",
+    "total_adjudicat": 68739.24,
+    "relacions": [
+      {
+        "empresa": "OBRAS Y PAVIMENTOS ESPECIALES, SA",
+        "import_empresa": 68739.24,
+        "carrecs": [
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "VOGEL MICHAEL RENE",
+    "total_adjudicat": 68739.24,
+    "relacions": [
+      {
+        "empresa": "OBRAS Y PAVIMENTOS ESPECIALES, SA",
+        "import_empresa": 68739.24,
         "carrecs": [
           "Consejero"
         ]
@@ -35947,11 +36210,11 @@
   },
   {
     "nom": "TEEKENS JOHANNES ABRAHAM",
-    "total_adjudicat": 67014.24,
+    "total_adjudicat": 68739.24,
     "relacions": [
       {
         "empresa": "OBRAS Y PAVIMENTOS ESPECIALES, SA",
-        "import_empresa": 67014.24,
+        "import_empresa": 68739.24,
         "carrecs": [
           "Presidente",
           "Consejero"
@@ -35961,11 +36224,11 @@
   },
   {
     "nom": "DIAZ PENA FERNANDO",
-    "total_adjudicat": 67014.24,
+    "total_adjudicat": 68739.24,
     "relacions": [
       {
         "empresa": "OBRAS Y PAVIMENTOS ESPECIALES, SA",
-        "import_empresa": 67014.24,
+        "import_empresa": 68739.24,
         "carrecs": [
           "Consejero",
           "Apo.Sol."
@@ -35975,11 +36238,11 @@
   },
   {
     "nom": "REY VILAR CESAR",
-    "total_adjudicat": 67014.24,
+    "total_adjudicat": 68739.24,
     "relacions": [
       {
         "empresa": "OBRAS Y PAVIMENTOS ESPECIALES, SA",
-        "import_empresa": 67014.24,
+        "import_empresa": 68739.24,
         "carrecs": [
           "Apo.Manc.",
           "Secretario"
@@ -35989,11 +36252,11 @@
   },
   {
     "nom": "SOLER HERNANDEZ ANTONIO",
-    "total_adjudicat": 67014.24,
+    "total_adjudicat": 68739.24,
     "relacions": [
       {
         "empresa": "OBRAS Y PAVIMENTOS ESPECIALES, SA",
-        "import_empresa": 67014.24,
+        "import_empresa": 68739.24,
         "carrecs": [
           "Apoderado"
         ]
@@ -36002,11 +36265,11 @@
   },
   {
     "nom": "RUS MARTINEZ HUGO ALFONSO",
-    "total_adjudicat": 67014.24,
+    "total_adjudicat": 68739.24,
     "relacions": [
       {
         "empresa": "OBRAS Y PAVIMENTOS ESPECIALES, SA",
-        "import_empresa": 67014.24,
+        "import_empresa": 68739.24,
         "carrecs": [
           "Apoderado"
         ]
@@ -36015,11 +36278,11 @@
   },
   {
     "nom": "MUERZA EZQUERRO FERNANDO",
-    "total_adjudicat": 67014.24,
+    "total_adjudicat": 68739.24,
     "relacions": [
       {
         "empresa": "OBRAS Y PAVIMENTOS ESPECIALES, SA",
-        "import_empresa": 67014.24,
+        "import_empresa": 68739.24,
         "carrecs": [
           "Apoderado"
         ]
@@ -36028,11 +36291,11 @@
   },
   {
     "nom": "TAHOCES ESCRIVA DE ROMANI LAURA",
-    "total_adjudicat": 67014.24,
+    "total_adjudicat": 68739.24,
     "relacions": [
       {
         "empresa": "OBRAS Y PAVIMENTOS ESPECIALES, SA",
-        "import_empresa": 67014.24,
+        "import_empresa": 68739.24,
         "carrecs": [
           "Auditor"
         ]
@@ -36041,11 +36304,11 @@
   },
   {
     "nom": "FERNANDEZ BERNARDINO ALBERTO",
-    "total_adjudicat": 67014.24,
+    "total_adjudicat": 68739.24,
     "relacions": [
       {
         "empresa": "OBRAS Y PAVIMENTOS ESPECIALES, SA",
-        "import_empresa": 67014.24,
+        "import_empresa": 68739.24,
         "carrecs": [
           "Auditor"
         ]
@@ -36054,11 +36317,11 @@
   },
   {
     "nom": "TAHOCES ACEBO BERNARDO",
-    "total_adjudicat": 67014.24,
+    "total_adjudicat": 68739.24,
     "relacions": [
       {
         "empresa": "OBRAS Y PAVIMENTOS ESPECIALES, SA",
-        "import_empresa": 67014.24,
+        "import_empresa": 68739.24,
         "carrecs": [
           "Auditor"
         ]
@@ -36067,11 +36330,11 @@
   },
   {
     "nom": "DIAZ GOMEZ MARIANO",
-    "total_adjudicat": 67014.24,
+    "total_adjudicat": 68739.24,
     "relacions": [
       {
         "empresa": "OBRAS Y PAVIMENTOS ESPECIALES, SA",
-        "import_empresa": 67014.24,
+        "import_empresa": 68739.24,
         "carrecs": [
           "Aud.Supl."
         ]
@@ -36191,19 +36454,6 @@
     ]
   },
   {
-    "nom": "VICTORI BLAYA XAVIER",
-    "total_adjudicat": 65575.0,
-    "relacions": [
-      {
-        "empresa": "PRODUCCIONS ARTÍSTIQUES VICTORI, SL",
-        "import_empresa": 65575.0,
-        "carrecs": [
-          "ADM.UNICO"
-        ]
-      }
-    ]
-  },
-  {
     "nom": "VALLS OLIVAN JOSEP LLUIS",
     "total_adjudicat": 64828.0,
     "relacions": [
@@ -36263,6 +36513,33 @@
         "empresa": "EXCAVACIONS ANOIA SA",
         "import_empresa": 59917.0,
         "carrecs": [
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "GIBERT RIBA MARIA",
+    "total_adjudicat": 59892.68,
+    "relacions": [
+      {
+        "empresa": "GIBERT I GIBERT, SL",
+        "import_empresa": 59892.68,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "MAS GIBERT ALBERT",
+    "total_adjudicat": 59892.68,
+    "relacions": [
+      {
+        "empresa": "GIBERT I GIBERT, SL",
+        "import_empresa": 59892.68,
+        "carrecs": [
+          "ADM.UNICO",
           "APODERAD.SOL"
         ]
       }
@@ -36329,33 +36606,6 @@
         "import_empresa": 59316.6,
         "carrecs": [
           "ADM.UNICO"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "GIBERT RIBA MARIA",
-    "total_adjudicat": 58842.68,
-    "relacions": [
-      {
-        "empresa": "GIBERT I GIBERT, SL",
-        "import_empresa": 58842.68,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "MAS GIBERT ALBERT",
-    "total_adjudicat": 58842.68,
-    "relacions": [
-      {
-        "empresa": "GIBERT I GIBERT, SL",
-        "import_empresa": 58842.68,
-        "carrecs": [
-          "ADM.UNICO",
-          "APODERAD.SOL"
         ]
       }
     ]
@@ -36621,6 +36871,19 @@
     ]
   },
   {
+    "nom": "LACOMA HUERVA GUILLERMO",
+    "total_adjudicat": 55913.14,
+    "relacions": [
+      {
+        "empresa": "PUNT NET ANOIA SL",
+        "import_empresa": 55913.14,
+        "carrecs": [
+          "ADM.CONJUNTO"
+        ]
+      }
+    ]
+  },
+  {
     "nom": "LUMBRERAS PEREZ FERNANDO",
     "total_adjudicat": 55004.92,
     "relacions": [
@@ -36630,6 +36893,26 @@
         "carrecs": [
           "Socio único",
           "Adm. Unico"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "RAMOS SEGURA JUAN",
+    "total_adjudicat": 54521.15,
+    "relacions": [
+      {
+        "empresa": "PAVIESPORT 2000 SL",
+        "import_empresa": 39343.15,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      },
+      {
+        "empresa": "PARQUETS 1900, SL",
+        "import_empresa": 15178.0,
+        "carrecs": [
+          "ADM.UNICO"
         ]
       }
     ]
@@ -36722,39 +37005,6 @@
         "carrecs": [
           "ADM.UNICO",
           "APODERADO"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "LACOMA HUERVA GUILLERMO",
-    "total_adjudicat": 52043.14,
-    "relacions": [
-      {
-        "empresa": "PUNT NET ANOIA SL",
-        "import_empresa": 52043.14,
-        "carrecs": [
-          "ADM.CONJUNTO"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "RAMOS SEGURA JUAN",
-    "total_adjudicat": 52040.15,
-    "relacions": [
-      {
-        "empresa": "PAVIESPORT 2000 SL",
-        "import_empresa": 39343.15,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      },
-      {
-        "empresa": "PARQUETS 1900, SL",
-        "import_empresa": 12697.0,
-        "carrecs": [
-          "ADM.UNICO"
         ]
       }
     ]
@@ -40326,6 +40576,35 @@
     ]
   },
   {
+    "nom": "ALSINA CORNELLANA RAMON MARIA",
+    "total_adjudicat": 44835.98,
+    "relacions": [
+      {
+        "empresa": "CORPORACION ALIMENTARIA GUISSONA, SA",
+        "import_empresa": 44835.98,
+        "carrecs": [
+          "Presidente",
+          "Consejero",
+          "Con.Delegado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "PUIG TREPAT ANDREU",
+    "total_adjudicat": 44835.98,
+    "relacions": [
+      {
+        "empresa": "CORPORACION ALIMENTARIA GUISSONA, SA",
+        "import_empresa": 44835.98,
+        "carrecs": [
+          "Consejero",
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
     "nom": "JOSE GENE CAPDEVILA",
     "total_adjudicat": 44835.98,
     "relacions": [
@@ -40456,20 +40735,6 @@
     ]
   },
   {
-    "nom": "ALSINA CORNELLANA RAMON MARIA",
-    "total_adjudicat": 44835.98,
-    "relacions": [
-      {
-        "empresa": "CORPORACION ALIMENTARIA GUISSONA, SA",
-        "import_empresa": 44835.98,
-        "carrecs": [
-          "Consejero",
-          "Con.Delegado"
-        ]
-      }
-    ]
-  },
-  {
     "nom": "ALSINA CORNELLANA JOSEP",
     "total_adjudicat": 44835.98,
     "relacions": [
@@ -40543,20 +40808,6 @@
         "import_empresa": 44835.98,
         "carrecs": [
           "Consejero"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "PUIG TREPAT ANDREU",
-    "total_adjudicat": 44835.98,
-    "relacions": [
-      {
-        "empresa": "CORPORACION ALIMENTARIA GUISSONA, SA",
-        "import_empresa": 44835.98,
-        "carrecs": [
-          "Consejero",
-          "Apoderado"
         ]
       }
     ]
@@ -41135,6 +41386,98 @@
     ]
   },
   {
+    "nom": "DE LAS CASAS GIMENEZ DE AZCARATE VICTORIA",
+    "total_adjudicat": 41647.0,
+    "relacions": [
+      {
+        "empresa": "ECITYCLIC SOLUTIONS, SL.",
+        "import_empresa": 41647.0,
+        "carrecs": [
+          "Apo.Sol."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "GIMENEZ PORCEL JUDITH",
+    "total_adjudicat": 41647.0,
+    "relacions": [
+      {
+        "empresa": "ECITYCLIC SOLUTIONS, SL.",
+        "import_empresa": 41647.0,
+        "carrecs": [
+          "Apo.Sol."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "PERERA MARTIN ALVARO",
+    "total_adjudicat": 41647.0,
+    "relacions": [
+      {
+        "empresa": "ECITYCLIC SOLUTIONS, SL.",
+        "import_empresa": 41647.0,
+        "carrecs": [
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "BOJ CORRAL LUIS ALBERTO",
+    "total_adjudicat": 41647.0,
+    "relacions": [
+      {
+        "empresa": "ECITYCLIC SOLUTIONS, SL.",
+        "import_empresa": 41647.0,
+        "carrecs": [
+          "Apo.Sol."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "ELIAS FERRER DAVID",
+    "total_adjudicat": 41647.0,
+    "relacions": [
+      {
+        "empresa": "ECITYCLIC SOLUTIONS, SL.",
+        "import_empresa": 41647.0,
+        "carrecs": [
+          "Apo.Sol."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "PERERA BADIA ALVARO",
+    "total_adjudicat": 41647.0,
+    "relacions": [
+      {
+        "empresa": "ECITYCLIC SOLUTIONS, SL.",
+        "import_empresa": 41647.0,
+        "carrecs": [
+          "Consejero",
+          "Secretario"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "PUERTAS GELONCH FRANCESC XAVIER",
+    "total_adjudicat": 41647.0,
+    "relacions": [
+      {
+        "empresa": "ECITYCLIC SOLUTIONS, SL.",
+        "import_empresa": 41647.0,
+        "carrecs": [
+          "Consejero"
+        ]
+      }
+    ]
+  },
+  {
     "nom": "ESTALELLA FORTEZA MANUEL",
     "total_adjudicat": 41340.65,
     "relacions": [
@@ -41292,98 +41635,6 @@
         "carrecs": [
           "CONSEJERO",
           "CONS.DEL.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "DE LAS CASAS GIMENEZ DE AZCARATE VICTORIA",
-    "total_adjudicat": 39947.0,
-    "relacions": [
-      {
-        "empresa": "ECITYCLIC SOLUTIONS, SL.",
-        "import_empresa": 39947.0,
-        "carrecs": [
-          "Apo.Sol."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "GIMENEZ PORCEL JUDITH",
-    "total_adjudicat": 39947.0,
-    "relacions": [
-      {
-        "empresa": "ECITYCLIC SOLUTIONS, SL.",
-        "import_empresa": 39947.0,
-        "carrecs": [
-          "Apo.Sol."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "PERERA MARTIN ALVARO",
-    "total_adjudicat": 39947.0,
-    "relacions": [
-      {
-        "empresa": "ECITYCLIC SOLUTIONS, SL.",
-        "import_empresa": 39947.0,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "BOJ CORRAL LUIS ALBERTO",
-    "total_adjudicat": 39947.0,
-    "relacions": [
-      {
-        "empresa": "ECITYCLIC SOLUTIONS, SL.",
-        "import_empresa": 39947.0,
-        "carrecs": [
-          "Apo.Sol."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "ELIAS FERRER DAVID",
-    "total_adjudicat": 39947.0,
-    "relacions": [
-      {
-        "empresa": "ECITYCLIC SOLUTIONS, SL.",
-        "import_empresa": 39947.0,
-        "carrecs": [
-          "Apo.Sol."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "PERERA BADIA ALVARO",
-    "total_adjudicat": 39947.0,
-    "relacions": [
-      {
-        "empresa": "ECITYCLIC SOLUTIONS, SL.",
-        "import_empresa": 39947.0,
-        "carrecs": [
-          "Consejero",
-          "Secretario"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "PUERTAS GELONCH FRANCESC XAVIER",
-    "total_adjudicat": 39947.0,
-    "relacions": [
-      {
-        "empresa": "ECITYCLIC SOLUTIONS, SL.",
-        "import_empresa": 39947.0,
-        "carrecs": [
-          "Consejero"
         ]
       }
     ]
@@ -41607,6 +41858,19 @@
         "import_empresa": 38568.0,
         "carrecs": [
           "REPR.143 RRM"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "MEDINA CARRIQUE DANIEL",
+    "total_adjudicat": 38364.0,
+    "relacions": [
+      {
+        "empresa": "PRESOLMAN MEDINA, SL",
+        "import_empresa": 38364.0,
+        "carrecs": [
+          "ADM.UNICO"
         ]
       }
     ]
@@ -44596,19 +44860,6 @@
     ]
   },
   {
-    "nom": "MEDINA CARRIQUE DANIEL",
-    "total_adjudicat": 33704.0,
-    "relacions": [
-      {
-        "empresa": "PRESOLMAN MEDINA, SL",
-        "import_empresa": 33704.0,
-        "carrecs": [
-          "ADM.UNICO"
-        ]
-      }
-    ]
-  },
-  {
     "nom": "GARCIA MORENO ALVAREZ MIGUEL ANGEL",
     "total_adjudicat": 33164.95,
     "relacions": [
@@ -46402,6 +46653,92 @@
     ]
   },
   {
+    "nom": "MAYOLAS AMOROS GEORGINA",
+    "total_adjudicat": 25683.47,
+    "relacions": [
+      {
+        "empresa": "PROMOTORA MEDITERRANEA 2 S A",
+        "import_empresa": 11234.3,
+        "carrecs": [
+          "V-SEC NO CON"
+        ]
+      },
+      {
+        "empresa": "ESCOFET 1886, SA",
+        "import_empresa": 8270.35,
+        "carrecs": [
+          "V-SEC NO CON"
+        ]
+      },
+      {
+        "empresa": "INDUSTRIAL BREINCO, S.A.",
+        "import_empresa": 6178.82,
+        "carrecs": [
+          "V-SEC NO CON"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "FERNANDEZ CAPO SALVADOR",
+    "total_adjudicat": 25683.47,
+    "relacions": [
+      {
+        "empresa": "PROMOTORA MEDITERRANEA 2 S A",
+        "import_empresa": 11234.3,
+        "carrecs": [
+          "PRESIDENTE",
+          "CONSEJERO",
+          "APOD.SOL/MAN"
+        ]
+      },
+      {
+        "empresa": "ESCOFET 1886, SA",
+        "import_empresa": 8270.35,
+        "carrecs": [
+          "APOD.SOL/MAN",
+          "CONSEJERO"
+        ]
+      },
+      {
+        "empresa": "INDUSTRIAL BREINCO, S.A.",
+        "import_empresa": 6178.82,
+        "carrecs": [
+          "CONSEJERO"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "GONZALEZ RODRIGUEZ RAUL MANUEL",
+    "total_adjudicat": 25683.47,
+    "relacions": [
+      {
+        "empresa": "PROMOTORA MEDITERRANEA 2 S A",
+        "import_empresa": 11234.3,
+        "carrecs": [
+          "CONSEJERO",
+          "SECRETARIO",
+          "APODERADO"
+        ]
+      },
+      {
+        "empresa": "ESCOFET 1886, SA",
+        "import_empresa": 8270.35,
+        "carrecs": [
+          "SECR.NO CONS"
+        ]
+      },
+      {
+        "empresa": "INDUSTRIAL BREINCO, S.A.",
+        "import_empresa": 6178.82,
+        "carrecs": [
+          "SECR.NO CONS"
+        ]
+      }
+    ]
+  },
+  {
     "nom": "LOPEZ RUIZ ROSA MARIA",
     "total_adjudicat": 25658.6,
     "relacions": [
@@ -46699,92 +47036,6 @@
         "import_empresa": 24763.73,
         "carrecs": [
           "Consejero"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "MAYOLAS AMOROS GEORGINA",
-    "total_adjudicat": 24609.47,
-    "relacions": [
-      {
-        "empresa": "PROMOTORA MEDITERRANEA 2 S A",
-        "import_empresa": 10160.3,
-        "carrecs": [
-          "V-SEC NO CON"
-        ]
-      },
-      {
-        "empresa": "ESCOFET 1886, SA",
-        "import_empresa": 8270.35,
-        "carrecs": [
-          "V-SEC NO CON"
-        ]
-      },
-      {
-        "empresa": "INDUSTRIAL BREINCO, S.A.",
-        "import_empresa": 6178.82,
-        "carrecs": [
-          "V-SEC NO CON"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "FERNANDEZ CAPO SALVADOR",
-    "total_adjudicat": 24609.47,
-    "relacions": [
-      {
-        "empresa": "PROMOTORA MEDITERRANEA 2 S A",
-        "import_empresa": 10160.3,
-        "carrecs": [
-          "PRESIDENTE",
-          "CONSEJERO",
-          "APOD.SOL/MAN"
-        ]
-      },
-      {
-        "empresa": "ESCOFET 1886, SA",
-        "import_empresa": 8270.35,
-        "carrecs": [
-          "APOD.SOL/MAN",
-          "CONSEJERO"
-        ]
-      },
-      {
-        "empresa": "INDUSTRIAL BREINCO, S.A.",
-        "import_empresa": 6178.82,
-        "carrecs": [
-          "CONSEJERO"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "GONZALEZ RODRIGUEZ RAUL MANUEL",
-    "total_adjudicat": 24609.47,
-    "relacions": [
-      {
-        "empresa": "PROMOTORA MEDITERRANEA 2 S A",
-        "import_empresa": 10160.3,
-        "carrecs": [
-          "CONSEJERO",
-          "SECRETARIO",
-          "APODERADO"
-        ]
-      },
-      {
-        "empresa": "ESCOFET 1886, SA",
-        "import_empresa": 8270.35,
-        "carrecs": [
-          "SECR.NO CONS"
-        ]
-      },
-      {
-        "empresa": "INDUSTRIAL BREINCO, S.A.",
-        "import_empresa": 6178.82,
-        "carrecs": [
-          "SECR.NO CONS"
         ]
       }
     ]
@@ -47919,6 +48170,19 @@
     ]
   },
   {
+    "nom": "FERRUS BELLES MONTSERRAT",
+    "total_adjudicat": 22505.0,
+    "relacions": [
+      {
+        "empresa": "TECNI POU SL",
+        "import_empresa": 22505.0,
+        "carrecs": [
+          "ADM.UNICO"
+        ]
+      }
+    ]
+  },
+  {
     "nom": "ESPINET FERNANDEZ SEBASTIAN RAMON",
     "total_adjudicat": 22490.3,
     "relacions": [
@@ -48538,19 +48802,6 @@
         "import_empresa": 21049.7,
         "carrecs": [
           "APODERADO"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "FERRUS BELLES MONTSERRAT",
-    "total_adjudicat": 20974.0,
-    "relacions": [
-      {
-        "empresa": "TECNI POU SL",
-        "import_empresa": 20974.0,
-        "carrecs": [
-          "ADM.UNICO"
         ]
       }
     ]
@@ -49277,6 +49528,168 @@
       {
         "empresa": "GESAB, S.A.",
         "import_empresa": 19702.72,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "BONNIN BIOSLADA JORGE",
+    "total_adjudicat": 19504.65,
+    "relacions": [
+      {
+        "empresa": "PROMOTORA MEDITERRANEA 2 S A",
+        "import_empresa": 11234.3,
+        "carrecs": [
+          "CONSEJERO",
+          "APOD.SOL/MAN"
+        ]
+      },
+      {
+        "empresa": "ESCOFET 1886, SA",
+        "import_empresa": 8270.35,
+        "carrecs": [
+          "APOD.SOL/MAN",
+          "CONSEJERO"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "CAMPMANY CARRILLO JORDI",
+    "total_adjudicat": 19504.65,
+    "relacions": [
+      {
+        "empresa": "PROMOTORA MEDITERRANEA 2 S A",
+        "import_empresa": 11234.3,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      },
+      {
+        "empresa": "ESCOFET 1886, SA",
+        "import_empresa": 8270.35,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "SUEIRAS GIL JAVIER",
+    "total_adjudicat": 19504.65,
+    "relacions": [
+      {
+        "empresa": "PROMOTORA MEDITERRANEA 2 S A",
+        "import_empresa": 11234.3,
+        "carrecs": [
+          "APOD.SOL/MAN"
+        ]
+      },
+      {
+        "empresa": "ESCOFET 1886, SA",
+        "import_empresa": 8270.35,
+        "carrecs": [
+          "APOD.SOL/MAN"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "QUERO LUQUE ALBERT",
+    "total_adjudicat": 19504.65,
+    "relacions": [
+      {
+        "empresa": "PROMOTORA MEDITERRANEA 2 S A",
+        "import_empresa": 11234.3,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      },
+      {
+        "empresa": "ESCOFET 1886, SA",
+        "import_empresa": 8270.35,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "ARIZA CABELLO CARMEN",
+    "total_adjudicat": 19504.65,
+    "relacions": [
+      {
+        "empresa": "PROMOTORA MEDITERRANEA 2 S A",
+        "import_empresa": 11234.3,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      },
+      {
+        "empresa": "ESCOFET 1886, SA",
+        "import_empresa": 8270.35,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "MARTINEZ FERRER CARLOS",
+    "total_adjudicat": 19504.65,
+    "relacions": [
+      {
+        "empresa": "PROMOTORA MEDITERRANEA 2 S A",
+        "import_empresa": 11234.3,
+        "carrecs": [
+          "APOD.SOL/MAN"
+        ]
+      },
+      {
+        "empresa": "ESCOFET 1886, SA",
+        "import_empresa": 8270.35,
+        "carrecs": [
+          "APOD.SOL/MAN"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "GONZALEZ ANDREU EVA",
+    "total_adjudicat": 19504.65,
+    "relacions": [
+      {
+        "empresa": "PROMOTORA MEDITERRANEA 2 S A",
+        "import_empresa": 11234.3,
+        "carrecs": [
+          "APOD.SOL/MAN"
+        ]
+      },
+      {
+        "empresa": "ESCOFET 1886, SA",
+        "import_empresa": 8270.35,
+        "carrecs": [
+          "APOD.SOL/MAN"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "MARTIN MARQUEZ JESSICA",
+    "total_adjudicat": 19504.65,
+    "relacions": [
+      {
+        "empresa": "PROMOTORA MEDITERRANEA 2 S A",
+        "import_empresa": 11234.3,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      },
+      {
+        "empresa": "ESCOFET 1886, SA",
+        "import_empresa": 8270.35,
         "carrecs": [
           "APODERAD.SOL"
         ]
@@ -54059,6 +54472,33 @@
     ]
   },
   {
+    "nom": "MARTINEZ MURCIA JUAN",
+    "total_adjudicat": 19092.41,
+    "relacions": [
+      {
+        "empresa": "ACTURA 12, SL",
+        "import_empresa": 11016.79,
+        "carrecs": [
+          "ADM.UNICO"
+        ]
+      },
+      {
+        "empresa": "ESPACIO ARTE ZENIT SL",
+        "import_empresa": 4525.62,
+        "carrecs": [
+          "ADM.UNICO"
+        ]
+      },
+      {
+        "empresa": "ACTURA ART GLOBAL, SL",
+        "import_empresa": 3550.0,
+        "carrecs": [
+          "ADM.UNICO"
+        ]
+      }
+    ]
+  },
+  {
     "nom": "OLAORTUA PALLARES CARLA",
     "total_adjudicat": 19042.0,
     "relacions": [
@@ -54471,168 +54911,6 @@
     ]
   },
   {
-    "nom": "BONNIN BIOSLADA JORGE",
-    "total_adjudicat": 18430.65,
-    "relacions": [
-      {
-        "empresa": "PROMOTORA MEDITERRANEA 2 S A",
-        "import_empresa": 10160.3,
-        "carrecs": [
-          "CONSEJERO",
-          "APOD.SOL/MAN"
-        ]
-      },
-      {
-        "empresa": "ESCOFET 1886, SA",
-        "import_empresa": 8270.35,
-        "carrecs": [
-          "APOD.SOL/MAN",
-          "CONSEJERO"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "CAMPMANY CARRILLO JORDI",
-    "total_adjudicat": 18430.65,
-    "relacions": [
-      {
-        "empresa": "PROMOTORA MEDITERRANEA 2 S A",
-        "import_empresa": 10160.3,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      },
-      {
-        "empresa": "ESCOFET 1886, SA",
-        "import_empresa": 8270.35,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "SUEIRAS GIL JAVIER",
-    "total_adjudicat": 18430.65,
-    "relacions": [
-      {
-        "empresa": "PROMOTORA MEDITERRANEA 2 S A",
-        "import_empresa": 10160.3,
-        "carrecs": [
-          "APOD.SOL/MAN"
-        ]
-      },
-      {
-        "empresa": "ESCOFET 1886, SA",
-        "import_empresa": 8270.35,
-        "carrecs": [
-          "APOD.SOL/MAN"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "QUERO LUQUE ALBERT",
-    "total_adjudicat": 18430.65,
-    "relacions": [
-      {
-        "empresa": "PROMOTORA MEDITERRANEA 2 S A",
-        "import_empresa": 10160.3,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      },
-      {
-        "empresa": "ESCOFET 1886, SA",
-        "import_empresa": 8270.35,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "ARIZA CABELLO CARMEN",
-    "total_adjudicat": 18430.65,
-    "relacions": [
-      {
-        "empresa": "PROMOTORA MEDITERRANEA 2 S A",
-        "import_empresa": 10160.3,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      },
-      {
-        "empresa": "ESCOFET 1886, SA",
-        "import_empresa": 8270.35,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "MARTINEZ FERRER CARLOS",
-    "total_adjudicat": 18430.65,
-    "relacions": [
-      {
-        "empresa": "PROMOTORA MEDITERRANEA 2 S A",
-        "import_empresa": 10160.3,
-        "carrecs": [
-          "APOD.SOL/MAN"
-        ]
-      },
-      {
-        "empresa": "ESCOFET 1886, SA",
-        "import_empresa": 8270.35,
-        "carrecs": [
-          "APOD.SOL/MAN"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "GONZALEZ ANDREU EVA",
-    "total_adjudicat": 18430.65,
-    "relacions": [
-      {
-        "empresa": "PROMOTORA MEDITERRANEA 2 S A",
-        "import_empresa": 10160.3,
-        "carrecs": [
-          "APOD.SOL/MAN"
-        ]
-      },
-      {
-        "empresa": "ESCOFET 1886, SA",
-        "import_empresa": 8270.35,
-        "carrecs": [
-          "APOD.SOL/MAN"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "MARTIN MARQUEZ JESSICA",
-    "total_adjudicat": 18430.65,
-    "relacions": [
-      {
-        "empresa": "PROMOTORA MEDITERRANEA 2 S A",
-        "import_empresa": 10160.3,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      },
-      {
-        "empresa": "ESCOFET 1886, SA",
-        "import_empresa": 8270.35,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
     "nom": "MORERA PRAT JORDI",
     "total_adjudicat": 18343.0,
     "relacions": [
@@ -54665,33 +54943,6 @@
       {
         "empresa": "DECCOTEXT LLAR SL",
         "import_empresa": 18092.09,
-        "carrecs": [
-          "ADM.UNICO"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "MARTINEZ MURCIA JUAN",
-    "total_adjudicat": 17592.41,
-    "relacions": [
-      {
-        "empresa": "ACTURA 12, SL",
-        "import_empresa": 11016.79,
-        "carrecs": [
-          "ADM.UNICO"
-        ]
-      },
-      {
-        "empresa": "ACTURA ART GLOBAL, SL",
-        "import_empresa": 3550.0,
-        "carrecs": [
-          "ADM.UNICO"
-        ]
-      },
-      {
-        "empresa": "ESPACIO ARTE ZENIT SL",
-        "import_empresa": 3025.62,
         "carrecs": [
           "ADM.UNICO"
         ]
@@ -55378,6 +55629,19 @@
     ]
   },
   {
+    "nom": "RAMOS ZOLOTYKH DALER",
+    "total_adjudicat": 15178.0,
+    "relacions": [
+      {
+        "empresa": "PARQUETS 1900, SL",
+        "import_empresa": 15178.0,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
     "nom": "RIFA SANS ALBERT",
     "total_adjudicat": 15070.0,
     "relacions": [
@@ -55680,6 +55944,20 @@
     ]
   },
   {
+    "nom": "GARCIA CERVERA ABEL",
+    "total_adjudicat": 14833.0,
+    "relacions": [
+      {
+        "empresa": "DISSENY TEA 3, SL",
+        "import_empresa": 14833.0,
+        "carrecs": [
+          "ADM.UNICO",
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
     "nom": "BOVER REIG CARLES JULIA",
     "total_adjudicat": 14734.04,
     "relacions": [
@@ -55703,6 +55981,19 @@
         "carrecs": [
           "APODERAD.SOL",
           "ADM.CONJUNTO"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "MESTRE VIVER RAMON",
+    "total_adjudicat": 14580.0,
+    "relacions": [
+      {
+        "empresa": "REHABILIT, SL",
+        "import_empresa": 14580.0,
+        "carrecs": [
+          "ADM.UNICO"
         ]
       }
     ]
@@ -55919,6 +56210,19 @@
         "import_empresa": 6178.82,
         "carrecs": [
           "CONSEJERO"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "BRAVO RODRIGUEZ AURORA",
+    "total_adjudicat": 14443.76,
+    "relacions": [
+      {
+        "empresa": "JARDIN MOVIL SL",
+        "import_empresa": 14443.76,
+        "carrecs": [
+          "ADM.SOLIDAR."
         ]
       }
     ]
@@ -61537,6 +61841,32 @@
     ]
   },
   {
+    "nom": "MARSAL CLARAMUNT ANGELA",
+    "total_adjudicat": 13745.67,
+    "relacions": [
+      {
+        "empresa": "PAPERERIA CODORNIU,S.L.",
+        "import_empresa": 13745.67,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "MARSAL MARSAL MARIA TERESA",
+    "total_adjudicat": 13745.67,
+    "relacions": [
+      {
+        "empresa": "PAPERERIA CODORNIU,S.L.",
+        "import_empresa": 13745.67,
+        "carrecs": [
+          "ADM.UNICO"
+        ]
+      }
+    ]
+  },
+  {
     "nom": "MARTINEZ BONNIN JOSE ORIOL",
     "total_adjudicat": 13739.07,
     "relacions": [
@@ -61572,19 +61902,6 @@
         "carrecs": [
           "ADM.UNICO",
           "APODERADO"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "BRAVO RODRIGUEZ AURORA",
-    "total_adjudicat": 13320.28,
-    "relacions": [
-      {
-        "empresa": "JARDIN MOVIL SL",
-        "import_empresa": 13320.28,
-        "carrecs": [
-          "ADM.SOLIDAR."
         ]
       }
     ]
@@ -62049,19 +62366,6 @@
     ]
   },
   {
-    "nom": "RAMOS ZOLOTYKH DALER",
-    "total_adjudicat": 12697.0,
-    "relacions": [
-      {
-        "empresa": "PARQUETS 1900, SL",
-        "import_empresa": 12697.0,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
     "nom": "CARO ARRABAL FRANCISCO",
     "total_adjudicat": 12647.0,
     "relacions": [
@@ -62109,6 +62413,32 @@
         "import_empresa": 12550.0,
         "carrecs": [
           "ADM.UNICO"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "DALMAU ALSINA SAIDA",
+    "total_adjudicat": 12550.0,
+    "relacions": [
+      {
+        "empresa": "SBDA PROCESSOS DIGITALS PER A LA REPRESENTACIÓ VISUAL DE PROJECTES SL",
+        "import_empresa": 12550.0,
+        "carrecs": [
+          "ADM.SOLIDAR."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "DALMAU ALSINA BENET",
+    "total_adjudicat": 12550.0,
+    "relacions": [
+      {
+        "empresa": "SBDA PROCESSOS DIGITALS PER A LA REPRESENTACIÓ VISUAL DE PROJECTES SL",
+        "import_empresa": 12550.0,
+        "carrecs": [
+          "ADM.SOLIDAR."
         ]
       }
     ]
@@ -62361,20 +62691,6 @@
     ]
   },
   {
-    "nom": "GARCIA CERVERA ABEL",
-    "total_adjudicat": 11753.0,
-    "relacions": [
-      {
-        "empresa": "DISSENY TEA 3, SL",
-        "import_empresa": 11753.0,
-        "carrecs": [
-          "ADM.UNICO",
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
     "nom": "HERNANDO TRONCOSO JOSE MIGUEL",
     "total_adjudicat": 11518.94,
     "relacions": [
@@ -62561,32 +62877,6 @@
     ]
   },
   {
-    "nom": "MARSAL CLARAMUNT ANGELA",
-    "total_adjudicat": 11385.67,
-    "relacions": [
-      {
-        "empresa": "PAPERERIA CODORNIU,S.L.",
-        "import_empresa": 11385.67,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "MARSAL MARSAL MARIA TERESA",
-    "total_adjudicat": 11385.67,
-    "relacions": [
-      {
-        "empresa": "PAPERERIA CODORNIU,S.L.",
-        "import_empresa": 11385.67,
-        "carrecs": [
-          "ADM.UNICO"
-        ]
-      }
-    ]
-  },
-  {
     "nom": "ARJONES RODRIGUEZ FERNANDO",
     "total_adjudicat": 11300.0,
     "relacions": [
@@ -62608,6 +62898,422 @@
         "import_empresa": 11300.0,
         "carrecs": [
           "ADM.UNICO"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "SUBTIL SUBTIL MARIA JOSE",
+    "total_adjudicat": 11234.3,
+    "relacions": [
+      {
+        "empresa": "PROMOTORA MEDITERRANEA 2 S A",
+        "import_empresa": 11234.3,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "LOPEZ TORRES MARIA DEL PILAR",
+    "total_adjudicat": 11234.3,
+    "relacions": [
+      {
+        "empresa": "PROMOTORA MEDITERRANEA 2 S A",
+        "import_empresa": 11234.3,
+        "carrecs": [
+          "APOD.SOL/MAN"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "VENTURA NIETO CARLOS",
+    "total_adjudicat": 11234.3,
+    "relacions": [
+      {
+        "empresa": "PROMOTORA MEDITERRANEA 2 S A",
+        "import_empresa": 11234.3,
+        "carrecs": [
+          "APOD.SOL/MAN"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "TARRES GOMEZ JOSE",
+    "total_adjudicat": 11234.3,
+    "relacions": [
+      {
+        "empresa": "PROMOTORA MEDITERRANEA 2 S A",
+        "import_empresa": 11234.3,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "ORTEGA ANTOLIN JESUS MANUEL",
+    "total_adjudicat": 11234.3,
+    "relacions": [
+      {
+        "empresa": "PROMOTORA MEDITERRANEA 2 S A",
+        "import_empresa": 11234.3,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "MUÑOZ SAMONS ADRIA",
+    "total_adjudicat": 11234.3,
+    "relacions": [
+      {
+        "empresa": "PROMOTORA MEDITERRANEA 2 S A",
+        "import_empresa": 11234.3,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "BASTERRETXEA BECERRA PATXI GORKA",
+    "total_adjudicat": 11234.3,
+    "relacions": [
+      {
+        "empresa": "PROMOTORA MEDITERRANEA 2 S A",
+        "import_empresa": 11234.3,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "ORTEGA SUBIRANA JOAN",
+    "total_adjudicat": 11234.3,
+    "relacions": [
+      {
+        "empresa": "PROMOTORA MEDITERRANEA 2 S A",
+        "import_empresa": 11234.3,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "COSIN CARDONA JOAN",
+    "total_adjudicat": 11234.3,
+    "relacions": [
+      {
+        "empresa": "PROMOTORA MEDITERRANEA 2 S A",
+        "import_empresa": 11234.3,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "ALVAREZ VELEZ PEDRO JOSE",
+    "total_adjudicat": 11234.3,
+    "relacions": [
+      {
+        "empresa": "PROMOTORA MEDITERRANEA 2 S A",
+        "import_empresa": 11234.3,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "LOPEZ MARTINEZ FERNANDO",
+    "total_adjudicat": 11234.3,
+    "relacions": [
+      {
+        "empresa": "PROMOTORA MEDITERRANEA 2 S A",
+        "import_empresa": 11234.3,
+        "carrecs": [
+          "APOD.SOL/MAN"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "ALTET TORNE JORGE",
+    "total_adjudicat": 11234.3,
+    "relacions": [
+      {
+        "empresa": "PROMOTORA MEDITERRANEA 2 S A",
+        "import_empresa": 11234.3,
+        "carrecs": [
+          "APOD.SOL/MAN"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "LARA IBAÑEZ YOLANDA",
+    "total_adjudicat": 11234.3,
+    "relacions": [
+      {
+        "empresa": "PROMOTORA MEDITERRANEA 2 S A",
+        "import_empresa": 11234.3,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "RAICH CABARROCAS CARLOS",
+    "total_adjudicat": 11234.3,
+    "relacions": [
+      {
+        "empresa": "PROMOTORA MEDITERRANEA 2 S A",
+        "import_empresa": 11234.3,
+        "carrecs": [
+          "APOD.SOL/MAN"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "DE TORRESCASANA BORRELL RAMON",
+    "total_adjudicat": 11234.3,
+    "relacions": [
+      {
+        "empresa": "PROMOTORA MEDITERRANEA 2 S A",
+        "import_empresa": 11234.3,
+        "carrecs": [
+          "APOD.SOL/MAN"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "TALLAFERRO RAVETLLAT ESTEVE",
+    "total_adjudicat": 11234.3,
+    "relacions": [
+      {
+        "empresa": "PROMOTORA MEDITERRANEA 2 S A",
+        "import_empresa": 11234.3,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "BOGUNYA RIBERA CARLES",
+    "total_adjudicat": 11234.3,
+    "relacions": [
+      {
+        "empresa": "PROMOTORA MEDITERRANEA 2 S A",
+        "import_empresa": 11234.3,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "BANUS GUIX GEMMA",
+    "total_adjudicat": 11234.3,
+    "relacions": [
+      {
+        "empresa": "PROMOTORA MEDITERRANEA 2 S A",
+        "import_empresa": 11234.3,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "ALVAREZ VELEZ PEDRO",
+    "total_adjudicat": 11234.3,
+    "relacions": [
+      {
+        "empresa": "PROMOTORA MEDITERRANEA 2 S A",
+        "import_empresa": 11234.3,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "DURAN YANES OSCAR",
+    "total_adjudicat": 11234.3,
+    "relacions": [
+      {
+        "empresa": "PROMOTORA MEDITERRANEA 2 S A",
+        "import_empresa": 11234.3,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "GARCIA GARCIA EDGAR",
+    "total_adjudicat": 11234.3,
+    "relacions": [
+      {
+        "empresa": "PROMOTORA MEDITERRANEA 2 S A",
+        "import_empresa": 11234.3,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "MESTRES NUALART JUAN CARLOS",
+    "total_adjudicat": 11234.3,
+    "relacions": [
+      {
+        "empresa": "PROMOTORA MEDITERRANEA 2 S A",
+        "import_empresa": 11234.3,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "MIRAMUNT BAILO JOSE FELIX",
+    "total_adjudicat": 11234.3,
+    "relacions": [
+      {
+        "empresa": "PROMOTORA MEDITERRANEA 2 S A",
+        "import_empresa": 11234.3,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "OXMAN GARCIA DAVID SAMUEL",
+    "total_adjudicat": 11234.3,
+    "relacions": [
+      {
+        "empresa": "PROMOTORA MEDITERRANEA 2 S A",
+        "import_empresa": 11234.3,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "ROMERA ROMERA CRISTOBAL",
+    "total_adjudicat": 11234.3,
+    "relacions": [
+      {
+        "empresa": "PROMOTORA MEDITERRANEA 2 S A",
+        "import_empresa": 11234.3,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "TREJO OMEÑACA IGNACIO",
+    "total_adjudicat": 11234.3,
+    "relacions": [
+      {
+        "empresa": "PROMOTORA MEDITERRANEA 2 S A",
+        "import_empresa": 11234.3,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "RODRIGUEZ EXPOSITO VICTOR",
+    "total_adjudicat": 11234.3,
+    "relacions": [
+      {
+        "empresa": "PROMOTORA MEDITERRANEA 2 S A",
+        "import_empresa": 11234.3,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "ESPARRAGUERA BOSCH JOAQUIN",
+    "total_adjudicat": 11234.3,
+    "relacions": [
+      {
+        "empresa": "PROMOTORA MEDITERRANEA 2 S A",
+        "import_empresa": 11234.3,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "GRAU ALBERICH MIQUEL",
+    "total_adjudicat": 11234.3,
+    "relacions": [
+      {
+        "empresa": "PROMOTORA MEDITERRANEA 2 S A",
+        "import_empresa": 11234.3,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "OLIVERAS LLORENTE OSCAR",
+    "total_adjudicat": 11234.3,
+    "relacions": [
+      {
+        "empresa": "PROMOTORA MEDITERRANEA 2 S A",
+        "import_empresa": 11234.3,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "DIAZ CORTES DAVID",
+    "total_adjudicat": 11234.3,
+    "relacions": [
+      {
+        "empresa": "PROMOTORA MEDITERRANEA 2 S A",
+        "import_empresa": 11234.3,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "NOCERA GIMENEZ DANIEL",
+    "total_adjudicat": 11234.3,
+    "relacions": [
+      {
+        "empresa": "PROMOTORA MEDITERRANEA 2 S A",
+        "import_empresa": 11234.3,
+        "carrecs": [
+          "APODERADO"
         ]
       }
     ]
@@ -63165,19 +63871,6 @@
         "import_empresa": 10724.33,
         "carrecs": [
           "Consejero"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "MESTRE VIVER RAMON",
-    "total_adjudicat": 10685.0,
-    "relacions": [
-      {
-        "empresa": "REHABILIT, SL",
-        "import_empresa": 10685.0,
-        "carrecs": [
-          "ADM.UNICO"
         ]
       }
     ]
@@ -63869,422 +64562,6 @@
         "import_empresa": 10205.0,
         "carrecs": [
           "Adm. Solid."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "SUBTIL SUBTIL MARIA JOSE",
-    "total_adjudicat": 10160.3,
-    "relacions": [
-      {
-        "empresa": "PROMOTORA MEDITERRANEA 2 S A",
-        "import_empresa": 10160.3,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "LOPEZ TORRES MARIA DEL PILAR",
-    "total_adjudicat": 10160.3,
-    "relacions": [
-      {
-        "empresa": "PROMOTORA MEDITERRANEA 2 S A",
-        "import_empresa": 10160.3,
-        "carrecs": [
-          "APOD.SOL/MAN"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "VENTURA NIETO CARLOS",
-    "total_adjudicat": 10160.3,
-    "relacions": [
-      {
-        "empresa": "PROMOTORA MEDITERRANEA 2 S A",
-        "import_empresa": 10160.3,
-        "carrecs": [
-          "APOD.SOL/MAN"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "TARRES GOMEZ JOSE",
-    "total_adjudicat": 10160.3,
-    "relacions": [
-      {
-        "empresa": "PROMOTORA MEDITERRANEA 2 S A",
-        "import_empresa": 10160.3,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "ORTEGA ANTOLIN JESUS MANUEL",
-    "total_adjudicat": 10160.3,
-    "relacions": [
-      {
-        "empresa": "PROMOTORA MEDITERRANEA 2 S A",
-        "import_empresa": 10160.3,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "MUÑOZ SAMONS ADRIA",
-    "total_adjudicat": 10160.3,
-    "relacions": [
-      {
-        "empresa": "PROMOTORA MEDITERRANEA 2 S A",
-        "import_empresa": 10160.3,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "BASTERRETXEA BECERRA PATXI GORKA",
-    "total_adjudicat": 10160.3,
-    "relacions": [
-      {
-        "empresa": "PROMOTORA MEDITERRANEA 2 S A",
-        "import_empresa": 10160.3,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "ORTEGA SUBIRANA JOAN",
-    "total_adjudicat": 10160.3,
-    "relacions": [
-      {
-        "empresa": "PROMOTORA MEDITERRANEA 2 S A",
-        "import_empresa": 10160.3,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "COSIN CARDONA JOAN",
-    "total_adjudicat": 10160.3,
-    "relacions": [
-      {
-        "empresa": "PROMOTORA MEDITERRANEA 2 S A",
-        "import_empresa": 10160.3,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "ALVAREZ VELEZ PEDRO JOSE",
-    "total_adjudicat": 10160.3,
-    "relacions": [
-      {
-        "empresa": "PROMOTORA MEDITERRANEA 2 S A",
-        "import_empresa": 10160.3,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "LOPEZ MARTINEZ FERNANDO",
-    "total_adjudicat": 10160.3,
-    "relacions": [
-      {
-        "empresa": "PROMOTORA MEDITERRANEA 2 S A",
-        "import_empresa": 10160.3,
-        "carrecs": [
-          "APOD.SOL/MAN"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "ALTET TORNE JORGE",
-    "total_adjudicat": 10160.3,
-    "relacions": [
-      {
-        "empresa": "PROMOTORA MEDITERRANEA 2 S A",
-        "import_empresa": 10160.3,
-        "carrecs": [
-          "APOD.SOL/MAN"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "LARA IBAÑEZ YOLANDA",
-    "total_adjudicat": 10160.3,
-    "relacions": [
-      {
-        "empresa": "PROMOTORA MEDITERRANEA 2 S A",
-        "import_empresa": 10160.3,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "RAICH CABARROCAS CARLOS",
-    "total_adjudicat": 10160.3,
-    "relacions": [
-      {
-        "empresa": "PROMOTORA MEDITERRANEA 2 S A",
-        "import_empresa": 10160.3,
-        "carrecs": [
-          "APOD.SOL/MAN"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "DE TORRESCASANA BORRELL RAMON",
-    "total_adjudicat": 10160.3,
-    "relacions": [
-      {
-        "empresa": "PROMOTORA MEDITERRANEA 2 S A",
-        "import_empresa": 10160.3,
-        "carrecs": [
-          "APOD.SOL/MAN"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "TALLAFERRO RAVETLLAT ESTEVE",
-    "total_adjudicat": 10160.3,
-    "relacions": [
-      {
-        "empresa": "PROMOTORA MEDITERRANEA 2 S A",
-        "import_empresa": 10160.3,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "BOGUNYA RIBERA CARLES",
-    "total_adjudicat": 10160.3,
-    "relacions": [
-      {
-        "empresa": "PROMOTORA MEDITERRANEA 2 S A",
-        "import_empresa": 10160.3,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "BANUS GUIX GEMMA",
-    "total_adjudicat": 10160.3,
-    "relacions": [
-      {
-        "empresa": "PROMOTORA MEDITERRANEA 2 S A",
-        "import_empresa": 10160.3,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "ALVAREZ VELEZ PEDRO",
-    "total_adjudicat": 10160.3,
-    "relacions": [
-      {
-        "empresa": "PROMOTORA MEDITERRANEA 2 S A",
-        "import_empresa": 10160.3,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "DURAN YANES OSCAR",
-    "total_adjudicat": 10160.3,
-    "relacions": [
-      {
-        "empresa": "PROMOTORA MEDITERRANEA 2 S A",
-        "import_empresa": 10160.3,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "GARCIA GARCIA EDGAR",
-    "total_adjudicat": 10160.3,
-    "relacions": [
-      {
-        "empresa": "PROMOTORA MEDITERRANEA 2 S A",
-        "import_empresa": 10160.3,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "MESTRES NUALART JUAN CARLOS",
-    "total_adjudicat": 10160.3,
-    "relacions": [
-      {
-        "empresa": "PROMOTORA MEDITERRANEA 2 S A",
-        "import_empresa": 10160.3,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "MIRAMUNT BAILO JOSE FELIX",
-    "total_adjudicat": 10160.3,
-    "relacions": [
-      {
-        "empresa": "PROMOTORA MEDITERRANEA 2 S A",
-        "import_empresa": 10160.3,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "OXMAN GARCIA DAVID SAMUEL",
-    "total_adjudicat": 10160.3,
-    "relacions": [
-      {
-        "empresa": "PROMOTORA MEDITERRANEA 2 S A",
-        "import_empresa": 10160.3,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "ROMERA ROMERA CRISTOBAL",
-    "total_adjudicat": 10160.3,
-    "relacions": [
-      {
-        "empresa": "PROMOTORA MEDITERRANEA 2 S A",
-        "import_empresa": 10160.3,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "TREJO OMEÑACA IGNACIO",
-    "total_adjudicat": 10160.3,
-    "relacions": [
-      {
-        "empresa": "PROMOTORA MEDITERRANEA 2 S A",
-        "import_empresa": 10160.3,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "RODRIGUEZ EXPOSITO VICTOR",
-    "total_adjudicat": 10160.3,
-    "relacions": [
-      {
-        "empresa": "PROMOTORA MEDITERRANEA 2 S A",
-        "import_empresa": 10160.3,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "ESPARRAGUERA BOSCH JOAQUIN",
-    "total_adjudicat": 10160.3,
-    "relacions": [
-      {
-        "empresa": "PROMOTORA MEDITERRANEA 2 S A",
-        "import_empresa": 10160.3,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "GRAU ALBERICH MIQUEL",
-    "total_adjudicat": 10160.3,
-    "relacions": [
-      {
-        "empresa": "PROMOTORA MEDITERRANEA 2 S A",
-        "import_empresa": 10160.3,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "OLIVERAS LLORENTE OSCAR",
-    "total_adjudicat": 10160.3,
-    "relacions": [
-      {
-        "empresa": "PROMOTORA MEDITERRANEA 2 S A",
-        "import_empresa": 10160.3,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "DIAZ CORTES DAVID",
-    "total_adjudicat": 10160.3,
-    "relacions": [
-      {
-        "empresa": "PROMOTORA MEDITERRANEA 2 S A",
-        "import_empresa": 10160.3,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "NOCERA GIMENEZ DANIEL",
-    "total_adjudicat": 10160.3,
-    "relacions": [
-      {
-        "empresa": "PROMOTORA MEDITERRANEA 2 S A",
-        "import_empresa": 10160.3,
-        "carrecs": [
-          "APODERADO"
         ]
       }
     ]
@@ -65608,6 +65885,19 @@
     ]
   },
   {
+    "nom": "AUDIEST AUDITORES SAP",
+    "total_adjudicat": 9987.01,
+    "relacions": [
+      {
+        "empresa": "DIVISIONES NORMALIZADAS, S.A.",
+        "import_empresa": 9987.01,
+        "carrecs": [
+          "Auditor"
+        ]
+      }
+    ]
+  },
+  {
     "nom": "POMAR FEHSKE ALEX",
     "total_adjudicat": 9987.01,
     "relacions": [
@@ -65829,6 +66119,20 @@
     ]
   },
   {
+    "nom": "PEREZ GARCIA ISIDORO",
+    "total_adjudicat": 9588.0,
+    "relacions": [
+      {
+        "empresa": "SEEKETING SL",
+        "import_empresa": 9588.0,
+        "carrecs": [
+          "Adm. Unico",
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
     "nom": "ANTOLIN HUERTA MARIA ROSARIO",
     "total_adjudicat": 9554.17,
     "relacions": [
@@ -65901,6 +66205,136 @@
       {
         "empresa": "INICIATIVES JAT, SL",
         "import_empresa": 9350.0,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "MATHIEU FRANCOIS CHAPELLE",
+    "total_adjudicat": 9293.33,
+    "relacions": [
+      {
+        "empresa": "CASBU, SL",
+        "import_empresa": 9293.33,
+        "carrecs": [
+          "APOD.SOL/MAN"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "MAÑA ESCARIHUELA JOSE JAVIER",
+    "total_adjudicat": 9293.33,
+    "relacions": [
+      {
+        "empresa": "CASBU, SL",
+        "import_empresa": 9293.33,
+        "carrecs": [
+          "APOD.SOL/MAN"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "RODRIGUEZ GUZMAN INMACULADA",
+    "total_adjudicat": 9293.33,
+    "relacions": [
+      {
+        "empresa": "CASBU, SL",
+        "import_empresa": 9293.33,
+        "carrecs": [
+          "APOD.SOL/MAN"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "CASTELLS SEGURA ROSER",
+    "total_adjudicat": 9293.33,
+    "relacions": [
+      {
+        "empresa": "CASBU, SL",
+        "import_empresa": 9293.33,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "REGIS GUIGOUR",
+    "total_adjudicat": 9293.33,
+    "relacions": [
+      {
+        "empresa": "CASBU, SL",
+        "import_empresa": 9293.33,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "MATTHIEU HUBERT MARIE LECHARNY",
+    "total_adjudicat": 9293.33,
+    "relacions": [
+      {
+        "empresa": "CASBU, SL",
+        "import_empresa": 9293.33,
+        "carrecs": [
+          "ADM.SOLIDAR."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "LOUIS MICHEL MARIE GUYOT",
+    "total_adjudicat": 9293.33,
+    "relacions": [
+      {
+        "empresa": "CASBU, SL",
+        "import_empresa": 9293.33,
+        "carrecs": [
+          "ADM.SOLIDAR."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "GARCIA FIGUEIRAS MARIA DOLORES",
+    "total_adjudicat": 9293.33,
+    "relacions": [
+      {
+        "empresa": "CASBU, SL",
+        "import_empresa": 9293.33,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "MARTIN GARCIA GUILLERMO",
+    "total_adjudicat": 9293.33,
+    "relacions": [
+      {
+        "empresa": "CASBU, SL",
+        "import_empresa": 9293.33,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "PAES JULIAN DANIEL KARIM",
+    "total_adjudicat": 9293.33,
+    "relacions": [
+      {
+        "empresa": "CASBU, SL",
+        "import_empresa": 9293.33,
         "carrecs": [
           "APODERAD.SOL"
         ]
@@ -66105,6 +66539,166 @@
     ]
   },
   {
+    "nom": "CRISTIAN CONCHA SOFFIA",
+    "total_adjudicat": 8908.0,
+    "relacions": [
+      {
+        "empresa": "ALCO RENTAL SERVICES SLU",
+        "import_empresa": 8908.0,
+        "carrecs": [
+          "PRESIDENTE",
+          "CONSEJERO"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "GARCIA CODINA OSCAR",
+    "total_adjudicat": 8908.0,
+    "relacions": [
+      {
+        "empresa": "ALCO RENTAL SERVICES SLU",
+        "import_empresa": 8908.0,
+        "carrecs": [
+          "CONSEJERO",
+          "SECRETARIO",
+          "APOD.SOL/MAN"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "RODRIGO ENRIQUE PRADO ROMANI",
+    "total_adjudicat": 8908.0,
+    "relacions": [
+      {
+        "empresa": "ALCO RENTAL SERVICES SLU",
+        "import_empresa": 8908.0,
+        "carrecs": [
+          "CONSEJERO",
+          "APOD.SOL/MAN"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "RIERA REY PABLO",
+    "total_adjudicat": 8908.0,
+    "relacions": [
+      {
+        "empresa": "ALCO RENTAL SERVICES SLU",
+        "import_empresa": 8908.0,
+        "carrecs": [
+          "APOD.SOL/MAN"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "RICARDO LARRAIN LLONA",
+    "total_adjudicat": 8908.0,
+    "relacions": [
+      {
+        "empresa": "ALCO RENTAL SERVICES SLU",
+        "import_empresa": 8908.0,
+        "carrecs": [
+          "CONSEJERO"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "RICARDO LLARAIN LLONA",
+    "total_adjudicat": 8908.0,
+    "relacions": [
+      {
+        "empresa": "ALCO RENTAL SERVICES SLU",
+        "import_empresa": 8908.0,
+        "carrecs": [
+          "ADM.SOLIDAR."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "DORADO LOPEZ MARIA PILAR",
+    "total_adjudicat": 8908.0,
+    "relacions": [
+      {
+        "empresa": "ALCO RENTAL SERVICES SLU",
+        "import_empresa": 8908.0,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "TORRES MALLEN VANESA",
+    "total_adjudicat": 8908.0,
+    "relacions": [
+      {
+        "empresa": "ALCO RENTAL SERVICES SLU",
+        "import_empresa": 8908.0,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "RIOS PACIO MIGUEL ANGEL",
+    "total_adjudicat": 8908.0,
+    "relacions": [
+      {
+        "empresa": "ALCO RENTAL SERVICES SLU",
+        "import_empresa": 8908.0,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "VEGARA RUIZ FRANCISCO JOSE",
+    "total_adjudicat": 8908.0,
+    "relacions": [
+      {
+        "empresa": "ALCO RENTAL SERVICES SLU",
+        "import_empresa": 8908.0,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "PICAS DE LA ROSA PEDRO",
+    "total_adjudicat": 8908.0,
+    "relacions": [
+      {
+        "empresa": "ALCO RENTAL SERVICES SLU",
+        "import_empresa": 8908.0,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "RIGAU PAGES JOSE MARIA",
+    "total_adjudicat": 8908.0,
+    "relacions": [
+      {
+        "empresa": "ALCO RENTAL SERVICES SLU",
+        "import_empresa": 8908.0,
+        "carrecs": [
+          "REPR.143 RRM"
+        ]
+      }
+    ]
+  },
+  {
     "nom": "MAS DAVILA MARIA DE LES NEUS",
     "total_adjudicat": 8785.0,
     "relacions": [
@@ -66144,32 +66738,6 @@
     ]
   },
   {
-    "nom": "DALMAU ALSINA SAIDA",
-    "total_adjudicat": 8650.0,
-    "relacions": [
-      {
-        "empresa": "SBDA PROCESSOS DIGITALS PER A LA REPRESENTACIÓ VISUAL DE PROJECTES SL",
-        "import_empresa": 8650.0,
-        "carrecs": [
-          "ADM.SOLIDAR."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "DALMAU ALSINA BENET",
-    "total_adjudicat": 8650.0,
-    "relacions": [
-      {
-        "empresa": "SBDA PROCESSOS DIGITALS PER A LA REPRESENTACIÓ VISUAL DE PROJECTES SL",
-        "import_empresa": 8650.0,
-        "carrecs": [
-          "ADM.SOLIDAR."
-        ]
-      }
-    ]
-  },
-  {
     "nom": "CARRERAS OLIVE ISAAC",
     "total_adjudicat": 8640.51,
     "relacions": [
@@ -66178,6 +66746,153 @@
         "import_empresa": 8640.51,
         "carrecs": [
           "REPR.143 RRM"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "HOMS COMAS MARC",
+    "total_adjudicat": 8635.3,
+    "relacions": [
+      {
+        "empresa": "HOMS RENTALS, SL",
+        "import_empresa": 7444.74,
+        "carrecs": [
+          "APODERAD.SOL",
+          "CONSEJERO"
+        ]
+      },
+      {
+        "empresa": "GERMANS HOMS LLOGUER DE MAQUINARIA 1852 SL",
+        "import_empresa": 1190.56,
+        "carrecs": [
+          "APODERAD.SOL",
+          "CONSEJERO"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "HOMS COMAS VICENC",
+    "total_adjudicat": 8635.3,
+    "relacions": [
+      {
+        "empresa": "HOMS RENTALS, SL",
+        "import_empresa": 7444.74,
+        "carrecs": [
+          "REPR.143 RRM",
+          "APODERAD.SOL",
+          "PRESIDENTE",
+          "CONSEJERO"
+        ]
+      },
+      {
+        "empresa": "GERMANS HOMS LLOGUER DE MAQUINARIA 1852 SL",
+        "import_empresa": 1190.56,
+        "carrecs": [
+          "APODERAD.SOL",
+          "PRESIDENTE",
+          "CONSEJERO"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "ARROYO SIERRA DAVID",
+    "total_adjudicat": 8635.3,
+    "relacions": [
+      {
+        "empresa": "HOMS RENTALS, SL",
+        "import_empresa": 7444.74,
+        "carrecs": [
+          "REPR.143 RRM"
+        ]
+      },
+      {
+        "empresa": "GERMANS HOMS LLOGUER DE MAQUINARIA 1852 SL",
+        "import_empresa": 1190.56,
+        "carrecs": [
+          "REPR.143 RRM"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "RIERA MAS POL",
+    "total_adjudicat": 8635.3,
+    "relacions": [
+      {
+        "empresa": "HOMS RENTALS, SL",
+        "import_empresa": 7444.74,
+        "carrecs": [
+          "CONSEJERO"
+        ]
+      },
+      {
+        "empresa": "GERMANS HOMS LLOGUER DE MAQUINARIA 1852 SL",
+        "import_empresa": 1190.56,
+        "carrecs": [
+          "CONSEJERO"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "CEBRIAN VELEZ MANUEL",
+    "total_adjudicat": 8635.3,
+    "relacions": [
+      {
+        "empresa": "HOMS RENTALS, SL",
+        "import_empresa": 7444.74,
+        "carrecs": [
+          "REPR.143 RRM"
+        ]
+      },
+      {
+        "empresa": "GERMANS HOMS LLOGUER DE MAQUINARIA 1852 SL",
+        "import_empresa": 1190.56,
+        "carrecs": [
+          "REPR.143 RRM"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "FOZ GIRALT XAVIER",
+    "total_adjudicat": 8635.3,
+    "relacions": [
+      {
+        "empresa": "HOMS RENTALS, SL",
+        "import_empresa": 7444.74,
+        "carrecs": [
+          "SECR.NO CONS"
+        ]
+      },
+      {
+        "empresa": "GERMANS HOMS LLOGUER DE MAQUINARIA 1852 SL",
+        "import_empresa": 1190.56,
+        "carrecs": [
+          "SECR.NO CONS"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "BERMUDEZ GUTIERREZ JORDI",
+    "total_adjudicat": 8635.3,
+    "relacions": [
+      {
+        "empresa": "HOMS RENTALS, SL",
+        "import_empresa": 7444.74,
+        "carrecs": [
+          "V-SEC NO CON"
+        ]
+      },
+      {
+        "empresa": "GERMANS HOMS LLOGUER DE MAQUINARIA 1852 SL",
+        "import_empresa": 1190.56,
+        "carrecs": [
+          "V-SEC NO CON"
         ]
       }
     ]
@@ -68036,136 +68751,6 @@
     ]
   },
   {
-    "nom": "MATHIEU FRANCOIS CHAPELLE",
-    "total_adjudicat": 7477.68,
-    "relacions": [
-      {
-        "empresa": "CASBU, SL",
-        "import_empresa": 7477.68,
-        "carrecs": [
-          "APOD.SOL/MAN"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "MAÑA ESCARIHUELA JOSE JAVIER",
-    "total_adjudicat": 7477.68,
-    "relacions": [
-      {
-        "empresa": "CASBU, SL",
-        "import_empresa": 7477.68,
-        "carrecs": [
-          "APOD.SOL/MAN"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "RODRIGUEZ GUZMAN INMACULADA",
-    "total_adjudicat": 7477.68,
-    "relacions": [
-      {
-        "empresa": "CASBU, SL",
-        "import_empresa": 7477.68,
-        "carrecs": [
-          "APOD.SOL/MAN"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "CASTELLS SEGURA ROSER",
-    "total_adjudicat": 7477.68,
-    "relacions": [
-      {
-        "empresa": "CASBU, SL",
-        "import_empresa": 7477.68,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "REGIS GUIGOUR",
-    "total_adjudicat": 7477.68,
-    "relacions": [
-      {
-        "empresa": "CASBU, SL",
-        "import_empresa": 7477.68,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "MATTHIEU HUBERT MARIE LECHARNY",
-    "total_adjudicat": 7477.68,
-    "relacions": [
-      {
-        "empresa": "CASBU, SL",
-        "import_empresa": 7477.68,
-        "carrecs": [
-          "ADM.SOLIDAR."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "LOUIS MICHEL MARIE GUYOT",
-    "total_adjudicat": 7477.68,
-    "relacions": [
-      {
-        "empresa": "CASBU, SL",
-        "import_empresa": 7477.68,
-        "carrecs": [
-          "ADM.SOLIDAR."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "GARCIA FIGUEIRAS MARIA DOLORES",
-    "total_adjudicat": 7477.68,
-    "relacions": [
-      {
-        "empresa": "CASBU, SL",
-        "import_empresa": 7477.68,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "MARTIN GARCIA GUILLERMO",
-    "total_adjudicat": 7477.68,
-    "relacions": [
-      {
-        "empresa": "CASBU, SL",
-        "import_empresa": 7477.68,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "PAES JULIAN DANIEL KARIM",
-    "total_adjudicat": 7477.68,
-    "relacions": [
-      {
-        "empresa": "CASBU, SL",
-        "import_empresa": 7477.68,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
     "nom": "PUJADAS MARFULL ALEXANDRE",
     "total_adjudicat": 7474.5,
     "relacions": [
@@ -68273,6 +68858,33 @@
         "import_empresa": 7383.95,
         "carrecs": [
           "ADM.SOLIDAR."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "ENFEDAQUE PEDROS ANDREU",
+    "total_adjudicat": 7320.73,
+    "relacions": [
+      {
+        "empresa": "YOU TEACH, SL",
+        "import_empresa": 4120.73,
+        "carrecs": [
+          "ADM.UNICO"
+        ]
+      },
+      {
+        "empresa": "EVENTS BRANCH S.L.",
+        "import_empresa": 1700.0,
+        "carrecs": [
+          "ADM.UNICO"
+        ]
+      },
+      {
+        "empresa": "ARTISTAMENTE S.L.",
+        "import_empresa": 1500.0,
+        "carrecs": [
+          "ADM.UNICO"
         ]
       }
     ]
@@ -68503,6 +69115,45 @@
     ]
   },
   {
+    "nom": "FREIXES GALLARDO JAUME",
+    "total_adjudicat": 7190.0,
+    "relacions": [
+      {
+        "empresa": "LA BONA PARTY SL",
+        "import_empresa": 7190.0,
+        "carrecs": [
+          "ADM.SOLIDAR."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "SOLE PASCUAL GUILLERMO",
+    "total_adjudicat": 7190.0,
+    "relacions": [
+      {
+        "empresa": "LA BONA PARTY SL",
+        "import_empresa": 7190.0,
+        "carrecs": [
+          "ADM.SOLIDAR."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "PLANELL TERRON CARLES",
+    "total_adjudicat": 7179.51,
+    "relacions": [
+      {
+        "empresa": "PINTURES PLANELL",
+        "import_empresa": 7179.51,
+        "carrecs": [
+          "ADM.UNICO"
+        ]
+      }
+    ]
+  },
+  {
     "nom": "GARCIA CANELA JOSE MANUEL",
     "total_adjudicat": 7135.0,
     "relacions": [
@@ -68525,166 +69176,6 @@
         "import_empresa": 7135.0,
         "carrecs": [
           "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "CRISTIAN CONCHA SOFFIA",
-    "total_adjudicat": 7078.0,
-    "relacions": [
-      {
-        "empresa": "ALCO RENTAL SERVICES SLU",
-        "import_empresa": 7078.0,
-        "carrecs": [
-          "PRESIDENTE",
-          "CONSEJERO"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "GARCIA CODINA OSCAR",
-    "total_adjudicat": 7078.0,
-    "relacions": [
-      {
-        "empresa": "ALCO RENTAL SERVICES SLU",
-        "import_empresa": 7078.0,
-        "carrecs": [
-          "CONSEJERO",
-          "SECRETARIO",
-          "APOD.SOL/MAN"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "RODRIGO ENRIQUE PRADO ROMANI",
-    "total_adjudicat": 7078.0,
-    "relacions": [
-      {
-        "empresa": "ALCO RENTAL SERVICES SLU",
-        "import_empresa": 7078.0,
-        "carrecs": [
-          "CONSEJERO",
-          "APOD.SOL/MAN"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "RIERA REY PABLO",
-    "total_adjudicat": 7078.0,
-    "relacions": [
-      {
-        "empresa": "ALCO RENTAL SERVICES SLU",
-        "import_empresa": 7078.0,
-        "carrecs": [
-          "APOD.SOL/MAN"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "RICARDO LARRAIN LLONA",
-    "total_adjudicat": 7078.0,
-    "relacions": [
-      {
-        "empresa": "ALCO RENTAL SERVICES SLU",
-        "import_empresa": 7078.0,
-        "carrecs": [
-          "CONSEJERO"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "RICARDO LLARAIN LLONA",
-    "total_adjudicat": 7078.0,
-    "relacions": [
-      {
-        "empresa": "ALCO RENTAL SERVICES SLU",
-        "import_empresa": 7078.0,
-        "carrecs": [
-          "ADM.SOLIDAR."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "DORADO LOPEZ MARIA PILAR",
-    "total_adjudicat": 7078.0,
-    "relacions": [
-      {
-        "empresa": "ALCO RENTAL SERVICES SLU",
-        "import_empresa": 7078.0,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "TORRES MALLEN VANESA",
-    "total_adjudicat": 7078.0,
-    "relacions": [
-      {
-        "empresa": "ALCO RENTAL SERVICES SLU",
-        "import_empresa": 7078.0,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "RIOS PACIO MIGUEL ANGEL",
-    "total_adjudicat": 7078.0,
-    "relacions": [
-      {
-        "empresa": "ALCO RENTAL SERVICES SLU",
-        "import_empresa": 7078.0,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "VEGARA RUIZ FRANCISCO JOSE",
-    "total_adjudicat": 7078.0,
-    "relacions": [
-      {
-        "empresa": "ALCO RENTAL SERVICES SLU",
-        "import_empresa": 7078.0,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "PICAS DE LA ROSA PEDRO",
-    "total_adjudicat": 7078.0,
-    "relacions": [
-      {
-        "empresa": "ALCO RENTAL SERVICES SLU",
-        "import_empresa": 7078.0,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "RIGAU PAGES JOSE MARIA",
-    "total_adjudicat": 7078.0,
-    "relacions": [
-      {
-        "empresa": "ALCO RENTAL SERVICES SLU",
-        "import_empresa": 7078.0,
-        "carrecs": [
-          "REPR.143 RRM"
         ]
       }
     ]
@@ -69197,20 +69688,6 @@
     ]
   },
   {
-    "nom": "PEREZ GARCIA ISIDORO",
-    "total_adjudicat": 6392.0,
-    "relacions": [
-      {
-        "empresa": "SEEKETING SL",
-        "import_empresa": 6392.0,
-        "carrecs": [
-          "Adm. Unico",
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
     "nom": "MARTI FERRER BOSCH",
     "total_adjudicat": 6318.0,
     "relacions": [
@@ -69224,159 +69701,25 @@
     ]
   },
   {
-    "nom": "HOMS COMAS MARC",
-    "total_adjudicat": 6254.0,
-    "relacions": [
-      {
-        "empresa": "HOMS RENTALS, SL",
-        "import_empresa": 5063.44,
-        "carrecs": [
-          "APODERAD.SOL",
-          "CONSEJERO"
-        ]
-      },
-      {
-        "empresa": "GERMANS HOMS LLOGUER DE MAQUINARIA 1852 SL",
-        "import_empresa": 1190.56,
-        "carrecs": [
-          "APODERAD.SOL",
-          "CONSEJERO"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "HOMS COMAS VICENC",
-    "total_adjudicat": 6254.0,
-    "relacions": [
-      {
-        "empresa": "HOMS RENTALS, SL",
-        "import_empresa": 5063.44,
-        "carrecs": [
-          "REPR.143 RRM",
-          "APODERAD.SOL",
-          "PRESIDENTE",
-          "CONSEJERO"
-        ]
-      },
-      {
-        "empresa": "GERMANS HOMS LLOGUER DE MAQUINARIA 1852 SL",
-        "import_empresa": 1190.56,
-        "carrecs": [
-          "APODERAD.SOL",
-          "PRESIDENTE",
-          "CONSEJERO"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "ARROYO SIERRA DAVID",
-    "total_adjudicat": 6254.0,
-    "relacions": [
-      {
-        "empresa": "HOMS RENTALS, SL",
-        "import_empresa": 5063.44,
-        "carrecs": [
-          "REPR.143 RRM"
-        ]
-      },
-      {
-        "empresa": "GERMANS HOMS LLOGUER DE MAQUINARIA 1852 SL",
-        "import_empresa": 1190.56,
-        "carrecs": [
-          "REPR.143 RRM"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "RIERA MAS POL",
-    "total_adjudicat": 6254.0,
-    "relacions": [
-      {
-        "empresa": "HOMS RENTALS, SL",
-        "import_empresa": 5063.44,
-        "carrecs": [
-          "CONSEJERO"
-        ]
-      },
-      {
-        "empresa": "GERMANS HOMS LLOGUER DE MAQUINARIA 1852 SL",
-        "import_empresa": 1190.56,
-        "carrecs": [
-          "CONSEJERO"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "CEBRIAN VELEZ MANUEL",
-    "total_adjudicat": 6254.0,
-    "relacions": [
-      {
-        "empresa": "HOMS RENTALS, SL",
-        "import_empresa": 5063.44,
-        "carrecs": [
-          "REPR.143 RRM"
-        ]
-      },
-      {
-        "empresa": "GERMANS HOMS LLOGUER DE MAQUINARIA 1852 SL",
-        "import_empresa": 1190.56,
-        "carrecs": [
-          "REPR.143 RRM"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "FOZ GIRALT XAVIER",
-    "total_adjudicat": 6254.0,
-    "relacions": [
-      {
-        "empresa": "HOMS RENTALS, SL",
-        "import_empresa": 5063.44,
-        "carrecs": [
-          "SECR.NO CONS"
-        ]
-      },
-      {
-        "empresa": "GERMANS HOMS LLOGUER DE MAQUINARIA 1852 SL",
-        "import_empresa": 1190.56,
-        "carrecs": [
-          "SECR.NO CONS"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "BERMUDEZ GUTIERREZ JORDI",
-    "total_adjudicat": 6254.0,
-    "relacions": [
-      {
-        "empresa": "HOMS RENTALS, SL",
-        "import_empresa": 5063.44,
-        "carrecs": [
-          "V-SEC NO CON"
-        ]
-      },
-      {
-        "empresa": "GERMANS HOMS LLOGUER DE MAQUINARIA 1852 SL",
-        "import_empresa": 1190.56,
-        "carrecs": [
-          "V-SEC NO CON"
-        ]
-      }
-    ]
-  },
-  {
     "nom": "PUJOL ARAIZ GERARD",
     "total_adjudicat": 6254.0,
     "relacions": [
       {
         "empresa": "ESTUCS PUJOL",
         "import_empresa": 6254.0,
+        "carrecs": [
+          "ADM.UNICO"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "GIMENEZ BUENDIA MARIA ELSA",
+    "total_adjudicat": 6240.0,
+    "relacions": [
+      {
+        "empresa": "KITCO VALLEY, SLU",
+        "import_empresa": 6240.0,
         "carrecs": [
           "ADM.UNICO"
         ]
@@ -69803,26 +70146,6 @@
         "import_empresa": 5625.0,
         "carrecs": [
           "CONSEJERO"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "ENFEDAQUE PEDROS ANDREU",
-    "total_adjudicat": 5620.73,
-    "relacions": [
-      {
-        "empresa": "YOU TEACH, SL",
-        "import_empresa": 4120.73,
-        "carrecs": [
-          "ADM.UNICO"
-        ]
-      },
-      {
-        "empresa": "ARTISTAMENTE S.L.",
-        "import_empresa": 1500.0,
-        "carrecs": [
-          "ADM.UNICO"
         ]
       }
     ]
@@ -71298,6 +71621,50 @@
     ]
   },
   {
+    "nom": "UBALS CAZORLA ERIC",
+    "total_adjudicat": 5059.97,
+    "relacions": [
+      {
+        "empresa": "UNIO COMERCIAL DE GASOILS,SL",
+        "import_empresa": 5059.97,
+        "carrecs": [
+          "PRESIDENTE",
+          "CONSEJERO",
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "UBALS GUITART JOSE",
+    "total_adjudicat": 5059.97,
+    "relacions": [
+      {
+        "empresa": "UNIO COMERCIAL DE GASOILS,SL",
+        "import_empresa": 5059.97,
+        "carrecs": [
+          "CONSEJERO",
+          "SECRETARIO",
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "UBALS CAZORLA SABI",
+    "total_adjudicat": 5059.97,
+    "relacions": [
+      {
+        "empresa": "UNIO COMERCIAL DE GASOILS,SL",
+        "import_empresa": 5059.97,
+        "carrecs": [
+          "CONSEJERO",
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
     "nom": "VILARRUBIAS SALA XAVIER",
     "total_adjudicat": 5050.0,
     "relacions": [
@@ -71382,19 +71749,6 @@
       {
         "empresa": "IMPULS FORMATIU",
         "import_empresa": 4950.0,
-        "carrecs": [
-          "ADM.UNICO"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "PLANELL TERRON CARLES",
-    "total_adjudicat": 4912.16,
-    "relacions": [
-      {
-        "empresa": "PINTURES PLANELL",
-        "import_empresa": 4912.16,
         "carrecs": [
           "ADM.UNICO"
         ]
@@ -71900,6 +72254,192 @@
         "import_empresa": 4692.7,
         "carrecs": [
           "Apo.Sol."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "FERNANDEZ DE UZQUIANO AMAYA",
+    "total_adjudicat": 4667.0,
+    "relacions": [
+      {
+        "empresa": "NUNSYS, S.A.",
+        "import_empresa": 2898.0,
+        "carrecs": [
+          "Vicepresid.",
+          "Consejero",
+          "Apoderado"
+        ]
+      },
+      {
+        "empresa": "NUNSYS, S.L.",
+        "import_empresa": 1769.0,
+        "carrecs": [
+          "Vicepresid.",
+          "Consejero",
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "ORTI TARAZONA VICENTE",
+    "total_adjudicat": 4667.0,
+    "relacions": [
+      {
+        "empresa": "NUNSYS, S.A.",
+        "import_empresa": 2898.0,
+        "carrecs": [
+          "Consejero",
+          "Apo.Sol."
+        ]
+      },
+      {
+        "empresa": "NUNSYS, S.L.",
+        "import_empresa": 1769.0,
+        "carrecs": [
+          "Consejero",
+          "Apo.Sol."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "TURANZO GIMENEZ EVA",
+    "total_adjudicat": 4667.0,
+    "relacions": [
+      {
+        "empresa": "NUNSYS, S.A.",
+        "import_empresa": 2898.0,
+        "carrecs": [
+          "Con.Ind."
+        ]
+      },
+      {
+        "empresa": "NUNSYS, S.L.",
+        "import_empresa": 1769.0,
+        "carrecs": [
+          "Con.Ind."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "ROS RAMON JOSE MARIA",
+    "total_adjudicat": 4667.0,
+    "relacions": [
+      {
+        "empresa": "NUNSYS, S.A.",
+        "import_empresa": 2898.0,
+        "carrecs": [
+          "Con.Ind."
+        ]
+      },
+      {
+        "empresa": "NUNSYS, S.L.",
+        "import_empresa": 1769.0,
+        "carrecs": [
+          "Con.Ind."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "GAVILAN PEREZ FRANCISCO",
+    "total_adjudicat": 4667.0,
+    "relacions": [
+      {
+        "empresa": "NUNSYS, S.A.",
+        "import_empresa": 2898.0,
+        "carrecs": [
+          "Apoderado"
+        ]
+      },
+      {
+        "empresa": "NUNSYS, S.L.",
+        "import_empresa": 1769.0,
+        "carrecs": [
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "MILLET SANCHO ALFONSO",
+    "total_adjudicat": 4667.0,
+    "relacions": [
+      {
+        "empresa": "NUNSYS, S.A.",
+        "import_empresa": 2898.0,
+        "carrecs": [
+          "Secretario"
+        ]
+      },
+      {
+        "empresa": "NUNSYS, S.L.",
+        "import_empresa": 1769.0,
+        "carrecs": [
+          "Secretario"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "PRIETO IZQUIERDO JOSE JOAQUIN",
+    "total_adjudicat": 4667.0,
+    "relacions": [
+      {
+        "empresa": "NUNSYS, S.A.",
+        "import_empresa": 2898.0,
+        "carrecs": [
+          "Apo.Manc."
+        ]
+      },
+      {
+        "empresa": "NUNSYS, S.L.",
+        "import_empresa": 1769.0,
+        "carrecs": [
+          "Apo.Manc."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "REINON SANCHEZ ANTONIO",
+    "total_adjudicat": 4667.0,
+    "relacions": [
+      {
+        "empresa": "NUNSYS, S.A.",
+        "import_empresa": 2898.0,
+        "carrecs": [
+          "Apo.Manc."
+        ]
+      },
+      {
+        "empresa": "NUNSYS, S.L.",
+        "import_empresa": 1769.0,
+        "carrecs": [
+          "Apo.Manc."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "DIANA GOMEZ FRANCISCO JOSE",
+    "total_adjudicat": 4667.0,
+    "relacions": [
+      {
+        "empresa": "NUNSYS, S.A.",
+        "import_empresa": 2898.0,
+        "carrecs": [
+          "Apo.Manc."
+        ]
+      },
+      {
+        "empresa": "NUNSYS, S.L.",
+        "import_empresa": 1769.0,
+        "carrecs": [
+          "Apo.Manc."
         ]
       }
     ]
@@ -72511,6 +73051,19 @@
     ]
   },
   {
+    "nom": "DOMENECH MIR FRANCESC XAVIER",
+    "total_adjudicat": 4125.94,
+    "relacions": [
+      {
+        "empresa": "BOBCAT OF SL",
+        "import_empresa": 4125.94,
+        "carrecs": [
+          "REPR.143 RRM"
+        ]
+      }
+    ]
+  },
+  {
     "nom": "LLORENS BATET FRANCESC",
     "total_adjudicat": 4082.45,
     "relacions": [
@@ -72743,192 +73296,6 @@
         "import_empresa": 3958.0,
         "carrecs": [
           "ADM.UNICO"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "FERNANDEZ DE UZQUIANO AMAYA",
-    "total_adjudicat": 3917.5,
-    "relacions": [
-      {
-        "empresa": "NUNSYS, S.A.",
-        "import_empresa": 2148.5,
-        "carrecs": [
-          "Vicepresid.",
-          "Consejero",
-          "Apoderado"
-        ]
-      },
-      {
-        "empresa": "NUNSYS, S.L.",
-        "import_empresa": 1769.0,
-        "carrecs": [
-          "Vicepresid.",
-          "Consejero",
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "ORTI TARAZONA VICENTE",
-    "total_adjudicat": 3917.5,
-    "relacions": [
-      {
-        "empresa": "NUNSYS, S.A.",
-        "import_empresa": 2148.5,
-        "carrecs": [
-          "Consejero",
-          "Apo.Sol."
-        ]
-      },
-      {
-        "empresa": "NUNSYS, S.L.",
-        "import_empresa": 1769.0,
-        "carrecs": [
-          "Consejero",
-          "Apo.Sol."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "TURANZO GIMENEZ EVA",
-    "total_adjudicat": 3917.5,
-    "relacions": [
-      {
-        "empresa": "NUNSYS, S.A.",
-        "import_empresa": 2148.5,
-        "carrecs": [
-          "Con.Ind."
-        ]
-      },
-      {
-        "empresa": "NUNSYS, S.L.",
-        "import_empresa": 1769.0,
-        "carrecs": [
-          "Con.Ind."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "ROS RAMON JOSE MARIA",
-    "total_adjudicat": 3917.5,
-    "relacions": [
-      {
-        "empresa": "NUNSYS, S.A.",
-        "import_empresa": 2148.5,
-        "carrecs": [
-          "Con.Ind."
-        ]
-      },
-      {
-        "empresa": "NUNSYS, S.L.",
-        "import_empresa": 1769.0,
-        "carrecs": [
-          "Con.Ind."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "GAVILAN PEREZ FRANCISCO",
-    "total_adjudicat": 3917.5,
-    "relacions": [
-      {
-        "empresa": "NUNSYS, S.A.",
-        "import_empresa": 2148.5,
-        "carrecs": [
-          "Apoderado"
-        ]
-      },
-      {
-        "empresa": "NUNSYS, S.L.",
-        "import_empresa": 1769.0,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "MILLET SANCHO ALFONSO",
-    "total_adjudicat": 3917.5,
-    "relacions": [
-      {
-        "empresa": "NUNSYS, S.A.",
-        "import_empresa": 2148.5,
-        "carrecs": [
-          "Secretario"
-        ]
-      },
-      {
-        "empresa": "NUNSYS, S.L.",
-        "import_empresa": 1769.0,
-        "carrecs": [
-          "Secretario"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "PRIETO IZQUIERDO JOSE JOAQUIN",
-    "total_adjudicat": 3917.5,
-    "relacions": [
-      {
-        "empresa": "NUNSYS, S.A.",
-        "import_empresa": 2148.5,
-        "carrecs": [
-          "Apo.Manc."
-        ]
-      },
-      {
-        "empresa": "NUNSYS, S.L.",
-        "import_empresa": 1769.0,
-        "carrecs": [
-          "Apo.Manc."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "REINON SANCHEZ ANTONIO",
-    "total_adjudicat": 3917.5,
-    "relacions": [
-      {
-        "empresa": "NUNSYS, S.A.",
-        "import_empresa": 2148.5,
-        "carrecs": [
-          "Apo.Manc."
-        ]
-      },
-      {
-        "empresa": "NUNSYS, S.L.",
-        "import_empresa": 1769.0,
-        "carrecs": [
-          "Apo.Manc."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "DIANA GOMEZ FRANCISCO JOSE",
-    "total_adjudicat": 3917.5,
-    "relacions": [
-      {
-        "empresa": "NUNSYS, S.A.",
-        "import_empresa": 2148.5,
-        "carrecs": [
-          "Apo.Manc."
-        ]
-      },
-      {
-        "empresa": "NUNSYS, S.L.",
-        "import_empresa": 1769.0,
-        "carrecs": [
-          "Apo.Manc."
         ]
       }
     ]
@@ -73170,50 +73537,6 @@
         "import_empresa": 3870.16,
         "carrecs": [
           "LIQUIDADOR"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "UBALS CAZORLA ERIC",
-    "total_adjudicat": 3846.07,
-    "relacions": [
-      {
-        "empresa": "UNIO COMERCIAL DE GASOILS,SL",
-        "import_empresa": 3846.07,
-        "carrecs": [
-          "PRESIDENTE",
-          "CONSEJERO",
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "UBALS GUITART JOSE",
-    "total_adjudicat": 3846.07,
-    "relacions": [
-      {
-        "empresa": "UNIO COMERCIAL DE GASOILS,SL",
-        "import_empresa": 3846.07,
-        "carrecs": [
-          "CONSEJERO",
-          "SECRETARIO",
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "UBALS CAZORLA SABI",
-    "total_adjudicat": 3846.07,
-    "relacions": [
-      {
-        "empresa": "UNIO COMERCIAL DE GASOILS,SL",
-        "import_empresa": 3846.07,
-        "carrecs": [
-          "CONSEJERO",
-          "APODERAD.SOL"
         ]
       }
     ]
@@ -75590,19 +75913,6 @@
     ]
   },
   {
-    "nom": "GIMENEZ BUENDIA MARIA ELSA",
-    "total_adjudicat": 3040.0,
-    "relacions": [
-      {
-        "empresa": "KITCO VALLEY, SLU",
-        "import_empresa": 3040.0,
-        "carrecs": [
-          "ADM.UNICO"
-        ]
-      }
-    ]
-  },
-  {
     "nom": "MONTMANY ALONSO MARIUS",
     "total_adjudicat": 3000.0,
     "relacions": [
@@ -75847,19 +76157,6 @@
         "import_empresa": 2861.98,
         "carrecs": [
           "ADM.CONJUNTO"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "DOMENECH MIR FRANCESC XAVIER",
-    "total_adjudicat": 2828.23,
-    "relacions": [
-      {
-        "empresa": "BOBCAT OF SL",
-        "import_empresa": 2828.23,
-        "carrecs": [
-          "REPR.143 RRM"
         ]
       }
     ]
@@ -78361,7 +78658,7 @@
     ]
   },
   {
-    "nom": "RAFOLS PUJOL LLUIS",
+    "nom": "ESTRUCH FORTUÑO GERARD",
     "total_adjudicat": 2051.35,
     "relacions": [
       {
@@ -79097,6 +79394,20 @@
         "empresa": "NETEGES NERESNAN, SL",
         "import_empresa": 1865.0,
         "carrecs": [
+          "Adm. Unico"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "PERE VILA COLLMALIVERN",
+    "total_adjudicat": 1800.0,
+    "relacions": [
+      {
+        "empresa": "BPM SPORT CONSULTING, SL",
+        "import_empresa": 1800.0,
+        "carrecs": [
+          "Socio único",
           "Adm. Unico"
         ]
       }
@@ -81118,6 +81429,34 @@
     ]
   },
   {
+    "nom": "SANCHEZ RODRIGUEZ OLGA",
+    "total_adjudicat": 1193.61,
+    "relacions": [
+      {
+        "empresa": "AXA SEGUROS GENERALES, SOCIEDAD ANÓNIMA DE SEGUROS Y REASEGUROS",
+        "import_empresa": 1193.61,
+        "carrecs": [
+          "Vicepresid.",
+          "Consejero",
+          "Cons.Del.Sol"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "LECLERCQ NICOLAS",
+    "total_adjudicat": 1193.61,
+    "relacions": [
+      {
+        "empresa": "AXA SEGUROS GENERALES, SOCIEDAD ANÓNIMA DE SEGUROS Y REASEGUROS",
+        "import_empresa": 1193.61,
+        "carrecs": [
+          "Consejero"
+        ]
+      }
+    ]
+  },
+  {
     "nom": "DE VEGA DIAZ TERESA",
     "total_adjudicat": 1193.61,
     "relacions": [
@@ -82822,19 +83161,6 @@
     ]
   },
   {
-    "nom": "LECLERCQ NICOLAS",
-    "total_adjudicat": 1193.61,
-    "relacions": [
-      {
-        "empresa": "AXA SEGUROS GENERALES, SOCIEDAD ANÓNIMA DE SEGUROS Y REASEGUROS",
-        "import_empresa": 1193.61,
-        "carrecs": [
-          "Consejero"
-        ]
-      }
-    ]
-  },
-  {
     "nom": "CEDENA GONZALEZ MARIA JOSEFA",
     "total_adjudicat": 1193.61,
     "relacions": [
@@ -82882,21 +83208,6 @@
         "import_empresa": 1193.61,
         "carrecs": [
           "Apo.Sol."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "SANCHEZ RODRIGUEZ OLGA",
-    "total_adjudicat": 1193.61,
-    "relacions": [
-      {
-        "empresa": "AXA SEGUROS GENERALES, SOCIEDAD ANÓNIMA DE SEGUROS Y REASEGUROS",
-        "import_empresa": 1193.61,
-        "carrecs": [
-          "Vicepresid.",
-          "Consejero",
-          "Cons.Del.Sol"
         ]
       }
     ]
@@ -89130,6 +89441,110 @@
     ]
   },
   {
+    "nom": "MONTES MONTES MARIA JOSE",
+    "total_adjudicat": 1050.0,
+    "relacions": [
+      {
+        "empresa": "TICNOVA QUALITY TEAM SL",
+        "import_empresa": 1050.0,
+        "carrecs": [
+          "VsecrNoConsj"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "BALLESTER VALVENY JOAN",
+    "total_adjudicat": 1050.0,
+    "relacions": [
+      {
+        "empresa": "TICNOVA QUALITY TEAM SL",
+        "import_empresa": 1050.0,
+        "carrecs": [
+          "Apo.Sol."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "AMIGO GRAU JOAN",
+    "total_adjudicat": 1050.0,
+    "relacions": [
+      {
+        "empresa": "TICNOVA QUALITY TEAM SL",
+        "import_empresa": 1050.0,
+        "carrecs": [
+          "Apo.Sol."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "INVEREADY ASSET MANAGEMENT S.G.E.I.C",
+    "total_adjudicat": 1050.0,
+    "relacions": [
+      {
+        "empresa": "TICNOVA QUALITY TEAM SL",
+        "import_empresa": 1050.0,
+        "carrecs": [
+          "Consejero"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "GONZALEZ FOLLEDO ENRIQUE",
+    "total_adjudicat": 1050.0,
+    "relacions": [
+      {
+        "empresa": "TICNOVA QUALITY TEAM SL",
+        "import_empresa": 1050.0,
+        "carrecs": [
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "ROMERO MORILLO FRANCISCO JAVIER",
+    "total_adjudicat": 1050.0,
+    "relacions": [
+      {
+        "empresa": "TICNOVA QUALITY TEAM SL",
+        "import_empresa": 1050.0,
+        "carrecs": [
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "DELGADO CABALLER JORDI",
+    "total_adjudicat": 1050.0,
+    "relacions": [
+      {
+        "empresa": "TICNOVA QUALITY TEAM SL",
+        "import_empresa": 1050.0,
+        "carrecs": [
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "PASTOR BEVIA JOSE",
+    "total_adjudicat": 1050.0,
+    "relacions": [
+      {
+        "empresa": "TICNOVA QUALITY TEAM SL",
+        "import_empresa": 1050.0,
+        "carrecs": [
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
     "nom": "BASAS GRIFE BERNAT",
     "total_adjudicat": 1050.0,
     "relacions": [
@@ -89985,6 +90400,32 @@
         "import_empresa": 550.0,
         "carrecs": [
           "SOCIO UNICO"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "RODELLAR FUSTERO FRANCESC",
+    "total_adjudicat": 428.8,
+    "relacions": [
+      {
+        "empresa": "SATEC, LABORATORI D'ASSAIGS PER A LA CONSTRUCCIO, SL",
+        "import_empresa": 428.8,
+        "carrecs": [
+          "ADM.SOLIDAR."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "RODELLAR FUSTERO JORDI",
+    "total_adjudicat": 428.8,
+    "relacions": [
+      {
+        "empresa": "SATEC, LABORATORI D'ASSAIGS PER A LA CONSTRUCCIO, SL",
+        "import_empresa": 428.8,
+        "carrecs": [
+          "ADM.SOLIDAR."
         ]
       }
     ]
