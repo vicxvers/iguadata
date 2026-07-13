@@ -19,7 +19,8 @@ function renderPage(caso) {
     const title = escapeHtml(caso.title);
     const description = escapeHtml(caso.subtitle);
     const canonical = `https://iguadata.cat/investigacio/${encodeURIComponent(caso.slug)}/`;
-    const image = caso.image ? `https://iguadata.cat${caso.image}` : '';
+    const socialImagePath = caso.image ? caso.image.replace(/\.webp$/, '.png') : '';
+    const image = socialImagePath ? `https://iguadata.cat${socialImagePath}` : '';
     const imageMeta = image
         ? `\n    <meta property="og:image" content="${escapeHtml(image)}">\n    <meta name="twitter:image" content="${escapeHtml(image)}">`
         : '';
@@ -29,6 +30,8 @@ function renderPage(caso) {
 
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://static.cloudflareinsights.com; connect-src 'self' https://cloudflareinsights.com; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="robots" content="index, follow">
     <meta name="description" content="${description}">
@@ -44,10 +47,7 @@ function renderPage(caso) {
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <title>${title} | Iguadata</title>
-    <script>
-        window.__IGUADATA_BASE__ = window.location.hostname.endsWith('github.io') ? '/iguadata-dev' : '';
-        window.__IGUADATA_ASSET__ = function (path) { return window.__IGUADATA_BASE__ + path; };
-    </script>
+    <script src="../../assets/bootstrap.js"></script>
     <link rel="icon" href="../../favicon.ico" type="image/x-icon">
     <link rel="icon" href="../../favicon-48x48.png" type="image/png" sizes="48x48">
     <link rel="stylesheet" href="../../assets/fonts/fonts.css">

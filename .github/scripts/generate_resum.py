@@ -4,6 +4,8 @@ import json
 from datetime import datetime, timezone
 from pathlib import Path
 
+from atomic_io import write_json_atomic
+
 
 ROOT = Path(__file__).resolve().parents[2]
 JSON_DIR = ROOT / "json"
@@ -134,10 +136,7 @@ def main():
     }
 
     out = JSON_DIR / "resum.json"
-    out.write_text(
-        json.dumps(resum, ensure_ascii=False, separators=(",", ":")) + "\n",
-        encoding="utf-8",
-    )
+    write_json_atomic(out, resum, indent=None, separators=(",", ":"))
     print(f"Generated {out.relative_to(ROOT)} ({out.stat().st_size} bytes)")
 
 

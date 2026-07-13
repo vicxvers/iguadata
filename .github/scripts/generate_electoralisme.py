@@ -16,6 +16,9 @@ from collections import defaultdict
 from datetime import date, timedelta
 from pathlib import Path
 
+from atomic_io import write_json_atomic
+from contract_filters import is_analysis_contract
+
 
 BASE_DIR = Path(__file__).resolve().parents[2]
 CONTRACTES_FILE = BASE_DIR / "json" / "contractes.json"
@@ -26,7 +29,7 @@ MUNICIPAL_ELECTION_DATES = [
     date(2015, 5, 24),
     date(2019, 5, 26),
     date(2023, 5, 28),
-    date(2027, 5, 30),
+    date(2027, 5, 23),
 ]
 ELECTORAL_PERIOD_DAYS = 54
 PRE_ELECTORAL_WINDOW_DAYS = 54
@@ -462,6 +465,7 @@ def main() -> None:
     with args.contractes.open("r", encoding="utf-8") as f:
         contractes = json.load(f)
 
+    contractes = [c for c in contractes if is_analysis_contract(c)]
     cases = build_cases(contractes)
     payload = {
         "metodologia": "electoralisme_v1",
@@ -479,9 +483,7 @@ def main() -> None:
         "total_alertes": len(cases),
         "alertes": cases,
     }
-    args.output.parent.mkdir(parents=True, exist_ok=True)
-    with args.output.open("w", encoding="utf-8") as f:
-        json.dump(payload, f, ensure_ascii=False, indent=2)
+    write_json_atomic(args.output, payload)
     print(f"electoralisme.json: {len(cases)} alertes")
 
 

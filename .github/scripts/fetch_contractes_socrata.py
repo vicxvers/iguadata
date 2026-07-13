@@ -27,6 +27,9 @@ from urllib.request import Request, urlopen
 from urllib.error import HTTPError, URLError
 from urllib.parse import urlencode
 
+from atomic_io import write_json_atomic
+from contract_audit import change_id, contract_differences, detailed_key, identity_key
+
 # ─────────────────────────────────────────────
 # CONFIGURACIÓ
 # ─────────────────────────────────────────────
@@ -39,6 +42,7 @@ from urllib.parse import urlencode
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 OUTPUT_FILE = os.path.join(BASE_DIR, "json", "contractes.json")
 ARCHIVE_FILE = os.path.join(BASE_DIR, "json", "contractes_arxiu.json")
+CHANGELOG_FILE = os.path.join(BASE_DIR, "json", "canvis_contractes.json")
 
 # Endpoint Socrata – dataset hb6v-jcbf (Registre de Contractes de Catalunya)
 BASE_URL = "https://analisi.transparenciacatalunya.cat/resource/hb6v-jcbf.json"
@@ -255,6 +259,8 @@ def mapejar_registre(fila: dict, index_id: int) -> dict:
         "año":          any_,
         "mes":          mes,
         "cpv":          (fila.get("codi_cpv") or "").strip(),
+        "numero_lot":   (fila.get("numero_lot") or "").strip(),
+        "contracte_origen": (fila.get("contracte") or "").strip(),
     }
 
 
@@ -295,41 +301,140 @@ def carregar_json_array(path: str) -> list:
 
 
 def actualitzar_arxiu_contractes(contractes_antics: list, contractes_nous: list) -> int:
-    claus_noves = {clau_contracte_detallada(c) for c in contractes_nous}
+    old_live = [
+        contract
+        for contract in contractes_antics
+        if isinstance(contract, dict) and not contract.get("preservat_iguadata")
+    ]
+    new_exact = {detailed_key(contract) for contract in contractes_nous}
+    new_by_identity = {}
+    for contract in contractes_nous:
+        key = identity_key(contract)
+        if key:
+            new_by_identity.setdefault(key, []).append(contract)
+
     arxiu = carregar_json_array(ARCHIVE_FILE)
+    canvis = carregar_json_array(CHANGELOG_FILE)
+    canvis_by_id = {
+        row.get("id"): row
+        for row in canvis
+        if isinstance(row, dict) and row.get("id")
+    }
     claus_arxivades = {
-        clau_contracte_detallada(c.get("contracte_original", c))
-        for c in arxiu
-        if isinstance(c, dict)
+        detailed_key(row.get("contracte_original", row))
+        for row in arxiu
+        if isinstance(row, dict)
     }
 
-    data_arxiu = datetime.now(timezone.utc).date().isoformat()
-    nous_arxivats = []
-    for contracte in contractes_antics:
-        clau = clau_contracte_detallada(contracte)
-        if clau in claus_noves or clau in claus_arxivades:
-            continue
-        nous_arxivats.append({
-            "estat_font": "desaparegut_socrata",
-            "primera_absencia_detectada": data_arxiu,
-            "font_preservacio": "json/contractes.json anterior",
-            "exclos_analisis": False,
-            "contracte_original": contracte,
-        })
-        claus_arxivades.add(clau)
+    data_deteccio = datetime.now(timezone.utc).date().isoformat()
+    arxiu_modificat = False
 
-    if nous_arxivats or not os.path.exists(ARCHIVE_FILE):
-        arxiu.extend(nous_arxivats)
+    # Migrate the historical archive to the explicit audit-event schema.
+    for registre in arxiu:
+        if not isinstance(registre, dict):
+            continue
+        original = registre.get("contracte_original")
+        if not isinstance(original, dict):
+            continue
+        tipus = registre.get("tipus_canvi") or "desaparegut"
+        detected = (
+            registre.get("detectat_a")
+            or registre.get("primera_absencia_detectada")
+            or data_deteccio
+        )
+        identifier = registre.get("canvi_id") or change_id(
+            tipus, original, registre.get("contracte_nou")
+        )
+        migration = {
+            "id": identifier,
+            "tipus_canvi": tipus,
+            "detectat_a": detected,
+            "contracte_anterior": original,
+            "contracte_nou": registre.get("contracte_nou"),
+            "camps_modificats": registre.get("camps_modificats", []),
+            "alertes_afectades": [],
+            "investigacions_afectades": [],
+            "impacte_calculat": False,
+        }
+        if identifier not in canvis_by_id:
+            canvis.append(migration)
+            canvis_by_id[identifier] = migration
+        if registre.get("exclos_analisis") is not True:
+            registre["exclos_analisis"] = True
+            arxiu_modificat = True
+        for key, value in (
+            ("tipus_canvi", tipus),
+            ("detectat_a", detected),
+            ("canvi_id", identifier),
+        ):
+            if registre.get(key) != value:
+                registre[key] = value
+                arxiu_modificat = True
+
+    nous_esdeveniments = 0
+    for contracte in old_live:
+        key = detailed_key(contracte)
+        if key in new_exact or key in claus_arxivades:
+            continue
+
+        candidates = new_by_identity.get(identity_key(contracte), [])
+        # Ignore schema-only backfills and exact semantic matches.
+        if any(not contract_differences(contracte, candidate) for candidate in candidates):
+            continue
+        contracte_nou = candidates[0] if len(candidates) == 1 else None
+        differences = (
+            contract_differences(contracte, contracte_nou)
+            if contracte_nou
+            else []
+        )
+        tipus = "modificat" if contracte_nou and differences else "desaparegut"
+        identifier = change_id(tipus, contracte, contracte_nou)
+
+        registre = {
+            "estat_font": "versio_anterior_socrata",
+            "tipus_canvi": tipus,
+            "detectat_a": data_deteccio,
+            "primera_absencia_detectada": data_deteccio,
+            "font_preservacio": "json/contractes.json anterior",
+            "exclos_analisis": True,
+            "canvi_id": identifier,
+            "contracte_original": contracte,
+            "contracte_nou": contracte_nou,
+            "camps_modificats": differences,
+        }
+        arxiu.append(registre)
+        claus_arxivades.add(key)
+        arxiu_modificat = True
+
+        if identifier not in canvis_by_id:
+            canvi = {
+                "id": identifier,
+                "tipus_canvi": tipus,
+                "detectat_a": data_deteccio,
+                "contracte_anterior": contracte,
+                "contracte_nou": contracte_nou,
+                "camps_modificats": differences,
+                "alertes_afectades": [],
+                "investigacions_afectades": [],
+                "impacte_calculat": False,
+            }
+            canvis.append(canvi)
+            canvis_by_id[identifier] = canvi
+        nous_esdeveniments += 1
+
+    if arxiu_modificat or not os.path.exists(ARCHIVE_FILE):
         arxiu.sort(
-            key=lambda r: (
-                r.get("contracte_original", {}).get("fecha") or "",
-                r.get("contracte_original", {}).get("codigo") or "",
+            key=lambda row: (
+                row.get("detectat_a") or row.get("primera_absencia_detectada") or "",
+                row.get("contracte_original", {}).get("fecha") or "",
+                row.get("contracte_original", {}).get("codigo") or "",
             )
         )
-        with open(ARCHIVE_FILE, "w", encoding="utf-8") as f:
-            json.dump(arxiu, f, ensure_ascii=False, indent=2)
+        write_json_atomic(ARCHIVE_FILE, arxiu)
 
-    return len(nous_arxivats)
+    canvis.sort(key=lambda row: (row.get("detectat_a") or "", row.get("id") or ""))
+    write_json_atomic(CHANGELOG_FILE, canvis)
+    return nous_esdeveniments
 
 
 def contracte_public_preservat(registre_arxiu: dict) -> dict | None:
@@ -342,6 +447,7 @@ def contracte_public_preservat(registre_arxiu: dict) -> dict | None:
     public["preservat_iguadata"] = True
     public["primera_absencia_detectada"] = registre_arxiu.get("primera_absencia_detectada", "")
     public["font_preservacio"] = registre_arxiu.get("font_preservacio", "")
+    public["exclos_analisis"] = True
     if registre_arxiu.get("primer_snapshot_iguadata"):
         public["primer_snapshot_iguadata"] = registre_arxiu.get("primer_snapshot_iguadata")
     return public
@@ -442,13 +548,14 @@ def main():
     print("fet.")
 
     arxivats = actualitzar_arxiu_contractes(contractes_anteriors, contractes)
-    contractes = fusionar_contractes_preservats(contractes)
+    for contracte in contractes:
+        contracte["estat_font"] = "actiu_socrata"
+        contracte["preservat_iguadata"] = False
 
     # ─── Escriure JSON de sortida ─────────────────────────────────
     print(f"  Escrivint {OUTPUT_FILE}...", end=" ", flush=True)
     os.makedirs(os.path.dirname(OUTPUT_FILE), exist_ok=True)
-    with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
-        json.dump(contractes, f, ensure_ascii=False, indent=2)
+    write_json_atomic(OUTPUT_FILE, contractes)
     print("fet.")
 
     # ─── Resum ───────────────────────────────────────────────────
@@ -517,8 +624,7 @@ def main():
             "categoria":    prev.get("categoria", ""),
         })
 
-    with open(EMPRESES_FILE, "w", encoding="utf-8") as f:
-        json.dump(empreses_nova, f, ensure_ascii=False, indent=2)
+    write_json_atomic(EMPRESES_FILE, empreses_nova)
 
     noves = sum(1 for e in empreses_nova if not e["sector"])
     print(f"  empreses.json          : {len(empreses_nova):,} empreses ({noves:,} noves sense classificar)")

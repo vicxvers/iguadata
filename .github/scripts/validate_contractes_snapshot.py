@@ -11,6 +11,8 @@ import json
 import sys
 from pathlib import Path
 
+from contract_filters import is_analysis_contract
+
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
@@ -27,7 +29,7 @@ def load_contracts(path: str) -> list[dict]:
         data = json.load(f)
     if not isinstance(data, list):
         raise SystemExit(f"{path} is not a JSON array")
-    return [row for row in data if isinstance(row, dict)]
+    return [row for row in data if is_analysis_contract(row)]
 
 
 def norm(value: object) -> str:

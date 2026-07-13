@@ -23,6 +23,8 @@ import sys
 from pathlib import Path
 
 import pandas as pd
+
+from atomic_io import write_json_atomic
 import pyarrow.parquet as pq
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -41,8 +43,7 @@ def main():
               'reparse necessari o pendent.')
         # Si ja existeix un alias_empreses.json, el mantenim tal qual.
         if not ALIAS_JSON.exists():
-            ALIAS_JSON.parent.mkdir(parents=True, exist_ok=True)
-            ALIAS_JSON.write_text('{}', encoding='utf-8')
+            write_json_atomic(ALIAS_JSON, {})
         return 0
 
     df = pd.read_parquet(PARQUET_EMPRESAS, columns=['empresa', 'nombre_posterior'])
@@ -79,10 +80,7 @@ def main():
     print(f'Alies: {abans:,} -> {despres:,} (+{despres - abans:,})')
 
     alias_final = {k: sorted(v) for k, v in sorted(alias_map.items())}
-    ALIAS_JSON.parent.mkdir(parents=True, exist_ok=True)
-    ALIAS_JSON.write_text(
-        json.dumps(alias_final, ensure_ascii=False, indent=2), encoding='utf-8'
-    )
+    write_json_atomic(ALIAS_JSON, alias_final)
     print(f'[OK] {ALIAS_JSON} ({len(alias_final):,} claus)')
     return 0
 

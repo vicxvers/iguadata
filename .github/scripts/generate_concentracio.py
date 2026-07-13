@@ -15,6 +15,9 @@ from collections import defaultdict
 from datetime import date, timedelta
 from pathlib import Path
 
+from atomic_io import write_json_atomic
+from contract_filters import is_analysis_contract
+
 
 BASE_DIR = Path(__file__).resolve().parents[2]
 CONTRACTES_FILE = BASE_DIR / "json" / "contractes.json"
@@ -570,6 +573,7 @@ def main() -> None:
     with args.administradors.open("r", encoding="utf-8") as f:
         administradors = json.load(f)
 
+    contractes = [c for c in contractes if is_analysis_contract(c)]
     cases = build_cases(contractes, empreses, administradors)
     payload = {
         "metodologia": "concentracio_v1",
@@ -577,9 +581,7 @@ def main() -> None:
         "total_alertes": len(cases),
         "alertes": cases,
     }
-    args.output.parent.mkdir(parents=True, exist_ok=True)
-    with args.output.open("w", encoding="utf-8") as f:
-        json.dump(payload, f, ensure_ascii=False, indent=2)
+    write_json_atomic(args.output, payload)
     print(f"concentracio.json: {len(cases)} alertes")
 
 

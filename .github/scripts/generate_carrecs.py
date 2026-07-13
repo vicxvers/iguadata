@@ -24,12 +24,13 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))  # sibling modules in .
 
 from normalize_empreses import normalize_empresa
 from classify_persones import is_company_name
+from atomic_io import write_json_atomic
 
 PARQUET_CARGOS = ROOT / '.dev' / 'borme' / 'borme_cargos.parquet'
 INPUT_EMPRESES = ROOT / 'json' / 'empreses.json'
 ALIAS_JSON     = ROOT / '.github' / 'scripts' / 'alias_empreses.json'
 OUTPUT_JSON    = ROOT / 'json' / 'carrecs.json'
-OUTPUT_PURGED  = ROOT / 'json' / 'carrecs_eliminats.json'
+OUTPUT_PURGED  = ROOT / '.dev' / 'outputs' / 'carrecs_eliminats.json'
 
 ACTOS_ACTIUS = {'nombramiento', 'reeleccion'}
 ACTO_RANK = {'nombramiento': 0, 'reeleccion': 0, 'cese': 1, 'revocacion': 1}
@@ -253,8 +254,7 @@ def main():
             purgats_unics.append(item)
     purgats_unics.sort(key=lambda x: (x['motius'], x['persona']))
 
-    with open(OUTPUT_PURGED, 'w', encoding='utf-8') as f:
-        json.dump(purgats_unics, f, ensure_ascii=False, indent=2)
+    write_json_atomic(OUTPUT_PURGED, purgats_unics)
 
     df = df[~mask_corrupt]
     print(f"  Purga dades corruptes: -{abans_purga - len(df):,} files eliminades")
@@ -300,9 +300,7 @@ def main():
     for admins in result.values():
         admins.sort(key=lambda a: a['fecha_nombramiento'], reverse=True)
 
-    OUTPUT_JSON.parent.mkdir(parents=True, exist_ok=True)
-    with open(OUTPUT_JSON, 'w', encoding='utf-8') as f:
-        json.dump(result, f, ensure_ascii=False, indent=2)
+    write_json_atomic(OUTPUT_JSON, result)
 
     total_admins = sum(len(v) for v in result.values())
     print(

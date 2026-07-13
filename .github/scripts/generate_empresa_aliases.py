@@ -11,6 +11,8 @@ import re
 import unicodedata
 from pathlib import Path
 
+from atomic_io import write_json_atomic
+
 
 ROOT = Path(__file__).resolve().parents[2]
 EMPRESES_JSON = ROOT / "json" / "empreses.json"
@@ -65,9 +67,7 @@ def main() -> None:
         "version": 1,
         "aliases": dict(sorted(aliases.items())),
     }
-    with OUTPUT_JSON.open("w", encoding="utf-8") as f:
-        json.dump(payload, f, ensure_ascii=False, indent=2)
-        f.write("\n")
+    write_json_atomic(OUTPUT_JSON, payload)
     print(f"empresa_aliases.json: {sum(len(v) for v in aliases.values())} alias")
 
 

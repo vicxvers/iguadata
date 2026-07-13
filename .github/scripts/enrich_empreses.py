@@ -1,5 +1,7 @@
 import json
 import os
+
+from atomic_io import write_json_atomic
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 filepath = os.path.join(BASE_DIR, 'json', 'empreses.json')
 
@@ -69,7 +71,6 @@ for emp in data:
             emp['sector'] = 'Altres Serveis i Subministraments'
             fallback += 1
 
-with open(filepath, 'w', encoding='utf-8') as f:
-    json.dump(data, f, ensure_ascii=False, indent=2)
+write_json_atomic(filepath, data)
 
 print(f"OK Fet! {updated} empreses actualitzades, {fallback} sense mapping (fallback).")

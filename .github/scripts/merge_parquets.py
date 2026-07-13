@@ -21,6 +21,8 @@ from pathlib import Path
 
 import pandas as pd
 
+from atomic_io import write_parquet_atomic
+
 
 DEDUP_KEYS = {
     "borme_empresas.parquet": ["fecha_borme", "num_entrada", "empresa_norm"],
@@ -54,7 +56,7 @@ def merge_one(big_path: Path, delta_path: Path, keys: list) -> None:
     added = after - before
 
     big_path.parent.mkdir(parents=True, exist_ok=True)
-    combined.to_parquet(big_path, index=False, engine="pyarrow")
+    write_parquet_atomic(combined, big_path)
 
     size_mb = big_path.stat().st_size / 1e6
     print(f"  [OK] {name}: {before:,} -> {after:,} files ({added:+,}) | {size_mb:.1f} MB")

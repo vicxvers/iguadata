@@ -16,6 +16,9 @@ from collections import defaultdict
 from datetime import date
 from pathlib import Path
 
+from atomic_io import write_json_atomic
+from contract_filters import is_analysis_contract
+
 
 BASE_DIR = Path(__file__).resolve().parents[2]
 CONTRACTES_FILE = BASE_DIR / "json" / "contractes.json"
@@ -119,7 +122,9 @@ def enrich_contract(c: dict) -> dict:
 
 def expediente_key(c: dict) -> str:
     code = re.sub(r"\s+", " ", str(c.get("codigo") or "")).strip()
-    return code or f"id:{c.get('id')}"
+    organismo = fold(c.get("organismo", ""))
+    organismo = re.sub(r"[^A-Z0-9]+", " ", organismo).strip()
+    return f"{organismo}|{code}" if code else f"id:{c.get('id')}"
 
 
 def stable_contract_key(c: dict) -> str:
@@ -617,6 +622,7 @@ def main() -> None:
     with args.administradors.open("r", encoding="utf-8") as f:
         administradors = json.load(f)
 
+    contractes = [c for c in contractes if is_analysis_contract(c)]
     cases = build_cases(contractes, administradors)
     payload = {
         "metodologia": "fraccionament_v2",
@@ -624,9 +630,7 @@ def main() -> None:
         "total_alertes": len(cases),
         "alertes": cases,
     }
-    args.output.parent.mkdir(parents=True, exist_ok=True)
-    with args.output.open("w", encoding="utf-8") as f:
-        json.dump(payload, f, ensure_ascii=False, indent=2)
+    write_json_atomic(args.output, payload)
     print(f"fraccionament.json: {len(cases)} alertes")
 
 

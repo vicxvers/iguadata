@@ -3,6 +3,8 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://static.cloudflareinsights.com; connect-src 'self' https://cloudflareinsights.com; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
     <meta name="robots" content="noindex, nofollow">
     <title>Iguadata</title>
     <!--
@@ -13,20 +15,7 @@
         l'index.html el desxifra i restaura la URL real amb history.replaceState.
         Tècnica: https://github.com/rafgraph/spa-github-pages
     -->
-    <script>
-        // segmentCount = nombre de segments del basePath del projecte.
-        // Per a vicxvers.github.io/iguadata-dev/ → 1
-        // Si algun dia migres a domini propi (CNAME) → 0
-        var segmentCount = (window.location.hostname.endsWith('github.io')) ? 1 : 0;
-        var l = window.location;
-        l.replace(
-            l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
-            l.pathname.split('/').slice(0, 1 + segmentCount).join('/') + '/?/' +
-            l.pathname.slice(1).split('/').slice(segmentCount).join('/').replace(/&/g, '~and~') +
-            (l.search ? '&' + l.search.slice(1).replace(/&/g, '~and~') : '') +
-            l.hash
-        );
-    </script>
+    <script src="assets/spa-redirect.js"></script>
 </head>
 
 <body></body>

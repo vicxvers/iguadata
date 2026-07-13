@@ -237,6 +237,35 @@ function matchesSearchQuery(values, query) {
     return terms.every(term => target.includes(term));
 }
 
+function normalizeContractCode(value) {
+    return String(value || '')
+        .toUpperCase()
+        .trim()
+        .replace(/\s+/g, ' ')
+        .replace(/\s*([/.-])\s*/g, '$1');
+}
+
+function looksLikeContractCodeQuery(query) {
+    return /\d\s*[/.-]\s*\d/.test(String(query || ''));
+}
+
+function contractCodeStartsWithQuery(code, query) {
+    const normalizedCode = normalizeContractCode(code);
+    const normalizedQuery = normalizeContractCode(query);
+    if (!normalizedQuery || !normalizedCode.startsWith(normalizedQuery)) return false;
+    const nextCharacter = normalizedCode.charAt(normalizedQuery.length);
+    return !nextCharacter || !/[A-Z0-9]/.test(nextCharacter);
+}
+
+function filterContractsBySearch(contracts, query, searchableValues) {
+    if (!query) return contracts;
+    if (looksLikeContractCodeQuery(query)) {
+        const codeMatches = contracts.filter(contract => contractCodeStartsWithQuery(contract.codigo, query));
+        if (codeMatches.length) return codeMatches;
+    }
+    return contracts.filter(contract => matchesSearchQuery(searchableValues(contract), query));
+}
+
 // Hash determinista de 53 bits (cyrb53). Sempre retorna el mateix valor per al mateix input.
 function cyrb53(str) {
     let h1 = 0xdeadbeef, h2 = 0x41c6ce57;
@@ -274,7 +303,7 @@ const CASOS_INVESTIGACIO_FALLBACK = [
         title: 'Passeig Verdaguer',
         subtitle: 'Cinc contractes a dit per començar la remodelació',
         publishedAt: '2026-06-22',
-        image: '/assets/investigacio/passeig-verdaguer.png',
+        image: '/assets/investigacio/passeig-verdaguer.webp',
         importe: 65500
     },
     {
@@ -334,6 +363,11 @@ function buildLegacyContractSlug(c) {
 
 function contractMatchesSlug(contract, slug) {
     return contract.slug === slug || (contract.slug_aliases || []).includes(slug);
+}
+
+function sameContractEvidence(current, frozen) {
+    const fields = ['codigo', 'organismo', 'fecha', 'importe', 'adjudicatario', 'descripcion'];
+    return fields.every(field => String(current?.[field] ?? '').trim() === String(frozen?.[field] ?? '').trim());
 }
 
 function buildEmpresaSlug(name) {
@@ -562,7 +596,7 @@ async function fetchStaticContractsSnapshot() {
     const resp = await fetch(jsonAssetUrl('/json/contractes.json'));
     if (!resp.ok) throw new Error(`Backup contractes HTTP ${resp.status}`);
     const data = await resp.json();
-    return Array.isArray(data) ? data : [];
+    return Array.isArray(data) ? data.filter(c => !c.preservat_iguadata && c.exclos_analisis !== true) : [];
 }
 
 async function fetchArchivedContracts() {
@@ -910,7 +944,7 @@ function ContractDetailView({ contract: c, contracts, empreses, onBack, onEmpres
     const empresaContracts = useMemo(() =>
         contracts.filter(contract => contract.adjudicatario === c.adjudicatario)
         , [contracts, c.adjudicatario]);
-    const isPreserved = c.estat_font === 'preservat_desaparegut_socrata' || c.preservat_iguadata;
+    const isPreserved = c.evidencia_congelada === true || c.estat_font === 'preservat_desaparegut_socrata' || c.preservat_iguadata;
 
     return (
         <div className="container contracte-detail-page">
@@ -924,7 +958,7 @@ function ContractDetailView({ contract: c, contracts, empreses, onBack, onEmpres
                 </div>
                 {isPreserved && (
                     <div className="contracte-preserved-notice">
-                        Aquest contracte ha estat eliminat de la base de dades oficial, però Iguadata conserva la seva fitxa per mantenir la traçabilitat de les dades.
+                        Aquest contracte és recuperat i ja no consta al registre públic. La fitxa i evidència es preserven per mantenir la traçabilitat de les dades.
                     </div>
                 )}
                 <div className="contract-meta contracte-detail-meta">
@@ -1920,10 +1954,11 @@ function EmpresaView({ empresa: empresaNom, contracts, empreses, administradors,
     const empresaContracts = useMemo(() => {
         let result = [...allEmpresaContracts];
         if (debouncedSearch) {
-            result = result.filter(c => matchesSearchQuery(
-                [c.descripcion, c.adjudicatario, c.codigo],
-                debouncedSearch
-            ));
+            result = filterContractsBySearch(
+                result,
+                debouncedSearch,
+                c => [c.descripcion, c.adjudicatario, c.codigo]
+            );
         }
         if (tipusFilter) result = result.filter(c => c.tipo === tipusFilter);
         if (procedureFilter) result = result.filter(c => c.procedimiento === procedureFilter);
@@ -2593,8 +2628,8 @@ function CasoEditorialContent({ caso, idx, showImage }) {
 }
 
 function InvestigacioContractCard({ contract, onSelect, hideAdjudicatario = false }) {
-    return (
-        <a href={buildRouteUrl('/contractes/' + contract.slug)} className="card-link-wrapper" onClick={(event) => handleInternalLinkClick(event, () => onSelect(contract))}>
+    const frozen = contract.evidencia_congelada === true;
+    const card = (
             <div className="contract-card">
                 <div className="contract-header">
                     <div className="contract-title">{contract.descripcion}</div>
@@ -2611,12 +2646,23 @@ function InvestigacioContractCard({ contract, onSelect, hideAdjudicatario = fals
                         <span className="contract-meta-label">Data</span>
                         <span className="contract-meta-value">{formatDate(contract.fecha)}</span>
                     </div>
+                    <div className="contract-meta-item">
+                        <span className="contract-meta-label">Codi expedient</span>
+                        <span className="contract-meta-value">{contract.codigo}</span>
+                    </div>
                     <div className="contract-pills">
                         <span className="contract-pill">{formatTipus(contract.tipo)}</span>
                         <span className="contract-pill procedure">{formatProcediment(contract.procedimiento)}</span>
                     </div>
                 </div>
             </div>
+    );
+    const detailPath = frozen
+        ? `/contractes/evidencia/${contract.slug}`
+        : `/contractes/${contract.slug}`;
+    return (
+        <a href={buildRouteUrl(detailPath)} className="card-link-wrapper" onClick={(event) => handleInternalLinkClick(event, () => onSelect(contract))}>
+            {card}
         </a>
     );
 }
@@ -2626,19 +2672,37 @@ function InvestigacioPaginatedContracts({ block, contracts, onContractSelect }) 
     const [currentPage, setCurrentPage] = useState(1);
     const sectionRef = useRef(null);
     const codes = block.codes || [];
-    const contractByCode = useMemo(() => {
+    const frozenByCode = useMemo(() => {
         const map = new Map();
-        contracts.forEach(contract => {
+        (block.contract_snapshots || []).forEach(contract => {
             const code = String(contract.codigo || '').trim();
             if (code && !map.has(code)) map.set(code, contract);
         });
         return map;
+    }, [block.contract_snapshots]);
+    const contractsByCode = useMemo(() => {
+        const map = new Map();
+        contracts.forEach(contract => {
+            const code = String(contract.codigo || '').trim();
+            if (code) map.set(code, [...(map.get(code) || []), contract]);
+        });
+        return map;
     }, [contracts]);
-    const blockContracts = useMemo(() =>
-        codes
-            .map(code => contractByCode.get(String(code || '').trim()))
-            .filter(Boolean)
-        , [codes, contractByCode]);
+    const blockContracts = useMemo(() => {
+        const resolved = codes
+            .map(code => {
+                const normalized = String(code || '').trim();
+                const frozen = frozenByCode.get(normalized);
+                const candidates = contractsByCode.get(normalized) || [];
+                if (!frozen) return candidates[0];
+                return candidates.find(contract => sameContractEvidence(contract, frozen)) || frozen;
+            })
+            .filter(Boolean);
+        if (block.sort === 'date-desc') {
+            resolved.sort((a, b) => String(b.fecha || '').localeCompare(String(a.fecha || '')) || String(b.codigo || '').localeCompare(String(a.codigo || '')));
+        }
+        return resolved;
+    }, [codes, contractsByCode, frozenByCode, block.sort]);
     const totalPages = Math.ceil(blockContracts.length / itemsPerPage);
     const pageContracts = blockContracts.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
     const goToPage = (page) => {
@@ -2690,8 +2754,14 @@ function InvestigacioCaseView({ caso, contracts, onContractSelect }) {
                         return <p key={key} className="prose-intro investigacio-copy">{block.text}</p>;
                     }
                     if (block.type === 'contracts') {
+                        const frozenBySlug = new Map((block.contract_snapshots || []).map(contract => [contract.slug, contract]));
                         const blockContracts = (block.slugs || [])
-                            .map(slug => contracts.find(contract => contractMatchesSlug(contract, slug)))
+                            .map(slug => {
+                                const current = contracts.find(contract => contractMatchesSlug(contract, slug));
+                                const frozen = frozenBySlug.get(slug);
+                                if (!frozen) return current;
+                                return current && sameContractEvidence(current, frozen) ? current : frozen;
+                            })
                             .filter(Boolean)
                             .sort((a, b) => String(a.fecha || '').localeCompare(String(b.fecha || '')));
                         return (
@@ -2772,6 +2842,11 @@ function App() {
     const activeInvestigacioCase = casosInvestigacio.find(item => item.slug === activeInvestigacioSlug)
         || CASOS_INVESTIGACIO_FALLBACK.find(item => item.slug === activeInvestigacioSlug)
         || CASOS_INVESTIGACIO_FALLBACK[0];
+    const preservedInvestigationContracts = useMemo(() =>
+        casosInvestigacio.flatMap(caso =>
+            (caso.content || []).flatMap(block => block.contract_snapshots || [])
+        )
+        , [casosInvestigacio]);
 
     useEffect(() => {
         let cancelled = false;
@@ -3455,15 +3530,14 @@ function App() {
         setCoreDataError(false);
         setDataLoading(true);
         Promise.all([
-            fetchAllContractsCached(),
+            fetchStaticContractsBackup(),
             fetch(jsonAssetUrl('/json/empreses.json')).then(res => {
                 if (!res.ok) throw new Error(`Empreses HTTP ${res.status}`);
                 return res.json();
             }),
-            fetchArchivedContracts(),
             fetchEmpresaAliases()
         ])
-            .then(async ([socrataRows, existingEmpreses, archiveRows, empresaAliases]) => {
+            .then(async ([socrataRows, existingEmpreses, empresaAliases]) => {
                 if (cancelled) return;
                 // Map Socrata rows to internal contract format
                 let contractsData = socrataRows.map((row, i) =>
@@ -3471,13 +3545,6 @@ function App() {
                         ? Object.fromEntries(Object.entries(row).filter(([key]) => key !== '__iguadataInternalContract'))
                         : mapSocrataContract(row, i + 1)
                 );
-                contractsData = mergeArchivedContracts(contractsData, archiveRows);
-                const expectedContracts = summary?.stats?.total_contratos || 0;
-                if (expectedContracts && contractsData.length < expectedContracts) {
-                    const snapshotRows = await fetchStaticContractsSnapshot();
-                    if (cancelled) return;
-                    contractsData = mergeMissingSnapshotContracts(contractsData, snapshotRows);
-                }
                 // Desambigua col·lisions de slug (extremadament rar): afegeix sufix -2, -3...
                 {
                     const slugCounts = new Map();
@@ -3659,18 +3726,27 @@ function App() {
     // Handle deep linking to a contract once the data loads
     useEffect(() => {
         if (contracts.length > 0 && pendingContractSlug) {
-            const c = contracts.find(c => contractMatchesSlug(c, pendingContractSlug));
+            const evidencePrefix = 'evidencia/';
+            const isEvidenceRoute = pendingContractSlug.startsWith(evidencePrefix);
+            if (isEvidenceRoute && !investigacioLoaded && !investigacioError) return;
+            const requestedSlug = isEvidenceRoute ? pendingContractSlug.slice(evidencePrefix.length) : pendingContractSlug;
+            const c = isEvidenceRoute
+                ? preservedInvestigationContracts.find(contract => contract.slug === requestedSlug)
+                : contracts.find(contract => contractMatchesSlug(contract, requestedSlug));
             if (c) {
                 setSelectedContractForDetail(c);
-                if (c.slug !== pendingContractSlug) {
-                    handleNavigation('contracte', `/contractes/${c.slug}`, { replace: true });
+                const canonicalPath = isEvidenceRoute
+                    ? `/contractes/evidencia/${c.slug}`
+                    : `/contractes/${c.slug}`;
+                if (c.slug !== requestedSlug) {
+                    handleNavigation('contracte', canonicalPath, { replace: true });
                 }
             } else {
                 handleNavigation('buscador', null, { replace: true });
             }
             setPendingContractSlug(null);
         }
-    }, [contracts, pendingContractSlug]);
+    }, [contracts, pendingContractSlug, preservedInvestigationContracts, investigacioLoaded, investigacioError]);
 
     // Handle deep linking to an empresa once the data loads
     useEffect(() => {
@@ -3768,10 +3844,11 @@ function App() {
         let result = [...contracts];
 
         if (debouncedSearch) {
-            result = result.filter(c => matchesSearchQuery(
-                [c.descripcion, c.adjudicatario, c.codigo],
-                debouncedSearch
-            ));
+            result = filterContractsBySearch(
+                result,
+                debouncedSearch,
+                c => [c.descripcion, c.adjudicatario, c.codigo]
+            );
         }
 
         if (typeFilter) {
@@ -4658,7 +4735,10 @@ function App() {
 
     const handleDetailClick = (contract) => {
         setSelectedContractForDetail(contract);
-        handleNavigation('contracte', `/contractes/${contract.slug}`);
+        const detailPath = contract.evidencia_congelada === true
+            ? `/contractes/evidencia/${contract.slug}`
+            : `/contractes/${contract.slug}`;
+        handleNavigation('contracte', detailPath);
     };
 
     const handleCasoClick = (caso) => {
@@ -4880,6 +4960,10 @@ function App() {
                                     <div className="contract-meta-item">
                                         <span className="contract-meta-label">Data</span>
                                         <span className="contract-meta-value">{formatDate(c.fecha)}</span>
+                                    </div>
+                                    <div className="contract-meta-item">
+                                        <span className="contract-meta-label">Codi expedient</span>
+                                        <span className="contract-meta-value">{c.codigo}</span>
                                     </div>
                                     <div className="contract-pills">
                                         <span className="contract-pill">{formatTipus(c.tipo)}</span>
@@ -5719,7 +5803,7 @@ function App() {
                             </p>
                             <h2 className="prose-heading">Font de dades</h2>
                             <p className="prose-paragraph">
-                                Les dades de contractació provenen del Registre Públic de Contractes de la Generalitat de Catalunya, consultat mitjançant l'API Socrata Open Data (SODA). Aquesta connexió permet treballar amb dades actualitzades de contractació pública en temps real.
+                                Les dades de contractació provenen del Registre Públic de Contractes de la Generalitat de Catalunya, consultat mitjançant l'API Socrata Open Data (SODA). Una actualització automàtica setmanal genera una fotografia coherent dels contractes, les empreses, les persones i els resultats analítics.
                             </p>
                             <p className="prose-paragraph">
                                 Les dades mercantils provenen del Butlletí Oficial del Registre Mercantil (BORME), registre oficial públic. Mitjançant un processament massiu, tècniques de mineria de dades i l'ús de programari de codi obert desenvolupat per <a href="https://github.com/BquantFinance" target="_blank" rel="noopener noreferrer" className="prose-link">Gerard Sánchez Vidal</a>, s'identifiquen els càrrecs actius de les empreses adjudicatàries.
@@ -5781,7 +5865,7 @@ function App() {
                             </p>
                             <h2 className="prose-heading">3. Actualització i traçabilitat</h2>
                             <p className="prose-paragraph">
-                                La plataforma combina dades consultades en temps real amb fitxers JSON generats periòdicament a partir de fonts públiques. Part del procés d'actualització s'executa de manera automatitzada mitjançant GitHub Actions, amb controls tècnics de validació, còpies de seguretat i comprovació d'integritat dels fitxers generats.
+                                La plataforma publica fotografies setmanals coherents generades a partir de fonts públiques. Part del procés d'actualització s'executa de manera automatitzada mitjançant GitHub Actions, amb controls tècnics de validació, còpies de seguretat i comprovació d'integritat dels fitxers generats.
                             </p>
                             <p className="prose-paragraph">
                                 Aquest procés no altera el sentit de les dades originals, sinó que les estructura, normalitza i encreua per facilitar-ne la consulta pública i l'anàlisi.

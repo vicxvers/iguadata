@@ -38,11 +38,12 @@ jobs:
 
           data_files=(
             json/carrecs.json
-            json/carrecs_eliminats.json
             json/concentracio.json
             json/contractes.json
             json/contractes_arxiu.json
+            json/canvis_contractes.json
             json/electoralisme.json
+            json/empresa_aliases.json
             json/empreses.json
             json/fraccionament.json
             json/persones.json

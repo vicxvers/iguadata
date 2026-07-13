@@ -29,6 +29,8 @@ except ImportError:
     print("pip install pandas pyarrow")
     raise
 
+from atomic_io import write_json_atomic, write_parquet_atomic
+
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s [%(levelname)s] %(message)s',
@@ -512,8 +514,7 @@ def run_batch(base_dir: Path, output_dir: Path, workers: int = 8,
         all_empresas.extend(batch_empresas)
         all_cargos.extend(batch_cargos)
 
-        with open(progress_file, "w") as f:
-            json.dump({"done": list(done_set), "errors": errors}, f)
+        write_json_atomic(progress_file, {"done": list(done_set), "errors": errors})
         log.info(f"   Batch guardado ({batch_start + len(batch):,} procesados)")
 
     # DataFrames
@@ -532,7 +533,7 @@ def run_batch(base_dir: Path, output_dir: Path, workers: int = 8,
             subset=["fecha_borme", "num_entrada", "empresa_norm"], keep="first"
         )
         log.info(f"   Empresas: {before:,} -> {len(df_empresas):,} (dedup)")
-        df_empresas.to_parquet(empresas_parquet, index=False, engine="pyarrow")
+        write_parquet_atomic(df_empresas, empresas_parquet)
         log.info(f"   {empresas_parquet} ({empresas_parquet.stat().st_size / 1e6:.1f} MB)")
 
     if len(df_cargos) > 0:
@@ -544,7 +545,7 @@ def run_batch(base_dir: Path, output_dir: Path, workers: int = 8,
             keep="first"
         )
         log.info(f"   Cargos: {before:,} -> {len(df_cargos):,} (dedup)")
-        df_cargos.to_parquet(cargos_parquet, index=False, engine="pyarrow")
+        write_parquet_atomic(df_cargos, cargos_parquet)
         log.info(f"   {cargos_parquet} ({cargos_parquet.stat().st_size / 1e6:.1f} MB)")
 
     # Resumen

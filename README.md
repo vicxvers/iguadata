@@ -29,7 +29,7 @@ La plataforma no substitueix la feina dels òrgans fiscalitzadors, jurídics o a
 
 ## Font de dades
 
-Les dades de contractació provenen del Registre Públic de Contractes de la Generalitat de Catalunya, consultat mitjançant l'API Socrata Open Data (SODA). Aquesta connexió permet treballar amb dades actualitzades de contractació pública en temps real.
+Les dades de contractació provenen del Registre Públic de Contractes de la Generalitat de Catalunya, consultat mitjançant l'API Socrata Open Data (SODA). Una actualització automàtica setmanal genera una fotografia coherent dels contractes, empreses, persones i anàlisis.
 
 Les dades mercantils provenen del Butlletí Oficial del Registre Mercantil (BORME), registre oficial públic. Mitjançant un processament massiu, tècniques de mineria de dades i l'ús de programari de codi obert desenvolupat per [Gerard Sánchez Vidal](https://github.com/BquantFinance), s'identifiquen els càrrecs actius de les empreses adjudicatàries.
 

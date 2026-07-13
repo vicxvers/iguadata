@@ -149,8 +149,11 @@ jobs:
       # ------------------------------------------------------------------
       - name: Refresh contractes + empreses from Socrata
         run: |
-          mkdir -p scratch
+          mkdir -p scratch/previous
           cp json/contractes.json scratch/contractes.previous.json
+          cp json/fraccionament.json scratch/previous/fraccionament.json
+          cp json/concentracio.json scratch/previous/concentracio.json
+          cp json/electoralisme.json scratch/previous/electoralisme.json
           python .github/scripts/fetch_contractes_socrata.py
           python .github/scripts/enrich_empreses.py
 
@@ -181,6 +184,8 @@ jobs:
           python .github/scripts/generate_concentracio.py
           python .github/scripts/generate_electoralisme.py
           python .github/scripts/generate_resum.py
+          python .github/scripts/generate_audit_impact.py --previous-dir scratch/previous
+          python .github/scripts/freeze_investigacio_contracts.py --check
 
       - name: Validate generated JSONs
         run: |
@@ -191,6 +196,7 @@ jobs:
           checks = {
               "json/contractes.json": 500_000,
               "json/contractes_arxiu.json": 2,
+              "json/canvis_contractes.json": 100,
               "json/empreses.json": 50_000,
               "json/empresa_aliases.json": 100,
               "json/carrecs.json": 100_000,
@@ -199,7 +205,6 @@ jobs:
               "json/concentracio.json": 10_000,
               "json/electoralisme.json": 10_000,
               "json/resum.json": 100,
-              "json/carrecs_eliminats.json": 1_000,
               ".github/scripts/alias_empreses.json": 1_000_000,
           }
 
@@ -213,6 +218,29 @@ jobs:
               with path.open("r", encoding="utf-8") as f:
                   json.load(f)
               print(f"OK {rel}: {size} bytes")
+
+          contractes = json.loads(Path("json/contractes.json").read_text(encoding="utf-8"))
+          if any(c.get("preservat_iguadata") or c.get("exclos_analisis") is True for c in contractes):
+              raise SystemExit("Archived contracts leaked into json/contractes.json")
+
+          arxiu = json.loads(Path("json/contractes_arxiu.json").read_text(encoding="utf-8"))
+          if any(row.get("exclos_analisis") is not True for row in arxiu):
+              raise SystemExit("Archived contracts must all have exclos_analisis=true")
+
+          canvis = json.loads(Path("json/canvis_contractes.json").read_text(encoding="utf-8"))
+          if any(not row.get("id") or row.get("impacte_calculat") is not True for row in canvis):
+              raise SystemExit("Contract audit events must have an ID and calculated impact")
+
+          for name in ("fraccionament", "concentracio", "electoralisme"):
+              payload = json.loads(Path(f"json/{name}.json").read_text(encoding="utf-8"))
+              leaked = [
+                  contract
+                  for case in payload.get("alertes", [])
+                  for contract in case.get("contractes", [])
+                  if contract.get("preservat_iguadata") or contract.get("exclos_analisis") is True
+              ]
+              if leaked:
+                  raise SystemExit(f"Archived contracts leaked into {name}.json")
           PY
 
       # ------------------------------------------------------------------
@@ -222,8 +250,8 @@ jobs:
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add json/carrecs.json json/persones.json json/carrecs_eliminats.json
-          git add json/empreses.json json/empresa_aliases.json json/contractes.json json/contractes_arxiu.json json/fraccionament.json json/concentracio.json json/electoralisme.json
+          git add json/carrecs.json json/persones.json
+          git add json/empreses.json json/empresa_aliases.json json/contractes.json json/contractes_arxiu.json json/canvis_contractes.json json/fraccionament.json json/concentracio.json json/electoralisme.json
           git add json/resum.json
           git add .github/scripts/alias_empreses.json
           if git diff --staged --quiet; then
@@ -281,38 +309,49 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           END="${{ steps.window.outputs.end }}"
+          MONTH="${END:0:7}"
           mkdir -p scratch/snapshots
           if ! gh release view snapshots >/dev/null 2>&1; then
             gh release create snapshots \
               --title "Iguadata JSON snapshots" \
-              --notes "Weekly contract/company JSON snapshots. Do not delete."
+              --notes "Weekly and monthly contract/company audit snapshots. Do not delete."
           fi
 
-          cp json/contractes.json "scratch/snapshots/contractes-$END.json"
-          cp json/contractes_arxiu.json "scratch/snapshots/contractes_arxiu-$END.json"
-          cp json/empreses.json "scratch/snapshots/empreses-$END.json"
-          sha256sum "scratch/snapshots/contractes-$END.json" "scratch/snapshots/contractes_arxiu-$END.json" "scratch/snapshots/empreses-$END.json" > "scratch/snapshots/json-checksums-$END.txt"
+          for period in "weekly-$END" "monthly-$MONTH"; do
+            cp json/contractes.json "scratch/snapshots/contractes-$period.json"
+            cp json/contractes_arxiu.json "scratch/snapshots/contractes_arxiu-$period.json"
+            cp json/canvis_contractes.json "scratch/snapshots/canvis_contractes-$period.json"
+            cp json/empreses.json "scratch/snapshots/empreses-$period.json"
+            sha256sum "scratch/snapshots/contractes-$period.json" "scratch/snapshots/contractes_arxiu-$period.json" "scratch/snapshots/canvis_contractes-$period.json" "scratch/snapshots/empreses-$period.json" > "scratch/snapshots/json-checksums-$period.txt"
+          done
 
-          gh release upload snapshots \
-            "scratch/snapshots/contractes-$END.json" \
-            "scratch/snapshots/contractes_arxiu-$END.json" \
-            "scratch/snapshots/empreses-$END.json" \
-            "scratch/snapshots/json-checksums-$END.txt" \
-            --clobber
+          gh release upload snapshots scratch/snapshots/*.json scratch/snapshots/*.txt --clobber
 
           cleanup_old_snapshot_assets() {
             prefix="$1"
-            keep="$2"
-            mapfile -t assets < <(gh release view snapshots --json assets --jq '.assets[].name' | grep -E "^${prefix}-[0-9]{4}-[0-9]{2}-[0-9]{2}\\." | sort -r || true)
+            cadence="$2"
+            keep="$3"
+            mapfile -t assets < <(gh release view snapshots --json assets --jq '.assets[].name' | grep -E "^${prefix}-${cadence}-[0-9]{4}-[0-9]{2}(-[0-9]{2})?\\." | sort -r || true)
             for asset in "${assets[@]:$keep}"; do
-              echo "Deleting old snapshot asset: $asset"
+              echo "Deleting old $cadence snapshot: $asset"
               gh release delete-asset snapshots "$asset" -y || true
             done
           }
 
-          cleanup_old_snapshot_assets "contractes" 12
-          cleanup_old_snapshot_assets "empreses" 12
-          cleanup_old_snapshot_assets "json-checksums" 12
+          cleanup_legacy_snapshot_assets() {
+            prefix="$1"
+            mapfile -t legacy < <(gh release view snapshots --json assets --jq '.assets[].name' | grep -E "^${prefix}-[0-9]{4}-[0-9]{2}(-[0-9]{2})?\\." || true)
+            for asset in "${legacy[@]}"; do
+              echo "Deleting legacy snapshot: $asset"
+              gh release delete-asset snapshots "$asset" -y || true
+            done
+          }
+
+          for prefix in contractes contractes_arxiu canvis_contractes empreses json-checksums; do
+            cleanup_old_snapshot_assets "$prefix" weekly 12
+            cleanup_old_snapshot_assets "$prefix" monthly 24
+            cleanup_legacy_snapshot_assets "$prefix"
+          done
 
       # ------------------------------------------------------------------
       - name: Cleanup scratch

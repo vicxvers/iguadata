@@ -264,6 +264,27 @@ function matchesSearchQuery(values, query) {
   const target = normalizeSearchText(Array.isArray(values) ? values.join(' ') : values);
   return terms.every(term => target.includes(term));
 }
+function normalizeContractCode(value) {
+  return String(value || '').toUpperCase().trim().replace(/\s+/g, ' ').replace(/\s*([/.-])\s*/g, '$1');
+}
+function looksLikeContractCodeQuery(query) {
+  return /\d\s*[/.-]\s*\d/.test(String(query || ''));
+}
+function contractCodeStartsWithQuery(code, query) {
+  const normalizedCode = normalizeContractCode(code);
+  const normalizedQuery = normalizeContractCode(query);
+  if (!normalizedQuery || !normalizedCode.startsWith(normalizedQuery)) return false;
+  const nextCharacter = normalizedCode.charAt(normalizedQuery.length);
+  return !nextCharacter || !/[A-Z0-9]/.test(nextCharacter);
+}
+function filterContractsBySearch(contracts, query, searchableValues) {
+  if (!query) return contracts;
+  if (looksLikeContractCodeQuery(query)) {
+    const codeMatches = contracts.filter(contract => contractCodeStartsWithQuery(contract.codigo, query));
+    if (codeMatches.length) return codeMatches;
+  }
+  return contracts.filter(contract => matchesSearchQuery(searchableValues(contract), query));
+}
 function cyrb53(str) {
   let h1 = 0xdeadbeef,
     h2 = 0x41c6ce57;
@@ -288,7 +309,7 @@ const CASOS_INVESTIGACIO_FALLBACK = [{
   title: 'Passeig Verdaguer',
   subtitle: 'Cinc contractes a dit per començar la remodelació',
   publishedAt: '2026-06-22',
-  image: '/assets/investigacio/passeig-verdaguer.png',
+  image: '/assets/investigacio/passeig-verdaguer.webp',
   importe: 65500
 }, {
   slug: 'neteja-parc-central',
@@ -337,6 +358,10 @@ function buildLegacyContractSlug(c) {
 }
 function contractMatchesSlug(contract, slug) {
   return contract.slug === slug || (contract.slug_aliases || []).includes(slug);
+}
+function sameContractEvidence(current, frozen) {
+  const fields = ['codigo', 'organismo', 'fecha', 'importe', 'adjudicatario', 'descripcion'];
+  return fields.every(field => String(current?.[field] ?? '').trim() === String(frozen?.[field] ?? '').trim());
 }
 function buildEmpresaSlug(name) {
   return slugify(name) || 'sense-nom';
@@ -523,7 +548,7 @@ async function fetchStaticContractsSnapshot() {
   const resp = await fetch(jsonAssetUrl('/json/contractes.json'));
   if (!resp.ok) throw new Error(`Backup contractes HTTP ${resp.status}`);
   const data = await resp.json();
-  return Array.isArray(data) ? data : [];
+  return Array.isArray(data) ? data.filter(c => !c.preservat_iguadata && c.exclos_analisis !== true) : [];
 }
 async function fetchArchivedContracts() {
   const resp = await fetch(jsonAssetUrl('/json/contractes_arxiu.json'));
@@ -878,7 +903,7 @@ function ContractDetailView({
   onEmpresaClick
 }) {
   const empresaContracts = useMemo(() => contracts.filter(contract => contract.adjudicatario === c.adjudicatario), [contracts, c.adjudicatario]);
-  const isPreserved = c.estat_font === 'preservat_desaparegut_socrata' || c.preservat_iguadata;
+  const isPreserved = c.evidencia_congelada === true || c.estat_font === 'preservat_desaparegut_socrata' || c.preservat_iguadata;
   return React.createElement("div", {
     className: "container contracte-detail-page"
   }, React.createElement("button", {
@@ -912,7 +937,7 @@ function ContractDetailView({
     className: "contracte-detail-title"
   }, c.descripcion)), isPreserved && React.createElement("div", {
     className: "contracte-preserved-notice"
-  }, "Aquest contracte ha estat eliminat de la base de dades oficial, per\xF2 Iguadata conserva la seva fitxa per mantenir la tra\xE7abilitat de les dades."), React.createElement("div", {
+  }, "Aquest contracte \xE9s recuperat i ja no consta al registre p\xFAblic. La fitxa i evid\xE8ncia es preserven per mantenir la tra\xE7abilitat de les dades."), React.createElement("div", {
     className: "contract-meta contracte-detail-meta"
   }, React.createElement("div", {
     className: "contract-meta-item"
@@ -2322,7 +2347,7 @@ function EmpresaView({
   const empresaContracts = useMemo(() => {
     let result = [...allEmpresaContracts];
     if (debouncedSearch) {
-      result = result.filter(c => matchesSearchQuery([c.descripcion, c.adjudicatario, c.codigo], debouncedSearch));
+      result = filterContractsBySearch(result, debouncedSearch, c => [c.descripcion, c.adjudicatario, c.codigo]);
     }
     if (tipusFilter) result = result.filter(c => c.tipo === tipusFilter);
     if (procedureFilter) result = result.filter(c => c.procedimiento === procedureFilter);
@@ -3197,11 +3222,8 @@ function InvestigacioContractCard({
   onSelect,
   hideAdjudicatario = false
 }) {
-  return React.createElement("a", {
-    href: buildRouteUrl('/contractes/' + contract.slug),
-    className: "card-link-wrapper",
-    onClick: event => handleInternalLinkClick(event, () => onSelect(contract))
-  }, React.createElement("div", {
+  const frozen = contract.evidencia_congelada === true;
+  const card = React.createElement("div", {
     className: "contract-card"
   }, React.createElement("div", {
     className: "contract-header"
@@ -3224,12 +3246,24 @@ function InvestigacioContractCard({
   }, "Data"), React.createElement("span", {
     className: "contract-meta-value"
   }, formatDate(contract.fecha))), React.createElement("div", {
+    className: "contract-meta-item"
+  }, React.createElement("span", {
+    className: "contract-meta-label"
+  }, "Codi expedient"), React.createElement("span", {
+    className: "contract-meta-value"
+  }, contract.codigo)), React.createElement("div", {
     className: "contract-pills"
   }, React.createElement("span", {
     className: "contract-pill"
   }, formatTipus(contract.tipo)), React.createElement("span", {
     className: "contract-pill procedure"
-  }, formatProcediment(contract.procedimiento))))));
+  }, formatProcediment(contract.procedimiento)))));
+  const detailPath = frozen ? `/contractes/evidencia/${contract.slug}` : `/contractes/${contract.slug}`;
+  return React.createElement("a", {
+    href: buildRouteUrl(detailPath),
+    className: "card-link-wrapper",
+    onClick: event => handleInternalLinkClick(event, () => onSelect(contract))
+  }, card);
 }
 function InvestigacioPaginatedContracts({
   block,
@@ -3240,15 +3274,35 @@ function InvestigacioPaginatedContracts({
   const [currentPage, setCurrentPage] = useState(1);
   const sectionRef = useRef(null);
   const codes = block.codes || [];
-  const contractByCode = useMemo(() => {
+  const frozenByCode = useMemo(() => {
     const map = new Map();
-    contracts.forEach(contract => {
+    (block.contract_snapshots || []).forEach(contract => {
       const code = String(contract.codigo || '').trim();
       if (code && !map.has(code)) map.set(code, contract);
     });
     return map;
+  }, [block.contract_snapshots]);
+  const contractsByCode = useMemo(() => {
+    const map = new Map();
+    contracts.forEach(contract => {
+      const code = String(contract.codigo || '').trim();
+      if (code) map.set(code, [...(map.get(code) || []), contract]);
+    });
+    return map;
   }, [contracts]);
-  const blockContracts = useMemo(() => codes.map(code => contractByCode.get(String(code || '').trim())).filter(Boolean), [codes, contractByCode]);
+  const blockContracts = useMemo(() => {
+    const resolved = codes.map(code => {
+      const normalized = String(code || '').trim();
+      const frozen = frozenByCode.get(normalized);
+      const candidates = contractsByCode.get(normalized) || [];
+      if (!frozen) return candidates[0];
+      return candidates.find(contract => sameContractEvidence(contract, frozen)) || frozen;
+    }).filter(Boolean);
+    if (block.sort === 'date-desc') {
+      resolved.sort((a, b) => String(b.fecha || '').localeCompare(String(a.fecha || '')) || String(b.codigo || '').localeCompare(String(a.codigo || '')));
+    }
+    return resolved;
+  }, [codes, contractsByCode, frozenByCode, block.sort]);
   const totalPages = Math.ceil(blockContracts.length / itemsPerPage);
   const pageContracts = blockContracts.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
   const goToPage = page => {
@@ -3327,7 +3381,13 @@ function InvestigacioCaseView({
       }, block.text);
     }
     if (block.type === 'contracts') {
-      const blockContracts = (block.slugs || []).map(slug => contracts.find(contract => contractMatchesSlug(contract, slug))).filter(Boolean).sort((a, b) => String(a.fecha || '').localeCompare(String(b.fecha || '')));
+      const frozenBySlug = new Map((block.contract_snapshots || []).map(contract => [contract.slug, contract]));
+      const blockContracts = (block.slugs || []).map(slug => {
+        const current = contracts.find(contract => contractMatchesSlug(contract, slug));
+        const frozen = frozenBySlug.get(slug);
+        if (!frozen) return current;
+        return current && sameContractEvidence(current, frozen) ? current : frozen;
+      }).filter(Boolean).sort((a, b) => String(a.fecha || '').localeCompare(String(b.fecha || '')));
       return React.createElement("section", {
         key: key,
         className: "investigacio-embed investigacio-card-stack",
@@ -3406,6 +3466,7 @@ function App() {
   const homeIntroPlayedRef = useRef(false);
   const activeInvestigacioSlug = getRoute().startsWith('/investigacio/') ? getRoute().slice('/investigacio/'.length) : null;
   const activeInvestigacioCase = casosInvestigacio.find(item => item.slug === activeInvestigacioSlug) || CASOS_INVESTIGACIO_FALLBACK.find(item => item.slug === activeInvestigacioSlug) || CASOS_INVESTIGACIO_FALLBACK[0];
+  const preservedInvestigationContracts = useMemo(() => casosInvestigacio.flatMap(caso => (caso.content || []).flatMap(block => block.contract_snapshots || [])), [casosInvestigacio]);
   useEffect(() => {
     let cancelled = false;
     setInvestigacioLoaded(false);
@@ -4071,19 +4132,12 @@ function App() {
     let cancelled = false;
     setCoreDataError(false);
     setDataLoading(true);
-    Promise.all([fetchAllContractsCached(), fetch(jsonAssetUrl('/json/empreses.json')).then(res => {
+    Promise.all([fetchStaticContractsBackup(), fetch(jsonAssetUrl('/json/empreses.json')).then(res => {
       if (!res.ok) throw new Error(`Empreses HTTP ${res.status}`);
       return res.json();
-    }), fetchArchivedContracts(), fetchEmpresaAliases()]).then(async ([socrataRows, existingEmpreses, archiveRows, empresaAliases]) => {
+    }), fetchEmpresaAliases()]).then(async ([socrataRows, existingEmpreses, empresaAliases]) => {
       if (cancelled) return;
       let contractsData = socrataRows.map((row, i) => row && row.__iguadataInternalContract ? Object.fromEntries(Object.entries(row).filter(([key]) => key !== '__iguadataInternalContract')) : mapSocrataContract(row, i + 1));
-      contractsData = mergeArchivedContracts(contractsData, archiveRows);
-      const expectedContracts = summary?.stats?.total_contratos || 0;
-      if (expectedContracts && contractsData.length < expectedContracts) {
-        const snapshotRows = await fetchStaticContractsSnapshot();
-        if (cancelled) return;
-        contractsData = mergeMissingSnapshotContracts(contractsData, snapshotRows);
-      }
       {
         const slugCounts = new Map();
         const legacySeen = new Map();
@@ -4237,11 +4291,16 @@ function App() {
   }, []);
   useEffect(() => {
     if (contracts.length > 0 && pendingContractSlug) {
-      const c = contracts.find(c => contractMatchesSlug(c, pendingContractSlug));
+      const evidencePrefix = 'evidencia/';
+      const isEvidenceRoute = pendingContractSlug.startsWith(evidencePrefix);
+      if (isEvidenceRoute && !investigacioLoaded && !investigacioError) return;
+      const requestedSlug = isEvidenceRoute ? pendingContractSlug.slice(evidencePrefix.length) : pendingContractSlug;
+      const c = isEvidenceRoute ? preservedInvestigationContracts.find(contract => contract.slug === requestedSlug) : contracts.find(contract => contractMatchesSlug(contract, requestedSlug));
       if (c) {
         setSelectedContractForDetail(c);
-        if (c.slug !== pendingContractSlug) {
-          handleNavigation('contracte', `/contractes/${c.slug}`, {
+        const canonicalPath = isEvidenceRoute ? `/contractes/evidencia/${c.slug}` : `/contractes/${c.slug}`;
+        if (c.slug !== requestedSlug) {
+          handleNavigation('contracte', canonicalPath, {
             replace: true
           });
         }
@@ -4252,7 +4311,7 @@ function App() {
       }
       setPendingContractSlug(null);
     }
-  }, [contracts, pendingContractSlug]);
+  }, [contracts, pendingContractSlug, preservedInvestigationContracts, investigacioLoaded, investigacioError]);
   useEffect(() => {
     if (empreses.length > 0 && pendingEmpresaSlug) {
       const emp = empreses.find(e => empresaMatchesSlug(e, pendingEmpresaSlug));
@@ -4351,7 +4410,7 @@ function App() {
   const contractesFiltrats = useMemo(() => {
     let result = [...contracts];
     if (debouncedSearch) {
-      result = result.filter(c => matchesSearchQuery([c.descripcion, c.adjudicatario, c.codigo], debouncedSearch));
+      result = filterContractsBySearch(result, debouncedSearch, c => [c.descripcion, c.adjudicatario, c.codigo]);
     }
     if (typeFilter) {
       if (typeFilter === '5. SERVEIS') {
@@ -5355,7 +5414,8 @@ function App() {
   }
   const handleDetailClick = contract => {
     setSelectedContractForDetail(contract);
-    handleNavigation('contracte', `/contractes/${contract.slug}`);
+    const detailPath = contract.evidencia_congelada === true ? `/contractes/evidencia/${contract.slug}` : `/contractes/${contract.slug}`;
+    handleNavigation('contracte', detailPath);
   };
   const handleCasoClick = caso => {
     setSelectedCasoDetail(caso);
@@ -5654,6 +5714,12 @@ function App() {
   }, "Data"), React.createElement("span", {
     className: "contract-meta-value"
   }, formatDate(c.fecha))), React.createElement("div", {
+    className: "contract-meta-item"
+  }, React.createElement("span", {
+    className: "contract-meta-label"
+  }, "Codi expedient"), React.createElement("span", {
+    className: "contract-meta-value"
+  }, c.codigo)), React.createElement("div", {
     className: "contract-pills"
   }, React.createElement("span", {
     className: "contract-pill"
@@ -6691,7 +6757,7 @@ function App() {
     className: "prose-heading"
   }, "Font de dades"), React.createElement("p", {
     className: "prose-paragraph"
-  }, "Les dades de contractaci\xF3 provenen del Registre P\xFAblic de Contractes de la Generalitat de Catalunya, consultat mitjan\xE7ant l'API Socrata Open Data (SODA). Aquesta connexi\xF3 permet treballar amb dades actualitzades de contractaci\xF3 p\xFAblica en temps real."), React.createElement("p", {
+  }, "Les dades de contractaci\xF3 provenen del Registre P\xFAblic de Contractes de la Generalitat de Catalunya, consultat mitjan\xE7ant l'API Socrata Open Data (SODA). Una actualitzaci\xF3 autom\xE0tica setmanal genera una fotografia coherent dels contractes, les empreses, les persones i els resultats anal\xEDtics."), React.createElement("p", {
     className: "prose-paragraph"
   }, "Les dades mercantils provenen del Butllet\xED Oficial del Registre Mercantil (BORME), registre oficial p\xFAblic. Mitjan\xE7ant un processament massiu, t\xE8cniques de mineria de dades i l'\xFAs de programari de codi obert desenvolupat per ", React.createElement("a", {
     href: "https://github.com/BquantFinance",
@@ -6757,7 +6823,7 @@ function App() {
     className: "prose-heading"
   }, "3. Actualitzaci\xF3 i tra\xE7abilitat"), React.createElement("p", {
     className: "prose-paragraph"
-  }, "La plataforma combina dades consultades en temps real amb fitxers JSON generats peri\xF2dicament a partir de fonts p\xFAbliques. Part del proc\xE9s d'actualitzaci\xF3 s'executa de manera automatitzada mitjan\xE7ant GitHub Actions, amb controls t\xE8cnics de validaci\xF3, c\xF2pies de seguretat i comprovaci\xF3 d'integritat dels fitxers generats."), React.createElement("p", {
+  }, "La plataforma publica fotografies setmanals coherents generades a partir de fonts p\xFAbliques. Part del proc\xE9s d'actualitzaci\xF3 s'executa de manera automatitzada mitjan\xE7ant GitHub Actions, amb controls t\xE8cnics de validaci\xF3, c\xF2pies de seguretat i comprovaci\xF3 d'integritat dels fitxers generats."), React.createElement("p", {
     className: "prose-paragraph"
   }, "Aquest proc\xE9s no altera el sentit de les dades originals, sin\xF3 que les estructura, normalitza i encreua per facilitar-ne la consulta p\xFAblica i l'an\xE0lisi."), React.createElement("h2", {
     className: "prose-heading"

@@ -11,6 +11,8 @@ import json
 from collections import defaultdict
 from pathlib import Path
 
+from atomic_io import write_json_atomic
+
 ROOT = Path(__file__).resolve().parents[2]
 
 INPUT_ADMINS   = ROOT / 'json' / 'carrecs.json'
@@ -73,8 +75,7 @@ def main():
 
     result.sort(key=lambda p: p['total_adjudicat'], reverse=True)
 
-    with open(OUTPUT_PERSONES, 'w', encoding='utf-8') as f:
-        json.dump(result, f, ensure_ascii=False, indent=2)
+    write_json_atomic(OUTPUT_PERSONES, result)
 
     total_relacions = sum(len(p['relacions']) for p in result)
     print(f"  [OK] {OUTPUT_PERSONES.name} -> {len(result)} persones, {total_relacions} relacions empresa-persona")
