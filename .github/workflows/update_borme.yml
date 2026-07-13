@@ -195,8 +195,8 @@ jobs:
 
           checks = {
               "json/contractes.json": 500_000,
-              "json/contractes_arxiu.json": 2,
-              "json/canvis_contractes.json": 100,
+              ".github/audit/contractes_arxiu.json": 2,
+              ".github/audit/canvis_contractes.json": 100,
               "json/empreses.json": 50_000,
               "json/empresa_aliases.json": 100,
               "json/carrecs.json": 100_000,
@@ -223,11 +223,11 @@ jobs:
           if any(c.get("preservat_iguadata") or c.get("exclos_analisis") is True for c in contractes):
               raise SystemExit("Archived contracts leaked into json/contractes.json")
 
-          arxiu = json.loads(Path("json/contractes_arxiu.json").read_text(encoding="utf-8"))
+          arxiu = json.loads(Path(".github/audit/contractes_arxiu.json").read_text(encoding="utf-8"))
           if any(row.get("exclos_analisis") is not True for row in arxiu):
               raise SystemExit("Archived contracts must all have exclos_analisis=true")
 
-          canvis = json.loads(Path("json/canvis_contractes.json").read_text(encoding="utf-8"))
+          canvis = json.loads(Path(".github/audit/canvis_contractes.json").read_text(encoding="utf-8"))
           if any(not row.get("id") or row.get("impacte_calculat") is not True for row in canvis):
               raise SystemExit("Contract audit events must have an ID and calculated impact")
 
@@ -251,7 +251,8 @@ jobs:
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add json/carrecs.json json/persones.json
-          git add json/empreses.json json/empresa_aliases.json json/contractes.json json/contractes_arxiu.json json/canvis_contractes.json json/fraccionament.json json/concentracio.json json/electoralisme.json
+          git add json/empreses.json json/empresa_aliases.json json/contractes.json json/fraccionament.json json/concentracio.json json/electoralisme.json
+          git add .github/audit/contractes_arxiu.json .github/audit/canvis_contractes.json
           git add json/resum.json
           git add .github/scripts/alias_empreses.json
           if git diff --staged --quiet; then
@@ -319,8 +320,8 @@ jobs:
 
           for period in "weekly-$END" "monthly-$MONTH"; do
             cp json/contractes.json "scratch/snapshots/contractes-$period.json"
-            cp json/contractes_arxiu.json "scratch/snapshots/contractes_arxiu-$period.json"
-            cp json/canvis_contractes.json "scratch/snapshots/canvis_contractes-$period.json"
+            cp .github/audit/contractes_arxiu.json "scratch/snapshots/contractes_arxiu-$period.json"
+            cp .github/audit/canvis_contractes.json "scratch/snapshots/canvis_contractes-$period.json"
             cp json/empreses.json "scratch/snapshots/empreses-$period.json"
             sha256sum "scratch/snapshots/contractes-$period.json" "scratch/snapshots/contractes_arxiu-$period.json" "scratch/snapshots/canvis_contractes-$period.json" "scratch/snapshots/empreses-$period.json" > "scratch/snapshots/json-checksums-$period.txt"
           done

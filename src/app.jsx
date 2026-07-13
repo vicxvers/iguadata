@@ -502,108 +502,21 @@ const SECTOR_MAPPING = {
     "Altres serveis comunitaris": "Altres Serveis i Subministraments",
 };
 
-function cpvToCategoria(cpvCode) {
-    if (!cpvCode) return "Altres serveis comunitaris";
-    const div = String(cpvCode).replace(/\D/g, '').substring(0, 2);
-    return CPV_DIVISIONS[div] || "Altres serveis comunitaris";
-}
-
 function categoriaToSector(cat) {
     return SECTOR_MAPPING[cat] || "Altres Serveis i Subministraments";
 }
 
-/* ---- Socrata API ------------------------------------------------ */
-const SOCRATA_BASE = "https://analisi.transparenciacatalunya.cat/resource/hb6v-jcbf.json";
-// Token públic d'aplicació Socrata: no és un secret i queda exposat al navegador.
-const SOCRATA_APP_TOKEN = "eolLs4uJArZvmZVTVUfJN8d3Y";
-const SOCRATA_TIMEOUT_MS = 4500;
-const SOCRATA_ORGANISMES = [
-    "Ajuntament d'Igualada",
-    "Igualada en Acció",
-    "Consorci de Gestió Aeròdrom General Vives d'Igualada-Òdena",
-    "Consorci per a la gestió de la televisió digital local de demarcació d'igualada",
-    "Organisme Autònom Municipal d'Ensenyaments Artístics d'Igualada",
-    "Terrenys Av. Catalunya d'Igualada, SA",
-    "Consorci Sociosanitari d'Igualada",
-    "Promotora Igualadina Municipal d'Habitatges, SL (PIMHA)",
-    "Societat Igualadina Municipal d'Aparcaments, SL",
-];
-
-async function fetchAllContracts() {
-    const select = [
-        "situaci_contractual", "exercici", "organisme_contractant",
-        "codi_expedient", "procediment_adjudicacio", "tipus_contracte",
-        "descripcio_expedient", "adjudicatari", "import_adjudicacio",
-        "data_adjudicacio", "codi_cpv"
-    ].map(f => '`' + f + '`').join(', ');
-
-    const orgList = SOCRATA_ORGANISMES.map(o => '"' + o + '"').join(', ');
-    const where = `caseless_one_of(\`organisme_contractant\`, ${orgList}) AND caseless_one_of(\`situaci_contractual\`, "adjudicació", "menor")`;
-    const order = [
-        '`exercici` ASC NULL LAST',
-        '`data_adjudicacio` ASC NULL LAST',
-        '`codi_expedient` ASC NULL LAST',
-        '`adjudicatari` ASC NULL LAST'
-    ].join(', ');
-    const LIMIT = 1000;
-
-    let all = [];
-    let offset = 0;
-    while (true) {
-        const params = new URLSearchParams({
-            '$select': select,
-            '$where': where,
-            '$order': order,
-            '$limit': LIMIT,
-            '$offset': offset,
-        });
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), SOCRATA_TIMEOUT_MS);
-        const resp = await fetch(`${SOCRATA_BASE}?${params}`, {
-            headers: { 'X-App-Token': SOCRATA_APP_TOKEN },
-            signal: controller.signal
-        });
-        clearTimeout(timeoutId);
-        if (!resp.ok) throw new Error(`Socrata HTTP ${resp.status}`);
-        const page = await resp.json();
-        all = all.concat(page);
-        if (page.length < LIMIT) break;
-        offset += LIMIT;
-    }
-    return all.sort((a, b) => {
-        const da = a.data_adjudicacio || '';
-        const db = b.data_adjudicacio || '';
-        if (da !== db) return db.localeCompare(da);
-        const ca = a.codi_expedient || '';
-        const cb = b.codi_expedient || '';
-        if (ca !== cb) return cb.localeCompare(ca);
-        return (b.adjudicatari || '').localeCompare(a.adjudicatari || '');
-    });
-}
-
-const CONTRACTS_CACHE_KEY = 'iguadata_contracts_cache_v2';
-
-async function fetchStaticContractsBackup() {
-    const data = await fetchStaticContractsSnapshot();
-    return data.map(c => ({
-        ...c,
-        slug: c.slug || buildContractSlug(c),
-        __iguadataInternalContract: true
-    }));
-}
-
-async function fetchStaticContractsSnapshot() {
+async function fetchContractsSnapshot() {
     const resp = await fetch(jsonAssetUrl('/json/contractes.json'));
-    if (!resp.ok) throw new Error(`Backup contractes HTTP ${resp.status}`);
+    if (!resp.ok) throw new Error(`Contractes HTTP ${resp.status}`);
     const data = await resp.json();
-    return Array.isArray(data) ? data.filter(c => !c.preservat_iguadata && c.exclos_analisis !== true) : [];
-}
-
-async function fetchArchivedContracts() {
-    const resp = await fetch(jsonAssetUrl('/json/contractes_arxiu.json'));
-    if (!resp.ok) return [];
-    const data = await resp.json();
-    return Array.isArray(data) ? data : [];
+    if (!Array.isArray(data)) return [];
+    return data
+        .filter(contract => !contract.preservat_iguadata && contract.exclos_analisis !== true)
+        .map(contract => ({
+            ...contract,
+            slug: contract.slug || buildContractSlug(contract),
+        }));
 }
 
 async function fetchEmpresaAliases() {
@@ -615,134 +528,6 @@ async function fetchEmpresaAliases() {
     } catch (e) {
         return { aliases: {} };
     }
-}
-
-async function fetchAllContractsCached() {
-    const today = new Date().toISOString().slice(0, 10);
-    try {
-        const raw = localStorage.getItem(CONTRACTS_CACHE_KEY);
-        if (raw) {
-            const cached = JSON.parse(raw);
-            if (cached.date === today && Array.isArray(cached.data)) {
-                return cached.data;
-            }
-        }
-    } catch (e) { /* cache invàlid, ignorem */ }
-
-    let data;
-    try {
-        data = await fetchAllContracts();
-    } catch (err) {
-        console.warn('Socrata no disponible, utilitzant backup JSON local:', err);
-        return fetchStaticContractsBackup();
-    }
-    try {
-        localStorage.setItem(CONTRACTS_CACHE_KEY, JSON.stringify({ date: today, data }));
-    } catch (e) { /* quota excedida o mode privat, no bloquegem */ }
-    return data;
-}
-
-function mapSocrataContract(row, id) {
-    const importRaw = row.import_adjudicacio;
-    const importe = (importRaw != null && importRaw !== '' && importRaw !== 'nan')
-        ? parseFloat(importRaw) || 0 : 0;
-
-    let fecha = '', mes = null;
-    const dataRaw = row.data_adjudicacio || '';
-    if (dataRaw) {
-        const d = dataRaw.substring(0, 10);
-        fecha = d;
-        const m = parseInt(d.substring(5, 7), 10);
-        if (!isNaN(m)) mes = m;
-    }
-
-    let año = row.exercici ? parseInt(row.exercici, 10) : null;
-    if (año == null && fecha.length >= 4) {
-        año = parseInt(fecha.substring(0, 4), 10) || null;
-    }
-
-    const c = {
-        id,
-        codigo: (row.codi_expedient || '').trim(),
-        organismo: (row.organisme_contractant || '').trim(),
-        tipo: (row.tipus_contracte || '').trim(),
-        procedimiento: (row.procediment_adjudicacio || '').trim(),
-        descripcion: (row.descripcio_expedient || '').trim(),
-        importe,
-        adjudicatario: (row.adjudicatari || '').trim().toUpperCase(),
-        fecha,
-        año,
-        mes,
-        cpv: (row.codi_cpv || '').trim(),
-    };
-    c.slug = buildContractSlug(c);
-    return c;
-}
-
-function contractStableKey(c) {
-    const norm = value => String(value || '').trim().toUpperCase().replace(/\s+/g, ' ');
-    const amount = Number(c.importe || 0).toFixed(2);
-    return [
-        norm(c.codigo),
-        norm(c.organismo),
-        norm(c.fecha),
-        amount,
-        norm(c.adjudicatario),
-        norm(c.descripcion).slice(0, 180)
-    ].join('|');
-}
-
-function mergeArchivedContracts(contractsData, archiveRows) {
-    const existing = new Set(contractsData.map(contractStableKey));
-    let nextId = contractsData.reduce((max, c) => Math.max(max, Number(c.id) || 0), 0);
-    const merged = [...contractsData];
-    for (const row of archiveRows || []) {
-        const original = row && row.contracte_original;
-        if (!original) continue;
-        const preserved = {
-            ...original,
-            estat_font: 'preservat_desaparegut_socrata',
-            preservat_iguadata: true,
-            primera_absencia_detectada: row.primera_absencia_detectada || '',
-            font_preservacio: row.font_preservacio || '',
-            primer_snapshot_iguadata: row.primer_snapshot_iguadata || '',
-        };
-        const key = contractStableKey(preserved);
-        if (existing.has(key)) continue;
-        preserved.id = ++nextId;
-        preserved.slug = buildContractSlug(preserved);
-        merged.push(preserved);
-        existing.add(key);
-    }
-    return merged.sort((a, b) => {
-        if ((a.fecha || '') !== (b.fecha || '')) return (b.fecha || '').localeCompare(a.fecha || '');
-        if ((a.codigo || '') !== (b.codigo || '')) return (b.codigo || '').localeCompare(a.codigo || '');
-        return (b.adjudicatario || '').localeCompare(a.adjudicatario || '');
-    }).map((c, i) => ({ ...c, id: i + 1 }));
-}
-
-function mergeMissingSnapshotContracts(contractsData, snapshotRows) {
-    const existing = new Set(contractsData.map(contractStableKey));
-    let nextId = contractsData.reduce((max, c) => Math.max(max, Number(c.id) || 0), 0);
-    const merged = [...contractsData];
-    for (const row of snapshotRows || []) {
-        if (!row || existing.has(contractStableKey(row))) continue;
-        const preserved = {
-            ...row,
-            estat_font: 'preservat_desaparegut_socrata',
-            preservat_iguadata: true,
-            font_preservacio: row.font_preservacio || 'json/contractes.json',
-        };
-        preserved.id = ++nextId;
-        preserved.slug = buildContractSlug(preserved);
-        merged.push(preserved);
-        existing.add(contractStableKey(preserved));
-    }
-    return merged.sort((a, b) => {
-        if ((a.fecha || '') !== (b.fecha || '')) return (b.fecha || '').localeCompare(a.fecha || '');
-        if ((a.codigo || '') !== (b.codigo || '')) return (b.codigo || '').localeCompare(a.codigo || '');
-        return (b.adjudicatario || '').localeCompare(a.adjudicatario || '');
-    }).map((c, i) => ({ ...c, id: i + 1 }));
 }
 
 function buildEmpreses(contracts, existingEmpreses) {
@@ -3530,21 +3315,16 @@ function App() {
         setCoreDataError(false);
         setDataLoading(true);
         Promise.all([
-            fetchStaticContractsBackup(),
+            fetchContractsSnapshot(),
             fetch(jsonAssetUrl('/json/empreses.json')).then(res => {
                 if (!res.ok) throw new Error(`Empreses HTTP ${res.status}`);
                 return res.json();
             }),
             fetchEmpresaAliases()
         ])
-            .then(async ([socrataRows, existingEmpreses, empresaAliases]) => {
+            .then(async ([snapshotRows, existingEmpreses, empresaAliases]) => {
                 if (cancelled) return;
-                // Map Socrata rows to internal contract format
-                let contractsData = socrataRows.map((row, i) =>
-                    row && row.__iguadataInternalContract
-                        ? Object.fromEntries(Object.entries(row).filter(([key]) => key !== '__iguadataInternalContract'))
-                        : mapSocrataContract(row, i + 1)
-                );
+                let contractsData = snapshotRows;
                 // Desambigua col·lisions de slug (extremadament rar): afegeix sufix -2, -3...
                 {
                     const slugCounts = new Map();

@@ -41,8 +41,8 @@ from contract_audit import change_id, contract_differences, detailed_key, identi
 # ^-----------^        dirname(dirname()) -> Iguadata (arrel del projecte)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 OUTPUT_FILE = os.path.join(BASE_DIR, "json", "contractes.json")
-ARCHIVE_FILE = os.path.join(BASE_DIR, "json", "contractes_arxiu.json")
-CHANGELOG_FILE = os.path.join(BASE_DIR, "json", "canvis_contractes.json")
+ARCHIVE_FILE = os.path.join(BASE_DIR, ".github", "audit", "contractes_arxiu.json")
+CHANGELOG_FILE = os.path.join(BASE_DIR, ".github", "audit", "canvis_contractes.json")
 
 # Endpoint Socrata – dataset hb6v-jcbf (Registre de Contractes de Catalunya)
 BASE_URL = "https://analisi.transparenciacatalunya.cat/resource/hb6v-jcbf.json"
@@ -264,31 +264,6 @@ def mapejar_registre(fila: dict, index_id: int) -> dict:
     }
 
 
-def normalitzar_text(valor) -> str:
-    return " ".join(str(valor or "").strip().upper().split())
-
-
-def clau_contracte_detallada(contracte: dict) -> tuple:
-    """
-    Clau estable per preservar expedients desapareguts sense confondre'ls amb
-    duplicats exactes corregits per Socrata.
-    """
-    import_raw = contracte.get("importe") or 0
-    try:
-        import_norm = f"{float(import_raw):.2f}"
-    except (TypeError, ValueError):
-        import_norm = "0.00"
-
-    return (
-        normalitzar_text(contracte.get("codigo")),
-        normalitzar_text(contracte.get("organismo")),
-        normalitzar_text(contracte.get("fecha")),
-        import_norm,
-        normalitzar_text(contracte.get("adjudicatario")),
-        normalitzar_text(contracte.get("descripcion"))[:180],
-    )
-
-
 def carregar_json_array(path: str) -> list:
     if not os.path.exists(path):
         return []
@@ -435,57 +410,6 @@ def actualitzar_arxiu_contractes(contractes_antics: list, contractes_nous: list)
     canvis.sort(key=lambda row: (row.get("detectat_a") or "", row.get("id") or ""))
     write_json_atomic(CHANGELOG_FILE, canvis)
     return nous_esdeveniments
-
-
-def contracte_public_preservat(registre_arxiu: dict) -> dict | None:
-    contracte = registre_arxiu.get("contracte_original")
-    if not isinstance(contracte, dict):
-        return None
-
-    public = dict(contracte)
-    public["estat_font"] = "preservat_desaparegut_socrata"
-    public["preservat_iguadata"] = True
-    public["primera_absencia_detectada"] = registre_arxiu.get("primera_absencia_detectada", "")
-    public["font_preservacio"] = registre_arxiu.get("font_preservacio", "")
-    public["exclos_analisis"] = True
-    if registre_arxiu.get("primer_snapshot_iguadata"):
-        public["primer_snapshot_iguadata"] = registre_arxiu.get("primer_snapshot_iguadata")
-    return public
-
-
-def fusionar_contractes_preservats(contractes_live: list) -> list:
-    public = []
-    claus_live = set()
-
-    for contracte in contractes_live:
-        c = dict(contracte)
-        c["estat_font"] = "actiu_socrata"
-        c["preservat_iguadata"] = False
-        public.append(c)
-        claus_live.add(clau_contracte_detallada(c))
-
-    claus_afegides = set(claus_live)
-    for registre in carregar_json_array(ARCHIVE_FILE):
-        preservat = contracte_public_preservat(registre)
-        if not preservat:
-            continue
-        clau = clau_contracte_detallada(preservat)
-        if clau in claus_afegides:
-            continue
-        public.append(preservat)
-        claus_afegides.add(clau)
-
-    public.sort(
-        key=lambda c: (
-            c.get("fecha") or "",
-            c.get("codigo") or "",
-            c.get("adjudicatario") or "",
-        ),
-        reverse=True,
-    )
-    for idx, contracte in enumerate(public, 1):
-        contracte["id"] = idx
-    return public
 
 
 # ─────────────────────────────────────────────

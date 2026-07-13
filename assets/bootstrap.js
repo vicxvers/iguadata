@@ -6,6 +6,10 @@
     };
 
     if (location.search[1] === '/') {
+        var baseElement = document.createElement('base');
+        baseElement.href = location.origin + base + '/';
+        document.head.appendChild(baseElement);
+
         var decoded = location.search.slice(1).split('&').map(function (part) {
             return part.replace(/~and~/g, '&');
         }).join('?');

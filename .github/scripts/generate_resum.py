@@ -17,7 +17,6 @@ DATA_FILES = [
     "fraccionament.json",
     "concentracio.json",
     "electoralisme.json",
-    "contractes_arxiu.json",
 ]
 
 

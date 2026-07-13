@@ -15,7 +15,7 @@ from atomic_io import write_json_atomic
 ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_INVESTIGATIONS = ROOT / "json" / "investigacio.json"
 DEFAULT_CONTRACTS = ROOT / "json" / "contractes.json"
-DEFAULT_ARCHIVE = ROOT / "json" / "contractes_arxiu.json"
+DEFAULT_ARCHIVE = ROOT / ".github" / "audit" / "contractes_arxiu.json"
 
 
 def slugify(value: object) -> str:

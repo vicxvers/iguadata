@@ -54,6 +54,31 @@ Qualsevol conclusió periodística, administrativa o jurídica requereix contras
 
 El codi font del projecte és públic i està disponible a GitHub sota llicència GNU GPL v3.0.
 
+## Estructura del projecte
+
+- `src/app.jsx`: font principal de la interfície.
+- `assets/app.js`: versió generada que es publica a la web.
+- `assets/`: recursos de navegador optimitzats.
+- `json/`: fotografia coherent i dades que consumeix el frontend.
+- `.github/audit/`: arxiu operatiu de contractes desapareguts o modificats; és públic al repositori però no es publica com a recurs normal de la web.
+- `.github/scripts/`: pipeline versionat de dades.
+- `scripts/`: eines de construcció i manteniment local.
+- `DESIGN.md`: principis i sistema visual del projecte.
+
+
+## Desenvolupament
+
+Després de modificar la interfície o les pàgines estàtiques:
+
+```powershell
+node scripts/build-app.js
+node scripts/build-pages.js
+python -B -m unittest discover -s tests -v
+```
+
+Les imatges socials i el favicon es poden regenerar amb `python scripts/optimize-static-images.py`.
+
+
 
 ## Contacte
 

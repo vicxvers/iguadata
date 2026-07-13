@@ -40,8 +40,8 @@ jobs:
             json/carrecs.json
             json/concentracio.json
             json/contractes.json
-            json/contractes_arxiu.json
-            json/canvis_contractes.json
+            .github/audit/contractes_arxiu.json
+            .github/audit/canvis_contractes.json
             json/electoralisme.json
             json/empresa_aliases.json
             json/empreses.json

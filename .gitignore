@@ -3,4 +3,16 @@
 AGENTS.md
 DESIGN.md
 __pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+coverage/
+.venv/
+venv/
+node_modules/
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+*.tmp
 .tmp-impact-*/

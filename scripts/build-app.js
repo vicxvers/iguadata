@@ -4,7 +4,7 @@ const vm = require('vm');
 
 const root = path.resolve(__dirname, '..');
 const sourcePath = path.join(root, 'src', 'app.jsx');
-const babelPath = path.join(root, 'assets', 'vendor', 'babel.min.js');
+const babelPath = path.join(root, '.github', 'vendor', 'babel.min.js');
 const outputPath = path.join(root, 'assets', 'app.js');
 
 const babelCode = fs.readFileSync(babelPath, 'utf8');

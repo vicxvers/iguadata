@@ -3,19 +3,20 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://static.cloudflareinsights.com; connect-src 'self' https://cloudflareinsights.com; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'sha256-HLucp8Of5yeH1uqi06dHQzbQo9Xc5rv95VgGLUXcH44='; object-src 'none'; base-uri 'none'; form-action 'none'; upgrade-insecure-requests">
     <meta name="referrer" content="strict-origin-when-cross-origin">
     <meta name="robots" content="noindex, nofollow">
     <title>Iguadata</title>
-    <!--
-        SPA fallback per a GitHub Pages.
-        Quan el visitant entra directament a /contractes/foo o /empreses/bar,
-        GH Pages no troba l'arxiu i serveix aquesta pàgina. Aquí codifiquem
-        el path a un query string i redirigim a l'arrel del projecte; allà
-        l'index.html el desxifra i restaura la URL real amb history.replaceState.
-        Tècnica: https://github.com/rafgraph/spa-github-pages
-    -->
-    <script src="assets/spa-redirect.js"></script>
+    <script>(function (location) {
+    var segmentCount = location.hostname.endsWith('github.io') ? 1 : 0;
+    location.replace(
+        location.protocol + '//' + location.hostname + (location.port ? ':' + location.port : '') +
+        location.pathname.split('/').slice(0, 1 + segmentCount).join('/') + '/?/' +
+        location.pathname.slice(1).split('/').slice(segmentCount).join('/').replace(/&/g, '~and~') +
+        (location.search ? '&' + location.search.slice(1).replace(/&/g, '~and~') : '') +
+        location.hash
+    );
+})(window.location);</script>
 </head>
 
 <body></body>

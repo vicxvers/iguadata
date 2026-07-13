@@ -5,7 +5,8 @@ import unittest
 from datetime import date
 from pathlib import Path
 
-SCRIPTS = Path(__file__).resolve().parents[1] / ".github" / "scripts"
+ROOT = Path(__file__).resolve().parents[1]
+SCRIPTS = ROOT / ".github" / "scripts"
 sys.path.insert(0, str(SCRIPTS))
 
 
@@ -93,6 +94,45 @@ class DataPipelineTests(unittest.TestCase):
         self.assertEqual(updated, 1)
         self.assertEqual(changes[0]["investigacions_afectades"], ["cas"])
         self.assertTrue(changes[0]["alertes_afectades"])
+
+    def test_operational_audit_is_not_in_the_public_json_tree(self):
+        audit_dir = ROOT / ".github" / "audit"
+        for name in ("contractes_arxiu.json", "canvis_contractes.json"):
+            internal_path = audit_dir / name
+            self.assertTrue(internal_path.is_file())
+            self.assertFalse((ROOT / "json" / name).exists())
+            self.assertIsInstance(json.loads(internal_path.read_text(encoding="utf-8")), list)
+
+    def test_frontend_uses_the_coherent_snapshot_only(self):
+        source = (ROOT / "src" / "app.jsx").read_text(encoding="utf-8")
+        self.assertIn("fetchContractsSnapshot", source)
+        self.assertNotIn("SOCRATA_BASE", source)
+        self.assertNotIn("fetchArchivedContracts", source)
+
+    def test_investigation_images_have_optimized_social_previews(self):
+        assets = ROOT / "assets" / "investigacio"
+        webp_stems = {path.stem for path in assets.glob("*.webp")}
+        social_files = list(assets.glob("*-og.jpg"))
+        social_stems = {path.stem.removesuffix("-og") for path in social_files}
+        self.assertEqual(webp_stems, social_stems)
+        self.assertEqual(list(assets.glob("*.png")), [])
+        self.assertLess(sum(path.stat().st_size for path in social_files), 2_000_000)
+
+    def test_favicon_is_compact(self):
+        favicon = ROOT / "favicon.ico"
+        self.assertTrue(favicon.is_file())
+        self.assertLess(favicon.stat().st_size, 50_000)
+
+    def test_spa_fallback_keeps_assets_rooted_before_rewriting_the_url(self):
+        bootstrap = (ROOT / "assets" / "bootstrap.js").read_text(encoding="utf-8")
+        self.assertIn("document.createElement('base')", bootstrap)
+        self.assertLess(bootstrap.index("document.createElement('base')"), bootstrap.index("history.replaceState"))
+        index = (ROOT / "index.html").read_text(encoding="utf-8")
+        self.assertRegex(index, r'assets/bootstrap\.js\?v=\d{8}-[a-z-]+')
+        fallback = (ROOT / "404.html").read_text(encoding="utf-8")
+        self.assertIn("script-src 'sha256-", fallback)
+        self.assertIn("location.pathname.split", fallback)
+        self.assertFalse((ROOT / "assets" / "spa-redirect.js").exists())
 
 
 if __name__ == "__main__":

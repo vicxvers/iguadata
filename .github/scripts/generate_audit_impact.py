@@ -66,7 +66,7 @@ def enrich_changes(changes: list, alerts: dict, investigations: dict) -> int:
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--changes", type=Path, default=ROOT / "json" / "canvis_contractes.json")
+    parser.add_argument("--changes", type=Path, default=ROOT / ".github" / "audit" / "canvis_contractes.json")
     parser.add_argument("--investigations", type=Path, default=ROOT / "json" / "investigacio.json")
     parser.add_argument("--previous-dir", type=Path, required=True)
     args = parser.parse_args()
