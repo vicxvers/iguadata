@@ -1,18 +1,44 @@
 .claude/
+.codex/
+.agents/
 .dev/
 AGENTS.md
 DESIGN.md
+
+# Local secrets and environment overrides
+.env
+.env.*
+!.env.example
+
+# Python caches and environments
 __pycache__/
 *.py[cod]
 .pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.tox/
 .coverage
 coverage/
+htmlcov/
 .venv/
 venv/
+
+# JavaScript dependencies and tool caches
 node_modules/
+.eslintcache
+
+# Editors and operating systems
 .idea/
 .vscode/
 .DS_Store
 Thumbs.db
+
+# Logs, backups and temporary files
+*.log
+*.bak
+*.orig
+*.rej
+*~
 *.tmp
+*.temp
 .tmp-impact-*/
