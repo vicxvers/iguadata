@@ -621,66 +621,6 @@
     ]
   },
   {
-    "nom": "MICO HERNANDEZ JESUS MARIA",
-    "total_adjudicat": 12571377.32,
-    "relacions": [
-      {
-        "empresa": "FCC MEDIO AMBIENTE",
-        "import_empresa": 12523143.07,
-        "carrecs": [
-          "Apoderado"
-        ]
-      },
-      {
-        "empresa": "IMESAPI S.A.",
-        "import_empresa": 48234.25,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "GONZALEZ PLANA ADOLFO",
-    "total_adjudicat": 12571377.32,
-    "relacions": [
-      {
-        "empresa": "FCC MEDIO AMBIENTE",
-        "import_empresa": 12523143.07,
-        "carrecs": [
-          "Apoderado"
-        ]
-      },
-      {
-        "empresa": "IMESAPI S.A.",
-        "import_empresa": 48234.25,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "GONZALEZ PRETEL JOSE MARIA",
-    "total_adjudicat": 12571377.32,
-    "relacions": [
-      {
-        "empresa": "FCC MEDIO AMBIENTE",
-        "import_empresa": 12523143.07,
-        "carrecs": [
-          "Apoderado"
-        ]
-      },
-      {
-        "empresa": "IMESAPI S.A.",
-        "import_empresa": 48234.25,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
     "nom": "SANTAMARIA ALBERQUILLA IGNACIO",
     "total_adjudicat": 12571377.32,
     "relacions": [
@@ -736,6 +676,66 @@
         "import_empresa": 48234.25,
         "carrecs": [
           "Apo.Sol."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "MICO HERNANDEZ JESUS MARIA",
+    "total_adjudicat": 12571377.32,
+    "relacions": [
+      {
+        "empresa": "FCC MEDIO AMBIENTE",
+        "import_empresa": 12523143.07,
+        "carrecs": [
+          "Apoderado"
+        ]
+      },
+      {
+        "empresa": "IMESAPI S.A.",
+        "import_empresa": 48234.25,
+        "carrecs": [
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "GONZALEZ PLANA ADOLFO",
+    "total_adjudicat": 12571377.32,
+    "relacions": [
+      {
+        "empresa": "FCC MEDIO AMBIENTE",
+        "import_empresa": 12523143.07,
+        "carrecs": [
+          "Apoderado"
+        ]
+      },
+      {
+        "empresa": "IMESAPI S.A.",
+        "import_empresa": 48234.25,
+        "carrecs": [
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "GONZALEZ PRETEL JOSE MARIA",
+    "total_adjudicat": 12571377.32,
+    "relacions": [
+      {
+        "empresa": "FCC MEDIO AMBIENTE",
+        "import_empresa": 12523143.07,
+        "carrecs": [
+          "Apoderado"
+        ]
+      },
+      {
+        "empresa": "IMESAPI S.A.",
+        "import_empresa": 48234.25,
+        "carrecs": [
+          "Apoderado"
         ]
       }
     ]
@@ -7161,11 +7161,11 @@
   },
   {
     "nom": "MESTRES SUREDA JOSEP",
-    "total_adjudicat": 5492066.87,
+    "total_adjudicat": 5414118.71,
     "relacions": [
       {
         "empresa": "BOSCIREM, S.L.",
-        "import_empresa": 5492066.87,
+        "import_empresa": 5414118.71,
         "carrecs": [
           "Adm. Solid."
         ]
@@ -7174,11 +7174,11 @@
   },
   {
     "nom": "BOSCH CHUMILLAS OSCAR",
-    "total_adjudicat": 5492066.87,
+    "total_adjudicat": 5414118.71,
     "relacions": [
       {
         "empresa": "BOSCIREM, S.L.",
-        "import_empresa": 5492066.87,
+        "import_empresa": 5414118.71,
         "carrecs": [
           "Adm. Solid."
         ]
@@ -8596,6 +8596,20 @@
     ]
   },
   {
+    "nom": "WANG XUEFENG",
+    "total_adjudicat": 1169025.42,
+    "relacions": [
+      {
+        "empresa": "AERONAVAL DE CONSTRUCCIONES E INSTALACIONES, SA",
+        "import_empresa": 1169025.42,
+        "carrecs": [
+          "Adm. Mancom.",
+          "Apo.Sol."
+        ]
+      }
+    ]
+  },
+  {
     "nom": "SUN YIZHEN",
     "total_adjudicat": 1169025.42,
     "relacions": [
@@ -8629,8 +8643,7 @@
         "empresa": "AERONAVAL DE CONSTRUCCIONES E INSTALACIONES, SA",
         "import_empresa": 1169025.42,
         "carrecs": [
-          "Apo.Sol.",
-          "Adm. Mancom."
+          "Apo.Sol."
         ]
       }
     ]
@@ -16412,27 +16425,6 @@
     ]
   },
   {
-    "nom": "VAZQUEZ MARAVER XAVIER",
-    "total_adjudicat": 627273.76,
-    "relacions": [
-      {
-        "empresa": "OBRAS Y CONSTRUCCIONES TRIVAZQUEZ, SL",
-        "import_empresa": 622693.6,
-        "carrecs": [
-          "ADM.UNICO",
-          "APODERAD.SOL"
-        ]
-      },
-      {
-        "empresa": "GRUPO TRIVAX, S.L.",
-        "import_empresa": 4580.16,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
     "nom": "RODRIGUEZ PEDRERO JOSE MARIA",
     "total_adjudicat": 626604.0,
     "relacions": [
@@ -19364,6 +19356,27 @@
         "import_empresa": 626604.0,
         "carrecs": [
           "APODERADO"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "VAZQUEZ MARAVER XAVIER",
+    "total_adjudicat": 624105.76,
+    "relacions": [
+      {
+        "empresa": "OBRAS Y CONSTRUCCIONES TRIVAZQUEZ, SL",
+        "import_empresa": 619525.6,
+        "carrecs": [
+          "ADM.UNICO",
+          "APODERAD.SOL"
+        ]
+      },
+      {
+        "empresa": "GRUPO TRIVAX, S.L.",
+        "import_empresa": 4580.16,
+        "carrecs": [
+          "APODERAD.SOL"
         ]
       }
     ]
@@ -24406,6 +24419,19 @@
     ]
   },
   {
+    "nom": "VILELLA XAMPENY PERE",
+    "total_adjudicat": 226029.18,
+    "relacions": [
+      {
+        "empresa": "CONSTRUCCIONES FRIGORIFICAS CRUZ, SL",
+        "import_empresa": 226029.18,
+        "carrecs": [
+          "REP.ADM.CONC"
+        ]
+      }
+    ]
+  },
+  {
     "nom": "CRUZ GARCIA RAFAEL",
     "total_adjudicat": 226029.18,
     "relacions": [
@@ -24997,74 +25023,6 @@
     ]
   },
   {
-    "nom": "PASTOR FERRER JOSEP MARIA",
-    "total_adjudicat": 158339.74,
-    "relacions": [
-      {
-        "empresa": "REMM GUITART, SL",
-        "import_empresa": 158339.74,
-        "carrecs": [
-          "PRESIDENTE",
-          "CONSEJERO"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "DIEGO GONZALEZ GORKA",
-    "total_adjudicat": 158339.74,
-    "relacions": [
-      {
-        "empresa": "REMM GUITART, SL",
-        "import_empresa": 158339.74,
-        "carrecs": [
-          "CONSEJERO",
-          "SECRETARIO"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "RODRIGUEZ MOLINUEVO ALEXANDER KOLDOBIKA",
-    "total_adjudicat": 158339.74,
-    "relacions": [
-      {
-        "empresa": "REMM GUITART, SL",
-        "import_empresa": 158339.74,
-        "carrecs": [
-          "CONSEJERO",
-          "CONS.DEL.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "CABRE BORRAS VICTOR",
-    "total_adjudicat": 158339.74,
-    "relacions": [
-      {
-        "empresa": "REMM GUITART, SL",
-        "import_empresa": 158339.74,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "MABRAS SALA ANTONI",
-    "total_adjudicat": 158159.57,
-    "relacions": [
-      {
-        "empresa": "AUDIOVISUAL RESOURCES, SL",
-        "import_empresa": 158159.57,
-        "carrecs": [
-          "ADM.UNICO"
-        ]
-      }
-    ]
-  },
-  {
     "nom": "LOZANO CASADO MARIA GEMA",
     "total_adjudicat": 157790.46,
     "relacions": [
@@ -25144,6 +25102,19 @@
         "import_empresa": 43659.0,
         "carrecs": [
           "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "MABRAS SALA ANTONI",
+    "total_adjudicat": 155284.57,
+    "relacions": [
+      {
+        "empresa": "AUDIOVISUAL RESOURCES, SL",
+        "import_empresa": 155284.57,
+        "carrecs": [
+          "ADM.UNICO"
         ]
       }
     ]
@@ -25235,6 +25206,61 @@
         "import_empresa": 148261.48,
         "carrecs": [
           "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "PASTOR FERRER JOSEP MARIA",
+    "total_adjudicat": 146522.86,
+    "relacions": [
+      {
+        "empresa": "REMM GUITART, SL",
+        "import_empresa": 146522.86,
+        "carrecs": [
+          "PRESIDENTE",
+          "CONSEJERO"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "DIEGO GONZALEZ GORKA",
+    "total_adjudicat": 146522.86,
+    "relacions": [
+      {
+        "empresa": "REMM GUITART, SL",
+        "import_empresa": 146522.86,
+        "carrecs": [
+          "CONSEJERO",
+          "SECRETARIO"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "RODRIGUEZ MOLINUEVO ALEXANDER KOLDOBIKA",
+    "total_adjudicat": 146522.86,
+    "relacions": [
+      {
+        "empresa": "REMM GUITART, SL",
+        "import_empresa": 146522.86,
+        "carrecs": [
+          "CONSEJERO",
+          "CONS.DEL.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "CABRE BORRAS VICTOR",
+    "total_adjudicat": 146522.86,
+    "relacions": [
+      {
+        "empresa": "REMM GUITART, SL",
+        "import_empresa": 146522.86,
+        "carrecs": [
+          "APODERAD.SOL"
         ]
       }
     ]
@@ -33335,15 +33361,6 @@
           "CONSEJERO",
           "APOD.MANCOMU"
         ]
-      },
-      {
-        "empresa": "SOCIEDAD ANONIMA MASATS TRANSPORTS GENERALS",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "PRESIDENTE",
-          "CONSEJERO",
-          "APOD.MANCOMU"
-        ]
       }
     ]
   },
@@ -33354,14 +33371,6 @@
       {
         "empresa": "SOCIEDAD ANONIMA MASATS-TRANSPORTS GENERALS, UNIPERSONAL",
         "import_empresa": 87435.79,
-        "carrecs": [
-          "CONSEJERO",
-          "APOD.MANCOMU"
-        ]
-      },
-      {
-        "empresa": "SOCIEDAD ANONIMA MASATS TRANSPORTS GENERALS",
-        "import_empresa": 0.0,
         "carrecs": [
           "CONSEJERO",
           "APOD.MANCOMU"
@@ -33380,14 +33389,6 @@
           "CONSEJERO",
           "APOD.MANCOMU"
         ]
-      },
-      {
-        "empresa": "SOCIEDAD ANONIMA MASATS TRANSPORTS GENERALS",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "CONSEJERO",
-          "APOD.MANCOMU"
-        ]
       }
     ]
   },
@@ -33398,14 +33399,6 @@
       {
         "empresa": "SOCIEDAD ANONIMA MASATS-TRANSPORTS GENERALS, UNIPERSONAL",
         "import_empresa": 87435.79,
-        "carrecs": [
-          "CONSEJERO",
-          "APOD.MANCOMU"
-        ]
-      },
-      {
-        "empresa": "SOCIEDAD ANONIMA MASATS TRANSPORTS GENERALS",
-        "import_empresa": 0.0,
         "carrecs": [
           "CONSEJERO",
           "APOD.MANCOMU"
@@ -33424,14 +33417,6 @@
           "CONSEJERO",
           "APOD.MANCOMU"
         ]
-      },
-      {
-        "empresa": "SOCIEDAD ANONIMA MASATS TRANSPORTS GENERALS",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "CONSEJERO",
-          "APOD.MANCOMU"
-        ]
       }
     ]
   },
@@ -33442,14 +33427,6 @@
       {
         "empresa": "SOCIEDAD ANONIMA MASATS-TRANSPORTS GENERALS, UNIPERSONAL",
         "import_empresa": 87435.79,
-        "carrecs": [
-          "CONSEJERO",
-          "APOD.MANCOMU"
-        ]
-      },
-      {
-        "empresa": "SOCIEDAD ANONIMA MASATS TRANSPORTS GENERALS",
-        "import_empresa": 0.0,
         "carrecs": [
           "CONSEJERO",
           "APOD.MANCOMU"
@@ -33468,14 +33445,6 @@
           "CONSEJERO",
           "APOD.MANCOMU"
         ]
-      },
-      {
-        "empresa": "SOCIEDAD ANONIMA MASATS TRANSPORTS GENERALS",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "CONSEJERO",
-          "APOD.MANCOMU"
-        ]
       }
     ]
   },
@@ -33486,13 +33455,6 @@
       {
         "empresa": "SOCIEDAD ANONIMA MASATS-TRANSPORTS GENERALS, UNIPERSONAL",
         "import_empresa": 87435.79,
-        "carrecs": [
-          "APOD.MANCOMU"
-        ]
-      },
-      {
-        "empresa": "SOCIEDAD ANONIMA MASATS TRANSPORTS GENERALS",
-        "import_empresa": 0.0,
         "carrecs": [
           "APOD.MANCOMU"
         ]
@@ -33509,13 +33471,6 @@
         "carrecs": [
           "APOD.MANCOMU"
         ]
-      },
-      {
-        "empresa": "SOCIEDAD ANONIMA MASATS TRANSPORTS GENERALS",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "APOD.MANCOMU"
-        ]
       }
     ]
   },
@@ -33526,13 +33481,6 @@
       {
         "empresa": "SOCIEDAD ANONIMA MASATS-TRANSPORTS GENERALS, UNIPERSONAL",
         "import_empresa": 87435.79,
-        "carrecs": [
-          "APOD.MANCOMU"
-        ]
-      },
-      {
-        "empresa": "SOCIEDAD ANONIMA MASATS TRANSPORTS GENERALS",
-        "import_empresa": 0.0,
         "carrecs": [
           "APOD.MANCOMU"
         ]
@@ -33549,13 +33497,6 @@
         "carrecs": [
           "APOD.MANCOMU"
         ]
-      },
-      {
-        "empresa": "SOCIEDAD ANONIMA MASATS TRANSPORTS GENERALS",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "APOD.MANCOMU"
-        ]
       }
     ]
   },
@@ -33566,13 +33507,6 @@
       {
         "empresa": "SOCIEDAD ANONIMA MASATS-TRANSPORTS GENERALS, UNIPERSONAL",
         "import_empresa": 87435.79,
-        "carrecs": [
-          "APOD.MANCOMU"
-        ]
-      },
-      {
-        "empresa": "SOCIEDAD ANONIMA MASATS TRANSPORTS GENERALS",
-        "import_empresa": 0.0,
         "carrecs": [
           "APOD.MANCOMU"
         ]
@@ -33589,13 +33523,6 @@
         "carrecs": [
           "APOD.MANCOMU"
         ]
-      },
-      {
-        "empresa": "SOCIEDAD ANONIMA MASATS TRANSPORTS GENERALS",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "APOD.MANCOMU"
-        ]
       }
     ]
   },
@@ -33606,13 +33533,6 @@
       {
         "empresa": "SOCIEDAD ANONIMA MASATS-TRANSPORTS GENERALS, UNIPERSONAL",
         "import_empresa": 87435.79,
-        "carrecs": [
-          "SE.TEC.NO CO"
-        ]
-      },
-      {
-        "empresa": "SOCIEDAD ANONIMA MASATS TRANSPORTS GENERALS",
-        "import_empresa": 0.0,
         "carrecs": [
           "SE.TEC.NO CO"
         ]
@@ -33629,13 +33549,6 @@
         "carrecs": [
           "APODERAD.SOL"
         ]
-      },
-      {
-        "empresa": "SOCIEDAD ANONIMA MASATS TRANSPORTS GENERALS",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
       }
     ]
   },
@@ -33649,13 +33562,6 @@
         "carrecs": [
           "APODERAD.SOL"
         ]
-      },
-      {
-        "empresa": "SOCIEDAD ANONIMA MASATS TRANSPORTS GENERALS",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
       }
     ]
   },
@@ -33666,13 +33572,6 @@
       {
         "empresa": "SOCIEDAD ANONIMA MASATS-TRANSPORTS GENERALS, UNIPERSONAL",
         "import_empresa": 87435.79,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      },
-      {
-        "empresa": "SOCIEDAD ANONIMA MASATS TRANSPORTS GENERALS",
-        "import_empresa": 0.0,
         "carrecs": [
           "APODERAD.SOL"
         ]
@@ -36536,13 +36435,6 @@
         "carrecs": [
           "Adm. Unico"
         ]
-      },
-      {
-        "empresa": "SOLUXIONS EFFICIENT ENERGY S.L.",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "Adm. Unico"
-        ]
       }
     ]
   },
@@ -36917,6 +36809,32 @@
     ]
   },
   {
+    "nom": "FERNANDEZ AFONSO MARIA ELENA",
+    "total_adjudicat": 48234.25,
+    "relacions": [
+      {
+        "empresa": "IMESAPI S.A.",
+        "import_empresa": 48234.25,
+        "carrecs": [
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "BUENO MARTIN IGNACIO",
+    "total_adjudicat": 48234.25,
+    "relacions": [
+      {
+        "empresa": "IMESAPI S.A.",
+        "import_empresa": 48234.25,
+        "carrecs": [
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
     "nom": "RAMA MEDINA ANTONIO",
     "total_adjudicat": 48234.25,
     "relacions": [
@@ -37021,19 +36939,6 @@
     ]
   },
   {
-    "nom": "CARRASCO MUÑOZ SARA",
-    "total_adjudicat": 48234.25,
-    "relacions": [
-      {
-        "empresa": "IMESAPI S.A.",
-        "import_empresa": 48234.25,
-        "carrecs": [
-          "Apo.Man.Soli"
-        ]
-      }
-    ]
-  },
-  {
     "nom": "PULIDO MORILLO FERNANDO",
     "total_adjudicat": 48234.25,
     "relacions": [
@@ -37113,19 +37018,6 @@
   },
   {
     "nom": "GARCIA LUZON JOSE PABLO",
-    "total_adjudicat": 48234.25,
-    "relacions": [
-      {
-        "empresa": "IMESAPI S.A.",
-        "import_empresa": 48234.25,
-        "carrecs": [
-          "Apo.Sol."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "CORONA GIANLUCA",
     "total_adjudicat": 48234.25,
     "relacions": [
       {
@@ -38206,27 +38098,6 @@
     ]
   },
   {
-    "nom": "ZARDOYA ARANA ALBERTO",
-    "total_adjudicat": 45450.0,
-    "relacions": [
-      {
-        "empresa": "ZARDOYA OTIS, SA",
-        "import_empresa": 45450.0,
-        "carrecs": [
-          "Representan",
-          "Consejero"
-        ]
-      },
-      {
-        "empresa": "MECALUX, S.A.",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "REPR.143 RRM"
-        ]
-      }
-    ]
-  },
-  {
     "nom": "MENDEZ ECHEVARRIA MARIA CRISTINA",
     "total_adjudicat": 45450.0,
     "relacions": [
@@ -38773,6 +38644,20 @@
         "import_empresa": 45450.0,
         "carrecs": [
           "Representan"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "ZARDOYA ARANA ALBERTO",
+    "total_adjudicat": 45450.0,
+    "relacions": [
+      {
+        "empresa": "ZARDOYA OTIS, SA",
+        "import_empresa": 45450.0,
+        "carrecs": [
+          "Representan",
+          "Consejero"
         ]
       }
     ]
@@ -43874,13 +43759,6 @@
         "carrecs": [
           "APOD.SOL/MAN"
         ]
-      },
-      {
-        "empresa": "ALUMBRADOS VIARIOS, SA",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "APODERADO"
-        ]
       }
     ]
   },
@@ -43906,13 +43784,6 @@
         "import_empresa": 34722.0,
         "carrecs": [
           "APOD.SOL/MAN"
-        ]
-      },
-      {
-        "empresa": "ALUMBRADOS VIARIOS, SA",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "APODERAD.SOL"
         ]
       }
     ]
@@ -45129,32 +45000,6 @@
     ]
   },
   {
-    "nom": "KOCH MORENO CHRISTIAN",
-    "total_adjudicat": 32752.17,
-    "relacions": [
-      {
-        "empresa": "TÜV RHEINLAND IBERICA INSPECTION, CERTIFICATION & TESTING, SA",
-        "import_empresa": 32752.17,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "DE RON MARTINEZ ISABEL",
-    "total_adjudicat": 32752.17,
-    "relacions": [
-      {
-        "empresa": "TÜV RHEINLAND IBERICA INSPECTION, CERTIFICATION & TESTING, SA",
-        "import_empresa": 32752.17,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
     "nom": "GIL REDONDO CARLOS",
     "total_adjudicat": 32752.17,
     "relacions": [
@@ -45162,7 +45007,20 @@
         "empresa": "TÜV RHEINLAND IBERICA INSPECTION, CERTIFICATION & TESTING, SA",
         "import_empresa": 32752.17,
         "carrecs": [
-          "APOD.MANCOMU"
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "ROCABRUNA PARRA LUIS FRANCISCO",
+    "total_adjudicat": 32752.17,
+    "relacions": [
+      {
+        "empresa": "TÜV RHEINLAND IBERICA INSPECTION, CERTIFICATION & TESTING, SA",
+        "import_empresa": 32752.17,
+        "carrecs": [
+          "APODERAD.SOL"
         ]
       }
     ]
@@ -45285,6 +45143,19 @@
     ]
   },
   {
+    "nom": "HERNANDEZ BRIEGA JAVIER",
+    "total_adjudicat": 32752.17,
+    "relacions": [
+      {
+        "empresa": "TÜV RHEINLAND IBERICA INSPECTION, CERTIFICATION & TESTING, SA",
+        "import_empresa": 32752.17,
+        "carrecs": [
+          "APOD.MANCOMU"
+        ]
+      }
+    ]
+  },
+  {
     "nom": "HERNANDEZ QUERO ARMAND",
     "total_adjudicat": 32752.17,
     "relacions": [
@@ -45337,33 +45208,7 @@
     ]
   },
   {
-    "nom": "CHOUATI PIÑEIRO ABDESLAM",
-    "total_adjudicat": 32752.17,
-    "relacions": [
-      {
-        "empresa": "TÜV RHEINLAND IBERICA INSPECTION, CERTIFICATION & TESTING, SA",
-        "import_empresa": 32752.17,
-        "carrecs": [
-          "APOD.MANCOMU"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "TEJERA ALONSO FERNANDO",
-    "total_adjudicat": 32752.17,
-    "relacions": [
-      {
-        "empresa": "TÜV RHEINLAND IBERICA INSPECTION, CERTIFICATION & TESTING, SA",
-        "import_empresa": 32752.17,
-        "carrecs": [
-          "APOD.MANCOMU"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "PELETIER RIBERA MONICA",
+    "nom": "GARCIA GRAMACHE SONIA",
     "total_adjudicat": 32752.17,
     "relacions": [
       {
@@ -45389,6 +45234,97 @@
     ]
   },
   {
+    "nom": "GIL VERNET ANNA",
+    "total_adjudicat": 32752.17,
+    "relacions": [
+      {
+        "empresa": "TÜV RHEINLAND IBERICA INSPECTION, CERTIFICATION & TESTING, SA",
+        "import_empresa": 32752.17,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "ABDESLAM CHOUATI PIÑEIRO",
+    "total_adjudicat": 32752.17,
+    "relacions": [
+      {
+        "empresa": "TÜV RHEINLAND IBERICA INSPECTION, CERTIFICATION & TESTING, SA",
+        "import_empresa": 32752.17,
+        "carrecs": [
+          "APOD.MANCOMU"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "TEJERA ALONSO FERNANDO",
+    "total_adjudicat": 32752.17,
+    "relacions": [
+      {
+        "empresa": "TÜV RHEINLAND IBERICA INSPECTION, CERTIFICATION & TESTING, SA",
+        "import_empresa": 32752.17,
+        "carrecs": [
+          "APOD.MANCOMU"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "KOCH MORENO CHRISTIAN",
+    "total_adjudicat": 32752.17,
+    "relacions": [
+      {
+        "empresa": "TÜV RHEINLAND IBERICA INSPECTION, CERTIFICATION & TESTING, SA",
+        "import_empresa": 32752.17,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "DE RON MARTINEZ ISABEL",
+    "total_adjudicat": 32752.17,
+    "relacions": [
+      {
+        "empresa": "TÜV RHEINLAND IBERICA INSPECTION, CERTIFICATION & TESTING, SA",
+        "import_empresa": 32752.17,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "CHOUATI PIÑEIRO ABDESLAM",
+    "total_adjudicat": 32752.17,
+    "relacions": [
+      {
+        "empresa": "TÜV RHEINLAND IBERICA INSPECTION, CERTIFICATION & TESTING, SA",
+        "import_empresa": 32752.17,
+        "carrecs": [
+          "APOD.MANCOMU"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "PELETIER RIBERA MONICA",
+    "total_adjudicat": 32752.17,
+    "relacions": [
+      {
+        "empresa": "TÜV RHEINLAND IBERICA INSPECTION, CERTIFICATION & TESTING, SA",
+        "import_empresa": 32752.17,
+        "carrecs": [
+          "APOD.MANCOMU"
+        ]
+      }
+    ]
+  },
+  {
     "nom": "DE CASTRO ALBERO GONZALO",
     "total_adjudicat": 32752.17,
     "relacions": [
@@ -45398,19 +45334,6 @@
         "carrecs": [
           "APOD.MANCOMU",
           "ADM.UNICO"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "GIL VERNET ANNA",
-    "total_adjudicat": 32752.17,
-    "relacions": [
-      {
-        "empresa": "TÜV RHEINLAND IBERICA INSPECTION, CERTIFICATION & TESTING, SA",
-        "import_empresa": 32752.17,
-        "carrecs": [
-          "APODERAD.SOL"
         ]
       }
     ]
@@ -45490,19 +45413,6 @@
         "import_empresa": 32752.17,
         "carrecs": [
           "APOD.SOL/MAN"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "ABDESLAM CHOUATI PIÑEIRO",
-    "total_adjudicat": 32752.17,
-    "relacions": [
-      {
-        "empresa": "TÜV RHEINLAND IBERICA INSPECTION, CERTIFICATION & TESTING, SA",
-        "import_empresa": 32752.17,
-        "carrecs": [
-          "APOD.MANCOMU"
         ]
       }
     ]
@@ -46685,6 +46595,47 @@
     ]
   },
   {
+    "nom": "JUNYENT CAPDEVILA VICENC",
+    "total_adjudicat": 27342.83,
+    "relacions": [
+      {
+        "empresa": "ANOIA PET SERVICES GROUP, SLU",
+        "import_empresa": 17508.59,
+        "carrecs": [
+          "REPR.143 RRM"
+        ]
+      },
+      {
+        "empresa": "HOSPITAL VETERINARI DE CATALUNYA, SL",
+        "import_empresa": 9834.24,
+        "carrecs": [
+          "REPR.143 RRM"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "VIVES PUENTE JUDIT",
+    "total_adjudicat": 27342.83,
+    "relacions": [
+      {
+        "empresa": "ANOIA PET SERVICES GROUP, SLU",
+        "import_empresa": 17508.59,
+        "carrecs": [
+          "REPR.143 RRM"
+        ]
+      },
+      {
+        "empresa": "HOSPITAL VETERINARI DE CATALUNYA, SL",
+        "import_empresa": 9834.24,
+        "carrecs": [
+          "REPR.143 RRM",
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
     "nom": "MARTIN ROYO FERNANDO",
     "total_adjudicat": 26868.8,
     "relacions": [
@@ -47330,47 +47281,6 @@
         "carrecs": [
           "ADM.SOLIDAR.",
           "APODERADO"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "JUNYENT CAPDEVILA VICENC",
-    "total_adjudicat": 23906.24,
-    "relacions": [
-      {
-        "empresa": "ANOIA PET SERVICES GROUP, SLU",
-        "import_empresa": 14072.0,
-        "carrecs": [
-          "REPR.143 RRM"
-        ]
-      },
-      {
-        "empresa": "HOSPITAL VETERINARI DE CATALUNYA, SL",
-        "import_empresa": 9834.24,
-        "carrecs": [
-          "REPR.143 RRM"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "VIVES PUENTE JUDIT",
-    "total_adjudicat": 23906.24,
-    "relacions": [
-      {
-        "empresa": "ANOIA PET SERVICES GROUP, SLU",
-        "import_empresa": 14072.0,
-        "carrecs": [
-          "REPR.143 RRM"
-        ]
-      },
-      {
-        "empresa": "HOSPITAL VETERINARI DE CATALUNYA, SL",
-        "import_empresa": 9834.24,
-        "carrecs": [
-          "REPR.143 RRM",
-          "APODERAD.SOL"
         ]
       }
     ]
@@ -48087,13 +47997,6 @@
       {
         "empresa": "FUSTERIA PAS A PAS, S. L.",
         "import_empresa": 22217.85,
-        "carrecs": [
-          "ADM.UNICO"
-        ]
-      },
-      {
-        "empresa": "IMFUSTA, SL",
-        "import_empresa": 0.0,
         "carrecs": [
           "ADM.UNICO"
         ]
@@ -61044,6 +60947,19 @@
     ]
   },
   {
+    "nom": "ARMENGOL CLOTET JAUME",
+    "total_adjudicat": 14850.0,
+    "relacions": [
+      {
+        "empresa": "BAMMP ARQUITECTES I ASSOCIATS, SLP",
+        "import_empresa": 14850.0,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
     "nom": "PONT MONTANER FERRAN",
     "total_adjudicat": 14850.0,
     "relacions": [
@@ -64760,6 +64676,19 @@
     ]
   },
   {
+    "nom": "GARCIA FIGUERIAS MARIA DOLORES",
+    "total_adjudicat": 9293.33,
+    "relacions": [
+      {
+        "empresa": "CASBU, SL",
+        "import_empresa": 9293.33,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
     "nom": "MATHIEU FRANCOIS CHAPELLE",
     "total_adjudicat": 9293.33,
     "relacions": [
@@ -64846,19 +64775,6 @@
         "import_empresa": 9293.33,
         "carrecs": [
           "ADM.SOLIDAR."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "GARCIA FIGUEIRAS MARIA DOLORES",
-    "total_adjudicat": 9293.33,
-    "relacions": [
-      {
-        "empresa": "CASBU, SL",
-        "import_empresa": 9293.33,
-        "carrecs": [
-          "APODERAD.SOL"
         ]
       }
     ]
@@ -66337,13 +66253,6 @@
         "carrecs": [
           "APOD.MANCOMU"
         ]
-      },
-      {
-        "empresa": "BEGUVERD, SL UNIPERSONAL",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "APOD.MANCOMU"
-        ]
       }
     ]
   },
@@ -66354,13 +66263,6 @@
       {
         "empresa": "REPARACIONS CATASTUR, SLU",
         "import_empresa": 8718.05,
-        "carrecs": [
-          "APOD.MANCOMU"
-        ]
-      },
-      {
-        "empresa": "BEGUVERD, SL UNIPERSONAL",
-        "import_empresa": 0.0,
         "carrecs": [
           "APOD.MANCOMU"
         ]
@@ -69286,19 +69188,6 @@
         "import_empresa": 6563.22,
         "carrecs": [
           "ADM.SOLIDAR."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "MATAS RIERA SERGI",
-    "total_adjudicat": 6560.0,
-    "relacions": [
-      {
-        "empresa": "SEGEMA MANAGEMENT SL",
-        "import_empresa": 6560.0,
-        "carrecs": [
-          "ADM.UNICO"
         ]
       }
     ]
@@ -75677,6 +75566,19 @@
     ]
   },
   {
+    "nom": "MATAS RIERA SERGI",
+    "total_adjudicat": 2460.0,
+    "relacions": [
+      {
+        "empresa": "SEGEMA MANAGEMENT SL",
+        "import_empresa": 2460.0,
+        "carrecs": [
+          "ADM.UNICO"
+        ]
+      }
+    ]
+  },
+  {
     "nom": "GONZALEZ TERCEÑO DANIEL",
     "total_adjudicat": 2444.04,
     "relacions": [
@@ -75690,13 +75592,6 @@
       {
         "empresa": "GODO STRATEGIES, S.L.U.",
         "import_empresa": 1120.0,
-        "carrecs": [
-          "APOD.SOL/MAN"
-        ]
-      },
-      {
-        "empresa": "GODO STRATEGIES, SLU",
-        "import_empresa": 0.0,
         "carrecs": [
           "APOD.SOL/MAN"
         ]
@@ -75720,13 +75615,6 @@
         "carrecs": [
           "APOD.SOL/MAN"
         ]
-      },
-      {
-        "empresa": "GODO STRATEGIES, SLU",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "APOD.SOL/MAN"
-        ]
       }
     ]
   },
@@ -75744,13 +75632,6 @@
       {
         "empresa": "GODO STRATEGIES, S.L.U.",
         "import_empresa": 1120.0,
-        "carrecs": [
-          "APOD.SOL/MAN"
-        ]
-      },
-      {
-        "empresa": "GODO STRATEGIES, SLU",
-        "import_empresa": 0.0,
         "carrecs": [
           "APOD.SOL/MAN"
         ]
@@ -75774,13 +75655,6 @@
         "carrecs": [
           "APODERAD.SOL"
         ]
-      },
-      {
-        "empresa": "GODO STRATEGIES, SLU",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
       }
     ]
   },
@@ -75798,13 +75672,6 @@
       {
         "empresa": "GODO STRATEGIES, S.L.U.",
         "import_empresa": 1120.0,
-        "carrecs": [
-          "APOD.SOL/MAN"
-        ]
-      },
-      {
-        "empresa": "GODO STRATEGIES, SLU",
-        "import_empresa": 0.0,
         "carrecs": [
           "APOD.SOL/MAN"
         ]
@@ -77087,6 +76954,32 @@
     ]
   },
   {
+    "nom": "FUENTES BIEITO ALVARO",
+    "total_adjudicat": 2110.5,
+    "relacions": [
+      {
+        "empresa": "SOCIEDAD DE TASACIÓN, S.L.",
+        "import_empresa": 2110.5,
+        "carrecs": [
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "GARCIA ALVAREZ ALEJANDRA",
+    "total_adjudicat": 2110.5,
+    "relacions": [
+      {
+        "empresa": "SOCIEDAD DE TASACIÓN, S.L.",
+        "import_empresa": 2110.5,
+        "carrecs": [
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
     "nom": "MORER DE LLORENS IGNACIO",
     "total_adjudicat": 2110.5,
     "relacions": [
@@ -77223,19 +77116,6 @@
   },
   {
     "nom": "ALONSO MARTINEZ MARIA ELENA",
-    "total_adjudicat": 2110.5,
-    "relacions": [
-      {
-        "empresa": "SOCIEDAD DE TASACIÓN, S.L.",
-        "import_empresa": 2110.5,
-        "carrecs": [
-          "Apo.Sol."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "FUENTES BIEITO ALVARO",
     "total_adjudicat": 2110.5,
     "relacions": [
       {
@@ -77678,19 +77558,6 @@
   },
   {
     "nom": "TALLARDA BAÑOS FRANCISCO",
-    "total_adjudicat": 2110.5,
-    "relacions": [
-      {
-        "empresa": "SOCIEDAD DE TASACIÓN, S.L.",
-        "import_empresa": 2110.5,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "NICOLAU CAMINO TOMAS",
     "total_adjudicat": 2110.5,
     "relacions": [
       {
@@ -80875,13 +80742,6 @@
         "carrecs": [
           "APOD.SOL/MAN"
         ]
-      },
-      {
-        "empresa": "GODO STRATEGIES, SLU",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "APOD.SOL/MAN"
-        ]
       }
     ]
   },
@@ -80892,13 +80752,6 @@
       {
         "empresa": "GODO STRATEGIES, S.L.U.",
         "import_empresa": 1120.0,
-        "carrecs": [
-          "APOD.SOL/MAN"
-        ]
-      },
-      {
-        "empresa": "GODO STRATEGIES, SLU",
-        "import_empresa": 0.0,
         "carrecs": [
           "APOD.SOL/MAN"
         ]
@@ -89785,1113 +89638,6 @@
         "import_empresa": 50.0,
         "carrecs": [
           "Adm. Unico"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "MARIA ANGELES MONTANE BENET",
-    "total_adjudicat": 0.0,
-    "relacions": [
-      {
-        "empresa": "BENITO ARNÓ E HIJOS, SA, SOCIEDAD UNIPERSONAL",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "Apo.Sol."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "MARIA PILAR BLASCO BORBON",
-    "total_adjudicat": 0.0,
-    "relacions": [
-      {
-        "empresa": "BENITO ARNÓ E HIJOS, SA, SOCIEDAD UNIPERSONAL",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "Apo.Sol."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "GOMEZ EROLES DAVID",
-    "total_adjudicat": 0.0,
-    "relacions": [
-      {
-        "empresa": "BENITO ARNÓ E HIJOS, SA, SOCIEDAD UNIPERSONAL",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "Apo.Sol."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "JOSEP CAPELL FABREGAT",
-    "total_adjudicat": 0.0,
-    "relacions": [
-      {
-        "empresa": "BENITO ARNÓ E HIJOS, SA, SOCIEDAD UNIPERSONAL",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "Apo.Sol."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "PROTOMARTIR MARTINEZ MERITXELL",
-    "total_adjudicat": 0.0,
-    "relacions": [
-      {
-        "empresa": "BENITO ARNÓ E HIJOS, SA, SOCIEDAD UNIPERSONAL",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "Apo.Sol."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "TORRUBIANO ROMERO GUSTAVO",
-    "total_adjudicat": 0.0,
-    "relacions": [
-      {
-        "empresa": "BENITO ARNÓ E HIJOS, SA, SOCIEDAD UNIPERSONAL",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "RICART CUXART FRANCESC ASSIS",
-    "total_adjudicat": 0.0,
-    "relacions": [
-      {
-        "empresa": "BENITO ARNÓ E HIJOS, SA, SOCIEDAD UNIPERSONAL",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "OMELLA JUAN DANIEL",
-    "total_adjudicat": 0.0,
-    "relacions": [
-      {
-        "empresa": "BENITO ARNÓ E HIJOS, SA, SOCIEDAD UNIPERSONAL",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "Apo.Sol."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "CALAFELL PEREZ CARLES",
-    "total_adjudicat": 0.0,
-    "relacions": [
-      {
-        "empresa": "BENITO ARNÓ E HIJOS, SA, SOCIEDAD UNIPERSONAL",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "Apo.Sol."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "DURAN LOPEZ ANTONIO",
-    "total_adjudicat": 0.0,
-    "relacions": [
-      {
-        "empresa": "BENITO ARNÓ E HIJOS, SA, SOCIEDAD UNIPERSONAL",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "RIBES COIT SEBASTIAN",
-    "total_adjudicat": 0.0,
-    "relacions": [
-      {
-        "empresa": "BENITO ARNÓ E HIJOS, SA, SOCIEDAD UNIPERSONAL",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "CANAS MONGAY DAVID IGOR",
-    "total_adjudicat": 0.0,
-    "relacions": [
-      {
-        "empresa": "BENITO ARNÓ E HIJOS, SA, SOCIEDAD UNIPERSONAL",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "ARNO SANTALLUSIA AURORA",
-    "total_adjudicat": 0.0,
-    "relacions": [
-      {
-        "empresa": "BENITO ARNÓ E HIJOS, SA, SOCIEDAD UNIPERSONAL",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "Apo.Sol."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "VIDAL SUAREZ CARLOS",
-    "total_adjudicat": 0.0,
-    "relacions": [
-      {
-        "empresa": "BENITO ARNÓ E HIJOS, SA, SOCIEDAD UNIPERSONAL",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "Apo.Sol."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "FERNANDEZ PLAZA JUAN PABLO",
-    "total_adjudicat": 0.0,
-    "relacions": [
-      {
-        "empresa": "GONZALO FERNANDEZ GOMEZ E HIJOS S.L",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "Adm. Unico"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "FERNANDEZ PLAZA ANTONIO ENRIQUE",
-    "total_adjudicat": 0.0,
-    "relacions": [
-      {
-        "empresa": "GONZALO FERNANDEZ GOMEZ E HIJOS S.L",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "TORNINI POCHELU JORGE",
-    "total_adjudicat": 0.0,
-    "relacions": [
-      {
-        "empresa": "HORMIPRESA NEC, SL",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "Presidente",
-          "Consejero",
-          "REPR.143 RRM"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "TORNINI MUÑIZ PAOLA",
-    "total_adjudicat": 0.0,
-    "relacions": [
-      {
-        "empresa": "HORMIPRESA NEC, SL",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "Secretario",
-          "CONSEJERO",
-          "CONS. DELEG."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "ARANAU COLILLAS JOAQUIM",
-    "total_adjudicat": 0.0,
-    "relacions": [
-      {
-        "empresa": "HORMIPRESA NEC, SL",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "RUIZ FARGAS JOSE MARIA",
-    "total_adjudicat": 0.0,
-    "relacions": [
-      {
-        "empresa": "HORMIPRESA NEC, SL",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "MOLINA HIDALGO ALEJANDRA",
-    "total_adjudicat": 0.0,
-    "relacions": [
-      {
-        "empresa": "HORMIPRESA NEC, SL",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "OLIVA BONSFILLS DOMENEC",
-    "total_adjudicat": 0.0,
-    "relacions": [
-      {
-        "empresa": "HORMIPRESA NEC, SL",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "Apoderado",
-          "CONSEJERO",
-          "SECRETARIO",
-          "CONS. DELEG."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "FELIS FACERIAS RUBEN",
-    "total_adjudicat": 0.0,
-    "relacions": [
-      {
-        "empresa": "HORMIPRESA NEC, SL",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "PONGILUPPI GOMILA RAIMON",
-    "total_adjudicat": 0.0,
-    "relacions": [
-      {
-        "empresa": "HORMIPRESA NEC, SL",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "CONSEJERO",
-          "CONS. DELEG."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "VILELLA XAMPENY PERE",
-    "total_adjudicat": 0.0,
-    "relacions": [
-      {
-        "empresa": "ALUMBRADOS VIARIOS, SA",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "REP.ADM.CONC"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "VALERO LARA JOSEP",
-    "total_adjudicat": 0.0,
-    "relacions": [
-      {
-        "empresa": "ALUMBRADOS VIARIOS, SA",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "GARCIA DAPIA JOSE IGNACIO",
-    "total_adjudicat": 0.0,
-    "relacions": [
-      {
-        "empresa": "ALUMBRADOS VIARIOS, SA",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "GARCIA RUIZ RAMON",
-    "total_adjudicat": 0.0,
-    "relacions": [
-      {
-        "empresa": "ALUMBRADOS VIARIOS, SA",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "GUILLAMON PEÑA CARLOS",
-    "total_adjudicat": 0.0,
-    "relacions": [
-      {
-        "empresa": "ALUMBRADOS VIARIOS, SA",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "RUIZ BRIZUELA SENDOA",
-    "total_adjudicat": 0.0,
-    "relacions": [
-      {
-        "empresa": "ALUMBRADOS VIARIOS, SA",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "PECANINS ROURE FRANCESC",
-    "total_adjudicat": 0.0,
-    "relacions": [
-      {
-        "empresa": "ALUMBRADOS VIARIOS, SA",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "MUÑOZ SUAREZ ANTONIO FERNANDO",
-    "total_adjudicat": 0.0,
-    "relacions": [
-      {
-        "empresa": "ALUMBRADOS VIARIOS, SA",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "TRUQUE SAEZ JUAN CARLOS",
-    "total_adjudicat": 0.0,
-    "relacions": [
-      {
-        "empresa": "SKYLINE PARTNERS, SL",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "ADM.UNICO"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "CARRILLO LOSTAO JAVIER",
-    "total_adjudicat": 0.0,
-    "relacions": [
-      {
-        "empresa": "MECALUX, S.A.",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "CONS.DEL.SOL",
-          "CONSEJERO",
-          "PRESIDENTE"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "CARRILLO RODRIGUEZ JOSE LUIS",
-    "total_adjudicat": 0.0,
-    "relacions": [
-      {
-        "empresa": "MECALUX, S.A.",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "CONSEJERO"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "CARRILLO LOSTAO DANIEL",
-    "total_adjudicat": 0.0,
-    "relacions": [
-      {
-        "empresa": "MECALUX, S.A.",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "CONSEJERO"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "CARRILLO TORRES PILAR",
-    "total_adjudicat": 0.0,
-    "relacions": [
-      {
-        "empresa": "MECALUX, S.A.",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "CONSEJERO"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "CARRILLO LOSTAO MARCIAL",
-    "total_adjudicat": 0.0,
-    "relacions": [
-      {
-        "empresa": "MECALUX, S.A.",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "CONSEJERO"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "ALTUBE ARSUAGA GREGORIO",
-    "total_adjudicat": 0.0,
-    "relacions": [
-      {
-        "empresa": "MECALUX, S.A.",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "CONSEJERO"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "MONTES PEREZ EDUARDO",
-    "total_adjudicat": 0.0,
-    "relacions": [
-      {
-        "empresa": "MECALUX, S.A.",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "CONSEJERO",
-          "CONS.INDEPEN"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "CARRILLO LOSTAO GREGORIO",
-    "total_adjudicat": 0.0,
-    "relacions": [
-      {
-        "empresa": "MECALUX, S.A.",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "REPR.143 RRM",
-          "CONSEJERO"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "GOMEZ GALLARDO FRANCISCO MANUEL",
-    "total_adjudicat": 0.0,
-    "relacions": [
-      {
-        "empresa": "MECALUX, S.A.",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "MARTINEZ MOLINA JUAN JESUS",
-    "total_adjudicat": 0.0,
-    "relacions": [
-      {
-        "empresa": "MECALUX, S.A.",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "GARCIA SEGOVIA MARTA",
-    "total_adjudicat": 0.0,
-    "relacions": [
-      {
-        "empresa": "MECALUX, S.A.",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "ESTRADA SOLER ORIOL",
-    "total_adjudicat": 0.0,
-    "relacions": [
-      {
-        "empresa": "MECALUX, S.A.",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "QUINTIN CASANOVA MARIA PILAR",
-    "total_adjudicat": 0.0,
-    "relacions": [
-      {
-        "empresa": "MECALUX, S.A.",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "CLOSAS HERRERA MARIA DOLORS",
-    "total_adjudicat": 0.0,
-    "relacions": [
-      {
-        "empresa": "MECALUX, S.A.",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "ANDRES CASTAÑEDA JOSE MARIA",
-    "total_adjudicat": 0.0,
-    "relacions": [
-      {
-        "empresa": "MECALUX, S.A.",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "MARTIN HERNANDEZ ADRIAN",
-    "total_adjudicat": 0.0,
-    "relacions": [
-      {
-        "empresa": "MECALUX, S.A.",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "VICIOSA GONZALEZ SERGIO",
-    "total_adjudicat": 0.0,
-    "relacions": [
-      {
-        "empresa": "MECALUX, S.A.",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "COMPOSICION Y REGULACION DEL CONSEJO DE ADMINISTRACION",
-    "total_adjudicat": 0.0,
-    "relacions": [
-      {
-        "empresa": "MECALUX, S.A.",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "MODIFICACION ARTS. 27 Y 29"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "NEIRA FERNANDEZ JAVIER",
-    "total_adjudicat": 0.0,
-    "relacions": [
-      {
-        "empresa": "MECALUX, S.A.",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "APODERADO"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "RIVAS CALVO JAVIER",
-    "total_adjudicat": 0.0,
-    "relacions": [
-      {
-        "empresa": "MECALUX, S.A.",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "APODERADO"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "PEÑARANDA NEGRETE JESUS",
-    "total_adjudicat": 0.0,
-    "relacions": [
-      {
-        "empresa": "MECALUX, S.A.",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "APODERADO"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "FORES RAFOLS ALBERT",
-    "total_adjudicat": 0.0,
-    "relacions": [
-      {
-        "empresa": "MECALUX, S.A.",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "APODERADO"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "POLADURA VECINO JOSE LUIS",
-    "total_adjudicat": 0.0,
-    "relacions": [
-      {
-        "empresa": "MECALUX, S.A.",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "APODERADO"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "ARTA CAPITAL SOCGESTORA DE ENTDE CAPITAL RIESGO",
-    "total_adjudicat": 0.0,
-    "relacions": [
-      {
-        "empresa": "MECALUX, S.A.",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "CONSEJERO"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "PUJOL ARTIGAS JOSE MARIA",
-    "total_adjudicat": 0.0,
-    "relacions": [
-      {
-        "empresa": "MECALUX, S.A.",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "CONSEJERO"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "MARCH JUAN JUAN",
-    "total_adjudicat": 0.0,
-    "relacions": [
-      {
-        "empresa": "MECALUX, S.A.",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "CONSEJERO"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "NOMDEDEU CALVENTE LEONARDO",
-    "total_adjudicat": 0.0,
-    "relacions": [
-      {
-        "empresa": "YOURSZENE, SL",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "Adm. Unico"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "ALBALADEJO NAVARRO ANTONIO",
-    "total_adjudicat": 0.0,
-    "relacions": [
-      {
-        "empresa": "SERVEIS ACTUALITZATS DE L'ESPECTACLE,SL",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "ADM.UNICO"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "ORDAX RODRIGUEZ ERIC",
-    "total_adjudicat": 0.0,
-    "relacions": [
-      {
-        "empresa": "BOR SEÑALIZACIONES Y COMPLEMENTOS, SL",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "JULIO ORDAX GIMENEZ",
-    "total_adjudicat": 0.0,
-    "relacions": [
-      {
-        "empresa": "BOR SEÑALIZACIONES Y COMPLEMENTOS, SL",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "SOCIO UNICO"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "ORDAX GIMENEZ JULIO",
-    "total_adjudicat": 0.0,
-    "relacions": [
-      {
-        "empresa": "BOR SEÑALIZACIONES Y COMPLEMENTOS, SL",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "ADM.UNICO"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "RODRIGUEZ SANCHEZ SARA",
-    "total_adjudicat": 0.0,
-    "relacions": [
-      {
-        "empresa": "ETRA BONAL, SA",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "APODERADO"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "FERNANDEZ GARCIA JOSE ANTONIO",
-    "total_adjudicat": 0.0,
-    "relacions": [
-      {
-        "empresa": "ETRA BONAL, SA",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "REPR.143 RRM",
-          "APODERADO"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "BAGUR PONS JUAN FRANCISCO",
-    "total_adjudicat": 0.0,
-    "relacions": [
-      {
-        "empresa": "ETRA BONAL, SA",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "APODERADO"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "FERNANDO MARTIN PABLO",
-    "total_adjudicat": 0.0,
-    "relacions": [
-      {
-        "empresa": "AUNAR GROUP 2009, SL",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "Socio único",
-          "Adm. Solid."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "SALOMON CABALLERO SILVIO",
-    "total_adjudicat": 0.0,
-    "relacions": [
-      {
-        "empresa": "AUNAR GROUP 2009, SL",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "Adm. Solid."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "CASTILLA FERNANDEZ ANTONIO MANUEL",
-    "total_adjudicat": 0.0,
-    "relacions": [
-      {
-        "empresa": "ASVIAL OBRES I SERVEIS SL",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "LIQUIDADOR"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "CLARAMUNT ROS ARCARIO",
-    "total_adjudicat": 0.0,
-    "relacions": [
-      {
-        "empresa": "VALUE POWER S.L.",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "LIQUIDADOR"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "MARTI FONT ANNA",
-    "total_adjudicat": 0.0,
-    "relacions": [
-      {
-        "empresa": "MARTIN WARWICK S.L",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "ADM.UNICO"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "FERNANDEZ GARCIA MIGUEL ANGEL",
-    "total_adjudicat": 0.0,
-    "relacions": [
-      {
-        "empresa": "COMERCIAL TECNOWORK, .S.L.",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "APODERAD.SOL",
-          "ADM.CONJUNTO"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "RAMIREZ PAREJA CARLOS",
-    "total_adjudicat": 0.0,
-    "relacions": [
-      {
-        "empresa": "COMERCIAL TECNOWORK, .S.L.",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "ADM.CONJUNTO"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "CENDRERO CRESPO RAQUEL",
-    "total_adjudicat": 0.0,
-    "relacions": [
-      {
-        "empresa": "COMERCIAL TECNOWORK, .S.L.",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "ADM.CONJUNTO"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "SOLE MONTSERRAT MONTSERRAT",
-    "total_adjudicat": 0.0,
-    "relacions": [
-      {
-        "empresa": "OFIMATICA ANOIA, S.L.",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "NOUH EL KHSSIM EL HIRECK",
-    "total_adjudicat": 0.0,
-    "relacions": [
-      {
-        "empresa": "MULTISERVEIS NOU NET, S.L.",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "ADM.UNICO"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "CERDEIRA GEMIN FERNANDO DANIEL",
-    "total_adjudicat": 0.0,
-    "relacions": [
-      {
-        "empresa": "NETEGES NERESNAN, SL",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "Adm. Unico"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "SERENTILL AUBETS MARIA ANGELS",
-    "total_adjudicat": 0.0,
-    "relacions": [
-      {
-        "empresa": "SANTAMARIA ARQUITECTES SLP",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "APODERADO"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "SANTAMARIA GARCIA PERE",
-    "total_adjudicat": 0.0,
-    "relacions": [
-      {
-        "empresa": "SANTAMARIA ARQUITECTES SLP",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "ADM.UNICO"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "PRIETO MANJON JAVIER",
-    "total_adjudicat": 0.0,
-    "relacions": [
-      {
-        "empresa": "BEBE HOGAR BARCELONA, SL",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "ADM.SOLIDAR."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "PRIETO MANJON ANTONIO",
-    "total_adjudicat": 0.0,
-    "relacions": [
-      {
-        "empresa": "BEBE HOGAR BARCELONA, SL",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "ADM.SOLIDAR."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "PAUNER DE MORAGES MIQUEL",
-    "total_adjudicat": 0.0,
-    "relacions": [
-      {
-        "empresa": "PUÇA ESPECTACLES, SL",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "ADM.UNICO"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "CAZORLA FERNANDEZ CRISTINA",
-    "total_adjudicat": 0.0,
-    "relacions": [
-      {
-        "empresa": "PUÇA ESPECTACLES, SL",
-        "import_empresa": 0.0,
-        "carrecs": [
-          "APODERADO"
         ]
       }
     ]
