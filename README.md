@@ -1,24 +1,12 @@
-# Iguadata
+# Sobre el projecte
 
-Iguadata és una plataforma independent de periodisme de dades per a l'anàlisi de la contractació pública de l'Ajuntament d'Igualada i dels seus organismes municipals.
+Iguadata és la plataforma independent de periodisme de dades per a l'anàlisi de la contractació pública de l'Ajuntament d'Igualada i dels seus organismes municipals.
 
 El projecte combina dades obertes de contractació, informació mercantil i algoritmes propis per fer més accessible, comprensible i fiscalitzable la despesa pública municipal.
-
-
-## Què analitza
-
-- Cercador de contractes públics.
-- Cercador d'empreses adjudicatàries.
-- Cercador de persones vinculades a càrrecs i apoderaments mercantils.
-- Anàlisi algorítmic de fraccionament, concentració i electoralisme.
-- Fitxes detallades de contractes, empreses i casos d'anàlisi.
-- Actualització automàtica de dades.
-
 
 ## Autoria
 
 Iguadata és un projecte de l'igualadí [Víctor Recio Rodríguez](https://x.com/viictxxr), desenvolupat com a Treball Final del Màster en Periodisme i Comunicació Digital: Dades i Noves Narratives de la Universitat Oberta de Catalunya (UOC), sota la tutoria de Carlos López Olano.
-
 
 ## Objectius
 
@@ -26,15 +14,19 @@ Iguadata neix amb tres objectius principals: facilitar l'accés de la ciutadania
 
 La plataforma no substitueix la feina dels òrgans fiscalitzadors, jurídics o administratius. El seu paper és ordenar dades disperses, mostrar relacions i generar indicadors que ajudin a fer millors preguntes.
 
+## Què analitza
+
+Iguadata permet consultar contractes, empreses adjudicatàries, persones vinculades a aquestes empreses i diferents indicadors d'anàlisi.
+
+Els principals blocs d'anàlisi són el possible fraccionament de contractes menors, la concentració d'adjudicacions en determinades empreses o sectors, els vincles mercantils entre empreses adjudicatàries i els patrons d'electoralisme o comunicació institucional en períodes sensibles.
 
 ## Font de dades
 
-Les dades de contractació provenen del Registre Públic de Contractes de la Generalitat de Catalunya, consultat mitjançant l'API Socrata Open Data (SODA). Una actualització automàtica setmanal genera una fotografia coherent dels contractes, empreses, persones i anàlisis.
+Les dades de contractació provenen del Registre Públic de Contractes de la Generalitat de Catalunya, consultat mitjançant l'API Socrata Open Data (SODA). Una actualització automàtica setmanal genera una fotografia coherent dels contractes, les empreses, les persones i els resultats analítics.
 
 Les dades mercantils provenen del Butlletí Oficial del Registre Mercantil (BORME), registre oficial públic. Mitjançant un processament massiu, tècniques de mineria de dades i l'ús de programari de codi obert desenvolupat per [Gerard Sánchez Vidal](https://github.com/BquantFinance), s'identifiquen els càrrecs actius de les empreses adjudicatàries.
 
 També es generen fitxers JSON propis que permeten alimentar la interfície, accelerar la consulta i mantenir còpies de suport en cas de caiguda temporal de fonts externes.
-
 
 ## Metodologia
 
@@ -42,43 +34,15 @@ El projecte utilitza scripts de Python per descarregar, netejar, normalitzar i e
 
 Els algoritmes d'Iguadata no emeten veredictes. Detecten patrons, acumulacions, recurrències, proximitats temporals, vincles mercantils o combinacions de factors que poden tenir interès públic i periodístic.
 
-
 ## Limitacions
 
 Les dades poden contenir errors d'origen, omissions, canvis posteriors o incidències derivades de la normalització automatitzada. L'aparició d'una empresa, persona o contracte en una alerta no implica cap irregularitat legal confirmada.
 
 Qualsevol conclusió periodística, administrativa o jurídica requereix contrastar les dades amb expedients originals, informes tècnics, resolucions, plecs i altres fonts documentals.
 
-
 ## Codi obert
 
-El codi font del projecte és públic i està disponible a GitHub sota llicència GNU GPL v3.0.
-
-## Estructura del projecte
-
-- `src/app.jsx`: font principal de la interfície.
-- `assets/app.js`: versió generada que es publica a la web.
-- `assets/`: recursos de navegador optimitzats.
-- `json/`: fotografia coherent i dades que consumeix el frontend.
-- `.github/audit/`: arxiu operatiu de contractes desapareguts o modificats; és públic al repositori però no es publica com a recurs normal de la web.
-- `.github/scripts/`: pipeline versionat de dades.
-- `scripts/`: eines de construcció i manteniment local.
-- `DESIGN.md`: principis i sistema visual del projecte.
-
-
-## Desenvolupament
-
-Després de modificar la interfície o les pàgines estàtiques:
-
-```powershell
-node scripts/build-app.js
-node scripts/build-pages.js
-python -B -m unittest discover -s tests -v
-```
-
-Les imatges socials i el favicon es poden regenerar amb `python scripts/optimize-static-images.py`.
-
-
+El codi font del projecte és públic i està disponible a [GitHub](https://github.com/vicxvers/iguadata) sota llicència GNU GPL v3.0.
 
 ## Contacte
 
