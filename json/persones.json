@@ -26947,6 +26947,71 @@
     ]
   },
   {
+    "nom": "ANGEL LUIS OLABUENAGA BURON",
+    "total_adjudicat": 114131.46,
+    "relacions": [
+      {
+        "empresa": "VITALY HEALTH SERVICES, S.L.",
+        "import_empresa": 114131.46,
+        "carrecs": [
+          "Apo.Sol."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "JOSE LUIS GARRIDO LARA",
+    "total_adjudicat": 114131.46,
+    "relacions": [
+      {
+        "empresa": "VITALY HEALTH SERVICES, S.L.",
+        "import_empresa": 114131.46,
+        "carrecs": [
+          "Apo.Sol."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "MARIA DEL SOL JIMENEZ BAYON",
+    "total_adjudicat": 114131.46,
+    "relacions": [
+      {
+        "empresa": "VITALY HEALTH SERVICES, S.L.",
+        "import_empresa": 114131.46,
+        "carrecs": [
+          "Apo.Sol."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "ANA MARIA MARTIN MOLANO",
+    "total_adjudicat": 114131.46,
+    "relacions": [
+      {
+        "empresa": "VITALY HEALTH SERVICES, S.L.",
+        "import_empresa": 114131.46,
+        "carrecs": [
+          "Apo.Sol."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "JUAN LUIS CEBRIAN GARRIDO",
+    "total_adjudicat": 114131.46,
+    "relacions": [
+      {
+        "empresa": "VITALY HEALTH SERVICES, S.L.",
+        "import_empresa": 114131.46,
+        "carrecs": [
+          "Apo.Sol."
+        ]
+      }
+    ]
+  },
+  {
     "nom": "MARIA ESTHER ROSAT VELASCO",
     "total_adjudicat": 114131.46,
     "relacions": [
@@ -27460,19 +27525,6 @@
   },
   {
     "nom": "PASCUAL DAVID PEÑARROCHA LOPEZ",
-    "total_adjudicat": 114131.46,
-    "relacions": [
-      {
-        "empresa": "VITALY HEALTH SERVICES, S.L.",
-        "import_empresa": 114131.46,
-        "carrecs": [
-          "Apo.Sol."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "ANGEL LUIS OLABUENAGA BURON",
     "total_adjudicat": 114131.46,
     "relacions": [
       {
@@ -28385,19 +28437,6 @@
   },
   {
     "nom": "CRISTINA MAESTRE ALVAREZ BUIZA",
-    "total_adjudicat": 114131.46,
-    "relacions": [
-      {
-        "empresa": "VITALY HEALTH SERVICES, S.L.",
-        "import_empresa": 114131.46,
-        "carrecs": [
-          "Apo.Sol."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "ANA MARIA MARTIN MOLANO",
     "total_adjudicat": 114131.46,
     "relacions": [
       {
@@ -35456,6 +35495,19 @@
       {
         "empresa": "SALTOKI CANTABRIA SA",
         "import_empresa": 69717.96,
+        "carrecs": [
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "LABORIE VILLEGAS FRANCISCO JOSE",
+    "total_adjudicat": 68739.24,
+    "relacions": [
+      {
+        "empresa": "OBRAS Y PAVIMENTOS ESPECIALES, SA",
+        "import_empresa": 68739.24,
         "carrecs": [
           "Apoderado"
         ]
@@ -43094,19 +43146,6 @@
         "import_empresa": 34722.0,
         "carrecs": [
           "PRE.COM.A.YC"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "PEÑA DURAN SERGIO",
-    "total_adjudicat": 34722.0,
-    "relacions": [
-      {
-        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
-        "import_empresa": 34722.0,
-        "carrecs": [
-          "APODERAD.SOL"
         ]
       }
     ]
@@ -71471,19 +71510,6 @@
     ]
   },
   {
-    "nom": "DIAZ SAGARRA PERE",
-    "total_adjudicat": 4839.89,
-    "relacions": [
-      {
-        "empresa": "PROMAQ SOLÉ JORBA, S.L.",
-        "import_empresa": 4839.89,
-        "carrecs": [
-          "ADM.SOLIDAR."
-        ]
-      }
-    ]
-  },
-  {
     "nom": "CASALS CAÑELLAS ANTONI",
     "total_adjudicat": 4839.89,
     "relacions": [
@@ -71491,7 +71517,7 @@
         "empresa": "PROMAQ SOLÉ JORBA, S.L.",
         "import_empresa": 4839.89,
         "carrecs": [
-          "ADM.SOLIDAR."
+          "ADM.UNICO"
         ]
       }
     ]
@@ -72167,7 +72193,7 @@
         "empresa": "INFORMA D&B, SA",
         "import_empresa": 3150.0,
         "carrecs": [
-          "Apo.Manc."
+          "Apoderado"
         ]
       },
       {
@@ -73902,32 +73928,6 @@
     ]
   },
   {
-    "nom": "FRANCO FUENTES DARIO",
-    "total_adjudicat": 3180.0,
-    "relacions": [
-      {
-        "empresa": "BUREAU VERITAS IBERIA, S.A. SOCIEDAD UNIPERSONAL",
-        "import_empresa": 3180.0,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "FERNANDEZ LOPEZ-PELAEZ JESUS",
-    "total_adjudicat": 3180.0,
-    "relacions": [
-      {
-        "empresa": "BUREAU VERITAS IBERIA, S.A. SOCIEDAD UNIPERSONAL",
-        "import_empresa": 3180.0,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
     "nom": "PANCORBO CRESPO JAIME",
     "total_adjudicat": 3180.0,
     "relacions": [
@@ -74182,6 +74182,7 @@
         "empresa": "INFORMA D&B, SA",
         "import_empresa": 3150.0,
         "carrecs": [
+          "Con.Delegado",
           "Consejero"
         ]
       }
@@ -74195,7 +74196,7 @@
         "empresa": "INFORMA D&B, SA",
         "import_empresa": 3150.0,
         "carrecs": [
-          "Apo.Manc."
+          "Apoderado"
         ]
       }
     ]
@@ -74208,7 +74209,7 @@
         "empresa": "INFORMA D&B, SA",
         "import_empresa": 3150.0,
         "carrecs": [
-          "Apo.Manc."
+          "Apoderado"
         ]
       }
     ]
@@ -75805,83 +75806,47 @@
     ]
   },
   {
-    "nom": "HUERTAS MEJIAS ANTONIO",
+    "nom": "ARIAS BERMUDEZ JOSE ANTONIO",
     "total_adjudicat": 2348.18,
     "relacions": [
       {
         "empresa": "MAPFRE",
         "import_empresa": 1282.11,
         "carrecs": [
-          "Presidente",
-          "Cons.Ejecuti",
-          "Pres.Com.Del",
-          "Apo.Sol.",
-          "Consejero"
+          "Apo.Manc."
         ]
       },
       {
         "empresa": "MAPFRE ESPAÑA COMPAÑÍA DE SEGUROS Y REASEGUROS SA",
         "import_empresa": 1066.07,
         "carrecs": [
-          "Apoderado"
+          "Apo.Sol."
         ]
       }
     ]
   },
   {
-    "nom": "FERNANDEZ ALVAREZ ANA ISABEL",
+    "nom": "DIAZ GRIDILLA CARLOS",
     "total_adjudicat": 2348.18,
     "relacions": [
       {
         "empresa": "MAPFRE",
         "import_empresa": 1282.11,
         "carrecs": [
-          "Consej.Coord",
-          "Vicepr.2",
-          "Vpre.Pres.Co",
-          "Pdte.Cte.NyR",
-          "Miem.Com.Ri.",
-          "Con.Ind.",
-          "Miem.ComAyR.",
-          "Mmbr.Com.Del",
-          "Mbro.Cte.NyR",
-          "Pte.Comit.Au"
+          "Apo.Sol."
         ]
       },
       {
         "empresa": "MAPFRE ESPAÑA COMPAÑÍA DE SEGUROS Y REASEGUROS SA",
         "import_empresa": 1066.07,
         "carrecs": [
-          "Consejero"
+          "Apo.Sol."
         ]
       }
     ]
   },
   {
-    "nom": "MARCO ORENES FRANCISCO JOSE",
-    "total_adjudicat": 2348.18,
-    "relacions": [
-      {
-        "empresa": "MAPFRE",
-        "import_empresa": 1282.11,
-        "carrecs": [
-          "Mbro.Cte.NyR",
-          "Consj.Domini",
-          "Miem.Com.Ri.",
-          "Mmbr.Com.Del"
-        ]
-      },
-      {
-        "empresa": "MAPFRE ESPAÑA COMPAÑÍA DE SEGUROS Y REASEGUROS SA",
-        "import_empresa": 1066.07,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "SANCHEZ FRESCO BLANCA",
+    "nom": "GUILLEUMA CUQUERELLA ELENA",
     "total_adjudicat": 2348.18,
     "relacions": [
       {
@@ -75923,100 +75888,6 @@
     ]
   },
   {
-    "nom": "PERELLI ALONSO JOSE LUIS",
-    "total_adjudicat": 2348.18,
-    "relacions": [
-      {
-        "empresa": "MAPFRE",
-        "import_empresa": 1282.11,
-        "carrecs": [
-          "Con.Ind.",
-          "Miem.ComAyR.",
-          "Miem.Com.Ri."
-        ]
-      },
-      {
-        "empresa": "MAPFRE ESPAÑA COMPAÑÍA DE SEGUROS Y REASEGUROS SA",
-        "import_empresa": 1066.07,
-        "carrecs": [
-          "Consejero"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "GOMEZ CIRIA ANTONIO",
-    "total_adjudicat": 2348.18,
-    "relacions": [
-      {
-        "empresa": "MAPFRE",
-        "import_empresa": 1282.11,
-        "carrecs": [
-          "Mmbr.Com.Del",
-          "Con.Ind.",
-          "Miem.Com.Ri.",
-          "Pr.Com.Ri.",
-          "Miem.ComAyR."
-        ]
-      },
-      {
-        "empresa": "MAPFRE ESPAÑA COMPAÑÍA DE SEGUROS Y REASEGUROS SA",
-        "import_empresa": 1066.07,
-        "carrecs": [
-          "Consejero"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "DIAZ GRIDILLA CARLOS",
-    "total_adjudicat": 2348.18,
-    "relacions": [
-      {
-        "empresa": "MAPFRE",
-        "import_empresa": 1282.11,
-        "carrecs": [
-          "Apo.Sol."
-        ]
-      },
-      {
-        "empresa": "MAPFRE ESPAÑA COMPAÑÍA DE SEGUROS Y REASEGUROS SA",
-        "import_empresa": 1066.07,
-        "carrecs": [
-          "Apo.Sol."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "INCHAUSTI PEREZ JOSE MANUEL",
-    "total_adjudicat": 2348.18,
-    "relacions": [
-      {
-        "empresa": "MAPFRE",
-        "import_empresa": 1282.11,
-        "carrecs": [
-          "Apo.Sol.",
-          "Vicepr.1",
-          "Mmbr.Com.Del",
-          "Vpre.Pres.Co",
-          "Cons.Ejecuti"
-        ]
-      },
-      {
-        "empresa": "MAPFRE ESPAÑA COMPAÑÍA DE SEGUROS Y REASEGUROS SA",
-        "import_empresa": 1066.07,
-        "carrecs": [
-          "Con.Delegado",
-          "Vicepr.1",
-          "MiemComDirec",
-          "PresComDirec",
-          "Consejero"
-        ]
-      }
-    ]
-  },
-  {
     "nom": "SANZ ISLA MARIA ELENA",
     "total_adjudicat": 2348.18,
     "relacions": [
@@ -76042,6 +75913,55 @@
     ]
   },
   {
+    "nom": "MIGUEL-ROMERO DE OLANO ANTONIO",
+    "total_adjudicat": 2348.18,
+    "relacions": [
+      {
+        "empresa": "MAPFRE",
+        "import_empresa": 1282.11,
+        "carrecs": [
+          "Consejero"
+        ]
+      },
+      {
+        "empresa": "MAPFRE ESPAÑA COMPAÑÍA DE SEGUROS Y REASEGUROS SA",
+        "import_empresa": 1066.07,
+        "carrecs": [
+          "Pres.Com.Del"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "FERNANDEZ ALVAREZ ANA ISABEL",
+    "total_adjudicat": 2348.18,
+    "relacions": [
+      {
+        "empresa": "MAPFRE",
+        "import_empresa": 1282.11,
+        "carrecs": [
+          "Consej.Coord",
+          "Vicepr.2",
+          "Vpre.Pres.Co",
+          "Pdte.Cte.NyR",
+          "Miem.Com.Ri.",
+          "Con.Ind.",
+          "Miem.ComAyR.",
+          "Mmbr.Com.Del",
+          "Mbro.Cte.NyR",
+          "Pte.Comit.Au"
+        ]
+      },
+      {
+        "empresa": "MAPFRE ESPAÑA COMPAÑÍA DE SEGUROS Y REASEGUROS SA",
+        "import_empresa": 1066.07,
+        "carrecs": [
+          "Consejero"
+        ]
+      }
+    ]
+  },
+  {
     "nom": "ALCOLEA CANTOS JOSE MIGUEL",
     "total_adjudicat": 2348.18,
     "relacions": [
@@ -76053,106 +75973,6 @@
           "SecreNoConsj",
           "Se.Com.AyR",
           "Secr.Cte.NyR"
-        ]
-      },
-      {
-        "empresa": "MAPFRE ESPAÑA COMPAÑÍA DE SEGUROS Y REASEGUROS SA",
-        "import_empresa": 1066.07,
-        "carrecs": [
-          "Apo.Sol."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "CASTELO MARIN ALFREDO",
-    "total_adjudicat": 2348.18,
-    "relacions": [
-      {
-        "empresa": "MAPFRE",
-        "import_empresa": 1282.11,
-        "carrecs": [
-          "Apo.Manc."
-        ]
-      },
-      {
-        "empresa": "MAPFRE ESPAÑA COMPAÑÍA DE SEGUROS Y REASEGUROS SA",
-        "import_empresa": 1066.07,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "COSTILLA PRIETO RAUL",
-    "total_adjudicat": 2348.18,
-    "relacions": [
-      {
-        "empresa": "MAPFRE",
-        "import_empresa": 1282.11,
-        "carrecs": [
-          "Apo.Manc."
-        ]
-      },
-      {
-        "empresa": "MAPFRE ESPAÑA COMPAÑÍA DE SEGUROS Y REASEGUROS SA",
-        "import_empresa": 1066.07,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "ARIAS BERMUDEZ JOSE ANTONIO",
-    "total_adjudicat": 2348.18,
-    "relacions": [
-      {
-        "empresa": "MAPFRE",
-        "import_empresa": 1282.11,
-        "carrecs": [
-          "Apo.Manc."
-        ]
-      },
-      {
-        "empresa": "MAPFRE ESPAÑA COMPAÑÍA DE SEGUROS Y REASEGUROS SA",
-        "import_empresa": 1066.07,
-        "carrecs": [
-          "Apo.Sol."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "INVERNON SACRISTAN ROBERTO",
-    "total_adjudicat": 2348.18,
-    "relacions": [
-      {
-        "empresa": "MAPFRE",
-        "import_empresa": 1282.11,
-        "carrecs": [
-          "Apo.Sol."
-        ]
-      },
-      {
-        "empresa": "MAPFRE ESPAÑA COMPAÑÍA DE SEGUROS Y REASEGUROS SA",
-        "import_empresa": 1066.07,
-        "carrecs": [
-          "Apo.Sol."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "GUILLEUMA CUQUERELLA ELENA",
-    "total_adjudicat": 2348.18,
-    "relacions": [
-      {
-        "empresa": "MAPFRE",
-        "import_empresa": 1282.11,
-        "carrecs": [
-          "Apo.Sol."
         ]
       },
       {
@@ -76190,6 +76010,112 @@
     ]
   },
   {
+    "nom": "MARTINEZ ALVAREZ CARLOS",
+    "total_adjudicat": 2348.18,
+    "relacions": [
+      {
+        "empresa": "MAPFRE",
+        "import_empresa": 1282.11,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      },
+      {
+        "empresa": "MAPFRE ESPAÑA COMPAÑÍA DE SEGUROS Y REASEGUROS SA",
+        "import_empresa": 1066.07,
+        "carrecs": [
+          "Apo.Sol."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "GOMEZ CIRIA ANTONIO",
+    "total_adjudicat": 2348.18,
+    "relacions": [
+      {
+        "empresa": "MAPFRE",
+        "import_empresa": 1282.11,
+        "carrecs": [
+          "Mmbr.Com.Del",
+          "Con.Ind.",
+          "Miem.Com.Ri.",
+          "Pr.Com.Ri.",
+          "Miem.ComAyR."
+        ]
+      },
+      {
+        "empresa": "MAPFRE ESPAÑA COMPAÑÍA DE SEGUROS Y REASEGUROS SA",
+        "import_empresa": 1066.07,
+        "carrecs": [
+          "Consejero"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "MIÑARRO BRUGAROLAS CATALINA",
+    "total_adjudicat": 2348.18,
+    "relacions": [
+      {
+        "empresa": "MAPFRE",
+        "import_empresa": 1282.11,
+        "carrecs": [
+          "Mbro.Cte.NyR",
+          "Pdte.Cte.NyR",
+          "Consejero"
+        ]
+      },
+      {
+        "empresa": "MAPFRE ESPAÑA COMPAÑÍA DE SEGUROS Y REASEGUROS SA",
+        "import_empresa": 1066.07,
+        "carrecs": [
+          "Consejero"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "CASTELO MARIN ALFREDO",
+    "total_adjudicat": 2348.18,
+    "relacions": [
+      {
+        "empresa": "MAPFRE",
+        "import_empresa": 1282.11,
+        "carrecs": [
+          "Apo.Manc."
+        ]
+      },
+      {
+        "empresa": "MAPFRE ESPAÑA COMPAÑÍA DE SEGUROS Y REASEGUROS SA",
+        "import_empresa": 1066.07,
+        "carrecs": [
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "RONDEAU MARTINEZ JUAN CARLOS",
+    "total_adjudicat": 2348.18,
+    "relacions": [
+      {
+        "empresa": "MAPFRE",
+        "import_empresa": 1282.11,
+        "carrecs": [
+          "Apoderado"
+        ]
+      },
+      {
+        "empresa": "MAPFRE ESPAÑA COMPAÑÍA DE SEGUROS Y REASEGUROS SA",
+        "import_empresa": 1066.07,
+        "carrecs": [
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
     "nom": "GARCIA GARCIA ROSA MARIA",
     "total_adjudicat": 2348.18,
     "relacions": [
@@ -76211,41 +76137,23 @@
     ]
   },
   {
-    "nom": "MARTINEZ ALVAREZ CARLOS",
+    "nom": "PERELLI ALONSO JOSE LUIS",
     "total_adjudicat": 2348.18,
     "relacions": [
       {
         "empresa": "MAPFRE",
         "import_empresa": 1282.11,
         "carrecs": [
-          "Apo.Man.Soli"
+          "Con.Ind.",
+          "Miem.ComAyR.",
+          "Miem.Com.Ri."
         ]
       },
       {
         "empresa": "MAPFRE ESPAÑA COMPAÑÍA DE SEGUROS Y REASEGUROS SA",
         "import_empresa": 1066.07,
         "carrecs": [
-          "Apo.Sol."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "RONDEAU MARTINEZ JUAN CARLOS",
-    "total_adjudicat": 2348.18,
-    "relacions": [
-      {
-        "empresa": "MAPFRE",
-        "import_empresa": 1282.11,
-        "carrecs": [
-          "Apoderado"
-        ]
-      },
-      {
-        "empresa": "MAPFRE ESPAÑA COMPAÑÍA DE SEGUROS Y REASEGUROS SA",
-        "import_empresa": 1066.07,
-        "carrecs": [
-          "Apoderado"
+          "Consejero"
         ]
       }
     ]
@@ -76291,49 +76199,7 @@
     ]
   },
   {
-    "nom": "MIÑARRO BRUGAROLAS CATALINA",
-    "total_adjudicat": 2348.18,
-    "relacions": [
-      {
-        "empresa": "MAPFRE",
-        "import_empresa": 1282.11,
-        "carrecs": [
-          "Mbro.Cte.NyR",
-          "Pdte.Cte.NyR",
-          "Consejero"
-        ]
-      },
-      {
-        "empresa": "MAPFRE ESPAÑA COMPAÑÍA DE SEGUROS Y REASEGUROS SA",
-        "import_empresa": 1066.07,
-        "carrecs": [
-          "Consejero"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "TABOADA DIEZ CARLA",
-    "total_adjudicat": 2348.18,
-    "relacions": [
-      {
-        "empresa": "MAPFRE",
-        "import_empresa": 1282.11,
-        "carrecs": [
-          "Apoderado"
-        ]
-      },
-      {
-        "empresa": "MAPFRE ESPAÑA COMPAÑÍA DE SEGUROS Y REASEGUROS SA",
-        "import_empresa": 1066.07,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "LLORENTE BALLESTEROS GUILLERMO",
+    "nom": "SANCHEZ FRESCO BLANCA",
     "total_adjudicat": 2348.18,
     "relacions": [
       {
@@ -76347,7 +76213,7 @@
         "empresa": "MAPFRE ESPAÑA COMPAÑÍA DE SEGUROS Y REASEGUROS SA",
         "import_empresa": 1066.07,
         "carrecs": [
-          "Apoderado"
+          "Apo.Sol."
         ]
       }
     ]
@@ -76368,26 +76234,6 @@
         "import_empresa": 1066.07,
         "carrecs": [
           "Apo.Sol."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "LEDESMA GARCIA JOSE ANTONIO",
-    "total_adjudicat": 2348.18,
-    "relacions": [
-      {
-        "empresa": "MAPFRE",
-        "import_empresa": 1282.11,
-        "carrecs": [
-          "Apoderado"
-        ]
-      },
-      {
-        "empresa": "MAPFRE ESPAÑA COMPAÑÍA DE SEGUROS Y REASEGUROS SA",
-        "import_empresa": 1066.07,
-        "carrecs": [
-          "Apoderado"
         ]
       }
     ]
@@ -76414,6 +76260,26 @@
     ]
   },
   {
+    "nom": "FERNANZ LOBO JORGE GASPAR",
+    "total_adjudicat": 2348.18,
+    "relacions": [
+      {
+        "empresa": "MAPFRE",
+        "import_empresa": 1282.11,
+        "carrecs": [
+          "Apoderado"
+        ]
+      },
+      {
+        "empresa": "MAPFRE ESPAÑA COMPAÑÍA DE SEGUROS Y REASEGUROS SA",
+        "import_empresa": 1066.07,
+        "carrecs": [
+          "Apo.Sol."
+        ]
+      }
+    ]
+  },
+  {
     "nom": "NEBOT MATEOS JUAN MANUEL",
     "total_adjudicat": 2348.18,
     "relacions": [
@@ -76435,7 +76301,7 @@
     ]
   },
   {
-    "nom": "FERNANZ LOBO JORGE",
+    "nom": "LEDESMA GARCIA JOSE ANTONIO",
     "total_adjudicat": 2348.18,
     "relacions": [
       {
@@ -76449,27 +76315,67 @@
         "empresa": "MAPFRE ESPAÑA COMPAÑÍA DE SEGUROS Y REASEGUROS SA",
         "import_empresa": 1066.07,
         "carrecs": [
-          "Apo.Man.Soli"
+          "Apoderado"
         ]
       }
     ]
   },
   {
-    "nom": "MIGUEL-ROMERO DE OLANO ANTONIO",
+    "nom": "INVERNON SACRISTAN ROBERTO",
     "total_adjudicat": 2348.18,
     "relacions": [
       {
         "empresa": "MAPFRE",
         "import_empresa": 1282.11,
         "carrecs": [
-          "Consejero"
+          "Apo.Sol."
         ]
       },
       {
         "empresa": "MAPFRE ESPAÑA COMPAÑÍA DE SEGUROS Y REASEGUROS SA",
         "import_empresa": 1066.07,
         "carrecs": [
-          "Pres.Com.Del"
+          "Apo.Sol."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "LLORENTE BALLESTEROS GUILLERMO",
+    "total_adjudicat": 2348.18,
+    "relacions": [
+      {
+        "empresa": "MAPFRE",
+        "import_empresa": 1282.11,
+        "carrecs": [
+          "Apo.Sol."
+        ]
+      },
+      {
+        "empresa": "MAPFRE ESPAÑA COMPAÑÍA DE SEGUROS Y REASEGUROS SA",
+        "import_empresa": 1066.07,
+        "carrecs": [
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "TABOADA DIEZ CARLA",
+    "total_adjudicat": 2348.18,
+    "relacions": [
+      {
+        "empresa": "MAPFRE",
+        "import_empresa": 1282.11,
+        "carrecs": [
+          "Apoderado"
+        ]
+      },
+      {
+        "empresa": "MAPFRE ESPAÑA COMPAÑÍA DE SEGUROS Y REASEGUROS SA",
+        "import_empresa": 1066.07,
+        "carrecs": [
+          "Apoderado"
         ]
       }
     ]
@@ -76498,7 +76404,58 @@
     ]
   },
   {
-    "nom": "FERNANZ LOBO JORGE GASPAR",
+    "nom": "INCHAUSTI PEREZ JOSE MANUEL",
+    "total_adjudicat": 2348.18,
+    "relacions": [
+      {
+        "empresa": "MAPFRE",
+        "import_empresa": 1282.11,
+        "carrecs": [
+          "Apo.Sol.",
+          "Vicepr.1",
+          "Mmbr.Com.Del",
+          "Vpre.Pres.Co",
+          "Cons.Ejecuti"
+        ]
+      },
+      {
+        "empresa": "MAPFRE ESPAÑA COMPAÑÍA DE SEGUROS Y REASEGUROS SA",
+        "import_empresa": 1066.07,
+        "carrecs": [
+          "Con.Delegado",
+          "Vicepr.1",
+          "MiemComDirec",
+          "PresComDirec",
+          "Consejero"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "MARCO ORENES FRANCISCO JOSE",
+    "total_adjudicat": 2348.18,
+    "relacions": [
+      {
+        "empresa": "MAPFRE",
+        "import_empresa": 1282.11,
+        "carrecs": [
+          "Mbro.Cte.NyR",
+          "Consj.Domini",
+          "Miem.Com.Ri.",
+          "Mmbr.Com.Del"
+        ]
+      },
+      {
+        "empresa": "MAPFRE ESPAÑA COMPAÑÍA DE SEGUROS Y REASEGUROS SA",
+        "import_empresa": 1066.07,
+        "carrecs": [
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "FERNANZ LOBO JORGE",
     "total_adjudicat": 2348.18,
     "relacions": [
       {
@@ -76512,7 +76469,7 @@
         "empresa": "MAPFRE ESPAÑA COMPAÑÍA DE SEGUROS Y REASEGUROS SA",
         "import_empresa": 1066.07,
         "carrecs": [
-          "Apo.Sol."
+          "Apo.Man.Soli"
         ]
       }
     ]
@@ -76526,6 +76483,50 @@
         "import_empresa": 1282.11,
         "carrecs": [
           "Sec.Com.Del"
+        ]
+      },
+      {
+        "empresa": "MAPFRE ESPAÑA COMPAÑÍA DE SEGUROS Y REASEGUROS SA",
+        "import_empresa": 1066.07,
+        "carrecs": [
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "COSTILLA PRIETO RAUL",
+    "total_adjudicat": 2348.18,
+    "relacions": [
+      {
+        "empresa": "MAPFRE",
+        "import_empresa": 1282.11,
+        "carrecs": [
+          "Apo.Manc."
+        ]
+      },
+      {
+        "empresa": "MAPFRE ESPAÑA COMPAÑÍA DE SEGUROS Y REASEGUROS SA",
+        "import_empresa": 1066.07,
+        "carrecs": [
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "HUERTAS MEJIAS ANTONIO",
+    "total_adjudicat": 2348.18,
+    "relacions": [
+      {
+        "empresa": "MAPFRE",
+        "import_empresa": 1282.11,
+        "carrecs": [
+          "Presidente",
+          "Cons.Ejecuti",
+          "Pres.Com.Del",
+          "Apo.Sol.",
+          "Consejero"
         ]
       },
       {
@@ -78171,19 +78172,6 @@
   },
   {
     "nom": "LUZDIVINA CONTRERAS SANCHEZ",
-    "total_adjudicat": 1970.5,
-    "relacions": [
-      {
-        "empresa": "BUREAU VERITAS INSPECCIÓN Y TESTING SL UNIPERSONAL",
-        "import_empresa": 1970.5,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "PICA GUBERT CARLES",
     "total_adjudicat": 1970.5,
     "relacions": [
       {
@@ -80930,6 +80918,32 @@
     ]
   },
   {
+    "nom": "BAUSELA SANCHEZ ARISTOBULO",
+    "total_adjudicat": 1066.07,
+    "relacions": [
+      {
+        "empresa": "MAPFRE ESPAÑA COMPAÑÍA DE SEGUROS Y REASEGUROS SA",
+        "import_empresa": 1066.07,
+        "carrecs": [
+          "Apo.Manc."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "ROLDON APARICIO TATIANA",
+    "total_adjudicat": 1066.07,
+    "relacions": [
+      {
+        "empresa": "MAPFRE ESPAÑA COMPAÑÍA DE SEGUROS Y REASEGUROS SA",
+        "import_empresa": 1066.07,
+        "carrecs": [
+          "Apo.Sol."
+        ]
+      }
+    ]
+  },
+  {
     "nom": "GUILLEN ESTANY MONTSERRAT",
     "total_adjudicat": 1066.07,
     "relacions": [
@@ -82463,19 +82477,6 @@
   },
   {
     "nom": "HIDALGO JAVIER ROSA MARIA",
-    "total_adjudicat": 1066.07,
-    "relacions": [
-      {
-        "empresa": "MAPFRE ESPAÑA COMPAÑÍA DE SEGUROS Y REASEGUROS SA",
-        "import_empresa": 1066.07,
-        "carrecs": [
-          "Apo.Sol."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "ARANDA ELCUAZ SARA",
     "total_adjudicat": 1066.07,
     "relacions": [
       {
@@ -86209,6 +86210,45 @@
     ]
   },
   {
+    "nom": "DE LA CUEVA MENDEZ DAVID",
+    "total_adjudicat": 894.0,
+    "relacions": [
+      {
+        "empresa": "ORIZON UNDERWRITERS SL",
+        "import_empresa": 894.0,
+        "carrecs": [
+          "Representan"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "BORDERIAS MAROTO ALVARO",
+    "total_adjudicat": 894.0,
+    "relacions": [
+      {
+        "empresa": "ORIZON UNDERWRITERS SL",
+        "import_empresa": 894.0,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "MECA DIEZ ANA",
+    "total_adjudicat": 894.0,
+    "relacions": [
+      {
+        "empresa": "ORIZON UNDERWRITERS SL",
+        "import_empresa": 894.0,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
     "nom": "MACIAS-LIZASO MIRANDA ANTONIO",
     "total_adjudicat": 894.0,
     "relacions": [
@@ -86216,7 +86256,85 @@
         "empresa": "ORIZON UNDERWRITERS SL",
         "import_empresa": 894.0,
         "carrecs": [
-          "Adm. Unico"
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "DROVE UBREVA DAVID H",
+    "total_adjudicat": 894.0,
+    "relacions": [
+      {
+        "empresa": "ORIZON UNDERWRITERS SL",
+        "import_empresa": 894.0,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "FEDRIANI CORDONES FERNANDO",
+    "total_adjudicat": 894.0,
+    "relacions": [
+      {
+        "empresa": "ORIZON UNDERWRITERS SL",
+        "import_empresa": 894.0,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "GOIZUETA PALLARES FRANCISCO JAVIER",
+    "total_adjudicat": 894.0,
+    "relacions": [
+      {
+        "empresa": "ORIZON UNDERWRITERS SL",
+        "import_empresa": 894.0,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "ALMAZAN GOMEZ IGNACIO",
+    "total_adjudicat": 894.0,
+    "relacions": [
+      {
+        "empresa": "ORIZON UNDERWRITERS SL",
+        "import_empresa": 894.0,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "CANTERA GONZALEZ IGNACIO",
+    "total_adjudicat": 894.0,
+    "relacions": [
+      {
+        "empresa": "ORIZON UNDERWRITERS SL",
+        "import_empresa": 894.0,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "CARULLA MARQUES JOSE MARIA",
+    "total_adjudicat": 894.0,
+    "relacions": [
+      {
+        "empresa": "ORIZON UNDERWRITERS SL",
+        "import_empresa": 894.0,
+        "carrecs": [
+          "Apo.Man.Soli"
         ]
       }
     ]
