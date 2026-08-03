@@ -621,66 +621,6 @@
     ]
   },
   {
-    "nom": "SANTAMARIA ALBERQUILLA IGNACIO",
-    "total_adjudicat": 12571377.32,
-    "relacions": [
-      {
-        "empresa": "FCC MEDIO AMBIENTE",
-        "import_empresa": 12523143.07,
-        "carrecs": [
-          "Apoderado"
-        ]
-      },
-      {
-        "empresa": "IMESAPI S.A.",
-        "import_empresa": 48234.25,
-        "carrecs": [
-          "Apo.Sol."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "CASTILLA MARRERO JUAN RAMON",
-    "total_adjudicat": 12571377.32,
-    "relacions": [
-      {
-        "empresa": "FCC MEDIO AMBIENTE",
-        "import_empresa": 12523143.07,
-        "carrecs": [
-          "Apoderado"
-        ]
-      },
-      {
-        "empresa": "IMESAPI S.A.",
-        "import_empresa": 48234.25,
-        "carrecs": [
-          "Apo.Sol."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "BRAVO MARTIN TOMAS OMAR",
-    "total_adjudicat": 12571377.32,
-    "relacions": [
-      {
-        "empresa": "FCC MEDIO AMBIENTE",
-        "import_empresa": 12523143.07,
-        "carrecs": [
-          "Apoderado"
-        ]
-      },
-      {
-        "empresa": "IMESAPI S.A.",
-        "import_empresa": 48234.25,
-        "carrecs": [
-          "Apo.Sol."
-        ]
-      }
-    ]
-  },
-  {
     "nom": "MICO HERNANDEZ JESUS MARIA",
     "total_adjudicat": 12571377.32,
     "relacions": [
@@ -736,6 +676,66 @@
         "import_empresa": 48234.25,
         "carrecs": [
           "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "SANTAMARIA ALBERQUILLA IGNACIO",
+    "total_adjudicat": 12571377.32,
+    "relacions": [
+      {
+        "empresa": "FCC MEDIO AMBIENTE",
+        "import_empresa": 12523143.07,
+        "carrecs": [
+          "Apoderado"
+        ]
+      },
+      {
+        "empresa": "IMESAPI S.A.",
+        "import_empresa": 48234.25,
+        "carrecs": [
+          "Apo.Sol."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "CASTILLA MARRERO JUAN RAMON",
+    "total_adjudicat": 12571377.32,
+    "relacions": [
+      {
+        "empresa": "FCC MEDIO AMBIENTE",
+        "import_empresa": 12523143.07,
+        "carrecs": [
+          "Apoderado"
+        ]
+      },
+      {
+        "empresa": "IMESAPI S.A.",
+        "import_empresa": 48234.25,
+        "carrecs": [
+          "Apo.Sol."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "BRAVO MARTIN TOMAS OMAR",
+    "total_adjudicat": 12571377.32,
+    "relacions": [
+      {
+        "empresa": "FCC MEDIO AMBIENTE",
+        "import_empresa": 12523143.07,
+        "carrecs": [
+          "Apoderado"
+        ]
+      },
+      {
+        "empresa": "IMESAPI S.A.",
+        "import_empresa": 48234.25,
+        "carrecs": [
+          "Apo.Sol."
         ]
       }
     ]
@@ -3465,6 +3465,32 @@
     ]
   },
   {
+    "nom": "FERNANDEZ-BLANCO AMADOR MARTA",
+    "total_adjudicat": 12523143.07,
+    "relacions": [
+      {
+        "empresa": "FCC MEDIO AMBIENTE",
+        "import_empresa": 12523143.07,
+        "carrecs": [
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "MORENO GUZMAN DANIEL",
+    "total_adjudicat": 12523143.07,
+    "relacions": [
+      {
+        "empresa": "FCC MEDIO AMBIENTE",
+        "import_empresa": 12523143.07,
+        "carrecs": [
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
     "nom": "MUR MINGUELL AGATA",
     "total_adjudicat": 12523143.07,
     "relacions": [
@@ -5484,19 +5510,6 @@
   },
   {
     "nom": "IRIMIA SEIJAS JOSE RAMON",
-    "total_adjudicat": 12523143.07,
-    "relacions": [
-      {
-        "empresa": "FCC MEDIO AMBIENTE",
-        "import_empresa": 12523143.07,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "COLAS RAMOS VICENTE",
     "total_adjudicat": 12523143.07,
     "relacions": [
       {
@@ -8596,6 +8609,19 @@
     ]
   },
   {
+    "nom": "GUERRERO CORDERO JOSE MARIA",
+    "total_adjudicat": 1169025.42,
+    "relacions": [
+      {
+        "empresa": "AERONAVAL DE CONSTRUCCIONES E INSTALACIONES, SA",
+        "import_empresa": 1169025.42,
+        "carrecs": [
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
     "nom": "WANG XUEFENG",
     "total_adjudicat": 1169025.42,
     "relacions": [
@@ -9074,19 +9100,6 @@
         "import_empresa": 1169025.42,
         "carrecs": [
           "Apo.Sol."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "GUERRERO CORDERO JOSE MARIA",
-    "total_adjudicat": 1169025.42,
-    "relacions": [
-      {
-        "empresa": "AERONAVAL DE CONSTRUCCIONES E INSTALACIONES, SA",
-        "import_empresa": 1169025.42,
-        "carrecs": [
-          "Apoderado"
         ]
       }
     ]
@@ -46860,9 +46873,9 @@
         "empresa": "LEFEBVRE-EL DERECHO, SA",
         "import_empresa": 26142.58,
         "carrecs": [
+          "Con.Delegado",
           "Presidente",
-          "Consejero",
-          "Con.Delegado"
+          "Consejero"
         ]
       }
     ]
@@ -46875,6 +46888,7 @@
         "empresa": "LEFEBVRE-EL DERECHO, SA",
         "import_empresa": 26142.58,
         "carrecs": [
+          "Con.Delegado",
           "Consejero",
           "Secretario",
           "Apoderado",
@@ -55067,6 +55081,45 @@
     ]
   },
   {
+    "nom": "MUÑOZ ALVAREZ ELENA",
+    "total_adjudicat": 15603.96,
+    "relacions": [
+      {
+        "empresa": "SIEMENS, SA",
+        "import_empresa": 15603.96,
+        "carrecs": [
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "PEREZ MONGE ANGEL",
+    "total_adjudicat": 15603.96,
+    "relacions": [
+      {
+        "empresa": "SIEMENS, SA",
+        "import_empresa": 15603.96,
+        "carrecs": [
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "HERNANDEZ MORENO SERGIO",
+    "total_adjudicat": 15603.96,
+    "relacions": [
+      {
+        "empresa": "SIEMENS, SA",
+        "import_empresa": 15603.96,
+        "carrecs": [
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
     "nom": "ANDRE LORENZO RUBEN",
     "total_adjudicat": 15603.96,
     "relacions": [
@@ -55257,19 +55310,6 @@
         "import_empresa": 15603.96,
         "carrecs": [
           "Apo.Sol."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "BRAVO ANTOLIN JULIAN VICENTE",
-    "total_adjudicat": 15603.96,
-    "relacions": [
-      {
-        "empresa": "SIEMENS, SA",
-        "import_empresa": 15603.96,
-        "carrecs": [
-          "Apo.Man.Soli"
         ]
       }
     ]
@@ -56941,19 +56981,6 @@
     ]
   },
   {
-    "nom": "HERNANDEZ MORENO SERGIO",
-    "total_adjudicat": 15603.96,
-    "relacions": [
-      {
-        "empresa": "SIEMENS, SA",
-        "import_empresa": 15603.96,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
     "nom": "RODRIGUES PEREIRA DA SILVA FERNANDO JORGE",
     "total_adjudicat": 15603.96,
     "relacions": [
@@ -57874,19 +57901,6 @@
         "import_empresa": 15603.96,
         "carrecs": [
           "Apo.Man.Soli"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "MUÑOZ ALVAREZ ELENA",
-    "total_adjudicat": 15603.96,
-    "relacions": [
-      {
-        "empresa": "SIEMENS, SA",
-        "import_empresa": 15603.96,
-        "carrecs": [
-          "Apo.Sol."
         ]
       }
     ]
@@ -59569,19 +59583,6 @@
     ]
   },
   {
-    "nom": "LUNA GARRIDO LUIS FERNANDO",
-    "total_adjudicat": 15603.96,
-    "relacions": [
-      {
-        "empresa": "SIEMENS, SA",
-        "import_empresa": 15603.96,
-        "carrecs": [
-          "Apo.Man.Soli"
-        ]
-      }
-    ]
-  },
-  {
     "nom": "MARTIN PAZ JAIME",
     "total_adjudicat": 15603.96,
     "relacions": [
@@ -59635,19 +59636,6 @@
   },
   {
     "nom": "GUERRA GALLEGO ALMUDENA",
-    "total_adjudicat": 15603.96,
-    "relacions": [
-      {
-        "empresa": "SIEMENS, SA",
-        "import_empresa": 15603.96,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "DIAZ MARTINEZ MIGUEL ANGEL",
     "total_adjudicat": 15603.96,
     "relacions": [
       {
@@ -60285,19 +60273,6 @@
     ]
   },
   {
-    "nom": "BLAZQUEZ GALEANO JOSE MARIA",
-    "total_adjudicat": 15603.96,
-    "relacions": [
-      {
-        "empresa": "SIEMENS, SA",
-        "import_empresa": 15603.96,
-        "carrecs": [
-          "Apo.Man.Soli"
-        ]
-      }
-    ]
-  },
-  {
     "nom": "GONZALEZ ALVARO JESUS",
     "total_adjudicat": 15603.96,
     "relacions": [
@@ -60716,6 +60691,26 @@
         "import_empresa": 15250.65,
         "carrecs": [
           "CONSEJERO"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "ZANGO XURIGUERA JOSE LUIS",
+    "total_adjudicat": 15235.78,
+    "relacions": [
+      {
+        "empresa": "ADO CERRAMIENTOS METÁLICOS, SA",
+        "import_empresa": 8170.06,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      },
+      {
+        "empresa": "ADO URBAN FURNITURE, SL",
+        "import_empresa": 7065.72,
+        "carrecs": [
+          "APODERAD.SOL"
         ]
       }
     ]
@@ -68842,19 +68837,6 @@
     ]
   },
   {
-    "nom": "ZANGO XURIGUERA JOSE LUIS",
-    "total_adjudicat": 7065.72,
-    "relacions": [
-      {
-        "empresa": "ADO URBAN FURNITURE, SL",
-        "import_empresa": 7065.72,
-        "carrecs": [
-          "APODERADO"
-        ]
-      }
-    ]
-  },
-  {
     "nom": "MERLO PEREZ MIGUEL-ANGEL",
     "total_adjudicat": 7030.0,
     "relacions": [
@@ -69032,7 +69014,7 @@
     ]
   },
   {
-    "nom": "GALMAN BACHPOL ANGEL",
+    "nom": "GASULL CASELLAS ROGER",
     "total_adjudicat": 6799.21,
     "relacions": [
       {
@@ -69040,7 +69022,22 @@
         "import_empresa": 6799.21,
         "carrecs": [
           "PRESIDENTE",
-          "CONSEJERO"
+          "CONSEJERO",
+          "CONS.DEL.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "GALMAN BACHPOL ANGEL",
+    "total_adjudicat": 6799.21,
+    "relacions": [
+      {
+        "empresa": "MERCADOMÒTIKA, SL",
+        "import_empresa": 6799.21,
+        "carrecs": [
+          "CONSEJERO",
+          "SECRETARIO"
         ]
       }
     ]
@@ -69059,20 +69056,6 @@
     ]
   },
   {
-    "nom": "GASULL PUIG ROBERTO",
-    "total_adjudicat": 6799.21,
-    "relacions": [
-      {
-        "empresa": "MERCADOMÒTIKA, SL",
-        "import_empresa": 6799.21,
-        "carrecs": [
-          "CONSEJERO",
-          "VICEPRESIDEN"
-        ]
-      }
-    ]
-  },
-  {
     "nom": "GALMAN GRACIA ANGEL",
     "total_adjudicat": 6799.21,
     "relacions": [
@@ -69081,21 +69064,6 @@
         "import_empresa": 6799.21,
         "carrecs": [
           "CONSEJERO",
-          "CONS.DEL.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "GASULL CASELLAS ROGER",
-    "total_adjudicat": 6799.21,
-    "relacions": [
-      {
-        "empresa": "MERCADOMÒTIKA, SL",
-        "import_empresa": 6799.21,
-        "carrecs": [
-          "CONSEJERO",
-          "SECRETARIO",
           "CONS.DEL.SOL"
         ]
       }
@@ -71510,6 +71478,19 @@
     ]
   },
   {
+    "nom": "ANTONI CASALS CAÑELLAS",
+    "total_adjudicat": 4839.89,
+    "relacions": [
+      {
+        "empresa": "PROMAQ SOLÉ JORBA, S.L.",
+        "import_empresa": 4839.89,
+        "carrecs": [
+          "SOCIO UNICO"
+        ]
+      }
+    ]
+  },
+  {
     "nom": "CASALS CAÑELLAS ANTONI",
     "total_adjudicat": 4839.89,
     "relacions": [
@@ -72285,6 +72266,61 @@
     ]
   },
   {
+    "nom": "GAELLE LAETITIA DOUBLET EP COLAERT",
+    "total_adjudicat": 4011.2,
+    "relacions": [
+      {
+        "empresa": "DOUBLET IBERICA, SA",
+        "import_empresa": 4011.2,
+        "carrecs": [
+          "PRESIDENTE",
+          "CONSEJERO"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "MANUEL MICHEL FRANCIS DUBOIS",
+    "total_adjudicat": 4011.2,
+    "relacions": [
+      {
+        "empresa": "DOUBLET IBERICA, SA",
+        "import_empresa": 4011.2,
+        "carrecs": [
+          "CONSEJERO",
+          "SECRETARIO",
+          "CONS.DEL.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "PERRAULT THOREUX OLIVIER SANTIAGO",
+    "total_adjudicat": 4011.2,
+    "relacions": [
+      {
+        "empresa": "DOUBLET IBERICA, SA",
+        "import_empresa": 4011.2,
+        "carrecs": [
+          "CONSEJERO"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "JEAN JACQUES HONORE RICOLEAU",
+    "total_adjudicat": 4011.2,
+    "relacions": [
+      {
+        "empresa": "DOUBLET IBERICA, SA",
+        "import_empresa": 4011.2,
+        "carrecs": [
+          "CONSEJERO"
+        ]
+      }
+    ]
+  },
+  {
     "nom": "SERRATS SOLDEVILA ESTHER",
     "total_adjudicat": 4011.2,
     "relacions": [
@@ -72293,19 +72329,6 @@
         "import_empresa": 4011.2,
         "carrecs": [
           "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "AGATHE MARIE DOUBLET",
-    "total_adjudicat": 4011.2,
-    "relacions": [
-      {
-        "empresa": "DOUBLET IBERICA, SA",
-        "import_empresa": 4011.2,
-        "carrecs": [
-          "ADM.UNICO"
         ]
       }
     ]
@@ -74920,6 +74943,32 @@
     ]
   },
   {
+    "nom": "GASSET RIUS MARTA",
+    "total_adjudicat": 3040.0,
+    "relacions": [
+      {
+        "empresa": "LABOCAT CALIDAD, S.L.",
+        "import_empresa": 3040.0,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "SOTO EJARQUE PEDRO",
+    "total_adjudicat": 3040.0,
+    "relacions": [
+      {
+        "empresa": "LABOCAT CALIDAD, S.L.",
+        "import_empresa": 3040.0,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
     "nom": "SANTAMARIA GAMEZ JORDI",
     "total_adjudicat": 3040.0,
     "relacions": [
@@ -74946,19 +74995,6 @@
           "CONS.DEL.MAN",
           "CONSEJERO",
           "SECRETARIO"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "GASSET RIUS MARTA",
-    "total_adjudicat": 3040.0,
-    "relacions": [
-      {
-        "empresa": "LABOCAT CALIDAD, S.L.",
-        "import_empresa": 3040.0,
-        "carrecs": [
-          "APODERAD.SOL"
         ]
       }
     ]
@@ -80918,6 +80954,47 @@
     ]
   },
   {
+    "nom": "ROMANO ANTON OSCAR",
+    "total_adjudicat": 1066.07,
+    "relacions": [
+      {
+        "empresa": "MAPFRE ESPAÑA COMPAÑÍA DE SEGUROS Y REASEGUROS SA",
+        "import_empresa": 1066.07,
+        "carrecs": [
+          "Apoderado",
+          "Apo.Sol."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "PEREZ DE LA ROCHA ESTIBALIZ",
+    "total_adjudicat": 1066.07,
+    "relacions": [
+      {
+        "empresa": "MAPFRE ESPAÑA COMPAÑÍA DE SEGUROS Y REASEGUROS SA",
+        "import_empresa": 1066.07,
+        "carrecs": [
+          "Apoderado",
+          "Apo.Sol."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "ROLDOS APARICIO TATIANA",
+    "total_adjudicat": 1066.07,
+    "relacions": [
+      {
+        "empresa": "MAPFRE ESPAÑA COMPAÑÍA DE SEGUROS Y REASEGUROS SA",
+        "import_empresa": 1066.07,
+        "carrecs": [
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
     "nom": "BAUSELA SANCHEZ ARISTOBULO",
     "total_adjudicat": 1066.07,
     "relacions": [
@@ -85335,19 +85412,6 @@
     ]
   },
   {
-    "nom": "ROMANO ANTON OSCAR",
-    "total_adjudicat": 1066.07,
-    "relacions": [
-      {
-        "empresa": "MAPFRE ESPAÑA COMPAÑÍA DE SEGUROS Y REASEGUROS SA",
-        "import_empresa": 1066.07,
-        "carrecs": [
-          "Apo.Sol."
-        ]
-      }
-    ]
-  },
-  {
     "nom": "ANTUNEZ DIAZ ALICIA",
     "total_adjudicat": 1066.07,
     "relacions": [
@@ -85356,19 +85420,6 @@
         "import_empresa": 1066.07,
         "carrecs": [
           "Apo.Man.Soli"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "PEREZ DE LA ROCHA ESTIBALIZ",
-    "total_adjudicat": 1066.07,
-    "relacions": [
-      {
-        "empresa": "MAPFRE ESPAÑA COMPAÑÍA DE SEGUROS Y REASEGUROS SA",
-        "import_empresa": 1066.07,
-        "carrecs": [
-          "Apo.Sol."
         ]
       }
     ]
@@ -86210,19 +86261,6 @@
     ]
   },
   {
-    "nom": "DE LA CUEVA MENDEZ DAVID",
-    "total_adjudicat": 894.0,
-    "relacions": [
-      {
-        "empresa": "ORIZON UNDERWRITERS SL",
-        "import_empresa": 894.0,
-        "carrecs": [
-          "Representan"
-        ]
-      }
-    ]
-  },
-  {
     "nom": "BORDERIAS MAROTO ALVARO",
     "total_adjudicat": 894.0,
     "relacions": [
@@ -86230,7 +86268,7 @@
         "empresa": "ORIZON UNDERWRITERS SL",
         "import_empresa": 894.0,
         "carrecs": [
-          "Apo.Man.Soli"
+          "Apo.Sol."
         ]
       }
     ]
@@ -86243,26 +86281,144 @@
         "empresa": "ORIZON UNDERWRITERS SL",
         "import_empresa": 894.0,
         "carrecs": [
-          "Apo.Man.Soli"
+          "Apo.Sol."
         ]
       }
     ]
   },
   {
-    "nom": "MACIAS-LIZASO MIRANDA ANTONIO",
+    "nom": "GOIZUETA PALLARES FRANCISCO JAVIER",
     "total_adjudicat": 894.0,
     "relacions": [
       {
         "empresa": "ORIZON UNDERWRITERS SL",
         "import_empresa": 894.0,
         "carrecs": [
-          "Apo.Man.Soli"
+          "Apo.Sol."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "ESCOLANO BENITO ALEJANDRO",
+    "total_adjudicat": 894.0,
+    "relacions": [
+      {
+        "empresa": "ORIZON UNDERWRITERS SL",
+        "import_empresa": 894.0,
+        "carrecs": [
+          "Apo.Sol."
         ]
       }
     ]
   },
   {
     "nom": "DROVE UBREVA DAVID H",
+    "total_adjudicat": 894.0,
+    "relacions": [
+      {
+        "empresa": "ORIZON UNDERWRITERS SL",
+        "import_empresa": 894.0,
+        "carrecs": [
+          "Apo.Sol."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "RAMIREZ ROYO RUBEN",
+    "total_adjudicat": 894.0,
+    "relacions": [
+      {
+        "empresa": "ORIZON UNDERWRITERS SL",
+        "import_empresa": 894.0,
+        "carrecs": [
+          "Apo.Sol."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "DE LA CUEVA MENDEZ DAVID",
+    "total_adjudicat": 894.0,
+    "relacions": [
+      {
+        "empresa": "ORIZON UNDERWRITERS SL",
+        "import_empresa": 894.0,
+        "carrecs": [
+          "Apo.Sol.",
+          "Representan"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "FERNANDEZ VALLE ANA CRISTINA",
+    "total_adjudicat": 894.0,
+    "relacions": [
+      {
+        "empresa": "ORIZON UNDERWRITERS SL",
+        "import_empresa": 894.0,
+        "carrecs": [
+          "Apo.Sol."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "BERGARECHE ECHEBARRENA JON",
+    "total_adjudicat": 894.0,
+    "relacions": [
+      {
+        "empresa": "ORIZON UNDERWRITERS SL",
+        "import_empresa": 894.0,
+        "carrecs": [
+          "Apo.Sol."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "CANTERA GONZALEZ IGNACIO",
+    "total_adjudicat": 894.0,
+    "relacions": [
+      {
+        "empresa": "ORIZON UNDERWRITERS SL",
+        "import_empresa": 894.0,
+        "carrecs": [
+          "Apo.Sol."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "MARTIN FALQUINA GARRE SARA",
+    "total_adjudicat": 894.0,
+    "relacions": [
+      {
+        "empresa": "ORIZON UNDERWRITERS SL",
+        "import_empresa": 894.0,
+        "carrecs": [
+          "Apo.Sol."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "SAEZ VICENTE-MAZARIEGOS JOAQUIN",
+    "total_adjudicat": 894.0,
+    "relacions": [
+      {
+        "empresa": "ORIZON UNDERWRITERS SL",
+        "import_empresa": 894.0,
+        "carrecs": [
+          "Apo.Sol."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "MACIAS-LIZASO MIRANDA ANTONIO",
     "total_adjudicat": 894.0,
     "relacions": [
       {
@@ -86288,33 +86444,7 @@
     ]
   },
   {
-    "nom": "GOIZUETA PALLARES FRANCISCO JAVIER",
-    "total_adjudicat": 894.0,
-    "relacions": [
-      {
-        "empresa": "ORIZON UNDERWRITERS SL",
-        "import_empresa": 894.0,
-        "carrecs": [
-          "Apo.Man.Soli"
-        ]
-      }
-    ]
-  },
-  {
     "nom": "ALMAZAN GOMEZ IGNACIO",
-    "total_adjudicat": 894.0,
-    "relacions": [
-      {
-        "empresa": "ORIZON UNDERWRITERS SL",
-        "import_empresa": 894.0,
-        "carrecs": [
-          "Apo.Man.Soli"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "CANTERA GONZALEZ IGNACIO",
     "total_adjudicat": 894.0,
     "relacions": [
       {
