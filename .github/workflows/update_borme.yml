@@ -165,7 +165,17 @@ jobs:
             --new json/contractes.json \
             --max-count-drop-pct 5 \
             --max-amount-drop-pct 10 \
-            --max-missing-contracts 50
+            --max-missing-contracts 50 \
+            --report scratch/contract-drop-report.json
+
+      - name: Preserve blocked contract deletion report
+        if: ${{ failure() && hashFiles('scratch/contract-drop-report.json') != '' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: contract-drop-report-${{ github.run_id }}
+          path: scratch/contract-drop-report.json
+          if-no-files-found: error
+          retention-days: 90
 
       - name: Contract deletion guard bypassed
         if: ${{ github.event_name == 'workflow_dispatch' && inputs.allow_contract_drop }}

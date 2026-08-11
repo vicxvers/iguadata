@@ -1,4 +1,5 @@
 import json
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -42,6 +43,45 @@ class DataPipelineTests(unittest.TestCase):
             path.write_text(json.dumps(rows), encoding="utf-8")
             loaded = validate_contractes_snapshot.load_contracts(str(path))
         self.assertEqual([row["codigo"] for row in loaded], ["LIVE"])
+
+    def test_snapshot_guard_report_lists_missing_contracts(self):
+        old_rows = [
+            {
+                "codigo": "42/2026",
+                "organismo": "Ajuntament d'Igualada",
+                "fecha": "2026-01-02",
+                "importe": 125,
+            }
+        ]
+        with tempfile.TemporaryDirectory(dir=temporary_root()) as directory:
+            directory = Path(directory)
+            old_path = directory / "old.json"
+            new_path = directory / "new.json"
+            report_path = directory / "report.json"
+            old_path.write_text(json.dumps(old_rows), encoding="utf-8")
+            new_path.write_text("[]", encoding="utf-8")
+            result = subprocess.run(
+                [
+                    sys.executable,
+                    str(SCRIPTS / "validate_contractes_snapshot.py"),
+                    "--old",
+                    str(old_path),
+                    "--new",
+                    str(new_path),
+                    "--max-missing-contracts",
+                    "0",
+                    "--report",
+                    str(report_path),
+                ],
+                capture_output=True,
+                text=True,
+            )
+            report = json.loads(report_path.read_text(encoding="utf-8"))
+
+        self.assertEqual(result.returncode, 1)
+        self.assertEqual(report["status"], "blocked")
+        self.assertEqual(report["summary"]["missing_keys"], 1)
+        self.assertEqual(report["missing_contracts"], old_rows)
 
     def test_2027_municipal_election_date(self):
         self.assertIn(date(2027, 5, 23), generate_electoralisme.MUNICIPAL_ELECTION_DATES)
