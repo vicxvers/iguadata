@@ -9,8 +9,10 @@ from __future__ import annotations
 import argparse
 import json
 import sys
+from datetime import datetime, timezone
 from pathlib import Path
 
+from atomic_io import write_json_atomic
 from contract_filters import is_analysis_contract
 
 
@@ -21,6 +23,10 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--max-count-drop-pct", type=float, default=5.0)
     parser.add_argument("--max-amount-drop-pct", type=float, default=10.0)
     parser.add_argument("--max-missing-contracts", type=int, default=50)
+    parser.add_argument(
+        "--report",
+        help="Optional JSON report containing the exact missing contracts.",
+    )
     return parser.parse_args()
 
 
@@ -77,7 +83,10 @@ def main() -> int:
     count_drop = pct_drop(old_count, new_count)
     amount_drop = pct_drop(old_amount, new_amount)
 
-    old_keys = {key for row in old_rows if (key := contract_key(row))}
+    old_by_key = {
+        key: row for row in old_rows if (key := contract_key(row))
+    }
+    old_keys = set(old_by_key)
     new_keys = {key for row in new_rows if (key := contract_key(row))}
     missing = old_keys - new_keys
 
@@ -101,6 +110,34 @@ def main() -> int:
     print(f"Previous contracts: {old_count:,} ({old_amount:,.2f} EUR)")
     print(f"Fresh contracts   : {new_count:,} ({new_amount:,.2f} EUR)")
     print(f"Missing keys      : {len(missing):,}")
+
+    if args.report:
+        missing_contracts = sorted(
+            (old_by_key[key] for key in missing),
+            key=lambda row: (row.get("fecha") or "", row.get("codigo") or ""),
+        )
+        write_json_atomic(
+            args.report,
+            {
+                "generated_at": datetime.now(timezone.utc).isoformat(),
+                "status": "blocked" if failures else "passed",
+                "summary": {
+                    "previous_contracts": old_count,
+                    "fresh_contracts": new_count,
+                    "previous_amount": round(old_amount, 2),
+                    "fresh_amount": round(new_amount, 2),
+                    "missing_keys": len(missing),
+                },
+                "thresholds": {
+                    "max_count_drop_pct": args.max_count_drop_pct,
+                    "max_amount_drop_pct": args.max_amount_drop_pct,
+                    "max_missing_contracts": args.max_missing_contracts,
+                },
+                "failures": failures,
+                "missing_contracts": missing_contracts,
+            },
+        )
+        print(f"Contract deletion report: {args.report}")
 
     if failures:
         print("Suspicious Socrata refresh detected:", file=sys.stderr)
