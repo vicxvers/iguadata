@@ -139,6 +139,8 @@ Los cambios visuales se ejecutarán por componente y se detendrán para revisió
 - La suite verifica que las primitives forman parte del manifiesto y que las estructuras y estilos inline consolidados no vuelven a duplicarse dentro de `app.jsx`.
 - La primera revisión visual de buscadores, filtros, paginación y estados vacíos ha sido validada en escritorio y móvil.
 - El primer bloque de cascada móvil ha eliminado reglas duplicadas y catorce `!important` innecesarios; `styles.css` pasa de 130 a 116 sin alterar las medidas calculadas de los controles.
+- El segundo bloque móvil consolida modales y elimina 109 líneas de declaraciones previas que quedaban anuladas por la misma cascada; `styles.css` pasa de 116 a 115 usos de `!important`, sin modificar los valores finales.
+- El tercer bloque elimina el antiguo drawer de navegación móvil, ya sustituido por el índice desplegable actual; `styles.css` pasa de 115 a 112 usos de `!important`.
 - La consolidación de la cascada histórica de `styles.css` queda pendiente de revisión por bloques; no se han eliminado overrides sin comprobar antes su efecto visual.
 
 ## Criterios de salida
