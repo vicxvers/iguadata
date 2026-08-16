@@ -132,78 +132,6 @@ html.home-lock-scroll {
     background-color: var(--bg);
 }
 
-/* Header moderno */
-.header {
-    background: var(--navy);
-    padding: var(--header-pad-y) 0;
-    border-bottom: 1px solid var(--border);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-    transition: background 0.3s, border-color 0.3s;
-}
-
-/* Header sobre el hero dark */
-.header-dark {
-    background: var(--navy);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-    box-shadow: none;
-}
-
-.header-dark .header-logo-main {
-    color: var(--surface);
-}
-
-.header-dark .header-logo-main em {
-    color: var(--surface);
-}
-
-.header-dark .header-tag {
-    color: var(--surface);
-}
-
-.header-content {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 0 2rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.header-logo {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    cursor: pointer;
-}
-
-.header-logo-svg {
-    height: 1.75rem;
-    aspect-ratio: 306 / 102;
-    background-color: var(--surface);
-    -webkit-mask-image: url('assets/iguadata.svg');
-    -webkit-mask-size: contain;
-    -webkit-mask-repeat: no-repeat;
-    -webkit-mask-position: left center;
-    mask-image: url('assets/iguadata.svg');
-    mask-size: contain;
-    mask-repeat: no-repeat;
-    mask-position: left center;
-}
-
-.header-dark .header-logo-svg {
-    background-color: var(--surface);
-}
-
-
-.header-tag {
-    font-family: var(--font-mono);
-    font-size: var(--text-xs);
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--navy);
-}
-
 /* NavegaciÃ³n moderna con pills */
 .nav-wrapper {
     background: var(--surface);
@@ -213,26 +141,6 @@ html.home-lock-scroll {
     z-index: 100;
     backdrop-filter: blur(10px);
     transition: background 0.3s, border-color 0.3s;
-}
-
-.nav-wrapper.nav-dark {
-    background: var(--navy);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-}
-
-.nav-wrapper.nav-dark .nav-tab {
-    color: rgba(148, 163, 184, 0.7);
-}
-
-.nav-wrapper.nav-dark .nav-tab:hover {
-    background: rgba(255, 255, 255, 0.06);
-    color: var(--surface);
-}
-
-.nav-wrapper.nav-dark .nav-tab.active {
-    background: rgba(255, 255, 255, 0.12);
-    color: var(--surface);
-    box-shadow: none;
 }
 
 .nav {
@@ -272,47 +180,6 @@ html.home-lock-scroll {
     background: var(--navy);
     color: var(--surface);
     box-shadow: 0 4px 12px rgba(30, 58, 138, 0.2);
-}
-
-/* â”€â”€â”€ BotÃ³n Hamburguesa MÃ³vil â”€â”€â”€â”€ */
-.mobile-menu-btn {
-    display: none;
-    flex-direction: column;
-    justify-content: space-around;
-    width: 2rem;
-    height: 2rem;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    z-index: 105;
-}
-
-.mobile-menu-btn span {
-    width: 2rem;
-    height: 0.25rem;
-    background: var(--navy);
-    border-radius: 10px;
-    transition: all 0.3s linear;
-    position: relative;
-    transform-origin: 1px;
-}
-
-.header-dark .mobile-menu-btn span {
-    background: var(--surface);
-}
-
-.mobile-menu-btn.open span:nth-child(1) {
-    transform: rotate(45deg);
-}
-
-.mobile-menu-btn.open span:nth-child(2) {
-    opacity: 0;
-    transform: translateX(20px);
-}
-
-.mobile-menu-btn.open span:nth-child(3) {
-    transform: rotate(-45deg);
 }
 
 /* Container */
@@ -6294,13 +6161,6 @@ body.home-scroll-surface::-webkit-scrollbar {
         font-size: 2.25rem;
     }
 
-    .header-content {
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        padding: 1rem 1.5rem;
-    }
-
     /* 2. Page titles and containers */
     .container {
         padding: 1.5rem 1rem;
@@ -6394,213 +6254,6 @@ body.home-scroll-surface::-webkit-scrollbar {
 
     .caso-bar-row {
         grid-template-columns: 1fr;
-    }
-
-    /* â”€â”€â”€ FASE 1 â€” Header, nav tabs scrollables, footer â”€â”€â”€ */
-
-    /* Header: mÃ©s alt, editorial */
-    .header {
-        position: sticky;
-        top: 0;
-        z-index: 102;
-        background: var(--navy);
-        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-        box-shadow: none;
-        padding: 1.75rem 0;
-    }
-
-    .header-content {
-        padding: 0 var(--mobile-pad-x);
-    }
-
-    .header-logo-svg {
-        height: 2rem;
-        background-color: var(--surface);
-    }
-
-    .header-tag {
-        display: none !important;
-    }
-
-    /* Eliminar hamburguesa â€” substituÃ¯da per tabs scrollables */
-    .mobile-menu-btn {
-        display: none !important;
-    }
-
-    /* Nav: drawer â†’ tabs horitzontals scrollables */
-    .nav-wrapper,
-    .nav-wrapper.nav-dark,
-    .nav-wrapper.open {
-        position: sticky;
-        top: 5.5rem;
-        left: auto;
-        right: auto;
-        bottom: auto;
-        height: auto;
-        max-height: none;
-        transform: none !important;
-        background: var(--surface);
-        backdrop-filter: none;
-        padding-top: 0;
-        border-bottom: 1px solid var(--border);
-        border-radius: 0 0 var(--radius-lg) var(--radius-lg);
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
-        display: block;
-        z-index: 101;
-    }
-
-    .nav-wrapper.nav-dark {
-        background: var(--navy);
-        border-bottom-color: rgba(255, 255, 255, 0.08);
-    }
-
-    .nav {
-        flex-direction: row;
-        overflow-x: auto;
-        overflow-y: hidden;
-        gap: 0;
-        padding: 0 var(--mobile-pad-x);
-        align-items: stretch;
-        justify-content: flex-start;
-        scroll-snap-type: x proximity;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: none;
-        max-width: 100%;
-    }
-
-    .nav::-webkit-scrollbar {
-        display: none;
-    }
-
-    .nav-tab {
-        flex: 0 0 auto;
-        width: auto;
-        text-align: center;
-        padding: 0.875rem 1rem;
-        font-size: var(--text-sm);
-        font-family: var(--font-mono);
-        font-style: normal;
-        font-weight: 500;
-        letter-spacing: 0.05em;
-        text-transform: uppercase;
-        color: var(--text-light);
-        background: transparent !important;
-        box-shadow: none !important;
-        white-space: nowrap;
-        scroll-snap-align: start;
-        border-bottom: 2px solid transparent;
-        border-radius: 0;
-        transition: color 0.2s, border-color 0.2s;
-        min-height: 44px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .nav-dark .nav-tab {
-        color: rgba(255, 255, 255, 0.65);
-    }
-
-    .nav-tab.active,
-    .nav-dark .nav-tab.active {
-        color: var(--navy) !important;
-        border-bottom-color: var(--navy);
-        font-style: normal;
-        background: transparent !important;
-    }
-
-    .nav-dark .nav-tab.active {
-        color: var(--surface) !important;
-        border-bottom-color: var(--surface);
-    }
-
-    /* Nav mobil: seccio actual + index desplegable */
-    .mobile-nav-current {
-        display: grid;
-        grid-template-columns: 1.5rem auto 1.5rem;
-        column-gap: 0.875rem;
-        width: 100%;
-        min-height: var(--nav-height-mobile);
-        align-items: center;
-        justify-content: center;
-        border: 0;
-        background: transparent;
-        color: var(--navy);
-        font-family: var(--font-mono);
-        font-size: var(--text-sm);
-        font-weight: 600;
-        letter-spacing: 0.06em;
-        text-transform: uppercase;
-        cursor: pointer;
-    }
-
-    .mobile-nav-current span {
-        grid-column: 2;
-    }
-
-    .nav-dark .mobile-nav-current {
-        color: var(--surface);
-    }
-
-    .mobile-nav-chevron {
-        grid-column: 3;
-        transition: transform 0.22s ease;
-    }
-
-    .nav-wrapper.open .mobile-nav-chevron {
-        transform: rotate(180deg);
-    }
-
-    .nav {
-        flex-direction: column;
-        align-items: stretch;
-        justify-content: flex-start;
-        overflow: hidden;
-        max-height: 0;
-        opacity: 0;
-        padding: 0 var(--mobile-pad-x);
-        transition: max-height 0.28s ease, opacity 0.2s ease, padding-bottom 0.28s ease;
-    }
-
-    .nav-wrapper.open .nav {
-        max-height: 320px;
-        opacity: 1;
-        padding-bottom: 0.75rem;
-    }
-
-    .nav-tab {
-        justify-content: center;
-        width: 100%;
-        min-height: 44px;
-        padding: 0.75rem 1rem;
-        border-bottom: 1px solid var(--border);
-    }
-
-    .nav-dark .nav-tab {
-        border-bottom-color: rgba(255, 255, 255, 0.1);
-    }
-
-    .nav-tab:last-child {
-        border-bottom: 0;
-    }
-
-    .nav-tab-home {
-        display: none;
-    }
-
-    .nav-tab.active,
-    .nav-dark .nav-tab.active {
-        display: none;
-    }
-
-    .home-wrapper .header {
-        background: transparent;
-        border-bottom: 0;
-        box-shadow: none;
-    }
-
-    .home-wrapper .nav-wrapper {
-        display: none;
     }
 
     /* Footer compactat */
@@ -6892,7 +6545,7 @@ body.home-scroll-surface::-webkit-scrollbar {
         max-height: none;
         display: block;
         padding: 0;
-        transform: none !important;
+        transform: none;
         border: 0;
         border-radius: 0;
         background: transparent;
@@ -6904,11 +6557,13 @@ body.home-scroll-surface::-webkit-scrollbar {
 
     .site-dock-nav .mobile-nav-current {
         display: flex;
+        width: 100%;
         height: 2.8rem;
         min-height: 2.8rem;
         align-items: center;
         justify-content: center;
         padding: 0 1rem;
+        border: 0;
         border-radius: var(--radius-pill);
         background: var(--navy);
         color: var(--surface);
@@ -6916,6 +6571,8 @@ body.home-scroll-surface::-webkit-scrollbar {
         font-size: var(--text-xs);
         font-weight: 500;
         letter-spacing: 0.05em;
+        text-transform: uppercase;
+        cursor: pointer;
         box-shadow: 0 12px 30px rgba(13, 31, 60, 0.16);
     }
 
@@ -6931,12 +6588,21 @@ body.home-scroll-surface::-webkit-scrollbar {
         grid-column: auto;
     }
 
+    .site-dock-nav .mobile-nav-chevron {
+        transition: transform 0.22s ease;
+    }
+
+    .site-dock-nav.open .mobile-nav-chevron {
+        transform: rotate(180deg);
+    }
+
     .site-dock-nav .nav {
         width: 100%;
         min-width: 0;
         max-height: 0;
         flex-direction: column;
         align-items: stretch;
+        justify-content: flex-start;
         gap: 0.35rem;
         overflow: visible;
         opacity: 0;
@@ -6956,29 +6622,34 @@ body.home-scroll-surface::-webkit-scrollbar {
     }
 
     .site-dock-nav .nav-tab {
-        display: flex !important;
+        display: flex;
         width: 100%;
         height: 2.8rem;
         min-height: 42px;
+        align-items: center;
         justify-content: center;
         padding: 0 1rem;
         border: 0;
         border-radius: var(--radius-pill);
-        background: var(--surface) !important;
-        color: var(--navy) !important;
+        background: var(--surface);
+        color: var(--navy);
         font-family: var(--font-mono);
         font-size: var(--text-xs);
         font-weight: 500;
         letter-spacing: 0.05em;
-        box-shadow: 0 12px 30px rgba(13, 31, 60, 0.16) !important;
+        text-align: center;
+        text-decoration: none;
+        text-transform: uppercase;
+        white-space: nowrap;
+        box-shadow: 0 12px 30px rgba(13, 31, 60, 0.16);
     }
 
     .site-dock-nav .nav-tab:hover {
-        background: var(--bg) !important;
+        background: var(--bg);
     }
 
     .site-dock-nav .nav-tab.active {
-        display: none !important;
+        display: none;
     }
 
     .contractes-page .page-title,

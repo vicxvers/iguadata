@@ -87,7 +87,7 @@ Los cambios visuales se ejecutarán por componente y se detendrán para revisió
 4. Evitar la carga completa de contratos en la portada. Completado.
 5. Introducir configuración única del proyecto y municipio. Primera fase completada.
 6. Definir y validar esquemas de datos. Contrato frontend v1 completado.
-7. Consolidar CSS y primitives visuales. En curso.
+7. Consolidar CSS y primitives visuales. Completado.
 8. Rediseñar interfaces por flujo.
 9. Documentar la creación de una segunda instancia.
 
@@ -141,7 +141,8 @@ Los cambios visuales se ejecutarán por componente y se detendrán para revisió
 - El primer bloque de cascada móvil ha eliminado reglas duplicadas y catorce `!important` innecesarios; `styles.css` pasa de 130 a 116 sin alterar las medidas calculadas de los controles.
 - El segundo bloque móvil consolida modales y elimina 109 líneas de declaraciones previas que quedaban anuladas por la misma cascada; `styles.css` pasa de 116 a 115 usos de `!important`, sin modificar los valores finales.
 - El tercer bloque elimina el antiguo drawer de navegación móvil, ya sustituido por el índice desplegable actual; `styles.css` pasa de 115 a 112 usos de `!important`.
-- La consolidación de la cascada histórica de `styles.css` queda pendiente de revisión por bloques; no se han eliminado overrides sin comprobar antes su efecto visual.
+- El cierre de fase elimina 354 líneas del antiguo header, sus variantes oscuras y la navegación móvil genérica sin consumidores; el dock vigente concentra ahora su comportamiento responsive y `styles.css` pasa de 112 a 97 usos de `!important`.
+- Los `!important` restantes están acotados a adaptaciones responsive de interfaces concretas. Su revisión continuará dentro del rediseño de cada flujo para no alterar componentes todavía no migrados.
 
 ## Criterios de salida
 
