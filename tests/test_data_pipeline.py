@@ -1,7 +1,15 @@
+import hashlib
 import json
+import os
+import shutil
+import socket
+import subprocess
 import sys
 import tempfile
+import time
 import unittest
+import urllib.error
+import urllib.request
 from datetime import date
 from pathlib import Path
 
@@ -104,10 +112,105 @@ class DataPipelineTests(unittest.TestCase):
             self.assertIsInstance(json.loads(internal_path.read_text(encoding="utf-8")), list)
 
     def test_frontend_uses_the_coherent_snapshot_only(self):
-        source = (ROOT / "src" / "app.jsx").read_text(encoding="utf-8")
+        source_files = json.loads((ROOT / "src" / "app.sources.json").read_text(encoding="utf-8"))
+        source = "\n".join((ROOT / path).read_text(encoding="utf-8") for path in source_files)
         self.assertIn("fetchContractsSnapshot", source)
         self.assertNotIn("SOCRATA_BASE", source)
         self.assertNotIn("fetchArchivedContracts", source)
+
+    def test_frontend_source_manifest_is_valid(self):
+        source_files = json.loads((ROOT / "src" / "app.sources.json").read_text(encoding="utf-8"))
+        self.assertEqual(len(source_files), len(set(source_files)))
+        self.assertIn("src/app.jsx", source_files)
+        self.assertIn("src/core/runtime.js", source_files)
+        self.assertIn("src/data/use-iguadata-data.js", source_files)
+        self.assertIn("src/ui/primitives.jsx", source_files)
+        for source_file in source_files:
+            source_path = (ROOT / source_file).resolve()
+            self.assertTrue(source_path.is_relative_to((ROOT / "src").resolve()))
+            self.assertTrue(source_path.is_file())
+
+        app_source = (ROOT / "src" / "app.jsx").read_text(encoding="utf-8")
+        primitives_source = (ROOT / "src" / "ui" / "primitives.jsx").read_text(encoding="utf-8")
+        self.assertIn("function Pagination(", primitives_source)
+        self.assertIn("function EmptySearchState(", primitives_source)
+        self.assertIn("function SearchField(", primitives_source)
+        self.assertNotIn('className="pagination"', app_source)
+        self.assertNotIn('className="search-input-wrapper"', app_source)
+        self.assertNotIn("style={{ flex: '1 1 200px' }}", app_source)
+        self.assertNotIn("style={{ flex: '1 1 240px' }}", app_source)
+        self.assertNotIn("style={{ height: '48px' }}", app_source)
+
+        styles = (ROOT / "styles.css").read_text(encoding="utf-8")
+        self.assertIn('.search-section .filter-input[type="date"]', styles)
+        self.assertIn('::-webkit-date-and-time-value', styles)
+        self.assertIn("max-width: 100%;", styles)
+
+    def test_home_does_not_request_route_specific_datasets(self):
+        source = (ROOT / "src" / "data" / "use-iguadata-data.js").read_text(encoding="utf-8")
+        self.assertIn("if (!summaryResolved || !requiresCoreData || coreDataLoaded) return;", source)
+        self.assertIn("if (!summaryResolved || !ANALYSIS_TABS.includes(activeTab) || analisiLoaded) return;", source)
+        self.assertIn("if (!INVESTIGATION_TABS.includes(activeTab) || investigacioLoaded) return;", source)
+
+    def test_project_config_drives_generated_pages_and_frontend(self):
+        config = json.loads((ROOT / "config" / "project.json").read_text(encoding="utf-8"))
+        index_html = (ROOT / "index.html").read_text(encoding="utf-8")
+        app_bundle = (ROOT / "assets" / "app.js").read_text(encoding="utf-8")
+        self.assertIn(f'<link rel="canonical" href="{config["site"]["url"]}/">', index_html)
+        self.assertIn(f'content="{config["brand"]["name"]}"', index_html)
+        self.assertIn(f'"contactEmail": "{config["site"]["contactEmail"]}"', app_bundle)
+
+    def test_local_server_supports_spa_fallback_and_blocks_sources(self):
+        node = shutil.which("node")
+        self.assertIsNotNone(node)
+        with socket.socket() as probe:
+            probe.bind(("127.0.0.1", 0))
+            port = probe.getsockname()[1]
+
+        creation_flags = subprocess.CREATE_NO_WINDOW if os.name == "nt" else 0
+        process = subprocess.Popen(
+            [node, str(ROOT / "scripts" / "dev-server.js"), "--port", str(port)],
+            cwd=ROOT,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.PIPE,
+            creationflags=creation_flags,
+        )
+        try:
+            dynamic_url = f"http://127.0.0.1:{port}/contractes/prova-directa"
+            for _ in range(30):
+                try:
+                    with urllib.request.urlopen(dynamic_url, timeout=1) as response:
+                        body = response.read().decode("utf-8")
+                        self.assertEqual(response.status, 200)
+                        self.assertIn('<div id="root"', body)
+                        self.assertNotIn("upgrade-insecure-requests", body)
+                        break
+                except urllib.error.URLError:
+                    if process.poll() is not None:
+                        self.fail(process.stderr.read().decode("utf-8", errors="replace"))
+                    time.sleep(0.05)
+            else:
+                self.fail("El servidor local no ha respost.")
+
+            with self.assertRaises(urllib.error.HTTPError) as blocked:
+                urllib.request.urlopen(f"http://127.0.0.1:{port}/src/app.jsx", timeout=1)
+            self.assertEqual(blocked.exception.code, 404)
+        finally:
+            process.terminate()
+            process.wait(timeout=5)
+            process.stderr.close()
+
+    def test_frontend_data_matches_versioned_schema(self):
+        node = shutil.which("node")
+        self.assertIsNotNone(node)
+        result = subprocess.run(
+            [node, str(ROOT / "scripts" / "validate-frontend-data.js")],
+            cwd=ROOT,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
 
     def test_investigation_images_have_optimized_social_previews(self):
         assets = ROOT / "assets" / "investigacio"
@@ -128,7 +231,9 @@ class DataPipelineTests(unittest.TestCase):
         self.assertIn("document.createElement('base')", bootstrap)
         self.assertLess(bootstrap.index("document.createElement('base')"), bootstrap.index("history.replaceState"))
         index = (ROOT / "index.html").read_text(encoding="utf-8")
-        self.assertRegex(index, r'assets/bootstrap\.js\?v=\d{8}-[a-z-]+')
+        for relative_path in ("assets/bootstrap.js", "assets/app.js", "styles.css"):
+            expected_version = hashlib.sha256((ROOT / relative_path).read_bytes()).hexdigest()[:12]
+            self.assertIn(f'{relative_path}?v={expected_version}', index)
         fallback = (ROOT / "404.html").read_text(encoding="utf-8")
         self.assertIn("script-src 'sha256-", fallback)
         self.assertIn("location.pathname.split", fallback)

@@ -243,6 +243,9 @@ jobs:
                   raise SystemExit(f"Archived contracts leaked into {name}.json")
           PY
 
+      - name: Validate frontend data contract
+        run: node scripts/validate-frontend-data.js
+
       # ------------------------------------------------------------------
       # 7. Commit updated JSONs (if any change).
       # ------------------------------------------------------------------

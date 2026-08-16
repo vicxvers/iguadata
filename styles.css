@@ -920,6 +920,14 @@ html.home-lock-scroll {
     width: 100%;
 }
 
+.filter-group-standard {
+    flex: 1 1 200px;
+}
+
+.filter-group-wide {
+    flex: 1 1 240px;
+}
+
 .filter-label {
     font-family: var(--font-mono);
     font-size: var(--text-xs);
@@ -943,6 +951,10 @@ html.home-lock-scroll {
     color: var(--navy);
     cursor: pointer;
     transition: all 0.2s;
+}
+
+.filter-select-standard {
+    height: 48px;
 }
 
 .filter-select:hover {
@@ -6851,55 +6863,20 @@ body.home-scroll-surface::-webkit-scrollbar {
     }
 
     /* FASE 3.2 - Contractes + filtres accordion */
-    .filter-actions {
-        display: flex !important;
-        width: 100%;
-        gap: 0.75rem;
-        margin-top: 1rem;
-        align-items: stretch;
-    }
-
     .filters-toggle-btn {
-        display: flex !important;
-        flex: 1 1 auto;
-        min-height: 48px;
-        margin: 0;
-        align-items: center;
-        justify-content: space-between;
-        gap: 1rem;
-        padding: 0.875rem 1rem;
-        border: 1px solid var(--border);
-        border-radius: var(--radius);
-        background: var(--surface);
-        color: var(--navy);
-        font-family: var(--font-mono);
-        font-size: var(--text-sm);
-        font-weight: 600;
-        letter-spacing: 0.05em;
-        text-transform: uppercase;
-        box-shadow: none;
-        cursor: pointer;
         transition: all 0.2s;
     }
 
     .filters-toggle-meta {
-        color: var(--text-light);
-        font-size: var(--text-2xs);
         letter-spacing: 0.05em;
     }
 
     .filters-mobile-reset {
-        display: flex !important;
-        flex: 0 0 48px;
-        width: 48px !important;
-        height: 48px !important;
-        padding: 0 !important;
-        align-items: center;
-        justify-content: center;
+        padding: 0;
     }
 
     .search-section {
-        padding: 1.5rem !important;
+        padding: 1.5rem;
         margin-bottom: var(--mobile-section-gap);
         border-radius: var(--radius-lg);
         background: var(--mobile-card-bg);
@@ -6915,10 +6892,10 @@ body.home-scroll-surface::-webkit-scrollbar {
 
     .search-section .search-filter-panel {
         width: 100%;
-        flex-direction: column !important;
-        align-items: stretch !important;
-        gap: 1rem !important;
-        margin-top: 1.25rem !important;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1rem;
+        margin-top: 1.25rem;
         max-height: 720px;
         opacity: 1;
         overflow: hidden;
@@ -6928,13 +6905,48 @@ body.home-scroll-surface::-webkit-scrollbar {
     .search-section .search-filter-panel.collapsed {
         max-height: 0;
         opacity: 0;
-        margin-top: 0 !important;
+        margin-top: 0;
         pointer-events: none;
     }
 
     .search-section .filter-group {
-        width: 100% !important;
-        flex: 1 1 100% !important;
+        width: 100%;
+        min-width: 0;
+        flex: 1 1 100%;
+    }
+
+    .search-section .filter-input[type="date"] {
+        display: block;
+        width: 100%;
+        min-width: 0;
+        max-width: 100%;
+        height: var(--control-h);
+        min-height: var(--control-h);
+        max-height: var(--control-h);
+    }
+
+    @supports (-webkit-touch-callout: none) {
+        .search-section .filter-input[type="date"] {
+            -webkit-appearance: none;
+            appearance: none;
+            line-height: 1.25rem;
+        }
+
+        .search-section .filter-input[type="date"]::-webkit-date-and-time-value {
+            display: block;
+            width: 100%;
+            min-width: 0;
+            height: 1.25rem;
+            min-height: 1.25rem;
+            line-height: 1.25rem;
+            text-align: left;
+        }
+
+        .search-section .filter-input[type="date"]::-webkit-datetime-edit {
+            display: block;
+            min-width: 0;
+            padding: 0;
+        }
     }
 
     .results-count {

@@ -160,66 +160,6 @@ function riskLabel(n) {
     return 'Risc baix';
 }
 
-/* ---- Routing: BASE path + slug helpers -------------------------- */
-// En GH Pages el projecte es serveix sota /iguadata-dev/. En localhost, sense prefix.
-const BASE = window.__IGUADATA_BASE__ || '';
-const assetUrl = (path) => `${BASE}${path}`;
-let DATA_VERSION = '';
-const setDataVersion = (version) => { DATA_VERSION = version || ''; };
-const jsonAssetUrl = (path) => {
-    const suffix = DATA_VERSION ? `?v=${encodeURIComponent(DATA_VERSION)}` : '';
-    return `${assetUrl(path)}${suffix}`;
-};
-let threeLoaderPromise = null;
-function loadThree() {
-    if (window.THREE) return Promise.resolve(window.THREE);
-    if (threeLoaderPromise) return threeLoaderPromise;
-    threeLoaderPromise = new Promise((resolve, reject) => {
-        const script = document.createElement('script');
-        script.src = assetUrl('/assets/vendor/three.min.js');
-        script.async = true;
-        script.onload = () => resolve(window.THREE);
-        script.onerror = reject;
-        document.head.appendChild(script);
-    });
-    return threeLoaderPromise;
-}
-const buildRouteUrl = (path) => `${BASE}${path.startsWith('/') ? path : `/${path}`}`;
-const isMobile = () => window.matchMedia('(max-width: 768px)').matches;
-
-function isPlainLeftClick(event) {
-    return event.button === 0 && !event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey;
-}
-
-function handleInternalLinkClick(event, navigate) {
-    if (!isPlainLeftClick(event)) return;
-    event.preventDefault();
-    navigate();
-}
-
-function resolveRoute(path) {
-    if (path === '/') return { tab: 'home', canonicalPath: '/' };
-    if (path === '/contractes') return { tab: 'buscador', canonicalPath: '/contractes' };
-    if (path === '/empreses') return { tab: 'empreses', canonicalPath: '/empreses' };
-    if (path === '/persones') return { tab: 'persones', canonicalPath: '/persones' };
-    if (path === '/analisi') return { tab: 'analisi', canonicalPath: '/analisi' };
-    if (path === '/investigacio') return { tab: 'casos', canonicalPath: '/investigacio' };
-    if (path.startsWith('/investigacio/')) return { tab: 'cas-investigacio', canonicalPath: path };
-    if (path === '/sobre') return { tab: 'sobre', canonicalPath: '/sobre' };
-    if (path === '/avis-legal') return { tab: 'legal', canonicalPath: '/avis-legal' };
-    if (path.startsWith('/contractes/')) return { tab: 'contracte', canonicalPath: path };
-    if (path.startsWith('/empreses/')) return { tab: 'empresa', canonicalPath: path };
-    if (path.startsWith('/analisi/fraccionament/')) return { tab: 'cas-fraccionament', canonicalPath: path };
-    if (path.startsWith('/analisi/concentracio/')) return { tab: 'cas-concentracio', canonicalPath: path };
-    if (path.startsWith('/analisi/electoralisme/')) return { tab: 'cas-electoralisme', canonicalPath: path };
-    return { tab: 'home', canonicalPath: '/' };
-}
-
-function formatPageTitle(value) {
-    const trimmed = (value || '').trim();
-    return trimmed ? `${trimmed} | Iguadata` : 'Iguadata';
-}
-
 function normalizeSearchText(value) {
     return String(value || '')
         .normalize('NFD')
@@ -504,77 +444,6 @@ const SECTOR_MAPPING = {
 
 function categoriaToSector(cat) {
     return SECTOR_MAPPING[cat] || "Altres Serveis i Subministraments";
-}
-
-async function fetchContractsSnapshot() {
-    const resp = await fetch(jsonAssetUrl('/json/contractes.json'));
-    if (!resp.ok) throw new Error(`Contractes HTTP ${resp.status}`);
-    const data = await resp.json();
-    if (!Array.isArray(data)) return [];
-    return data
-        .filter(contract => !contract.preservat_iguadata && contract.exclos_analisis !== true)
-        .map(contract => ({
-            ...contract,
-            slug: contract.slug || buildContractSlug(contract),
-        }));
-}
-
-async function fetchEmpresaAliases() {
-    try {
-        const resp = await fetch(jsonAssetUrl('/json/empresa_aliases.json'));
-        if (!resp.ok) return { aliases: {} };
-        const data = await resp.json();
-        return data && data.aliases ? data : { aliases: {} };
-    } catch (e) {
-        return { aliases: {} };
-    }
-}
-
-function buildEmpreses(contracts, existingEmpreses) {
-    const existingByName = {};
-    for (const e of existingEmpreses) {
-        existingByName[e.nom.trim().toUpperCase()] = e;
-    }
-
-    const groups = {};
-    for (const c of contracts) {
-        const nom = c.adjudicatario;
-        if (!nom) continue;
-        if (!groups[nom]) groups[nom] = { ids: [], importe: 0, cpvs: [] };
-        groups[nom].ids.push(c.id);
-        groups[nom].importe += c.importe;
-        if (c.cpv) groups[nom].cpvs.push(c.cpv);
-    }
-
-    const result = [];
-    for (const [nom, data] of Object.entries(groups)) {
-        const existing = existingByName[nom];
-        let sector, categoria;
-        if (existing && existing.sector && existing.categoria) {
-            sector = existing.sector;
-            categoria = existing.categoria;
-        } else {
-            // New company: derive from most frequent CPV code
-            const cpvCount = {};
-            for (const cpv of data.cpvs) {
-                const div = String(cpv).replace(/\D/g, '').substring(0, 2);
-                cpvCount[div] = (cpvCount[div] || 0) + 1;
-            }
-            const topCpv = Object.entries(cpvCount).sort((a, b) => b[1] - a[1])[0];
-            categoria = topCpv ? (CPV_DIVISIONS[topCpv[0]] || "Altres serveis comunitaris") : "Altres serveis comunitaris";
-            sector = categoriaToSector(categoria);
-        }
-        result.push({
-            nom,
-            num_contratos: data.ids.length,
-            total_importe: Math.round(data.importe * 100) / 100,
-            contratos: data.ids.sort((a, b) => a - b),
-            sector,
-            categoria,
-        });
-    }
-    result.sort((a, b) => b.num_contratos - a.num_contratos);
-    return result;
 }
 
 /* ---- generateShareImage ----------------------------------------- */
@@ -1075,13 +944,12 @@ function CasFraccionamentView({ caso, contracts, empreses, onBack, onContractSel
                 )
             ))}
             {casContracts.length > itemsPerPage && (
-                <div className="pagination">
-                    <button className="pagination-btn" onClick={() => { setCurrentPage(1) }} disabled={currentPage === 1}>«</button>
-                    <button className="pagination-btn" onClick={() => { setCurrentPage(p => Math.max(p - 1, 1)) }} disabled={currentPage === 1}>‹</button>
-                    <span className="pagination-info">Pàgina <strong>{currentPage}</strong> de <strong>{totalPages}</strong></span>
-                    <button className="pagination-btn" onClick={() => { setCurrentPage(p => Math.min(p + 1, totalPages)) }} disabled={currentPage === totalPages}>›</button>
-                    <button className="pagination-btn" onClick={() => { setCurrentPage(totalPages) }} disabled={currentPage === totalPages}>»</button>
-                </div>
+                <Pagination
+                    currentPage={currentPage}
+                    totalPages={totalPages}
+                    onPageChange={setCurrentPage}
+                    showTitles={false}
+                />
             )}
         </div>
     );
@@ -1223,13 +1091,12 @@ function CasConcentracioView({ caso, contracts, empreses, onBack, onContractSele
                 )
             ))}
             {casContracts.length > itemsPerPage && (
-                <div className="pagination">
-                    <button className="pagination-btn" onClick={() => { setCurrentPage(1) }} disabled={currentPage === 1}>«</button>
-                    <button className="pagination-btn" onClick={() => { setCurrentPage(p => Math.max(p - 1, 1)) }} disabled={currentPage === 1}>‹</button>
-                    <span className="pagination-info">Pàgina <strong>{currentPage}</strong> de <strong>{totalPages}</strong></span>
-                    <button className="pagination-btn" onClick={() => { setCurrentPage(p => Math.min(p + 1, totalPages)) }} disabled={currentPage === totalPages}>›</button>
-                    <button className="pagination-btn" onClick={() => { setCurrentPage(totalPages) }} disabled={currentPage === totalPages}>»</button>
-                </div>
+                <Pagination
+                    currentPage={currentPage}
+                    totalPages={totalPages}
+                    onPageChange={setCurrentPage}
+                    showTitles={false}
+                />
             )}
         </div>
     );
@@ -1334,31 +1201,6 @@ function CasElectoralismeView({ caso, contracts, empreses, onBack, onContractSel
                     <div className="contract-header"><div className="contract-title">{contracte.descripcion}</div><div className="contract-amount">{formatCurrency(contracte.importe)}</div></div>
                 </div>
             )}
-        </div>
-    );
-}
-
-function FilterActions({ open, onToggle, activeCount, onReset }) {
-    return (
-        <div className="filter-actions">
-            <button
-                className="filters-toggle-btn"
-                onClick={onToggle}
-                aria-expanded={open}
-                type="button"
-            >
-                <span>Filtres</span>
-                <span className="filters-toggle-meta">{activeCount}</span>
-            </button>
-            <button
-                className="btn-reset filters-mobile-reset"
-                onClick={onReset}
-                title="Restablir filtres"
-                aria-label="Restablir filtres"
-                type="button"
-            >
-                <svg className="filters-reset-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8" /><path d="M3 3v5h5" /></svg>
-            </button>
         </div>
     );
 }
@@ -1474,22 +1316,12 @@ function EmpresesView({ empreses, onEmpresaSelect, searchTerm, setSearchTerm, se
         <div className="container empreses-page">
             <h1 className="page-title">Cercador d'empreses</h1>
             <div className="search-section">
-                <div className="search-input-wrapper">
-                    <span className="search-icon">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                    </span>
-                    <input
-                        type="text"
-                        className="search-input"
-                        placeholder="Cerca per empresa"
-                        aria-label="Cerca per empresa"
-                        value={searchTerm}
-                        onChange={(e) => setSearchTerm(e.target.value)}
-                    />
-                    {searchTerm && (
-                        <button className="search-clear" onClick={() => setSearchTerm('')} type="button" aria-label="Netejar cerca">&times;</button>
-                    )}
-                </div>
+                <SearchField
+                    value={searchTerm}
+                    onValueChange={setSearchTerm}
+                    placeholder="Cerca per empresa"
+                    ariaLabel="Cerca per empresa"
+                />
 
                 <FilterActions
                     open={empresesFiltersOpen}
@@ -1499,18 +1331,18 @@ function EmpresesView({ empreses, onEmpresaSelect, searchTerm, setSearchTerm, se
                 />
 
                 <div className={"filters search-filter-panel" + (!empresesFiltersOpen ? " collapsed" : "")}>
-                    <div className="filter-group" style={{ flex: '1 1 200px' }}>
+                    <div className="filter-group filter-group-standard">
                         <label className="filter-label">Ordenar per</label>
-                        <select className="filter-select" style={{ height: '48px' }} value={sortBy} onChange={(e) => setSortBy(e.target.value)} aria-label="Ordenar empreses per">
+                        <select className="filter-select filter-select-standard" value={sortBy} onChange={(e) => setSortBy(e.target.value)} aria-label="Ordenar empreses per">
                             <option value="amount-desc">Import (descendent)</option>
                             <option value="amount-asc">Import (ascendent)</option>
                             <option value="contracts-desc">Nombre de contractes (descendent)</option>
                             <option value="contracts-asc">Nombre de contractes (ascendent)</option>
                         </select>
                     </div>
-                    <div className="filter-group" style={{ flex: '1 1 200px' }}>
+                    <div className="filter-group filter-group-standard">
                         <label className="filter-label">Sector</label>
-                        <select className="filter-select" style={{ height: '48px' }} value={sectorFilter} onChange={(e) => { setSectorFilter(e.target.value); setCategoriaFilter(''); }} aria-label="Sector">
+                        <select className="filter-select filter-select-standard" value={sectorFilter} onChange={(e) => { setSectorFilter(e.target.value); setCategoriaFilter(''); }} aria-label="Sector">
                             <option value="">Tots els sectors</option>
                             {allSectors
                                 .slice()
@@ -1524,9 +1356,9 @@ function EmpresesView({ empreses, onEmpresaSelect, searchTerm, setSearchTerm, se
                                 ))}
                         </select>
                     </div>
-                    <div className="filter-group" style={{ flex: '1 1 200px' }}>
+                    <div className="filter-group filter-group-standard">
                         <label className="filter-label">Categoria</label>
-                        <select className="filter-select" style={{ height: '48px' }} value={categoriaFilter} onChange={(e) => setCategoriaFilter(e.target.value)} disabled={!sectorFilter} aria-label="Categoria">
+                        <select className="filter-select filter-select-standard" value={categoriaFilter} onChange={(e) => setCategoriaFilter(e.target.value)} disabled={!sectorFilter} aria-label="Categoria">
                             <option value="">{sectorFilter ? 'Totes les categories' : 'Selecciona un sector'}</option>
                             {categoriesForSector
                                 .slice()
@@ -1589,56 +1421,15 @@ function EmpresesView({ empreses, onEmpresaSelect, searchTerm, setSearchTerm, se
             </div>
 
             {empresesFiltrades.length === 0 && (
-                <div className="empty-state">
-                    <div className="empty-state-icon">
-                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                    </div>
-                    <div className="empty-state-title">Sense resultats</div>
-                    <div className="empty-state-text">No s'han trobat empreses.</div>
-                    <div className="empty-state-action">
-                        <button className="empty-state-btn" onClick={resetFilters}>Restablir filtres</button>
-                    </div>
-                </div>
+                <EmptySearchState text="No s'han trobat empreses." onReset={resetFilters} />
             )}
 
             {empresesFiltrades.length > itemsPerPage && (
-                <div className="pagination">
-                    <button
-                        className="pagination-btn"
-                        onClick={() => { setCurrentPage(1) }}
-                        disabled={currentPage === 1}
-                        title="Primera pàgina"
-                    >
-                        «
-                    </button>
-                    <button
-                        className="pagination-btn"
-                        onClick={() => { setCurrentPage(prev => Math.max(prev - 1, 1)) }}
-                        disabled={currentPage === 1}
-                        title="Pàgina anterior"
-                    >
-                        ‹
-                    </button>
-                    <span className="pagination-info">
-                        Pàgina <strong>{currentPage}</strong> de <strong>{totalPages}</strong>
-                    </span>
-                    <button
-                        className="pagination-btn"
-                        onClick={() => { setCurrentPage(prev => Math.min(prev + 1, totalPages)) }}
-                        disabled={currentPage === totalPages}
-                        title="Pàgina següent"
-                    >
-                        ›
-                    </button>
-                    <button
-                        className="pagination-btn"
-                        onClick={() => { setCurrentPage(totalPages) }}
-                        disabled={currentPage === totalPages}
-                        title="Última pàgina"
-                    >
-                        »
-                    </button>
-                </div>
+                <Pagination
+                    currentPage={currentPage}
+                    totalPages={totalPages}
+                    onPageChange={setCurrentPage}
+                />
             )}
 
             {sectorTissue.items.length > 0 && (
@@ -1684,7 +1475,7 @@ function EmpresesView({ empreses, onEmpresaSelect, searchTerm, setSearchTerm, se
                 <div className="metodologia">
                     <h3 className="metodologia-legal-title">Metodologia</h3>
                     <p className="metodologia-intro">
-                        Les empreses que apareixen en aquest cercador han estat adjudicatàries d'un o més contractes per part de l'Ajuntament d'Igualada, segons les dades publicades al Registre Públic de Contractes de la Generalitat de Catalunya.
+                        Les empreses que apareixen en aquest cercador han estat adjudicatàries d'un o més contractes per part de {AUTHORITY_NAME}, segons les dades publicades al Registre Públic de Contractes de la Generalitat de Catalunya.
                     </p>
                     <p className="metodologia-intro">
                         L'import total que figura al costat de cada empresa correspon a la suma dels valors d'adjudicació de tots els contractes que li han estat atorgats. Aparèixer en aquest llistat no implica cap irregularitat, sinó que reflecteix la informació pública disponible sobre la contractació municipal. Les dades poden contenir errors derivats de fonts públiques o processos automatitzats, i qualsevol correcció factual serà revisada.
@@ -1916,22 +1707,12 @@ function EmpresaView({ empresa: empresaNom, contracts, empreses, administradors,
                 </div>
             )}
             <div className="search-section" style={{ marginBottom: '2rem' }}>
-                <div className="search-input-wrapper">
-                    <span className="search-icon">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                    </span>
-                    <input
-                        type="text"
-                        className="search-input"
-                        placeholder="Cerca per descripció, empresa o codi d'expedient"
-                        aria-label="Cerca per descripció, empresa o codi d'expedient"
-                        value={searchTerm}
-                        onChange={(e) => setSearchTerm(e.target.value)}
-                    />
-                    {searchTerm && (
-                        <button className="search-clear" onClick={() => setSearchTerm('')} type="button" aria-label="Netejar cerca">&times;</button>
-                    )}
-                </div>
+                <SearchField
+                    value={searchTerm}
+                    onValueChange={setSearchTerm}
+                    placeholder="Cerca per descripció, empresa o codi d'expedient"
+                    ariaLabel="Cerca per descripció, empresa o codi d'expedient"
+                />
                 <FilterActions
                     open={empresaFiltersOpen}
                     onToggle={() => setEmpresaFiltersOpen(prev => !prev)}
@@ -1940,18 +1721,18 @@ function EmpresaView({ empresa: empresaNom, contracts, empreses, administradors,
                 />
 
                 <div className={"filters search-filter-panel" + (!empresaFiltersOpen ? " collapsed" : "")}>
-                    <div className="filter-group" style={{ flex: '1 1 200px' }}>
+                    <div className="filter-group filter-group-standard">
                         <label className="filter-label">Ordenar per</label>
-                        <select className="filter-select" style={{ height: '48px' }} value={sortBy} onChange={(e) => setSortBy(e.target.value)} aria-label="Ordenar contractes de l'empresa per">
+                        <select className="filter-select filter-select-standard" value={sortBy} onChange={(e) => setSortBy(e.target.value)} aria-label="Ordenar contractes de l'empresa per">
                             <option value="date-desc">Data (més recents)</option>
                             <option value="date-asc">Data (més antics)</option>
                             <option value="amount-desc">Import (descendent)</option>
                             <option value="amount-asc">Import (ascendent)</option>
                         </select>
                     </div>
-                    <div className="filter-group" style={{ flex: '1 1 200px' }}>
+                    <div className="filter-group filter-group-standard">
                         <label className="filter-label">Procediment</label>
-                        <select className="filter-select" style={{ height: '48px' }} value={procedureFilter} onChange={(e) => setProcedureFilter(e.target.value)} aria-label="Procediment">
+                        <select className="filter-select filter-select-standard" value={procedureFilter} onChange={(e) => setProcedureFilter(e.target.value)} aria-label="Procediment">
                             <option value="">Tots els procediments</option>
                             <option value="Menor">Menor</option>
                             <option value="Obert">Obert</option>
@@ -1961,9 +1742,9 @@ function EmpresaView({ empresa: empresaNom, contracts, empreses, administradors,
                             <option value="Específic de sistema dinàmic de contractació">Sistema dinàmic</option>
                         </select>
                     </div>
-                    <div className="filter-group" style={{ flex: '1 1 200px' }}>
+                    <div className="filter-group filter-group-standard">
                         <label className="filter-label">Tipus</label>
-                        <select className="filter-select" style={{ height: '48px' }} value={tipusFilter} onChange={(e) => setTipusFilter(e.target.value)} aria-label="Tipus de contracte">
+                        <select className="filter-select filter-select-standard" value={tipusFilter} onChange={(e) => setTipusFilter(e.target.value)} aria-label="Tipus de contracte">
                             <option value="">Tots els tipus</option>
                             <option value="1. OBRES">Obres</option>
                             <option value="3. SUBMINISTRAMENTS">Subministraments</option>
@@ -1976,19 +1757,19 @@ function EmpresaView({ empresa: empresaNom, contracts, empreses, administradors,
                     </div>
                 </div>
                 <div className={"filters-row search-filter-panel search-filter-panel-secondary" + (!empresaFiltersOpen ? " collapsed" : "")}>
-                    <div className="filter-group" style={{ flex: '1 1 200px' }}>
+                    <div className="filter-group filter-group-standard">
                         <label className="filter-label">Data inici</label>
                         <input type="date" className="filter-input" aria-label="Data inici" value={dateStart} onChange={(e) => setDateStart(e.target.value)} />
                     </div>
-                    <div className="filter-group" style={{ flex: '1 1 200px' }}>
+                    <div className="filter-group filter-group-standard">
                         <label className="filter-label">Data final</label>
                         <input type="date" className="filter-input" aria-label="Data final" value={dateEnd} onChange={(e) => setDateEnd(e.target.value)} />
                     </div>
-                    <div className="filter-group" style={{ flex: '1 1 200px' }}>
+                    <div className="filter-group filter-group-standard">
                         <label className="filter-label">Des de</label>
                         <input type="number" min="0" step="0.01" inputMode="decimal" className="filter-input" placeholder="Import mínim" aria-label="Import mínim" value={amountMin} onChange={(e) => setAmountMin(e.target.value)} />
                     </div>
-                    <div className="filter-group" style={{ flex: '1 1 200px' }}>
+                    <div className="filter-group filter-group-standard">
                         <label className="filter-label">Fins a</label>
                         <input type="number" min="0" step="0.01" inputMode="decimal" className="filter-input" placeholder="Import màxim" aria-label="Import màxim" value={amountMax} onChange={(e) => setAmountMax(e.target.value)} />
                     </div>
@@ -2033,25 +1814,14 @@ function EmpresaView({ empresa: empresaNom, contracts, empreses, administradors,
                 </a>
             ))}
             {empresaContracts.length === 0 && (
-                <div className="empty-state">
-                    <div className="empty-state-icon">
-                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                    </div>
-                    <div className="empty-state-title">Sense resultats</div>
-                    <div className="empty-state-text">No s'han trobat contractes.</div>
-                    <div className="empty-state-action">
-                        <button className="empty-state-btn" onClick={resetFilters}>Restablir filtres</button>
-                    </div>
-                </div>
+                <EmptySearchState text="No s'han trobat contractes." onReset={resetFilters} />
             )}
             {empresaContracts.length > itemsPerPage && (
-                <div className="pagination">
-                    <button className="pagination-btn" onClick={() => { setCurrentPage(1) }} disabled={currentPage === 1} title="Primera pàgina">«</button>
-                    <button className="pagination-btn" onClick={() => { setCurrentPage(prev => Math.max(prev - 1, 1)) }} disabled={currentPage === 1} title="Pàgina anterior">‹</button>
-                    <span className="pagination-info">Pàgina <strong>{currentPage}</strong> de <strong>{totalPages}</strong></span>
-                    <button className="pagination-btn" onClick={() => { setCurrentPage(prev => Math.min(prev + 1, totalPages)) }} disabled={currentPage === totalPages} title="Pàgina següent">›</button>
-                    <button className="pagination-btn" onClick={() => { setCurrentPage(totalPages) }} disabled={currentPage === totalPages} title="Última pàgina">»</button>
-                </div>
+                <Pagination
+                    currentPage={currentPage}
+                    totalPages={totalPages}
+                    onPageChange={setCurrentPage}
+                />
             )}
         </div>
     );
@@ -2128,22 +1898,12 @@ function PersonesView({ persones, onEmpresaSelect, onNavigateLegal, searchTerm, 
         <div className="container persones-page">
             <h1 className="page-title">Cercador de persones</h1>
             <div className="search-section">
-                <div className="search-input-wrapper">
-                    <span className="search-icon">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                    </span>
-                    <input
-                        type="text"
-                        className="search-input"
-                        placeholder="Cerca per persona o empresa vinculada"
-                        aria-label="Cerca per persona o empresa vinculada"
-                        value={searchTerm}
-                        onChange={(e) => setSearchTerm(e.target.value)}
-                    />
-                    {searchTerm && (
-                        <button className="search-clear" onClick={() => setSearchTerm('')} type="button" aria-label="Netejar cerca">&times;</button>
-                    )}
-                </div>
+                <SearchField
+                    value={searchTerm}
+                    onValueChange={setSearchTerm}
+                    placeholder="Cerca per persona o empresa vinculada"
+                    ariaLabel="Cerca per persona o empresa vinculada"
+                />
 
                 <FilterActions
                     open={personesFiltersOpen}
@@ -2153,9 +1913,9 @@ function PersonesView({ persones, onEmpresaSelect, onNavigateLegal, searchTerm, 
                 />
 
                 <div className={"filters search-filter-panel search-filter-panel-single" + (!personesFiltersOpen ? " collapsed" : "")}>
-                    <div className="filter-group" style={{ flex: '1 1 200px' }}>
+                    <div className="filter-group filter-group-standard">
                         <label className="filter-label">Ordenar per</label>
-                        <select className="filter-select" style={{ height: '48px' }} value={sortBy} onChange={(e) => setSortBy(e.target.value)} aria-label="Ordenar persones per">
+                        <select className="filter-select filter-select-standard" value={sortBy} onChange={(e) => setSortBy(e.target.value)} aria-label="Ordenar persones per">
                             <option value="companies-desc">Nombre d'empreses (descendent)</option>
                             <option value="companies-asc">Nombre d'empreses (ascendent)</option>
                             <option value="amount-desc">Import (descendent)</option>
@@ -2230,63 +1990,22 @@ function PersonesView({ persones, onEmpresaSelect, onNavigateLegal, searchTerm, 
             </div>
 
             {personesFiltrades.length === 0 && (
-                <div className="empty-state">
-                    <div className="empty-state-icon">
-                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                    </div>
-                    <div className="empty-state-title">Sense resultats</div>
-                    <div className="empty-state-text">No s'han trobat persones.</div>
-                    <div className="empty-state-action">
-                        <button className="empty-state-btn" onClick={resetFilters}>Restablir filtres</button>
-                    </div>
-                </div>
+                <EmptySearchState text="No s'han trobat persones." onReset={resetFilters} />
             )}
 
             {personesFiltrades.length > itemsPerPage && (
-                <div className="pagination">
-                    <button
-                        className="pagination-btn"
-                        onClick={() => { setCurrentPage(1) }}
-                        disabled={currentPage === 1}
-                        title="Primera pàgina"
-                    >
-                        «
-                    </button>
-                    <button
-                        className="pagination-btn"
-                        onClick={() => { setCurrentPage(prev => Math.max(prev - 1, 1)) }}
-                        disabled={currentPage === 1}
-                        title="Pàgina anterior"
-                    >
-                        ‹
-                    </button>
-                    <span className="pagination-info">
-                        Pàgina <strong>{currentPage}</strong> de <strong>{totalPages}</strong>
-                    </span>
-                    <button
-                        className="pagination-btn"
-                        onClick={() => { setCurrentPage(prev => Math.min(prev + 1, totalPages)) }}
-                        disabled={currentPage === totalPages}
-                        title="Pàgina següent"
-                    >
-                        ›
-                    </button>
-                    <button
-                        className="pagination-btn"
-                        onClick={() => { setCurrentPage(totalPages) }}
-                        disabled={currentPage === totalPages}
-                        title="Última pàgina"
-                    >
-                        »
-                    </button>
-                </div>
+                <Pagination
+                    currentPage={currentPage}
+                    totalPages={totalPages}
+                    onPageChange={setCurrentPage}
+                />
             )}
 
             <div className="metodologia-wrapper">
                 <div className="metodologia">
                     <h3 className="metodologia-legal-title">Metodologia</h3>
                     <p className="metodologia-intro">
-                        Les persones que apareixen en aquest cercador es mostren en la seva condició de representants mercantils d'empreses adjudicatàries de l'Ajuntament d'Igualada, segons les dades del Butlletí Oficial del Registre Mercantil (BORME) i la plataforma de contractació municipal, registres oficials de caràcter públic i universal.
+                        Les persones que apareixen en aquest cercador es mostren en la seva condició de representants mercantils d'empreses adjudicatàries de {AUTHORITY_NAME}, segons les dades del Butlletí Oficial del Registre Mercantil (BORME) i la plataforma de contractació municipal, registres oficials de caràcter públic i universal.
                     </p>
                     <p className="metodologia-intro">
                         L'import que figura al costat de cada persona correspon al volum total adjudicat a les empreses on exerceix o ha exercit un càrrec mercantil. Aparèixer en aquest llistat no implica cap irregularitat, sinó que reflecteix únicament la vinculació professional pública entre la persona i les empreses que han contractat amb l'Ajuntament. Les dades poden contenir errors derivats de fonts públiques o processos automatitzats, i qualsevol correcció factual serà revisada.
@@ -2501,13 +2220,11 @@ function InvestigacioPaginatedContracts({ block, contracts, onContractSelect }) 
         <section ref={sectionRef} className="investigacio-embed investigacio-card-stack" aria-label={block.ariaLabel || 'Contractes relacionats'}>
             {pageContracts.map(contract => <InvestigacioContractCard key={contract.slug} contract={contract} onSelect={onContractSelect} hideAdjudicatario={Boolean(block.hideAdjudicatario)} />)}
             {blockContracts.length > itemsPerPage && (
-                <div className="pagination">
-                    <button className="pagination-btn" onClick={() => goToPage(1)} disabled={currentPage === 1} title="Primera pàgina">«</button>
-                    <button className="pagination-btn" onClick={() => goToPage(currentPage - 1)} disabled={currentPage === 1} title="Pàgina anterior">‹</button>
-                    <span className="pagination-info">Pàgina <strong>{currentPage}</strong> de <strong>{totalPages}</strong></span>
-                    <button className="pagination-btn" onClick={() => goToPage(currentPage + 1)} disabled={currentPage === totalPages} title="Pàgina següent">›</button>
-                    <button className="pagination-btn" onClick={() => goToPage(totalPages)} disabled={currentPage === totalPages} title="Última pàgina">»</button>
-                </div>
+                <Pagination
+                    currentPage={currentPage}
+                    totalPages={totalPages}
+                    onPageChange={goToPage}
+                />
             )}
         </section>
     );
@@ -2565,55 +2282,37 @@ function InvestigacioCaseView({ caso, contracts, onContractSelect }) {
     );
 }
 function App() {
-    // Treu el prefix BASE i normalitza la URL actual
-    const getRoute = () => {
-        let p = window.location.pathname;
-        if (BASE && p.startsWith(BASE)) p = p.slice(BASE.length);
-        if (!p.startsWith('/')) p = '/' + p;
-        // Suporta /contractes/ amb barra final
-        if (p.length > 1 && p.endsWith('/')) p = p.slice(0, -1);
-        return p;
-    };
     const tabFromPath = (p) => resolveRoute(p).tab;
-    const [activeTab, setActiveTab] = useState(() => tabFromPath(getRoute()));
+    const [activeTab, setActiveTab] = useState(() => tabFromPath(getCurrentRoute()));
     const [pendingEmpresaSlug, setPendingEmpresaSlug] = useState(() => {
-        const p = getRoute();
+        const p = getCurrentRoute();
         return p.startsWith('/empreses/') ? p.slice('/empreses/'.length) : null;
     });
     const [pendingContractSlug, setPendingContractSlug] = useState(() => {
-        const p = getRoute();
+        const p = getCurrentRoute();
         return p.startsWith('/contractes/') ? p.slice('/contractes/'.length) : null;
     });
     const [selectedContractForDetail, setSelectedContractForDetail] = useState(null);
-    const [contracts, setContracts] = useState([]);
-    const [empreses, setEmpreses] = useState([]);
-    const [persones, setPersones] = useState([]);
-    const [administradors, setAdministradors] = useState({});
-    const [fraudes, setFraudes] = useState([]);
-    const [concentracio, setConcentracio] = useState([]);
-    const [electoral, setElectoral] = useState([]);
-    const [monopolio, setMonopolio] = useState(null);
-    const [stats, setStats] = useState(null);
-    const [loading, setLoading] = useState(true);
-    const [dataLoading, setDataLoading] = useState(true);
-    const [personesLoaded, setPersonesLoaded] = useState(false);
-    const [administradorsLoaded, setAdministradorsLoaded] = useState(false);
-    const [analisiLoaded, setAnalisiLoaded] = useState(false);
-    const [casosInvestigacio, setCasosInvestigacio] = useState(CASOS_INVESTIGACIO_FALLBACK);
-    const [investigacioLoaded, setInvestigacioLoaded] = useState(false);
-    const [coreDataError, setCoreDataError] = useState(false);
-    const [personesError, setPersonesError] = useState(false);
-    const [administradorsError, setAdministradorsError] = useState(false);
-    const [analisiError, setAnalisiError] = useState(false);
-    const [investigacioError, setInvestigacioError] = useState(false);
-    const [coreRetry, setCoreRetry] = useState(0);
-    const [personesRetry, setPersonesRetry] = useState(0);
-    const [administradorsRetry, setAdministradorsRetry] = useState(0);
-    const [analisiRetry, setAnalisiRetry] = useState(0);
-    const [investigacioRetry, setInvestigacioRetry] = useState(0);
-    const [summary, setSummary] = useState(null);
-    const [summaryResolved, setSummaryResolved] = useState(false);
-    const [loadingProgress, setLoadingProgress] = useState(0);
+    const {
+        contracts,
+        empreses,
+        persones,
+        administradors,
+        fraudes,
+        concentracio,
+        electoral,
+        stats,
+        summary,
+        casosInvestigacio,
+        loading,
+        loadingProgress,
+        investigacioLoaded,
+        investigacioError,
+        activeDataError,
+        isDataTabLoading,
+        canRenderDataTab,
+        retryActiveData,
+    } = useIguadataData(activeTab);
     const [homeIntroFading, setHomeIntroFading] = useState(false);
     const [threeReadyTick, setThreeReadyTick] = useState(0);
     const [showMobileScrollTop, setShowMobileScrollTop] = useState(false);
@@ -2621,8 +2320,8 @@ function App() {
     const [homeRouteTransition, setHomeRouteTransition] = useState('');
     const [homeMetricTransition, setHomeMetricTransition] = useState(null);
     const homeIntroPlayedRef = useRef(false);
-    const activeInvestigacioSlug = getRoute().startsWith('/investigacio/')
-        ? getRoute().slice('/investigacio/'.length)
+    const activeInvestigacioSlug = getCurrentRoute().startsWith('/investigacio/')
+        ? getCurrentRoute().slice('/investigacio/'.length)
         : null;
     const activeInvestigacioCase = casosInvestigacio.find(item => item.slug === activeInvestigacioSlug)
         || CASOS_INVESTIGACIO_FALLBACK.find(item => item.slug === activeInvestigacioSlug)
@@ -2632,72 +2331,6 @@ function App() {
             (caso.content || []).flatMap(block => block.contract_snapshots || [])
         )
         , [casosInvestigacio]);
-
-    useEffect(() => {
-        let cancelled = false;
-        setInvestigacioLoaded(false);
-        setInvestigacioError(false);
-        fetch(jsonAssetUrl('/json/investigacio.json'))
-            .then(res => {
-                if (!res.ok) throw new Error('Investigacio HTTP ' + res.status);
-                return res.json();
-            })
-            .then(data => {
-                if (cancelled) return;
-                if (!Array.isArray(data) || !data.length) throw new Error('Investigacio JSON buit');
-                setCasosInvestigacio(data);
-                setInvestigacioLoaded(true);
-            })
-            .catch(err => {
-                if (cancelled) return;
-                console.warn('Error loading investigacio:', err);
-                setInvestigacioError(true);
-            });
-        return () => { cancelled = true; };
-    }, [investigacioRetry]);
-
-    useEffect(() => {
-        if (!loading) return;
-        const startTime = Date.now();
-        const timer = setInterval(() => {
-            const elapsed = Date.now() - startTime;
-            const p = 95 * (1 - Math.exp(-elapsed / 800));
-            setLoadingProgress(Math.floor(p));
-        }, 50);
-        return () => clearInterval(timer);
-    }, [loading]);
-
-    useEffect(() => {
-        let cancelled = false;
-        fetch(assetUrl('/json/resum.json'), { cache: 'no-cache' })
-            .then(res => res.ok ? res.json() : null)
-            .then(data => {
-                if (cancelled) return;
-                if (data) {
-                    setDataVersion(data.version);
-                    setSummary(data);
-                    if (data.stats) {
-                        setStats({
-                            total_contratos: data.stats.total_contratos || 0,
-                            importe_total: data.stats.importe_total || 0,
-                            num_empresas: data.stats.num_empresas || 0,
-                        });
-                    }
-                }
-            })
-            .catch(err => {
-                console.warn('No s\'ha pogut carregar el resum inicial:', err);
-            })
-            .finally(() => {
-                if (cancelled) return;
-                setSummaryResolved(true);
-                setLoadingProgress(100);
-                setTimeout(() => {
-                    if (!cancelled) setLoading(false);
-                }, 180);
-            });
-        return () => { cancelled = true; };
-    }, []);
 
     useEffect(() => {
         if (activeTab !== 'home' || loading || homeIntroPlayedRef.current) return;
@@ -3016,15 +2649,15 @@ function App() {
     const [selectedConcentracioDetail, setSelectedConcentracioDetail] = useState(null);
     const [selectedElectoralismeDetail, setSelectedElectoralismeDetail] = useState(null);
     const [pendingCasId, setPendingCasId] = useState(() => {
-        const p = getRoute();
+        const p = getCurrentRoute();
         return p.startsWith('/analisi/fraccionament/') ? p.slice('/analisi/fraccionament/'.length) : null;
     });
     const [pendingConcentracioId, setPendingConcentracioId] = useState(() => {
-        const p = getRoute();
+        const p = getCurrentRoute();
         return p.startsWith('/analisi/concentracio/') ? p.slice('/analisi/concentracio/'.length) : null;
     });
     const [pendingElectoralismeId, setPendingElectoralismeId] = useState(() => {
-        const p = getRoute();
+        const p = getCurrentRoute();
         return p.startsWith('/analisi/electoralisme/') ? p.slice('/analisi/electoralisme/'.length) : null;
     });
     const [selectedEmpresa, setSelectedEmpresa] = useState(null);
@@ -3129,7 +2762,7 @@ function App() {
         const route = customPath !== null ? customPath : (pathMap[tab] || '/');
         const normalizedRoute = (route.length > 1 && route.endsWith('/')) ? route.slice(0, -1) : route;
         const fullPath = (BASE + normalizedRoute).replace(/\/+$/, '') || '/';
-        if (getRoute() !== normalizedRoute) {
+        if (getCurrentRoute() !== normalizedRoute) {
             if (!replace) saveCurrentScroll();
             window.history[replace ? 'replaceState' : 'pushState']({
                 tab,
@@ -3187,7 +2820,7 @@ function App() {
             const state = event.state || window.history.state || {};
             const fallbackScroll = typeof state.scrollY === 'number' ? state.scrollY : 0;
             restoreScrollRef.current = getSavedScrollPosition(window.location.href, fallbackScroll);
-            const p = getRoute();
+            const p = getCurrentRoute();
             const resolved = resolveRoute(p);
             if (resolved.canonicalPath !== p) {
                 handleNavigation(resolved.tab, resolved.canonicalPath, { replace: true });
@@ -3310,193 +2943,7 @@ function App() {
     }, [fraudes, concentracio, electoral, summary]);
 
     useEffect(() => {
-        if (!summaryResolved) return;
-        let cancelled = false;
-        setCoreDataError(false);
-        setDataLoading(true);
-        Promise.all([
-            fetchContractsSnapshot(),
-            fetch(jsonAssetUrl('/json/empreses.json')).then(res => {
-                if (!res.ok) throw new Error(`Empreses HTTP ${res.status}`);
-                return res.json();
-            }),
-            fetchEmpresaAliases()
-        ])
-            .then(async ([snapshotRows, existingEmpreses, empresaAliases]) => {
-                if (cancelled) return;
-                let contractsData = snapshotRows;
-                // Desambigua col·lisions de slug (extremadament rar): afegeix sufix -2, -3...
-                {
-                    const slugCounts = new Map();
-                    const legacySeen = new Map();
-                    for (const c of contractsData) {
-                        const baseSlug = buildContractSlug(c);
-                        slugCounts.set(baseSlug, (slugCounts.get(baseSlug) || 0) + 1);
-                    }
-                    for (const c of contractsData) {
-                        const baseSlug = buildContractSlug(c);
-                        const legacyBaseSlug = buildLegacyContractSlug(c);
-                        c.slug = slugCounts.get(baseSlug) > 1
-                            ? `${baseSlug}-${stableHash([c.fecha, c.importe, c.adjudicatario])}`
-                            : baseSlug;
-
-                        const legacyN = (legacySeen.get(legacyBaseSlug) || 0) + 1;
-                        legacySeen.set(legacyBaseSlug, legacyN);
-                        const legacySlug = legacyN > 1 ? `${legacyBaseSlug}-${legacyN}` : legacyBaseSlug;
-                        c.slug_aliases = Array.from(new Set([legacyBaseSlug, legacySlug].filter(s => s && s !== c.slug)));
-                    }
-                }
-                setContracts(contractsData);
-
-                // Compute stats on the fly
-                const uniqueEmps = new Set(contractsData.map(c => c.adjudicatario).filter(Boolean));
-                setStats({
-                    total_contratos: contractsData.length,
-                    importe_total: contractsData.reduce((s, c) => s + c.importe, 0),
-                    num_empresas: uniqueEmps.size,
-                });
-
-                // Build empreses: existing AI classifications + CPV for new ones
-                const empresesData = buildEmpreses(contractsData, existingEmpreses);
-
-                // Asignar IDs cronológicos a las empresas
-                empresesData.forEach(e => {
-                    e.firstContractId = Math.min(...e.contratos);
-                });
-                const sortedChronological = [...empresesData].sort((a, b) => a.firstContractId - b.firstContractId);
-                sortedChronological.forEach((e, index) => {
-                    e.id = index + 1; // 1-indexed (intern, ja no s'usa a la URL)
-                });
-                // Slugs estables a partir del nom; desambigua col·lisions amb sufix numèric
-                {
-                    const seen = new Map();
-                    for (const e of empresesData) {
-                        let s = buildEmpresaSlug(e.nom);
-                        const n = (seen.get(s) || 0) + 1;
-                        seen.set(s, n);
-                        if (n > 1) s = `${s}-${n}`;
-                        e.slug = s;
-                    }
-                    const aliasSlugMap = buildEmpresaAliasSlugMap(empresesData, empresaAliases);
-                    for (const e of empresesData) {
-                        e.slug_aliases = Array.from(aliasSlugMap.entries())
-                            .filter(([, targetSlug]) => targetSlug === e.slug)
-                            .map(([aliasSlug]) => aliasSlug);
-                    }
-                }
-                setEmpreses(empresesData);
-                setDataLoading(false);
-            })
-            .catch(err => {
-                if (cancelled) return;
-                console.error('Error loading data:', err);
-                setCoreDataError(true);
-                setDataLoading(false);
-            });
-        return () => { cancelled = true; };
-    }, [summaryResolved, coreRetry]);
-
-    useEffect(() => {
-        if (!summaryResolved || activeTab !== 'persones' || personesLoaded) return;
-        let cancelled = false;
-        setPersonesError(false);
-        fetch(jsonAssetUrl('/json/persones.json'))
-            .then(res => {
-                if (!res.ok) throw new Error(`Persones HTTP ${res.status}`);
-                return res.json();
-            })
-            .then(data => {
-                if (!cancelled) setPersones(data || []);
-            })
-            .catch(err => {
-                console.error('Error loading persones:', err);
-                if (!cancelled) setPersonesError(true);
-            })
-            .finally(() => {
-                if (!cancelled) setPersonesLoaded(true);
-            });
-        return () => { cancelled = true; };
-    }, [activeTab, summaryResolved, personesLoaded, personesRetry]);
-
-    useEffect(() => {
-        if (!summaryResolved || activeTab !== 'empresa' || administradorsLoaded) return;
-        let cancelled = false;
-        setAdministradorsError(false);
-        fetch(jsonAssetUrl('/json/carrecs.json'))
-            .then(res => {
-                if (!res.ok) throw new Error(`Carrecs HTTP ${res.status}`);
-                return res.json();
-            })
-            .then(data => {
-                if (!cancelled) setAdministradors(data || {});
-            })
-            .catch(err => {
-                console.error('Error loading carrecs:', err);
-                if (!cancelled) setAdministradorsError(true);
-            })
-            .finally(() => {
-                if (!cancelled) setAdministradorsLoaded(true);
-            });
-        return () => { cancelled = true; };
-    }, [activeTab, summaryResolved, administradorsLoaded, administradorsRetry]);
-
-    useEffect(() => {
-        const analisiTabs = ['analisi', 'cas-fraccionament', 'cas-concentracio', 'cas-electoralisme'];
-        const shouldLoadImmediately = analisiTabs.includes(activeTab);
-        const shouldLoadWhenIdle = activeTab === 'home' && !dataLoading;
-        if (!summaryResolved || analisiLoaded || (!shouldLoadImmediately && !shouldLoadWhenIdle)) return;
-
-        let cancelled = false;
-        let idleId = null;
-        let timeoutId = null;
-        const loadAnalisi = () => {
-            setAnalisiError(false);
-            Promise.all([
-                fetch(jsonAssetUrl('/json/fraccionament.json')).then(res => {
-                    if (!res.ok) throw new Error(`Fraccionament HTTP ${res.status}`);
-                    return res.json();
-                }),
-                fetch(jsonAssetUrl('/json/concentracio.json')).then(res => {
-                    if (!res.ok) throw new Error(`Concentracio HTTP ${res.status}`);
-                    return res.json();
-                }),
-                fetch(jsonAssetUrl('/json/electoralisme.json')).then(res => {
-                    if (!res.ok) throw new Error(`Electoralisme HTTP ${res.status}`);
-                    return res.json();
-                })
-            ])
-                .then(([fraccionamentData, concentracioData, electoralismeData]) => {
-                    if (cancelled) return;
-                    setFraudes((fraccionamentData && fraccionamentData.alertes) || []);
-                    setConcentracio((concentracioData && concentracioData.alertes) || []);
-                    setElectoral((electoralismeData && electoralismeData.alertes) || []);
-                })
-                .catch(err => {
-                    console.error('Error loading analysis data:', err);
-                    if (!cancelled) setAnalisiError(true);
-                })
-                .finally(() => {
-                    if (!cancelled) setAnalisiLoaded(true);
-                });
-        };
-
-        if (shouldLoadImmediately) {
-            loadAnalisi();
-        } else if ('requestIdleCallback' in window) {
-            idleId = window.requestIdleCallback(loadAnalisi, { timeout: 2500 });
-        } else {
-            timeoutId = window.setTimeout(loadAnalisi, 800);
-        }
-
-        return () => {
-            cancelled = true;
-            if (idleId !== null) window.cancelIdleCallback(idleId);
-            if (timeoutId !== null) window.clearTimeout(timeoutId);
-        };
-    }, [activeTab, summaryResolved, dataLoading, analisiLoaded, analisiRetry]);
-
-    useEffect(() => {
-        const route = getRoute();
+        const route = getCurrentRoute();
         const resolved = resolveRoute(route);
         if (resolved.canonicalPath !== route) {
             handleNavigation(resolved.tab, resolved.canonicalPath, { replace: true });
@@ -3607,17 +3054,17 @@ function App() {
             return;
         }
         const titles = {
-            'home': "Iguadata | El projecte de transparència d'Igualada",
-            'loading': 'Iguadata',
-            buscador: 'Contractes | Iguadata',
-            empreses: 'Empreses | Iguadata',
-            persones: 'Persones | Iguadata',
-            analisi: 'Anàlisi | Iguadata',
-            casos: "Casos d'investigació | Iguadata",
-            sobre: 'Sobre | Iguadata',
-            legal: 'Iguadata'
+            'home': `${BRAND_NAME} | ${BRAND_TAGLINE}`,
+            'loading': BRAND_NAME,
+            buscador: formatPageTitle('Contractes'),
+            empreses: formatPageTitle('Empreses'),
+            persones: formatPageTitle('Persones'),
+            analisi: formatPageTitle('Anàlisi'),
+            casos: formatPageTitle("Casos d'investigació"),
+            sobre: formatPageTitle('Sobre'),
+            legal: BRAND_NAME
         };
-        document.title = titles[activeTab] || 'Iguadata';
+        document.title = titles[activeTab] || BRAND_NAME;
     }, [activeTab, selectedContractForDetail, selectedEmpresa, selectedCasoDetail, selectedConcentracioDetail, selectedElectoralismeDetail, activeInvestigacioCase]);
 
     const contractesFiltrats = useMemo(() => {
@@ -3909,7 +3356,7 @@ function App() {
         'cas-investigacio': 'Investigació',
         sobre: 'Sobre',
         legal: 'Avís legal'
-    }[activeTab] || 'Iguadata';
+    }[activeTab] || BRAND_NAME;
 
     const resetFilters = () => {
         setSearchTerm('');
@@ -4124,7 +3571,7 @@ function App() {
                         <div className="home-copy">
                             <h1 className="home-title">Tot és <em>públic</em></h1>
                             <p className="home-deck">
-                                Contractes, empreses, persones, imports i anàlisi en una cartografia oberta de la contractació pública de l'Ajuntament d'Igualada.
+                                Contractes, empreses, persones, imports i anàlisi en una cartografia oberta de la contractació pública de {AUTHORITY_NAME}.
                             </p>
                         </div>
 
@@ -4161,7 +3608,7 @@ function App() {
                     <section className="home-chapter home-economic-scene" aria-labelledby="home-economic-title">
                         <div className="home-economic-heading">
                             <h2 id="home-economic-title">On van els <em>diners?</em></h2>
-                            <p>Els sectors amb més despesa de l'Ajuntament d'Igualada.</p>
+                            <p>Els sectors amb més despesa de {AUTHORITY_NAME}.</p>
                         </div>
                         <div className="home-economic-bars" aria-label="Sectors amb més import adjudicat">
                             {homeTopSectors.map(item => (
@@ -4192,7 +3639,7 @@ function App() {
                         </div>
                         <div className="home-categories-heading">
                             <h2 id="home-categories-title">Què es <em>compra</em>?</h2>
-                            <p>Els serveis més contractats de l'Ajuntament d'Igualada.</p>
+                            <p>Els serveis més contractats de {AUTHORITY_NAME}.</p>
                         </div>
                     </section>
 
@@ -4234,7 +3681,7 @@ function App() {
             <div className="home-copy">
                 <h1 className="home-title">Tot és <em>públic</em></h1>
                 <p className="home-deck">
-                    Contractes, empreses, persones, imports i anàlisi en una cartografia oberta de la contractació pública de l'Ajuntament d'Igualada.
+                    Contractes, empreses, persones, imports i anàlisi en una cartografia oberta de la contractació pública de {AUTHORITY_NAME}.
                 </p>
             </div>
 
@@ -4380,49 +3827,6 @@ function App() {
         </div>
     );
 
-    const dataTabs = ['buscador', 'empreses', 'persones', 'contracte', 'empresa', 'analisi', 'cas-fraccionament', 'cas-concentracio', 'cas-electoralisme', 'cas-investigacio'];
-    const analisiTabs = ['analisi', 'cas-fraccionament', 'cas-concentracio', 'cas-electoralisme'];
-    const activeDataError =
-        (dataTabs.includes(activeTab) && coreDataError) ||
-        (activeTab === 'persones' && personesError) ||
-        (activeTab === 'empresa' && administradorsError) ||
-        (activeTab === 'cas-investigacio' && investigacioError) ||
-        (analisiTabs.includes(activeTab) && analisiError);
-    const isSupplementalDataLoading =
-        (activeTab === 'persones' && !personesLoaded) ||
-        (activeTab === 'empresa' && !administradorsLoaded) ||
-        (activeTab === 'cas-investigacio' && !investigacioLoaded) ||
-        (analisiTabs.includes(activeTab) && !analisiLoaded);
-    const isDataTabLoading = dataTabs.includes(activeTab) && (dataLoading || isSupplementalDataLoading);
-    const canRenderDataTab = !isDataTabLoading && !activeDataError;
-    const retryActiveData = () => {
-        if (coreDataError) {
-            setCoreRetry(value => value + 1);
-            return;
-        }
-        if (activeTab === 'persones') {
-            setPersonesLoaded(false);
-            setPersonesError(false);
-            setPersonesRetry(value => value + 1);
-            return;
-        }
-        if (activeTab === 'empresa') {
-            setAdministradorsLoaded(false);
-            setAdministradorsError(false);
-            setAdministradorsRetry(value => value + 1);
-            return;
-        }
-        if (activeTab === 'cas-investigacio') {
-            setInvestigacioError(false);
-            setInvestigacioRetry(value => value + 1);
-            return;
-        }
-        if (analisiTabs.includes(activeTab)) {
-            setAnalisiLoaded(false);
-            setAnalisiError(false);
-            setAnalisiRetry(value => value + 1);
-        }
-    };
     const renderSkeletonCard = (className = '') => (
         <div className={`contract-card data-skeleton-card${className ? ` ${className}` : ''}`} aria-hidden="true">
             <div className="data-skeleton-line data-skeleton-line-short"></div>
@@ -4463,7 +3867,7 @@ function App() {
     );
     const renderDataLoading = () => {
         if (activeTab === 'cas-investigacio') return renderInvestigacioLoading(activeInvestigacioCase);
-        const isAnalisiLoading = analisiTabs.includes(activeTab);
+        const isAnalisiLoading = ANALYSIS_TABS.includes(activeTab);
         const pageClass =
             activeTab === 'persones' ? 'persones-page' :
                 activeTab === 'empreses' || activeTab === 'empresa' ? 'empreses-page' :
@@ -4620,22 +4024,12 @@ function App() {
                 <div className="container contractes-page">
                     <h1 className="page-title">Cercador de contractes</h1>
                     <div className="search-section">
-                        <div className="search-input-wrapper">
-                            <span className="search-icon">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                            </span>
-                            <input
-                                type="text"
-                                className="search-input"
-                                placeholder="Cerca per descripció, empresa o codi d'expedient"
-                                aria-label="Cerca per descripció, empresa o codi d'expedient"
-                                value={searchTerm}
-                                onChange={(e) => setSearchTerm(e.target.value)}
-                            />
-                            {searchTerm && (
-                                <button className="search-clear" onClick={() => setSearchTerm('')} type="button" aria-label="Netejar cerca">&times;</button>
-                            )}
-                        </div>
+                        <SearchField
+                            value={searchTerm}
+                            onValueChange={setSearchTerm}
+                            placeholder="Cerca per descripció, empresa o codi d'expedient"
+                            ariaLabel="Cerca per descripció, empresa o codi d'expedient"
+                        />
 
                         <FilterActions
                             open={filtersOpen}
@@ -4645,18 +4039,18 @@ function App() {
                         />
 
                         <div className={"filters search-filter-panel" + (!filtersOpen ? " collapsed" : "")}>
-                            <div className="filter-group" style={{ flex: '1 1 200px' }}>
+                            <div className="filter-group filter-group-standard">
                                 <label className="filter-label">Ordenar per</label>
-                                <select className="filter-select" style={{ height: '48px' }} value={sortBy} onChange={(e) => setSortBy(e.target.value)} aria-label="Ordenar contractes per">
+                                <select className="filter-select filter-select-standard" value={sortBy} onChange={(e) => setSortBy(e.target.value)} aria-label="Ordenar contractes per">
                                     <option value="date-desc">Data (més recents)</option>
                                     <option value="date-asc">Data (més antics)</option>
                                     <option value="amount-desc">Import (descendent)</option>
                                     <option value="amount-asc">Import (ascendent)</option>
                                 </select>
                             </div>
-                            <div className="filter-group" style={{ flex: '1 1 200px' }}>
+                            <div className="filter-group filter-group-standard">
                                 <label className="filter-label">Procediment</label>
-                                <select className="filter-select" style={{ height: '48px' }} value={procedureFilter} onChange={(e) => setProcedureFilter(e.target.value)} aria-label="Procediment">
+                                <select className="filter-select filter-select-standard" value={procedureFilter} onChange={(e) => setProcedureFilter(e.target.value)} aria-label="Procediment">
                                     <option value="">Tots els procediments</option>
                                     <option value="Menor">Menor</option>
                                     <option value="Obert">Obert</option>
@@ -4666,9 +4060,9 @@ function App() {
                                     <option value="Específic de sistema dinàmic de contractació">Sistema dinàmic</option>
                                 </select>
                             </div>
-                            <div className="filter-group" style={{ flex: '1 1 200px' }}>
+                            <div className="filter-group filter-group-standard">
                                 <label className="filter-label">Tipus</label>
-                                <select className="filter-select" style={{ height: '48px' }} value={typeFilter} onChange={(e) => setTypeFilter(e.target.value)} aria-label="Tipus de contracte">
+                                <select className="filter-select filter-select-standard" value={typeFilter} onChange={(e) => setTypeFilter(e.target.value)} aria-label="Tipus de contracte">
                                     <option value="">Tots els tipus</option>
                                     <option value="1. OBRES">Obres</option>
                                     <option value="3. SUBMINISTRAMENTS">Subministraments</option>
@@ -4755,58 +4149,15 @@ function App() {
                     ))}
 
                     {contractesFiltrats.length === 0 && (
-                        <div className="empty-state">
-                            <div className="empty-state-icon">
-                                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                            </div>
-                            <div className="empty-state-title">Sense resultats</div>
-                            <div className="empty-state-text">No s'han trobat contractes.</div>
-                            <div className="empty-state-action">
-                                <button className="empty-state-btn" onClick={resetFilters}>Restablir filtres</button>
-                            </div>
-                        </div>
+                        <EmptySearchState text="No s'han trobat contractes." onReset={resetFilters} />
                     )}
 
                     {contractesFiltrats.length > itemsPerPage && (
-                        <div className="pagination">
-                            <button
-                                className="pagination-btn"
-                                onClick={() => { setCurrentPage(1) }}
-                                disabled={currentPage === 1}
-                                title="Primera pàgina"
-                            >
-                                «
-                            </button>
-                            <button
-                                className="pagination-btn"
-                                onClick={() => { setCurrentPage(currentPage - 1) }}
-                                disabled={currentPage === 1}
-                                title="Pàgina anterior"
-                            >
-                                ‹
-                            </button>
-
-                            <span className="pagination-info">
-                                Pàgina <strong>{currentPage}</strong> de <strong>{totalPages}</strong>
-                            </span>
-
-                            <button
-                                className="pagination-btn"
-                                onClick={() => { setCurrentPage(currentPage + 1) }}
-                                disabled={currentPage === totalPages}
-                                title="Pàgina següent"
-                            >
-                                ›
-                            </button>
-                            <button
-                                className="pagination-btn"
-                                onClick={() => { setCurrentPage(totalPages) }}
-                                disabled={currentPage === totalPages}
-                                title="Última pàgina"
-                            >
-                                »
-                            </button>
-                        </div>
+                        <Pagination
+                            currentPage={currentPage}
+                            totalPages={totalPages}
+                            onPageChange={setCurrentPage}
+                        />
                     )}
 
                     {contractesAnnualEvolution.items.length > 0 && (
@@ -5067,22 +4418,12 @@ function App() {
                                 </div>
 
                                 <div className="search-section analisi-search-section">
-                                    <div className="search-input-wrapper">
-                                        <span className="search-icon">
-                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                                        </span>
-                                        <input
-                                            type="text"
-                                            className="search-input"
-                                            placeholder="Cerca per descripció, empresa o codi de cas"
-                                            aria-label="Cerca casos de fraccionament"
-                                            value={analisiSearch}
-                                            onChange={(e) => setAnalisiSearch(e.target.value)}
-                                        />
-                                        {analisiSearch && (
-                                            <button className="search-clear" onClick={() => setAnalisiSearch('')} type="button" aria-label="Netejar cerca">&times;</button>
-                                        )}
-                                    </div>
+                                    <SearchField
+                                        value={analisiSearch}
+                                        onValueChange={setAnalisiSearch}
+                                        placeholder="Cerca per descripció, empresa o codi de cas"
+                                        ariaLabel="Cerca casos de fraccionament"
+                                    />
 
                                     <FilterActions
                                         open={analisiFiltersOpen}
@@ -5092,9 +4433,9 @@ function App() {
                                     />
 
                                     <div className={"filters search-filter-panel search-filter-panel-analysis" + (!analisiFiltersOpen ? " collapsed" : "")}>
-                                        <div className="filter-group" style={{ flex: '1 1 240px' }}>
+                                        <div className="filter-group filter-group-wide">
                                             <label className="filter-label">Ordenar per</label>
-                                            <select className="filter-select" style={{ height: '48px' }} value={analisiSort} onChange={(e) => setAnalisiSort(e.target.value)} aria-label="Ordenar casos de fraccionament per">
+                                            <select className="filter-select filter-select-standard" value={analisiSort} onChange={(e) => setAnalisiSort(e.target.value)} aria-label="Ordenar casos de fraccionament per">
                                                 <option value="risk-desc">Puntuació de risc (descendent)</option>
                                                 <option value="risk-asc">Puntuació de risc (ascendent)</option>
                                                 <option value="amount-desc">Import (descendent)</option>
@@ -5153,13 +4494,11 @@ function App() {
                                 </div>
 
                                 {fraudesFiltrats.length > analisiItemsPerPage && (
-                                    <div className="pagination">
-                                        <button className="pagination-btn" onClick={() => { setAnalisiPageFrac(1) }} disabled={analisiPageFrac === 1} title="Primera pàgina">«</button>
-                                        <button className="pagination-btn" onClick={() => { setAnalisiPageFrac(prev => Math.max(prev - 1, 1)) }} disabled={analisiPageFrac === 1} title="Pàgina anterior">‹</button>
-                                        <span className="pagination-info">Pàgina <strong>{analisiPageFrac}</strong> de <strong>{totalPagesFrac}</strong></span>
-                                        <button className="pagination-btn" onClick={() => { setAnalisiPageFrac(prev => Math.min(prev + 1, totalPagesFrac)) }} disabled={analisiPageFrac === totalPagesFrac} title="Pàgina següent">›</button>
-                                        <button className="pagination-btn" onClick={() => { setAnalisiPageFrac(totalPagesFrac) }} disabled={analisiPageFrac === totalPagesFrac} title="Última pàgina">»</button>
-                                    </div>
+                                    <Pagination
+                                        currentPage={analisiPageFrac}
+                                        totalPages={totalPagesFrac}
+                                        onPageChange={setAnalisiPageFrac}
+                                    />
                                 )}
                             </>
                         )}
@@ -5258,22 +4597,12 @@ function App() {
 
                                 {concentracioMode === 'temporal' && (
                                 <div className="search-section analisi-search-section">
-                                        <div className="search-input-wrapper">
-                                            <span className="search-icon">
-                                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                                            </span>
-                                            <input
-                                                type="text"
-                                                className="search-input"
-                                                placeholder="Cerca per descripció, empresa o codi de cas"
-                                                aria-label="Cerca casos de concentració"
-                                                value={analisiSearch}
-                                                onChange={(e) => setAnalisiSearch(e.target.value)}
-                                            />
-                                            {analisiSearch && (
-                                                <button className="search-clear" onClick={() => setAnalisiSearch('')} type="button" aria-label="Netejar cerca">&times;</button>
-                                            )}
-                                        </div>
+                                        <SearchField
+                                            value={analisiSearch}
+                                            onValueChange={setAnalisiSearch}
+                                            placeholder="Cerca per descripció, empresa o codi de cas"
+                                            ariaLabel="Cerca casos de concentració"
+                                        />
 
                                         <FilterActions
                                             open={analisiFiltersOpen}
@@ -5283,9 +4612,9 @@ function App() {
                                         />
 
                                         <div className={"filters search-filter-panel search-filter-panel-analysis" + (!analisiFiltersOpen ? " collapsed" : "")}>
-                                            <div className="filter-group" style={{ flex: '1 1 240px' }}>
+                                            <div className="filter-group filter-group-wide">
                                                 <label className="filter-label">Ordenar per</label>
-                                                <select className="filter-select" style={{ height: '48px' }} value={analisiSort} onChange={(e) => setAnalisiSort(e.target.value)} aria-label="Ordenar casos de concentració per">
+                                                <select className="filter-select filter-select-standard" value={analisiSort} onChange={(e) => setAnalisiSort(e.target.value)} aria-label="Ordenar casos de concentració per">
                                                     <option value="risk-desc">Puntuació de risc (descendent)</option>
                                                     <option value="risk-asc">Puntuació de risc (ascendent)</option>
                                                     <option value="amount-desc">Import (descendent)</option>
@@ -5390,13 +4719,11 @@ function App() {
                                         </div>
 
                                         {concentracioTemporal.length > analisiItemsPerPage && (
-                                            <div className="pagination">
-                                                <button className="pagination-btn" onClick={() => { setAnalisiPageMonop(1) }} disabled={analisiPageMonop === 1} title="Primera pàgina">«</button>
-                                                <button className="pagination-btn" onClick={() => { setAnalisiPageMonop(prev => Math.max(prev - 1, 1)) }} disabled={analisiPageMonop === 1} title="Pàgina anterior">‹</button>
-                                                <span className="pagination-info">Pàgina <strong>{analisiPageMonop}</strong> de <strong>{totalPagesMonop}</strong></span>
-                                                <button className="pagination-btn" onClick={() => { setAnalisiPageMonop(prev => Math.min(prev + 1, totalPagesMonop)) }} disabled={analisiPageMonop === totalPagesMonop} title="Pàgina següent">›</button>
-                                                <button className="pagination-btn" onClick={() => { setAnalisiPageMonop(totalPagesMonop) }} disabled={analisiPageMonop === totalPagesMonop} title="Última pàgina">»</button>
-                                            </div>
+                                            <Pagination
+                                                currentPage={analisiPageMonop}
+                                                totalPages={totalPagesMonop}
+                                                onPageChange={setAnalisiPageMonop}
+                                            />
                                         )}
                                     </>
                                 )}
@@ -5435,22 +4762,12 @@ function App() {
                                 </div>
 
                                 <div className="search-section analisi-search-section">
-                                    <div className="search-input-wrapper">
-                                        <span className="search-icon">
-                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                                        </span>
-                                        <input
-                                            type="text"
-                                            className="search-input"
-                                            placeholder="Cerca per descripció, empresa o codi de cas"
-                                            aria-label="Cerca casos d'electoralisme"
-                                            value={analisiSearch}
-                                            onChange={(e) => setAnalisiSearch(e.target.value)}
-                                        />
-                                        {analisiSearch && (
-                                            <button className="search-clear" onClick={() => setAnalisiSearch('')} type="button" aria-label="Netejar cerca">&times;</button>
-                                        )}
-                                    </div>
+                                    <SearchField
+                                        value={analisiSearch}
+                                        onValueChange={setAnalisiSearch}
+                                        placeholder="Cerca per descripció, empresa o codi de cas"
+                                        ariaLabel="Cerca casos d'electoralisme"
+                                    />
 
                                     <FilterActions
                                         open={analisiFiltersOpen}
@@ -5460,9 +4777,9 @@ function App() {
                                     />
 
                                     <div className={"filters search-filter-panel search-filter-panel-analysis" + (!analisiFiltersOpen ? " collapsed" : "")}>
-                                        <div className="filter-group" style={{ flex: '1 1 240px' }}>
+                                        <div className="filter-group filter-group-wide">
                                             <label className="filter-label">Ordenar per</label>
-                                            <select className="filter-select" style={{ height: '48px' }} value={analisiSort} onChange={(e) => setAnalisiSort(e.target.value)} aria-label="Ordenar casos d'electoralisme per">
+                                            <select className="filter-select filter-select-standard" value={analisiSort} onChange={(e) => setAnalisiSort(e.target.value)} aria-label="Ordenar casos d'electoralisme per">
                                                 <option value="risk-desc">Puntuació de risc (descendent)</option>
                                                 <option value="risk-asc">Puntuació de risc (ascendent)</option>
                                                 <option value="amount-desc">Import (descendent)</option>
@@ -5540,13 +4857,11 @@ function App() {
                                 </div>
 
                                 {electoralFiltrats.length > analisiItemsPerPage && (
-                                    <div className="pagination">
-                                        <button className="pagination-btn" onClick={() => { setAnalisiPageElect(1) }} disabled={analisiPageElect === 1} title="Primera pàgina">«</button>
-                                        <button className="pagination-btn" onClick={() => { setAnalisiPageElect(prev => Math.max(prev - 1, 1)) }} disabled={analisiPageElect === 1} title="Pàgina anterior">‹</button>
-                                        <span className="pagination-info">Pàgina <strong>{analisiPageElect}</strong> de <strong>{totalPagesElect}</strong></span>
-                                        <button className="pagination-btn" onClick={() => { setAnalisiPageElect(prev => Math.min(prev + 1, totalPagesElect)) }} disabled={analisiPageElect === totalPagesElect} title="Pàgina següent">›</button>
-                                        <button className="pagination-btn" onClick={() => { setAnalisiPageElect(totalPagesElect) }} disabled={analisiPageElect === totalPagesElect} title="Última pàgina">»</button>
-                                    </div>
+                                    <Pagination
+                                        currentPage={analisiPageElect}
+                                        totalPages={totalPagesElect}
+                                        onPageChange={setAnalisiPageElect}
+                                    />
                                 )}
                             </>
                         )}
@@ -5561,7 +4876,7 @@ function App() {
                         <h1 className="page-title">Sobre el projecte</h1>
                         <div className="prose-wrapper">
                             <p className="prose-intro">
-                                Iguadata és la plataforma independent de periodisme de dades per a l'anàlisi de la contractació pública de l'Ajuntament d'Igualada i dels seus organismes municipals.<br /><br />El projecte combina dades obertes de contractació, informació mercantil i algoritmes propis per fer més accessible, comprensible i fiscalitzable la despesa pública municipal.
+                                {BRAND_NAME} és la plataforma independent de periodisme de dades per a l'anàlisi de la contractació pública de {AUTHORITY_NAME} i dels seus organismes municipals.<br /><br />El projecte combina dades obertes de contractació, informació mercantil i algoritmes propis per fer més accessible, comprensible i fiscalitzable la despesa pública municipal.
                             </p>
                             <h2 className="prose-heading">Autoria</h2>
                             <p className="prose-paragraph">
@@ -5607,11 +4922,11 @@ function App() {
                             </p>
                             <h2 className="prose-heading">Codi obert</h2>
                             <p className="prose-paragraph">
-                                El codi font del projecte és públic i està disponible a <a href="https://github.com/vicxvers/iguadata" target="_blank" rel="noopener noreferrer" className="prose-link">GitHub</a> sota llicència GNU GPL v3.0.
+                                El codi font del projecte és públic i està disponible a <a href={REPOSITORY_URL} target="_blank" rel="noopener noreferrer" className="prose-link">GitHub</a> sota llicència GNU GPL v3.0.
                             </p>
                             <h2 className="prose-heading">Contacte</h2>
                             <p className="prose-paragraph">
-                                Per a suggeriments, correccions factuals, col·laboracions o consultes sobre el projecte, es pot contactar a partir de <a href="mailto:hola@iguadata.cat" className="prose-link">hola@iguadata.cat</a>.
+                                Per a suggeriments, correccions factuals, col·laboracions o consultes sobre el projecte, es pot contactar a partir de <a href={`mailto:${CONTACT_EMAIL}`} className="prose-link">{CONTACT_EMAIL}</a>.
                             </p>
                         </div>
                     </div>
@@ -5625,13 +4940,13 @@ function App() {
                         <div className="prose-wrapper">
                             <h2 className="prose-heading">1. Identificació i titularitat</h2>
                             <p className="prose-paragraph">
-                                Iguadata és un projecte independent de transparència, anàlisi de dades públiques i fiscalització cívica de la contractació pública vinculada a l'Ajuntament d'Igualada i als seus organismes municipals relacionats.
+                                {BRAND_NAME} és un projecte independent de transparència, anàlisi de dades públiques i fiscalització cívica de la contractació pública vinculada a {AUTHORITY_NAME} i als seus organismes municipals relacionats.
                             </p>
                             <p className="prose-paragraph">
                                 Iguadata no és una administració pública ni actua en nom de cap institució. La plataforma té finalitats informatives, periodístiques, educatives, de recerca i de divulgació.
                             </p>
                             <p className="prose-paragraph">
-                                Responsable del projecte i del tractament: Víctor Recio Rodríguez. Contacte: <a href="mailto:hola@iguadata.cat" className="prose-link">hola@iguadata.cat</a>.
+                                Responsable del projecte i del tractament: Víctor Recio Rodríguez. Contacte: <a href={`mailto:${CONTACT_EMAIL}`} className="prose-link">{CONTACT_EMAIL}</a>.
                             </p>
                             <h2 className="prose-heading">2. Origen de les dades</h2>
                             <p className="prose-paragraph">
@@ -5682,7 +4997,7 @@ function App() {
                             </p>
                             <h2 className="prose-heading">7. Exercici de drets i correccions</h2>
                             <p className="prose-paragraph">
-                                Les persones interessades poden exercir els drets d'accés, rectificació, limitació o oposició al tractament a <a href="mailto:hola@iguadata.cat" className="prose-link">hola@iguadata.cat</a>.
+                                Les persones interessades poden exercir els drets d'accés, rectificació, limitació o oposició al tractament a <a href={`mailto:${CONTACT_EMAIL}`} className="prose-link">{CONTACT_EMAIL}</a>.
                             </p>
                             <p className="prose-paragraph">
                                 També es poden comunicar errors factuals, homonímies, atribucions incorrectes, canvis de denominació, dades desactualitzades o incidències derivades del processament automatitzat.
@@ -5731,19 +5046,19 @@ function App() {
                         <div className={`footer-content${activeTab === 'sobre' || activeTab === 'legal' || activeTab === 'cas-investigacio' ? ' footer-content-prose' : ''}`}>
                             <div className="footer-main">
                                 <div className="footer-brand">
-                                    <a href={BASE + '/'} onClick={(e) => { e.preventDefault(); handleNavigation('home'); }} className="footer-logo-link" aria-label="Iguadata, inici">
-                                        <img src={assetUrl('/assets/iguadata.svg')} alt="Iguadata" className="footer-logo" />
+                                    <a href={BASE + '/'} onClick={(e) => { e.preventDefault(); handleNavigation('home'); }} className="footer-logo-link" aria-label={`${BRAND_NAME}, inici`}>
+                                        <img src={assetUrl('/assets/iguadata.svg')} alt={BRAND_NAME} className="footer-logo" />
                                     </a>
-                                    <p className="footer-tagline">El projecte de transparència d'Igualada</p>
+                                    <p className="footer-tagline">{BRAND_TAGLINE}</p>
                                     <div className="footer-social">
-                                        <a href="https://www.instagram.com/iguadata/" target="_blank" rel="noopener noreferrer" className="footer-social-link" aria-label="Iguadata a Instagram">
+                                        <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" className="footer-social-link" aria-label={`${BRAND_NAME} a Instagram`}>
                                             <svg viewBox="0 0 24 24" aria-hidden="true">
                                                 <rect x="3" y="3" width="18" height="18" rx="5" />
                                                 <circle cx="12" cy="12" r="4" />
                                                 <circle cx="17.5" cy="6.5" r="1" className="footer-social-fill" />
                                             </svg>
                                         </a>
-                                        <a href="mailto:hola@iguadata.cat" className="footer-social-link" aria-label="Escriu a Iguadata">
+                                        <a href={`mailto:${CONTACT_EMAIL}`} className="footer-social-link" aria-label={`Escriu a ${BRAND_NAME}`}>
                                             <svg viewBox="0 0 24 24" aria-hidden="true">
                                                 <rect x="3" y="5" width="18" height="14" rx="2" />
                                                 <path d="m4 7 8 6 8-6" />
@@ -5762,14 +5077,14 @@ function App() {
                                     </div>
                                     <div className="footer-nav-column">
                                         <a href={BASE + '/sobre'} onClick={(e) => { e.preventDefault(); handleNavigation('sobre'); }} className="footer-link">Sobre</a>
-                                        <a href="mailto:hola@iguadata.cat" className="footer-link">Contacte</a>
-                                        <a href="https://github.com/vicxvers/iguadata" target="_blank" rel="noopener noreferrer" className="footer-link">Codi obert</a>
+                                        <a href={`mailto:${CONTACT_EMAIL}`} className="footer-link">Contacte</a>
+                                        <a href={REPOSITORY_URL} target="_blank" rel="noopener noreferrer" className="footer-link">Codi obert</a>
                                         <a href={BASE + '/avis-legal'} onClick={(e) => { e.preventDefault(); handleNavigation('legal'); }} className="footer-link">Avís legal</a>
                                     </div>
                                 </nav>
                             </div>
 
-                            <div className="footer-copyright">© 2026 Iguadata. Tots els drets reservats.</div>
+                            <div className="footer-copyright">© 2026 {BRAND_NAME}. Tots els drets reservats.</div>
                         </div>
                     </footer>
                 )
