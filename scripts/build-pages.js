@@ -10,7 +10,7 @@ const investigationsPath = path.join(root, 'json', 'investigacio.json');
 const sitemapPath = path.join(root, 'sitemap.xml');
 const assetVersion = relativePath => crypto
     .createHash('sha256')
-    .update(fs.readFileSync(path.join(root, relativePath)))
+    .update(fs.readFileSync(path.join(root, relativePath), 'utf8').replace(/\r\n?/g, '\n'))
     .digest('hex')
     .slice(0, 12);
 const ASSET_VERSIONS = {

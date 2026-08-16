@@ -271,7 +271,8 @@ class DataPipelineTests(unittest.TestCase):
         self.assertLess(bootstrap.index("document.createElement('base')"), bootstrap.index("history.replaceState"))
         index = (ROOT / "index.html").read_text(encoding="utf-8")
         for relative_path in ("assets/bootstrap.js", "assets/app.js", "styles.css"):
-            expected_version = hashlib.sha256((ROOT / relative_path).read_bytes()).hexdigest()[:12]
+            normalized_asset = (ROOT / relative_path).read_text(encoding="utf-8").replace("\r\n", "\n").replace("\r", "\n")
+            expected_version = hashlib.sha256(normalized_asset.encode("utf-8")).hexdigest()[:12]
             self.assertIn(f'{relative_path}?v={expected_version}', index)
         fallback = (ROOT / "404.html").read_text(encoding="utf-8")
         self.assertIn("script-src 'sha256-", fallback)
