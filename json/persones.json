@@ -741,60 +741,6 @@
     ]
   },
   {
-    "nom": "HERNANDEZ FERNANDEZ LAURA",
-    "total_adjudicat": 12566187.07,
-    "relacions": [
-      {
-        "empresa": "FCC MEDIO AMBIENTE",
-        "import_empresa": 12523143.07,
-        "carrecs": [
-          "Apo.Man.Soli"
-        ]
-      },
-      {
-        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
-        "import_empresa": 34722.0,
-        "carrecs": [
-          "APOD.SOL/MAN"
-        ]
-      },
-      {
-        "empresa": "CONTENUR SL",
-        "import_empresa": 8322.0,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "MARRERO PEREZ FRANCISCO FERNANDO",
-    "total_adjudicat": 12566187.07,
-    "relacions": [
-      {
-        "empresa": "FCC MEDIO AMBIENTE",
-        "import_empresa": 12523143.07,
-        "carrecs": [
-          "Apoderado"
-        ]
-      },
-      {
-        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
-        "import_empresa": 34722.0,
-        "carrecs": [
-          "APOD.SOL/MAN"
-        ]
-      },
-      {
-        "empresa": "CONTENUR SL",
-        "import_empresa": 8322.0,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
     "nom": "ALVAREZ SALCEDA JOAQUIN CARLOS",
     "total_adjudicat": 12566187.07,
     "relacions": [
@@ -864,6 +810,33 @@
         "import_empresa": 34722.0,
         "carrecs": [
           "APODERAD.SOL"
+        ]
+      },
+      {
+        "empresa": "CONTENUR SL",
+        "import_empresa": 8322.0,
+        "carrecs": [
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "HERNANDEZ FERNANDEZ LAURA",
+    "total_adjudicat": 12566187.07,
+    "relacions": [
+      {
+        "empresa": "FCC MEDIO AMBIENTE",
+        "import_empresa": 12523143.07,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      },
+      {
+        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
+        "import_empresa": 34722.0,
+        "carrecs": [
+          "APOD.SOL/MAN"
         ]
       },
       {
@@ -958,28 +931,8 @@
     ]
   },
   {
-    "nom": "ACOSTA ACOSTA DAVID ALBERTO",
-    "total_adjudicat": 12557865.07,
-    "relacions": [
-      {
-        "empresa": "FCC MEDIO AMBIENTE",
-        "import_empresa": 12523143.07,
-        "carrecs": [
-          "Apo.Man.Soli"
-        ]
-      },
-      {
-        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
-        "import_empresa": 34722.0,
-        "carrecs": [
-          "APODERADO"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "ZUBELZU MINGUEZ OSCAR",
-    "total_adjudicat": 12557865.07,
+    "nom": "MARRERO PEREZ FRANCISCO FERNANDO",
+    "total_adjudicat": 12566187.07,
     "relacions": [
       {
         "empresa": "FCC MEDIO AMBIENTE",
@@ -994,11 +947,18 @@
         "carrecs": [
           "APOD.SOL/MAN"
         ]
+      },
+      {
+        "empresa": "CONTENUR SL",
+        "import_empresa": 8322.0,
+        "carrecs": [
+          "Apoderado"
+        ]
       }
     ]
   },
   {
-    "nom": "MARTIN RODRIGUEZ JESUS",
+    "nom": "COLIO ABRIL PABLO",
     "total_adjudicat": 12557865.07,
     "relacions": [
       {
@@ -1012,7 +972,11 @@
         "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
         "import_empresa": 34722.0,
         "carrecs": [
-          "APODERAD.SOL"
+          "CONS.EJECUTI",
+          "MRO.COMS.EJE",
+          "CONS.DEL.SOL",
+          "CONS. DELEG.",
+          "APOD.SOL/MAN"
         ]
       }
     ]
@@ -1038,27 +1002,7 @@
     ]
   },
   {
-    "nom": "BRAVO DIAZ ANTONIO",
-    "total_adjudicat": 12557865.07,
-    "relacions": [
-      {
-        "empresa": "FCC MEDIO AMBIENTE",
-        "import_empresa": 12523143.07,
-        "carrecs": [
-          "Apoderado"
-        ]
-      },
-      {
-        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
-        "import_empresa": 34722.0,
-        "carrecs": [
-          "APOD.SOL/MAN"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "SANCHEZ GARCIA ALFONSO",
+    "nom": "CEREZO ORTEGA FRANCISCO JAVIER",
     "total_adjudicat": 12557865.07,
     "relacions": [
       {
@@ -1098,47 +1042,7 @@
     ]
   },
   {
-    "nom": "CUESTA GARCIA ENRIQUE",
-    "total_adjudicat": 12557865.07,
-    "relacions": [
-      {
-        "empresa": "FCC MEDIO AMBIENTE",
-        "import_empresa": 12523143.07,
-        "carrecs": [
-          "Apo.Man.Soli"
-        ]
-      },
-      {
-        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
-        "import_empresa": 34722.0,
-        "carrecs": [
-          "APOD.SOL/MAN"
-        ]
-      }
-    ]
-  },
-  {
     "nom": "GARCILLAN FONTECHA ANGEL",
-    "total_adjudicat": 12557865.07,
-    "relacions": [
-      {
-        "empresa": "FCC MEDIO AMBIENTE",
-        "import_empresa": 12523143.07,
-        "carrecs": [
-          "Apoderado"
-        ]
-      },
-      {
-        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
-        "import_empresa": 34722.0,
-        "carrecs": [
-          "APOD.SOL/MAN"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "URBANO DE SALETA FELIPE",
     "total_adjudicat": 12557865.07,
     "relacions": [
       {
@@ -1178,7 +1082,7 @@
     ]
   },
   {
-    "nom": "FERNANDEZ FARIZA TIRSO",
+    "nom": "ZUBELZU MINGUEZ OSCAR",
     "total_adjudicat": 12557865.07,
     "relacions": [
       {
@@ -1192,7 +1096,7 @@
         "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
         "import_empresa": 34722.0,
         "carrecs": [
-          "APODERAD.SOL"
+          "APOD.SOL/MAN"
         ]
       }
     ]
@@ -1238,86 +1142,6 @@
     ]
   },
   {
-    "nom": "VAZQUEZ DE PRADA GARCIA JAVIER",
-    "total_adjudicat": 12557865.07,
-    "relacions": [
-      {
-        "empresa": "FCC MEDIO AMBIENTE",
-        "import_empresa": 12523143.07,
-        "carrecs": [
-          "Apo.Man.Soli"
-        ]
-      },
-      {
-        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
-        "import_empresa": 34722.0,
-        "carrecs": [
-          "APOD.SOL/MAN"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "MONTEAGUDO FERNANDEZ ROBERTO",
-    "total_adjudicat": 12557865.07,
-    "relacions": [
-      {
-        "empresa": "FCC MEDIO AMBIENTE",
-        "import_empresa": 12523143.07,
-        "carrecs": [
-          "Apo.Man.Soli"
-        ]
-      },
-      {
-        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
-        "import_empresa": 34722.0,
-        "carrecs": [
-          "APODERADO"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "PONTEJO URIARTE MARIA VICTORIA",
-    "total_adjudicat": 12557865.07,
-    "relacions": [
-      {
-        "empresa": "FCC MEDIO AMBIENTE",
-        "import_empresa": 12523143.07,
-        "carrecs": [
-          "Apo.Man.Soli"
-        ]
-      },
-      {
-        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
-        "import_empresa": 34722.0,
-        "carrecs": [
-          "APOD.SOL/MAN"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "ALVAREZ ALVAREZ ISIDRO",
-    "total_adjudicat": 12557865.07,
-    "relacions": [
-      {
-        "empresa": "FCC MEDIO AMBIENTE",
-        "import_empresa": 12523143.07,
-        "carrecs": [
-          "Apoderado"
-        ]
-      },
-      {
-        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
-        "import_empresa": 34722.0,
-        "carrecs": [
-          "APOD.SOL/MAN"
-        ]
-      }
-    ]
-  },
-  {
     "nom": "RECAS LOPEZ RAFAEL",
     "total_adjudicat": 12557865.07,
     "relacions": [
@@ -1333,86 +1157,6 @@
         "import_empresa": 34722.0,
         "carrecs": [
           "APOD.SOL/MAN"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "GONZALEZ VILLAR RAFAEL",
-    "total_adjudicat": 12557865.07,
-    "relacions": [
-      {
-        "empresa": "FCC MEDIO AMBIENTE",
-        "import_empresa": 12523143.07,
-        "carrecs": [
-          "Apoderado"
-        ]
-      },
-      {
-        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
-        "import_empresa": 34722.0,
-        "carrecs": [
-          "APODERADO"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "SANDEOGRACIAS LOPEZ JOSE JAVIER",
-    "total_adjudicat": 12557865.07,
-    "relacions": [
-      {
-        "empresa": "FCC MEDIO AMBIENTE",
-        "import_empresa": 12523143.07,
-        "carrecs": [
-          "Apoderado"
-        ]
-      },
-      {
-        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
-        "import_empresa": 34722.0,
-        "carrecs": [
-          "APOD.SOL/MAN"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "CORPORALES MARIN JUAN JOSE",
-    "total_adjudicat": 12557865.07,
-    "relacions": [
-      {
-        "empresa": "FCC MEDIO AMBIENTE",
-        "import_empresa": 12523143.07,
-        "carrecs": [
-          "Apoderado"
-        ]
-      },
-      {
-        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
-        "import_empresa": 34722.0,
-        "carrecs": [
-          "APOD.SOL/MAN"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "ACOSTA ACOSTA OSCAR JOSE",
-    "total_adjudicat": 12557865.07,
-    "relacions": [
-      {
-        "empresa": "FCC MEDIO AMBIENTE",
-        "import_empresa": 12523143.07,
-        "carrecs": [
-          "Apoderado"
-        ]
-      },
-      {
-        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
-        "import_empresa": 34722.0,
-        "carrecs": [
-          "APODERADO"
         ]
       }
     ]
@@ -1478,106 +1222,6 @@
     ]
   },
   {
-    "nom": "MONDEJAR RUIZ JORGE",
-    "total_adjudicat": 12557865.07,
-    "relacions": [
-      {
-        "empresa": "FCC MEDIO AMBIENTE",
-        "import_empresa": 12523143.07,
-        "carrecs": [
-          "Apoderado"
-        ]
-      },
-      {
-        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
-        "import_empresa": 34722.0,
-        "carrecs": [
-          "APOD.SOL/MAN"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "PITARCH PEIDRO JORDI",
-    "total_adjudicat": 12557865.07,
-    "relacions": [
-      {
-        "empresa": "FCC MEDIO AMBIENTE",
-        "import_empresa": 12523143.07,
-        "carrecs": [
-          "Apoderado"
-        ]
-      },
-      {
-        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
-        "import_empresa": 34722.0,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "SUAREZ CABRERA JOSE LUIS",
-    "total_adjudicat": 12557865.07,
-    "relacions": [
-      {
-        "empresa": "FCC MEDIO AMBIENTE",
-        "import_empresa": 12523143.07,
-        "carrecs": [
-          "Apoderado"
-        ]
-      },
-      {
-        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
-        "import_empresa": 34722.0,
-        "carrecs": [
-          "APOD.SOL/MAN"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "CANTERO SANTANA PAULA",
-    "total_adjudicat": 12557865.07,
-    "relacions": [
-      {
-        "empresa": "FCC MEDIO AMBIENTE",
-        "import_empresa": 12523143.07,
-        "carrecs": [
-          "Apo.Man.Soli"
-        ]
-      },
-      {
-        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
-        "import_empresa": 34722.0,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "RODRIGUEZ PEREZ ANTONIO CARLOS",
-    "total_adjudicat": 12557865.07,
-    "relacions": [
-      {
-        "empresa": "FCC MEDIO AMBIENTE",
-        "import_empresa": 12523143.07,
-        "carrecs": [
-          "Apo.Man.Soli"
-        ]
-      },
-      {
-        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
-        "import_empresa": 34722.0,
-        "carrecs": [
-          "APOD.SOL/MAN"
-        ]
-      }
-    ]
-  },
-  {
     "nom": "DE LA TORRE DIEZ JAVIER",
     "total_adjudicat": 12557865.07,
     "relacions": [
@@ -1586,126 +1230,6 @@
         "import_empresa": 12523143.07,
         "carrecs": [
           "Apo.Sol."
-        ]
-      },
-      {
-        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
-        "import_empresa": 34722.0,
-        "carrecs": [
-          "APOD.SOL/MAN"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "SAEZ GONZALEZ ELADIO",
-    "total_adjudicat": 12557865.07,
-    "relacions": [
-      {
-        "empresa": "FCC MEDIO AMBIENTE",
-        "import_empresa": 12523143.07,
-        "carrecs": [
-          "Apo.Sol."
-        ]
-      },
-      {
-        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
-        "import_empresa": 34722.0,
-        "carrecs": [
-          "APOD.SOL/MAN"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "BONE MIRANDA IGNACIO",
-    "total_adjudicat": 12557865.07,
-    "relacions": [
-      {
-        "empresa": "FCC MEDIO AMBIENTE",
-        "import_empresa": 12523143.07,
-        "carrecs": [
-          "Apo.Manc."
-        ]
-      },
-      {
-        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
-        "import_empresa": 34722.0,
-        "carrecs": [
-          "APOD.MANCOMU"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "YAGUE HERNANDEZ JUAN MANUEL",
-    "total_adjudicat": 12557865.07,
-    "relacions": [
-      {
-        "empresa": "FCC MEDIO AMBIENTE",
-        "import_empresa": 12523143.07,
-        "carrecs": [
-          "Apo.Man.Soli"
-        ]
-      },
-      {
-        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
-        "import_empresa": 34722.0,
-        "carrecs": [
-          "APOD.SOL/MAN"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "VALOR CALATAYUD MARIA ANGELES",
-    "total_adjudicat": 12557865.07,
-    "relacions": [
-      {
-        "empresa": "FCC MEDIO AMBIENTE",
-        "import_empresa": 12523143.07,
-        "carrecs": [
-          "Apoderado"
-        ]
-      },
-      {
-        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
-        "import_empresa": 34722.0,
-        "carrecs": [
-          "APODERADO"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "LUQUE VIGO LUIS CARLOS",
-    "total_adjudicat": 12557865.07,
-    "relacions": [
-      {
-        "empresa": "FCC MEDIO AMBIENTE",
-        "import_empresa": 12523143.07,
-        "carrecs": [
-          "Apo.Man.Soli"
-        ]
-      },
-      {
-        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
-        "import_empresa": 34722.0,
-        "carrecs": [
-          "APODERADO"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "ROMERO OLIVER CARMEN ELVIRA",
-    "total_adjudicat": 12557865.07,
-    "relacions": [
-      {
-        "empresa": "FCC MEDIO AMBIENTE",
-        "import_empresa": 12523143.07,
-        "carrecs": [
-          "Apo.Man.Soli"
         ]
       },
       {
@@ -1738,210 +1262,6 @@
     ]
   },
   {
-    "nom": "LAGE LAREDO MANUEL",
-    "total_adjudicat": 12557865.07,
-    "relacions": [
-      {
-        "empresa": "FCC MEDIO AMBIENTE",
-        "import_empresa": 12523143.07,
-        "carrecs": [
-          "Apoderado"
-        ]
-      },
-      {
-        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
-        "import_empresa": 34722.0,
-        "carrecs": [
-          "APOD.SOL/MAN"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "JIMENEZ SANCHEZ MIGUEL ANGEL",
-    "total_adjudicat": 12557865.07,
-    "relacions": [
-      {
-        "empresa": "FCC MEDIO AMBIENTE",
-        "import_empresa": 12523143.07,
-        "carrecs": [
-          "Apoderado"
-        ]
-      },
-      {
-        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
-        "import_empresa": 34722.0,
-        "carrecs": [
-          "APOD.SOL/MAN"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "GARCIA PEREZ FELIPE BERNABE",
-    "total_adjudicat": 12557865.07,
-    "relacions": [
-      {
-        "empresa": "FCC MEDIO AMBIENTE",
-        "import_empresa": 12523143.07,
-        "carrecs": [
-          "Apoderado"
-        ]
-      },
-      {
-        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
-        "import_empresa": 34722.0,
-        "carrecs": [
-          "V-SEC NO CON"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "COLIO ABRIL PABLO",
-    "total_adjudicat": 12557865.07,
-    "relacions": [
-      {
-        "empresa": "FCC MEDIO AMBIENTE",
-        "import_empresa": 12523143.07,
-        "carrecs": [
-          "Apoderado"
-        ]
-      },
-      {
-        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
-        "import_empresa": 34722.0,
-        "carrecs": [
-          "CONS.EJECUTI",
-          "CONS.DEL.SOL",
-          "MRO.COMS.EJE",
-          "CONS. DELEG.",
-          "APOD.SOL/MAN"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "YARRITU TUBILLA PATRICIA",
-    "total_adjudicat": 12557865.07,
-    "relacions": [
-      {
-        "empresa": "FCC MEDIO AMBIENTE",
-        "import_empresa": 12523143.07,
-        "carrecs": [
-          "Apoderado"
-        ]
-      },
-      {
-        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
-        "import_empresa": 34722.0,
-        "carrecs": [
-          "APOD.SOL/MAN"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "YARRITU MARTINEZ MARIA",
-    "total_adjudicat": 12557865.07,
-    "relacions": [
-      {
-        "empresa": "FCC MEDIO AMBIENTE",
-        "import_empresa": 12523143.07,
-        "carrecs": [
-          "Apoderado"
-        ]
-      },
-      {
-        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
-        "import_empresa": 34722.0,
-        "carrecs": [
-          "APOD.SOL/MAN"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "PEREZ GIL ANTONIO",
-    "total_adjudicat": 12557865.07,
-    "relacions": [
-      {
-        "empresa": "FCC MEDIO AMBIENTE",
-        "import_empresa": 12523143.07,
-        "carrecs": [
-          "Apo.Man.Soli"
-        ]
-      },
-      {
-        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
-        "import_empresa": 34722.0,
-        "carrecs": [
-          "APOD.SOL/MAN"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "PASCUAL RODRIGUEZ ALVARO",
-    "total_adjudicat": 12557865.07,
-    "relacions": [
-      {
-        "empresa": "FCC MEDIO AMBIENTE",
-        "import_empresa": 12523143.07,
-        "carrecs": [
-          "Apo.Man.Soli"
-        ]
-      },
-      {
-        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
-        "import_empresa": 34722.0,
-        "carrecs": [
-          "APOD.SOL/MAN"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "GALLARDO GARCIA GRACILIANO",
-    "total_adjudicat": 12557865.07,
-    "relacions": [
-      {
-        "empresa": "FCC MEDIO AMBIENTE",
-        "import_empresa": 12523143.07,
-        "carrecs": [
-          "Apo.Man.Soli"
-        ]
-      },
-      {
-        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
-        "import_empresa": 34722.0,
-        "carrecs": [
-          "APOD.SOL/MAN"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "BAUTISTA FUENTES FERNANDO",
-    "total_adjudicat": 12557865.07,
-    "relacions": [
-      {
-        "empresa": "FCC MEDIO AMBIENTE",
-        "import_empresa": 12523143.07,
-        "carrecs": [
-          "Apo.Man.Soli"
-        ]
-      },
-      {
-        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
-        "import_empresa": 34722.0,
-        "carrecs": [
-          "APOD.SOL/MAN"
-        ]
-      }
-    ]
-  },
-  {
     "nom": "LLORENTE DEL TORO LUCIA",
     "total_adjudicat": 12557865.07,
     "relacions": [
@@ -1962,47 +1282,7 @@
     ]
   },
   {
-    "nom": "JASO AMADOZ ANDRES",
-    "total_adjudicat": 12557865.07,
-    "relacions": [
-      {
-        "empresa": "FCC MEDIO AMBIENTE",
-        "import_empresa": 12523143.07,
-        "carrecs": [
-          "Apoderado"
-        ]
-      },
-      {
-        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
-        "import_empresa": 34722.0,
-        "carrecs": [
-          "APODERADO"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "CERRO REDONDO JOSE FERNANDO",
-    "total_adjudicat": 12557865.07,
-    "relacions": [
-      {
-        "empresa": "FCC MEDIO AMBIENTE",
-        "import_empresa": 12523143.07,
-        "carrecs": [
-          "Apoderado"
-        ]
-      },
-      {
-        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
-        "import_empresa": 34722.0,
-        "carrecs": [
-          "APOD.MANCOMU"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "CEREZO ORTEGA FRANCISCO JAVIER",
+    "nom": "SUAREZ CABRERA JOSE LUIS",
     "total_adjudicat": 12557865.07,
     "relacions": [
       {
@@ -2062,7 +1342,27 @@
     ]
   },
   {
-    "nom": "CESPA COMPAÑIA ESPAÑOLA DE SERVICIOS PUBLICOS AUXI",
+    "nom": "QUINTANA DELGADO GEMA",
+    "total_adjudicat": 12557865.07,
+    "relacions": [
+      {
+        "empresa": "FCC MEDIO AMBIENTE",
+        "import_empresa": 12523143.07,
+        "carrecs": [
+          "Apoderado"
+        ]
+      },
+      {
+        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
+        "import_empresa": 34722.0,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "LAGE LAREDO MANUEL",
     "total_adjudicat": 12557865.07,
     "relacions": [
       {
@@ -2082,67 +1382,7 @@
     ]
   },
   {
-    "nom": "LAFUENTE ALVAREZ ANTONIA",
-    "total_adjudicat": 12557865.07,
-    "relacions": [
-      {
-        "empresa": "FCC MEDIO AMBIENTE",
-        "import_empresa": 12523143.07,
-        "carrecs": [
-          "Apoderado"
-        ]
-      },
-      {
-        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
-        "import_empresa": 34722.0,
-        "carrecs": [
-          "APOD.MANCOMU"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "CORDOBA FERNANDEZ MARIA JESUS",
-    "total_adjudicat": 12557865.07,
-    "relacions": [
-      {
-        "empresa": "FCC MEDIO AMBIENTE",
-        "import_empresa": 12523143.07,
-        "carrecs": [
-          "Apoderado"
-        ]
-      },
-      {
-        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
-        "import_empresa": 34722.0,
-        "carrecs": [
-          "APOD.MANCOMU"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "DE TOMAS BRASERO JOSE LUIS",
-    "total_adjudicat": 12557865.07,
-    "relacions": [
-      {
-        "empresa": "FCC MEDIO AMBIENTE",
-        "import_empresa": 12523143.07,
-        "carrecs": [
-          "Apoderado"
-        ]
-      },
-      {
-        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
-        "import_empresa": 34722.0,
-        "carrecs": [
-          "APODERADO"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "MORANT LATORRE FABIAN",
+    "nom": "TRUEBA PALAU IGNACIO",
     "total_adjudicat": 12557865.07,
     "relacions": [
       {
@@ -2162,7 +1402,387 @@
     ]
   },
   {
-    "nom": "BARTOLOME GARCIA JAVIER",
+    "nom": "CORPORALES MARIN JUAN JOSE",
+    "total_adjudicat": 12557865.07,
+    "relacions": [
+      {
+        "empresa": "FCC MEDIO AMBIENTE",
+        "import_empresa": 12523143.07,
+        "carrecs": [
+          "Apoderado"
+        ]
+      },
+      {
+        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
+        "import_empresa": 34722.0,
+        "carrecs": [
+          "APOD.SOL/MAN"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "TORROJA RIBERA JOSE MARIA",
+    "total_adjudicat": 12557865.07,
+    "relacions": [
+      {
+        "empresa": "FCC MEDIO AMBIENTE",
+        "import_empresa": 12523143.07,
+        "carrecs": [
+          "Apoderado"
+        ]
+      },
+      {
+        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
+        "import_empresa": 34722.0,
+        "carrecs": [
+          "APOD.SOL/MAN"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "PEREZ GIL ANTONIO",
+    "total_adjudicat": 12557865.07,
+    "relacions": [
+      {
+        "empresa": "FCC MEDIO AMBIENTE",
+        "import_empresa": 12523143.07,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      },
+      {
+        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
+        "import_empresa": 34722.0,
+        "carrecs": [
+          "APOD.SOL/MAN"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "GALLARDO GARCIA GRACILIANO",
+    "total_adjudicat": 12557865.07,
+    "relacions": [
+      {
+        "empresa": "FCC MEDIO AMBIENTE",
+        "import_empresa": 12523143.07,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      },
+      {
+        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
+        "import_empresa": 34722.0,
+        "carrecs": [
+          "APOD.SOL/MAN"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "PASCUAL RODRIGUEZ ALVARO",
+    "total_adjudicat": 12557865.07,
+    "relacions": [
+      {
+        "empresa": "FCC MEDIO AMBIENTE",
+        "import_empresa": 12523143.07,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      },
+      {
+        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
+        "import_empresa": 34722.0,
+        "carrecs": [
+          "APOD.SOL/MAN"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "BAUTISTA FUENTES FERNANDO",
+    "total_adjudicat": 12557865.07,
+    "relacions": [
+      {
+        "empresa": "FCC MEDIO AMBIENTE",
+        "import_empresa": 12523143.07,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      },
+      {
+        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
+        "import_empresa": 34722.0,
+        "carrecs": [
+          "APOD.SOL/MAN"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "SAEZ GONZALEZ ELADIO",
+    "total_adjudicat": 12557865.07,
+    "relacions": [
+      {
+        "empresa": "FCC MEDIO AMBIENTE",
+        "import_empresa": 12523143.07,
+        "carrecs": [
+          "Apo.Sol."
+        ]
+      },
+      {
+        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
+        "import_empresa": 34722.0,
+        "carrecs": [
+          "APOD.SOL/MAN"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "ALCAÑIZ MONTESINOS ALBERT",
+    "total_adjudicat": 12557865.07,
+    "relacions": [
+      {
+        "empresa": "FCC MEDIO AMBIENTE",
+        "import_empresa": 12523143.07,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      },
+      {
+        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
+        "import_empresa": 34722.0,
+        "carrecs": [
+          "APOD.SOL/MAN"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "SANTAMARIA RUIZ VICTOR",
+    "total_adjudicat": 12557865.07,
+    "relacions": [
+      {
+        "empresa": "FCC MEDIO AMBIENTE",
+        "import_empresa": 12523143.07,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      },
+      {
+        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
+        "import_empresa": 34722.0,
+        "carrecs": [
+          "APOD.SOL/MAN"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "MORENO GALVEZ JOSE MANUEL",
+    "total_adjudicat": 12557865.07,
+    "relacions": [
+      {
+        "empresa": "FCC MEDIO AMBIENTE",
+        "import_empresa": 12523143.07,
+        "carrecs": [
+          "Apoderado"
+        ]
+      },
+      {
+        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
+        "import_empresa": 34722.0,
+        "carrecs": [
+          "APOD.SOL/MAN"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "ECHEVARRIA MARIN BELEN ARANZAZU",
+    "total_adjudicat": 12557865.07,
+    "relacions": [
+      {
+        "empresa": "FCC MEDIO AMBIENTE",
+        "import_empresa": 12523143.07,
+        "carrecs": [
+          "Apoderado"
+        ]
+      },
+      {
+        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
+        "import_empresa": 34722.0,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "YAGUE HERNANDEZ JUAN MANUEL",
+    "total_adjudicat": 12557865.07,
+    "relacions": [
+      {
+        "empresa": "FCC MEDIO AMBIENTE",
+        "import_empresa": 12523143.07,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      },
+      {
+        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
+        "import_empresa": 34722.0,
+        "carrecs": [
+          "APOD.SOL/MAN"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "CUESTA GARCIA ENRIQUE",
+    "total_adjudicat": 12557865.07,
+    "relacions": [
+      {
+        "empresa": "FCC MEDIO AMBIENTE",
+        "import_empresa": 12523143.07,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      },
+      {
+        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
+        "import_empresa": 34722.0,
+        "carrecs": [
+          "APOD.SOL/MAN"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "SANCHEZ GARCIA ALFONSO",
+    "total_adjudicat": 12557865.07,
+    "relacions": [
+      {
+        "empresa": "FCC MEDIO AMBIENTE",
+        "import_empresa": 12523143.07,
+        "carrecs": [
+          "Apoderado"
+        ]
+      },
+      {
+        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
+        "import_empresa": 34722.0,
+        "carrecs": [
+          "APOD.SOL/MAN"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "GONZALEZ URIGOITIA ALFREDO",
+    "total_adjudicat": 12557865.07,
+    "relacions": [
+      {
+        "empresa": "FCC MEDIO AMBIENTE",
+        "import_empresa": 12523143.07,
+        "carrecs": [
+          "Apoderado"
+        ]
+      },
+      {
+        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
+        "import_empresa": 34722.0,
+        "carrecs": [
+          "APOD.SOL/MAN"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "FERNANDEZ FARIZA TIRSO",
+    "total_adjudicat": 12557865.07,
+    "relacions": [
+      {
+        "empresa": "FCC MEDIO AMBIENTE",
+        "import_empresa": 12523143.07,
+        "carrecs": [
+          "Apoderado"
+        ]
+      },
+      {
+        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
+        "import_empresa": 34722.0,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "YARRITU TUBILLA PATRICIA",
+    "total_adjudicat": 12557865.07,
+    "relacions": [
+      {
+        "empresa": "FCC MEDIO AMBIENTE",
+        "import_empresa": 12523143.07,
+        "carrecs": [
+          "Apoderado"
+        ]
+      },
+      {
+        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
+        "import_empresa": 34722.0,
+        "carrecs": [
+          "APOD.SOL/MAN"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "YARRITU MARTINEZ MARIA",
+    "total_adjudicat": 12557865.07,
+    "relacions": [
+      {
+        "empresa": "FCC MEDIO AMBIENTE",
+        "import_empresa": 12523143.07,
+        "carrecs": [
+          "Apoderado"
+        ]
+      },
+      {
+        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
+        "import_empresa": 34722.0,
+        "carrecs": [
+          "APOD.SOL/MAN"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "MARTINEZ RUBI ALBERTO",
+    "total_adjudicat": 12557865.07,
+    "relacions": [
+      {
+        "empresa": "FCC MEDIO AMBIENTE",
+        "import_empresa": 12523143.07,
+        "carrecs": [
+          "Apoderado"
+        ]
+      },
+      {
+        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
+        "import_empresa": 34722.0,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "JIMENEZ SANCHEZ MIGUEL ANGEL",
     "total_adjudicat": 12557865.07,
     "relacions": [
       {
@@ -2183,6 +1803,126 @@
   },
   {
     "nom": "GONZALEZ MORALES SEBASTIAN",
+    "total_adjudicat": 12557865.07,
+    "relacions": [
+      {
+        "empresa": "FCC MEDIO AMBIENTE",
+        "import_empresa": 12523143.07,
+        "carrecs": [
+          "Apoderado"
+        ]
+      },
+      {
+        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
+        "import_empresa": 34722.0,
+        "carrecs": [
+          "APOD.SOL/MAN"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "BONE MIRANDA IGNACIO",
+    "total_adjudicat": 12557865.07,
+    "relacions": [
+      {
+        "empresa": "FCC MEDIO AMBIENTE",
+        "import_empresa": 12523143.07,
+        "carrecs": [
+          "Apo.Manc."
+        ]
+      },
+      {
+        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
+        "import_empresa": 34722.0,
+        "carrecs": [
+          "APOD.MANCOMU"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "LOMBA RIAL EMILIANO",
+    "total_adjudicat": 12557865.07,
+    "relacions": [
+      {
+        "empresa": "FCC MEDIO AMBIENTE",
+        "import_empresa": 12523143.07,
+        "carrecs": [
+          "Apoderado"
+        ]
+      },
+      {
+        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
+        "import_empresa": 34722.0,
+        "carrecs": [
+          "APOD.SOL/MAN"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "MONDEJAR RUIZ JORGE",
+    "total_adjudicat": 12557865.07,
+    "relacions": [
+      {
+        "empresa": "FCC MEDIO AMBIENTE",
+        "import_empresa": 12523143.07,
+        "carrecs": [
+          "Apoderado"
+        ]
+      },
+      {
+        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
+        "import_empresa": 34722.0,
+        "carrecs": [
+          "APOD.SOL/MAN"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "PITARCH PEIDRO JORDI",
+    "total_adjudicat": 12557865.07,
+    "relacions": [
+      {
+        "empresa": "FCC MEDIO AMBIENTE",
+        "import_empresa": 12523143.07,
+        "carrecs": [
+          "Apoderado"
+        ]
+      },
+      {
+        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
+        "import_empresa": 34722.0,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "ESCALONA GIMENEZ MARIA ESTHER",
+    "total_adjudicat": 12557865.07,
+    "relacions": [
+      {
+        "empresa": "FCC MEDIO AMBIENTE",
+        "import_empresa": 12523143.07,
+        "carrecs": [
+          "Apo.Sol."
+        ]
+      },
+      {
+        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
+        "import_empresa": 34722.0,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "PONTE CASTIÑEIRA BRUNO",
     "total_adjudicat": 12557865.07,
     "relacions": [
       {
@@ -2262,426 +2002,6 @@
     ]
   },
   {
-    "nom": "GONZALEZ URIGOITIA ALFREDO",
-    "total_adjudicat": 12557865.07,
-    "relacions": [
-      {
-        "empresa": "FCC MEDIO AMBIENTE",
-        "import_empresa": 12523143.07,
-        "carrecs": [
-          "Apoderado"
-        ]
-      },
-      {
-        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
-        "import_empresa": 34722.0,
-        "carrecs": [
-          "APOD.SOL/MAN"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "QUINTANA DELGADO GEMA",
-    "total_adjudicat": 12557865.07,
-    "relacions": [
-      {
-        "empresa": "FCC MEDIO AMBIENTE",
-        "import_empresa": 12523143.07,
-        "carrecs": [
-          "Apoderado"
-        ]
-      },
-      {
-        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
-        "import_empresa": 34722.0,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "LECUMBERRI EUSA JOSE ROBERTO",
-    "total_adjudicat": 12557865.07,
-    "relacions": [
-      {
-        "empresa": "FCC MEDIO AMBIENTE",
-        "import_empresa": 12523143.07,
-        "carrecs": [
-          "Apo.Man.Soli"
-        ]
-      },
-      {
-        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
-        "import_empresa": 34722.0,
-        "carrecs": [
-          "APOD.SOL/MAN"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "LANDARECH ZOZAYA MARIA CAMINO",
-    "total_adjudicat": 12557865.07,
-    "relacions": [
-      {
-        "empresa": "FCC MEDIO AMBIENTE",
-        "import_empresa": 12523143.07,
-        "carrecs": [
-          "Apo.Man.Soli"
-        ]
-      },
-      {
-        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
-        "import_empresa": 34722.0,
-        "carrecs": [
-          "APODERADO"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "TRUEBA PALAU IGNACIO",
-    "total_adjudicat": 12557865.07,
-    "relacions": [
-      {
-        "empresa": "FCC MEDIO AMBIENTE",
-        "import_empresa": 12523143.07,
-        "carrecs": [
-          "Apoderado"
-        ]
-      },
-      {
-        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
-        "import_empresa": 34722.0,
-        "carrecs": [
-          "APOD.SOL/MAN"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "TORROJA RIBERA JOSE MARIA",
-    "total_adjudicat": 12557865.07,
-    "relacions": [
-      {
-        "empresa": "FCC MEDIO AMBIENTE",
-        "import_empresa": 12523143.07,
-        "carrecs": [
-          "Apoderado"
-        ]
-      },
-      {
-        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
-        "import_empresa": 34722.0,
-        "carrecs": [
-          "APOD.SOL/MAN"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "LACUEY RUESTA LUIS",
-    "total_adjudicat": 12557865.07,
-    "relacions": [
-      {
-        "empresa": "FCC MEDIO AMBIENTE",
-        "import_empresa": 12523143.07,
-        "carrecs": [
-          "Apoderado"
-        ]
-      },
-      {
-        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
-        "import_empresa": 34722.0,
-        "carrecs": [
-          "APODERADO"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "ALCAÑIZ MONTESINOS ALBERT",
-    "total_adjudicat": 12557865.07,
-    "relacions": [
-      {
-        "empresa": "FCC MEDIO AMBIENTE",
-        "import_empresa": 12523143.07,
-        "carrecs": [
-          "Apo.Man.Soli"
-        ]
-      },
-      {
-        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
-        "import_empresa": 34722.0,
-        "carrecs": [
-          "APOD.SOL/MAN"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "SANTAMARIA RUIZ VICTOR",
-    "total_adjudicat": 12557865.07,
-    "relacions": [
-      {
-        "empresa": "FCC MEDIO AMBIENTE",
-        "import_empresa": 12523143.07,
-        "carrecs": [
-          "Apo.Man.Soli"
-        ]
-      },
-      {
-        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
-        "import_empresa": 34722.0,
-        "carrecs": [
-          "APOD.SOL/MAN"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "IBAÑEZ DE PRADO FERNANDO",
-    "total_adjudicat": 12557865.07,
-    "relacions": [
-      {
-        "empresa": "FCC MEDIO AMBIENTE",
-        "import_empresa": 12523143.07,
-        "carrecs": [
-          "Apo.Man.Soli"
-        ]
-      },
-      {
-        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
-        "import_empresa": 34722.0,
-        "carrecs": [
-          "APOD.SOL/MAN"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "ESCALONA GIMENEZ MARIA ESTHER",
-    "total_adjudicat": 12557865.07,
-    "relacions": [
-      {
-        "empresa": "FCC MEDIO AMBIENTE",
-        "import_empresa": 12523143.07,
-        "carrecs": [
-          "Apo.Sol."
-        ]
-      },
-      {
-        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
-        "import_empresa": 34722.0,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "LOMBA RIAL EMILIANO",
-    "total_adjudicat": 12557865.07,
-    "relacions": [
-      {
-        "empresa": "FCC MEDIO AMBIENTE",
-        "import_empresa": 12523143.07,
-        "carrecs": [
-          "Apoderado"
-        ]
-      },
-      {
-        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
-        "import_empresa": 34722.0,
-        "carrecs": [
-          "APOD.SOL/MAN"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "LOPEZ SUAREZ IVAN",
-    "total_adjudicat": 12557865.07,
-    "relacions": [
-      {
-        "empresa": "FCC MEDIO AMBIENTE",
-        "import_empresa": 12523143.07,
-        "carrecs": [
-          "Apoderado"
-        ]
-      },
-      {
-        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
-        "import_empresa": 34722.0,
-        "carrecs": [
-          "APOD.SOL/MAN"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "MORENO GALVEZ JOSE MANUEL",
-    "total_adjudicat": 12557865.07,
-    "relacions": [
-      {
-        "empresa": "FCC MEDIO AMBIENTE",
-        "import_empresa": 12523143.07,
-        "carrecs": [
-          "Apoderado"
-        ]
-      },
-      {
-        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
-        "import_empresa": 34722.0,
-        "carrecs": [
-          "APOD.SOL/MAN"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "ECHEVARRIA MARIN BELEN ARANZAZU",
-    "total_adjudicat": 12557865.07,
-    "relacions": [
-      {
-        "empresa": "FCC MEDIO AMBIENTE",
-        "import_empresa": 12523143.07,
-        "carrecs": [
-          "Apoderado"
-        ]
-      },
-      {
-        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
-        "import_empresa": 34722.0,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "LOPEZ BARRANCO CRISTINA",
-    "total_adjudicat": 12557865.07,
-    "relacions": [
-      {
-        "empresa": "FCC MEDIO AMBIENTE",
-        "import_empresa": 12523143.07,
-        "carrecs": [
-          "SecreNoConsj"
-        ]
-      },
-      {
-        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
-        "import_empresa": 34722.0,
-        "carrecs": [
-          "APOD.MANCOMU"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "MARTIN MUÑOZ JAVIER",
-    "total_adjudicat": 12557865.07,
-    "relacions": [
-      {
-        "empresa": "FCC MEDIO AMBIENTE",
-        "import_empresa": 12523143.07,
-        "carrecs": [
-          "Apo.Man.Soli"
-        ]
-      },
-      {
-        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
-        "import_empresa": 34722.0,
-        "carrecs": [
-          "APODERADO"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "DE MATEO LUENGO FERNANDO JOSE",
-    "total_adjudicat": 12557865.07,
-    "relacions": [
-      {
-        "empresa": "FCC MEDIO AMBIENTE",
-        "import_empresa": 12523143.07,
-        "carrecs": [
-          "Apo.Man.Soli"
-        ]
-      },
-      {
-        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
-        "import_empresa": 34722.0,
-        "carrecs": [
-          "APOD.SOL/MAN"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "MARTINEZ RUBI ALBERTO",
-    "total_adjudicat": 12557865.07,
-    "relacions": [
-      {
-        "empresa": "FCC MEDIO AMBIENTE",
-        "import_empresa": 12523143.07,
-        "carrecs": [
-          "Apoderado"
-        ]
-      },
-      {
-        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
-        "import_empresa": 34722.0,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "PONTE CASTIÑEIRA BRUNO",
-    "total_adjudicat": 12557865.07,
-    "relacions": [
-      {
-        "empresa": "FCC MEDIO AMBIENTE",
-        "import_empresa": 12523143.07,
-        "carrecs": [
-          "Apoderado"
-        ]
-      },
-      {
-        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
-        "import_empresa": 34722.0,
-        "carrecs": [
-          "APOD.SOL/MAN"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "SERRA SALA FABIAN",
-    "total_adjudicat": 12557865.07,
-    "relacions": [
-      {
-        "empresa": "FCC MEDIO AMBIENTE",
-        "import_empresa": 12523143.07,
-        "carrecs": [
-          "Apoderado"
-        ]
-      },
-      {
-        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
-        "import_empresa": 34722.0,
-        "carrecs": [
-          "APOD.SOL/MAN"
-        ]
-      }
-    ]
-  },
-  {
     "nom": "LIEBANA ALCANTARILLA JOSE",
     "total_adjudicat": 12557865.07,
     "relacions": [
@@ -2702,7 +2022,7 @@
     ]
   },
   {
-    "nom": "MARTIN RODRIGUEZ PAU",
+    "nom": "BRAVO DIAZ ANTONIO",
     "total_adjudicat": 12557865.07,
     "relacions": [
       {
@@ -2716,7 +2036,7 @@
         "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
         "import_empresa": 34722.0,
         "carrecs": [
-          "APODERAD.SOL"
+          "APOD.SOL/MAN"
         ]
       }
     ]
@@ -2762,6 +2082,66 @@
     ]
   },
   {
+    "nom": "CANTERO SANTANA PAULA",
+    "total_adjudicat": 12557865.07,
+    "relacions": [
+      {
+        "empresa": "FCC MEDIO AMBIENTE",
+        "import_empresa": 12523143.07,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      },
+      {
+        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
+        "import_empresa": 34722.0,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "RODRIGUEZ PEREZ ANTONIO CARLOS",
+    "total_adjudicat": 12557865.07,
+    "relacions": [
+      {
+        "empresa": "FCC MEDIO AMBIENTE",
+        "import_empresa": 12523143.07,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      },
+      {
+        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
+        "import_empresa": 34722.0,
+        "carrecs": [
+          "APOD.SOL/MAN"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "LECUMBERRI EUSA JOSE ROBERTO",
+    "total_adjudicat": 12557865.07,
+    "relacions": [
+      {
+        "empresa": "FCC MEDIO AMBIENTE",
+        "import_empresa": 12523143.07,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      },
+      {
+        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
+        "import_empresa": 34722.0,
+        "carrecs": [
+          "APOD.SOL/MAN"
+        ]
+      }
+    ]
+  },
+  {
     "nom": "MORAGON CASARIEGO SANDRA MERCEDES",
     "total_adjudicat": 12557865.07,
     "relacions": [
@@ -2802,7 +2182,47 @@
     ]
   },
   {
-    "nom": "TORREMOCHA GILA MARTA",
+    "nom": "LAFUENTE ALVAREZ ANTONIA",
+    "total_adjudicat": 12557865.07,
+    "relacions": [
+      {
+        "empresa": "FCC MEDIO AMBIENTE",
+        "import_empresa": 12523143.07,
+        "carrecs": [
+          "Apoderado"
+        ]
+      },
+      {
+        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
+        "import_empresa": 34722.0,
+        "carrecs": [
+          "APOD.MANCOMU"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "CORDOBA FERNANDEZ MARIA JESUS",
+    "total_adjudicat": 12557865.07,
+    "relacions": [
+      {
+        "empresa": "FCC MEDIO AMBIENTE",
+        "import_empresa": 12523143.07,
+        "carrecs": [
+          "Apoderado"
+        ]
+      },
+      {
+        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
+        "import_empresa": 34722.0,
+        "carrecs": [
+          "APOD.MANCOMU"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "MARTIN RODRIGUEZ JESUS",
     "total_adjudicat": 12557865.07,
     "relacions": [
       {
@@ -2817,6 +2237,146 @@
         "import_empresa": 34722.0,
         "carrecs": [
           "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "ALVAREZ ALVAREZ ISIDRO",
+    "total_adjudicat": 12557865.07,
+    "relacions": [
+      {
+        "empresa": "FCC MEDIO AMBIENTE",
+        "import_empresa": 12523143.07,
+        "carrecs": [
+          "Apoderado"
+        ]
+      },
+      {
+        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
+        "import_empresa": 34722.0,
+        "carrecs": [
+          "APOD.SOL/MAN"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "DE SERRANOS HERRERO VIRGINIA",
+    "total_adjudicat": 12557865.07,
+    "relacions": [
+      {
+        "empresa": "FCC MEDIO AMBIENTE",
+        "import_empresa": 12523143.07,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      },
+      {
+        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
+        "import_empresa": 34722.0,
+        "carrecs": [
+          "APOD.SOL/MAN"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "SANDEOGRACIAS LOPEZ JOSE JAVIER",
+    "total_adjudicat": 12557865.07,
+    "relacions": [
+      {
+        "empresa": "FCC MEDIO AMBIENTE",
+        "import_empresa": 12523143.07,
+        "carrecs": [
+          "Apoderado"
+        ]
+      },
+      {
+        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
+        "import_empresa": 34722.0,
+        "carrecs": [
+          "APOD.SOL/MAN"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "SERRA SALA FABIAN",
+    "total_adjudicat": 12557865.07,
+    "relacions": [
+      {
+        "empresa": "FCC MEDIO AMBIENTE",
+        "import_empresa": 12523143.07,
+        "carrecs": [
+          "Apoderado"
+        ]
+      },
+      {
+        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
+        "import_empresa": 34722.0,
+        "carrecs": [
+          "APOD.SOL/MAN"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "VAZQUEZ DE PRADA GARCIA JAVIER",
+    "total_adjudicat": 12557865.07,
+    "relacions": [
+      {
+        "empresa": "FCC MEDIO AMBIENTE",
+        "import_empresa": 12523143.07,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      },
+      {
+        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
+        "import_empresa": 34722.0,
+        "carrecs": [
+          "APOD.SOL/MAN"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "IBAÑEZ DE PRADO FERNANDO",
+    "total_adjudicat": 12557865.07,
+    "relacions": [
+      {
+        "empresa": "FCC MEDIO AMBIENTE",
+        "import_empresa": 12523143.07,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      },
+      {
+        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
+        "import_empresa": 34722.0,
+        "carrecs": [
+          "APOD.SOL/MAN"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "BARTOLOME GARCIA JAVIER",
+    "total_adjudicat": 12557865.07,
+    "relacions": [
+      {
+        "empresa": "FCC MEDIO AMBIENTE",
+        "import_empresa": 12523143.07,
+        "carrecs": [
+          "Apoderado"
+        ]
+      },
+      {
+        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
+        "import_empresa": 34722.0,
+        "carrecs": [
+          "APOD.SOL/MAN"
         ]
       }
     ]
@@ -2837,6 +2397,46 @@
         "import_empresa": 34722.0,
         "carrecs": [
           "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "TORREMOCHA GILA MARTA",
+    "total_adjudicat": 12557865.07,
+    "relacions": [
+      {
+        "empresa": "FCC MEDIO AMBIENTE",
+        "import_empresa": 12523143.07,
+        "carrecs": [
+          "Apoderado"
+        ]
+      },
+      {
+        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
+        "import_empresa": 34722.0,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "GARCIA PEREZ FELIPE BERNABE",
+    "total_adjudicat": 12557865.07,
+    "relacions": [
+      {
+        "empresa": "FCC MEDIO AMBIENTE",
+        "import_empresa": 12523143.07,
+        "carrecs": [
+          "Apoderado"
+        ]
+      },
+      {
+        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
+        "import_empresa": 34722.0,
+        "carrecs": [
+          "V-SEC NO CON"
         ]
       }
     ]
@@ -2882,7 +2482,127 @@
     ]
   },
   {
+    "nom": "ROMERO OLIVER CARMEN ELVIRA",
+    "total_adjudicat": 12557865.07,
+    "relacions": [
+      {
+        "empresa": "FCC MEDIO AMBIENTE",
+        "import_empresa": 12523143.07,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      },
+      {
+        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
+        "import_empresa": 34722.0,
+        "carrecs": [
+          "APOD.SOL/MAN"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "MARTIN RODRIGUEZ PAU",
+    "total_adjudicat": 12557865.07,
+    "relacions": [
+      {
+        "empresa": "FCC MEDIO AMBIENTE",
+        "import_empresa": 12523143.07,
+        "carrecs": [
+          "Apoderado"
+        ]
+      },
+      {
+        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
+        "import_empresa": 34722.0,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "DE MATEO LUENGO FERNANDO JOSE",
+    "total_adjudicat": 12557865.07,
+    "relacions": [
+      {
+        "empresa": "FCC MEDIO AMBIENTE",
+        "import_empresa": 12523143.07,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      },
+      {
+        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
+        "import_empresa": 34722.0,
+        "carrecs": [
+          "APOD.SOL/MAN"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "LOPEZ BARRANCO CRISTINA",
+    "total_adjudicat": 12557865.07,
+    "relacions": [
+      {
+        "empresa": "FCC MEDIO AMBIENTE",
+        "import_empresa": 12523143.07,
+        "carrecs": [
+          "SecreNoConsj"
+        ]
+      },
+      {
+        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
+        "import_empresa": 34722.0,
+        "carrecs": [
+          "APOD.MANCOMU"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "CERRO REDONDO JOSE FERNANDO",
+    "total_adjudicat": 12557865.07,
+    "relacions": [
+      {
+        "empresa": "FCC MEDIO AMBIENTE",
+        "import_empresa": 12523143.07,
+        "carrecs": [
+          "Apoderado"
+        ]
+      },
+      {
+        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
+        "import_empresa": 34722.0,
+        "carrecs": [
+          "APOD.MANCOMU"
+        ]
+      }
+    ]
+  },
+  {
     "nom": "HUETE ARROYO FRANCISCO JOSE",
+    "total_adjudicat": 12557865.07,
+    "relacions": [
+      {
+        "empresa": "FCC MEDIO AMBIENTE",
+        "import_empresa": 12523143.07,
+        "carrecs": [
+          "Apoderado"
+        ]
+      },
+      {
+        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
+        "import_empresa": 34722.0,
+        "carrecs": [
+          "APOD.SOL/MAN"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "MORANT LATORRE FABIAN",
     "total_adjudicat": 12557865.07,
     "relacions": [
       {
@@ -2942,6 +2662,86 @@
     ]
   },
   {
+    "nom": "CESPA COMPAÑIA ESPAÑOLA DE SERVICIOS PUBLICOS AUXI",
+    "total_adjudicat": 12557865.07,
+    "relacions": [
+      {
+        "empresa": "FCC MEDIO AMBIENTE",
+        "import_empresa": 12523143.07,
+        "carrecs": [
+          "Apoderado"
+        ]
+      },
+      {
+        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
+        "import_empresa": 34722.0,
+        "carrecs": [
+          "APOD.SOL/MAN"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "URBANO DE SALETA FELIPE",
+    "total_adjudicat": 12557865.07,
+    "relacions": [
+      {
+        "empresa": "FCC MEDIO AMBIENTE",
+        "import_empresa": 12523143.07,
+        "carrecs": [
+          "Apoderado"
+        ]
+      },
+      {
+        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
+        "import_empresa": 34722.0,
+        "carrecs": [
+          "APOD.SOL/MAN"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "LOPEZ SUAREZ IVAN",
+    "total_adjudicat": 12557865.07,
+    "relacions": [
+      {
+        "empresa": "FCC MEDIO AMBIENTE",
+        "import_empresa": 12523143.07,
+        "carrecs": [
+          "Apoderado"
+        ]
+      },
+      {
+        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
+        "import_empresa": 34722.0,
+        "carrecs": [
+          "APOD.SOL/MAN"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "PONTEJO URIARTE MARIA VICTORIA",
+    "total_adjudicat": 12557865.07,
+    "relacions": [
+      {
+        "empresa": "FCC MEDIO AMBIENTE",
+        "import_empresa": 12523143.07,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      },
+      {
+        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
+        "import_empresa": 34722.0,
+        "carrecs": [
+          "APOD.SOL/MAN"
+        ]
+      }
+    ]
+  },
+  {
     "nom": "FURIO ORTEGA PABLO",
     "total_adjudicat": 12557865.07,
     "relacions": [
@@ -2962,7 +2762,47 @@
     ]
   },
   {
-    "nom": "SERRANO BATANERO SONIA",
+    "nom": "LUQUE VIGO LUIS CARLOS",
+    "total_adjudicat": 12557865.07,
+    "relacions": [
+      {
+        "empresa": "FCC MEDIO AMBIENTE",
+        "import_empresa": 12523143.07,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      },
+      {
+        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
+        "import_empresa": 34722.0,
+        "carrecs": [
+          "APODERADO"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "LANDARECH ZOZAYA MARIA CAMINO",
+    "total_adjudicat": 12557865.07,
+    "relacions": [
+      {
+        "empresa": "FCC MEDIO AMBIENTE",
+        "import_empresa": 12523143.07,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      },
+      {
+        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
+        "import_empresa": 34722.0,
+        "carrecs": [
+          "APODERADO"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "GONZALEZ VILLAR RAFAEL",
     "total_adjudicat": 12557865.07,
     "relacions": [
       {
@@ -2982,7 +2822,7 @@
     ]
   },
   {
-    "nom": "GRIMA OLMEDO MARIA",
+    "nom": "ESCUDERO GILGADO ROSA MARIA",
     "total_adjudicat": 12557865.07,
     "relacions": [
       {
@@ -3010,46 +2850,6 @@
         "import_empresa": 12523143.07,
         "carrecs": [
           "Apo.Man.Soli"
-        ]
-      },
-      {
-        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
-        "import_empresa": 34722.0,
-        "carrecs": [
-          "APODERADO"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "DE SERRANOS HERRERO VIRGINIA",
-    "total_adjudicat": 12557865.07,
-    "relacions": [
-      {
-        "empresa": "FCC MEDIO AMBIENTE",
-        "import_empresa": 12523143.07,
-        "carrecs": [
-          "Apo.Man.Soli"
-        ]
-      },
-      {
-        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
-        "import_empresa": 34722.0,
-        "carrecs": [
-          "APOD.SOL/MAN"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "ESCUDERO GILGADO ROSA MARIA",
-    "total_adjudicat": 12557865.07,
-    "relacions": [
-      {
-        "empresa": "FCC MEDIO AMBIENTE",
-        "import_empresa": 12523143.07,
-        "carrecs": [
-          "Apoderado"
         ]
       },
       {
@@ -3102,6 +2902,146 @@
     ]
   },
   {
+    "nom": "SERRANO BATANERO SONIA",
+    "total_adjudicat": 12557865.07,
+    "relacions": [
+      {
+        "empresa": "FCC MEDIO AMBIENTE",
+        "import_empresa": 12523143.07,
+        "carrecs": [
+          "Apoderado"
+        ]
+      },
+      {
+        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
+        "import_empresa": 34722.0,
+        "carrecs": [
+          "APODERADO"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "GRIMA OLMEDO MARIA",
+    "total_adjudicat": 12557865.07,
+    "relacions": [
+      {
+        "empresa": "FCC MEDIO AMBIENTE",
+        "import_empresa": 12523143.07,
+        "carrecs": [
+          "Apoderado"
+        ]
+      },
+      {
+        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
+        "import_empresa": 34722.0,
+        "carrecs": [
+          "APODERADO"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "ACOSTA ACOSTA OSCAR JOSE",
+    "total_adjudicat": 12557865.07,
+    "relacions": [
+      {
+        "empresa": "FCC MEDIO AMBIENTE",
+        "import_empresa": 12523143.07,
+        "carrecs": [
+          "Apoderado"
+        ]
+      },
+      {
+        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
+        "import_empresa": 34722.0,
+        "carrecs": [
+          "APODERADO"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "ACOSTA ACOSTA DAVID ALBERTO",
+    "total_adjudicat": 12557865.07,
+    "relacions": [
+      {
+        "empresa": "FCC MEDIO AMBIENTE",
+        "import_empresa": 12523143.07,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      },
+      {
+        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
+        "import_empresa": 34722.0,
+        "carrecs": [
+          "APODERADO"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "VALOR CALATAYUD MARIA ANGELES",
+    "total_adjudicat": 12557865.07,
+    "relacions": [
+      {
+        "empresa": "FCC MEDIO AMBIENTE",
+        "import_empresa": 12523143.07,
+        "carrecs": [
+          "Apoderado"
+        ]
+      },
+      {
+        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
+        "import_empresa": 34722.0,
+        "carrecs": [
+          "APODERADO"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "MARTIN MUÑOZ JAVIER",
+    "total_adjudicat": 12557865.07,
+    "relacions": [
+      {
+        "empresa": "FCC MEDIO AMBIENTE",
+        "import_empresa": 12523143.07,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      },
+      {
+        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
+        "import_empresa": 34722.0,
+        "carrecs": [
+          "APODERADO"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "LACUEY RUESTA LUIS",
+    "total_adjudicat": 12557865.07,
+    "relacions": [
+      {
+        "empresa": "FCC MEDIO AMBIENTE",
+        "import_empresa": 12523143.07,
+        "carrecs": [
+          "Apoderado"
+        ]
+      },
+      {
+        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
+        "import_empresa": 34722.0,
+        "carrecs": [
+          "APODERADO"
+        ]
+      }
+    ]
+  },
+  {
     "nom": "BOIX MORADELL MIQUEL",
     "total_adjudicat": 12557865.07,
     "relacions": [
@@ -3123,6 +3063,66 @@
   },
   {
     "nom": "GONZALEZ ALCAZAR MIGUEL",
+    "total_adjudicat": 12557865.07,
+    "relacions": [
+      {
+        "empresa": "FCC MEDIO AMBIENTE",
+        "import_empresa": 12523143.07,
+        "carrecs": [
+          "Apoderado"
+        ]
+      },
+      {
+        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
+        "import_empresa": 34722.0,
+        "carrecs": [
+          "APODERADO"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "MONTEAGUDO FERNANDEZ ROBERTO",
+    "total_adjudicat": 12557865.07,
+    "relacions": [
+      {
+        "empresa": "FCC MEDIO AMBIENTE",
+        "import_empresa": 12523143.07,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      },
+      {
+        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
+        "import_empresa": 34722.0,
+        "carrecs": [
+          "APODERADO"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "DE TOMAS BRASERO JOSE LUIS",
+    "total_adjudicat": 12557865.07,
+    "relacions": [
+      {
+        "empresa": "FCC MEDIO AMBIENTE",
+        "import_empresa": 12523143.07,
+        "carrecs": [
+          "Apoderado"
+        ]
+      },
+      {
+        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
+        "import_empresa": 34722.0,
+        "carrecs": [
+          "APODERADO"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "JASO AMADOZ ANDRES",
     "total_adjudicat": 12557865.07,
     "relacions": [
       {
@@ -7174,11 +7174,11 @@
   },
   {
     "nom": "MESTRES SUREDA JOSEP",
-    "total_adjudicat": 5414118.71,
+    "total_adjudicat": 5660691.0,
     "relacions": [
       {
         "empresa": "BOSCIREM, S.L.",
-        "import_empresa": 5414118.71,
+        "import_empresa": 5660691.0,
         "carrecs": [
           "Adm. Solid."
         ]
@@ -7187,11 +7187,11 @@
   },
   {
     "nom": "BOSCH CHUMILLAS OSCAR",
-    "total_adjudicat": 5414118.71,
+    "total_adjudicat": 5660691.0,
     "relacions": [
       {
         "empresa": "BOSCIREM, S.L.",
-        "import_empresa": 5414118.71,
+        "import_empresa": 5660691.0,
         "carrecs": [
           "Adm. Solid."
         ]
@@ -8976,19 +8976,6 @@
   },
   {
     "nom": "RAMOS GARCIA LUIS",
-    "total_adjudicat": 1169025.42,
-    "relacions": [
-      {
-        "empresa": "AERONAVAL DE CONSTRUCCIONES E INSTALACIONES, SA",
-        "import_empresa": 1169025.42,
-        "carrecs": [
-          "Apo.Sol."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "ALONSO DOMENECH BELEN",
     "total_adjudicat": 1169025.42,
     "relacions": [
       {
@@ -16332,15 +16319,14 @@
     ]
   },
   {
-    "nom": "DE LA IGLESIA OLMEDILLA JESUS",
+    "nom": "ALIANA PORTUGAL ANTONIO",
     "total_adjudicat": 661326.0,
     "relacions": [
       {
         "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
         "import_empresa": 626604.0,
         "carrecs": [
-          "Apoderado",
-          "APODERADO"
+          "Apoderado"
         ]
       },
       {
@@ -16353,14 +16339,15 @@
     ]
   },
   {
-    "nom": "ALIANA PORTUGAL ANTONIO",
+    "nom": "DE LA IGLESIA OLMEDILLA JESUS",
     "total_adjudicat": 661326.0,
     "relacions": [
       {
         "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
         "import_empresa": 626604.0,
         "carrecs": [
-          "Apoderado"
+          "Apoderado",
+          "APODERADO"
         ]
       },
       {
@@ -19759,11 +19746,11 @@
   },
   {
     "nom": "MARGETS SOLER CARLES",
-    "total_adjudicat": 470402.89,
+    "total_adjudicat": 469150.89,
     "relacions": [
       {
         "empresa": "ELM, SL",
-        "import_empresa": 441223.49,
+        "import_empresa": 439971.49,
         "carrecs": [
           "APODERAD.SOL"
         ]
@@ -19819,11 +19806,11 @@
   },
   {
     "nom": "MARGETS MIQUEL JOSEP",
-    "total_adjudicat": 441223.49,
+    "total_adjudicat": 439971.49,
     "relacions": [
       {
         "empresa": "ELM, SL",
-        "import_empresa": 441223.49,
+        "import_empresa": 439971.49,
         "carrecs": [
           "APODERADO"
         ]
@@ -24851,11 +24838,11 @@
   },
   {
     "nom": "LOPEZ GOMBAU OSCAR",
-    "total_adjudicat": 168632.48,
+    "total_adjudicat": 164272.48,
     "relacions": [
       {
         "empresa": "SERVICIOS MICROINFORMÁTICA, SA",
-        "import_empresa": 118482.12,
+        "import_empresa": 114122.12,
         "carrecs": [
           "Apoderado"
         ]
@@ -25440,19 +25427,6 @@
       {
         "empresa": "DAGRAM TI, S.L.",
         "import_empresa": 146268.2,
-        "carrecs": [
-          "ADM.UNICO"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "MABRAS SALA ANTONI",
-    "total_adjudicat": 140339.17,
-    "relacions": [
-      {
-        "empresa": "AUDIOVISUAL RESOURCES, SL",
-        "import_empresa": 140339.17,
         "carrecs": [
           "ADM.UNICO"
         ]
@@ -26245,6 +26219,19 @@
     ]
   },
   {
+    "nom": "MABRAS SALA ANTONI",
+    "total_adjudicat": 131975.17,
+    "relacions": [
+      {
+        "empresa": "AUDIOVISUAL RESOURCES, SL",
+        "import_empresa": 131975.17,
+        "carrecs": [
+          "ADM.UNICO"
+        ]
+      }
+    ]
+  },
+  {
     "nom": "ROMERA HINIESTA MANUEL",
     "total_adjudicat": 130175.11,
     "relacions": [
@@ -26425,108 +26412,6 @@
     ]
   },
   {
-    "nom": "RENAULD PHILIPPE",
-    "total_adjudicat": 126985.48,
-    "relacions": [
-      {
-        "empresa": "SERVICIOS MICROINFORMÁTICA, SA",
-        "import_empresa": 118482.12,
-        "carrecs": [
-          "Consejero"
-        ]
-      },
-      {
-        "empresa": "ECONOCOM SEMIC, S.A.U",
-        "import_empresa": 8503.36,
-        "carrecs": [
-          "Consejero"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "RODRIGUEZ DE LA FLOR Y DEL TORO LUIS MARIA",
-    "total_adjudicat": 126985.48,
-    "relacions": [
-      {
-        "empresa": "SERVICIOS MICROINFORMÁTICA, SA",
-        "import_empresa": 118482.12,
-        "carrecs": [
-          "SecreNoConsj"
-        ]
-      },
-      {
-        "empresa": "ECONOCOM SEMIC, S.A.U",
-        "import_empresa": 8503.36,
-        "carrecs": [
-          "SecreNoConsj"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "PEREZ HERCE GARCIA CARLOS ANTONIO",
-    "total_adjudicat": 126985.48,
-    "relacions": [
-      {
-        "empresa": "SERVICIOS MICROINFORMÁTICA, SA",
-        "import_empresa": 118482.12,
-        "carrecs": [
-          "Con.Delegado"
-        ]
-      },
-      {
-        "empresa": "ECONOCOM SEMIC, S.A.U",
-        "import_empresa": 8503.36,
-        "carrecs": [
-          "Con.Delegado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "GUIU RIUS RAMON",
-    "total_adjudicat": 126985.48,
-    "relacions": [
-      {
-        "empresa": "SERVICIOS MICROINFORMÁTICA, SA",
-        "import_empresa": 118482.12,
-        "carrecs": [
-          "Aud.Supl.",
-          "Auditor"
-        ]
-      },
-      {
-        "empresa": "ECONOCOM SEMIC, S.A.U",
-        "import_empresa": 8503.36,
-        "carrecs": [
-          "Aud.Supl.",
-          "Auditor"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "PEIRO PASCUAL JOSE NARCISO",
-    "total_adjudicat": 126985.48,
-    "relacions": [
-      {
-        "empresa": "SERVICIOS MICROINFORMÁTICA, SA",
-        "import_empresa": 118482.12,
-        "carrecs": [
-          "Aud.Supl."
-        ]
-      },
-      {
-        "empresa": "ECONOCOM SEMIC, S.A.U",
-        "import_empresa": 8503.36,
-        "carrecs": [
-          "Aud.Supl."
-        ]
-      }
-    ]
-  },
-  {
     "nom": "LOPEZ BLANCO VANESA",
     "total_adjudicat": 125120.0,
     "relacions": [
@@ -26659,6 +26544,108 @@
         "carrecs": [
           "Apo.Manc.",
           "Consejero"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "RENAULD PHILIPPE",
+    "total_adjudicat": 122625.48,
+    "relacions": [
+      {
+        "empresa": "SERVICIOS MICROINFORMÁTICA, SA",
+        "import_empresa": 114122.12,
+        "carrecs": [
+          "Consejero"
+        ]
+      },
+      {
+        "empresa": "ECONOCOM SEMIC, S.A.U",
+        "import_empresa": 8503.36,
+        "carrecs": [
+          "Consejero"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "RODRIGUEZ DE LA FLOR Y DEL TORO LUIS MARIA",
+    "total_adjudicat": 122625.48,
+    "relacions": [
+      {
+        "empresa": "SERVICIOS MICROINFORMÁTICA, SA",
+        "import_empresa": 114122.12,
+        "carrecs": [
+          "SecreNoConsj"
+        ]
+      },
+      {
+        "empresa": "ECONOCOM SEMIC, S.A.U",
+        "import_empresa": 8503.36,
+        "carrecs": [
+          "SecreNoConsj"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "PEREZ HERCE GARCIA CARLOS ANTONIO",
+    "total_adjudicat": 122625.48,
+    "relacions": [
+      {
+        "empresa": "SERVICIOS MICROINFORMÁTICA, SA",
+        "import_empresa": 114122.12,
+        "carrecs": [
+          "Con.Delegado"
+        ]
+      },
+      {
+        "empresa": "ECONOCOM SEMIC, S.A.U",
+        "import_empresa": 8503.36,
+        "carrecs": [
+          "Con.Delegado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "GUIU RIUS RAMON",
+    "total_adjudicat": 122625.48,
+    "relacions": [
+      {
+        "empresa": "SERVICIOS MICROINFORMÁTICA, SA",
+        "import_empresa": 114122.12,
+        "carrecs": [
+          "Aud.Supl.",
+          "Auditor"
+        ]
+      },
+      {
+        "empresa": "ECONOCOM SEMIC, S.A.U",
+        "import_empresa": 8503.36,
+        "carrecs": [
+          "Aud.Supl.",
+          "Auditor"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "PEIRO PASCUAL JOSE NARCISO",
+    "total_adjudicat": 122625.48,
+    "relacions": [
+      {
+        "empresa": "SERVICIOS MICROINFORMÁTICA, SA",
+        "import_empresa": 114122.12,
+        "carrecs": [
+          "Aud.Supl."
+        ]
+      },
+      {
+        "empresa": "ECONOCOM SEMIC, S.A.U",
+        "import_empresa": 8503.36,
+        "carrecs": [
+          "Aud.Supl."
         ]
       }
     ]
@@ -28775,68 +28762,6 @@
     ]
   },
   {
-    "nom": "ALOY NOGUERA ALBERT",
-    "total_adjudicat": 105547.62,
-    "relacions": [
-      {
-        "empresa": "TRANS DIEMA,SL",
-        "import_empresa": 89027.62,
-        "carrecs": [
-          "ADM.UNICO",
-          "APODERAD.SOL"
-        ]
-      },
-      {
-        "empresa": "TRANSPORTES DIEGO NOGUERA, S.L.",
-        "import_empresa": 16520.0,
-        "carrecs": [
-          "ADM.UNICO",
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "NOGUERA NOGUERA JUANA",
-    "total_adjudicat": 105547.62,
-    "relacions": [
-      {
-        "empresa": "TRANS DIEMA,SL",
-        "import_empresa": 89027.62,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      },
-      {
-        "empresa": "TRANSPORTES DIEGO NOGUERA, S.L.",
-        "import_empresa": 16520.0,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "NOGUERA NOGUERA MARIA",
-    "total_adjudicat": 105547.62,
-    "relacions": [
-      {
-        "empresa": "TRANS DIEMA,SL",
-        "import_empresa": 89027.62,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      },
-      {
-        "empresa": "TRANSPORTES DIEGO NOGUERA, S.L.",
-        "import_empresa": 16520.0,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
     "nom": "CLOSAS DURAN GUILLERMO",
     "total_adjudicat": 104180.0,
     "relacions": [
@@ -28887,6 +28812,68 @@
         "carrecs": [
           "Apoderado",
           "Representan"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "ALOY NOGUERA ALBERT",
+    "total_adjudicat": 103693.07,
+    "relacions": [
+      {
+        "empresa": "TRANS DIEMA,SL",
+        "import_empresa": 87173.07,
+        "carrecs": [
+          "ADM.UNICO",
+          "APODERAD.SOL"
+        ]
+      },
+      {
+        "empresa": "TRANSPORTES DIEGO NOGUERA, S.L.",
+        "import_empresa": 16520.0,
+        "carrecs": [
+          "ADM.UNICO",
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "NOGUERA NOGUERA JUANA",
+    "total_adjudicat": 103693.07,
+    "relacions": [
+      {
+        "empresa": "TRANS DIEMA,SL",
+        "import_empresa": 87173.07,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      },
+      {
+        "empresa": "TRANSPORTES DIEGO NOGUERA, S.L.",
+        "import_empresa": 16520.0,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "NOGUERA NOGUERA MARIA",
+    "total_adjudicat": 103693.07,
+    "relacions": [
+      {
+        "empresa": "TRANS DIEMA,SL",
+        "import_empresa": 87173.07,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      },
+      {
+        "empresa": "TRANSPORTES DIEGO NOGUERA, S.L.",
+        "import_empresa": 16520.0,
+        "carrecs": [
+          "APODERAD.SOL"
         ]
       }
     ]
@@ -35104,46 +35091,6 @@
     ]
   },
   {
-    "nom": "MIQUEL VILANOVA MARIA ANGELS",
-    "total_adjudicat": 75043.01,
-    "relacions": [
-      {
-        "empresa": "ANOIA DE PLASTICS INDUSTRIALS, SL",
-        "import_empresa": 49623.21,
-        "carrecs": [
-          "ADM.SOLIDAR."
-        ]
-      },
-      {
-        "empresa": "ANGEL ESCURA, S.L.",
-        "import_empresa": 25419.8,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "ESCURA MIQUEL FERRAN",
-    "total_adjudicat": 75043.01,
-    "relacions": [
-      {
-        "empresa": "ANOIA DE PLASTICS INDUSTRIALS, SL",
-        "import_empresa": 49623.21,
-        "carrecs": [
-          "ADM.SOLIDAR."
-        ]
-      },
-      {
-        "empresa": "ANGEL ESCURA, S.L.",
-        "import_empresa": 25419.8,
-        "carrecs": [
-          "ADM.UNICO"
-        ]
-      }
-    ]
-  },
-  {
     "nom": "LOPEZ QUINTANILLA CARLOS",
     "total_adjudicat": 74600.0,
     "relacions": [
@@ -35185,6 +35132,46 @@
         "import_empresa": 23815.81,
         "carrecs": [
           "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "MIQUEL VILANOVA MARIA ANGELS",
+    "total_adjudicat": 73468.67,
+    "relacions": [
+      {
+        "empresa": "ANOIA DE PLASTICS INDUSTRIALS, SL",
+        "import_empresa": 49623.21,
+        "carrecs": [
+          "ADM.SOLIDAR."
+        ]
+      },
+      {
+        "empresa": "ANGEL ESCURA, S.L.",
+        "import_empresa": 23845.46,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "ESCURA MIQUEL FERRAN",
+    "total_adjudicat": 73468.67,
+    "relacions": [
+      {
+        "empresa": "ANOIA DE PLASTICS INDUSTRIALS, SL",
+        "import_empresa": 49623.21,
+        "carrecs": [
+          "ADM.SOLIDAR."
+        ]
+      },
+      {
+        "empresa": "ANGEL ESCURA, S.L.",
+        "import_empresa": 23845.46,
+        "carrecs": [
+          "ADM.UNICO"
         ]
       }
     ]
@@ -36565,19 +36552,6 @@
         "import_empresa": 50542.0,
         "carrecs": [
           "Adm. Unico"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "TOVAR MORALES JAVIER",
-    "total_adjudicat": 49530.67,
-    "relacions": [
-      {
-        "empresa": "SOCIETY AND NEUROBUSINESS EXPERIENCE SL",
-        "import_empresa": 49530.67,
-        "carrecs": [
-          "ADM.UNICO"
         ]
       }
     ]
@@ -38040,6 +38014,19 @@
         "import_empresa": 47481.96,
         "carrecs": [
           "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "TOVAR MORALES JAVIER",
+    "total_adjudicat": 47350.5,
+    "relacions": [
+      {
+        "empresa": "SOCIETY AND NEUROBUSINESS EXPERIENCE SL",
+        "import_empresa": 47350.5,
+        "carrecs": [
+          "ADM.UNICO"
         ]
       }
     ]
@@ -41027,32 +41014,6 @@
         "import_empresa": 41647.0,
         "carrecs": [
           "Consejero"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "LLEAL SEGUI PERE",
-    "total_adjudicat": 41423.02,
-    "relacions": [
-      {
-        "empresa": "BERRYSAR SL",
-        "import_empresa": 41423.02,
-        "carrecs": [
-          "ADM.SOLIDAR."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "PINOS ALSEDA JOSEP",
-    "total_adjudicat": 41423.02,
-    "relacions": [
-      {
-        "empresa": "BERRYSAR SL",
-        "import_empresa": 41423.02,
-        "carrecs": [
-          "ADM.SOLIDAR."
         ]
       }
     ]
@@ -44888,6 +44849,32 @@
     ]
   },
   {
+    "nom": "LLEAL SEGUI PERE",
+    "total_adjudicat": 34073.02,
+    "relacions": [
+      {
+        "empresa": "BERRYSAR SL",
+        "import_empresa": 34073.02,
+        "carrecs": [
+          "ADM.SOLIDAR."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "PINOS ALSEDA JOSEP",
+    "total_adjudicat": 34073.02,
+    "relacions": [
+      {
+        "empresa": "BERRYSAR SL",
+        "import_empresa": 34073.02,
+        "carrecs": [
+          "ADM.SOLIDAR."
+        ]
+      }
+    ]
+  },
+  {
     "nom": "GARCIA MORENO ALVAREZ MIGUEL ANGEL",
     "total_adjudicat": 33164.95,
     "relacions": [
@@ -45199,59 +45186,6 @@
         "import_empresa": 32352.0,
         "carrecs": [
           "ARTICULOS 16 Y 17"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "CUELLO GONZALEZ JORDI",
-    "total_adjudicat": 31790.27,
-    "relacions": [
-      {
-        "empresa": "TOI TOI SANITARIOS MOVILES, S.A.",
-        "import_empresa": 31790.27,
-        "carrecs": [
-          "ADM.SOLIDAR.",
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "SUBIRANA FEBRER JAIME",
-    "total_adjudicat": 31790.27,
-    "relacions": [
-      {
-        "empresa": "TOI TOI SANITARIOS MOVILES, S.A.",
-        "import_empresa": 31790.27,
-        "carrecs": [
-          "AUDIT.CUENT."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "BLEDA BAUTISTA MARIA TRINIDAD",
-    "total_adjudicat": 31790.27,
-    "relacions": [
-      {
-        "empresa": "TOI TOI SANITARIOS MOVILES, S.A.",
-        "import_empresa": 31790.27,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "VAZQUEZ LOPEZ FRANCISCO",
-    "total_adjudicat": 31790.27,
-    "relacions": [
-      {
-        "empresa": "TOI TOI SANITARIOS MOVILES, S.A.",
-        "import_empresa": 31790.27,
-        "carrecs": [
-          "APODERADO"
         ]
       }
     ]
@@ -45908,6 +45842,59 @@
         "carrecs": [
           "Socio único",
           "Adm. Unico"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "CUELLO GONZALEZ JORDI",
+    "total_adjudicat": 29204.93,
+    "relacions": [
+      {
+        "empresa": "TOI TOI SANITARIOS MOVILES, S.A.",
+        "import_empresa": 29204.93,
+        "carrecs": [
+          "ADM.SOLIDAR.",
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "SUBIRANA FEBRER JAIME",
+    "total_adjudicat": 29204.93,
+    "relacions": [
+      {
+        "empresa": "TOI TOI SANITARIOS MOVILES, S.A.",
+        "import_empresa": 29204.93,
+        "carrecs": [
+          "AUDIT.CUENT."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "BLEDA BAUTISTA MARIA TRINIDAD",
+    "total_adjudicat": 29204.93,
+    "relacions": [
+      {
+        "empresa": "TOI TOI SANITARIOS MOVILES, S.A.",
+        "import_empresa": 29204.93,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "VAZQUEZ LOPEZ FRANCISCO",
+    "total_adjudicat": 29204.93,
+    "relacions": [
+      {
+        "empresa": "TOI TOI SANITARIOS MOVILES, S.A.",
+        "import_empresa": 29204.93,
+        "carrecs": [
+          "APODERADO"
         ]
       }
     ]
@@ -46708,33 +46695,6 @@
     ]
   },
   {
-    "nom": "MAYOLAS AMOROS GEORGINA",
-    "total_adjudicat": 26165.77,
-    "relacions": [
-      {
-        "empresa": "PROMOTORA MEDITERRANEA 2 S A",
-        "import_empresa": 11716.6,
-        "carrecs": [
-          "V-SEC NO CON"
-        ]
-      },
-      {
-        "empresa": "ESCOFET 1886, SA",
-        "import_empresa": 8270.35,
-        "carrecs": [
-          "V-SEC NO CON"
-        ]
-      },
-      {
-        "empresa": "INDUSTRIAL BREINCO, S.A.",
-        "import_empresa": 6178.82,
-        "carrecs": [
-          "V-SEC NO CON"
-        ]
-      }
-    ]
-  },
-  {
     "nom": "FERNANDEZ CAPO SALVADOR",
     "total_adjudicat": 26165.77,
     "relacions": [
@@ -46751,8 +46711,8 @@
         "empresa": "ESCOFET 1886, SA",
         "import_empresa": 8270.35,
         "carrecs": [
-          "APOD.SOL/MAN",
-          "CONSEJERO"
+          "CONSEJERO",
+          "APOD.SOL/MAN"
         ]
       },
       {
@@ -46789,6 +46749,33 @@
         "import_empresa": 6178.82,
         "carrecs": [
           "SECR.NO CONS"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "MAYOLAS AMOROS GEORGINA",
+    "total_adjudicat": 26165.77,
+    "relacions": [
+      {
+        "empresa": "PROMOTORA MEDITERRANEA 2 S A",
+        "import_empresa": 11716.6,
+        "carrecs": [
+          "V-SEC NO CON"
+        ]
+      },
+      {
+        "empresa": "ESCOFET 1886, SA",
+        "import_empresa": 8270.35,
+        "carrecs": [
+          "V-SEC NO CON"
+        ]
+      },
+      {
+        "empresa": "INDUSTRIAL BREINCO, S.A.",
+        "import_empresa": 6178.82,
+        "carrecs": [
+          "V-SEC NO CON"
         ]
       }
     ]
@@ -48570,14 +48557,54 @@
         "empresa": "ESCOFET 1886, SA",
         "import_empresa": 8270.35,
         "carrecs": [
-          "APOD.SOL/MAN",
-          "CONSEJERO"
+          "CONSEJERO",
+          "APOD.SOL/MAN"
         ]
       }
     ]
   },
   {
     "nom": "CAMPMANY CARRILLO JORDI",
+    "total_adjudicat": 19986.95,
+    "relacions": [
+      {
+        "empresa": "PROMOTORA MEDITERRANEA 2 S A",
+        "import_empresa": 11716.6,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      },
+      {
+        "empresa": "ESCOFET 1886, SA",
+        "import_empresa": 8270.35,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "MARTIN MARQUEZ JESSICA",
+    "total_adjudicat": 19986.95,
+    "relacions": [
+      {
+        "empresa": "PROMOTORA MEDITERRANEA 2 S A",
+        "import_empresa": 11716.6,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      },
+      {
+        "empresa": "ESCOFET 1886, SA",
+        "import_empresa": 8270.35,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "QUERO LUQUE ALBERT",
     "total_adjudicat": 19986.95,
     "relacions": [
       {
@@ -48617,41 +48644,21 @@
     ]
   },
   {
-    "nom": "QUERO LUQUE ALBERT",
+    "nom": "GONZALEZ ANDREU EVA",
     "total_adjudicat": 19986.95,
     "relacions": [
       {
         "empresa": "PROMOTORA MEDITERRANEA 2 S A",
         "import_empresa": 11716.6,
         "carrecs": [
-          "APODERAD.SOL"
+          "APOD.SOL/MAN"
         ]
       },
       {
         "empresa": "ESCOFET 1886, SA",
         "import_empresa": 8270.35,
         "carrecs": [
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "ARIZA CABELLO CARMEN",
-    "total_adjudicat": 19986.95,
-    "relacions": [
-      {
-        "empresa": "PROMOTORA MEDITERRANEA 2 S A",
-        "import_empresa": 11716.6,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      },
-      {
-        "empresa": "ESCOFET 1886, SA",
-        "import_empresa": 8270.35,
-        "carrecs": [
-          "APODERAD.SOL"
+          "APOD.SOL/MAN"
         ]
       }
     ]
@@ -48677,27 +48684,7 @@
     ]
   },
   {
-    "nom": "GONZALEZ ANDREU EVA",
-    "total_adjudicat": 19986.95,
-    "relacions": [
-      {
-        "empresa": "PROMOTORA MEDITERRANEA 2 S A",
-        "import_empresa": 11716.6,
-        "carrecs": [
-          "APOD.SOL/MAN"
-        ]
-      },
-      {
-        "empresa": "ESCOFET 1886, SA",
-        "import_empresa": 8270.35,
-        "carrecs": [
-          "APOD.SOL/MAN"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "MARTIN MARQUEZ JESSICA",
+    "nom": "ARIZA CABELLO CARMEN",
     "total_adjudicat": 19986.95,
     "relacions": [
       {
@@ -48855,32 +48842,6 @@
         "import_empresa": 19702.72,
         "carrecs": [
           "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "MENDEZ MIRANDA JOSEP",
-    "total_adjudicat": 19517.0,
-    "relacions": [
-      {
-        "empresa": "CARDIOSOS GLOBAL PROTECTION, SL",
-        "import_empresa": 19517.0,
-        "carrecs": [
-          "ADM.SOLIDAR."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "BAUSILI RIBERA MARC",
-    "total_adjudicat": 19517.0,
-    "relacions": [
-      {
-        "empresa": "CARDIOSOS GLOBAL PROTECTION, SL",
-        "import_empresa": 19517.0,
-        "carrecs": [
-          "ADM.SOLIDAR."
         ]
       }
     ]
@@ -54616,6 +54577,32 @@
       {
         "empresa": "URBAN TOT FIRA SL",
         "import_empresa": 17000.0,
+        "carrecs": [
+          "ADM.SOLIDAR."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "MENDEZ MIRANDA JOSEP",
+    "total_adjudicat": 16961.0,
+    "relacions": [
+      {
+        "empresa": "CARDIOSOS GLOBAL PROTECTION, SL",
+        "import_empresa": 16961.0,
+        "carrecs": [
+          "ADM.SOLIDAR."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "BAUSILI RIBERA MARC",
+    "total_adjudicat": 16961.0,
+    "relacions": [
+      {
+        "empresa": "CARDIOSOS GLOBAL PROTECTION, SL",
+        "import_empresa": 16961.0,
         "carrecs": [
           "ADM.SOLIDAR."
         ]
@@ -61168,6 +61155,7 @@
         "empresa": "ESCOFET 1886, SA",
         "import_empresa": 8270.35,
         "carrecs": [
+          "CONSEJERO",
           "APOD.SOL/MAN"
         ]
       },
@@ -69342,32 +69330,6 @@
     ]
   },
   {
-    "nom": "MERCADE MATIAS XAVIER",
-    "total_adjudicat": 6196.34,
-    "relacions": [
-      {
-        "empresa": "SUMESCAL SL",
-        "import_empresa": 6196.34,
-        "carrecs": [
-          "ADM.UNICO"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "MERCADE MATIAS RICARD",
-    "total_adjudicat": 6196.34,
-    "relacions": [
-      {
-        "empresa": "SUMESCAL SL",
-        "import_empresa": 6196.34,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
     "nom": "SITJA CAMPINS PERE",
     "total_adjudicat": 6178.82,
     "relacions": [
@@ -73057,19 +73019,6 @@
     ]
   },
   {
-    "nom": "IZQUIERDO BUERA ANTONIO",
-    "total_adjudicat": 3600.0,
-    "relacions": [
-      {
-        "empresa": "LEICESTER TRADE CENTER, SL",
-        "import_empresa": 3600.0,
-        "carrecs": [
-          "ADM.UNICO"
-        ]
-      }
-    ]
-  },
-  {
     "nom": "MORILLAS MORCILLO ERIC",
     "total_adjudicat": 3600.0,
     "relacions": [
@@ -74833,6 +74782,22 @@
     ]
   },
   {
+    "nom": "SANTAMARIA GAMEZ JORDI",
+    "total_adjudicat": 3040.0,
+    "relacions": [
+      {
+        "empresa": "LABOCAT CALIDAD, S.L.",
+        "import_empresa": 3040.0,
+        "carrecs": [
+          "PRESIDENTE",
+          "APODERAD.SOL",
+          "CONSEJERO",
+          "CONS.DEL.MAN"
+        ]
+      }
+    ]
+  },
+  {
     "nom": "GASSET RIUS MARTA",
     "total_adjudicat": 3040.0,
     "relacions": [
@@ -74854,21 +74819,6 @@
         "import_empresa": 3040.0,
         "carrecs": [
           "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "SANTAMARIA GAMEZ JORDI",
-    "total_adjudicat": 3040.0,
-    "relacions": [
-      {
-        "empresa": "LABOCAT CALIDAD, S.L.",
-        "import_empresa": 3040.0,
-        "carrecs": [
-          "APODERAD.SOL",
-          "CONSEJERO",
-          "CONS.DEL.MAN"
         ]
       }
     ]
@@ -74911,35 +74861,7 @@
         "empresa": "LABOCAT CALIDAD, S.L.",
         "import_empresa": 3040.0,
         "carrecs": [
-          "PRESIDENTE",
-          "CONSEJERO",
           "APODERADO"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "RIART AMIGO FRANCISCA",
-    "total_adjudicat": 3040.0,
-    "relacions": [
-      {
-        "empresa": "LABOCAT CALIDAD, S.L.",
-        "import_empresa": 3040.0,
-        "carrecs": [
-          "CONSEJERO"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "MARTIN BORREGON DOMENECH DAVID",
-    "total_adjudicat": 3040.0,
-    "relacions": [
-      {
-        "empresa": "LABOCAT CALIDAD, S.L.",
-        "import_empresa": 3040.0,
-        "carrecs": [
-          "CONSEJERO"
         ]
       }
     ]
@@ -80616,6 +80538,32 @@
         "carrecs": [
           "Socio único",
           "Adm. Unico"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "MERCADE MATIAS XAVIER",
+    "total_adjudicat": 1159.25,
+    "relacions": [
+      {
+        "empresa": "SUMESCAL SL",
+        "import_empresa": 1159.25,
+        "carrecs": [
+          "ADM.UNICO"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "MERCADE MATIAS RICARD",
+    "total_adjudicat": 1159.25,
+    "relacions": [
+      {
+        "empresa": "SUMESCAL SL",
+        "import_empresa": 1159.25,
+        "carrecs": [
+          "APODERAD.SOL"
         ]
       }
     ]
