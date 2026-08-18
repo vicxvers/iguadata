@@ -126,6 +126,119 @@ function resolveRoute(path) {
     canonicalPath: '/'
   };
 }
+const CONTRACT_SEARCH_DEFAULTS = {
+  searchTerm: '',
+  typeFilter: '',
+  procedureFilter: '',
+  dateStart: '',
+  dateEnd: '',
+  amountMin: '',
+  amountMax: '',
+  sortBy: 'date-desc',
+  currentPage: 1
+};
+const CONTRACT_TYPE_QUERY_VALUES = {
+  '1. OBRES': 'obres',
+  '2. GESTIÓ DE SERVEI PÚBLIC': 'gestio-servei-public',
+  '3. SUBMINISTRAMENTS': 'subministraments',
+  '5. SERVEIS': 'serveis',
+  '6. ADMINISTRATIU ESPECIAL': 'administratiu-especial',
+  '8. CONCESSIÓ DE SERVEIS': 'concessio-serveis',
+  "10. PRIVAT D'ADMINISTRACIO PUBLICA": 'privat-administracio-publica'
+};
+const CONTRACT_PROCEDURE_QUERY_VALUES = {
+  'Menor': 'menor',
+  'Obert': 'obert',
+  'Negociat sense publicitat': 'negociat-sense-publicitat',
+  'Licitació amb negociació': 'licitacio-amb-negociacio',
+  'Adjudicacions directes no menors': 'adjudicacio-directa',
+  'Específic de sistema dinàmic de contractació': 'sistema-dinamic'
+};
+const CONTRACT_SORT_QUERY_VALUES = {
+  'date-desc': 'data-recents',
+  'date-asc': 'data-antics',
+  'amount-desc': 'import-descendent',
+  'amount-asc': 'import-ascendent'
+};
+function readMappedQueryValue(value, mapping, fallback = '') {
+  if (!value) return fallback;
+  if (Object.hasOwn(mapping, value)) return value;
+  return Object.keys(mapping).find(key => mapping[key] === value) || fallback;
+}
+function readContractSearchState(search = window.location.search) {
+  const params = new URLSearchParams(search);
+  const requestedPage = Number.parseInt(params.get('pagina') || '1', 10);
+  return {
+    searchTerm: params.get('cerca') || '',
+    typeFilter: readMappedQueryValue(params.get('tipus'), CONTRACT_TYPE_QUERY_VALUES),
+    procedureFilter: readMappedQueryValue(params.get('procediment'), CONTRACT_PROCEDURE_QUERY_VALUES),
+    dateStart: params.get('data_inici') || '',
+    dateEnd: params.get('data_final') || '',
+    amountMin: params.get('import_min') || '',
+    amountMax: params.get('import_max') || '',
+    sortBy: readMappedQueryValue(params.get('ordre'), CONTRACT_SORT_QUERY_VALUES, CONTRACT_SEARCH_DEFAULTS.sortBy),
+    currentPage: Number.isFinite(requestedPage) && requestedPage > 0 ? requestedPage : 1
+  };
+}
+function buildContractSearchParams(state) {
+  const params = new URLSearchParams();
+  if (state.searchTerm.trim()) params.set('cerca', state.searchTerm.trim());
+  if (state.typeFilter) params.set('tipus', CONTRACT_TYPE_QUERY_VALUES[state.typeFilter] || state.typeFilter);
+  if (state.procedureFilter) params.set('procediment', CONTRACT_PROCEDURE_QUERY_VALUES[state.procedureFilter] || state.procedureFilter);
+  if (state.dateStart) params.set('data_inici', state.dateStart);
+  if (state.dateEnd) params.set('data_final', state.dateEnd);
+  if (state.amountMin !== '') params.set('import_min', state.amountMin);
+  if (state.amountMax !== '') params.set('import_max', state.amountMax);
+  if (state.sortBy !== CONTRACT_SEARCH_DEFAULTS.sortBy) params.set('ordre', CONTRACT_SORT_QUERY_VALUES[state.sortBy] || state.sortBy);
+  if (state.currentPage > 1) params.set('pagina', String(state.currentPage));
+  return params.toString();
+}
+const ANALYSIS_SEARCH_DEFAULTS = {
+  tab: 'fraccionament',
+  concentrationMode: 'temporal',
+  searchTerm: '',
+  sortBy: 'risk-desc',
+  currentPage: 1
+};
+const ANALYSIS_TAB_QUERY_VALUES = {
+  fraccionament: 'fraccionament',
+  monopoli: 'concentracio',
+  electoral: 'electoralisme'
+};
+const ANALYSIS_MODE_QUERY_VALUES = {
+  historic: 'sectors',
+  temporal: 'temporals'
+};
+const ANALYSIS_SORT_QUERY_VALUES = {
+  'risk-desc': 'risc-descendent',
+  'risk-asc': 'risc-ascendent',
+  'amount-desc': 'import-descendent',
+  'amount-asc': 'import-ascendent',
+  'date-desc': 'data-recents',
+  'date-asc': 'data-antics'
+};
+function readAnalysisSearchState(search = window.location.search) {
+  const params = new URLSearchParams(search);
+  const requestedPage = Number.parseInt(params.get('pagina') || '1', 10);
+  return {
+    tab: readMappedQueryValue(params.get('tipus'), ANALYSIS_TAB_QUERY_VALUES, ANALYSIS_SEARCH_DEFAULTS.tab),
+    concentrationMode: readMappedQueryValue(params.get('mode'), ANALYSIS_MODE_QUERY_VALUES, ANALYSIS_SEARCH_DEFAULTS.concentrationMode),
+    searchTerm: params.get('cerca') || '',
+    sortBy: readMappedQueryValue(params.get('ordre'), ANALYSIS_SORT_QUERY_VALUES, ANALYSIS_SEARCH_DEFAULTS.sortBy),
+    currentPage: Number.isFinite(requestedPage) && requestedPage > 0 ? requestedPage : 1
+  };
+}
+function buildAnalysisSearchParams(state) {
+  const params = new URLSearchParams();
+  if (state.tab !== ANALYSIS_SEARCH_DEFAULTS.tab) params.set('tipus', ANALYSIS_TAB_QUERY_VALUES[state.tab] || state.tab);
+  if (state.tab === 'monopoli' && state.concentrationMode !== ANALYSIS_SEARCH_DEFAULTS.concentrationMode) {
+    params.set('mode', ANALYSIS_MODE_QUERY_VALUES[state.concentrationMode] || state.concentrationMode);
+  }
+  if (state.searchTerm.trim()) params.set('cerca', state.searchTerm.trim());
+  if (state.sortBy !== ANALYSIS_SEARCH_DEFAULTS.sortBy) params.set('ordre', ANALYSIS_SORT_QUERY_VALUES[state.sortBy] || state.sortBy);
+  if (state.currentPage > 1) params.set('pagina', String(state.currentPage));
+  return params.toString();
+}
 function formatPageTitle(value) {
   const trimmed = (value || '').trim();
   return trimmed ? `${trimmed} | ${BRAND_NAME}` : BRAND_NAME;
@@ -219,11 +332,12 @@ function prepareContracts(contracts) {
   for (const contract of contracts) {
     const baseSlug = buildContractSlug(contract);
     const legacyBaseSlug = buildLegacyContractSlug(contract);
-    contract.slug = slugCounts.get(baseSlug) > 1 ? `${baseSlug}-${stableHash([contract.fecha, contract.importe, contract.adjudicatario])}` : baseSlug;
+    const previousCollisionSlug = slugCounts.get(baseSlug) > 1 ? `${baseSlug}-${stableHash([contract.fecha, contract.importe, contract.adjudicatario])}` : null;
+    contract.slug = slugCounts.get(baseSlug) > 1 ? `${baseSlug}-${stableHash([contract.fecha, contract.importe, contract.adjudicatario, contract.numero_lot, contract.cpv, contract.contracte_origen, contract.id])}` : baseSlug;
     const legacyIndex = (legacySeen.get(legacyBaseSlug) || 0) + 1;
     legacySeen.set(legacyBaseSlug, legacyIndex);
     const legacySlug = legacyIndex > 1 ? `${legacyBaseSlug}-${legacyIndex}` : legacyBaseSlug;
-    contract.slug_aliases = Array.from(new Set([legacyBaseSlug, legacySlug].filter(slug => slug && slug !== contract.slug)));
+    contract.slug_aliases = Array.from(new Set([previousCollisionSlug, legacyBaseSlug, legacySlug].filter(slug => slug && slug !== contract.slug)));
   }
   return contracts;
 }
@@ -559,41 +673,62 @@ function Pagination({
   showTitles = true
 }) {
   const title = label => showTitles ? label : undefined;
-  return React.createElement("div", {
-    className: "pagination"
+  const Arrow = ({
+    direction
+  }) => React.createElement("svg", {
+    className: "pagination-icon",
+    width: "18",
+    height: "18",
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: "1.8",
+    strokeLinecap: "round",
+    strokeLinejoin: "round",
+    "aria-hidden": "true"
+  }, React.createElement("path", {
+    d: direction === 'left' ? 'm14 6-6 6 6 6' : 'm10 6 6 6-6 6'
+  }));
+  return React.createElement("nav", {
+    className: "pagination",
+    "aria-label": "Paginaci\xF3"
+  }, React.createElement("span", {
+    className: "pagination-info",
+    "aria-live": "polite"
+  }, React.createElement("span", {
+    className: "pagination-info-label"
+  }, "P\xE0gina"), React.createElement("strong", null, currentPage), React.createElement("span", null, "de"), React.createElement("strong", null, totalPages)), React.createElement("div", {
+    className: "pagination-actions"
   }, React.createElement("button", {
-    className: "pagination-btn",
-    onClick: () => onPageChange(1),
-    disabled: currentPage === 1,
-    title: title("Primera pàgina"),
-    type: "button"
-  }, "\xAB"), React.createElement("button", {
-    className: "pagination-btn",
+    className: "pagination-btn pagination-btn-direction",
     onClick: () => onPageChange(Math.max(currentPage - 1, 1)),
     disabled: currentPage === 1,
     title: title("Pàgina anterior"),
+    "aria-label": "P\xE0gina anterior",
     type: "button"
-  }, "\u2039"), React.createElement("span", {
-    className: "pagination-info"
-  }, "P\xE0gina ", React.createElement("strong", null, currentPage), " de ", React.createElement("strong", null, totalPages)), React.createElement("button", {
-    className: "pagination-btn",
+  }, React.createElement(Arrow, {
+    direction: "left"
+  }), React.createElement("span", {
+    className: "pagination-btn-label"
+  }, "Anterior")), React.createElement("button", {
+    className: "pagination-btn pagination-btn-direction",
     onClick: () => onPageChange(Math.min(currentPage + 1, totalPages)),
     disabled: currentPage === totalPages,
     title: title("Pàgina següent"),
+    "aria-label": "P\xE0gina seg\xFCent",
     type: "button"
-  }, "\u203A"), React.createElement("button", {
-    className: "pagination-btn",
-    onClick: () => onPageChange(totalPages),
-    disabled: currentPage === totalPages,
-    title: title("Última pàgina"),
-    type: "button"
-  }, "\xBB"));
+  }, React.createElement("span", {
+    className: "pagination-btn-label"
+  }, "Seg\xFCent"), React.createElement(Arrow, {
+    direction: "right"
+  }))));
 }
 function FilterActions({
   open,
   onToggle,
   activeCount,
-  onReset
+  onReset,
+  controlsId
 }) {
   return React.createElement("div", {
     className: "filter-actions"
@@ -601,10 +736,11 @@ function FilterActions({
     className: "filters-toggle-btn",
     onClick: onToggle,
     "aria-expanded": open,
+    "aria-controls": controlsId,
     type: "button"
   }, React.createElement("span", null, "Filtres"), React.createElement("span", {
     className: "filters-toggle-meta"
-  }, activeCount)), React.createElement("button", {
+  }, activeCount > 0 ? activeCount : 'Ø')), React.createElement("button", {
     className: "btn-reset filters-mobile-reset",
     onClick: onReset,
     title: "Restablir filtres",
@@ -1167,48 +1303,82 @@ async function generateShareImage(contract) {
 }
 function ContractDetailView({
   contract: c,
-  contracts,
   empreses,
   onBack,
   onEmpresaClick
 }) {
-  const empresaContracts = useMemo(() => contracts.filter(contract => contract.adjudicatario === c.adjudicatario), [contracts, c.adjudicatario]);
+  const [shareActionsOpen, setShareActionsOpen] = useState(false);
+  const [shareCopyStatus, setShareCopyStatus] = useState('');
+  const [shareDownloadStatus, setShareDownloadStatus] = useState('');
+  const shareActionsRef = useRef(null);
+  const shareStatusTimerRef = useRef(null);
+  const shareDownloadTimerRef = useRef(null);
+  const linkedEmpresa = empreses.find(empresa => empresa.nom === c.adjudicatario);
+  const empresaHref = buildRouteUrl(linkedEmpresa?.slug ? `/empreses/${linkedEmpresa.slug}` : '/empreses');
   const isPreserved = c.evidencia_congelada === true || c.estat_font === 'preservat_desaparegut_socrata' || c.preservat_iguadata;
+  const hasCpv = Boolean(String(c.cpv || '').trim());
+  useEffect(() => {
+    if (!shareActionsOpen) return;
+    const closeShareActions = event => {
+      if (event.type === 'keydown' && event.key !== 'Escape') return;
+      if (event.type === 'pointerdown' && shareActionsRef.current?.contains(event.target)) return;
+      setShareActionsOpen(false);
+    };
+    document.addEventListener('pointerdown', closeShareActions);
+    document.addEventListener('keydown', closeShareActions);
+    return () => {
+      document.removeEventListener('pointerdown', closeShareActions);
+      document.removeEventListener('keydown', closeShareActions);
+    };
+  }, [shareActionsOpen]);
+  useEffect(() => () => {
+    window.clearTimeout(shareStatusTimerRef.current);
+    window.clearTimeout(shareDownloadTimerRef.current);
+  }, []);
+  const copyContractLink = async () => {
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      setShareCopyStatus('Enllaç copiat');
+    } catch (_) {
+      setShareCopyStatus("No s'ha pogut copiar");
+    }
+    window.clearTimeout(shareStatusTimerRef.current);
+    shareStatusTimerRef.current = window.setTimeout(() => setShareCopyStatus(''), 1800);
+  };
+  const downloadContractImage = () => {
+    generateShareImage(c);
+    setShareDownloadStatus('Imatge descarregada');
+    window.clearTimeout(shareDownloadTimerRef.current);
+    shareDownloadTimerRef.current = window.setTimeout(() => setShareDownloadStatus(''), 1800);
+  };
   return React.createElement("div", {
     className: "container contracte-detail-page"
-  }, React.createElement("button", {
-    onClick: onBack,
-    className: "btn-reset contracte-detail-back",
-    style: {
-      marginBottom: '1.25rem'
-    },
-    title: "Tornar"
-  }, React.createElement("svg", {
-    xmlns: "http://www.w3.org/2000/svg",
-    width: "20",
-    height: "20",
-    viewBox: "0 0 24 24",
-    fill: "none",
-    stroke: "currentColor",
-    strokeWidth: "2",
-    strokeLinecap: "round",
-    strokeLinejoin: "round"
-  }, React.createElement("path", {
-    d: "M19 12H5"
-  }), React.createElement("polyline", {
-    points: "12 19 5 12 12 5"
-  }))), React.createElement("div", {
+  }, React.createElement("h1", {
+    className: "page-title"
+  }, "Detall de contracte"), React.createElement("div", {
     className: "contracte-detail-hero"
   }, React.createElement("div", {
     className: "contracte-detail-amount"
   }, formatCurrency(c.importe)), React.createElement("div", {
     className: "contract-header contracte-detail-title-row"
-  }, React.createElement("h1", {
+  }, React.createElement("h2", {
     className: "contracte-detail-title"
-  }, c.descripcion)), isPreserved && React.createElement("div", {
+  }, c.descripcion)), React.createElement("div", {
+    className: "contracte-detail-hero-company"
+  }, React.createElement("div", {
+    className: "contract-header contracte-detail-company-row"
+  }, React.createElement("h2", {
+    className: "contracte-detail-company-title"
+  }, React.createElement("a", {
+    className: "contracte-detail-company-link",
+    href: empresaHref,
+    onClick: event => handleInternalLinkClick(event, () => onEmpresaClick(c.adjudicatario))
+  }, c.adjudicatario))))), React.createElement("div", {
+    className: "contracte-detail-info-card"
+  }, isPreserved && React.createElement("div", {
     className: "contracte-preserved-notice"
   }, "Aquest contracte \xE9s recuperat i ja no consta al registre p\xFAblic. La fitxa i evid\xE8ncia es preserven per mantenir la tra\xE7abilitat de les dades."), React.createElement("div", {
-    className: "contract-meta contracte-detail-meta"
+    className: `contract-meta contracte-detail-meta contracte-detail-info-meta${hasCpv ? '' : ' contracte-detail-info-meta-without-cpv'}`
   }, React.createElement("div", {
     className: "contract-meta-item"
   }, React.createElement("span", {
@@ -1221,7 +1391,13 @@ function ContractDetailView({
     className: "contract-meta-label"
   }, "Codi expedient"), React.createElement("span", {
     className: "contract-meta-value"
-  }, c.codigo)), React.createElement("div", {
+  }, c.codigo)), hasCpv && React.createElement("div", {
+    className: "contract-meta-item"
+  }, React.createElement("span", {
+    className: "contract-meta-label"
+  }, "CPV"), React.createElement("span", {
+    className: "contract-meta-value"
+  }, c.cpv)), React.createElement("div", {
     className: "contract-meta-item"
   }, React.createElement("span", {
     className: "contract-meta-label"
@@ -1239,39 +1415,56 @@ function ContractDetailView({
     className: "contract-meta-label"
   }, "Procediment"), React.createElement("span", {
     className: "contract-meta-value"
-  }, formatProcediment(c.procedimiento)))), React.createElement("div", {
-    className: "contracte-detail-share"
+  }, formatProcediment(c.procedimiento))))), React.createElement("div", {
+    className: "contracte-detail-actions-row"
   }, React.createElement("button", {
-    className: "btn-share contracte-detail-share-btn",
-    onClick: () => generateShareImage(c)
-  }, "Compartir ", React.createElement("em", {
-    className: "share-arrow"
-  })))), React.createElement("div", {
-    className: "contracte-detail-company-card"
+    onClick: onBack,
+    className: "btn-share contracte-detail-back",
+    title: "Tornar",
+    "aria-label": "Tornar",
+    type: "button"
+  }, React.createElement("svg", {
+    className: "contracte-detail-back-icon",
+    xmlns: "http://www.w3.org/2000/svg",
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: "2",
+    strokeLinecap: "round",
+    strokeLinejoin: "round",
+    "aria-hidden": "true"
+  }, React.createElement("path", {
+    d: "M19 12H5"
+  }), React.createElement("polyline", {
+    points: "12 19 5 12 12 5"
+  })), React.createElement("span", null, "Tornar")), React.createElement("div", {
+    className: `contracte-detail-share contracte-detail-share-standalone${shareActionsOpen ? ' is-open' : ''}`,
+    ref: shareActionsRef
   }, React.createElement("div", {
-    className: "contract-meta-label",
-    style: {
-      marginBottom: '0.75rem'
-    }
-  }, "Empresa adjudicat\xE0ria"), React.createElement("div", {
-    className: "contract-header contracte-detail-company-row"
-  }, React.createElement("h2", {
-    className: "contracte-detail-company-title",
-    onClick: () => onEmpresaClick(c.adjudicatario),
-    onKeyDown: event => {
-      if (event.key === 'Enter' || event.key === ' ') {
-        event.preventDefault();
-        onEmpresaClick(c.adjudicatario);
-      }
-    },
-    role: "link",
-    tabIndex: 0
-  }, c.adjudicatario), React.createElement("div", {
-    className: "contract-pills contracte-detail-company-pills"
+    id: "contract-share-actions",
+    className: "contracte-detail-share-actions",
+    "aria-hidden": !shareActionsOpen
   }, React.createElement("button", {
-    className: "contract-pill contract-pill-button",
-    onClick: () => onEmpresaClick(c.adjudicatario)
-  }, empresaContracts.length, " contractes")))));
+    id: "analisi-tab-fraccionament",
+    className: "btn-share contracte-detail-share-btn",
+    onClick: copyContractLink,
+    tabIndex: shareActionsOpen ? 0 : -1,
+    type: "button"
+  }, shareCopyStatus || "Copia l'enllaç"), React.createElement("button", {
+    id: "analisi-tab-monopoli",
+    className: "btn-share contracte-detail-share-btn",
+    onClick: downloadContractImage,
+    tabIndex: shareActionsOpen ? 0 : -1,
+    type: "button"
+  }, shareDownloadStatus || "Descarrega l'imatge")), React.createElement("button", {
+    className: "btn-share contracte-detail-share-btn",
+    onClick: () => setShareActionsOpen(open => !open),
+    "aria-expanded": shareActionsOpen,
+    "aria-controls": "contract-share-actions",
+    type: "button"
+  }, React.createElement("em", {
+    className: "share-arrow"
+  }), " Compartir"))));
 }
 function CasoModal({
   caso,
@@ -1408,13 +1601,12 @@ function CasFraccionamentView({
   const overLimit = pct > 100;
   const limitShare = overLimit && caso.import_total > 0 ? caso.limit_legal / caso.import_total * 100 : Math.min(pct, 100);
   const overShare = overLimit ? 100 - limitShare : 0;
-  const sepStyle = {
-    marginTop: '1.25rem',
-    paddingTop: '1.75rem',
-    borderTop: '1px solid var(--border-on-dark)'
-  };
   const itemsPerPage = 25;
   const [currentPage, setCurrentPage] = useState(1);
+  const [shareActionsOpen, setShareActionsOpen] = useState(false);
+  const [shareCopyStatus, setShareCopyStatus] = useState('');
+  const shareActionsRef = useRef(null);
+  const shareStatusTimerRef = useRef(null);
   const casContracts = useMemo(() => (caso.contractes || []).map(cc => {
     const full = findMatchingContract(contracts, cc);
     return {
@@ -1426,43 +1618,42 @@ function CasFraccionamentView({
   const isSingleContractAlert = casContracts.length === 1 || caso.tipus_alerta === 'contracte_proper_limit';
   const totalPages = Math.ceil(casContracts.length / itemsPerPage);
   const contractesPaginats = casContracts.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+  useEffect(() => {
+    if (!shareActionsOpen) return;
+    const closeShareActions = event => {
+      if (event.type === 'keydown' && event.key !== 'Escape') return;
+      if (event.type === 'pointerdown' && shareActionsRef.current?.contains(event.target)) return;
+      setShareActionsOpen(false);
+    };
+    document.addEventListener('pointerdown', closeShareActions);
+    document.addEventListener('keydown', closeShareActions);
+    return () => {
+      document.removeEventListener('pointerdown', closeShareActions);
+      document.removeEventListener('keydown', closeShareActions);
+    };
+  }, [shareActionsOpen]);
+  useEffect(() => () => window.clearTimeout(shareStatusTimerRef.current), []);
+  const copyFraccionamentLink = async () => {
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      setShareCopyStatus('Enllaç copiat');
+    } catch (_) {
+      setShareCopyStatus("No s'ha pogut copiar");
+    }
+    window.clearTimeout(shareStatusTimerRef.current);
+    shareStatusTimerRef.current = window.setTimeout(() => setShareCopyStatus(''), 1800);
+  };
   return React.createElement("div", {
     className: "container analisi-detail-page"
-  }, React.createElement("button", {
-    onClick: onBack,
-    className: "btn-reset analisi-detail-back",
-    style: {
-      marginBottom: '1.25rem'
-    },
-    title: "Tornar"
-  }, React.createElement("svg", {
-    xmlns: "http://www.w3.org/2000/svg",
-    width: "20",
-    height: "20",
-    viewBox: "0 0 24 24",
-    fill: "none",
-    stroke: "currentColor",
-    strokeWidth: "2",
-    strokeLinecap: "round",
-    strokeLinejoin: "round"
-  }, React.createElement("path", {
-    d: "M19 12H5"
-  }), React.createElement("polyline", {
-    points: "12 19 5 12 12 5"
-  }))), React.createElement("div", {
+  }, React.createElement("h1", {
+    className: "page-title"
+  }, "Detall de fraccionament"), React.createElement("div", {
     className: "analisi-detail-hero analisi-case-hero analisi-case-fraccionament"
   }, React.createElement("div", {
-    className: "contract-pills analisi-mobile-risk-pills"
-  }, React.createElement("span", {
-    className: "risk-badge " + riskClass(caso.nivell)
-  }, riskLabel(caso.nivell)), React.createElement("span", {
-    className: "risk-badge " + riskClass(caso.nivell),
-    style: {
-      fontVariantNumeric: 'tabular-nums'
-    }
-  }, Number.isInteger(caso.risc) ? caso.risc : Number(caso.risc).toFixed(1), "/100")), React.createElement("div", {
-    className: "contract-header analisi-case-header"
-  }, React.createElement("div", {
+    className: "analisi-case-amount"
+  }, formatCurrency(caso.import_total)), React.createElement("div", {
+    className: "contract-header analisi-case-header analisi-fraccionament-title-row"
+  }, React.createElement("h2", {
     className: "analisi-case-title-wrap"
   }, (caso.empreses || []).map((nom, i) => {
     const emp = empreses.find(e => e.nom === nom);
@@ -1473,17 +1664,46 @@ function CasFraccionamentView({
       onClick: event => handleInternalLinkClick(event, () => onEmpresaClick(nom)),
       className: "analisi-case-title-link"
     }, nom);
-  })), React.createElement("div", {
-    className: "analisi-case-amount"
-  }, formatCurrency(caso.import_total))), React.createElement("div", {
-    className: "contract-meta divider-on-dark"
+  }))), React.createElement("div", {
+    className: "analisi-detail-contract-count"
+  }, casContracts.length, " ", casContracts.length === 1 ? 'contracte' : 'contractes'), React.createElement("div", {
+    className: "contract-pills analisi-detail-hero-pills"
+  }, React.createElement("span", {
+    className: "risk-badge " + riskClass(caso.nivell)
+  }, riskLabel(caso.nivell)), React.createElement("span", {
+    className: "risk-badge " + riskClass(caso.nivell),
+    style: {
+      fontVariantNumeric: 'tabular-nums'
+    }
+  }, Number.isInteger(caso.risc) ? caso.risc : Number(caso.risc).toFixed(1), "/100"))), React.createElement("section", {
+    className: "analisi-detail-section-card",
+    "aria-labelledby": "concentracio-company-title"
+  }, React.createElement("h2", {
+    id: "concentracio-company-title",
+    className: "analisi-detail-section-title"
+  }, caso.tipus_concentracio === 'xarxa' ? 'Xarxa mercantil concentrada' : 'Empresa dominant'), React.createElement("ul", {
+    className: "analisi-detail-text-list"
+  }, (caso.empreses || []).map(nom => {
+    const emp = empreses.find(e => e.nom === nom);
+    const slug = emp ? emp.slug : buildEmpresaSlug(nom);
+    return React.createElement("li", {
+      key: nom
+    }, React.createElement("a", {
+      href: buildRouteUrl(`/empreses/${slug}`),
+      onClick: event => handleInternalLinkClick(event, () => onEmpresaClick(nom)),
+      className: "analisi-detail-company-link"
+    }, nom));
+  }))), React.createElement("div", {
+    className: "analisi-detail-info-card"
+  }, React.createElement("div", {
+    className: "contract-meta analisi-detail-info-meta"
   }, React.createElement("div", {
     className: "contract-meta-item"
   }, React.createElement("span", {
     className: "contract-meta-label"
-  }, isSingleContractAlert ? 'Contracte' : 'Contractes'), React.createElement("span", {
+  }, "Per\xEDode"), React.createElement("span", {
     className: "contract-meta-value"
-  }, casContracts.length)), React.createElement("div", {
+  }, isSingleContractAlert ? formatDate(caso.data_inici) : `${formatDate(caso.data_inici)} – ${formatDate(caso.data_fi)}`)), React.createElement("div", {
     className: "contract-meta-item"
   }, React.createElement("span", {
     className: "contract-meta-label"
@@ -1493,31 +1713,21 @@ function CasFraccionamentView({
     className: "contract-meta-item"
   }, React.createElement("span", {
     className: "contract-meta-label"
-  }, isSingleContractAlert ? 'Data' : 'Període'), React.createElement("span", {
+  }, "Durada"), React.createElement("span", {
     className: "contract-meta-value"
-  }, isSingleContractAlert ? formatDate(caso.data_inici) : `${caso.dies_entre_primer_i_ultim} dies`)), React.createElement("div", {
+  }, isSingleContractAlert ? 'Un dia' : `${caso.dies_entre_primer_i_ultim} dies`)), React.createElement("div", {
     className: "contract-meta-item"
   }, React.createElement("span", {
     className: "contract-meta-label"
   }, "Tipus"), React.createElement("span", {
     className: "contract-meta-value"
-  }, formatTipusLimit(caso.tipus_limit))), React.createElement("div", {
-    className: "contract-pills"
-  }, React.createElement("span", {
-    className: "risk-badge " + riskClass(caso.nivell)
-  }, riskLabel(caso.nivell)), React.createElement("span", {
-    className: "risk-badge " + riskClass(caso.nivell),
-    style: {
-      fontVariantNumeric: 'tabular-nums'
-    }
-  }, Number.isInteger(caso.risc) ? caso.risc : Number(caso.risc).toFixed(1), "/100"))), React.createElement("div", {
-    className: "analisi-case-section",
-    style: sepStyle
+  }, formatTipusLimit(caso.tipus_limit))))), React.createElement("section", {
+    className: "analisi-detail-section-card analisi-fraccionament-limit",
+    "aria-label": "Llindar del contracte menor"
   }, React.createElement("div", {
-    className: "contract-meta-label",
-    style: {
-      marginBottom: '0.5rem'
-    }
+    className: "analisi-detail-section-body"
+  }, React.createElement("div", {
+    className: "contract-meta-label analisi-detail-section-label"
   }, isSingleContractAlert ? 'Import del contracte' : 'Import acumulat'), React.createElement("ul", {
     className: "stack-list"
   }, React.createElement("li", {
@@ -1531,7 +1741,8 @@ function CasFraccionamentView({
       fontVariantNumeric: 'tabular-nums'
     }
   }, overLimit ? `+${Math.round(pct)}% sobre el límit legal` : `${Math.round(pct)}% del límit legal`))), React.createElement("div", {
-    className: "analisi-case-progress"
+    className: "analisi-case-progress",
+    "aria-hidden": "true"
   }, React.createElement("div", {
     className: "analisi-case-progress-segment analisi-case-progress-limit",
     style: {
@@ -1542,41 +1753,27 @@ function CasFraccionamentView({
     style: {
       width: overShare + '%'
     }
-  }))), (caso.administradors_comuns || []).length > 0 && React.createElement("div", {
-    className: "analisi-case-section",
-    style: sepStyle
-  }, React.createElement("div", {
-    className: "contract-meta-label",
-    style: {
-      marginBottom: '0.5rem'
-    }
+  })))), (caso.administradors_comuns || []).length > 0 && React.createElement("section", {
+    className: "analisi-detail-section-card",
+    "aria-labelledby": "fraccionament-relations-title"
+  }, React.createElement("h2", {
+    id: "fraccionament-relations-title",
+    className: "analisi-detail-section-title"
   }, "Administradors comuns"), React.createElement("ul", {
-    className: "stack-list"
+    className: "analisi-detail-text-list"
   }, caso.administradors_comuns.map(a => React.createElement("li", {
-    key: a,
-    className: "analisi-case-row"
-  }, React.createElement("span", {
-    style: {
-      fontWeight: 500
-    }
-  }, a))))), (caso.motius || []).length > 0 && React.createElement("div", {
-    className: "analisi-case-section",
-    style: sepStyle
-  }, React.createElement("div", {
-    className: "contract-meta-label",
-    style: {
-      marginBottom: '0.5rem'
-    }
+    key: a
+  }, a)))), (caso.motius || []).length > 0 && React.createElement("section", {
+    className: "analisi-detail-section-card",
+    "aria-labelledby": "fraccionament-indicators-title"
+  }, React.createElement("h2", {
+    id: "fraccionament-indicators-title",
+    className: "analisi-detail-section-title"
   }, "Indicadors"), React.createElement("ul", {
-    className: "stack-list"
+    className: "analisi-detail-text-list"
   }, caso.motius.map(m => React.createElement("li", {
-    key: m,
-    className: "analisi-case-row"
-  }, React.createElement("span", {
-    style: {
-      fontWeight: 400
-    }
-  }, formatMotiuFraccionament(m))))))), contractesPaginats.map((cc, i) => cc.slug && cc.fullObj ? React.createElement("a", {
+    key: m
+  }, formatMotiuFraccionament(m))))), contractesPaginats.map((cc, i) => cc.slug && cc.fullObj ? React.createElement("a", {
     key: `${cc.codigo}-${i}`,
     href: buildRouteUrl(`/contractes/${cc.slug}`),
     className: "card-link-wrapper",
@@ -1616,7 +1813,13 @@ function CasFraccionamentView({
     className: "contract-meta-label"
   }, "Codi expedient"), React.createElement("span", {
     className: "contract-meta-value"
-  }, cc.codigo))))) : React.createElement("div", {
+  }, cc.codigo)), React.createElement("div", {
+    className: "contract-pills"
+  }, React.createElement("span", {
+    className: "contract-pill"
+  }, formatTipus(cc.tipo)), React.createElement("span", {
+    className: "contract-pill procedure"
+  }, formatProcediment(cc.procedimiento)))))) : React.createElement("div", {
     key: `${cc.codigo}-${i}`,
     className: "contract-card"
   }, React.createElement("div", {
@@ -1645,12 +1848,60 @@ function CasFraccionamentView({
     className: "contract-meta-label"
   }, "Codi expedient"), React.createElement("span", {
     className: "contract-meta-value"
-  }, cc.codigo))))), casContracts.length > itemsPerPage && React.createElement(Pagination, {
+  }, cc.codigo)), React.createElement("div", {
+    className: "contract-pills"
+  }, React.createElement("span", {
+    className: "contract-pill"
+  }, formatTipus(cc.tipo)), React.createElement("span", {
+    className: "contract-pill procedure"
+  }, formatProcediment(cc.procedimiento)))))), casContracts.length > itemsPerPage && React.createElement(Pagination, {
     currentPage: currentPage,
     totalPages: totalPages,
     onPageChange: setCurrentPage,
     showTitles: false
-  }));
+  }), React.createElement("div", {
+    className: "contracte-detail-actions-row"
+  }, React.createElement("button", {
+    onClick: onBack,
+    className: "btn-share contracte-detail-back",
+    title: "Tornar",
+    "aria-label": "Tornar",
+    type: "button"
+  }, React.createElement("svg", {
+    className: "contracte-detail-back-icon",
+    xmlns: "http://www.w3.org/2000/svg",
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: "2",
+    strokeLinecap: "round",
+    strokeLinejoin: "round",
+    "aria-hidden": "true"
+  }, React.createElement("path", {
+    d: "M19 12H5"
+  }), React.createElement("polyline", {
+    points: "12 19 5 12 12 5"
+  })), React.createElement("span", null, "Tornar")), React.createElement("div", {
+    className: `contracte-detail-share contracte-detail-share-standalone${shareActionsOpen ? ' is-open' : ''}`,
+    ref: shareActionsRef
+  }, React.createElement("div", {
+    id: "fraccionament-share-actions",
+    className: "contracte-detail-share-actions",
+    "aria-hidden": !shareActionsOpen
+  }, React.createElement("button", {
+    className: "btn-share contracte-detail-share-btn",
+    onClick: copyFraccionamentLink,
+    tabIndex: shareActionsOpen ? 0 : -1,
+    type: "button"
+  }, shareCopyStatus || "Copia l'enllaç")), React.createElement("button", {
+    className: "btn-share contracte-detail-share-btn",
+    onClick: () => setShareActionsOpen(open => !open),
+    "aria-expanded": shareActionsOpen,
+    "aria-controls": "fraccionament-share-actions",
+    type: "button"
+  }, React.createElement("em", {
+    className: "share-arrow"
+  }), " Compartir"))));
 }
 function CasConcentracioView({
   caso,
@@ -1661,13 +1912,12 @@ function CasConcentracioView({
   onEmpresaClick
 }) {
   if (!caso) return null;
-  const sepStyle = {
-    marginTop: '1.25rem',
-    paddingTop: '1.75rem',
-    borderTop: '1px solid var(--border-on-dark)'
-  };
   const itemsPerPage = 25;
   const [currentPage, setCurrentPage] = useState(1);
+  const [shareActionsOpen, setShareActionsOpen] = useState(false);
+  const [shareCopyStatus, setShareCopyStatus] = useState('');
+  const shareActionsRef = useRef(null);
+  const shareStatusTimerRef = useRef(null);
   const casContracts = useMemo(() => (caso.contractes || []).map(cc => {
     const full = findMatchingContract(contracts, cc);
     return {
@@ -1681,154 +1931,50 @@ function CasConcentracioView({
   const isHistoricConcentracio = caso.finestra === 'historic';
   const quotaPercent = Math.max(0, Math.min(100, Math.round((Number(caso.quota_import) || 0) * 100)));
   const quotaTone = quotaClass(caso.quota_import);
+  const concentrationType = isHistoricConcentracio ? 'Històrica' : 'Temporal';
+  useEffect(() => {
+    if (!shareActionsOpen) return;
+    const closeShareActions = event => {
+      if (event.type === 'keydown' && event.key !== 'Escape') return;
+      if (event.type === 'pointerdown' && shareActionsRef.current?.contains(event.target)) return;
+      setShareActionsOpen(false);
+    };
+    document.addEventListener('pointerdown', closeShareActions);
+    document.addEventListener('keydown', closeShareActions);
+    return () => {
+      document.removeEventListener('pointerdown', closeShareActions);
+      document.removeEventListener('keydown', closeShareActions);
+    };
+  }, [shareActionsOpen]);
+  useEffect(() => () => window.clearTimeout(shareStatusTimerRef.current), []);
+  const copyConcentracioLink = async () => {
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      setShareCopyStatus('Enllaç copiat');
+    } catch (_) {
+      setShareCopyStatus("No s'ha pogut copiar");
+    }
+    window.clearTimeout(shareStatusTimerRef.current);
+    shareStatusTimerRef.current = window.setTimeout(() => setShareCopyStatus(''), 1800);
+  };
   return React.createElement("div", {
     className: "container analisi-detail-page"
-  }, React.createElement("button", {
-    onClick: onBack,
-    className: "btn-reset analisi-detail-back",
-    style: {
-      marginBottom: '1.25rem'
-    },
-    title: "Tornar"
-  }, React.createElement("svg", {
-    xmlns: "http://www.w3.org/2000/svg",
-    width: "20",
-    height: "20",
-    viewBox: "0 0 24 24",
-    fill: "none",
-    stroke: "currentColor",
-    strokeWidth: "2",
-    strokeLinecap: "round",
-    strokeLinejoin: "round"
-  }, React.createElement("path", {
-    d: "M19 12H5"
-  }), React.createElement("polyline", {
-    points: "12 19 5 12 12 5"
-  }))), React.createElement("div", {
+  }, React.createElement("h1", {
+    className: "page-title"
+  }, "Detall de concentraci\xF3"), React.createElement("div", {
     className: "analisi-detail-hero analisi-case-hero analisi-case-concentracio"
-  }, !isHistoricConcentracio && React.createElement("div", {
-    className: "contract-pills analisi-mobile-risk-pills"
-  }, React.createElement("span", {
-    className: "risk-badge " + riskClass(caso.nivell)
-  }, riskLabel(caso.nivell)), React.createElement("span", {
-    className: "risk-badge " + riskClass(caso.nivell),
-    style: {
-      fontVariantNumeric: 'tabular-nums'
-    }
-  }, Number.isInteger(caso.risc) ? caso.risc : Number(caso.risc).toFixed(1), "/100")), React.createElement("div", {
-    className: "contract-header analisi-case-header"
   }, React.createElement("div", {
+    className: "analisi-case-amount"
+  }, formatCurrency(caso.import_concentrat)), React.createElement("div", {
+    className: "contract-header analisi-case-header analisi-fraccionament-title-row"
+  }, React.createElement("h2", {
     className: "analisi-case-title-wrap"
-  }, React.createElement("div", {
+  }, React.createElement("span", {
     className: "analisi-case-title"
-  }, formatSectorName(caso.sector)), React.createElement("div", {
-    className: "label-on-dark analisi-case-subtitle"
-  }, isHistoricConcentracio ? 'Registre històric' : formatConcentracioPeriod(caso)))), isHistoricConcentracio ? React.createElement(React.Fragment, null, React.createElement("div", {
-    className: "analisi-case-section",
-    style: sepStyle
-  }, React.createElement("div", {
-    className: "contract-meta-label",
-    style: {
-      marginBottom: '0.75rem'
-    }
-  }, caso.tipus_concentracio === 'xarxa' ? 'Xarxa mercantil concentrada' : 'Empresa dominant'), React.createElement("ul", {
-    className: "stack-list"
-  }, (caso.empreses || []).map(nom => {
-    const emp = empreses.find(e => e.nom === nom);
-    const slug = emp ? emp.slug : buildEmpresaSlug(nom);
-    return React.createElement("li", {
-      key: nom,
-      className: "analisi-case-company-item"
-    }, React.createElement("a", {
-      href: buildRouteUrl(`/empreses/${slug}`),
-      onClick: event => handleInternalLinkClick(event, () => onEmpresaClick(nom)),
-      className: "analisi-case-company-link"
-    }, nom));
-  }))), React.createElement("div", {
-    className: "analisi-case-section",
-    style: sepStyle
-  }, React.createElement("div", {
-    className: "contract-meta-label",
-    style: {
-      marginBottom: '0.75rem'
-    }
-  }, "Quota de mercat"), React.createElement("div", {
-    className: "analisi-case-quota analisi-case-quota-" + quotaTone
-  }, quotaPercent, "%"), React.createElement("div", {
-    className: "analisi-case-quota-bar"
-  }, React.createElement("div", {
-    className: "analisi-case-quota-fill analisi-case-quota-fill-" + quotaTone,
-    style: {
-      width: `${quotaPercent}%`
-    }
-  }))), React.createElement("div", {
-    className: "contract-meta divider-on-dark"
-  }, React.createElement("div", {
-    className: "contract-meta-item"
-  }, React.createElement("span", {
-    className: "contract-meta-label"
-  }, "Import"), React.createElement("span", {
-    className: "contract-meta-value"
-  }, formatCurrency(caso.import_concentrat), " / ", formatCurrency(caso.import_sector))), React.createElement("div", {
-    className: "contract-meta-item"
-  }, React.createElement("span", {
-    className: "contract-meta-label"
-  }, "Contractes"), React.createElement("span", {
-    className: "contract-meta-value"
-  }, caso.contractes_concentrats, " / ", caso.contractes_sector)))) : React.createElement(React.Fragment, null, React.createElement("div", {
-    className: "analisi-case-section",
-    style: sepStyle
-  }, React.createElement("div", {
-    className: "contract-meta-label",
-    style: {
-      marginBottom: '0.75rem'
-    }
-  }, caso.tipus_concentracio === 'xarxa' ? 'Xarxa mercantil concentrada' : 'Empresa dominant'), React.createElement("ul", {
-    className: "stack-list"
-  }, (caso.empreses || []).map(nom => {
-    const emp = empreses.find(e => e.nom === nom);
-    const slug = emp ? emp.slug : buildEmpresaSlug(nom);
-    return React.createElement("li", {
-      key: nom,
-      className: "analisi-case-company-item"
-    }, React.createElement("a", {
-      href: buildRouteUrl(`/empreses/${slug}`),
-      onClick: event => handleInternalLinkClick(event, () => onEmpresaClick(nom)),
-      className: "analisi-case-company-link"
-    }, nom));
-  }))), React.createElement("div", {
-    className: "analisi-case-section",
-    style: sepStyle
-  }, React.createElement("div", {
-    className: "contract-meta-label",
-    style: {
-      marginBottom: '0.75rem'
-    }
-  }, "Quota de mercat"), React.createElement("div", {
-    className: "analisi-case-quota analisi-case-quota-" + quotaTone
-  }, quotaPercent, "%"), React.createElement("div", {
-    className: "analisi-case-quota-bar"
-  }, React.createElement("div", {
-    className: "analisi-case-quota-fill analisi-case-quota-fill-" + quotaTone,
-    style: {
-      width: `${quotaPercent}%`
-    }
-  }))), React.createElement("div", {
-    className: "contract-meta divider-on-dark"
-  }, React.createElement("div", {
-    className: "contract-meta-item"
-  }, React.createElement("span", {
-    className: "contract-meta-label"
-  }, "Import"), React.createElement("span", {
-    className: "contract-meta-value"
-  }, formatCurrency(caso.import_concentrat), " / ", formatCurrency(caso.import_sector))), React.createElement("div", {
-    className: "contract-meta-item"
-  }, React.createElement("span", {
-    className: "contract-meta-label"
-  }, "Contractes"), React.createElement("span", {
-    className: "contract-meta-value"
-  }, caso.contractes_concentrats, " / ", caso.contractes_sector)), React.createElement("div", {
-    className: "contract-pills"
+  }, formatSectorName(caso.sector)))), React.createElement("div", {
+    className: "analisi-detail-contract-count"
+  }, casContracts.length, " ", casContracts.length === 1 ? 'contracte' : 'contractes'), React.createElement("div", {
+    className: "contract-pills analisi-detail-hero-pills"
   }, React.createElement("span", {
     className: "risk-badge " + riskClass(caso.nivell)
   }, riskLabel(caso.nivell)), React.createElement("span", {
@@ -1836,33 +1982,69 @@ function CasConcentracioView({
     style: {
       fontVariantNumeric: 'tabular-nums'
     }
-  }, Number.isInteger(caso.risc) ? caso.risc : Number(caso.risc).toFixed(1), "/100")))), (caso.administradors_comuns || []).length > 0 && React.createElement("div", {
-    className: "analisi-case-section",
-    style: sepStyle
+  }, Number.isInteger(caso.risc) ? caso.risc : Number(caso.risc).toFixed(1), "/100"))), React.createElement("div", {
+    className: "analisi-detail-info-card"
   }, React.createElement("div", {
-    className: "contract-meta-label",
+    className: `contract-meta analisi-detail-info-meta analisi-detail-info-meta-concentracio${isHistoricConcentracio ? ' is-historic' : ''}`
+  }, !isHistoricConcentracio && React.createElement("div", {
+    className: "contract-meta-item"
+  }, React.createElement("span", {
+    className: "contract-meta-label"
+  }, "Per\xEDode"), React.createElement("span", {
+    className: "contract-meta-value"
+  }, formatConcentracioPeriod(caso))), React.createElement("div", {
+    className: "contract-meta-item"
+  }, React.createElement("span", {
+    className: "contract-meta-label"
+  }, "Tipus"), React.createElement("span", {
+    className: "contract-meta-value"
+  }, concentrationType)), React.createElement("div", {
+    className: "contract-meta-item"
+  }, React.createElement("span", {
+    className: "contract-meta-label"
+  }, "Import del sector"), React.createElement("span", {
+    className: "contract-meta-value"
+  }, formatCurrency(caso.import_sector))), React.createElement("div", {
+    className: "contract-meta-item"
+  }, React.createElement("span", {
+    className: "contract-meta-label"
+  }, "Contractes del sector"), React.createElement("span", {
+    className: "contract-meta-value"
+  }, caso.contractes_sector)), React.createElement("div", {
+    className: "analisi-detail-info-extra"
+  }, React.createElement("span", {
+    className: "contract-meta-label"
+  }, "Quota de mercat"), React.createElement("span", {
+    className: "analisi-case-quota analisi-case-quota-" + quotaTone
+  }, quotaPercent, "%"), React.createElement("span", {
+    className: "analisi-case-quota-bar",
+    "aria-hidden": "true"
+  }, React.createElement("span", {
+    className: "analisi-case-quota-fill analisi-case-quota-fill-" + quotaTone,
     style: {
-      marginBottom: '0.5rem'
+      width: `${quotaPercent}%`
     }
+  }))))), (caso.administradors_comuns || []).length > 0 && React.createElement("section", {
+    className: "analisi-detail-section-card",
+    "aria-labelledby": "concentracio-relations-title"
+  }, React.createElement("h2", {
+    id: "concentracio-relations-title",
+    className: "analisi-detail-section-title"
   }, "Administradors comuns"), React.createElement("ul", {
-    className: "stack-list"
+    className: "analisi-detail-text-list"
   }, caso.administradors_comuns.map(a => React.createElement("li", {
-    key: a,
-    className: "analisi-case-section-value"
-  }, a)))), React.createElement("div", {
-    className: "analisi-case-section",
-    style: sepStyle
-  }, React.createElement("div", {
-    className: "contract-meta-label",
-    style: {
-      marginBottom: '0.5rem'
-    }
+    key: a
+  }, a)))), (caso.motius || []).length > 0 && React.createElement("section", {
+    className: "analisi-detail-section-card",
+    "aria-labelledby": "concentracio-indicators-title"
+  }, React.createElement("h2", {
+    id: "concentracio-indicators-title",
+    className: "analisi-detail-section-title"
   }, "Indicadors"), React.createElement("ul", {
-    className: "stack-list"
-  }, (caso.motius || []).map(m => React.createElement("li", {
-    key: m,
-    className: "analisi-case-list-item"
-  }, m))))), contractesPaginats.map((cc, i) => cc.slug && cc.fullObj ? React.createElement("a", {
+    className: "analisi-detail-text-list"
+  }, caso.motius.map(m => React.createElement("li", {
+    key: m
+  }, m)))), contractesPaginats.map((cc, i) => cc.slug && cc.fullObj ? React.createElement("a", {
     key: `${cc.codigo}-${i}`,
     href: buildRouteUrl(`/contractes/${cc.slug}`),
     className: "card-link-wrapper",
@@ -1895,7 +2077,13 @@ function CasConcentracioView({
     className: "contract-meta-label"
   }, "Codi expedient"), React.createElement("span", {
     className: "contract-meta-value"
-  }, cc.codigo))))) : React.createElement("div", {
+  }, cc.codigo)), React.createElement("div", {
+    className: "contract-pills"
+  }, React.createElement("span", {
+    className: "contract-pill"
+  }, formatTipus(cc.tipo)), React.createElement("span", {
+    className: "contract-pill procedure"
+  }, formatProcediment(cc.procedimiento)))))) : React.createElement("div", {
     key: `${cc.codigo}-${i}`,
     className: "contract-card"
   }, React.createElement("div", {
@@ -1904,12 +2092,80 @@ function CasConcentracioView({
     className: "contract-title"
   }, cc.descripcion), React.createElement("div", {
     className: "contract-amount"
-  }, formatCurrency(cc.importe))))), casContracts.length > itemsPerPage && React.createElement(Pagination, {
+  }, formatCurrency(cc.importe))), React.createElement("div", {
+    className: "contract-meta"
+  }, React.createElement("div", {
+    className: "contract-meta-item"
+  }, React.createElement("span", {
+    className: "contract-meta-label"
+  }, "Empresa adjudicat\xE0ria"), React.createElement("span", {
+    className: "contract-meta-value"
+  }, cc.adjudicatario)), React.createElement("div", {
+    className: "contract-meta-item"
+  }, React.createElement("span", {
+    className: "contract-meta-label"
+  }, "Data"), React.createElement("span", {
+    className: "contract-meta-value"
+  }, formatDate(cc.fecha))), React.createElement("div", {
+    className: "contract-meta-item"
+  }, React.createElement("span", {
+    className: "contract-meta-label"
+  }, "Codi expedient"), React.createElement("span", {
+    className: "contract-meta-value"
+  }, cc.codigo)), React.createElement("div", {
+    className: "contract-pills"
+  }, React.createElement("span", {
+    className: "contract-pill"
+  }, formatTipus(cc.tipo)), React.createElement("span", {
+    className: "contract-pill procedure"
+  }, formatProcediment(cc.procedimiento)))))), casContracts.length > itemsPerPage && React.createElement(Pagination, {
     currentPage: currentPage,
     totalPages: totalPages,
     onPageChange: setCurrentPage,
     showTitles: false
-  }));
+  }), React.createElement("div", {
+    className: "contracte-detail-actions-row"
+  }, React.createElement("button", {
+    onClick: onBack,
+    className: "btn-share contracte-detail-back",
+    title: "Tornar",
+    "aria-label": "Tornar",
+    type: "button"
+  }, React.createElement("svg", {
+    className: "contracte-detail-back-icon",
+    xmlns: "http://www.w3.org/2000/svg",
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: "2",
+    strokeLinecap: "round",
+    strokeLinejoin: "round",
+    "aria-hidden": "true"
+  }, React.createElement("path", {
+    d: "M19 12H5"
+  }), React.createElement("polyline", {
+    points: "12 19 5 12 12 5"
+  })), React.createElement("span", null, "Tornar")), React.createElement("div", {
+    className: `contracte-detail-share contracte-detail-share-standalone${shareActionsOpen ? ' is-open' : ''}`,
+    ref: shareActionsRef
+  }, React.createElement("div", {
+    id: "concentracio-share-actions",
+    className: "contracte-detail-share-actions",
+    "aria-hidden": !shareActionsOpen
+  }, React.createElement("button", {
+    className: "btn-share contracte-detail-share-btn",
+    onClick: copyConcentracioLink,
+    tabIndex: shareActionsOpen ? 0 : -1,
+    type: "button"
+  }, shareCopyStatus || "Copia l'enllaç")), React.createElement("button", {
+    className: "btn-share contracte-detail-share-btn",
+    onClick: () => setShareActionsOpen(open => !open),
+    "aria-expanded": shareActionsOpen,
+    "aria-controls": "concentracio-share-actions",
+    type: "button"
+  }, React.createElement("em", {
+    className: "share-arrow"
+  }), " Compartir"))));
 }
 function CasElectoralismeView({
   caso,
@@ -1920,11 +2176,10 @@ function CasElectoralismeView({
   onEmpresaClick
 }) {
   if (!caso) return null;
-  const sepStyle = {
-    marginTop: '1.25rem',
-    paddingTop: '1.75rem',
-    borderTop: '1px solid var(--border-on-dark)'
-  };
+  const [shareActionsOpen, setShareActionsOpen] = useState(false);
+  const [shareCopyStatus, setShareCopyStatus] = useState('');
+  const shareActionsRef = useRef(null);
+  const shareStatusTimerRef = useRef(null);
   const casContracts = useMemo(() => (caso.contractes || []).map(cc => {
     const full = findMatchingContract(contracts, cc);
     return {
@@ -1959,33 +2214,51 @@ function CasElectoralismeView({
   const isPostElectoral = caso.fase_temporal === 'Finestra administrativa posterior';
   const temporalLabel = isPreElectoral ? 'Dies abans' : isPostElectoral ? 'Dies després' : 'Votació en';
   const temporalValue = isPreElectoral ? caso.dies_abans_convocatoria || 0 : isPostElectoral ? caso.dies_despres_votacio || 0 : caso.dies_fins_votacio;
+  useEffect(() => {
+    if (!shareActionsOpen) return;
+    const closeShareActions = event => {
+      if (event.type === 'keydown' && event.key !== 'Escape') return;
+      if (event.type === 'pointerdown' && shareActionsRef.current?.contains(event.target)) return;
+      setShareActionsOpen(false);
+    };
+    document.addEventListener('pointerdown', closeShareActions);
+    document.addEventListener('keydown', closeShareActions);
+    return () => {
+      document.removeEventListener('pointerdown', closeShareActions);
+      document.removeEventListener('keydown', closeShareActions);
+    };
+  }, [shareActionsOpen]);
+  useEffect(() => () => window.clearTimeout(shareStatusTimerRef.current), []);
+  const copyElectoralismeLink = async () => {
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      setShareCopyStatus('Enllaç copiat');
+    } catch (_) {
+      setShareCopyStatus("No s'ha pogut copiar");
+    }
+    window.clearTimeout(shareStatusTimerRef.current);
+    shareStatusTimerRef.current = window.setTimeout(() => setShareCopyStatus(''), 1800);
+  };
   return React.createElement("div", {
     className: "container analisi-detail-page"
-  }, React.createElement("button", {
-    onClick: onBack,
-    className: "btn-reset analisi-detail-back",
-    style: {
-      marginBottom: '1.25rem'
-    },
-    title: "Tornar"
-  }, React.createElement("svg", {
-    xmlns: "http://www.w3.org/2000/svg",
-    width: "20",
-    height: "20",
-    viewBox: "0 0 24 24",
-    fill: "none",
-    stroke: "currentColor",
-    strokeWidth: "2",
-    strokeLinecap: "round",
-    strokeLinejoin: "round"
-  }, React.createElement("path", {
-    d: "M19 12H5"
-  }), React.createElement("polyline", {
-    points: "12 19 5 12 12 5"
-  }))), React.createElement("div", {
+  }, React.createElement("h1", {
+    className: "page-title"
+  }, "Detall d'electoralisme"), React.createElement("div", {
     className: "analisi-detail-hero analisi-case-hero analisi-case-electoralisme"
   }, React.createElement("div", {
-    className: "contract-pills analisi-mobile-risk-pills"
+    className: "analisi-case-amount"
+  }, formatCurrency(caso.import_total)), React.createElement("div", {
+    className: "contract-header analisi-case-header analisi-fraccionament-title-row"
+  }, React.createElement("h2", {
+    className: "analisi-case-title-wrap"
+  }, React.createElement("a", {
+    href: buildRouteUrl(`/empreses/${empresaPrincipalSlug}`),
+    onClick: event => handleInternalLinkClick(event, () => onEmpresaClick(empresaPrincipal)),
+    className: "analisi-case-title-link"
+  }, empresaPrincipal))), React.createElement("div", {
+    className: "analisi-detail-contract-count"
+  }, casContracts.length, " ", casContracts.length === 1 ? 'contracte' : 'contractes'), React.createElement("div", {
+    className: "contract-pills analisi-detail-hero-pills"
   }, React.createElement("span", {
     className: "risk-badge " + riskClass(caso.nivell)
   }, riskLabel(caso.nivell)), React.createElement("span", {
@@ -1993,18 +2266,10 @@ function CasElectoralismeView({
     style: {
       fontVariantNumeric: 'tabular-nums'
     }
-  }, Number.isInteger(caso.risc) ? caso.risc : Number(caso.risc).toFixed(1), "/100")), React.createElement("div", {
-    className: "contract-header analisi-case-header"
+  }, Number.isInteger(caso.risc) ? caso.risc : Number(caso.risc).toFixed(1), "/100"))), React.createElement("div", {
+    className: "analisi-detail-info-card"
   }, React.createElement("div", {
-    className: "analisi-case-title-wrap"
-  }, React.createElement("a", {
-    href: buildRouteUrl(`/empreses/${empresaPrincipalSlug}`),
-    onClick: event => handleInternalLinkClick(event, () => onEmpresaClick(empresaPrincipal)),
-    className: "analisi-case-title-link"
-  }, empresaPrincipal)), React.createElement("div", {
-    className: "analisi-case-amount"
-  }, formatCurrency(caso.import_total))), React.createElement("div", {
-    className: "contract-meta divider-on-dark"
+    className: "contract-meta analisi-detail-info-meta"
   }, React.createElement("div", {
     className: "contract-meta-item"
   }, React.createElement("span", {
@@ -2027,41 +2292,27 @@ function CasElectoralismeView({
     className: "contract-meta-item"
   }, React.createElement("span", {
     className: "contract-meta-label"
-  }, "Contracte recurrent"), React.createElement("span", {
+  }, "Recurr\xE8ncia"), React.createElement("span", {
     className: "contract-meta-value"
-  }, hasRecurrencia ? 'Sí' : 'No')), React.createElement("div", {
-    className: "contract-pills"
-  }, React.createElement("span", {
-    className: "risk-badge " + riskClass(caso.nivell)
-  }, riskLabel(caso.nivell)), React.createElement("span", {
-    className: "risk-badge " + riskClass(caso.nivell),
-    style: {
-      fontVariantNumeric: 'tabular-nums'
-    }
-  }, Number.isInteger(caso.risc) ? caso.risc : Number(caso.risc).toFixed(1), "/100"))), (caso.termes_detectats || []).length > 0 && React.createElement("div", {
-    className: "analisi-case-section",
-    style: sepStyle
-  }, React.createElement("div", {
-    className: "contract-meta-label",
-    style: {
-      marginBottom: '0.5rem'
-    }
+  }, hasRecurrencia ? 'Sí' : 'No')))), (caso.termes_detectats || []).length > 0 && React.createElement("section", {
+    className: "analisi-detail-section-card",
+    "aria-labelledby": "electoralisme-concepts-title"
+  }, React.createElement("h2", {
+    id: "electoralisme-concepts-title",
+    className: "analisi-detail-section-title"
   }, "Conceptes"), React.createElement("div", {
-    className: "analisi-case-list-item"
-  }, conceptesText)), React.createElement("div", {
-    className: "analisi-case-section",
-    style: sepStyle
-  }, React.createElement("div", {
-    className: "contract-meta-label",
-    style: {
-      marginBottom: '0.5rem'
-    }
+    className: "analisi-detail-section-value"
+  }, conceptesText)), (caso.motius || []).length > 0 && React.createElement("section", {
+    className: "analisi-detail-section-card",
+    "aria-labelledby": "electoralisme-indicators-title"
+  }, React.createElement("h2", {
+    id: "electoralisme-indicators-title",
+    className: "analisi-detail-section-title"
   }, "Indicadors"), React.createElement("ul", {
-    className: "stack-list"
-  }, (caso.motius || []).map(m => React.createElement("li", {
-    key: m,
-    className: "analisi-case-list-item"
-  }, m))))), contracte.slug && contracte.fullObj ? React.createElement("a", {
+    className: "analisi-detail-text-list"
+  }, caso.motius.map(m => React.createElement("li", {
+    key: m
+  }, m)))), contracte.slug && contracte.fullObj ? React.createElement("a", {
     href: buildRouteUrl(`/contractes/${contracte.slug}`),
     className: "card-link-wrapper",
     onClick: event => handleInternalLinkClick(event, () => onContractSelect(contracte.fullObj))
@@ -2093,7 +2344,13 @@ function CasElectoralismeView({
     className: "contract-meta-label"
   }, "Codi expedient"), React.createElement("span", {
     className: "contract-meta-value"
-  }, contracte.codigo))))) : React.createElement("div", {
+  }, contracte.codigo)), React.createElement("div", {
+    className: "contract-pills"
+  }, React.createElement("span", {
+    className: "contract-pill"
+  }, formatTipus(contracte.tipo)), React.createElement("span", {
+    className: "contract-pill procedure"
+  }, formatProcediment(contracte.procedimiento)))))) : React.createElement("div", {
     className: "contract-card"
   }, React.createElement("div", {
     className: "contract-header"
@@ -2101,7 +2358,75 @@ function CasElectoralismeView({
     className: "contract-title"
   }, contracte.descripcion), React.createElement("div", {
     className: "contract-amount"
-  }, formatCurrency(contracte.importe)))));
+  }, formatCurrency(contracte.importe))), React.createElement("div", {
+    className: "contract-meta"
+  }, React.createElement("div", {
+    className: "contract-meta-item"
+  }, React.createElement("span", {
+    className: "contract-meta-label"
+  }, "Empresa adjudicat\xE0ria"), React.createElement("span", {
+    className: "contract-meta-value"
+  }, contracte.adjudicatario)), React.createElement("div", {
+    className: "contract-meta-item"
+  }, React.createElement("span", {
+    className: "contract-meta-label"
+  }, "Data"), React.createElement("span", {
+    className: "contract-meta-value"
+  }, formatDate(contracte.fecha))), React.createElement("div", {
+    className: "contract-meta-item"
+  }, React.createElement("span", {
+    className: "contract-meta-label"
+  }, "Codi expedient"), React.createElement("span", {
+    className: "contract-meta-value"
+  }, contracte.codigo)), React.createElement("div", {
+    className: "contract-pills"
+  }, React.createElement("span", {
+    className: "contract-pill"
+  }, formatTipus(contracte.tipo)), React.createElement("span", {
+    className: "contract-pill procedure"
+  }, formatProcediment(contracte.procedimiento))))), React.createElement("div", {
+    className: "contracte-detail-actions-row"
+  }, React.createElement("button", {
+    onClick: onBack,
+    className: "btn-share contracte-detail-back",
+    title: "Tornar",
+    "aria-label": "Tornar",
+    type: "button"
+  }, React.createElement("svg", {
+    className: "contracte-detail-back-icon",
+    xmlns: "http://www.w3.org/2000/svg",
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: "2",
+    strokeLinecap: "round",
+    strokeLinejoin: "round",
+    "aria-hidden": "true"
+  }, React.createElement("path", {
+    d: "M19 12H5"
+  }), React.createElement("polyline", {
+    points: "12 19 5 12 12 5"
+  })), React.createElement("span", null, "Tornar")), React.createElement("div", {
+    className: `contracte-detail-share contracte-detail-share-standalone${shareActionsOpen ? ' is-open' : ''}`,
+    ref: shareActionsRef
+  }, React.createElement("div", {
+    id: "electoralisme-share-actions",
+    className: "contracte-detail-share-actions",
+    "aria-hidden": !shareActionsOpen
+  }, React.createElement("button", {
+    className: "btn-share contracte-detail-share-btn",
+    onClick: copyElectoralismeLink,
+    tabIndex: shareActionsOpen ? 0 : -1,
+    type: "button"
+  }, shareCopyStatus || "Copia l'enllaç")), React.createElement("button", {
+    className: "btn-share contracte-detail-share-btn",
+    onClick: () => setShareActionsOpen(open => !open),
+    "aria-expanded": shareActionsOpen,
+    "aria-controls": "electoralisme-share-actions",
+    type: "button"
+  }, React.createElement("em", {
+    className: "share-arrow"
+  }), " Compartir"))));
 }
 function EmpresesView({
   empreses,
@@ -2186,27 +2511,6 @@ function EmpresesView({
   const endIndex = startIndex + itemsPerPage;
   const empresesPaginades = empresesFiltrades.slice(startIndex, endIndex);
   const activeFiltersCount = [sectorFilter, categoriaFilter, sortBy !== 'amount-desc' ? sortBy : ''].filter(Boolean).length;
-  const sectorTissue = useMemo(() => {
-    const bySector = {};
-    for (const e of empreses) {
-      const sector = e.sector || 'Altres Serveis i Subministraments';
-      if (!bySector[sector]) bySector[sector] = {
-        sector,
-        count: 0
-      };
-      bySector[sector].count += 1;
-    }
-    const items = Object.values(bySector).sort((a, b) => {
-      if (a.sector === 'Altres Serveis i Subministraments') return 1;
-      if (b.sector === 'Altres Serveis i Subministraments') return -1;
-      return b.count - a.count;
-    });
-    const maxCount = items.reduce((max, item) => Math.max(max, item.count), 0);
-    return {
-      items,
-      maxCount
-    };
-  }, [empreses]);
   return React.createElement("div", {
     className: "container empreses-page"
   }, React.createElement("h1", {
@@ -2314,13 +2618,13 @@ function EmpresesView({
   }, e.num_contratos, " contractes"))), React.createElement("div", {
     className: "contract-meta"
   }, e.sector && React.createElement("div", {
-    className: "contract-meta-item"
+    className: "contract-meta-item empresa-list-sector"
   }, React.createElement("span", {
     className: "contract-meta-label"
   }, "Sector"), React.createElement("span", {
     className: "contract-meta-value"
   }, e.sector)), e.categoria && React.createElement("div", {
-    className: "contract-meta-item"
+    className: "contract-meta-item empresa-list-category"
   }, React.createElement("span", {
     className: "contract-meta-label"
   }, "Categoria"), React.createElement("span", {
@@ -2336,44 +2640,7 @@ function EmpresesView({
     currentPage: currentPage,
     totalPages: totalPages,
     onPageChange: setCurrentPage
-  }), sectorTissue.items.length > 0 && React.createElement("div", {
-    className: "sector-tissue-visual",
-    "aria-label": "Distribuci\xF3 d'empreses adjudicat\xE0ries per sector"
-  }, React.createElement("div", {
-    className: "sector-tissue-header"
-  }, React.createElement("div", {
-    className: "chart-kicker"
-  }, "Visualitzaci\xF3"), React.createElement("h3", null, "Teixit de contractaci\xF3")), React.createElement("div", {
-    className: "sector-tissue-bars"
-  }, sectorTissue.items.map(item => React.createElement("button", {
-    key: item.sector,
-    type: "button",
-    className: "sector-tissue-row" + (sectorFilter === item.sector ? " is-active" : ""),
-    onClick: () => {
-      setSearchTerm('');
-      setDebouncedSearch('');
-      setSectorFilter(item.sector);
-      setCategoriaFilter('');
-      setSortBy('amount-desc');
-      setCurrentPage(1);
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
-    },
-    "aria-label": `Filtrar empreses del sector ${formatSectorName(item.sector)}`
-  }, React.createElement("div", {
-    className: "sector-tissue-copy"
-  }, React.createElement("span", null, formatSectorName(item.sector))), React.createElement("div", {
-    className: "sector-tissue-track",
-    "aria-hidden": "true"
-  }, React.createElement("span", {
-    style: {
-      width: `${Math.max(4, Math.round(item.count / sectorTissue.maxCount * 100))}%`
-    }
-  })), React.createElement("div", {
-    className: "sector-tissue-value"
-  }, React.createElement("span", null, item.count)))))), React.createElement("div", {
+  }), React.createElement("div", {
     className: "metodologia-wrapper"
   }, React.createElement("div", {
     className: "metodologia"
@@ -2416,6 +2683,10 @@ function EmpresaView({
   const [currentPage, setCurrentPage] = useState(1);
   const [showAllAdministradors, setShowAllAdministradors] = useState(false);
   const [empresaFiltersOpen, setEmpresaFiltersOpen] = useState(false);
+  const [shareActionsOpen, setShareActionsOpen] = useState(false);
+  const [shareCopyStatus, setShareCopyStatus] = useState('');
+  const shareActionsRef = useRef(null);
+  const shareStatusTimerRef = useRef(null);
   const itemsPerPage = 25;
   const maxAdministradorsInitial = isMobile() ? 5 : 10;
   const administradorsVisibles = administradorsEmpresa.slice(0, maxAdministradorsInitial);
@@ -2430,6 +2701,21 @@ function EmpresaView({
   useEffect(() => {
     setShowAllAdministradors(false);
   }, [empresaNom]);
+  useEffect(() => {
+    if (!shareActionsOpen) return;
+    const closeShareActions = event => {
+      if (event.type === 'keydown' && event.key !== 'Escape') return;
+      if (event.type === 'pointerdown' && shareActionsRef.current?.contains(event.target)) return;
+      setShareActionsOpen(false);
+    };
+    document.addEventListener('pointerdown', closeShareActions);
+    document.addEventListener('keydown', closeShareActions);
+    return () => {
+      document.removeEventListener('pointerdown', closeShareActions);
+      document.removeEventListener('keydown', closeShareActions);
+    };
+  }, [shareActionsOpen]);
+  useEffect(() => () => window.clearTimeout(shareStatusTimerRef.current), []);
   const empresaContracts = useMemo(() => {
     let result = [...allEmpresaContracts];
     if (debouncedSearch) {
@@ -2459,9 +2745,13 @@ function EmpresaView({
     }
     const items = Object.values(byYear).sort((a, b) => a.year - b.year);
     const maxAmount = items.reduce((max, item) => Math.max(max, item.amount), 0);
+    const firstYear = items[0]?.year;
+    const lastYear = items[items.length - 1]?.year;
+    const period = firstYear ? firstYear === lastYear ? String(firstYear) : `${firstYear}–${lastYear}` : '—';
     return {
       items,
-      maxAmount
+      maxAmount,
+      period
     };
   }, [allEmpresaContracts]);
   const totalPages = Math.ceil(empresaContracts.length / itemsPerPage);
@@ -2479,43 +2769,34 @@ function EmpresaView({
     setCurrentPage(1);
   };
   const activeFiltersCount = [tipusFilter, procedureFilter, dateStart, dateEnd, amountMin, amountMax, sortBy !== 'date-desc' ? sortBy : ''].filter(Boolean).length;
+  const copyEmpresaLink = async () => {
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      setShareCopyStatus('Enllaç copiat');
+    } catch (_) {
+      setShareCopyStatus("No s'ha pogut copiar");
+    }
+    window.clearTimeout(shareStatusTimerRef.current);
+    shareStatusTimerRef.current = window.setTimeout(() => setShareCopyStatus(''), 1800);
+  };
   return React.createElement("div", {
     className: "container empresa-detail-page"
-  }, React.createElement("button", {
-    onClick: onBack,
-    className: "btn-reset contracte-detail-back",
-    style: {
-      marginBottom: '1.25rem'
-    },
-    title: "Tornar"
-  }, React.createElement("svg", {
-    xmlns: "http://www.w3.org/2000/svg",
-    width: "20",
-    height: "20",
-    viewBox: "0 0 24 24",
-    fill: "none",
-    stroke: "currentColor",
-    strokeWidth: "2",
-    strokeLinecap: "round",
-    strokeLinejoin: "round"
-  }, React.createElement("path", {
-    d: "M19 12H5"
-  }), React.createElement("polyline", {
-    points: "12 19 5 12 12 5"
-  }))), React.createElement("div", {
+  }, React.createElement("h1", {
+    className: "page-title"
+  }, "Detall d'empresa"), React.createElement("div", {
     className: "empresa-detail-hero"
   }, React.createElement("div", {
-    className: "contract-header empresa-detail-title-row"
-  }, React.createElement("h1", {
-    className: "empresa-detail-title"
-  }, empresaNom), React.createElement("div", {
     className: "empresa-detail-amount"
   }, formatCurrency(totalImport)), React.createElement("div", {
-    className: "contract-pills empresa-mobile-title-pills"
-  }, React.createElement("span", {
-    className: "contract-pill pill-on-dark"
-  }, allEmpresaContracts.length, " contractes"))), React.createElement("div", {
-    className: "contract-meta empresa-detail-meta"
+    className: "contract-header empresa-detail-title-row"
+  }, React.createElement("h2", {
+    className: "empresa-detail-title"
+  }, empresaNom)), React.createElement("div", {
+    className: "empresa-detail-contract-count"
+  }, allEmpresaContracts.length, " contractes")), React.createElement("div", {
+    className: "empresa-detail-info-card"
+  }, React.createElement("div", {
+    className: "contract-meta empresa-detail-info-meta"
   }, empresaData?.sector && React.createElement("div", {
     className: "contract-meta-item"
   }, React.createElement("span", {
@@ -2529,14 +2810,18 @@ function EmpresaView({
   }, "Categoria"), React.createElement("span", {
     className: "contract-meta-value"
   }, empresaData.categoria)), React.createElement("div", {
-    className: "contract-pills empresa-detail-title-pills"
+    className: "contract-meta-item"
   }, React.createElement("span", {
-    className: "contract-pill pill-on-dark"
-  }, allEmpresaContracts.length, " contractes"))), React.createElement("div", {
-    className: "empresa-detail-cargos"
-  }, React.createElement("div", {
-    className: "contract-meta-label empresa-detail-cargos-label"
-  }, "C\xE0rrecs actius"), administradorsEmpresa.length > 0 ? React.createElement("ul", {
+    className: "contract-meta-label"
+  }, "Per\xEDode"), React.createElement("span", {
+    className: "contract-meta-value"
+  }, empresaAnnualActivity.period)))), administradorsEmpresa.length > 0 && React.createElement("section", {
+    className: "empresa-detail-cargos",
+    "aria-labelledby": "empresa-cargos-title"
+  }, React.createElement("h2", {
+    id: "empresa-cargos-title",
+    className: "empresa-detail-cargos-title"
+  }, "C\xE0rrecs actius"), React.createElement("ul", {
     className: "empresa-detail-cargos-list"
   }, administradorsVisibles.map((a, i) => React.createElement("li", {
     key: i,
@@ -2562,38 +2847,18 @@ function EmpresaView({
     type: "button",
     onClick: () => setShowAllAdministradors(v => !v),
     className: "empresa-detail-cargos-toggle" + (showAllAdministradors ? " is-open" : "")
-  }, showAllAdministradors ? 'Veure menys' : 'Veure tots'))) : React.createElement("div", {
-    className: "empresa-detail-cargos-empty"
-  }, "No s'han trobat c\xE0rrecs actius"))), empresaAnnualActivity.items.length > 1 && React.createElement("div", {
+  }, showAllAdministradors ? 'Veure menys' : 'Veure tots')))), empresaAnnualActivity.items.length > 1 && React.createElement("div", {
     className: "empresa-activity-visual",
-    "aria-label": "Evoluci\xF3 anual de l'import adjudicat a aquesta empresa"
+    "aria-label": "Hist\xF2ric anual de l'import adjudicat a aquesta empresa"
   }, React.createElement("div", {
     className: "empresa-activity-header"
-  }, React.createElement("div", {
-    className: "chart-kicker"
-  }, "Visualitzaci\xF3"), React.createElement("h3", null, "Activitat de contractaci\xF3")), React.createElement("div", {
+  }, React.createElement("h3", {
+    className: "empresa-activity-title"
+  }, "Hist\xF2ric de contractes")), React.createElement("div", {
     className: "empresa-activity-bars"
-  }, empresaAnnualActivity.items.map(item => React.createElement("button", {
+  }, empresaAnnualActivity.items.map(item => React.createElement("div", {
     key: item.year,
-    type: "button",
-    className: "empresa-activity-column" + (dateStart === `${item.year}-01-01` && dateEnd === `${item.year}-12-31` ? " is-active" : ""),
-    onClick: () => {
-      setSearchTerm('');
-      setDebouncedSearch('');
-      setTipusFilter('');
-      setProcedureFilter('');
-      setAmountMin('');
-      setAmountMax('');
-      setSortBy('date-desc');
-      setDateStart(`${item.year}-01-01`);
-      setDateEnd(`${item.year}-12-31`);
-      setCurrentPage(1);
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
-    },
-    "aria-label": `Filtrar contractes de ${empresaNom} de l'any ${item.year}`
+    className: "empresa-activity-column"
   }, React.createElement("div", {
     className: "empresa-activity-bar-wrap",
     "aria-hidden": "true"
@@ -2605,10 +2870,7 @@ function EmpresaView({
   })), React.createElement("div", {
     className: "empresa-activity-meta"
   }, React.createElement("span", null, item.year), React.createElement("small", null, formatCurrency(item.amount))))))), React.createElement("div", {
-    className: "search-section",
-    style: {
-      marginBottom: '2rem'
-    }
+    className: "search-section empresa-detail-contract-search"
   }, React.createElement(SearchField, {
     value: searchTerm,
     onValueChange: setSearchTerm,
@@ -2788,7 +3050,49 @@ function EmpresaView({
     currentPage: currentPage,
     totalPages: totalPages,
     onPageChange: setCurrentPage
-  }));
+  }), React.createElement("div", {
+    className: "empresa-detail-actions-row contracte-detail-actions-row"
+  }, React.createElement("button", {
+    onClick: onBack,
+    className: "btn-share empresa-detail-back contracte-detail-back",
+    title: "Tornar",
+    "aria-label": "Tornar",
+    type: "button"
+  }, React.createElement("svg", {
+    className: "contracte-detail-back-icon",
+    xmlns: "http://www.w3.org/2000/svg",
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: "2",
+    strokeLinecap: "round",
+    strokeLinejoin: "round",
+    "aria-hidden": "true"
+  }, React.createElement("path", {
+    d: "M19 12H5"
+  }), React.createElement("polyline", {
+    points: "12 19 5 12 12 5"
+  })), React.createElement("span", null, "Tornar")), React.createElement("div", {
+    className: `contracte-detail-share contracte-detail-share-standalone${shareActionsOpen ? ' is-open' : ''}`,
+    ref: shareActionsRef
+  }, React.createElement("div", {
+    id: "empresa-share-actions",
+    className: "contracte-detail-share-actions",
+    "aria-hidden": !shareActionsOpen
+  }, React.createElement("button", {
+    className: "btn-share contracte-detail-share-btn",
+    onClick: copyEmpresaLink,
+    tabIndex: shareActionsOpen ? 0 : -1,
+    type: "button"
+  }, shareCopyStatus || "Copia l'enllaç")), React.createElement("button", {
+    className: "btn-share contracte-detail-share-btn",
+    onClick: () => setShareActionsOpen(open => !open),
+    "aria-expanded": shareActionsOpen,
+    "aria-controls": "empresa-share-actions",
+    type: "button"
+  }, React.createElement("em", {
+    className: "share-arrow"
+  }), " Compartir"))));
 }
 function PersonesView({
   persones,
@@ -2806,8 +3110,8 @@ function PersonesView({
   const [debouncedSearch, setDebouncedSearch] = useState(searchTerm);
   const [personesFiltersOpen, setPersonesFiltersOpen] = useState(false);
   const itemsPerPage = 25;
-  const togglePersona = idx => {
-    setExpandedIdx(prev => prev === idx ? null : idx);
+  const togglePersona = personaId => {
+    setExpandedIdx(prev => prev === personaId ? null : personaId);
   };
   const resetFilters = () => {
     setSearchTerm('');
@@ -2870,8 +3174,10 @@ function PersonesView({
     open: personesFiltersOpen,
     onToggle: () => setPersonesFiltersOpen(prev => !prev),
     activeCount: activeFiltersCount,
-    onReset: resetFilters
+    onReset: resetFilters,
+    controlsId: "persones-filter-panel"
   }), React.createElement("div", {
+    id: "persones-filter-panel",
     className: "filters search-filter-panel search-filter-panel-single" + (!personesFiltersOpen ? " collapsed" : "")
   }, React.createElement("div", {
     className: "filter-group filter-group-standard"
@@ -2891,7 +3197,9 @@ function PersonesView({
   }, "Import (descendent)"), React.createElement("option", {
     value: "amount-asc"
   }, "Import (ascendent)"))))), React.createElement("div", {
-    className: "results-count"
+    className: "results-count",
+    role: "status",
+    "aria-live": "polite"
   }, React.createElement("span", {
     className: "results-count-total"
   }, React.createElement("span", {
@@ -2904,52 +3212,54 @@ function PersonesView({
     className: "results-count-page-short"
   }, "P\xE0g."), " ", React.createElement("strong", null, currentPage), " de ", React.createElement("strong", null, totalPages))), React.createElement("div", {
     className: "persones-compact-list"
-  }, personesPaginades.map((p, idx) => {
-    const isExpanded = expandedIdx === idx;
+  }, personesPaginades.map(p => {
+    const personaId = `persona-${stableHash([p.nom])}`;
+    const panelId = `${personaId}-relacions`;
+    const isExpanded = expandedIdx === personaId;
+    const principalEmpresa = (p.relacions || []).reduce((principal, relacio) => !principal || Number(relacio.import_empresa) > Number(principal.import_empresa) ? relacio : principal, null);
     return React.createElement("div", {
-      key: idx,
+      key: p.nom,
       className: "contract-card persona-card"
     }, React.createElement("button", {
+      id: `${personaId}-trigger`,
       type: "button",
       className: `persona-row-header${isExpanded ? ' is-expanded' : ''}`,
-      onClick: () => togglePersona(idx),
-      "aria-expanded": isExpanded
+      onClick: () => togglePersona(personaId),
+      "aria-expanded": isExpanded,
+      "aria-controls": panelId
     }, React.createElement("div", {
-      className: "persona-row-header-left"
-    }, React.createElement("div", null, React.createElement("div", {
+      className: "contract-header persona-row-main"
+    }, React.createElement("div", {
       className: "contract-title persona-title"
-    }, p.nom))), React.createElement("div", {
-      className: "persona-row-header-right"
-    }, React.createElement("div", {
-      className: "persona-row-amount"
-    }, React.createElement("div", {
+    }, p.nom), React.createElement("div", {
       className: "contract-amount persona-amount"
-    }, formatCurrency(p.total_adjudicat)), React.createElement("div", {
-      className: "contract-meta-value persona-amount-caption"
-    }, "De ", p.relacions.length, " ", p.relacions.length === 1 ? 'empresa' : 'empreses')), React.createElement("div", {
-      className: `persona-row-chevron${isExpanded ? ' is-expanded' : ''}`
-    }, React.createElement("svg", {
-      xmlns: "http://www.w3.org/2000/svg",
-      width: "20",
-      height: "20",
-      viewBox: "0 0 24 24",
-      fill: "none",
-      stroke: "currentColor",
-      strokeWidth: "2",
-      strokeLinecap: "round",
-      strokeLinejoin: "round"
-    }, React.createElement("polyline", {
-      points: "6 9 12 15 18 9"
-    }))))), React.createElement("div", {
-      className: `persona-row-body-wrapper${isExpanded ? ' is-expanded' : ''}`
+    }, formatCurrency(p.total_adjudicat))), React.createElement("div", {
+      className: "contract-meta persona-row-meta"
+    }, principalEmpresa && React.createElement("div", {
+      className: "contract-meta-item"
+    }, React.createElement("span", {
+      className: "contract-meta-label"
+    }, "Empresa principal"), React.createElement("span", {
+      className: "contract-meta-value persona-primary-company"
+    }, principalEmpresa.empresa)), React.createElement("div", {
+      className: "contract-pills"
+    }, React.createElement("span", {
+      className: "contract-pill"
+    }, p.relacions.length, " ", p.relacions.length === 1 ? 'empresa' : 'empreses')))), React.createElement("div", {
+      id: panelId,
+      className: `persona-row-body-wrapper${isExpanded ? ' is-expanded' : ''}`,
+      role: "region",
+      "aria-labelledby": `${personaId}-trigger`,
+      "aria-hidden": !isExpanded
     }, React.createElement("div", null, React.createElement("div", {
       className: "persona-row-body"
     }, React.createElement("div", {
       className: "persona-relacions-list"
-    }, p.relacions.map((emp, i) => React.createElement("a", {
-      key: i,
+    }, p.relacions.map(emp => React.createElement("a", {
+      key: emp.empresa,
       href: buildRouteUrl(`/empreses/${buildEmpresaSlug(emp.empresa)}`),
       className: "persona-relacio-item",
+      tabIndex: isExpanded ? 0 : -1,
       onClick: event => handleInternalLinkClick(event, () => onEmpresaSelect(emp.empresa))
     }, React.createElement("div", {
       className: "persona-relacio-empresa"
@@ -2962,7 +3272,10 @@ function PersonesView({
   }), personesFiltrades.length > itemsPerPage && React.createElement(Pagination, {
     currentPage: currentPage,
     totalPages: totalPages,
-    onPageChange: setCurrentPage
+    onPageChange: page => {
+      setCurrentPage(page);
+      setExpandedIdx(null);
+    }
   }), React.createElement("div", {
     className: "metodologia-wrapper"
   }, React.createElement("div", {
@@ -3270,6 +3583,8 @@ function InvestigacioCaseView({
   })));
 }
 function App() {
+  const initialContractSearch = useMemo(() => readContractSearchState(), []);
+  const initialAnalysisSearch = useMemo(() => readAnalysisSearchState(), []);
   const tabFromPath = p => resolveRoute(p).tab;
   const [activeTab, setActiveTab] = useState(() => tabFromPath(getCurrentRoute()));
   const [pendingEmpresaSlug, setPendingEmpresaSlug] = useState(() => {
@@ -3598,28 +3913,61 @@ function App() {
   }, [activeTab]);
   const [expandedId, setExpandedId] = useState(null);
   const [expandedMonopolyId, setExpandedMonopolyId] = useState(null);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [debouncedSearch, setDebouncedSearch] = useState('');
-  const [typeFilter, setTypeFilter] = useState('');
-  const [procedureFilter, setProcedureFilter] = useState('');
-  const [riskFilter, setRiskFilter] = useState('TOTS');
-  const [analisiSearch, setAnalisiSearch] = useState('');
-  const [analisiSort, setAnalisiSort] = useState('risk-desc');
-  const [concentracioMode, setConcentracioMode] = useState('historic');
+  const [searchTerm, setSearchTerm] = useState(initialContractSearch.searchTerm);
+  const [debouncedSearch, setDebouncedSearch] = useState(initialContractSearch.searchTerm);
+  const [typeFilter, setTypeFilter] = useState(initialContractSearch.typeFilter);
+  const [procedureFilter, setProcedureFilter] = useState(initialContractSearch.procedureFilter);
+  const [analisiTab, setAnalisiTab] = useState(initialAnalysisSearch.tab);
+  const [analisiFiltersByTab, setAnalisiFiltersByTab] = useState(() => {
+    const defaults = () => ({
+      searchTerm: '',
+      sortBy: 'risk-desc'
+    });
+    const state = {
+      fraccionament: defaults(),
+      monopoli: defaults(),
+      electoral: defaults()
+    };
+    state[initialAnalysisSearch.tab] = {
+      searchTerm: initialAnalysisSearch.searchTerm,
+      sortBy: initialAnalysisSearch.sortBy
+    };
+    return state;
+  });
+  const currentAnalisiFilters = analisiFiltersByTab[analisiTab];
+  const analisiSearch = currentAnalisiFilters.searchTerm;
+  const analisiSort = currentAnalisiFilters.sortBy;
+  const setAnalisiFilterValue = (key, value) => {
+    setAnalisiFiltersByTab(previous => ({
+      ...previous,
+      [analisiTab]: {
+        ...previous[analisiTab],
+        [key]: value
+      }
+    }));
+    if (analisiTab === 'fraccionament') setAnalisiPageFrac(1);
+    if (analisiTab === 'monopoli') setAnalisiPageMonop(1);
+    if (analisiTab === 'electoral') setAnalisiPageElect(1);
+  };
+  const setAnalisiSearch = value => setAnalisiFilterValue('searchTerm', value);
+  const setAnalisiSort = value => setAnalisiFilterValue('sortBy', value);
+  const [concentracioMode, setConcentracioMode] = useState(initialAnalysisSearch.concentrationMode);
   const [filtersOpen, setFiltersOpen] = useState(false);
   const [analisiFiltersOpen, setAnalisiFiltersOpen] = useState(false);
-  const [analisiPageFrac, setAnalisiPageFrac] = useState(1);
-  const [analisiPageElect, setAnalisiPageElect] = useState(1);
-  const [analisiPageMonop, setAnalisiPageMonop] = useState(1);
+  const [analisiPageFrac, setAnalisiPageFrac] = useState(initialAnalysisSearch.tab === 'fraccionament' ? initialAnalysisSearch.currentPage : 1);
+  const [analisiPageElect, setAnalisiPageElect] = useState(initialAnalysisSearch.tab === 'electoral' ? initialAnalysisSearch.currentPage : 1);
+  const [analisiPageMonop, setAnalisiPageMonop] = useState(initialAnalysisSearch.tab === 'monopoli' ? initialAnalysisSearch.currentPage : 1);
   const analisiItemsPerPage = 25;
-  const [dateStart, setDateStart] = useState('');
-  const [dateEnd, setDateEnd] = useState('');
-  const [amountMin, setAmountMin] = useState('');
-  const [amountMax, setAmountMax] = useState('');
-  const [sortBy, setSortBy] = useState('date-desc');
-  const [currentPage, setCurrentPage] = useState(1);
+  useEffect(() => {
+    setAnalisiFiltersOpen(false);
+  }, [analisiTab, concentracioMode]);
+  const [dateStart, setDateStart] = useState(initialContractSearch.dateStart);
+  const [dateEnd, setDateEnd] = useState(initialContractSearch.dateEnd);
+  const [amountMin, setAmountMin] = useState(initialContractSearch.amountMin);
+  const [amountMax, setAmountMax] = useState(initialContractSearch.amountMax);
+  const [sortBy, setSortBy] = useState(initialContractSearch.sortBy);
+  const [currentPage, setCurrentPage] = useState(initialContractSearch.currentPage);
   const itemsPerPage = 25;
-  const [analisiTab, setAnalisiTab] = useState('fraccionament');
   const [selectedCasoDetail, setSelectedCasoDetail] = useState(null);
   const [selectedConcentracioDetail, setSelectedConcentracioDetail] = useState(null);
   const [selectedElectoralismeDetail, setSelectedElectoralismeDetail] = useState(null);
@@ -3658,6 +4006,32 @@ function App() {
   const [personesSort, setPersonesSort] = useState('companies-desc');
   const [personesPage, setPersonesPage] = useState(1);
   const [personesExpanded, setPersonesExpanded] = useState(null);
+  const applyContractSearchState = (state = readContractSearchState()) => {
+    setSearchTerm(state.searchTerm);
+    setDebouncedSearch(state.searchTerm);
+    setTypeFilter(state.typeFilter);
+    setProcedureFilter(state.procedureFilter);
+    setDateStart(state.dateStart);
+    setDateEnd(state.dateEnd);
+    setAmountMin(state.amountMin);
+    setAmountMax(state.amountMax);
+    setSortBy(state.sortBy);
+    setCurrentPage(state.currentPage);
+  };
+  const applyAnalysisSearchState = (state = readAnalysisSearchState()) => {
+    setAnalisiTab(state.tab);
+    setConcentracioMode(state.concentrationMode);
+    setAnalisiFiltersByTab(previous => ({
+      ...previous,
+      [state.tab]: {
+        searchTerm: state.searchTerm,
+        sortBy: state.sortBy
+      }
+    }));
+    if (state.tab === 'fraccionament') setAnalisiPageFrac(state.currentPage);
+    if (state.tab === 'monopoli') setAnalisiPageMonop(state.currentPage);
+    if (state.tab === 'electoral') setAnalisiPageElect(state.currentPage);
+  };
   const resetAllFilters = () => {
     setSearchTerm('');
     setDebouncedSearch('');
@@ -3829,7 +4203,11 @@ function App() {
       } else {
         const tab = resolved.tab;
         if (tab === 'empreses') setSelectedEmpresa(null);
-        if (tab === 'buscador') setSelectedContractForDetail(null);
+        if (tab === 'buscador') {
+          applyContractSearchState();
+          setSelectedContractForDetail(null);
+        }
+        if (tab === 'analisi') applyAnalysisSearchState();
         setActiveTab(tab);
       }
     };
@@ -3964,6 +4342,7 @@ function App() {
       const cas = fraudes.find(f => String(f.id) === String(pendingCasId));
       if (cas) {
         setSelectedCasoDetail(cas);
+        setAnalisiTab('fraccionament');
       } else {
         handleNavigation('analisi', '/analisi', {
           replace: true
@@ -3977,6 +4356,7 @@ function App() {
       const cas = concentracio.find(f => String(f.id) === String(pendingConcentracioId));
       if (cas) {
         setSelectedConcentracioDetail(cas);
+        setAnalisiTab('monopoli');
       } else {
         handleNavigation('analisi', '/analisi', {
           replace: true
@@ -3990,6 +4370,7 @@ function App() {
       const cas = electoral.find(f => String(f.id) === String(pendingElectoralismeId));
       if (cas) {
         setSelectedElectoralismeDetail(cas);
+        setAnalisiTab('electoral');
       } else {
         handleNavigation('analisi', '/analisi', {
           replace: true
@@ -4083,36 +4464,60 @@ function App() {
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const contractesPaginats = contractesFiltrats.slice(startIndex, endIndex);
-  const contractesAnnualEvolution = useMemo(() => {
-    const byYear = {};
-    for (const c of contracts) {
-      const year = c.año || (c.fecha ? parseInt(String(c.fecha).slice(0, 4), 10) : null);
-      if (!year) continue;
-      if (!byYear[year]) byYear[year] = {
-        year,
-        amount: 0,
-        count: 0
-      };
-      byYear[year].amount += Number(c.importe) || 0;
-      byYear[year].count += 1;
-    }
-    const items = Object.values(byYear).sort((a, b) => a.year - b.year);
-    const maxAmount = items.reduce((max, item) => Math.max(max, item.amount), 0);
-    const topYear = items.reduce((top, item) => item.amount > (top?.amount || 0) ? item : top, null);
-    return {
-      items,
-      maxAmount,
-      topYear
-    };
-  }, [contracts]);
   useEffect(() => {
-    setCurrentPage(1);
-  }, [debouncedSearch, typeFilter, procedureFilter, dateStart, dateEnd, amountMin, amountMax, sortBy]);
+    if (!contracts.length) return;
+    const lastPage = Math.max(1, totalPages);
+    if (currentPage > lastPage) setCurrentPage(lastPage);
+  }, [contracts.length, currentPage, totalPages]);
+  useEffect(() => {
+    if (activeTab !== 'buscador' || getCurrentRoute() !== '/contractes') return;
+    const query = buildContractSearchParams({
+      searchTerm,
+      typeFilter,
+      procedureFilter,
+      dateStart,
+      dateEnd,
+      amountMin,
+      amountMax,
+      sortBy,
+      currentPage
+    });
+    const fullPath = `${BASE}/contractes${query ? `?${query}` : ''}`;
+    const nextHref = new URL(fullPath, window.location.origin).href;
+    if (nextHref === window.location.href) return;
+    const scrollY = window.scrollY;
+    window.history.replaceState({
+      ...(window.history.state || {}),
+      tab: 'buscador',
+      iguadata: true,
+      scrollY
+    }, '', fullPath);
+    saveScrollPosition(nextHref, scrollY);
+  }, [activeTab, searchTerm, typeFilter, procedureFilter, dateStart, dateEnd, amountMin, amountMax, sortBy, currentPage]);
+  useEffect(() => {
+    if (activeTab !== 'analisi' || getCurrentRoute() !== '/analisi') return;
+    const currentPage = analisiTab === 'fraccionament' ? analisiPageFrac : analisiTab === 'monopoli' ? analisiPageMonop : analisiPageElect;
+    const query = buildAnalysisSearchParams({
+      tab: analisiTab,
+      concentrationMode: concentracioMode,
+      searchTerm: analisiSearch,
+      sortBy: analisiSort,
+      currentPage
+    });
+    const fullPath = `${BASE}/analisi${query ? `?${query}` : ''}`;
+    const nextHref = new URL(fullPath, window.location.origin).href;
+    if (nextHref === window.location.href) return;
+    const scrollY = window.scrollY;
+    window.history.replaceState({
+      ...(window.history.state || {}),
+      tab: 'analisi',
+      iguadata: true,
+      scrollY
+    }, '', fullPath);
+    saveScrollPosition(nextHref, scrollY);
+  }, [activeTab, analisiTab, concentracioMode, analisiSearch, analisiSort, analisiPageFrac, analisiPageMonop, analisiPageElect]);
   const fraudesFiltrats = useMemo(() => {
     let result = fraudes.filter(f => f.nivell !== 'BAIX');
-    if (riskFilter !== 'TOTS') {
-      result = result.filter(f => f.nivell === riskFilter || f.nivel_riesgo === riskFilter);
-    }
     if (analisiSearch.trim()) {
       result = result.filter(f => matchesSearchQuery([...(f.empreses || []), f.id, ...(f.contractes || []).flatMap(c => [c.descripcion, c.adjudicatario])], analisiSearch));
     }
@@ -4137,7 +4542,7 @@ function App() {
         result.sort((a, b) => (b.risc || 0) - (a.risc || 0));
     }
     return result;
-  }, [fraudes, riskFilter, analisiSearch, analisiSort]);
+  }, [fraudes, analisiSearch, analisiSort]);
   const concentracioFiltradaBase = useMemo(() => [...concentracio], [concentracio]);
   const concentracioTemporalBase = useMemo(() => {
     let result = [...concentracio];
@@ -4191,26 +4596,12 @@ function App() {
     const filtered = concentracioFiltradaBase.filter(f => f.finestra === 'historic');
     return bestConcentracioBySector(filtered).sort((a, b) => (b.quota_import || 0) - (a.quota_import || 0));
   }, [bestConcentracioBySector, concentracioFiltradaBase]);
-  const concentracioSectorSnapshot = useMemo(() => {
-    const items = [...concentracioHistoric].sort((a, b) => (b.quota_import || 0) - (a.quota_import || 0)).slice(0, 6);
-    const maxQuota = items.reduce((max, item) => Math.max(max, item.quota_import || 0), 0);
-    return {
-      items,
-      maxQuota
-    };
-  }, [concentracioHistoric]);
   const concentracioTemporal = useMemo(() => {
     let result = concentracioTemporalBase.filter(f => f.finestra !== 'historic');
-    if (riskFilter !== 'TOTS') {
-      result = result.filter(f => f.nivell === riskFilter || riskFilter === 'OBSERVACIO' && f.nivell === 'BAIX');
-    }
     return orderConcentracio(result);
-  }, [concentracioTemporalBase, orderConcentracio, riskFilter]);
+  }, [concentracioTemporalBase, orderConcentracio]);
   const electoralFiltrats = useMemo(() => {
     let result = electoral.filter(f => f.nivell !== 'BAIX');
-    if (riskFilter !== 'TOTS') {
-      result = result.filter(f => f.nivell === riskFilter);
-    }
     if (analisiSearch.trim()) {
       result = result.filter(f => matchesSearchQuery([f.empresa, f.id, ...(f.contractes || []).flatMap(c => [c.descripcion, c.adjudicatario])], analisiSearch));
     }
@@ -4235,20 +4626,19 @@ function App() {
         result.sort((a, b) => (b.risc || 0) - (a.risc || 0));
     }
     return result;
-  }, [electoral, riskFilter, analisiSearch, analisiSort]);
-  useEffect(() => {
-    setAnalisiPageFrac(1);
-    setAnalisiPageElect(1);
-    setAnalisiPageMonop(1);
-  }, [riskFilter, analisiSearch, analisiSort]);
-  useEffect(() => {
-    setAnalisiPageFrac(1);
-    setAnalisiPageElect(1);
-    setAnalisiPageMonop(1);
-  }, [analisiTab]);
+  }, [electoral, analisiSearch, analisiSort]);
   const totalPagesFrac = Math.max(1, Math.ceil(fraudesFiltrats.length / analisiItemsPerPage));
   const totalPagesElect = Math.max(1, Math.ceil(electoralFiltrats.length / analisiItemsPerPage));
   const totalPagesMonop = Math.max(1, Math.ceil(concentracioTemporal.length / analisiItemsPerPage));
+  useEffect(() => {
+    if (analisiPageFrac > totalPagesFrac) setAnalisiPageFrac(totalPagesFrac);
+  }, [analisiPageFrac, totalPagesFrac]);
+  useEffect(() => {
+    if (analisiPageElect > totalPagesElect) setAnalisiPageElect(totalPagesElect);
+  }, [analisiPageElect, totalPagesElect]);
+  useEffect(() => {
+    if (analisiPageMonop > totalPagesMonop) setAnalisiPageMonop(totalPagesMonop);
+  }, [analisiPageMonop, totalPagesMonop]);
   const fraudesPaginats = fraudesFiltrats.slice((analisiPageFrac - 1) * analisiItemsPerPage, analisiPageFrac * analisiItemsPerPage);
   const electoralPaginats = electoralFiltrats.slice((analisiPageElect - 1) * analisiItemsPerPage, analisiPageElect * analisiItemsPerPage);
   const concentracioPaginada = concentracioTemporal.slice((analisiPageMonop - 1) * analisiItemsPerPage, analisiPageMonop * analisiItemsPerPage);
@@ -4316,12 +4706,12 @@ function App() {
   };
   const resetAnalisiFilters = () => {
     setAnalisiSearch('');
-    setRiskFilter('TOTS');
     setAnalisiSort('risk-desc');
     setAnalisiPageFrac(1);
     setAnalisiPageMonop(1);
+    setAnalisiPageElect(1);
   };
-  const activeAnalisiFiltersCount = (riskFilter !== 'TOTS' ? 1 : 0) + (analisiSort !== 'risk-desc' ? 1 : 0);
+  const activeAnalisiFiltersCount = analisiSort !== 'risk-desc' ? 1 : 0;
   const activeFiltersCount = [typeFilter, procedureFilter, dateStart, dateEnd, amountMin, amountMax, sortBy !== 'date-desc' ? sortBy : ''].filter(Boolean).length;
   const homeTopSectors = useMemo(() => {
     if (!empreses.length && summary?.home?.top_sectors) {
@@ -5010,7 +5400,9 @@ function App() {
   const handleDetailClick = contract => {
     setSelectedContractForDetail(contract);
     const detailPath = contract.evidencia_congelada === true ? `/contractes/evidencia/${contract.slug}` : `/contractes/${contract.slug}`;
-    handleNavigation('contracte', detailPath);
+    handleNavigation('contracte', detailPath, {
+      keepFilters: true
+    });
   };
   const handleCasoClick = caso => {
     setSelectedCasoDetail(caso);
@@ -5049,7 +5441,9 @@ function App() {
     if (event.key === 'ArrowLeft') nextIndex = (currentIndex - 1 + tabs.length) % tabs.length;
     if (event.key === 'Home') nextIndex = 0;
     if (event.key === 'End') nextIndex = tabs.length - 1;
-    setAnalisiTab(tabs[nextIndex]);
+    const nextTab = tabs[nextIndex];
+    setAnalisiTab(nextTab);
+    if (nextTab === 'monopoli') setConcentracioMode('temporal');
     requestAnimationFrame(() => {
       const tabButtons = event.currentTarget.parentElement.querySelectorAll('[role="tab"]');
       tabButtons[nextIndex]?.focus();
@@ -5097,15 +5491,20 @@ function App() {
     className: "search-section"
   }, React.createElement(SearchField, {
     value: searchTerm,
-    onValueChange: setSearchTerm,
+    onValueChange: value => {
+      setSearchTerm(value);
+      setCurrentPage(1);
+    },
     placeholder: "Cerca per descripci\xF3, empresa o codi d'expedient",
     ariaLabel: "Cerca per descripci\xF3, empresa o codi d'expedient"
   }), React.createElement(FilterActions, {
     open: filtersOpen,
     onToggle: () => setFiltersOpen(prev => !prev),
     activeCount: activeFiltersCount,
-    onReset: resetFilters
+    onReset: resetFilters,
+    controlsId: "contract-filter-primary contract-filter-secondary"
   }), React.createElement("div", {
+    id: "contract-filter-primary",
     className: "filters search-filter-panel" + (!filtersOpen ? " collapsed" : "")
   }, React.createElement("div", {
     className: "filter-group filter-group-standard"
@@ -5114,7 +5513,10 @@ function App() {
   }, "Ordenar per"), React.createElement("select", {
     className: "filter-select filter-select-standard",
     value: sortBy,
-    onChange: e => setSortBy(e.target.value),
+    onChange: e => {
+      setSortBy(e.target.value);
+      setCurrentPage(1);
+    },
     "aria-label": "Ordenar contractes per"
   }, React.createElement("option", {
     value: "date-desc"
@@ -5131,7 +5533,10 @@ function App() {
   }, "Procediment"), React.createElement("select", {
     className: "filter-select filter-select-standard",
     value: procedureFilter,
-    onChange: e => setProcedureFilter(e.target.value),
+    onChange: e => {
+      setProcedureFilter(e.target.value);
+      setCurrentPage(1);
+    },
     "aria-label": "Procediment"
   }, React.createElement("option", {
     value: ""
@@ -5154,7 +5559,10 @@ function App() {
   }, "Tipus"), React.createElement("select", {
     className: "filter-select filter-select-standard",
     value: typeFilter,
-    onChange: e => setTypeFilter(e.target.value),
+    onChange: e => {
+      setTypeFilter(e.target.value);
+      setCurrentPage(1);
+    },
     "aria-label": "Tipus de contracte"
   }, React.createElement("option", {
     value: ""
@@ -5173,6 +5581,7 @@ function App() {
   }, "Concessi\xF3 de serveis"), React.createElement("option", {
     value: "10. PRIVAT D'ADMINISTRACIO PUBLICA"
   }, "Privat d'administraci\xF3 p\xFAblica")))), React.createElement("div", {
+    id: "contract-filter-secondary",
     className: "filters-row search-filter-panel search-filter-panel-secondary" + (!filtersOpen ? " collapsed" : "")
   }, React.createElement("div", {
     className: "filter-group"
@@ -5183,7 +5592,10 @@ function App() {
     className: "filter-input",
     "aria-label": "Data inici",
     value: dateStart,
-    onChange: e => setDateStart(e.target.value)
+    onChange: e => {
+      setDateStart(e.target.value);
+      setCurrentPage(1);
+    }
   })), React.createElement("div", {
     className: "filter-group"
   }, React.createElement("label", {
@@ -5193,7 +5605,10 @@ function App() {
     className: "filter-input",
     "aria-label": "Data final",
     value: dateEnd,
-    onChange: e => setDateEnd(e.target.value)
+    onChange: e => {
+      setDateEnd(e.target.value);
+      setCurrentPage(1);
+    }
   })), React.createElement("div", {
     className: "filter-group"
   }, React.createElement("label", {
@@ -5207,7 +5622,10 @@ function App() {
     placeholder: "Import m\xEDnim",
     "aria-label": "Import m\xEDnim",
     value: amountMin,
-    onChange: e => setAmountMin(e.target.value)
+    onChange: e => {
+      setAmountMin(e.target.value);
+      setCurrentPage(1);
+    }
   })), React.createElement("div", {
     className: "filter-group"
   }, React.createElement("label", {
@@ -5221,9 +5639,14 @@ function App() {
     placeholder: "Import m\xE0xim",
     "aria-label": "Import m\xE0xim",
     value: amountMax,
-    onChange: e => setAmountMax(e.target.value)
+    onChange: e => {
+      setAmountMax(e.target.value);
+      setCurrentPage(1);
+    }
   })))), React.createElement("div", {
-    className: "results-count"
+    className: "results-count",
+    role: "status",
+    "aria-live": "polite"
   }, React.createElement("span", {
     className: "results-count-total"
   }, React.createElement("span", {
@@ -5280,47 +5703,7 @@ function App() {
     currentPage: currentPage,
     totalPages: totalPages,
     onPageChange: setCurrentPage
-  }), contractesAnnualEvolution.items.length > 0 && React.createElement("div", {
-    className: "contract-evolution-visual",
-    "aria-label": "Evoluci\xF3 anual de l'import adjudicat"
-  }, React.createElement("div", {
-    className: "contract-evolution-header"
-  }, React.createElement("div", null, React.createElement("div", {
-    className: "chart-kicker"
-  }, "Visualitzaci\xF3"), React.createElement("h3", null, "Hist\xF2ric de contractaci\xF3"))), React.createElement("div", {
-    className: "contract-evolution-bars"
-  }, contractesAnnualEvolution.items.map(item => React.createElement("button", {
-    key: item.year,
-    type: "button",
-    className: "contract-evolution-column" + (dateStart === `${item.year}-01-01` && dateEnd === `${item.year}-12-31` ? " is-active" : ""),
-    onClick: () => {
-      setSearchTerm('');
-      setDebouncedSearch('');
-      setTypeFilter('');
-      setProcedureFilter('');
-      setAmountMin('');
-      setAmountMax('');
-      setSortBy('date-desc');
-      setDateStart(`${item.year}-01-01`);
-      setDateEnd(`${item.year}-12-31`);
-      setCurrentPage(1);
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
-    },
-    "aria-label": `Filtrar contractes de l'any ${item.year}`
-  }, React.createElement("div", {
-    className: "contract-evolution-bar-wrap",
-    "aria-hidden": "true"
-  }, React.createElement("span", {
-    style: {
-      height: `${Math.max(4, Math.round(item.amount / contractesAnnualEvolution.maxAmount * 100))}%`,
-      '--bar-width': `${Math.max(4, Math.round(item.amount / contractesAnnualEvolution.maxAmount * 100))}%`
-    }
-  })), React.createElement("div", {
-    className: "contract-evolution-meta"
-  }, React.createElement("span", null, item.year), React.createElement("small", null, formatCurrency(item.amount))))))), React.createElement("div", {
+  }), React.createElement("div", {
     className: "metodologia-wrapper"
   }, React.createElement("div", {
     className: "metodologia"
@@ -5377,7 +5760,6 @@ function App() {
     onContractSelect: handleDetailClick
   }), activeTab === 'contracte' && selectedContractForDetail && canRenderDataTab && React.createElement(ContractDetailView, {
     contract: selectedContractForDetail,
-    contracts: contracts,
     empreses: empreses,
     onBack: () => goBack(() => {
       handleNavigation('buscador', null, {
@@ -5435,6 +5817,7 @@ function App() {
     role: "tablist",
     "aria-label": "Tipus d'an\xE0lisi"
   }, React.createElement("button", {
+    id: "analisi-tab-electoral",
     className: 'analisi-tab' + (analisiTab === 'fraccionament' ? ' active' : ''),
     onClick: () => setAnalisiTab('fraccionament'),
     type: "button",
@@ -5445,7 +5828,10 @@ function App() {
     onKeyDown: handleAnalisiTabKeyDown
   }, "Fraccionament"), React.createElement("button", {
     className: 'analisi-tab' + (analisiTab === 'monopoli' ? ' active' : ''),
-    onClick: () => setAnalisiTab('monopoli'),
+    onClick: () => {
+      setAnalisiTab('monopoli');
+      setConcentracioMode('temporal');
+    },
     type: "button",
     role: "tab",
     "aria-selected": analisiTab === 'monopoli',
@@ -5464,7 +5850,8 @@ function App() {
   }, "Electoralisme"))), React.createElement("div", {
     className: `container analisi-page analisi-page-reordered analisi-page-${analisiTab}${analisiTab === 'monopoli' ? ` concentracio-mode-${concentracioMode}` : ''}`,
     id: "analisi-panel",
-    role: "tabpanel"
+    role: "tabpanel",
+    "aria-labelledby": `analisi-tab-${analisiTab}`
   }, React.createElement("h1", {
     className: "page-title"
   }, analisiTab === 'fraccionament' ? 'Anàlisi de fraccionament' : analisiTab === 'monopoli' ? 'Anàlisi de concentració' : "Anàlisi d'electoralisme"), analisiTab === 'fraccionament' && React.createElement(React.Fragment, null, React.createElement("div", {
@@ -5530,8 +5917,10 @@ function App() {
     open: analisiFiltersOpen,
     onToggle: () => setAnalisiFiltersOpen(prev => !prev),
     activeCount: activeAnalisiFiltersCount,
-    onReset: resetAnalisiFilters
+    onReset: resetAnalisiFilters,
+    controlsId: "analisi-filter-panel-fraccionament"
   }), React.createElement("div", {
+    id: "analisi-filter-panel-fraccionament",
     className: "filters search-filter-panel search-filter-panel-analysis" + (!analisiFiltersOpen ? " collapsed" : "")
   }, React.createElement("div", {
     className: "filter-group filter-group-wide"
@@ -5554,26 +5943,10 @@ function App() {
     value: "date-desc"
   }, "Data (m\xE9s recents)"), React.createElement("option", {
     value: "date-asc"
-  }, "Data (m\xE9s antics)"))), React.createElement("div", {
-    className: "filter-group analisi-risk-filter-group",
-    style: {
-      flex: '1 1 280px'
-    }
-  }, React.createElement("label", {
-    className: "filter-label"
-  }, "Risc"), React.createElement("div", {
-    className: "analisi-risk-filters"
-  }, React.createElement("button", {
-    className: 'analisi-filter-btn analisi-filter-all' + (riskFilter === 'TOTS' ? ' active' : ''),
-    onClick: () => setRiskFilter('TOTS'),
-    type: "button"
-  }, "Tots"), [['CRITIC', 'Alt'], ['ALT', 'Mitjà'], ['OBSERVACIO', 'Baix']].map(([value, label]) => React.createElement("button", {
-    key: value,
-    className: 'analisi-filter-btn risk-' + riskClass(value) + (riskFilter === value ? ' active' : ''),
-    onClick: () => setRiskFilter(value),
-    type: "button"
-  }, label)))))), React.createElement("div", {
-    className: "results-count"
+  }, "Data (m\xE9s antics)"))))), React.createElement("div", {
+    className: "results-count",
+    role: "status",
+    "aria-live": "polite"
   }, React.createElement("span", {
     className: "results-count-total"
   }, React.createElement("span", {
@@ -5592,7 +5965,7 @@ function App() {
     className: "card-link-wrapper",
     onClick: event => handleInternalLinkClick(event, () => handleCasoClick(caso))
   }, React.createElement("div", {
-    className: "contract-card fraccionament-card"
+    className: "contract-card analysis-list-card fraccionament-card"
   }, React.createElement("div", {
     className: "contract-header"
   }, React.createElement("div", {
@@ -5600,10 +5973,12 @@ function App() {
   }, (caso.empreses || []).slice(0, 2).join(' & ')), React.createElement("div", {
     className: "contract-amount"
   }, formatCurrency(caso.import_total))), React.createElement("div", {
-    className: "contract-meta fraccionament-alert-meta"
+    className: "contract-meta analysis-list-meta"
   }, React.createElement("div", {
-    className: "contract-meta-item fraccionament-card-object"
+    className: "contract-meta-item analysis-list-primary analysis-list-primary-long"
   }, React.createElement("span", {
+    className: "contract-meta-label"
+  }, "Objecte"), React.createElement("span", {
     className: "contract-meta-value"
   }, caso.contractes && caso.contractes[0] && caso.contractes[0].descripcion || '')), React.createElement("div", {
     className: "contract-pills"
@@ -5611,7 +5986,10 @@ function App() {
     className: "risk-badge " + riskClass(caso.nivell)
   }, riskLabel(caso.nivell)), React.createElement("span", {
     className: "risk-badge " + riskClass(caso.nivell)
-  }, Number.isInteger(caso.risc) ? caso.risc : Number(caso.risc).toFixed(1), "/100"))))))), fraudesFiltrats.length > analisiItemsPerPage && React.createElement(Pagination, {
+  }, Number.isInteger(caso.risc) ? caso.risc : Number(caso.risc).toFixed(1), "/100"))))))), fraudesFiltrats.length === 0 && React.createElement(EmptySearchState, {
+    text: "No s'han trobat alertes de fraccionament.",
+    onReset: resetAnalisiFilters
+  }), fraudesFiltrats.length > analisiItemsPerPage && React.createElement(Pagination, {
     currentPage: analisiPageFrac,
     totalPages: totalPagesFrac,
     onPageChange: setAnalisiPageFrac
@@ -5679,42 +6057,19 @@ function App() {
     className: "metodologia-step-num-compact"
   }, "09"), React.createElement("span", {
     className: "metodologia-step-text-compact"
-  }, "Puntuaci\xF3 i classificaci\xF3 visual segons el nivell de risc"))))), concentracioSectorSnapshot.items.length > 0 && React.createElement("div", {
-    className: "sector-concentration-visual",
-    "aria-label": "Sectors amb m\xE9s concentraci\xF3 d'adjudicacions"
-  }, React.createElement("div", {
-    className: "sector-concentration-header"
-  }, React.createElement("div", null, React.createElement("div", {
-    className: "chart-kicker"
-  }, "Visualitzaci\xF3"), React.createElement("h3", null, "Concentraci\xF3 de contractes"))), React.createElement("div", {
-    className: "sector-concentration-bars"
-  }, concentracioSectorSnapshot.items.map(caso => React.createElement("div", {
-    key: `snapshot-${caso.id}`,
-    className: "sector-concentration-row"
-  }, React.createElement("div", {
-    className: "sector-concentration-copy"
-  }, React.createElement("span", null, formatSectorName(caso.sector)), React.createElement("small", null, (caso.empreses || []).slice(0, 2).join(' · '))), React.createElement("div", {
-    className: "sector-concentration-track",
-    "aria-hidden": "true"
-  }, React.createElement("span", {
-    style: {
-      width: `${Math.max(4, Math.round((caso.quota_import || 0) * 100))}%`
-    }
-  })), React.createElement("div", {
-    className: "sector-concentration-value"
-  }, React.createElement("span", null, formatPercent(caso.quota_import))))))), React.createElement("div", {
+  }, "Puntuaci\xF3 i classificaci\xF3 visual segons el nivell de risc"))))), React.createElement("div", {
     className: "concentracio-mode-switch",
     role: "group",
     "aria-label": "Tipus de concentraci\xF3"
   }, React.createElement("button", {
     type: "button",
-    className: 'concentracio-mode-btn' + (concentracioMode === 'historic' ? ' active' : ''),
-    onClick: () => setConcentracioMode('historic')
-  }, "Sectors"), React.createElement("button", {
-    type: "button",
     className: 'concentracio-mode-btn' + (concentracioMode === 'temporal' ? ' active' : ''),
     onClick: () => setConcentracioMode('temporal')
-  }, "Temporals")), concentracioMode === 'temporal' && React.createElement("div", {
+  }, "Temporals"), React.createElement("button", {
+    type: "button",
+    className: 'concentracio-mode-btn' + (concentracioMode === 'historic' ? ' active' : ''),
+    onClick: () => setConcentracioMode('historic')
+  }, "Sectors")), concentracioMode === 'temporal' && React.createElement("div", {
     className: "search-section analisi-search-section"
   }, React.createElement(SearchField, {
     value: analisiSearch,
@@ -5725,8 +6080,10 @@ function App() {
     open: analisiFiltersOpen,
     onToggle: () => setAnalisiFiltersOpen(prev => !prev),
     activeCount: activeAnalisiFiltersCount,
-    onReset: resetAnalisiFilters
+    onReset: resetAnalisiFilters,
+    controlsId: "analisi-filter-panel-concentracio"
   }), React.createElement("div", {
+    id: "analisi-filter-panel-concentracio",
     className: "filters search-filter-panel search-filter-panel-analysis" + (!analisiFiltersOpen ? " collapsed" : "")
   }, React.createElement("div", {
     className: "filter-group filter-group-wide"
@@ -5749,25 +6106,7 @@ function App() {
     value: "date-desc"
   }, "Data (m\xE9s recents)"), React.createElement("option", {
     value: "date-asc"
-  }, "Data (m\xE9s antics)"))), React.createElement("div", {
-    className: "filter-group analisi-risk-filter-group",
-    style: {
-      flex: '1 1 280px'
-    }
-  }, React.createElement("label", {
-    className: "filter-label"
-  }, "Risc"), React.createElement("div", {
-    className: "analisi-risk-filters"
-  }, React.createElement("button", {
-    className: 'analisi-filter-btn analisi-filter-all' + (riskFilter === 'TOTS' ? ' active' : ''),
-    onClick: () => setRiskFilter('TOTS'),
-    type: "button"
-  }, "Tots"), [['CRITIC', 'Alt'], ['ALT', 'Mitjà'], ['OBSERVACIO', 'Baix']].map(([value, label]) => React.createElement("button", {
-    key: value,
-    className: 'analisi-filter-btn risk-' + riskClass(value) + (riskFilter === value ? ' active' : ''),
-    onClick: () => setRiskFilter(value),
-    type: "button"
-  }, label)))))), concentracioMode === 'historic' && React.createElement(React.Fragment, null, React.createElement("div", {
+  }, "Data (m\xE9s antics)"))))), concentracioMode === 'historic' && React.createElement(React.Fragment, null, React.createElement("div", {
     className: "analisi-alert-list"
   }, concentracioHistoric.map(caso => React.createElement("a", {
     key: caso.id,
@@ -5775,35 +6114,37 @@ function App() {
     className: "card-link-wrapper",
     onClick: event => handleInternalLinkClick(event, () => handleConcentracioClick(caso))
   }, React.createElement("div", {
-    className: "contract-card concentracio-card concentracio-card-historic"
+    className: "contract-card analysis-list-card concentracio-card concentracio-card-historic"
   }, React.createElement("div", {
-    className: "analysis-card-title"
+    className: "contract-header"
+  }, React.createElement("div", {
+    className: "contract-title"
   }, formatSectorName(caso.sector)), React.createElement("div", {
-    className: "analysis-card-main"
+    className: "contract-amount"
+  }, formatCurrency(caso.import_concentrat))), React.createElement("div", {
+    className: "contract-meta analysis-list-meta"
   }, React.createElement("div", {
-    className: "concentracio-card-company"
+    className: "contract-meta-item analysis-list-primary"
   }, React.createElement("span", {
     className: "contract-meta-label"
   }, "Empresa dominant"), React.createElement("span", {
     className: "contract-meta-value"
   }, (caso.empreses || []).slice(0, 2).join(' · '))), React.createElement("div", {
-    className: "contract-amount"
+    className: "contract-meta-item analysis-list-secondary"
+  }, React.createElement("span", {
+    className: "contract-meta-label"
+  }, "Quota de mercat"), React.createElement("span", {
+    className: "contract-meta-value"
   }, formatPercent(caso.quota_import))), React.createElement("div", {
-    className: "contract-meta concentracio-card-meta"
-  }, React.createElement("div", {
-    className: "contract-meta-item"
+    className: "contract-pills"
   }, React.createElement("span", {
-    className: "contract-meta-label"
-  }, "Import"), React.createElement("span", {
-    className: "contract-meta-value"
-  }, formatCurrency(caso.import_concentrat), " / ", formatCurrency(caso.import_sector))), React.createElement("div", {
-    className: "contract-meta-item"
-  }, React.createElement("span", {
-    className: "contract-meta-label"
-  }, "Contractes"), React.createElement("span", {
-    className: "contract-meta-value"
-  }, caso.contractes_concentrats, " / ", caso.contractes_sector)))))))), concentracioMode === 'temporal' && React.createElement(React.Fragment, null, React.createElement("div", {
-    className: "results-count"
+    className: "risk-badge " + riskClass(caso.nivell)
+  }, riskLabel(caso.nivell)), React.createElement("span", {
+    className: "risk-badge " + riskClass(caso.nivell)
+  }, Number.isInteger(caso.risc) ? caso.risc : Number(caso.risc).toFixed(1), "/100")))))))), concentracioMode === 'temporal' && React.createElement(React.Fragment, null, React.createElement("div", {
+    className: "results-count",
+    role: "status",
+    "aria-live": "polite"
   }, React.createElement("span", {
     className: "results-count-total"
   }, "S'han trobat ", React.createElement("strong", null, concentracioTemporal.length), " concentracions"), concentracioTemporal.length > analisiItemsPerPage && React.createElement("span", {
@@ -5820,46 +6161,37 @@ function App() {
     className: "card-link-wrapper",
     onClick: event => handleInternalLinkClick(event, () => handleConcentracioClick(caso))
   }, React.createElement("div", {
-    className: "contract-card concentracio-card concentracio-card-temporal"
+    className: "contract-card analysis-list-card concentracio-card concentracio-card-temporal"
   }, React.createElement("div", {
-    className: "analysis-card-title"
+    className: "contract-header"
+  }, React.createElement("div", {
+    className: "contract-title"
   }, formatSectorName(caso.sector)), React.createElement("div", {
-    className: "analysis-card-main"
+    className: "contract-amount"
+  }, formatCurrency(caso.import_concentrat))), React.createElement("div", {
+    className: "contract-meta analysis-list-meta"
   }, React.createElement("div", {
-    className: "concentracio-card-company"
+    className: "contract-meta-item analysis-list-primary"
   }, React.createElement("span", {
     className: "contract-meta-label"
   }, caso.tipus_concentracio === 'xarxa' ? 'Xarxa mercantil' : 'Empresa dominant'), React.createElement("span", {
     className: "contract-meta-value"
   }, (caso.empreses || []).slice(0, 2).join(' · '))), React.createElement("div", {
-    className: "contract-amount"
-  }, formatCurrency(caso.import_concentrat))), React.createElement("div", {
-    className: "contract-meta concentracio-card-meta"
-  }, React.createElement("div", {
-    className: "contract-meta-item"
+    className: "contract-meta-item analysis-list-secondary"
   }, React.createElement("span", {
     className: "contract-meta-label"
   }, "Per\xEDode"), React.createElement("span", {
     className: "contract-meta-value"
   }, "Del ", formatDate(caso.data_inici), " al ", formatDate(caso.data_fi))), React.createElement("div", {
-    className: "contract-meta-item"
-  }, React.createElement("span", {
-    className: "contract-meta-label"
-  }, "Contractes"), React.createElement("span", {
-    className: "contract-meta-value"
-  }, caso.contractes_concentrats, " / ", caso.contractes_sector)), React.createElement("div", {
-    className: "contract-meta-item"
-  }, React.createElement("span", {
-    className: "contract-meta-label"
-  }, "Quota de mercat"), React.createElement("span", {
-    className: "contract-meta-value"
-  }, formatPercent(caso.quota_import))), React.createElement("div", {
     className: "contract-pills"
   }, React.createElement("span", {
     className: "risk-badge " + riskClass(caso.nivell)
   }, riskLabel(caso.nivell)), React.createElement("span", {
     className: "risk-badge " + riskClass(caso.nivell)
-  }, Number.isInteger(caso.risc) ? caso.risc : Number(caso.risc).toFixed(1), "/100"))))))), concentracioTemporal.length > analisiItemsPerPage && React.createElement(Pagination, {
+  }, Number.isInteger(caso.risc) ? caso.risc : Number(caso.risc).toFixed(1), "/100"))))))), concentracioTemporal.length === 0 && React.createElement(EmptySearchState, {
+    text: "No s'han trobat concentracions temporals.",
+    onReset: resetAnalisiFilters
+  }), concentracioTemporal.length > analisiItemsPerPage && React.createElement(Pagination, {
     currentPage: analisiPageMonop,
     totalPages: totalPagesMonop,
     onPageChange: setAnalisiPageMonop
@@ -5914,8 +6246,10 @@ function App() {
     open: analisiFiltersOpen,
     onToggle: () => setAnalisiFiltersOpen(prev => !prev),
     activeCount: activeAnalisiFiltersCount,
-    onReset: resetAnalisiFilters
+    onReset: resetAnalisiFilters,
+    controlsId: "analisi-filter-panel-electoralisme"
   }), React.createElement("div", {
+    id: "analisi-filter-panel-electoralisme",
     className: "filters search-filter-panel search-filter-panel-analysis" + (!analisiFiltersOpen ? " collapsed" : "")
   }, React.createElement("div", {
     className: "filter-group filter-group-wide"
@@ -5938,26 +6272,10 @@ function App() {
     value: "date-desc"
   }, "Data (m\xE9s recents)"), React.createElement("option", {
     value: "date-asc"
-  }, "Data (m\xE9s antics)"))), React.createElement("div", {
-    className: "filter-group analisi-risk-filter-group",
-    style: {
-      flex: '1 1 280px'
-    }
-  }, React.createElement("label", {
-    className: "filter-label"
-  }, "Risc"), React.createElement("div", {
-    className: "analisi-risk-filters"
-  }, React.createElement("button", {
-    className: 'analisi-filter-btn analisi-filter-all' + (riskFilter === 'TOTS' ? ' active' : ''),
-    onClick: () => setRiskFilter('TOTS'),
-    type: "button"
-  }, "Tots"), [['CRITIC', 'Alt'], ['ALT', 'Mitjà'], ['OBSERVACIO', 'Baix']].map(([value, label]) => React.createElement("button", {
-    key: value,
-    className: 'analisi-filter-btn risk-' + riskClass(value) + (riskFilter === value ? ' active' : ''),
-    onClick: () => setRiskFilter(value),
-    type: "button"
-  }, label)))))), React.createElement("div", {
-    className: "results-count"
+  }, "Data (m\xE9s antics)"))))), React.createElement("div", {
+    className: "results-count",
+    role: "status",
+    "aria-live": "polite"
   }, React.createElement("span", {
     className: "results-count-total"
   }, React.createElement("span", {
@@ -5973,57 +6291,38 @@ function App() {
   }, electoralPaginats.map(caso => {
     const cc = caso.contractes && caso.contractes[0] || {};
     const href = buildRouteUrl(`/analisi/electoralisme/${caso.id}`);
-    const isPreElectoral = caso.fase_temporal === 'Finestra administrativa prèvia';
-    const isPostElectoral = caso.fase_temporal === 'Finestra administrativa posterior';
-    const temporalLabel = isPreElectoral ? 'Dies abans' : isPostElectoral ? 'Dies després' : 'Votació en';
-    const temporalValue = isPreElectoral ? caso.dies_abans_convocatoria || 0 : isPostElectoral ? caso.dies_despres_votacio || 0 : caso.dies_fins_votacio;
     return React.createElement("a", {
       key: caso.id,
       href: href,
       className: "card-link-wrapper",
       onClick: event => handleInternalLinkClick(event, () => handleElectoralismeClick(caso))
     }, React.createElement("div", {
-      className: "contract-card fraccionament-card electoralisme-card"
+      className: "contract-card analysis-list-card electoralisme-card"
     }, React.createElement("div", {
-      className: "analysis-card-title"
+      className: "contract-header"
+    }, React.createElement("div", {
+      className: "contract-title"
     }, caso.empresa), React.createElement("div", {
-      className: "analysis-card-main"
+      className: "contract-amount"
+    }, formatCurrency(caso.import_total))), React.createElement("div", {
+      className: "contract-meta analysis-list-meta"
     }, React.createElement("div", {
-      className: "fraccionament-card-object"
+      className: "contract-meta-item analysis-list-primary analysis-list-primary-long"
     }, React.createElement("span", {
       className: "contract-meta-label"
     }, "Objecte"), React.createElement("span", {
       className: "contract-meta-value"
     }, cc.descripcion || '')), React.createElement("div", {
-      className: "contract-amount"
-    }, formatCurrency(caso.import_total))), React.createElement("div", {
-      className: "contract-meta fraccionament-card-meta"
-    }, React.createElement("div", {
-      className: "contract-meta-item"
-    }, React.createElement("span", {
-      className: "contract-meta-label"
-    }, "Per\xEDode"), React.createElement("span", {
-      className: "contract-meta-value"
-    }, caso.periode_electoral)), React.createElement("div", {
-      className: "contract-meta-item"
-    }, React.createElement("span", {
-      className: "contract-meta-label"
-    }, "Data"), React.createElement("span", {
-      className: "contract-meta-value"
-    }, formatDate(caso.data_inici))), React.createElement("div", {
-      className: "contract-meta-item"
-    }, React.createElement("span", {
-      className: "contract-meta-label"
-    }, temporalLabel), React.createElement("span", {
-      className: "contract-meta-value"
-    }, temporalValue, " dies")), React.createElement("div", {
       className: "contract-pills"
     }, React.createElement("span", {
       className: "risk-badge " + riskClass(caso.nivell)
     }, riskLabel(caso.nivell)), React.createElement("span", {
       className: "risk-badge " + riskClass(caso.nivell)
     }, Number.isInteger(caso.risc) ? caso.risc : Number(caso.risc).toFixed(1), "/100")))));
-  })), electoralFiltrats.length > analisiItemsPerPage && React.createElement(Pagination, {
+  })), electoralFiltrats.length === 0 && React.createElement(EmptySearchState, {
+    text: "No s'han trobat alertes d'electoralisme.",
+    onReset: resetAnalisiFilters
+  }), electoralFiltrats.length > analisiItemsPerPage && React.createElement(Pagination, {
     currentPage: analisiPageElect,
     totalPages: totalPagesElect,
     onPageChange: setAnalisiPageElect

@@ -594,28 +594,85 @@ async function generateShareImage(contract) {
 }
 
 /* ---- ContractDetailView ----------------------------------------- */
-function ContractDetailView({ contract: c, contracts, empreses, onBack, onEmpresaClick }) {
-    const empresaContracts = useMemo(() =>
-        contracts.filter(contract => contract.adjudicatario === c.adjudicatario)
-        , [contracts, c.adjudicatario]);
+function ContractDetailView({ contract: c, empreses, onBack, onEmpresaClick }) {
+    const [shareActionsOpen, setShareActionsOpen] = useState(false);
+    const [shareCopyStatus, setShareCopyStatus] = useState('');
+    const [shareDownloadStatus, setShareDownloadStatus] = useState('');
+    const shareActionsRef = useRef(null);
+    const shareStatusTimerRef = useRef(null);
+    const shareDownloadTimerRef = useRef(null);
+    const linkedEmpresa = empreses.find(empresa => empresa.nom === c.adjudicatario);
+    const empresaHref = buildRouteUrl(linkedEmpresa?.slug ? `/empreses/${linkedEmpresa.slug}` : '/empreses');
     const isPreserved = c.evidencia_congelada === true || c.estat_font === 'preservat_desaparegut_socrata' || c.preservat_iguadata;
+    const hasCpv = Boolean(String(c.cpv || '').trim());
+
+    useEffect(() => {
+        if (!shareActionsOpen) return;
+        const closeShareActions = (event) => {
+            if (event.type === 'keydown' && event.key !== 'Escape') return;
+            if (event.type === 'pointerdown' && shareActionsRef.current?.contains(event.target)) return;
+            setShareActionsOpen(false);
+        };
+        document.addEventListener('pointerdown', closeShareActions);
+        document.addEventListener('keydown', closeShareActions);
+        return () => {
+            document.removeEventListener('pointerdown', closeShareActions);
+            document.removeEventListener('keydown', closeShareActions);
+        };
+    }, [shareActionsOpen]);
+
+    useEffect(() => () => {
+        window.clearTimeout(shareStatusTimerRef.current);
+        window.clearTimeout(shareDownloadTimerRef.current);
+    }, []);
+
+    const copyContractLink = async () => {
+        try {
+            await navigator.clipboard.writeText(window.location.href);
+            setShareCopyStatus('Enllaç copiat');
+        } catch (_) {
+            setShareCopyStatus("No s'ha pogut copiar");
+        }
+        window.clearTimeout(shareStatusTimerRef.current);
+        shareStatusTimerRef.current = window.setTimeout(() => setShareCopyStatus(''), 1800);
+    };
+
+    const downloadContractImage = () => {
+        generateShareImage(c);
+        setShareDownloadStatus('Imatge descarregada');
+        window.clearTimeout(shareDownloadTimerRef.current);
+        shareDownloadTimerRef.current = window.setTimeout(() => setShareDownloadStatus(''), 1800);
+    };
 
     return (
         <div className="container contracte-detail-page">
-            <button onClick={onBack} className="btn-reset contracte-detail-back" style={{ marginBottom: '1.25rem' }} title="Tornar">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 12H5" /><polyline points="12 19 5 12 12 5" /></svg>
-            </button>
+            <h1 className="page-title">Detall de contracte</h1>
             <div className="contracte-detail-hero">
                 <div className="contracte-detail-amount">{formatCurrency(c.importe)}</div>
                 <div className="contract-header contracte-detail-title-row">
-                    <h1 className="contracte-detail-title">{c.descripcion}</h1>
+                    <h2 className="contracte-detail-title">{c.descripcion}</h2>
                 </div>
+                <div className="contracte-detail-hero-company">
+                    <div className="contract-header contracte-detail-company-row">
+                        <h2 className="contracte-detail-company-title">
+                            <a
+                                className="contracte-detail-company-link"
+                                href={empresaHref}
+                                onClick={(event) => handleInternalLinkClick(event, () => onEmpresaClick(c.adjudicatario))}
+                            >
+                                {c.adjudicatario}
+                            </a>
+                        </h2>
+                    </div>
+                </div>
+            </div>
+            <div className="contracte-detail-info-card">
                 {isPreserved && (
                     <div className="contracte-preserved-notice">
                         Aquest contracte és recuperat i ja no consta al registre públic. La fitxa i evidència es preserven per mantenir la traçabilitat de les dades.
                     </div>
                 )}
-                <div className="contract-meta contracte-detail-meta">
+                <div className={`contract-meta contracte-detail-meta contracte-detail-info-meta${hasCpv ? '' : ' contracte-detail-info-meta-without-cpv'}`}>
                     <div className="contract-meta-item">
                         <span className="contract-meta-label">Data</span>
                         <span className="contract-meta-value">{formatDate(c.fecha)}</span>
@@ -624,6 +681,12 @@ function ContractDetailView({ contract: c, contracts, empreses, onBack, onEmpres
                         <span className="contract-meta-label">Codi expedient</span>
                         <span className="contract-meta-value">{c.codigo}</span>
                     </div>
+                    {hasCpv && (
+                        <div className="contract-meta-item">
+                            <span className="contract-meta-label">CPV</span>
+                            <span className="contract-meta-value">{c.cpv}</span>
+                        </div>
+                    )}
                     <div className="contract-meta-item">
                         <span className="contract-meta-label">Contractant</span>
                         <span className="contract-meta-value">{c.organismo}</span>
@@ -637,39 +700,46 @@ function ContractDetailView({ contract: c, contracts, empreses, onBack, onEmpres
                         <span className="contract-meta-value">{formatProcediment(c.procedimiento)}</span>
                     </div>
                 </div>
-                <div className="contracte-detail-share">
-                    <button
-                        className="btn-share contracte-detail-share-btn"
-                        onClick={() => generateShareImage(c)}
-                    >
-                        Compartir <em className="share-arrow"></em>
-                    </button>
-                </div>
             </div>
-            <div className="contracte-detail-company-card">
-                <div className="contract-meta-label" style={{ marginBottom: '0.75rem' }}>
-                    Empresa adjudicatària
-                </div>
-                <div className="contract-header contracte-detail-company-row">
-                    <h2
-                        className="contracte-detail-company-title"
-                        onClick={() => onEmpresaClick(c.adjudicatario)}
-                        onKeyDown={(event) => {
-                            if (event.key === 'Enter' || event.key === ' ') {
-                                event.preventDefault();
-                                onEmpresaClick(c.adjudicatario);
-                            }
-                        }}
-                        role="link"
-                        tabIndex={0}
+            <div className="contracte-detail-actions-row">
+                <button onClick={onBack} className="btn-share contracte-detail-back" title="Tornar" aria-label="Tornar" type="button">
+                    <svg className="contracte-detail-back-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M19 12H5" /><polyline points="12 19 5 12 12 5" /></svg>
+                    <span>Tornar</span>
+                </button>
+                <div className={`contracte-detail-share contracte-detail-share-standalone${shareActionsOpen ? ' is-open' : ''}`} ref={shareActionsRef}>
+                    <div
+                        id="contract-share-actions"
+                        className="contracte-detail-share-actions"
+                        aria-hidden={!shareActionsOpen}
                     >
-                        {c.adjudicatario}
-                    </h2>
-                    <div className="contract-pills contracte-detail-company-pills">
-                        <button className="contract-pill contract-pill-button" onClick={() => onEmpresaClick(c.adjudicatario)}>
-                            {empresaContracts.length} contractes
+                        <button
+                            id="analisi-tab-fraccionament"
+                            className="btn-share contracte-detail-share-btn"
+                            onClick={copyContractLink}
+                            tabIndex={shareActionsOpen ? 0 : -1}
+                            type="button"
+                        >
+                            {shareCopyStatus || "Copia l'enllaç"}
+                        </button>
+                        <button
+                            id="analisi-tab-monopoli"
+                            className="btn-share contracte-detail-share-btn"
+                            onClick={downloadContractImage}
+                            tabIndex={shareActionsOpen ? 0 : -1}
+                            type="button"
+                        >
+                            {shareDownloadStatus || "Descarrega l'imatge"}
                         </button>
                     </div>
+                    <button
+                        className="btn-share contracte-detail-share-btn"
+                        onClick={() => setShareActionsOpen(open => !open)}
+                        aria-expanded={shareActionsOpen}
+                        aria-controls="contract-share-actions"
+                        type="button"
+                    >
+                        <em className="share-arrow"></em> Compartir
+                    </button>
                 </div>
             </div>
         </div>
@@ -787,9 +857,12 @@ function CasFraccionamentView({ caso, contracts, empreses, onBack, onContractSel
     const overLimit = pct > 100;
     const limitShare = overLimit && caso.import_total > 0 ? (caso.limit_legal / caso.import_total) * 100 : Math.min(pct, 100);
     const overShare = overLimit ? 100 - limitShare : 0;
-    const sepStyle = { marginTop: '1.25rem', paddingTop: '1.75rem', borderTop: '1px solid var(--border-on-dark)' };
     const itemsPerPage = 25;
     const [currentPage, setCurrentPage] = useState(1);
+    const [shareActionsOpen, setShareActionsOpen] = useState(false);
+    const [shareCopyStatus, setShareCopyStatus] = useState('');
+    const shareActionsRef = useRef(null);
+    const shareStatusTimerRef = useRef(null);
 
     const casContracts = useMemo(() =>
         (caso.contractes || []).map(cc => {
@@ -802,22 +875,41 @@ function CasFraccionamentView({ caso, contracts, empreses, onBack, onContractSel
     const totalPages = Math.ceil(casContracts.length / itemsPerPage);
     const contractesPaginats = casContracts.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
 
+    useEffect(() => {
+        if (!shareActionsOpen) return;
+        const closeShareActions = (event) => {
+            if (event.type === 'keydown' && event.key !== 'Escape') return;
+            if (event.type === 'pointerdown' && shareActionsRef.current?.contains(event.target)) return;
+            setShareActionsOpen(false);
+        };
+        document.addEventListener('pointerdown', closeShareActions);
+        document.addEventListener('keydown', closeShareActions);
+        return () => {
+            document.removeEventListener('pointerdown', closeShareActions);
+            document.removeEventListener('keydown', closeShareActions);
+        };
+    }, [shareActionsOpen]);
+
+    useEffect(() => () => window.clearTimeout(shareStatusTimerRef.current), []);
+
+    const copyFraccionamentLink = async () => {
+        try {
+            await navigator.clipboard.writeText(window.location.href);
+            setShareCopyStatus('Enllaç copiat');
+        } catch (_) {
+            setShareCopyStatus("No s'ha pogut copiar");
+        }
+        window.clearTimeout(shareStatusTimerRef.current);
+        shareStatusTimerRef.current = window.setTimeout(() => setShareCopyStatus(''), 1800);
+    };
+
     return (
         <div className="container analisi-detail-page">
-            <button onClick={onBack} className="btn-reset analisi-detail-back" style={{ marginBottom: '1.25rem' }} title="Tornar">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 12H5" /><polyline points="12 19 5 12 12 5" /></svg>
-            </button>
-
-            {/* -- Hero — idèntic a EmpresaView -- */}
+            <h1 className="page-title">Detall de fraccionament</h1>
             <div className="analisi-detail-hero analisi-case-hero analisi-case-fraccionament">
-                <div className="contract-pills analisi-mobile-risk-pills">
-                    <span className={"risk-badge " + riskClass(caso.nivell)}>{riskLabel(caso.nivell)}</span>
-                    <span className={"risk-badge " + riskClass(caso.nivell)} style={{ fontVariantNumeric: 'tabular-nums' }}>{Number.isInteger(caso.risc) ? caso.risc : Number(caso.risc).toFixed(1)}/100</span>
-                </div>
-
-                {/* Nom + import — exactament com empresa */}
-                <div className="contract-header analisi-case-header">
-                    <div className="analisi-case-title-wrap">
+                <div className="analisi-case-amount">{formatCurrency(caso.import_total)}</div>
+                <div className="contract-header analisi-case-header analisi-fraccionament-title-row">
+                    <h2 className="analisi-case-title-wrap">
                         {(caso.empreses || []).map((nom, i) => {
                             const emp = empreses.find(e => e.nom === nom);
                             const slug = emp ? emp.slug : buildEmpresaSlug(nom);
@@ -829,39 +921,54 @@ function CasFraccionamentView({ caso, contracts, empreses, onBack, onContractSel
                                 </a>
                             );
                         })}
-                    </div>
-                    <div className="analisi-case-amount">
-                        {formatCurrency(caso.import_total)}
-                    </div>
+                    </h2>
                 </div>
+                <div className="analisi-detail-contract-count">
+                    {casContracts.length} {casContracts.length === 1 ? 'contracte' : 'contractes'}
+                </div>
+                <div className="contract-pills analisi-detail-hero-pills">
+                    <span className={"risk-badge " + riskClass(caso.nivell)}>{riskLabel(caso.nivell)}</span>
+                    <span className={"risk-badge " + riskClass(caso.nivell)} style={{ fontVariantNumeric: 'tabular-nums' }}>{Number.isInteger(caso.risc) ? caso.risc : Number(caso.risc).toFixed(1)}/100</span>
+                </div>
+            </div>
 
-                {/* Meta — exactament com empresa: items + pills de risc a la dreta */}
-                <div className="contract-meta divider-on-dark">
+            <section className="analisi-detail-section-card" aria-labelledby="concentracio-company-title">
+                <h2 id="concentracio-company-title" className="analisi-detail-section-title">{caso.tipus_concentracio === 'xarxa' ? 'Xarxa mercantil concentrada' : 'Empresa dominant'}</h2>
+                <ul className="analisi-detail-text-list">
+                    {(caso.empreses || []).map(nom => {
+                        const emp = empreses.find(e => e.nom === nom);
+                        const slug = emp ? emp.slug : buildEmpresaSlug(nom);
+                        return <li key={nom}><a href={buildRouteUrl(`/empreses/${slug}`)} onClick={(event) => handleInternalLinkClick(event, () => onEmpresaClick(nom))} className="analisi-detail-company-link">{nom}</a></li>;
+                    })}
+                </ul>
+            </section>
+
+            <div className="analisi-detail-info-card">
+                <div className="contract-meta analisi-detail-info-meta">
                     <div className="contract-meta-item">
-                        <span className="contract-meta-label">{isSingleContractAlert ? 'Contracte' : 'Contractes'}</span>
-                        <span className="contract-meta-value">{casContracts.length}</span>
+                        <span className="contract-meta-label">Període</span>
+                        <span className="contract-meta-value">
+                            {isSingleContractAlert ? formatDate(caso.data_inici) : `${formatDate(caso.data_inici)} – ${formatDate(caso.data_fi)}`}
+                        </span>
                     </div>
                     <div className="contract-meta-item">
                         <span className="contract-meta-label">{isSingleContractAlert ? 'Import' : 'Similitud'}</span>
                         <span className="contract-meta-value">{isSingleContractAlert ? `${Math.round(pct)}% límit` : `${Math.round((caso.similitud_objecte || 0) * 100)}%`}</span>
                     </div>
                     <div className="contract-meta-item">
-                        <span className="contract-meta-label">{isSingleContractAlert ? 'Data' : 'Període'}</span>
-                        <span className="contract-meta-value">{isSingleContractAlert ? formatDate(caso.data_inici) : `${caso.dies_entre_primer_i_ultim} dies`}</span>
+                        <span className="contract-meta-label">Durada</span>
+                        <span className="contract-meta-value">{isSingleContractAlert ? 'Un dia' : `${caso.dies_entre_primer_i_ultim} dies`}</span>
                     </div>
                     <div className="contract-meta-item">
                         <span className="contract-meta-label">Tipus</span>
                         <span className="contract-meta-value">{formatTipusLimit(caso.tipus_limit)}</span>
                     </div>
-                    <div className="contract-pills">
-                        <span className={"risk-badge " + riskClass(caso.nivell)}>{riskLabel(caso.nivell)}</span>
-                        <span className={"risk-badge " + riskClass(caso.nivell)} style={{ fontVariantNumeric: 'tabular-nums' }}>{Number.isInteger(caso.risc) ? caso.risc : Number(caso.risc).toFixed(1)}/100</span>
-                    </div>
                 </div>
+            </div>
 
-                {/* Barra de progrés — mateix patró que la secció admins */}
-                <div className="analisi-case-section" style={sepStyle}>
-                    <div className="contract-meta-label" style={{ marginBottom: '0.5rem' }}>
+            <section className="analisi-detail-section-card analisi-fraccionament-limit" aria-label="Llindar del contracte menor">
+                <div className="analisi-detail-section-body">
+                    <div className="contract-meta-label analisi-detail-section-label">
                         {isSingleContractAlert ? 'Import del contracte' : 'Import acumulat'}
                     </div>
                     <ul className="stack-list">
@@ -872,46 +979,31 @@ function CasFraccionamentView({ caso, contracts, empreses, onBack, onContractSel
                             </span>
                         </li>
                     </ul>
-                    <div className="analisi-case-progress">
+                    <div className="analisi-case-progress" aria-hidden="true">
                         <div className="analisi-case-progress-segment analisi-case-progress-limit" style={{ width: limitShare + '%' }}></div>
                         {overLimit && <div className="analisi-case-progress-segment analisi-case-progress-over" style={{ width: overShare + '%' }}></div>}
                     </div>
                 </div>
+            </section>
 
-                {/* Administradors comuns — exactament igual que admins empresa */}
-                {(caso.administradors_comuns || []).length > 0 && (
-                    <div className="analisi-case-section" style={sepStyle}>
-                        <div className="contract-meta-label" style={{ marginBottom: '0.5rem' }}>
-                            Administradors comuns
-                        </div>
-                        <ul className="stack-list">
-                            {caso.administradors_comuns.map(a => (
-                                <li key={a} className="analisi-case-row">
-                                    <span style={{ fontWeight: 500 }}>{a}</span>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-                )}
+            {(caso.administradors_comuns || []).length > 0 && (
+                <section className="analisi-detail-section-card" aria-labelledby="fraccionament-relations-title">
+                    <h2 id="fraccionament-relations-title" className="analisi-detail-section-title">Administradors comuns</h2>
+                    <ul className="analisi-detail-text-list">
+                        {caso.administradors_comuns.map(a => <li key={a}>{a}</li>)}
+                    </ul>
+                </section>
+            )}
 
-                {/* Indicadors — exactament igual que admins empresa */}
-                {(caso.motius || []).length > 0 && (
-                    <div className="analisi-case-section" style={sepStyle}>
-                        <div className="contract-meta-label" style={{ marginBottom: '0.5rem' }}>
-                            Indicadors
-                        </div>
-                        <ul className="stack-list">
-                            {caso.motius.map(m => (
-                                <li key={m} className="analisi-case-row">
-                                    <span style={{ fontWeight: 400 }}>{formatMotiuFraccionament(m)}</span>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-                )}
-            </div>
+            {(caso.motius || []).length > 0 && (
+                <section className="analisi-detail-section-card" aria-labelledby="fraccionament-indicators-title">
+                    <h2 id="fraccionament-indicators-title" className="analisi-detail-section-title">Indicadors</h2>
+                    <ul className="analisi-detail-text-list">
+                        {caso.motius.map(m => <li key={m}>{formatMotiuFraccionament(m)}</li>)}
+                    </ul>
+                </section>
+            )}
 
-            {/* -- Contractes trobats -- */}
             {contractesPaginats.map((cc, i) => (
                 cc.slug && cc.fullObj ? (
                     <a key={`${cc.codigo}-${i}`} href={buildRouteUrl(`/contractes/${cc.slug}`)} className="card-link-wrapper" onClick={(event) => handleInternalLinkClick(event, () => onContractSelect(cc.fullObj))}>
@@ -926,6 +1018,10 @@ function CasFraccionamentView({ caso, contracts, empreses, onBack, onContractSel
                                 <div className="contract-meta-item"><span className="contract-meta-label">Empresa adjudicatària</span><span className="contract-meta-value">{cc.adjudicatario}</span></div>
                                 <div className="contract-meta-item"><span className="contract-meta-label">Data</span><span className="contract-meta-value">{formatDate(cc.fecha)}</span></div>
                                 <div className="contract-meta-item"><span className="contract-meta-label">Codi expedient</span><span className="contract-meta-value">{cc.codigo}</span></div>
+                                <div className="contract-pills">
+                                    <span className="contract-pill">{formatTipus(cc.tipo)}</span>
+                                    <span className="contract-pill procedure">{formatProcediment(cc.procedimiento)}</span>
+                                </div>
                             </div>
                         </div>
                     </a>
@@ -939,6 +1035,10 @@ function CasFraccionamentView({ caso, contracts, empreses, onBack, onContractSel
                             <div className="contract-meta-item"><span className="contract-meta-label">Empresa adjudicatària</span><span className="contract-meta-value">{cc.adjudicatario}</span></div>
                             <div className="contract-meta-item"><span className="contract-meta-label">Data</span><span className="contract-meta-value">{formatDate(cc.fecha)}</span></div>
                             <div className="contract-meta-item"><span className="contract-meta-label">Codi expedient</span><span className="contract-meta-value">{cc.codigo}</span></div>
+                            <div className="contract-pills">
+                                <span className="contract-pill">{formatTipus(cc.tipo)}</span>
+                                <span className="contract-pill procedure">{formatProcediment(cc.procedimiento)}</span>
+                            </div>
                         </div>
                     </div>
                 )
@@ -951,6 +1051,22 @@ function CasFraccionamentView({ caso, contracts, empreses, onBack, onContractSel
                     showTitles={false}
                 />
             )}
+            <div className="contracte-detail-actions-row">
+                <button onClick={onBack} className="btn-share contracte-detail-back" title="Tornar" aria-label="Tornar" type="button">
+                    <svg className="contracte-detail-back-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M19 12H5" /><polyline points="12 19 5 12 12 5" /></svg>
+                    <span>Tornar</span>
+                </button>
+                <div className={`contracte-detail-share contracte-detail-share-standalone${shareActionsOpen ? ' is-open' : ''}`} ref={shareActionsRef}>
+                    <div id="fraccionament-share-actions" className="contracte-detail-share-actions" aria-hidden={!shareActionsOpen}>
+                        <button className="btn-share contracte-detail-share-btn" onClick={copyFraccionamentLink} tabIndex={shareActionsOpen ? 0 : -1} type="button">
+                            {shareCopyStatus || "Copia l'enllaç"}
+                        </button>
+                    </div>
+                    <button className="btn-share contracte-detail-share-btn" onClick={() => setShareActionsOpen(open => !open)} aria-expanded={shareActionsOpen} aria-controls="fraccionament-share-actions" type="button">
+                        <em className="share-arrow"></em> Compartir
+                    </button>
+                </div>
+            </div>
         </div>
     );
 }
@@ -958,9 +1074,12 @@ function CasFraccionamentView({ caso, contracts, empreses, onBack, onContractSel
 /* ---- CasConcentracioView ---------------------------------------- */
 function CasConcentracioView({ caso, contracts, empreses, onBack, onContractSelect, onEmpresaClick }) {
     if (!caso) return null;
-    const sepStyle = { marginTop: '1.25rem', paddingTop: '1.75rem', borderTop: '1px solid var(--border-on-dark)' };
     const itemsPerPage = 25;
     const [currentPage, setCurrentPage] = useState(1);
+    const [shareActionsOpen, setShareActionsOpen] = useState(false);
+    const [shareCopyStatus, setShareCopyStatus] = useState('');
+    const shareActionsRef = useRef(null);
+    const shareStatusTimerRef = useRef(null);
     const casContracts = useMemo(() =>
         (caso.contractes || []).map(cc => {
             const full = findMatchingContract(contracts, cc);
@@ -972,105 +1091,78 @@ function CasConcentracioView({ caso, contracts, empreses, onBack, onContractSele
     const isHistoricConcentracio = caso.finestra === 'historic';
     const quotaPercent = Math.max(0, Math.min(100, Math.round((Number(caso.quota_import) || 0) * 100)));
     const quotaTone = quotaClass(caso.quota_import);
+    const concentrationType = isHistoricConcentracio ? 'Històrica' : 'Temporal';
+
+    useEffect(() => {
+        if (!shareActionsOpen) return;
+        const closeShareActions = (event) => {
+            if (event.type === 'keydown' && event.key !== 'Escape') return;
+            if (event.type === 'pointerdown' && shareActionsRef.current?.contains(event.target)) return;
+            setShareActionsOpen(false);
+        };
+        document.addEventListener('pointerdown', closeShareActions);
+        document.addEventListener('keydown', closeShareActions);
+        return () => {
+            document.removeEventListener('pointerdown', closeShareActions);
+            document.removeEventListener('keydown', closeShareActions);
+        };
+    }, [shareActionsOpen]);
+
+    useEffect(() => () => window.clearTimeout(shareStatusTimerRef.current), []);
+
+    const copyConcentracioLink = async () => {
+        try {
+            await navigator.clipboard.writeText(window.location.href);
+            setShareCopyStatus('Enllaç copiat');
+        } catch (_) {
+            setShareCopyStatus("No s'ha pogut copiar");
+        }
+        window.clearTimeout(shareStatusTimerRef.current);
+        shareStatusTimerRef.current = window.setTimeout(() => setShareCopyStatus(''), 1800);
+    };
 
     return (
         <div className="container analisi-detail-page">
-            <button onClick={onBack} className="btn-reset analisi-detail-back" style={{ marginBottom: '1.25rem' }} title="Tornar">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 12H5" /><polyline points="12 19 5 12 12 5" /></svg>
-            </button>
+            <h1 className="page-title">Detall de concentració</h1>
             <div className="analisi-detail-hero analisi-case-hero analisi-case-concentracio">
-                {!isHistoricConcentracio && (
-                    <div className="contract-pills analisi-mobile-risk-pills">
-                        <span className={"risk-badge " + riskClass(caso.nivell)}>{riskLabel(caso.nivell)}</span>
-                        <span className={"risk-badge " + riskClass(caso.nivell)} style={{ fontVariantNumeric: 'tabular-nums' }}>{Number.isInteger(caso.risc) ? caso.risc : Number(caso.risc).toFixed(1)}/100</span>
-                    </div>
-                )}
-                <div className="contract-header analisi-case-header">
-                    <div className="analisi-case-title-wrap">
-                        <div className="analisi-case-title">{formatSectorName(caso.sector)}</div>
-                        <div className="label-on-dark analisi-case-subtitle">{isHistoricConcentracio ? 'Registre històric' : formatConcentracioPeriod(caso)}</div>
-                    </div>
+                <div className="analisi-case-amount">{formatCurrency(caso.import_concentrat)}</div>
+                <div className="contract-header analisi-case-header analisi-fraccionament-title-row">
+                    <h2 className="analisi-case-title-wrap"><span className="analisi-case-title">{formatSectorName(caso.sector)}</span></h2>
                 </div>
-                {isHistoricConcentracio ? (
-                    <>
-                        <div className="analisi-case-section" style={sepStyle}>
-                            <div className="contract-meta-label" style={{ marginBottom: '0.75rem' }}>
-                                {caso.tipus_concentracio === 'xarxa' ? 'Xarxa mercantil concentrada' : 'Empresa dominant'}
-                            </div>
-                            <ul className="stack-list">
-                                {(caso.empreses || []).map(nom => {
-                                    const emp = empreses.find(e => e.nom === nom);
-                                    const slug = emp ? emp.slug : buildEmpresaSlug(nom);
-                                    return (
-                                        <li key={nom} className="analisi-case-company-item">
-                                            <a href={buildRouteUrl(`/empreses/${slug}`)} onClick={(event) => handleInternalLinkClick(event, () => onEmpresaClick(nom))} className="analisi-case-company-link">{nom}</a>
-                                        </li>
-                                    );
-                                })}
-                            </ul>
-                        </div>
-                        <div className="analisi-case-section" style={sepStyle}>
-                            <div className="contract-meta-label" style={{ marginBottom: '0.75rem' }}>Quota de mercat</div>
-                            <div className={"analisi-case-quota analisi-case-quota-" + quotaTone}>{quotaPercent}%</div>
-                            <div className="analisi-case-quota-bar">
-                                <div className={"analisi-case-quota-fill analisi-case-quota-fill-" + quotaTone} style={{ width: `${quotaPercent}%` }} />
-                            </div>
-                        </div>
-                        <div className="contract-meta divider-on-dark">
-                            <div className="contract-meta-item"><span className="contract-meta-label">Import</span><span className="contract-meta-value">{formatCurrency(caso.import_concentrat)} / {formatCurrency(caso.import_sector)}</span></div>
-                            <div className="contract-meta-item"><span className="contract-meta-label">Contractes</span><span className="contract-meta-value">{caso.contractes_concentrats} / {caso.contractes_sector}</span></div>
-                        </div>
-                    </>
-                ) : (
-                    <>
-                        <div className="analisi-case-section" style={sepStyle}>
-                            <div className="contract-meta-label" style={{ marginBottom: '0.75rem' }}>
-                                {caso.tipus_concentracio === 'xarxa' ? 'Xarxa mercantil concentrada' : 'Empresa dominant'}
-                            </div>
-                            <ul className="stack-list">
-                                {(caso.empreses || []).map(nom => {
-                                    const emp = empreses.find(e => e.nom === nom);
-                                    const slug = emp ? emp.slug : buildEmpresaSlug(nom);
-                                    return (
-                                        <li key={nom} className="analisi-case-company-item">
-                                            <a href={buildRouteUrl(`/empreses/${slug}`)} onClick={(event) => handleInternalLinkClick(event, () => onEmpresaClick(nom))} className="analisi-case-company-link">{nom}</a>
-                                        </li>
-                                    );
-                                })}
-                            </ul>
-                        </div>
-                        <div className="analisi-case-section" style={sepStyle}>
-                            <div className="contract-meta-label" style={{ marginBottom: '0.75rem' }}>Quota de mercat</div>
-                            <div className={"analisi-case-quota analisi-case-quota-" + quotaTone}>{quotaPercent}%</div>
-                            <div className="analisi-case-quota-bar">
-                                <div className={"analisi-case-quota-fill analisi-case-quota-fill-" + quotaTone} style={{ width: `${quotaPercent}%` }} />
-                            </div>
-                        </div>
-                        <div className="contract-meta divider-on-dark">
-                            <div className="contract-meta-item"><span className="contract-meta-label">Import</span><span className="contract-meta-value">{formatCurrency(caso.import_concentrat)} / {formatCurrency(caso.import_sector)}</span></div>
-                            <div className="contract-meta-item"><span className="contract-meta-label">Contractes</span><span className="contract-meta-value">{caso.contractes_concentrats} / {caso.contractes_sector}</span></div>
-                            <div className="contract-pills">
-                                <span className={"risk-badge " + riskClass(caso.nivell)}>{riskLabel(caso.nivell)}</span>
-                                <span className={"risk-badge " + riskClass(caso.nivell)} style={{ fontVariantNumeric: 'tabular-nums' }}>{Number.isInteger(caso.risc) ? caso.risc : Number(caso.risc).toFixed(1)}/100</span>
-                            </div>
-                        </div>
-                    </>
-                )}
-                {(caso.administradors_comuns || []).length > 0 && (
-                    <div className="analisi-case-section" style={sepStyle}>
-                        <div className="contract-meta-label" style={{ marginBottom: '0.5rem' }}>Administradors comuns</div>
-                        <ul className="stack-list">
-                            {caso.administradors_comuns.map(a => <li key={a} className="analisi-case-section-value">{a}</li>)}
-                        </ul>
-                    </div>
-                )}
-                <div className="analisi-case-section" style={sepStyle}>
-                    <div className="contract-meta-label" style={{ marginBottom: '0.5rem' }}>Indicadors</div>
-                    <ul className="stack-list">
-                        {(caso.motius || []).map(m => <li key={m} className="analisi-case-list-item">{m}</li>)}
-                    </ul>
+                <div className="analisi-detail-contract-count">{casContracts.length} {casContracts.length === 1 ? 'contracte' : 'contractes'}</div>
+                <div className="contract-pills analisi-detail-hero-pills">
+                    <span className={"risk-badge " + riskClass(caso.nivell)}>{riskLabel(caso.nivell)}</span>
+                    <span className={"risk-badge " + riskClass(caso.nivell)} style={{ fontVariantNumeric: 'tabular-nums' }}>{Number.isInteger(caso.risc) ? caso.risc : Number(caso.risc).toFixed(1)}/100</span>
                 </div>
             </div>
+
+            <div className="analisi-detail-info-card">
+                <div className={`contract-meta analisi-detail-info-meta analisi-detail-info-meta-concentracio${isHistoricConcentracio ? ' is-historic' : ''}`}>
+                    {!isHistoricConcentracio && <div className="contract-meta-item"><span className="contract-meta-label">Període</span><span className="contract-meta-value">{formatConcentracioPeriod(caso)}</span></div>}
+                    <div className="contract-meta-item"><span className="contract-meta-label">Tipus</span><span className="contract-meta-value">{concentrationType}</span></div>
+                    <div className="contract-meta-item"><span className="contract-meta-label">Import del sector</span><span className="contract-meta-value">{formatCurrency(caso.import_sector)}</span></div>
+                    <div className="contract-meta-item"><span className="contract-meta-label">Contractes del sector</span><span className="contract-meta-value">{caso.contractes_sector}</span></div>
+                    <div className="analisi-detail-info-extra">
+                        <span className="contract-meta-label">Quota de mercat</span>
+                        <span className={"analisi-case-quota analisi-case-quota-" + quotaTone}>{quotaPercent}%</span>
+                        <span className="analisi-case-quota-bar" aria-hidden="true"><span className={"analisi-case-quota-fill analisi-case-quota-fill-" + quotaTone} style={{ width: `${quotaPercent}%` }} /></span>
+                    </div>
+                </div>
+            </div>
+
+            {(caso.administradors_comuns || []).length > 0 && (
+                <section className="analisi-detail-section-card" aria-labelledby="concentracio-relations-title">
+                    <h2 id="concentracio-relations-title" className="analisi-detail-section-title">Administradors comuns</h2>
+                    <ul className="analisi-detail-text-list">{caso.administradors_comuns.map(a => <li key={a}>{a}</li>)}</ul>
+                </section>
+            )}
+
+            {(caso.motius || []).length > 0 && (
+                <section className="analisi-detail-section-card" aria-labelledby="concentracio-indicators-title">
+                    <h2 id="concentracio-indicators-title" className="analisi-detail-section-title">Indicadors</h2>
+                    <ul className="analisi-detail-text-list">{caso.motius.map(m => <li key={m}>{m}</li>)}</ul>
+                </section>
+            )}
 
             {contractesPaginats.map((cc, i) => (
                 cc.slug && cc.fullObj ? (
@@ -1081,12 +1173,19 @@ function CasConcentracioView({ caso, contracts, empreses, onBack, onContractSele
                                 <div className="contract-meta-item"><span className="contract-meta-label">Empresa adjudicatària</span><span className="contract-meta-value">{cc.adjudicatario}</span></div>
                                 <div className="contract-meta-item"><span className="contract-meta-label">Data</span><span className="contract-meta-value">{formatDate(cc.fecha)}</span></div>
                                 <div className="contract-meta-item"><span className="contract-meta-label">Codi expedient</span><span className="contract-meta-value">{cc.codigo}</span></div>
+                                <div className="contract-pills"><span className="contract-pill">{formatTipus(cc.tipo)}</span><span className="contract-pill procedure">{formatProcediment(cc.procedimiento)}</span></div>
                             </div>
                         </div>
                     </a>
                 ) : (
                     <div key={`${cc.codigo}-${i}`} className="contract-card">
                         <div className="contract-header"><div className="contract-title">{cc.descripcion}</div><div className="contract-amount">{formatCurrency(cc.importe)}</div></div>
+                        <div className="contract-meta">
+                            <div className="contract-meta-item"><span className="contract-meta-label">Empresa adjudicatària</span><span className="contract-meta-value">{cc.adjudicatario}</span></div>
+                            <div className="contract-meta-item"><span className="contract-meta-label">Data</span><span className="contract-meta-value">{formatDate(cc.fecha)}</span></div>
+                            <div className="contract-meta-item"><span className="contract-meta-label">Codi expedient</span><span className="contract-meta-value">{cc.codigo}</span></div>
+                            <div className="contract-pills"><span className="contract-pill">{formatTipus(cc.tipo)}</span><span className="contract-pill procedure">{formatProcediment(cc.procedimiento)}</span></div>
+                        </div>
                     </div>
                 )
             ))}
@@ -1098,6 +1197,13 @@ function CasConcentracioView({ caso, contracts, empreses, onBack, onContractSele
                     showTitles={false}
                 />
             )}
+            <div className="contracte-detail-actions-row">
+                <button onClick={onBack} className="btn-share contracte-detail-back" title="Tornar" aria-label="Tornar" type="button"><svg className="contracte-detail-back-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M19 12H5" /><polyline points="12 19 5 12 12 5" /></svg><span>Tornar</span></button>
+                <div className={`contracte-detail-share contracte-detail-share-standalone${shareActionsOpen ? ' is-open' : ''}`} ref={shareActionsRef}>
+                    <div id="concentracio-share-actions" className="contracte-detail-share-actions" aria-hidden={!shareActionsOpen}><button className="btn-share contracte-detail-share-btn" onClick={copyConcentracioLink} tabIndex={shareActionsOpen ? 0 : -1} type="button">{shareCopyStatus || "Copia l'enllaç"}</button></div>
+                    <button className="btn-share contracte-detail-share-btn" onClick={() => setShareActionsOpen(open => !open)} aria-expanded={shareActionsOpen} aria-controls="concentracio-share-actions" type="button"><em className="share-arrow"></em> Compartir</button>
+                </div>
+            </div>
         </div>
     );
 }
@@ -1105,7 +1211,10 @@ function CasConcentracioView({ caso, contracts, empreses, onBack, onContractSele
 /* ---- CasElectoralismeView --------------------------------------- */
 function CasElectoralismeView({ caso, contracts, empreses, onBack, onContractSelect, onEmpresaClick }) {
     if (!caso) return null;
-    const sepStyle = { marginTop: '1.25rem', paddingTop: '1.75rem', borderTop: '1px solid var(--border-on-dark)' };
+    const [shareActionsOpen, setShareActionsOpen] = useState(false);
+    const [shareCopyStatus, setShareCopyStatus] = useState('');
+    const shareActionsRef = useRef(null);
+    const shareStatusTimerRef = useRef(null);
     const casContracts = useMemo(() =>
         (caso.contractes || []).map(cc => {
             const full = findMatchingContract(contracts, cc);
@@ -1139,51 +1248,73 @@ function CasElectoralismeView({ caso, contracts, empreses, onBack, onContractSel
     const temporalLabel = isPreElectoral ? 'Dies abans' : (isPostElectoral ? 'Dies després' : 'Votació en');
     const temporalValue = isPreElectoral ? (caso.dies_abans_convocatoria || 0) : (isPostElectoral ? (caso.dies_despres_votacio || 0) : caso.dies_fins_votacio);
 
+    useEffect(() => {
+        if (!shareActionsOpen) return;
+        const closeShareActions = (event) => {
+            if (event.type === 'keydown' && event.key !== 'Escape') return;
+            if (event.type === 'pointerdown' && shareActionsRef.current?.contains(event.target)) return;
+            setShareActionsOpen(false);
+        };
+        document.addEventListener('pointerdown', closeShareActions);
+        document.addEventListener('keydown', closeShareActions);
+        return () => {
+            document.removeEventListener('pointerdown', closeShareActions);
+            document.removeEventListener('keydown', closeShareActions);
+        };
+    }, [shareActionsOpen]);
+
+    useEffect(() => () => window.clearTimeout(shareStatusTimerRef.current), []);
+
+    const copyElectoralismeLink = async () => {
+        try {
+            await navigator.clipboard.writeText(window.location.href);
+            setShareCopyStatus('Enllaç copiat');
+        } catch (_) {
+            setShareCopyStatus("No s'ha pogut copiar");
+        }
+        window.clearTimeout(shareStatusTimerRef.current);
+        shareStatusTimerRef.current = window.setTimeout(() => setShareCopyStatus(''), 1800);
+    };
+
     return (
         <div className="container analisi-detail-page">
-            <button onClick={onBack} className="btn-reset analisi-detail-back" style={{ marginBottom: '1.25rem' }} title="Tornar">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 12H5" /><polyline points="12 19 5 12 12 5" /></svg>
-            </button>
-
+            <h1 className="page-title">Detall d'electoralisme</h1>
             <div className="analisi-detail-hero analisi-case-hero analisi-case-electoralisme">
-                <div className="contract-pills analisi-mobile-risk-pills">
+                <div className="analisi-case-amount">{formatCurrency(caso.import_total)}</div>
+                <div className="contract-header analisi-case-header analisi-fraccionament-title-row">
+                    <h2 className="analisi-case-title-wrap">
+                        <a href={buildRouteUrl(`/empreses/${empresaPrincipalSlug}`)} onClick={(event) => handleInternalLinkClick(event, () => onEmpresaClick(empresaPrincipal))} className="analisi-case-title-link">{empresaPrincipal}</a>
+                    </h2>
+                </div>
+                <div className="analisi-detail-contract-count">{casContracts.length} {casContracts.length === 1 ? 'contracte' : 'contractes'}</div>
+                <div className="contract-pills analisi-detail-hero-pills">
                     <span className={"risk-badge " + riskClass(caso.nivell)}>{riskLabel(caso.nivell)}</span>
                     <span className={"risk-badge " + riskClass(caso.nivell)} style={{ fontVariantNumeric: 'tabular-nums' }}>{Number.isInteger(caso.risc) ? caso.risc : Number(caso.risc).toFixed(1)}/100</span>
                 </div>
-                <div className="contract-header analisi-case-header">
-                    <div className="analisi-case-title-wrap">
-                        <a href={buildRouteUrl(`/empreses/${empresaPrincipalSlug}`)} onClick={(event) => handleInternalLinkClick(event, () => onEmpresaClick(empresaPrincipal))} className="analisi-case-title-link">{empresaPrincipal}</a>
-                    </div>
-                    <div className="analisi-case-amount">
-                        {formatCurrency(caso.import_total)}
-                    </div>
-                </div>
+            </div>
 
-                <div className="contract-meta divider-on-dark">
+            <div className="analisi-detail-info-card">
+                <div className="contract-meta analisi-detail-info-meta">
                     <div className="contract-meta-item"><span className="contract-meta-label">Període</span><span className="contract-meta-value">{caso.periode_electoral}</span></div>
                     <div className="contract-meta-item"><span className="contract-meta-label">Data</span><span className="contract-meta-value">{formatDate(caso.data_inici)}</span></div>
                     <div className="contract-meta-item"><span className="contract-meta-label">{temporalLabel}</span><span className="contract-meta-value">{temporalValue} dies</span></div>
-                    <div className="contract-meta-item"><span className="contract-meta-label">Contracte recurrent</span><span className="contract-meta-value">{hasRecurrencia ? 'Sí' : 'No'}</span></div>
-                    <div className="contract-pills">
-                        <span className={"risk-badge " + riskClass(caso.nivell)}>{riskLabel(caso.nivell)}</span>
-                        <span className={"risk-badge " + riskClass(caso.nivell)} style={{ fontVariantNumeric: 'tabular-nums' }}>{Number.isInteger(caso.risc) ? caso.risc : Number(caso.risc).toFixed(1)}/100</span>
-                    </div>
-                </div>
-
-                {(caso.termes_detectats || []).length > 0 && (
-                    <div className="analisi-case-section" style={sepStyle}>
-                        <div className="contract-meta-label" style={{ marginBottom: '0.5rem' }}>Conceptes</div>
-                        <div className="analisi-case-list-item">{conceptesText}</div>
-                    </div>
-                )}
-
-                <div className="analisi-case-section" style={sepStyle}>
-                    <div className="contract-meta-label" style={{ marginBottom: '0.5rem' }}>Indicadors</div>
-                    <ul className="stack-list">
-                        {(caso.motius || []).map(m => <li key={m} className="analisi-case-list-item">{m}</li>)}
-                    </ul>
+                    <div className="contract-meta-item"><span className="contract-meta-label">Recurrència</span><span className="contract-meta-value">{hasRecurrencia ? 'Sí' : 'No'}</span></div>
                 </div>
             </div>
+
+            {(caso.termes_detectats || []).length > 0 && (
+                <section className="analisi-detail-section-card" aria-labelledby="electoralisme-concepts-title">
+                    <h2 id="electoralisme-concepts-title" className="analisi-detail-section-title">Conceptes</h2>
+                    <div className="analisi-detail-section-value">{conceptesText}</div>
+                </section>
+            )}
+
+            {(caso.motius || []).length > 0 && (
+                <section className="analisi-detail-section-card" aria-labelledby="electoralisme-indicators-title">
+                    <h2 id="electoralisme-indicators-title" className="analisi-detail-section-title">Indicadors</h2>
+                    <ul className="analisi-detail-text-list">{caso.motius.map(m => <li key={m}>{m}</li>)}</ul>
+                </section>
+            )}
 
             {contracte.slug && contracte.fullObj ? (
                 <a href={buildRouteUrl(`/contractes/${contracte.slug}`)} className="card-link-wrapper" onClick={(event) => handleInternalLinkClick(event, () => onContractSelect(contracte.fullObj))}>
@@ -1193,14 +1324,28 @@ function CasElectoralismeView({ caso, contracts, empreses, onBack, onContractSel
                             <div className="contract-meta-item"><span className="contract-meta-label">Empresa adjudicatària</span><span className="contract-meta-value">{contracte.adjudicatario}</span></div>
                             <div className="contract-meta-item"><span className="contract-meta-label">Data</span><span className="contract-meta-value">{formatDate(contracte.fecha)}</span></div>
                             <div className="contract-meta-item"><span className="contract-meta-label">Codi expedient</span><span className="contract-meta-value">{contracte.codigo}</span></div>
+                            <div className="contract-pills"><span className="contract-pill">{formatTipus(contracte.tipo)}</span><span className="contract-pill procedure">{formatProcediment(contracte.procedimiento)}</span></div>
                         </div>
                     </div>
                 </a>
             ) : (
                 <div className="contract-card">
                     <div className="contract-header"><div className="contract-title">{contracte.descripcion}</div><div className="contract-amount">{formatCurrency(contracte.importe)}</div></div>
+                    <div className="contract-meta">
+                        <div className="contract-meta-item"><span className="contract-meta-label">Empresa adjudicatària</span><span className="contract-meta-value">{contracte.adjudicatario}</span></div>
+                        <div className="contract-meta-item"><span className="contract-meta-label">Data</span><span className="contract-meta-value">{formatDate(contracte.fecha)}</span></div>
+                        <div className="contract-meta-item"><span className="contract-meta-label">Codi expedient</span><span className="contract-meta-value">{contracte.codigo}</span></div>
+                        <div className="contract-pills"><span className="contract-pill">{formatTipus(contracte.tipo)}</span><span className="contract-pill procedure">{formatProcediment(contracte.procedimiento)}</span></div>
+                    </div>
                 </div>
             )}
+            <div className="contracte-detail-actions-row">
+                <button onClick={onBack} className="btn-share contracte-detail-back" title="Tornar" aria-label="Tornar" type="button"><svg className="contracte-detail-back-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M19 12H5" /><polyline points="12 19 5 12 12 5" /></svg><span>Tornar</span></button>
+                <div className={`contracte-detail-share contracte-detail-share-standalone${shareActionsOpen ? ' is-open' : ''}`} ref={shareActionsRef}>
+                    <div id="electoralisme-share-actions" className="contracte-detail-share-actions" aria-hidden={!shareActionsOpen}><button className="btn-share contracte-detail-share-btn" onClick={copyElectoralismeLink} tabIndex={shareActionsOpen ? 0 : -1} type="button">{shareCopyStatus || "Copia l'enllaç"}</button></div>
+                    <button className="btn-share contracte-detail-share-btn" onClick={() => setShareActionsOpen(open => !open)} aria-expanded={shareActionsOpen} aria-controls="electoralisme-share-actions" type="button"><em className="share-arrow"></em> Compartir</button>
+                </div>
+            </div>
         </div>
     );
 }
@@ -1296,22 +1441,6 @@ function EmpresesView({ empreses, onEmpresaSelect, searchTerm, setSearchTerm, se
         sortBy !== 'amount-desc' ? sortBy : ''
     ].filter(Boolean).length;
 
-    const sectorTissue = useMemo(() => {
-        const bySector = {};
-        for (const e of empreses) {
-            const sector = e.sector || 'Altres Serveis i Subministraments';
-            if (!bySector[sector]) bySector[sector] = { sector, count: 0 };
-            bySector[sector].count += 1;
-        }
-        const items = Object.values(bySector).sort((a, b) => {
-            if (a.sector === 'Altres Serveis i Subministraments') return 1;
-            if (b.sector === 'Altres Serveis i Subministraments') return -1;
-            return b.count - a.count;
-        });
-        const maxCount = items.reduce((max, item) => Math.max(max, item.count), 0);
-        return { items, maxCount };
-    }, [empreses]);
-
     return (
         <div className="container empreses-page">
             <h1 className="page-title">Cercador d'empreses</h1>
@@ -1400,13 +1529,13 @@ function EmpresesView({ empreses, onEmpresaSelect, searchTerm, setSearchTerm, se
                             </div>
                             <div className="contract-meta">
                                 {e.sector && (
-                                    <div className="contract-meta-item">
+                                    <div className="contract-meta-item empresa-list-sector">
                                         <span className="contract-meta-label">Sector</span>
                                         <span className="contract-meta-value">{e.sector}</span>
                                     </div>
                                 )}
                                 {e.categoria && (
-                                    <div className="contract-meta-item">
+                                    <div className="contract-meta-item empresa-list-category">
                                         <span className="contract-meta-label">Categoria</span>
                                         <span className="contract-meta-value">{e.categoria}</span>
                                     </div>
@@ -1430,45 +1559,6 @@ function EmpresesView({ empreses, onEmpresaSelect, searchTerm, setSearchTerm, se
                     totalPages={totalPages}
                     onPageChange={setCurrentPage}
                 />
-            )}
-
-            {sectorTissue.items.length > 0 && (
-                <div className="sector-tissue-visual" aria-label="Distribució d'empreses adjudicatàries per sector">
-                    <div className="sector-tissue-header">
-                        <div className="chart-kicker">Visualització</div>
-                        <h3>Teixit de contractació</h3>
-                    </div>
-
-                    <div className="sector-tissue-bars">
-                        {sectorTissue.items.map(item => (
-                            <button
-                                key={item.sector}
-                                type="button"
-                                className={"sector-tissue-row" + (sectorFilter === item.sector ? " is-active" : "")}
-                                onClick={() => {
-                                    setSearchTerm('');
-                                    setDebouncedSearch('');
-                                    setSectorFilter(item.sector);
-                                    setCategoriaFilter('');
-                                    setSortBy('amount-desc');
-                                    setCurrentPage(1);
-                                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                                }}
-                                aria-label={`Filtrar empreses del sector ${formatSectorName(item.sector)}`}
-                            >
-                                <div className="sector-tissue-copy">
-                                    <span>{formatSectorName(item.sector)}</span>
-                                </div>
-                                <div className="sector-tissue-track" aria-hidden="true">
-                                    <span style={{ width: `${Math.max(4, Math.round((item.count / sectorTissue.maxCount) * 100))}%` }}></span>
-                                </div>
-                                <div className="sector-tissue-value">
-                                    <span>{item.count}</span>
-                                </div>
-                            </button>
-                        ))}
-                    </div>
-                </div>
             )}
 
             <div className="metodologia-wrapper">
@@ -1512,6 +1602,10 @@ function EmpresaView({ empresa: empresaNom, contracts, empreses, administradors,
     const [currentPage, setCurrentPage] = useState(1);
     const [showAllAdministradors, setShowAllAdministradors] = useState(false);
     const [empresaFiltersOpen, setEmpresaFiltersOpen] = useState(false);
+    const [shareActionsOpen, setShareActionsOpen] = useState(false);
+    const [shareCopyStatus, setShareCopyStatus] = useState('');
+    const shareActionsRef = useRef(null);
+    const shareStatusTimerRef = useRef(null);
     const itemsPerPage = 25;
     const maxAdministradorsInitial = isMobile() ? 5 : 10;
     const administradorsVisibles = administradorsEmpresa.slice(0, maxAdministradorsInitial);
@@ -1526,6 +1620,21 @@ function EmpresaView({ empresa: empresaNom, contracts, empreses, administradors,
         setCurrentPage(1);
     }, [debouncedSearch, tipusFilter, procedureFilter, dateStart, dateEnd, amountMin, amountMax, sortBy]);
     useEffect(() => { setShowAllAdministradors(false); }, [empresaNom]);
+    useEffect(() => {
+        if (!shareActionsOpen) return;
+        const closeShareActions = (event) => {
+            if (event.type === 'keydown' && event.key !== 'Escape') return;
+            if (event.type === 'pointerdown' && shareActionsRef.current?.contains(event.target)) return;
+            setShareActionsOpen(false);
+        };
+        document.addEventListener('pointerdown', closeShareActions);
+        document.addEventListener('keydown', closeShareActions);
+        return () => {
+            document.removeEventListener('pointerdown', closeShareActions);
+            document.removeEventListener('keydown', closeShareActions);
+        };
+    }, [shareActionsOpen]);
+    useEffect(() => () => window.clearTimeout(shareStatusTimerRef.current), []);
 
     const empresaContracts = useMemo(() => {
         let result = [...allEmpresaContracts];
@@ -1560,7 +1669,10 @@ function EmpresaView({ empresa: empresaNom, contracts, empreses, administradors,
         }
         const items = Object.values(byYear).sort((a, b) => a.year - b.year);
         const maxAmount = items.reduce((max, item) => Math.max(max, item.amount), 0);
-        return { items, maxAmount };
+        const firstYear = items[0]?.year;
+        const lastYear = items[items.length - 1]?.year;
+        const period = firstYear ? (firstYear === lastYear ? String(firstYear) : `${firstYear}–${lastYear}`) : '—';
+        return { items, maxAmount, period };
     }, [allEmpresaContracts]);
 
     const totalPages = Math.ceil(empresaContracts.length / itemsPerPage);
@@ -1588,25 +1700,29 @@ function EmpresaView({ empresa: empresaNom, contracts, empreses, administradors,
         sortBy !== 'date-desc' ? sortBy : ''
     ].filter(Boolean).length;
 
+    const copyEmpresaLink = async () => {
+        try {
+            await navigator.clipboard.writeText(window.location.href);
+            setShareCopyStatus('Enllaç copiat');
+        } catch (_) {
+            setShareCopyStatus("No s'ha pogut copiar");
+        }
+        window.clearTimeout(shareStatusTimerRef.current);
+        shareStatusTimerRef.current = window.setTimeout(() => setShareCopyStatus(''), 1800);
+    };
+
     return (
         <div className="container empresa-detail-page">
-            <button
-                onClick={onBack}
-                className="btn-reset contracte-detail-back"
-                style={{ marginBottom: '1.25rem' }}
-                title="Tornar"
-            >
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 12H5" /><polyline points="12 19 5 12 12 5" /></svg>
-            </button>
+            <h1 className="page-title">Detall d'empresa</h1>
             <div className="empresa-detail-hero">
+                <div className="empresa-detail-amount">{formatCurrency(totalImport)}</div>
                 <div className="contract-header empresa-detail-title-row">
-                    <h1 className="empresa-detail-title">{empresaNom}</h1>
-                    <div className="empresa-detail-amount">{formatCurrency(totalImport)}</div>
-                    <div className="contract-pills empresa-mobile-title-pills">
-                        <span className="contract-pill pill-on-dark">{allEmpresaContracts.length} contractes</span>
-                    </div>
+                    <h2 className="empresa-detail-title">{empresaNom}</h2>
                 </div>
-                <div className="contract-meta empresa-detail-meta">
+                <div className="empresa-detail-contract-count">{allEmpresaContracts.length} contractes</div>
+            </div>
+            <div className="empresa-detail-info-card">
+                <div className="contract-meta empresa-detail-info-meta">
                     {empresaData?.sector && (
                         <div className="contract-meta-item">
                             <span className="contract-meta-label">Sector</span>
@@ -1619,80 +1735,59 @@ function EmpresaView({ empresa: empresaNom, contracts, empreses, administradors,
                             <span className="contract-meta-value">{empresaData.categoria}</span>
                         </div>
                     )}
-                    <div className="contract-pills empresa-detail-title-pills">
-                        <span className="contract-pill pill-on-dark">{allEmpresaContracts.length} contractes</span>
+                    <div className="contract-meta-item">
+                        <span className="contract-meta-label">Període</span>
+                        <span className="contract-meta-value">{empresaAnnualActivity.period}</span>
                     </div>
-                </div>
-                <div className="empresa-detail-cargos">
-                    <div className="contract-meta-label empresa-detail-cargos-label">
-                        Càrrecs actius
-                    </div>
-                    {administradorsEmpresa.length > 0 ? (
-                        <ul className="empresa-detail-cargos-list">
-                            {administradorsVisibles.map((a, i) => (
-                                <li key={i} className="empresa-detail-cargo-item">
-                                    <span className="empresa-detail-cargo-name">{a.nombre}</span>
-                                    <span className="empresa-detail-cargo-meta">{a.cargo}<span>{a.fecha_nombramiento}</span></span>
-                                </li>
-                            ))}
-                            {administradorsEmpresa.length > maxAdministradorsInitial && (
-                                <li className="empresa-detail-cargos-more">
-                                    <div className={"empresa-detail-cargos-more-panel" + (showAllAdministradors ? " is-open" : "")}>
-                                        <div>
-                                            <ul className="empresa-detail-cargos-list">
-                                                {administradorsExtres.map((a, i) => (
-                                                    <li key={i} className="empresa-detail-cargo-item">
-                                                        <span className="empresa-detail-cargo-name">{a.nombre}</span>
-                                                        <span className="empresa-detail-cargo-meta">{a.cargo}<span>{a.fecha_nombramiento}</span></span>
-                                                    </li>
-                                                ))}
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <button
-                                        type="button"
-                                        onClick={() => setShowAllAdministradors(v => !v)}
-                                        className={"empresa-detail-cargos-toggle" + (showAllAdministradors ? " is-open" : "")}
-                                    >
-                                        {showAllAdministradors ? 'Veure menys' : 'Veure tots'}
-                                    </button>
-                                </li>
-                            )}
-                        </ul>
-                    ) : (
-                        <div className="empresa-detail-cargos-empty">
-                            No s'han trobat càrrecs actius
-                        </div>
-                    )}
                 </div>
             </div>
+            {administradorsEmpresa.length > 0 && (
+                <section className="empresa-detail-cargos" aria-labelledby="empresa-cargos-title">
+                    <h2 id="empresa-cargos-title" className="empresa-detail-cargos-title">Càrrecs actius</h2>
+                    <ul className="empresa-detail-cargos-list">
+                        {administradorsVisibles.map((a, i) => (
+                            <li key={i} className="empresa-detail-cargo-item">
+                                <span className="empresa-detail-cargo-name">{a.nombre}</span>
+                                <span className="empresa-detail-cargo-meta">{a.cargo}<span>{a.fecha_nombramiento}</span></span>
+                            </li>
+                        ))}
+                        {administradorsEmpresa.length > maxAdministradorsInitial && (
+                            <li className="empresa-detail-cargos-more">
+                                <div className={"empresa-detail-cargos-more-panel" + (showAllAdministradors ? " is-open" : "")}>
+                                    <div>
+                                        <ul className="empresa-detail-cargos-list">
+                                            {administradorsExtres.map((a, i) => (
+                                                <li key={i} className="empresa-detail-cargo-item">
+                                                    <span className="empresa-detail-cargo-name">{a.nombre}</span>
+                                                    <span className="empresa-detail-cargo-meta">{a.cargo}<span>{a.fecha_nombramiento}</span></span>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                </div>
+                                <button
+                                    type="button"
+                                    onClick={() => setShowAllAdministradors(v => !v)}
+                                    className={"empresa-detail-cargos-toggle" + (showAllAdministradors ? " is-open" : "")}
+                                >
+                                    {showAllAdministradors ? 'Veure menys' : 'Veure tots'}
+                                </button>
+                            </li>
+                        )}
+                    </ul>
+                </section>
+            )}
             {empresaAnnualActivity.items.length > 1 && (
-                <div className="empresa-activity-visual" aria-label="Evolució anual de l'import adjudicat a aquesta empresa">
+                <div className="empresa-activity-visual" aria-label="Històric anual de l'import adjudicat a aquesta empresa">
                     <div className="empresa-activity-header">
-                        <div className="chart-kicker">Visualització</div>
-                        <h3>Activitat de contractació</h3>
+                        <h3 className="empresa-activity-title">Històric de contractes</h3>
                     </div>
 
                     <div className="empresa-activity-bars">
                         {empresaAnnualActivity.items.map(item => (
-                            <button
+                            <div
                                 key={item.year}
-                                type="button"
-                                className={"empresa-activity-column" + (dateStart === `${item.year}-01-01` && dateEnd === `${item.year}-12-31` ? " is-active" : "")}
-                                onClick={() => {
-                                    setSearchTerm('');
-                                    setDebouncedSearch('');
-                                    setTipusFilter('');
-                                    setProcedureFilter('');
-                                    setAmountMin('');
-                                    setAmountMax('');
-                                    setSortBy('date-desc');
-                                    setDateStart(`${item.year}-01-01`);
-                                    setDateEnd(`${item.year}-12-31`);
-                                    setCurrentPage(1);
-                                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                                }}
-                                aria-label={`Filtrar contractes de ${empresaNom} de l'any ${item.year}`}
+                                className="empresa-activity-column"
                             >
                                 <div className="empresa-activity-bar-wrap" aria-hidden="true">
                                     <span style={{ height: `${Math.max(4, Math.round((item.amount / empresaAnnualActivity.maxAmount) * 100))}%`, '--bar-width': `${Math.max(4, Math.round((item.amount / empresaAnnualActivity.maxAmount) * 100))}%` }}></span>
@@ -1701,12 +1796,12 @@ function EmpresaView({ empresa: empresaNom, contracts, empreses, administradors,
                                     <span>{item.year}</span>
                                     <small>{formatCurrency(item.amount)}</small>
                                 </div>
-                            </button>
+                            </div>
                         ))}
                     </div>
                 </div>
             )}
-            <div className="search-section" style={{ marginBottom: '2rem' }}>
+            <div className="search-section empresa-detail-contract-search">
                 <SearchField
                     value={searchTerm}
                     onValueChange={setSearchTerm}
@@ -1823,6 +1918,18 @@ function EmpresaView({ empresa: empresaNom, contracts, empreses, administradors,
                     onPageChange={setCurrentPage}
                 />
             )}
+            <div className="empresa-detail-actions-row contracte-detail-actions-row">
+                <button onClick={onBack} className="btn-share empresa-detail-back contracte-detail-back" title="Tornar" aria-label="Tornar" type="button">
+                    <svg className="contracte-detail-back-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M19 12H5" /><polyline points="12 19 5 12 12 5" /></svg>
+                    <span>Tornar</span>
+                </button>
+                <div className={`contracte-detail-share contracte-detail-share-standalone${shareActionsOpen ? ' is-open' : ''}`} ref={shareActionsRef}>
+                    <div id="empresa-share-actions" className="contracte-detail-share-actions" aria-hidden={!shareActionsOpen}>
+                        <button className="btn-share contracte-detail-share-btn" onClick={copyEmpresaLink} tabIndex={shareActionsOpen ? 0 : -1} type="button">{shareCopyStatus || "Copia l'enllaç"}</button>
+                    </div>
+                    <button className="btn-share contracte-detail-share-btn" onClick={() => setShareActionsOpen(open => !open)} aria-expanded={shareActionsOpen} aria-controls="empresa-share-actions" type="button"><em className="share-arrow"></em> Compartir</button>
+                </div>
+            </div>
         </div>
     );
 }
@@ -1833,8 +1940,8 @@ function PersonesView({ persones, onEmpresaSelect, onNavigateLegal, searchTerm, 
     const [personesFiltersOpen, setPersonesFiltersOpen] = useState(false);
     const itemsPerPage = 25;
 
-    const togglePersona = (idx) => {
-        setExpandedIdx(prev => prev === idx ? null : idx);
+    const togglePersona = (personaId) => {
+        setExpandedIdx(prev => prev === personaId ? null : personaId);
     };
 
     const resetFilters = () => {
@@ -1910,9 +2017,10 @@ function PersonesView({ persones, onEmpresaSelect, onNavigateLegal, searchTerm, 
                     onToggle={() => setPersonesFiltersOpen(prev => !prev)}
                     activeCount={activeFiltersCount}
                     onReset={resetFilters}
+                    controlsId="persones-filter-panel"
                 />
 
-                <div className={"filters search-filter-panel search-filter-panel-single" + (!personesFiltersOpen ? " collapsed" : "")}>
+                <div id="persones-filter-panel" className={"filters search-filter-panel search-filter-panel-single" + (!personesFiltersOpen ? " collapsed" : "")}>
                     <div className="filter-group filter-group-standard">
                         <label className="filter-label">Ordenar per</label>
                         <select className="filter-select filter-select-standard" value={sortBy} onChange={(e) => setSortBy(e.target.value)} aria-label="Ordenar persones per">
@@ -1925,7 +2033,7 @@ function PersonesView({ persones, onEmpresaSelect, onNavigateLegal, searchTerm, 
                 </div>
             </div>
 
-            <div className="results-count">
+            <div className="results-count" role="status" aria-live="polite">
                 <span className="results-count-total"><span className="results-count-prefix">S'han trobat </span><strong>{personesFiltrades.length}</strong> persones</span>
                 {personesFiltrades.length > itemsPerPage && (
                     <span className="results-count-page"><span className="results-count-page-full">Pàgina</span><span className="results-count-page-short">Pàg.</span> <strong>{currentPage}</strong> de <strong>{totalPages}</strong></span>
@@ -1933,45 +2041,62 @@ function PersonesView({ persones, onEmpresaSelect, onNavigateLegal, searchTerm, 
             </div>
 
             <div className="persones-compact-list">
-                {personesPaginades.map((p, idx) => {
-                    const isExpanded = expandedIdx === idx;
+                {personesPaginades.map((p) => {
+                    const personaId = `persona-${stableHash([p.nom])}`;
+                    const panelId = `${personaId}-relacions`;
+                    const isExpanded = expandedIdx === personaId;
+                    const principalEmpresa = (p.relacions || []).reduce((principal, relacio) =>
+                        !principal || Number(relacio.import_empresa) > Number(principal.import_empresa)
+                            ? relacio
+                            : principal
+                        , null);
                     return (
-                        <div key={idx} className="contract-card persona-card">
+                        <div key={p.nom} className="contract-card persona-card">
                             <button
+                                id={`${personaId}-trigger`}
                                 type="button"
                                 className={`persona-row-header${isExpanded ? ' is-expanded' : ''}`}
-                                onClick={() => togglePersona(idx)}
+                                onClick={() => togglePersona(personaId)}
                                 aria-expanded={isExpanded}
+                                aria-controls={panelId}
                             >
-                                <div className="persona-row-header-left">
-                                    <div>
-                                        <div className="contract-title persona-title">{p.nom}</div>
+                                <div className="contract-header persona-row-main">
+                                    <div className="contract-title persona-title">{p.nom}</div>
+                                    <div className="contract-amount persona-amount">
+                                        {formatCurrency(p.total_adjudicat)}
                                     </div>
                                 </div>
-                                <div className="persona-row-header-right">
-                                    <div className="persona-row-amount">
-                                        <div className="contract-amount persona-amount">
-                                            {formatCurrency(p.total_adjudicat)}
+                                <div className="contract-meta persona-row-meta">
+                                    {principalEmpresa && (
+                                        <div className="contract-meta-item">
+                                            <span className="contract-meta-label">Empresa principal</span>
+                                            <span className="contract-meta-value persona-primary-company">{principalEmpresa.empresa}</span>
                                         </div>
-                                        <div className="contract-meta-value persona-amount-caption">
-                                            De {p.relacions.length} {p.relacions.length === 1 ? 'empresa' : 'empreses'}
-                                        </div>
-                                    </div>
-                                    <div className={`persona-row-chevron${isExpanded ? ' is-expanded' : ''}`}>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9" /></svg>
+                                    )}
+                                    <div className="contract-pills">
+                                        <span className="contract-pill">
+                                            {p.relacions.length} {p.relacions.length === 1 ? 'empresa' : 'empreses'}
+                                        </span>
                                     </div>
                                 </div>
                             </button>
 
-                            <div className={`persona-row-body-wrapper${isExpanded ? ' is-expanded' : ''}`}>
+                            <div
+                                id={panelId}
+                                className={`persona-row-body-wrapper${isExpanded ? ' is-expanded' : ''}`}
+                                role="region"
+                                aria-labelledby={`${personaId}-trigger`}
+                                aria-hidden={!isExpanded}
+                            >
                                 <div>
                                     <div className="persona-row-body">
                                         <div className="persona-relacions-list">
-                                            {p.relacions.map((emp, i) => (
+                                            {p.relacions.map((emp) => (
                                                 <a
-                                                    key={i}
+                                                    key={emp.empresa}
                                                     href={buildRouteUrl(`/empreses/${buildEmpresaSlug(emp.empresa)}`)}
                                                     className="persona-relacio-item"
+                                                    tabIndex={isExpanded ? 0 : -1}
                                                     onClick={(event) => handleInternalLinkClick(event, () => onEmpresaSelect(emp.empresa))}
                                                 >
                                                     <div className="persona-relacio-empresa">{emp.empresa}</div>
@@ -1997,7 +2122,10 @@ function PersonesView({ persones, onEmpresaSelect, onNavigateLegal, searchTerm, 
                 <Pagination
                     currentPage={currentPage}
                     totalPages={totalPages}
-                    onPageChange={setCurrentPage}
+                    onPageChange={(page) => {
+                        setCurrentPage(page);
+                        setExpandedIdx(null);
+                    }}
                 />
             )}
 
@@ -2282,6 +2410,8 @@ function InvestigacioCaseView({ caso, contracts, onContractSelect }) {
     );
 }
 function App() {
+    const initialContractSearch = useMemo(() => readContractSearchState(), []);
+    const initialAnalysisSearch = useMemo(() => readAnalysisSearchState(), []);
     const tabFromPath = (p) => resolveRoute(p).tab;
     const [activeTab, setActiveTab] = useState(() => tabFromPath(getCurrentRoute()));
     const [pendingEmpresaSlug, setPendingEmpresaSlug] = useState(() => {
@@ -2623,28 +2753,55 @@ function App() {
 
     const [expandedId, setExpandedId] = useState(null);
     const [expandedMonopolyId, setExpandedMonopolyId] = useState(null);
-    const [searchTerm, setSearchTerm] = useState('');
-    const [debouncedSearch, setDebouncedSearch] = useState('');
-    const [typeFilter, setTypeFilter] = useState('');
-    const [procedureFilter, setProcedureFilter] = useState('');
-    const [riskFilter, setRiskFilter] = useState('TOTS');
-    const [analisiSearch, setAnalisiSearch] = useState('');
-    const [analisiSort, setAnalisiSort] = useState('risk-desc');
-    const [concentracioMode, setConcentracioMode] = useState('historic');
+    const [searchTerm, setSearchTerm] = useState(initialContractSearch.searchTerm);
+    const [debouncedSearch, setDebouncedSearch] = useState(initialContractSearch.searchTerm);
+    const [typeFilter, setTypeFilter] = useState(initialContractSearch.typeFilter);
+    const [procedureFilter, setProcedureFilter] = useState(initialContractSearch.procedureFilter);
+    const [analisiTab, setAnalisiTab] = useState(initialAnalysisSearch.tab);
+    const [analisiFiltersByTab, setAnalisiFiltersByTab] = useState(() => {
+        const defaults = () => ({ searchTerm: '', sortBy: 'risk-desc' });
+        const state = {
+            fraccionament: defaults(),
+            monopoli: defaults(),
+            electoral: defaults(),
+        };
+        state[initialAnalysisSearch.tab] = {
+            searchTerm: initialAnalysisSearch.searchTerm,
+            sortBy: initialAnalysisSearch.sortBy,
+        };
+        return state;
+    });
+    const currentAnalisiFilters = analisiFiltersByTab[analisiTab];
+    const analisiSearch = currentAnalisiFilters.searchTerm;
+    const analisiSort = currentAnalisiFilters.sortBy;
+    const setAnalisiFilterValue = (key, value) => {
+        setAnalisiFiltersByTab(previous => ({
+            ...previous,
+            [analisiTab]: { ...previous[analisiTab], [key]: value },
+        }));
+        if (analisiTab === 'fraccionament') setAnalisiPageFrac(1);
+        if (analisiTab === 'monopoli') setAnalisiPageMonop(1);
+        if (analisiTab === 'electoral') setAnalisiPageElect(1);
+    };
+    const setAnalisiSearch = value => setAnalisiFilterValue('searchTerm', value);
+    const setAnalisiSort = value => setAnalisiFilterValue('sortBy', value);
+    const [concentracioMode, setConcentracioMode] = useState(initialAnalysisSearch.concentrationMode);
     const [filtersOpen, setFiltersOpen] = useState(false);
     const [analisiFiltersOpen, setAnalisiFiltersOpen] = useState(false);
-    const [analisiPageFrac, setAnalisiPageFrac] = useState(1);
-    const [analisiPageElect, setAnalisiPageElect] = useState(1);
-    const [analisiPageMonop, setAnalisiPageMonop] = useState(1);
+    const [analisiPageFrac, setAnalisiPageFrac] = useState(initialAnalysisSearch.tab === 'fraccionament' ? initialAnalysisSearch.currentPage : 1);
+    const [analisiPageElect, setAnalisiPageElect] = useState(initialAnalysisSearch.tab === 'electoral' ? initialAnalysisSearch.currentPage : 1);
+    const [analisiPageMonop, setAnalisiPageMonop] = useState(initialAnalysisSearch.tab === 'monopoli' ? initialAnalysisSearch.currentPage : 1);
     const analisiItemsPerPage = 25;
-    const [dateStart, setDateStart] = useState('');
-    const [dateEnd, setDateEnd] = useState('');
-    const [amountMin, setAmountMin] = useState('');
-    const [amountMax, setAmountMax] = useState('');
-    const [sortBy, setSortBy] = useState('date-desc');
-    const [currentPage, setCurrentPage] = useState(1);
+    useEffect(() => {
+        setAnalisiFiltersOpen(false);
+    }, [analisiTab, concentracioMode]);
+    const [dateStart, setDateStart] = useState(initialContractSearch.dateStart);
+    const [dateEnd, setDateEnd] = useState(initialContractSearch.dateEnd);
+    const [amountMin, setAmountMin] = useState(initialContractSearch.amountMin);
+    const [amountMax, setAmountMax] = useState(initialContractSearch.amountMax);
+    const [sortBy, setSortBy] = useState(initialContractSearch.sortBy);
+    const [currentPage, setCurrentPage] = useState(initialContractSearch.currentPage);
     const itemsPerPage = 25;
-    const [analisiTab, setAnalisiTab] = useState('fraccionament');
     const [selectedCasoDetail, setSelectedCasoDetail] = useState(null);
     const [selectedConcentracioDetail, setSelectedConcentracioDetail] = useState(null);
     const [selectedElectoralismeDetail, setSelectedElectoralismeDetail] = useState(null);
@@ -2687,6 +2844,32 @@ function App() {
     const [personesSort, setPersonesSort] = useState('companies-desc');
     const [personesPage, setPersonesPage] = useState(1);
     const [personesExpanded, setPersonesExpanded] = useState(null);
+    const applyContractSearchState = (state = readContractSearchState()) => {
+        setSearchTerm(state.searchTerm);
+        setDebouncedSearch(state.searchTerm);
+        setTypeFilter(state.typeFilter);
+        setProcedureFilter(state.procedureFilter);
+        setDateStart(state.dateStart);
+        setDateEnd(state.dateEnd);
+        setAmountMin(state.amountMin);
+        setAmountMax(state.amountMax);
+        setSortBy(state.sortBy);
+        setCurrentPage(state.currentPage);
+    };
+    const applyAnalysisSearchState = (state = readAnalysisSearchState()) => {
+        setAnalisiTab(state.tab);
+        setConcentracioMode(state.concentrationMode);
+        setAnalisiFiltersByTab(previous => ({
+            ...previous,
+            [state.tab]: {
+                searchTerm: state.searchTerm,
+                sortBy: state.sortBy,
+            },
+        }));
+        if (state.tab === 'fraccionament') setAnalisiPageFrac(state.currentPage);
+        if (state.tab === 'monopoli') setAnalisiPageMonop(state.currentPage);
+        if (state.tab === 'electoral') setAnalisiPageElect(state.currentPage);
+    };
     const resetAllFilters = () => {
         // Contractes
         setSearchTerm(''); setDebouncedSearch('');
@@ -2856,7 +3039,11 @@ function App() {
             else {
                 const tab = resolved.tab;
                 if (tab === 'empreses') setSelectedEmpresa(null);
-                if (tab === 'buscador') setSelectedContractForDetail(null);
+                if (tab === 'buscador') {
+                    applyContractSearchState();
+                    setSelectedContractForDetail(null);
+                }
+                if (tab === 'analisi') applyAnalysisSearchState();
                 setActiveTab(tab);
             }
         };
@@ -2997,6 +3184,7 @@ function App() {
             const cas = fraudes.find(f => String(f.id) === String(pendingCasId));
             if (cas) {
                 setSelectedCasoDetail(cas);
+                setAnalisiTab('fraccionament');
             } else {
                 handleNavigation('analisi', '/analisi', { replace: true });
             }
@@ -3009,6 +3197,7 @@ function App() {
             const cas = concentracio.find(f => String(f.id) === String(pendingConcentracioId));
             if (cas) {
                 setSelectedConcentracioDetail(cas);
+                setAnalisiTab('monopoli');
             } else {
                 handleNavigation('analisi', '/analisi', { replace: true });
             }
@@ -3021,6 +3210,7 @@ function App() {
             const cas = electoral.find(f => String(f.id) === String(pendingElectoralismeId));
             if (cas) {
                 setSelectedElectoralismeDetail(cas);
+                setAnalisiTab('electoral');
             } else {
                 handleNavigation('analisi', '/analisi', { replace: true });
             }
@@ -3127,30 +3317,67 @@ function App() {
     const endIndex = startIndex + itemsPerPage;
     const contractesPaginats = contractesFiltrats.slice(startIndex, endIndex);
 
-    const contractesAnnualEvolution = useMemo(() => {
-        const byYear = {};
-        for (const c of contracts) {
-            const year = c.año || (c.fecha ? parseInt(String(c.fecha).slice(0, 4), 10) : null);
-            if (!year) continue;
-            if (!byYear[year]) byYear[year] = { year, amount: 0, count: 0 };
-            byYear[year].amount += Number(c.importe) || 0;
-            byYear[year].count += 1;
-        }
-        const items = Object.values(byYear).sort((a, b) => a.year - b.year);
-        const maxAmount = items.reduce((max, item) => Math.max(max, item.amount), 0);
-        const topYear = items.reduce((top, item) => item.amount > (top?.amount || 0) ? item : top, null);
-        return { items, maxAmount, topYear };
-    }, [contracts]);
+    useEffect(() => {
+        if (!contracts.length) return;
+        const lastPage = Math.max(1, totalPages);
+        if (currentPage > lastPage) setCurrentPage(lastPage);
+    }, [contracts.length, currentPage, totalPages]);
 
     useEffect(() => {
-        setCurrentPage(1);
-    }, [debouncedSearch, typeFilter, procedureFilter, dateStart, dateEnd, amountMin, amountMax, sortBy]);
+        if (activeTab !== 'buscador' || getCurrentRoute() !== '/contractes') return;
+        const query = buildContractSearchParams({
+            searchTerm,
+            typeFilter,
+            procedureFilter,
+            dateStart,
+            dateEnd,
+            amountMin,
+            amountMax,
+            sortBy,
+            currentPage,
+        });
+        const fullPath = `${BASE}/contractes${query ? `?${query}` : ''}`;
+        const nextHref = new URL(fullPath, window.location.origin).href;
+        if (nextHref === window.location.href) return;
+        const scrollY = window.scrollY;
+        window.history.replaceState({
+            ...(window.history.state || {}),
+            tab: 'buscador',
+            iguadata: true,
+            scrollY,
+        }, '', fullPath);
+        saveScrollPosition(nextHref, scrollY);
+    }, [activeTab, searchTerm, typeFilter, procedureFilter, dateStart, dateEnd, amountMin, amountMax, sortBy, currentPage]);
+
+    useEffect(() => {
+        if (activeTab !== 'analisi' || getCurrentRoute() !== '/analisi') return;
+        const currentPage = analisiTab === 'fraccionament'
+            ? analisiPageFrac
+            : analisiTab === 'monopoli'
+                ? analisiPageMonop
+                : analisiPageElect;
+        const query = buildAnalysisSearchParams({
+            tab: analisiTab,
+            concentrationMode: concentracioMode,
+            searchTerm: analisiSearch,
+            sortBy: analisiSort,
+            currentPage,
+        });
+        const fullPath = `${BASE}/analisi${query ? `?${query}` : ''}`;
+        const nextHref = new URL(fullPath, window.location.origin).href;
+        if (nextHref === window.location.href) return;
+        const scrollY = window.scrollY;
+        window.history.replaceState({
+            ...(window.history.state || {}),
+            tab: 'analisi',
+            iguadata: true,
+            scrollY,
+        }, '', fullPath);
+        saveScrollPosition(nextHref, scrollY);
+    }, [activeTab, analisiTab, concentracioMode, analisiSearch, analisiSort, analisiPageFrac, analisiPageMonop, analisiPageElect]);
 
     const fraudesFiltrats = useMemo(() => {
         let result = fraudes.filter(f => f.nivell !== 'BAIX');
-        if (riskFilter !== 'TOTS') {
-            result = result.filter(f => f.nivell === riskFilter || f.nivel_riesgo === riskFilter);
-        }
         if (analisiSearch.trim()) {
             result = result.filter(f => matchesSearchQuery(
                 [
@@ -3182,7 +3409,7 @@ function App() {
                 result.sort((a, b) => (b.risc || 0) - (a.risc || 0));
         }
         return result;
-    }, [fraudes, riskFilter, analisiSearch, analisiSort]);
+    }, [fraudes, analisiSearch, analisiSort]);
 
     const concentracioFiltradaBase = useMemo(() => [...concentracio], [concentracio]);
 
@@ -3250,27 +3477,13 @@ function App() {
             .sort((a, b) => (b.quota_import || 0) - (a.quota_import || 0));
     }, [bestConcentracioBySector, concentracioFiltradaBase]);
 
-    const concentracioSectorSnapshot = useMemo(() => {
-        const items = [...concentracioHistoric]
-            .sort((a, b) => (b.quota_import || 0) - (a.quota_import || 0))
-            .slice(0, 6);
-        const maxQuota = items.reduce((max, item) => Math.max(max, item.quota_import || 0), 0);
-        return { items, maxQuota };
-    }, [concentracioHistoric]);
-
     const concentracioTemporal = useMemo(() => {
         let result = concentracioTemporalBase.filter(f => f.finestra !== 'historic');
-        if (riskFilter !== 'TOTS') {
-            result = result.filter(f => f.nivell === riskFilter || (riskFilter === 'OBSERVACIO' && f.nivell === 'BAIX'));
-        }
         return orderConcentracio(result);
-    }, [concentracioTemporalBase, orderConcentracio, riskFilter]);
+    }, [concentracioTemporalBase, orderConcentracio]);
 
     const electoralFiltrats = useMemo(() => {
         let result = electoral.filter(f => f.nivell !== 'BAIX');
-        if (riskFilter !== 'TOTS') {
-            result = result.filter(f => f.nivell === riskFilter);
-        }
         if (analisiSearch.trim()) {
             result = result.filter(f => matchesSearchQuery(
                 [
@@ -3302,14 +3515,21 @@ function App() {
                 result.sort((a, b) => (b.risc || 0) - (a.risc || 0));
         }
         return result;
-    }, [electoral, riskFilter, analisiSearch, analisiSort]);
-
-    useEffect(() => { setAnalisiPageFrac(1); setAnalisiPageElect(1); setAnalisiPageMonop(1); }, [riskFilter, analisiSearch, analisiSort]);
-    useEffect(() => { setAnalisiPageFrac(1); setAnalisiPageElect(1); setAnalisiPageMonop(1); }, [analisiTab]);
+    }, [electoral, analisiSearch, analisiSort]);
 
     const totalPagesFrac = Math.max(1, Math.ceil(fraudesFiltrats.length / analisiItemsPerPage));
     const totalPagesElect = Math.max(1, Math.ceil(electoralFiltrats.length / analisiItemsPerPage));
     const totalPagesMonop = Math.max(1, Math.ceil(concentracioTemporal.length / analisiItemsPerPage));
+
+    useEffect(() => {
+        if (analisiPageFrac > totalPagesFrac) setAnalisiPageFrac(totalPagesFrac);
+    }, [analisiPageFrac, totalPagesFrac]);
+    useEffect(() => {
+        if (analisiPageElect > totalPagesElect) setAnalisiPageElect(totalPagesElect);
+    }, [analisiPageElect, totalPagesElect]);
+    useEffect(() => {
+        if (analisiPageMonop > totalPagesMonop) setAnalisiPageMonop(totalPagesMonop);
+    }, [analisiPageMonop, totalPagesMonop]);
 
     const fraudesPaginats = fraudesFiltrats.slice((analisiPageFrac - 1) * analisiItemsPerPage, analisiPageFrac * analisiItemsPerPage);
     const electoralPaginats = electoralFiltrats.slice((analisiPageElect - 1) * analisiItemsPerPage, analisiPageElect * analisiItemsPerPage);
@@ -3373,12 +3593,12 @@ function App() {
 
     const resetAnalisiFilters = () => {
         setAnalisiSearch('');
-        setRiskFilter('TOTS');
         setAnalisiSort('risk-desc');
         setAnalisiPageFrac(1);
         setAnalisiPageMonop(1);
+        setAnalisiPageElect(1);
     };
-    const activeAnalisiFiltersCount = (riskFilter !== 'TOTS' ? 1 : 0) + (analisiSort !== 'risk-desc' ? 1 : 0);
+    const activeAnalisiFiltersCount = analisiSort !== 'risk-desc' ? 1 : 0;
 
     const activeFiltersCount = [
         typeFilter,
@@ -3922,7 +4142,7 @@ function App() {
         const detailPath = contract.evidencia_congelada === true
             ? `/contractes/evidencia/${contract.slug}`
             : `/contractes/${contract.slug}`;
-        handleNavigation('contracte', detailPath);
+        handleNavigation('contracte', detailPath, { keepFilters: true });
     };
 
     const handleCasoClick = (caso) => {
@@ -3967,7 +4187,9 @@ function App() {
         if (event.key === 'ArrowLeft') nextIndex = (currentIndex - 1 + tabs.length) % tabs.length;
         if (event.key === 'Home') nextIndex = 0;
         if (event.key === 'End') nextIndex = tabs.length - 1;
-        setAnalisiTab(tabs[nextIndex]);
+        const nextTab = tabs[nextIndex];
+        setAnalisiTab(nextTab);
+        if (nextTab === 'monopoli') setConcentracioMode('temporal');
         requestAnimationFrame(() => {
             const tabButtons = event.currentTarget.parentElement.querySelectorAll('[role="tab"]');
             tabButtons[nextIndex]?.focus();
@@ -4026,7 +4248,7 @@ function App() {
                     <div className="search-section">
                         <SearchField
                             value={searchTerm}
-                            onValueChange={setSearchTerm}
+                            onValueChange={(value) => { setSearchTerm(value); setCurrentPage(1); }}
                             placeholder="Cerca per descripció, empresa o codi d'expedient"
                             ariaLabel="Cerca per descripció, empresa o codi d'expedient"
                         />
@@ -4036,12 +4258,13 @@ function App() {
                             onToggle={() => setFiltersOpen(prev => !prev)}
                             activeCount={activeFiltersCount}
                             onReset={resetFilters}
+                            controlsId="contract-filter-primary contract-filter-secondary"
                         />
 
-                        <div className={"filters search-filter-panel" + (!filtersOpen ? " collapsed" : "")}>
+                        <div id="contract-filter-primary" className={"filters search-filter-panel" + (!filtersOpen ? " collapsed" : "")}>
                             <div className="filter-group filter-group-standard">
                                 <label className="filter-label">Ordenar per</label>
-                                <select className="filter-select filter-select-standard" value={sortBy} onChange={(e) => setSortBy(e.target.value)} aria-label="Ordenar contractes per">
+                                <select className="filter-select filter-select-standard" value={sortBy} onChange={(e) => { setSortBy(e.target.value); setCurrentPage(1); }} aria-label="Ordenar contractes per">
                                     <option value="date-desc">Data (més recents)</option>
                                     <option value="date-asc">Data (més antics)</option>
                                     <option value="amount-desc">Import (descendent)</option>
@@ -4050,7 +4273,7 @@ function App() {
                             </div>
                             <div className="filter-group filter-group-standard">
                                 <label className="filter-label">Procediment</label>
-                                <select className="filter-select filter-select-standard" value={procedureFilter} onChange={(e) => setProcedureFilter(e.target.value)} aria-label="Procediment">
+                                <select className="filter-select filter-select-standard" value={procedureFilter} onChange={(e) => { setProcedureFilter(e.target.value); setCurrentPage(1); }} aria-label="Procediment">
                                     <option value="">Tots els procediments</option>
                                     <option value="Menor">Menor</option>
                                     <option value="Obert">Obert</option>
@@ -4062,7 +4285,7 @@ function App() {
                             </div>
                             <div className="filter-group filter-group-standard">
                                 <label className="filter-label">Tipus</label>
-                                <select className="filter-select filter-select-standard" value={typeFilter} onChange={(e) => setTypeFilter(e.target.value)} aria-label="Tipus de contracte">
+                                <select className="filter-select filter-select-standard" value={typeFilter} onChange={(e) => { setTypeFilter(e.target.value); setCurrentPage(1); }} aria-label="Tipus de contracte">
                                     <option value="">Tots els tipus</option>
                                     <option value="1. OBRES">Obres</option>
                                     <option value="3. SUBMINISTRAMENTS">Subministraments</option>
@@ -4075,7 +4298,7 @@ function App() {
                             </div>
                         </div>
 
-                        <div className={"filters-row search-filter-panel search-filter-panel-secondary" + (!filtersOpen ? " collapsed" : "")}>
+                        <div id="contract-filter-secondary" className={"filters-row search-filter-panel search-filter-panel-secondary" + (!filtersOpen ? " collapsed" : "")}>
                             <div className="filter-group">
                                 <label className="filter-label">Data inici</label>
                                 <input
@@ -4083,7 +4306,7 @@ function App() {
                                     className="filter-input"
                                     aria-label="Data inici"
                                     value={dateStart}
-                                    onChange={(e) => setDateStart(e.target.value)}
+                                    onChange={(e) => { setDateStart(e.target.value); setCurrentPage(1); }}
                                 />
                             </div>
                             <div className="filter-group">
@@ -4093,21 +4316,21 @@ function App() {
                                     className="filter-input"
                                     aria-label="Data final"
                                     value={dateEnd}
-                                    onChange={(e) => setDateEnd(e.target.value)}
+                                    onChange={(e) => { setDateEnd(e.target.value); setCurrentPage(1); }}
                                 />
                             </div>
                             <div className="filter-group">
                                 <label className="filter-label">Des de</label>
-                                <input type="number" min="0" step="0.01" inputMode="decimal" className="filter-input" placeholder="Import mínim" aria-label="Import mínim" value={amountMin} onChange={(e) => setAmountMin(e.target.value)} />
+                                <input type="number" min="0" step="0.01" inputMode="decimal" className="filter-input" placeholder="Import mínim" aria-label="Import mínim" value={amountMin} onChange={(e) => { setAmountMin(e.target.value); setCurrentPage(1); }} />
                             </div>
                             <div className="filter-group">
                                 <label className="filter-label">Fins a</label>
-                                <input type="number" min="0" step="0.01" inputMode="decimal" className="filter-input" placeholder="Import màxim" aria-label="Import màxim" value={amountMax} onChange={(e) => setAmountMax(e.target.value)} />
+                                <input type="number" min="0" step="0.01" inputMode="decimal" className="filter-input" placeholder="Import màxim" aria-label="Import màxim" value={amountMax} onChange={(e) => { setAmountMax(e.target.value); setCurrentPage(1); }} />
                             </div>
                         </div>
                     </div>
 
-                    <div className="results-count">
+                    <div className="results-count" role="status" aria-live="polite">
                         <span className="results-count-total"><span className="results-count-prefix">S'han trobat </span><strong>{contractesFiltrats.length}</strong> contractes</span>
                         {contractesFiltrats.length > itemsPerPage && (
                             <span className="results-count-page"><span className="results-count-page-full">Pàgina</span><span className="results-count-page-short">Pàg.</span> <strong>{currentPage}</strong> de <strong>{totalPages}</strong></span>
@@ -4158,49 +4381,6 @@ function App() {
                             totalPages={totalPages}
                             onPageChange={setCurrentPage}
                         />
-                    )}
-
-                    {contractesAnnualEvolution.items.length > 0 && (
-                        <div className="contract-evolution-visual" aria-label="Evolució anual de l'import adjudicat">
-                            <div className="contract-evolution-header">
-                                <div>
-                                    <div className="chart-kicker">Visualització</div>
-                                    <h3>Històric de contractació</h3>
-                                </div>
-                            </div>
-
-                            <div className="contract-evolution-bars">
-                                {contractesAnnualEvolution.items.map(item => (
-                                    <button
-                                        key={item.year}
-                                        type="button"
-                                        className={"contract-evolution-column" + (dateStart === `${item.year}-01-01` && dateEnd === `${item.year}-12-31` ? " is-active" : "")}
-                                        onClick={() => {
-                                            setSearchTerm('');
-                                            setDebouncedSearch('');
-                                            setTypeFilter('');
-                                            setProcedureFilter('');
-                                            setAmountMin('');
-                                            setAmountMax('');
-                                            setSortBy('date-desc');
-                                            setDateStart(`${item.year}-01-01`);
-                                            setDateEnd(`${item.year}-12-31`);
-                                            setCurrentPage(1);
-                                            window.scrollTo({ top: 0, behavior: 'smooth' });
-                                        }}
-                                        aria-label={`Filtrar contractes de l'any ${item.year}`}
-                                    >
-                                        <div className="contract-evolution-bar-wrap" aria-hidden="true">
-                                            <span style={{ height: `${Math.max(4, Math.round((item.amount / contractesAnnualEvolution.maxAmount) * 100))}%`, '--bar-width': `${Math.max(4, Math.round((item.amount / contractesAnnualEvolution.maxAmount) * 100))}%` }}></span>
-                                        </div>
-                                        <div className="contract-evolution-meta">
-                                            <span>{item.year}</span>
-                                            <small>{formatCurrency(item.amount)}</small>
-                                        </div>
-                                    </button>
-                                ))}
-                            </div>
-                        </div>
                     )}
 
                     <div className="metodologia-wrapper">
@@ -4271,7 +4451,6 @@ function App() {
             {activeTab === 'contracte' && selectedContractForDetail && canRenderDataTab && (
                 <ContractDetailView
                     contract={selectedContractForDetail}
-                    contracts={contracts}
                     empreses={empreses}
                     onBack={() => goBack(() => { handleNavigation('buscador', null, { keepFilters: true }); setSelectedContractForDetail(null); })}
                     onEmpresaClick={handleEmpresaClick}
@@ -4327,6 +4506,7 @@ function App() {
                     <div className={'analisi-tabs-wrapper' + (!isPageTop ? ' is-hidden-on-scroll' : '')}>
                         <div className="analisi-tabs" role="tablist" aria-label="Tipus d'anàlisi">
                         <button
+                            id="analisi-tab-electoral"
                             className={'analisi-tab' + (analisiTab === 'fraccionament' ? ' active' : '')}
                             onClick={() => setAnalisiTab('fraccionament')}
                             type="button"
@@ -4340,7 +4520,7 @@ function App() {
                         </button>
                         <button
                             className={'analisi-tab' + (analisiTab === 'monopoli' ? ' active' : '')}
-                            onClick={() => setAnalisiTab('monopoli')}
+                            onClick={() => { setAnalisiTab('monopoli'); setConcentracioMode('temporal'); }}
                             type="button"
                             role="tab"
                             aria-selected={analisiTab === 'monopoli'}
@@ -4369,6 +4549,7 @@ function App() {
                         className={`container analisi-page analisi-page-reordered analisi-page-${analisiTab}${analisiTab === 'monopoli' ? ` concentracio-mode-${concentracioMode}` : ''}`}
                         id="analisi-panel"
                         role="tabpanel"
+                        aria-labelledby={`analisi-tab-${analisiTab}`}
                     >
                         <h1 className="page-title">
                             {analisiTab === 'fraccionament'
@@ -4430,9 +4611,10 @@ function App() {
                                         onToggle={() => setAnalisiFiltersOpen(prev => !prev)}
                                         activeCount={activeAnalisiFiltersCount}
                                         onReset={resetAnalisiFilters}
+                                        controlsId="analisi-filter-panel-fraccionament"
                                     />
 
-                                    <div className={"filters search-filter-panel search-filter-panel-analysis" + (!analisiFiltersOpen ? " collapsed" : "")}>
+                                    <div id="analisi-filter-panel-fraccionament" className={"filters search-filter-panel search-filter-panel-analysis" + (!analisiFiltersOpen ? " collapsed" : "")}>
                                         <div className="filter-group filter-group-wide">
                                             <label className="filter-label">Ordenar per</label>
                                             <select className="filter-select filter-select-standard" value={analisiSort} onChange={(e) => setAnalisiSort(e.target.value)} aria-label="Ordenar casos de fraccionament per">
@@ -4444,27 +4626,10 @@ function App() {
                                                 <option value="date-asc">Data (més antics)</option>
                                             </select>
                                         </div>
-                                        <div className="filter-group analisi-risk-filter-group" style={{ flex: '1 1 280px' }}>
-                                            <label className="filter-label">Risc</label>
-                                            <div className="analisi-risk-filters">
-                                                <button className={'analisi-filter-btn analisi-filter-all' + (riskFilter === 'TOTS' ? ' active' : '')} onClick={() => setRiskFilter('TOTS')} type="button">
-                                                    Tots
-                                                </button>
-                                                {[
-                                                    ['CRITIC', 'Alt'],
-                                                    ['ALT', 'Mitjà'],
-                                                    ['OBSERVACIO', 'Baix'],
-                                                ].map(([value, label]) => (
-                                                    <button key={value} className={'analisi-filter-btn risk-' + riskClass(value) + (riskFilter === value ? ' active' : '')} onClick={() => setRiskFilter(value)} type="button">
-                                                        {label}
-                                                    </button>
-                                                ))}
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
 
-                                <div className="results-count">
+                                <div className="results-count" role="status" aria-live="polite">
                                     <span className="results-count-total"><span className="results-count-prefix">S'han trobat </span><strong>{fraudesFiltrats.length}</strong> alertes</span>
                                     {fraudesFiltrats.length > analisiItemsPerPage && (
                                         <span className="results-count-page"><span className="results-count-page-full">Pàgina</span><span className="results-count-page-short">Pàg.</span> <strong>{analisiPageFrac}</strong> de <strong>{totalPagesFrac}</strong></span>
@@ -4474,13 +4639,14 @@ function App() {
                                 <div className="analisi-alert-list">
                                     {fraudesPaginats.map(caso => (
                                         <a key={caso.id} href={buildRouteUrl(`/analisi/fraccionament/${caso.id}`)} className="card-link-wrapper" onClick={(event) => handleInternalLinkClick(event, () => handleCasoClick(caso))}>
-                                            <div className="contract-card fraccionament-card">
+                                            <div className="contract-card analysis-list-card fraccionament-card">
                                                 <div className="contract-header">
                                                     <div className="contract-title">{(caso.empreses || []).slice(0, 2).join(' & ')}</div>
                                                     <div className="contract-amount">{formatCurrency(caso.import_total)}</div>
                                                 </div>
-                                                <div className="contract-meta fraccionament-alert-meta">
-                                                    <div className="contract-meta-item fraccionament-card-object">
+                                                <div className="contract-meta analysis-list-meta">
+                                                    <div className="contract-meta-item analysis-list-primary analysis-list-primary-long">
+                                                        <span className="contract-meta-label">Objecte</span>
                                                         <span className="contract-meta-value">{(caso.contractes && caso.contractes[0] && caso.contractes[0].descripcion) || ''}</span>
                                                     </div>
                                                     <div className="contract-pills">
@@ -4492,6 +4658,10 @@ function App() {
                                         </a>
                                     ))}
                                 </div>
+
+                                {fraudesFiltrats.length === 0 && (
+                                    <EmptySearchState text="No s'han trobat alertes de fraccionament." onReset={resetAnalisiFilters} />
+                                )}
 
                                 {fraudesFiltrats.length > analisiItemsPerPage && (
                                     <Pagination
@@ -4550,48 +4720,20 @@ function App() {
                                     </div>
                                 </div>
 
-                                {concentracioSectorSnapshot.items.length > 0 && (
-                                    <div className="sector-concentration-visual" aria-label="Sectors amb més concentració d'adjudicacions">
-                                        <div className="sector-concentration-header">
-                                            <div>
-                                                <div className="chart-kicker">Visualització</div>
-                                                <h3>Concentració de contractes</h3>
-                                            </div>
-                                        </div>
-
-                                        <div className="sector-concentration-bars">
-                                            {concentracioSectorSnapshot.items.map(caso => (
-                                                <div key={`snapshot-${caso.id}`} className="sector-concentration-row">
-                                                    <div className="sector-concentration-copy">
-                                                        <span>{formatSectorName(caso.sector)}</span>
-                                                        <small>{(caso.empreses || []).slice(0, 2).join(' · ')}</small>
-                                                    </div>
-                                                    <div className="sector-concentration-track" aria-hidden="true">
-                                                        <span style={{ width: `${Math.max(4, Math.round((caso.quota_import || 0) * 100))}%` }}></span>
-                                                    </div>
-                                                    <div className="sector-concentration-value">
-                                                        <span>{formatPercent(caso.quota_import)}</span>
-                                                    </div>
-                                                </div>
-                                            ))}
-                                        </div>
-                                    </div>
-                                )}
-
                                 <div className="concentracio-mode-switch" role="group" aria-label="Tipus de concentració">
-                                    <button
-                                        type="button"
-                                        className={'concentracio-mode-btn' + (concentracioMode === 'historic' ? ' active' : '')}
-                                        onClick={() => setConcentracioMode('historic')}
-                                    >
-                                        Sectors
-                                    </button>
                                     <button
                                         type="button"
                                         className={'concentracio-mode-btn' + (concentracioMode === 'temporal' ? ' active' : '')}
                                         onClick={() => setConcentracioMode('temporal')}
                                     >
                                         Temporals
+                                    </button>
+                                    <button
+                                        type="button"
+                                        className={'concentracio-mode-btn' + (concentracioMode === 'historic' ? ' active' : '')}
+                                        onClick={() => setConcentracioMode('historic')}
+                                    >
+                                        Sectors
                                     </button>
                                 </div>
 
@@ -4609,9 +4751,10 @@ function App() {
                                             onToggle={() => setAnalisiFiltersOpen(prev => !prev)}
                                             activeCount={activeAnalisiFiltersCount}
                                             onReset={resetAnalisiFilters}
+                                            controlsId="analisi-filter-panel-concentracio"
                                         />
 
-                                        <div className={"filters search-filter-panel search-filter-panel-analysis" + (!analisiFiltersOpen ? " collapsed" : "")}>
+                                        <div id="analisi-filter-panel-concentracio" className={"filters search-filter-panel search-filter-panel-analysis" + (!analisiFiltersOpen ? " collapsed" : "")}>
                                             <div className="filter-group filter-group-wide">
                                                 <label className="filter-label">Ordenar per</label>
                                                 <select className="filter-select filter-select-standard" value={analisiSort} onChange={(e) => setAnalisiSort(e.target.value)} aria-label="Ordenar casos de concentració per">
@@ -4623,21 +4766,6 @@ function App() {
                                                     <option value="date-asc">Data (més antics)</option>
                                                 </select>
                                             </div>
-                                            <div className="filter-group analisi-risk-filter-group" style={{ flex: '1 1 280px' }}>
-                                                <label className="filter-label">Risc</label>
-                                                <div className="analisi-risk-filters">
-                                                    <button className={'analisi-filter-btn analisi-filter-all' + (riskFilter === 'TOTS' ? ' active' : '')} onClick={() => setRiskFilter('TOTS')} type="button">Tots</button>
-                                                    {[
-                                                        ['CRITIC', 'Alt'],
-                                                        ['ALT', 'Mitjà'],
-                                                        ['OBSERVACIO', 'Baix'],
-                                                    ].map(([value, label]) => (
-                                                        <button key={value} className={'analisi-filter-btn risk-' + riskClass(value) + (riskFilter === value ? ' active' : '')} onClick={() => setRiskFilter(value)} type="button">
-                                                            {label}
-                                                        </button>
-                                                    ))}
-                                                </div>
-                                            </div>
                                         </div>
                                 </div>
 
@@ -4648,63 +4776,17 @@ function App() {
                                         <div className="analisi-alert-list">
                                             {concentracioHistoric.map(caso => (
                                                 <a key={caso.id} href={buildRouteUrl(`/analisi/concentracio/${caso.id}`)} className="card-link-wrapper" onClick={(event) => handleInternalLinkClick(event, () => handleConcentracioClick(caso))}>
-                                                    <div className="contract-card concentracio-card concentracio-card-historic">
-                                                        <div className="analysis-card-title">{formatSectorName(caso.sector)}</div>
-                                                        <div className="analysis-card-main">
-                                                            <div className="concentracio-card-company">
+                                                    <div className="contract-card analysis-list-card concentracio-card concentracio-card-historic">
+                                                        <div className="contract-header">
+                                                            <div className="contract-title">{formatSectorName(caso.sector)}</div>
+                                                            <div className="contract-amount">{formatCurrency(caso.import_concentrat)}</div>
+                                                        </div>
+                                                        <div className="contract-meta analysis-list-meta">
+                                                            <div className="contract-meta-item analysis-list-primary">
                                                                 <span className="contract-meta-label">Empresa dominant</span>
                                                                 <span className="contract-meta-value">{(caso.empreses || []).slice(0, 2).join(' · ')}</span>
                                                             </div>
-                                                            <div className="contract-amount">{formatPercent(caso.quota_import)}</div>
-                                                        </div>
-                                                        <div className="contract-meta concentracio-card-meta">
-                                                            <div className="contract-meta-item">
-                                                                <span className="contract-meta-label">Import</span>
-                                                                <span className="contract-meta-value">{formatCurrency(caso.import_concentrat)} / {formatCurrency(caso.import_sector)}</span>
-                                                            </div>
-                                                            <div className="contract-meta-item">
-                                                                <span className="contract-meta-label">Contractes</span>
-                                                                <span className="contract-meta-value">{caso.contractes_concentrats} / {caso.contractes_sector}</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            ))}
-                                        </div>
-                                    </>
-                                )}
-
-                                {concentracioMode === 'temporal' && (
-                                    <>
-                                        <div className="results-count">
-                                            <span className="results-count-total">S'han trobat <strong>{concentracioTemporal.length}</strong> concentracions</span>
-                                            {concentracioTemporal.length > analisiItemsPerPage && (
-                                                <span className="results-count-page"><span className="results-count-page-full">Pàgina</span><span className="results-count-page-short">Pàg.</span> <strong>{analisiPageMonop}</strong> de <strong>{totalPagesMonop}</strong></span>
-                                            )}
-                                        </div>
-
-                                        <div className="analisi-alert-list">
-                                            {concentracioPaginada.map(caso => (
-                                                <a key={caso.id} href={buildRouteUrl(`/analisi/concentracio/${caso.id}`)} className="card-link-wrapper" onClick={(event) => handleInternalLinkClick(event, () => handleConcentracioClick(caso))}>
-                                                    <div className="contract-card concentracio-card concentracio-card-temporal">
-                                                        <div className="analysis-card-title">{formatSectorName(caso.sector)}</div>
-                                                        <div className="analysis-card-main">
-                                                            <div className="concentracio-card-company">
-                                                                <span className="contract-meta-label">{caso.tipus_concentracio === 'xarxa' ? 'Xarxa mercantil' : 'Empresa dominant'}</span>
-                                                                <span className="contract-meta-value">{(caso.empreses || []).slice(0, 2).join(' · ')}</span>
-                                                            </div>
-                                                            <div className="contract-amount">{formatCurrency(caso.import_concentrat)}</div>
-                                                        </div>
-                                                        <div className="contract-meta concentracio-card-meta">
-                                                            <div className="contract-meta-item">
-                                                                <span className="contract-meta-label">Període</span>
-                                                                <span className="contract-meta-value">Del {formatDate(caso.data_inici)} al {formatDate(caso.data_fi)}</span>
-                                                            </div>
-                                                            <div className="contract-meta-item">
-                                                                <span className="contract-meta-label">Contractes</span>
-                                                                <span className="contract-meta-value">{caso.contractes_concentrats} / {caso.contractes_sector}</span>
-                                                            </div>
-                                                            <div className="contract-meta-item">
+                                                            <div className="contract-meta-item analysis-list-secondary">
                                                                 <span className="contract-meta-label">Quota de mercat</span>
                                                                 <span className="contract-meta-value">{formatPercent(caso.quota_import)}</span>
                                                             </div>
@@ -4717,6 +4799,48 @@ function App() {
                                                 </a>
                                             ))}
                                         </div>
+                                    </>
+                                )}
+
+                                {concentracioMode === 'temporal' && (
+                                    <>
+                                        <div className="results-count" role="status" aria-live="polite">
+                                            <span className="results-count-total">S'han trobat <strong>{concentracioTemporal.length}</strong> concentracions</span>
+                                            {concentracioTemporal.length > analisiItemsPerPage && (
+                                                <span className="results-count-page"><span className="results-count-page-full">Pàgina</span><span className="results-count-page-short">Pàg.</span> <strong>{analisiPageMonop}</strong> de <strong>{totalPagesMonop}</strong></span>
+                                            )}
+                                        </div>
+
+                                        <div className="analisi-alert-list">
+                                            {concentracioPaginada.map(caso => (
+                                                <a key={caso.id} href={buildRouteUrl(`/analisi/concentracio/${caso.id}`)} className="card-link-wrapper" onClick={(event) => handleInternalLinkClick(event, () => handleConcentracioClick(caso))}>
+                                                    <div className="contract-card analysis-list-card concentracio-card concentracio-card-temporal">
+                                                        <div className="contract-header">
+                                                            <div className="contract-title">{formatSectorName(caso.sector)}</div>
+                                                            <div className="contract-amount">{formatCurrency(caso.import_concentrat)}</div>
+                                                        </div>
+                                                        <div className="contract-meta analysis-list-meta">
+                                                            <div className="contract-meta-item analysis-list-primary">
+                                                                <span className="contract-meta-label">{caso.tipus_concentracio === 'xarxa' ? 'Xarxa mercantil' : 'Empresa dominant'}</span>
+                                                                <span className="contract-meta-value">{(caso.empreses || []).slice(0, 2).join(' · ')}</span>
+                                                            </div>
+                                                            <div className="contract-meta-item analysis-list-secondary">
+                                                                <span className="contract-meta-label">Període</span>
+                                                                <span className="contract-meta-value">Del {formatDate(caso.data_inici)} al {formatDate(caso.data_fi)}</span>
+                                                            </div>
+                                                            <div className="contract-pills">
+                                                                <span className={"risk-badge " + riskClass(caso.nivell)}>{riskLabel(caso.nivell)}</span>
+                                                                <span className={"risk-badge " + riskClass(caso.nivell)}>{Number.isInteger(caso.risc) ? caso.risc : Number(caso.risc).toFixed(1)}/100</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            ))}
+                                        </div>
+
+                                        {concentracioTemporal.length === 0 && (
+                                            <EmptySearchState text="No s'han trobat concentracions temporals." onReset={resetAnalisiFilters} />
+                                        )}
 
                                         {concentracioTemporal.length > analisiItemsPerPage && (
                                             <Pagination
@@ -4774,9 +4898,10 @@ function App() {
                                         onToggle={() => setAnalisiFiltersOpen(prev => !prev)}
                                         activeCount={activeAnalisiFiltersCount}
                                         onReset={resetAnalisiFilters}
+                                        controlsId="analisi-filter-panel-electoralisme"
                                     />
 
-                                    <div className={"filters search-filter-panel search-filter-panel-analysis" + (!analisiFiltersOpen ? " collapsed" : "")}>
+                                    <div id="analisi-filter-panel-electoralisme" className={"filters search-filter-panel search-filter-panel-analysis" + (!analisiFiltersOpen ? " collapsed" : "")}>
                                         <div className="filter-group filter-group-wide">
                                             <label className="filter-label">Ordenar per</label>
                                             <select className="filter-select filter-select-standard" value={analisiSort} onChange={(e) => setAnalisiSort(e.target.value)} aria-label="Ordenar casos d'electoralisme per">
@@ -4788,25 +4913,10 @@ function App() {
                                                 <option value="date-asc">Data (més antics)</option>
                                             </select>
                                         </div>
-                                        <div className="filter-group analisi-risk-filter-group" style={{ flex: '1 1 280px' }}>
-                                            <label className="filter-label">Risc</label>
-                                            <div className="analisi-risk-filters">
-                                                <button className={'analisi-filter-btn analisi-filter-all' + (riskFilter === 'TOTS' ? ' active' : '')} onClick={() => setRiskFilter('TOTS')} type="button">Tots</button>
-                                                {[
-                                                    ['CRITIC', 'Alt'],
-                                                    ['ALT', 'Mitjà'],
-                                                    ['OBSERVACIO', 'Baix'],
-                                                ].map(([value, label]) => (
-                                                    <button key={value} className={'analisi-filter-btn risk-' + riskClass(value) + (riskFilter === value ? ' active' : '')} onClick={() => setRiskFilter(value)} type="button">
-                                                        {label}
-                                                    </button>
-                                                ))}
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
 
-                                <div className="results-count">
+                                <div className="results-count" role="status" aria-live="polite">
                                     <span className="results-count-total"><span className="results-count-prefix">S'han trobat </span><strong>{electoralFiltrats.length}</strong> alertes</span>
                                     {electoralFiltrats.length > analisiItemsPerPage && (
                                         <span className="results-count-page"><span className="results-count-page-full">Pàgina</span><span className="results-count-page-short">Pàg.</span> <strong>{analisiPageElect}</strong> de <strong>{totalPagesElect}</strong></span>
@@ -4817,33 +4927,17 @@ function App() {
                                     {electoralPaginats.map(caso => {
                                         const cc = (caso.contractes && caso.contractes[0]) || {};
                                         const href = buildRouteUrl(`/analisi/electoralisme/${caso.id}`);
-                                        const isPreElectoral = caso.fase_temporal === 'Finestra administrativa prèvia';
-                                        const isPostElectoral = caso.fase_temporal === 'Finestra administrativa posterior';
-                                        const temporalLabel = isPreElectoral ? 'Dies abans' : (isPostElectoral ? 'Dies després' : 'Votació en');
-                                        const temporalValue = isPreElectoral ? (caso.dies_abans_convocatoria || 0) : (isPostElectoral ? (caso.dies_despres_votacio || 0) : caso.dies_fins_votacio);
                                         return (
                                             <a key={caso.id} href={href} className="card-link-wrapper" onClick={(event) => handleInternalLinkClick(event, () => handleElectoralismeClick(caso))}>
-                                                <div className="contract-card fraccionament-card electoralisme-card">
-                                                    <div className="analysis-card-title">{caso.empresa}</div>
-                                                    <div className="analysis-card-main">
-                                                        <div className="fraccionament-card-object">
-                                                            <span className="contract-meta-label">Objecte</span>
-                                                            <span className="contract-meta-value">{cc.descripcion || ''}</span>
-                                                        </div>
+                                                <div className="contract-card analysis-list-card electoralisme-card">
+                                                    <div className="contract-header">
+                                                        <div className="contract-title">{caso.empresa}</div>
                                                         <div className="contract-amount">{formatCurrency(caso.import_total)}</div>
                                                     </div>
-                                                    <div className="contract-meta fraccionament-card-meta">
-                                                        <div className="contract-meta-item">
-                                                            <span className="contract-meta-label">Període</span>
-                                                            <span className="contract-meta-value">{caso.periode_electoral}</span>
-                                                        </div>
-                                                        <div className="contract-meta-item">
-                                                            <span className="contract-meta-label">Data</span>
-                                                            <span className="contract-meta-value">{formatDate(caso.data_inici)}</span>
-                                                        </div>
-                                                        <div className="contract-meta-item">
-                                                            <span className="contract-meta-label">{temporalLabel}</span>
-                                                            <span className="contract-meta-value">{temporalValue} dies</span>
+                                                    <div className="contract-meta analysis-list-meta">
+                                                        <div className="contract-meta-item analysis-list-primary analysis-list-primary-long">
+                                                            <span className="contract-meta-label">Objecte</span>
+                                                            <span className="contract-meta-value">{cc.descripcion || ''}</span>
                                                         </div>
                                                         <div className="contract-pills">
                                                             <span className={"risk-badge " + riskClass(caso.nivell)}>{riskLabel(caso.nivell)}</span>
@@ -4855,6 +4949,10 @@ function App() {
                                         );
                                     })}
                                 </div>
+
+                                {electoralFiltrats.length === 0 && (
+                                    <EmptySearchState text="No s'han trobat alertes d'electoralisme." onReset={resetAnalisiFilters} />
+                                )}
 
                                 {electoralFiltrats.length > analisiItemsPerPage && (
                                     <Pagination

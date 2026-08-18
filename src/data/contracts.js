@@ -87,15 +87,26 @@ function prepareContracts(contracts) {
     for (const contract of contracts) {
         const baseSlug = buildContractSlug(contract);
         const legacyBaseSlug = buildLegacyContractSlug(contract);
-        contract.slug = slugCounts.get(baseSlug) > 1
+        const previousCollisionSlug = slugCounts.get(baseSlug) > 1
             ? `${baseSlug}-${stableHash([contract.fecha, contract.importe, contract.adjudicatario])}`
+            : null;
+        contract.slug = slugCounts.get(baseSlug) > 1
+            ? `${baseSlug}-${stableHash([
+                contract.fecha,
+                contract.importe,
+                contract.adjudicatario,
+                contract.numero_lot,
+                contract.cpv,
+                contract.contracte_origen,
+                contract.id,
+            ])}`
             : baseSlug;
 
         const legacyIndex = (legacySeen.get(legacyBaseSlug) || 0) + 1;
         legacySeen.set(legacyBaseSlug, legacyIndex);
         const legacySlug = legacyIndex > 1 ? `${legacyBaseSlug}-${legacyIndex}` : legacyBaseSlug;
         contract.slug_aliases = Array.from(new Set(
-            [legacyBaseSlug, legacySlug].filter(slug => slug && slug !== contract.slug)
+            [previousCollisionSlug, legacyBaseSlug, legacySlug].filter(slug => slug && slug !== contract.slug)
         ));
     }
     return contracts;

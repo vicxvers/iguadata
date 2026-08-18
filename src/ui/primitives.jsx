@@ -64,63 +64,46 @@ function EmptySearchState({ text, onReset }) {
 
 function Pagination({ currentPage, totalPages, onPageChange, showTitles = true }) {
     const title = label => showTitles ? label : undefined;
+    const Arrow = ({ direction }) => (
+        <svg className="pagination-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <path d={direction === 'left' ? 'm14 6-6 6 6 6' : 'm10 6 6 6-6 6'} />
+        </svg>
+    );
 
     return (
-        <div className="pagination">
-            <button
-                className="pagination-btn"
-                onClick={() => onPageChange(1)}
-                disabled={currentPage === 1}
-                title={title("Primera pàgina")}
-                type="button"
-            >
-                «
-            </button>
-            <button
-                className="pagination-btn"
-                onClick={() => onPageChange(Math.max(currentPage - 1, 1))}
-                disabled={currentPage === 1}
-                title={title("Pàgina anterior")}
-                type="button"
-            >
-                ‹
-            </button>
-            <span className="pagination-info">
-                Pàgina <strong>{currentPage}</strong> de <strong>{totalPages}</strong>
+        <nav className="pagination" aria-label="Paginació">
+            <span className="pagination-info" aria-live="polite">
+                <span className="pagination-info-label">Pàgina</span>
+                <strong>{currentPage}</strong>
+                <span>de</span>
+                <strong>{totalPages}</strong>
             </span>
-            <button
-                className="pagination-btn"
-                onClick={() => onPageChange(Math.min(currentPage + 1, totalPages))}
-                disabled={currentPage === totalPages}
-                title={title("Pàgina següent")}
-                type="button"
-            >
-                ›
-            </button>
-            <button
-                className="pagination-btn"
-                onClick={() => onPageChange(totalPages)}
-                disabled={currentPage === totalPages}
-                title={title("Última pàgina")}
-                type="button"
-            >
-                »
-            </button>
-        </div>
+            <div className="pagination-actions">
+                <button className="pagination-btn pagination-btn-direction" onClick={() => onPageChange(Math.max(currentPage - 1, 1))} disabled={currentPage === 1} title={title("Pàgina anterior")} aria-label="Pàgina anterior" type="button">
+                    <Arrow direction="left" />
+                    <span className="pagination-btn-label">Anterior</span>
+                </button>
+                <button className="pagination-btn pagination-btn-direction" onClick={() => onPageChange(Math.min(currentPage + 1, totalPages))} disabled={currentPage === totalPages} title={title("Pàgina següent")} aria-label="Pàgina següent" type="button">
+                    <span className="pagination-btn-label">Següent</span>
+                    <Arrow direction="right" />
+                </button>
+            </div>
+        </nav>
     );
 }
 
-function FilterActions({ open, onToggle, activeCount, onReset }) {
+function FilterActions({ open, onToggle, activeCount, onReset, controlsId }) {
     return (
         <div className="filter-actions">
             <button
                 className="filters-toggle-btn"
                 onClick={onToggle}
                 aria-expanded={open}
+                aria-controls={controlsId}
                 type="button"
             >
                 <span>Filtres</span>
-                <span className="filters-toggle-meta">{activeCount}</span>
+                <span className="filters-toggle-meta">{activeCount > 0 ? activeCount : 'Ø'}</span>
             </button>
             <button
                 className="btn-reset filters-mobile-reset"
