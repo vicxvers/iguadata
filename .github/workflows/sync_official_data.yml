@@ -48,6 +48,8 @@ jobs:
             json/fraccionament.json
             json/persones.json
             json/resum.json
+            json/subvencions.json
+            .github/data/subvencions_raisc.json
             .github/scripts/alias_empreses.json
           )
 

@@ -12,7 +12,8 @@
     "fraccionament": "fraccionament.json",
     "concentracio": "concentracio.json",
     "electoralisme": "electoralisme.json",
-    "investigacio": "investigacio.json"
+    "investigacio": "investigacio.json",
+    "subvencions": "subvencions.json"
   },
   "required": [
     "resum",
@@ -24,7 +25,8 @@
     "fraccionament",
     "concentracio",
     "electoralisme",
-    "investigacio"
+    "investigacio",
+    "subvencions"
   ],
   "properties": {
     "resum": {
@@ -106,9 +108,28 @@
     "investigacio": {
       "type": "array",
       "items": { "$ref": "#/$defs/investigation" }
+    },
+    "subvencions": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/subsidy" }
     }
   },
   "$defs": {
+    "subsidy": {
+      "type": "object",
+      "required": ["id", "descripcion", "importe", "adjudicatario", "fecha", "codigo", "entitat_slug"],
+      "properties": {
+        "id": { "type": ["string", "integer"] },
+        "descripcion": { "type": "string", "minLength": 1 },
+        "importe": { "type": "number" },
+        "adjudicatario": { "type": "string", "minLength": 1 },
+        "fecha": { "type": "string" },
+        "codigo": { "type": "string" },
+        "entitat_slug": { "type": "string", "minLength": 1 },
+        "cif_beneficiari": { "type": "string" },
+        "tipus_de_beneficiaris": { "type": "string" }
+      }
+    },
     "contract": {
       "type": "object",
       "required": [

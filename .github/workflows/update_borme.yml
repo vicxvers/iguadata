@@ -143,11 +143,11 @@ jobs:
           python .github/scripts/build_alias_from_parquet.py
 
       # ------------------------------------------------------------------
-      # 6b. Refresh contractes.json + empreses.json from Socrata first.
+      # 6b. Refresh contractes, empreses and subvencions from Socrata first.
       #     Downstream analysis then uses the latest companies/contracts
       #     from the same run, not the previous week's snapshot.
       # ------------------------------------------------------------------
-      - name: Refresh contractes + empreses from Socrata
+      - name: Refresh contractes + empreses + subvencions from Socrata
         run: |
           mkdir -p scratch/previous
           cp json/contractes.json scratch/contractes.previous.json
@@ -156,6 +156,7 @@ jobs:
           cp json/electoralisme.json scratch/previous/electoralisme.json
           python .github/scripts/fetch_contractes_socrata.py
           python .github/scripts/enrich_empreses.py
+          python .github/scripts/fetch_subvencions_socrata.py
 
       - name: Guard against suspicious contract deletion
         if: ${{ !(github.event_name == 'workflow_dispatch' && inputs.allow_contract_drop) }}
@@ -208,6 +209,8 @@ jobs:
               ".github/audit/contractes_arxiu.json": 2,
               ".github/audit/canvis_contractes.json": 100,
               "json/empreses.json": 50_000,
+              "json/subvencions.json": 10_000,
+              ".github/data/subvencions_raisc.json": 10_000,
               "json/empresa_aliases.json": 100,
               "json/carrecs.json": 100_000,
               "json/persones.json": 100_000,
@@ -265,6 +268,7 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add json/carrecs.json json/persones.json
           git add json/empreses.json json/empresa_aliases.json json/contractes.json json/fraccionament.json json/concentracio.json json/electoralisme.json
+          git add json/subvencions.json .github/data/subvencions_raisc.json
           git add .github/audit/contractes_arxiu.json .github/audit/canvis_contractes.json
           git add json/resum.json
           git add .github/scripts/alias_empreses.json
@@ -336,7 +340,9 @@ jobs:
             cp .github/audit/contractes_arxiu.json "scratch/snapshots/contractes_arxiu-$period.json"
             cp .github/audit/canvis_contractes.json "scratch/snapshots/canvis_contractes-$period.json"
             cp json/empreses.json "scratch/snapshots/empreses-$period.json"
-            sha256sum "scratch/snapshots/contractes-$period.json" "scratch/snapshots/contractes_arxiu-$period.json" "scratch/snapshots/canvis_contractes-$period.json" "scratch/snapshots/empreses-$period.json" > "scratch/snapshots/json-checksums-$period.txt"
+            cp json/subvencions.json "scratch/snapshots/subvencions-$period.json"
+            cp .github/data/subvencions_raisc.json "scratch/snapshots/subvencions_raisc-$period.json"
+            sha256sum "scratch/snapshots/contractes-$period.json" "scratch/snapshots/contractes_arxiu-$period.json" "scratch/snapshots/canvis_contractes-$period.json" "scratch/snapshots/empreses-$period.json" "scratch/snapshots/subvencions-$period.json" "scratch/snapshots/subvencions_raisc-$period.json" > "scratch/snapshots/json-checksums-$period.txt"
           done
 
           gh release upload snapshots scratch/snapshots/*.json scratch/snapshots/*.txt --clobber
@@ -361,7 +367,7 @@ jobs:
             done
           }
 
-          for prefix in contractes contractes_arxiu canvis_contractes empreses json-checksums; do
+          for prefix in contractes contractes_arxiu canvis_contractes empreses subvencions subvencions_raisc json-checksums; do
             cleanup_old_snapshot_assets "$prefix" weekly 12
             cleanup_old_snapshot_assets "$prefix" monthly 24
             cleanup_legacy_snapshot_assets "$prefix"

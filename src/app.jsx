@@ -177,31 +177,6 @@ function matchesSearchQuery(values, query) {
     return terms.every(term => target.includes(term));
 }
 
-const SUBVENCIONS_API_ENDPOINT = 'https://analisi.transparenciacatalunya.cat/resource/s9xt-n979.json';
-
-function buildSubvencionsApiUrl() {
-    const params = new URLSearchParams({
-        '$select': 'clau,codi_raisc,objecte_de_la_convocat_ria,import_subvenci_pr_stec_ajut,ra_social_del_beneficiari,data_concessi,cif_beneficiari,entitat_oo_aa_o_departament_1',
-        '$where': "upper(entitat_oo_aa_o_departament_1) = upper('Ajuntament d''Igualada') AND cif_beneficiari NOT IN ('Benef. no publicable', 'Persona física')",
-        '$order': 'data_concessi DESC',
-        '$limit': '10000',
-    });
-    return `${SUBVENCIONS_API_ENDPOINT}?${params.toString()}`;
-}
-
-function normalizeSubvencio(row, index) {
-    const importe = Number(String(row.import_subvenci_pr_stec_ajut || '0').replace(',', '.'));
-    const fecha = String(row.data_concessi || '').slice(0, 10);
-    return {
-        id: row.clau || `${row.codi_raisc || 'subvencio'}-${fecha || index}-${index}`,
-        descripcion: row.objecte_de_la_convocat_ria || 'Subvenció sense descripció',
-        importe: Number.isFinite(importe) ? importe : 0,
-        adjudicatario: row.ra_social_del_beneficiari || 'Entitat no informada',
-        fecha,
-        codigo: row.codi_raisc || '—',
-    };
-}
-
 function normalizeContractCode(value) {
     return String(value || '')
         .toUpperCase()
@@ -1959,6 +1934,206 @@ function EmpresaView({ empresa: empresaNom, contracts, empreses, administradors,
     );
 }
 
+function EntitatView({ entitatSlug, subvencions, onBack }) {
+    const allEntitatSubvencions = useMemo(
+        () => subvencions.filter(subvencio => subvencio.entitat_slug === entitatSlug),
+        [subvencions, entitatSlug]
+    );
+    const entitatNom = allEntitatSubvencions[0]?.adjudicatario || '';
+    const totalImport = allEntitatSubvencions.reduce((sum, subvencio) => sum + (Number(subvencio.importe) || 0), 0);
+    const [searchTerm, setSearchTerm] = useState('');
+    const [sortBy, setSortBy] = useState('date-desc');
+    const [dateStart, setDateStart] = useState('');
+    const [dateEnd, setDateEnd] = useState('');
+    const [amountMin, setAmountMin] = useState('');
+    const [amountMax, setAmountMax] = useState('');
+    const [currentPage, setCurrentPage] = useState(1);
+    const [filtersOpen, setFiltersOpen] = useState(false);
+    const [shareActionsOpen, setShareActionsOpen] = useState(false);
+    const [shareCopyStatus, setShareCopyStatus] = useState('');
+    const shareActionsRef = useRef(null);
+    const shareStatusTimerRef = useRef(null);
+    const itemsPerPage = 25;
+
+    useEffect(() => setCurrentPage(1), [searchTerm, sortBy, dateStart, dateEnd, amountMin, amountMax]);
+    useEffect(() => {
+        if (!shareActionsOpen) return;
+        const closeShareActions = event => {
+            if (event.type === 'keydown' && event.key !== 'Escape') return;
+            if (event.type === 'pointerdown' && shareActionsRef.current?.contains(event.target)) return;
+            setShareActionsOpen(false);
+        };
+        document.addEventListener('pointerdown', closeShareActions);
+        document.addEventListener('keydown', closeShareActions);
+        return () => {
+            document.removeEventListener('pointerdown', closeShareActions);
+            document.removeEventListener('keydown', closeShareActions);
+        };
+    }, [shareActionsOpen]);
+    useEffect(() => () => window.clearTimeout(shareStatusTimerRef.current), []);
+
+    const annualActivity = useMemo(() => {
+        const byYear = {};
+        for (const subvencio of allEntitatSubvencions) {
+            const year = subvencio.año || Number(String(subvencio.fecha || '').slice(0, 4));
+            if (!year) continue;
+            if (!byYear[year]) byYear[year] = { year, amount: 0, count: 0 };
+            byYear[year].amount += Number(subvencio.importe) || 0;
+            byYear[year].count += 1;
+        }
+        const items = Object.values(byYear).sort((a, b) => a.year - b.year);
+        const maxAmount = items.reduce((max, item) => Math.max(max, item.amount), 0);
+        const firstYear = items[0]?.year;
+        const lastYear = items[items.length - 1]?.year;
+        return {
+            items,
+            maxAmount,
+            period: firstYear ? (firstYear === lastYear ? String(firstYear) : `${firstYear}–${lastYear}`) : '—',
+        };
+    }, [allEntitatSubvencions]);
+
+    const filteredSubvencions = useMemo(() => {
+        const result = allEntitatSubvencions.filter(subvencio => {
+            if (searchTerm && !matchesSearchQuery([subvencio.descripcion, subvencio.adjudicatario, subvencio.codigo], searchTerm)) return false;
+            if (dateStart && subvencio.fecha < dateStart) return false;
+            if (dateEnd && subvencio.fecha > dateEnd) return false;
+            if (amountMin !== '' && subvencio.importe < Number(amountMin)) return false;
+            if (amountMax !== '' && subvencio.importe > Number(amountMax)) return false;
+            return true;
+        });
+        return result.sort((a, b) => {
+            if (sortBy === 'date-asc') return (Date.parse(a.fecha) || 0) - (Date.parse(b.fecha) || 0);
+            if (sortBy === 'amount-desc') return b.importe - a.importe;
+            if (sortBy === 'amount-asc') return a.importe - b.importe;
+            return (Date.parse(b.fecha) || 0) - (Date.parse(a.fecha) || 0);
+        });
+    }, [allEntitatSubvencions, searchTerm, sortBy, dateStart, dateEnd, amountMin, amountMax]);
+
+    const totalPages = Math.ceil(filteredSubvencions.length / itemsPerPage);
+    const pageSubvencions = filteredSubvencions.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+    const firstSubvencio = allEntitatSubvencions[0] || {};
+    const resetFilters = () => {
+        setSearchTerm('');
+        setSortBy('date-desc');
+        setDateStart('');
+        setDateEnd('');
+        setAmountMin('');
+        setAmountMax('');
+        setCurrentPage(1);
+    };
+    const activeFiltersCount = [dateStart, dateEnd, amountMin, amountMax, sortBy !== 'date-desc' ? sortBy : ''].filter(Boolean).length;
+    const copyEntitatLink = async () => {
+        try {
+            await navigator.clipboard.writeText(window.location.href);
+            setShareCopyStatus('Enllaç copiat');
+        } catch (_) {
+            setShareCopyStatus("No s'ha pogut copiar");
+        }
+        window.clearTimeout(shareStatusTimerRef.current);
+        shareStatusTimerRef.current = window.setTimeout(() => setShareCopyStatus(''), 1800);
+    };
+
+    return (
+        <div className="container empresa-detail-page entitat-detail-page">
+            <h1 className="page-title">Detall d'entitat</h1>
+            <div className="empresa-detail-hero">
+                <div className="empresa-detail-amount">{formatCurrency(totalImport)}</div>
+                <div className="contract-header empresa-detail-title-row">
+                    <h2 className="empresa-detail-title">{entitatNom}</h2>
+                </div>
+                <div className="empresa-detail-contract-count">{allEntitatSubvencions.length} subvencions</div>
+            </div>
+            <div className="empresa-detail-info-card">
+                <div className="contract-meta empresa-detail-info-meta">
+                    {firstSubvencio.cif_beneficiari && (
+                        <div className="contract-meta-item">
+                            <span className="contract-meta-label">CIF</span>
+                            <span className="contract-meta-value">{firstSubvencio.cif_beneficiari}</span>
+                        </div>
+                    )}
+                    {firstSubvencio.tipus_de_beneficiaris && (
+                        <div className="contract-meta-item">
+                            <span className="contract-meta-label">Tipus de beneficiari</span>
+                            <span className="contract-meta-value">{firstSubvencio.tipus_de_beneficiaris}</span>
+                        </div>
+                    )}
+                    <div className="contract-meta-item">
+                        <span className="contract-meta-label">Període</span>
+                        <span className="contract-meta-value">{annualActivity.period}</span>
+                    </div>
+                </div>
+            </div>
+            {annualActivity.items.length > 1 && (
+                <div className="empresa-activity-visual" aria-label="Històric anual de les subvencions concedides a aquesta entitat">
+                    <div className="empresa-activity-header">
+                        <h3 className="empresa-activity-title">Històric de subvencions</h3>
+                    </div>
+                    <div className="empresa-activity-bars">
+                        {annualActivity.items.map(item => (
+                            <div key={item.year} className="empresa-activity-column">
+                                <div className="empresa-activity-bar-wrap" aria-hidden="true">
+                                    <span style={{ height: `${Math.max(4, Math.round((item.amount / annualActivity.maxAmount) * 100))}%`, '--bar-width': `${Math.max(4, Math.round((item.amount / annualActivity.maxAmount) * 100))}%` }}></span>
+                                </div>
+                                <div className="empresa-activity-meta">
+                                    <span>{item.year}</span>
+                                    <small>{formatCurrency(item.amount)}</small>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            )}
+            <div className="search-section empresa-detail-contract-search">
+                <SearchField value={searchTerm} onValueChange={setSearchTerm} placeholder="Cerca per descripció, entitat o codi d'expedient" ariaLabel="Cerca per descripció, entitat o codi d'expedient" />
+                <FilterActions open={filtersOpen} onToggle={() => setFiltersOpen(open => !open)} activeCount={activeFiltersCount} onReset={resetFilters} />
+                <div className={'filters search-filter-panel' + (!filtersOpen ? ' collapsed' : '')}>
+                    <div className="filter-group filter-group-standard">
+                        <label className="filter-label">Ordenar per</label>
+                        <select className="filter-select filter-select-standard" value={sortBy} onChange={event => setSortBy(event.target.value)} aria-label="Ordenar subvencions de l'entitat per">
+                            <option value="date-desc">Data (més recents)</option>
+                            <option value="date-asc">Data (més antics)</option>
+                            <option value="amount-desc">Import (descendent)</option>
+                            <option value="amount-asc">Import (ascendent)</option>
+                        </select>
+                    </div>
+                </div>
+                <div className={'filters-row search-filter-panel search-filter-panel-secondary' + (!filtersOpen ? ' collapsed' : '')}>
+                    <div className="filter-group"><label className="filter-label">Data inici</label><input type="date" className="filter-input" value={dateStart} onChange={event => setDateStart(event.target.value)} /></div>
+                    <div className="filter-group"><label className="filter-label">Data final</label><input type="date" className="filter-input" value={dateEnd} onChange={event => setDateEnd(event.target.value)} /></div>
+                    <div className="filter-group"><label className="filter-label">Des de</label><input type="number" min="0" step="0.01" inputMode="decimal" className="filter-input" placeholder="Import mínim" value={amountMin} onChange={event => setAmountMin(event.target.value)} /></div>
+                    <div className="filter-group"><label className="filter-label">Fins a</label><input type="number" min="0" step="0.01" inputMode="decimal" className="filter-input" placeholder="Import màxim" value={amountMax} onChange={event => setAmountMax(event.target.value)} /></div>
+                </div>
+            </div>
+            <div className="results-count" role="status" aria-live="polite">
+                <span className="results-count-total"><span className="results-count-prefix">S'han trobat </span><strong>{filteredSubvencions.length}</strong> subvencions</span>
+            </div>
+            {pageSubvencions.map(subvencio => (
+                <div key={subvencio.id} className="contract-card subvencio-card">
+                    <span className="contract-header"><span className="contract-title">{subvencio.descripcion}</span><span className="contract-amount">{formatCurrency(subvencio.importe)}</span></span>
+                    <span className="contract-meta">
+                        <span className="contract-meta-item"><span className="contract-meta-label">Entitat adjudicatària</span><span className="contract-meta-value">{subvencio.adjudicatario}</span></span>
+                        <span className="contract-meta-item"><span className="contract-meta-label">Data</span><span className="contract-meta-value">{formatDate(subvencio.fecha)}</span></span>
+                        <span className="contract-meta-item"><span className="contract-meta-label">Codi expedient</span><span className="contract-meta-value">{subvencio.codigo || '—'}</span></span>
+                    </span>
+                </div>
+            ))}
+            {filteredSubvencions.length === 0 && <EmptySearchState text="No s'han trobat subvencions." onReset={resetFilters} />}
+            {filteredSubvencions.length > itemsPerPage && <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />}
+            <div className="empresa-detail-actions-row contracte-detail-actions-row">
+                <button onClick={onBack} className="btn-share empresa-detail-back contracte-detail-back" title="Tornar" aria-label="Tornar" type="button">
+                    <svg className="contracte-detail-back-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M19 12H5" /><polyline points="12 19 5 12 12 5" /></svg><span>Tornar</span>
+                </button>
+                <div className={`contracte-detail-share contracte-detail-share-standalone${shareActionsOpen ? ' is-open' : ''}`} ref={shareActionsRef}>
+                    <div id="entitat-share-actions" className="contracte-detail-share-actions" aria-hidden={!shareActionsOpen}>
+                        <button className="btn-share contracte-detail-share-btn" onClick={copyEntitatLink} tabIndex={shareActionsOpen ? 0 : -1} type="button">{shareCopyStatus || "Copia l'enllaç"}</button>
+                    </div>
+                    <button className="btn-share contracte-detail-share-btn" onClick={() => setShareActionsOpen(open => !open)} aria-expanded={shareActionsOpen} aria-controls="entitat-share-actions" type="button"><em className="share-arrow"></em> Compartir</button>
+                </div>
+            </div>
+        </div>
+    );
+}
+
 /* ---- PersonesView (beginning — merges with existing file end) ---- */
 function PersonesView({ persones, onEmpresaSelect, onNavigateLegal, searchTerm, setSearchTerm, sortBy, setSortBy, currentPage, setCurrentPage, expandedIdx, setExpandedIdx }) {
     const [debouncedSearch, setDebouncedSearch] = useState(searchTerm);
@@ -2175,11 +2350,9 @@ function PersonesView({ persones, onEmpresaSelect, onNavigateLegal, searchTerm, 
     );
 }
 
-function SubvencionsView() {
-    const [subvencions, setSubvencions] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(false);
-    const [retry, setRetry] = useState(0);
+function SubvencionsView({ subvencions, onEntitatSelect }) {
+    const loading = false;
+    const error = false;
     const [searchTerm, setSearchTerm] = useState('');
     const [filtersOpen, setFiltersOpen] = useState(false);
     const [sortBy, setSortBy] = useState('date-desc');
@@ -2189,34 +2362,6 @@ function SubvencionsView() {
     const [amountMax, setAmountMax] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 25;
-
-    useEffect(() => {
-        const controller = new AbortController();
-        setLoading(true);
-        setError(false);
-        fetch(buildSubvencionsApiUrl(), {
-            cache: 'no-store',
-            signal: controller.signal,
-            headers: { Accept: 'application/json' },
-        })
-            .then(response => {
-                if (!response.ok) throw new Error(`RAISC ${response.status}`);
-                return response.json();
-            })
-            .then(rows => {
-                if (!Array.isArray(rows)) throw new Error('Resposta RAISC no vàlida');
-                setSubvencions(rows.map(normalizeSubvencio));
-            })
-            .catch(fetchError => {
-                if (fetchError.name === 'AbortError') return;
-                console.error('Error loading subvencions:', fetchError);
-                setError(true);
-            })
-            .finally(() => {
-                if (!controller.signal.aborted) setLoading(false);
-            });
-        return () => controller.abort();
-    }, [retry]);
 
     const filteredSubvencions = useMemo(() => {
         const filtered = subvencions.filter(subvencio => {
@@ -2285,7 +2430,7 @@ function SubvencionsView() {
                     <div className="empty-state-title">No s'han pogut carregar les subvencions</div>
                     <div className="empty-state-text">La connexió amb el RAISC no està disponible ara mateix.</div>
                     <div className="empty-state-action">
-                        <button className="empty-state-btn" onClick={() => setRetry(value => value + 1)} type="button">Tornar-ho a provar</button>
+                        <button className="empty-state-btn" type="button">Tornar-ho a provar</button>
                     </div>
                 </div>
             )}
@@ -2348,7 +2493,12 @@ function SubvencionsView() {
                     </div>
 
                     {pageSubvencions.map(subvencio => (
-                        <button key={subvencio.id} className="contract-card subvencio-card" onClick={() => {}} type="button">
+                        <a
+                            key={subvencio.id}
+                            href={buildRouteUrl(`/entitats/${subvencio.entitat_slug}`)}
+                            className="contract-card subvencio-card"
+                            onClick={event => handleInternalLinkClick(event, () => onEntitatSelect(subvencio))}
+                        >
                             <span className="contract-header">
                                 <span className="contract-title">{subvencio.descripcion}</span>
                                 <span className="contract-amount">{formatCurrency(subvencio.importe)}</span>
@@ -2367,7 +2517,7 @@ function SubvencionsView() {
                                     <span className="contract-meta-value">{subvencio.codigo}</span>
                                 </span>
                             </span>
-                        </button>
+                        </a>
                     ))}
 
                     {filteredSubvencions.length === 0 && (
@@ -2727,6 +2877,7 @@ function App() {
         stats,
         summary,
         casosInvestigacio,
+        subvencions,
         loading,
         loadingProgress,
         investigacioLoaded,
@@ -2749,6 +2900,13 @@ function App() {
     const activeInvestigacioCase = casosInvestigacio.find(item => item.slug === activeInvestigacioSlug)
         || CASOS_INVESTIGACIO_FALLBACK.find(item => item.slug === activeInvestigacioSlug)
         || null;
+    const activeEntitatSlug = getCurrentRoute().startsWith('/entitats/')
+        ? getCurrentRoute().slice('/entitats/'.length)
+        : null;
+    const activeEntitatSubvencions = useMemo(
+        () => activeEntitatSlug ? subvencions.filter(subvencio => subvencio.entitat_slug === activeEntitatSlug) : [],
+        [subvencions, activeEntitatSlug]
+    );
     const preservedInvestigationContracts = useMemo(() =>
         casosInvestigacio.flatMap(caso =>
             (caso.content || []).flatMap(block => block.contract_snapshots || [])
@@ -3228,6 +3386,7 @@ function App() {
             'empresa': '/empreses', // Fallback si no es passa customPath
             'persones': '/persones',
             'subvencions': '/subvencions',
+            'entitat': '/subvencions',
             'analisi': '/analisi',
             'cas-fraccionament': '/analisi/fraccionament',
             'cas-concentracio': '/analisi/concentracio',
@@ -3255,6 +3414,11 @@ function App() {
         if (activeTab !== 'cas-investigacio' || !investigacioLoaded || investigacioError || activeInvestigacioCase) return;
         handleNavigation('casos', '/investigacio', { replace: true });
     }, [activeTab, investigacioLoaded, investigacioError, activeInvestigacioCase]);
+
+    useEffect(() => {
+        if (activeTab !== 'entitat' || !subvencions.length || activeEntitatSubvencions.length) return;
+        handleNavigation('subvencions', '/subvencions', { replace: true });
+    }, [activeTab, subvencions, activeEntitatSubvencions]);
 
     const runRouteTransition = useCallback((navigate) => {
         if (homeRouteTransition) return;
@@ -3314,6 +3478,9 @@ function App() {
                 setPendingEmpresaSlug(p.slice('/empreses/'.length));
                 setSelectedEmpresa(null);
                 setActiveTab('empresa');
+            }
+            else if (p.startsWith('/entitats/')) {
+                setActiveTab('entitat');
             }
             else if (p.startsWith('/contractes/')) {
                 setPendingContractSlug(p.slice('/contractes/'.length));
@@ -3526,6 +3693,10 @@ function App() {
             document.title = formatPageTitle(selectedEmpresa);
             return;
         }
+        if (activeTab === 'entitat' && activeEntitatSubvencions.length) {
+            document.title = formatPageTitle(activeEntitatSubvencions[0].adjudicatario);
+            return;
+        }
         if (activeTab === 'cas-fraccionament' && selectedCasoDetail) {
             document.title = formatPageTitle(`Cas #${selectedCasoDetail.id}`);
             return;
@@ -3549,13 +3720,14 @@ function App() {
             empreses: formatPageTitle('Empreses'),
             persones: formatPageTitle('Persones'),
             subvencions: formatPageTitle('Subvencions'),
+            entitat: formatPageTitle('Subvencions'),
             analisi: formatPageTitle('Anàlisi'),
             casos: formatPageTitle("Casos d'investigació"),
             sobre: formatPageTitle('Sobre'),
             legal: BRAND_NAME
         };
         document.title = titles[activeTab] || BRAND_NAME;
-    }, [activeTab, selectedContractForDetail, selectedEmpresa, selectedCasoDetail, selectedConcentracioDetail, selectedElectoralismeDetail, activeInvestigacioCase]);
+    }, [activeTab, selectedContractForDetail, selectedEmpresa, selectedCasoDetail, selectedConcentracioDetail, selectedElectoralismeDetail, activeInvestigacioCase, activeEntitatSubvencions]);
 
     const contractesFiltrats = useMemo(() => {
         let result = [...contracts];
@@ -3869,6 +4041,7 @@ function App() {
         empresa: 'Empreses',
         persones: 'Persones',
         subvencions: 'Subvencions',
+        entitat: 'Subvencions',
         analisi: 'Anàlisi',
         'cas-fraccionament': 'Anàlisi',
         'cas-concentracio': 'Anàlisi',
@@ -4026,7 +4199,7 @@ function App() {
         const contractesActive = activeTab === 'buscador' || activeTab === 'contracte';
         const empresesActive = activeTab === 'empreses' || activeTab === 'empresa';
         const personesActive = activeTab === 'persones';
-        const subvencionsActive = activeTab === 'subvencions';
+        const subvencionsActive = activeTab === 'subvencions' || activeTab === 'entitat';
         const analisiActive = activeTab === 'analisi' || activeTab === 'cas-fraccionament' || activeTab === 'cas-concentracio' || activeTab === 'cas-electoralisme';
         return (
             <div className="nav">
@@ -4513,6 +4686,10 @@ function App() {
         }
     };
 
+    const handleEntitatClick = subvencio => {
+        handleNavigation('entitat', `/entitats/${subvencio.entitat_slug}`);
+    };
+
     const goBack = (fallback) => {
         saveCurrentScroll();
         const referrerPath = document.referrer ? new URL(document.referrer).pathname : '';
@@ -4736,8 +4913,16 @@ function App() {
                 />
             )}
 
-            {activeTab === 'subvencions' && (
-                <SubvencionsView />
+            {activeTab === 'subvencions' && canRenderDataTab && (
+                <SubvencionsView subvencions={subvencions} onEntitatSelect={handleEntitatClick} />
+            )}
+
+            {activeTab === 'entitat' && activeEntitatSubvencions.length > 0 && canRenderDataTab && (
+                <EntitatView
+                    entitatSlug={activeEntitatSlug}
+                    subvencions={subvencions}
+                    onBack={() => goBack(() => handleNavigation('subvencions', '/subvencions'))}
+                />
             )}
 
             {activeTab === 'casos' && (

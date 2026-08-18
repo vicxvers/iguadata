@@ -85,6 +85,10 @@ function resolveRoute(path) {
     tab: 'subvencions',
     canonicalPath: '/subvencions'
   };
+  if (path.startsWith('/entitats/')) return {
+    tab: 'entitat',
+    canonicalPath: path
+  };
   if (path === '/analisi') return {
     tab: 'analisi',
     canonicalPath: '/analisi'
@@ -385,6 +389,7 @@ async function fetchCoreData() {
 const DATA_TABS = ['buscador', 'empreses', 'persones', 'contracte', 'empresa', 'analisi', 'cas-fraccionament', 'cas-concentracio', 'cas-electoralisme', 'cas-investigacio'];
 const ANALYSIS_TABS = ['analisi', 'cas-fraccionament', 'cas-concentracio', 'cas-electoralisme'];
 const INVESTIGATION_TABS = ['casos', 'cas-investigacio'];
+const SUBVENTION_TABS = ['subvencions', 'entitat'];
 function useIguadataData(activeTab) {
   const [contracts, setContracts] = useState([]);
   const [empreses, setEmpreses] = useState([]);
@@ -396,6 +401,7 @@ function useIguadataData(activeTab) {
   const [stats, setStats] = useState(null);
   const [summary, setSummary] = useState(null);
   const [casosInvestigacio, setCasosInvestigacio] = useState(CASOS_INVESTIGACIO_FALLBACK);
+  const [subvencions, setSubvencions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [loadingProgress, setLoadingProgress] = useState(0);
   const [summaryResolved, setSummaryResolved] = useState(false);
@@ -405,16 +411,37 @@ function useIguadataData(activeTab) {
   const [administradorsLoaded, setAdministradorsLoaded] = useState(false);
   const [analisiLoaded, setAnalisiLoaded] = useState(false);
   const [investigacioLoaded, setInvestigacioLoaded] = useState(false);
+  const [subvencionsLoaded, setSubvencionsLoaded] = useState(false);
   const [coreDataError, setCoreDataError] = useState(false);
   const [personesError, setPersonesError] = useState(false);
   const [administradorsError, setAdministradorsError] = useState(false);
   const [analisiError, setAnalisiError] = useState(false);
   const [investigacioError, setInvestigacioError] = useState(false);
+  const [subvencionsError, setSubvencionsError] = useState(false);
   const [coreRetry, setCoreRetry] = useState(0);
   const [personesRetry, setPersonesRetry] = useState(0);
   const [administradorsRetry, setAdministradorsRetry] = useState(0);
   const [analisiRetry, setAnalisiRetry] = useState(0);
   const [investigacioRetry, setInvestigacioRetry] = useState(0);
+  const [subvencionsRetry, setSubvencionsRetry] = useState(0);
+  useEffect(() => {
+    if (!SUBVENTION_TABS.includes(activeTab) || subvencionsLoaded) return;
+    let cancelled = false;
+    setSubvencionsError(false);
+    fetchJsonDataset('/json/subvencions.json', 'Subvencions').then(data => {
+      if (cancelled) return;
+      if (!Array.isArray(data)) throw new Error('Subvencions JSON no vàlid');
+      setSubvencions(data);
+      setSubvencionsLoaded(true);
+    }).catch(error => {
+      if (cancelled) return;
+      console.error('Error loading subvencions:', error);
+      setSubvencionsError(true);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [activeTab, subvencionsLoaded, subvencionsRetry]);
   useEffect(() => {
     if (!INVESTIGATION_TABS.includes(activeTab) || investigacioLoaded) return;
     let cancelled = false;
@@ -546,9 +573,9 @@ function useIguadataData(activeTab) {
       cancelled = true;
     };
   }, [activeTab, summaryResolved, analisiLoaded, analisiRetry]);
-  const activeDataError = DATA_TABS.includes(activeTab) && coreDataError || activeTab === 'persones' && personesError || activeTab === 'empresa' && administradorsError || activeTab === 'cas-investigacio' && investigacioError || ANALYSIS_TABS.includes(activeTab) && analisiError;
-  const supplementalDataLoading = activeTab === 'persones' && !personesLoaded || activeTab === 'empresa' && !administradorsLoaded || activeTab === 'cas-investigacio' && !investigacioLoaded || ANALYSIS_TABS.includes(activeTab) && !analisiLoaded;
-  const isDataTabLoading = DATA_TABS.includes(activeTab) && (!coreDataLoaded || dataLoading || supplementalDataLoading);
+  const activeDataError = DATA_TABS.includes(activeTab) && coreDataError || activeTab === 'persones' && personesError || activeTab === 'empresa' && administradorsError || activeTab === 'cas-investigacio' && investigacioError || SUBVENTION_TABS.includes(activeTab) && subvencionsError || ANALYSIS_TABS.includes(activeTab) && analisiError;
+  const supplementalDataLoading = activeTab === 'persones' && !personesLoaded || activeTab === 'empresa' && !administradorsLoaded || activeTab === 'cas-investigacio' && !investigacioLoaded || SUBVENTION_TABS.includes(activeTab) && !subvencionsLoaded || ANALYSIS_TABS.includes(activeTab) && !analisiLoaded;
+  const isDataTabLoading = DATA_TABS.includes(activeTab) && (!coreDataLoaded || dataLoading || supplementalDataLoading) || SUBVENTION_TABS.includes(activeTab) && supplementalDataLoading;
   const retryActiveData = () => {
     if (coreDataError) {
       setCoreRetry(value => value + 1);
@@ -571,6 +598,12 @@ function useIguadataData(activeTab) {
       setInvestigacioRetry(value => value + 1);
       return;
     }
+    if (SUBVENTION_TABS.includes(activeTab)) {
+      setSubvencionsLoaded(false);
+      setSubvencionsError(false);
+      setSubvencionsRetry(value => value + 1);
+      return;
+    }
     if (ANALYSIS_TABS.includes(activeTab)) {
       setAnalisiLoaded(false);
       setAnalisiError(false);
@@ -588,6 +621,7 @@ function useIguadataData(activeTab) {
     stats,
     summary,
     casosInvestigacio,
+    subvencions,
     loading,
     loadingProgress,
     investigacioLoaded,
@@ -928,28 +962,6 @@ function matchesSearchQuery(values, query) {
   if (!terms.length) return true;
   const target = normalizeSearchText(Array.isArray(values) ? values.join(' ') : values);
   return terms.every(term => target.includes(term));
-}
-const SUBVENCIONS_API_ENDPOINT = 'https://analisi.transparenciacatalunya.cat/resource/s9xt-n979.json';
-function buildSubvencionsApiUrl() {
-  const params = new URLSearchParams({
-    '$select': 'clau,codi_raisc,objecte_de_la_convocat_ria,import_subvenci_pr_stec_ajut,ra_social_del_beneficiari,data_concessi,cif_beneficiari,entitat_oo_aa_o_departament_1',
-    '$where': "upper(entitat_oo_aa_o_departament_1) = upper('Ajuntament d''Igualada') AND cif_beneficiari NOT IN ('Benef. no publicable', 'Persona física')",
-    '$order': 'data_concessi DESC',
-    '$limit': '10000'
-  });
-  return `${SUBVENCIONS_API_ENDPOINT}?${params.toString()}`;
-}
-function normalizeSubvencio(row, index) {
-  const importe = Number(String(row.import_subvenci_pr_stec_ajut || '0').replace(',', '.'));
-  const fecha = String(row.data_concessi || '').slice(0, 10);
-  return {
-    id: row.clau || `${row.codi_raisc || 'subvencio'}-${fecha || index}-${index}`,
-    descripcion: row.objecte_de_la_convocat_ria || 'Subvenció sense descripció',
-    importe: Number.isFinite(importe) ? importe : 0,
-    adjudicatario: row.ra_social_del_beneficiari || 'Entitat no informada',
-    fecha,
-    codigo: row.codi_raisc || '—'
-  };
 }
 function normalizeContractCode(value) {
   return String(value || '').toUpperCase().trim().replace(/\s+/g, ' ').replace(/\s*([/.-])\s*/g, '$1');
@@ -3120,6 +3132,328 @@ function EmpresaView({
     className: "share-arrow"
   }), " Compartir"))));
 }
+function EntitatView({
+  entitatSlug,
+  subvencions,
+  onBack
+}) {
+  const allEntitatSubvencions = useMemo(() => subvencions.filter(subvencio => subvencio.entitat_slug === entitatSlug), [subvencions, entitatSlug]);
+  const entitatNom = allEntitatSubvencions[0]?.adjudicatario || '';
+  const totalImport = allEntitatSubvencions.reduce((sum, subvencio) => sum + (Number(subvencio.importe) || 0), 0);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [sortBy, setSortBy] = useState('date-desc');
+  const [dateStart, setDateStart] = useState('');
+  const [dateEnd, setDateEnd] = useState('');
+  const [amountMin, setAmountMin] = useState('');
+  const [amountMax, setAmountMax] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const [filtersOpen, setFiltersOpen] = useState(false);
+  const [shareActionsOpen, setShareActionsOpen] = useState(false);
+  const [shareCopyStatus, setShareCopyStatus] = useState('');
+  const shareActionsRef = useRef(null);
+  const shareStatusTimerRef = useRef(null);
+  const itemsPerPage = 25;
+  useEffect(() => setCurrentPage(1), [searchTerm, sortBy, dateStart, dateEnd, amountMin, amountMax]);
+  useEffect(() => {
+    if (!shareActionsOpen) return;
+    const closeShareActions = event => {
+      if (event.type === 'keydown' && event.key !== 'Escape') return;
+      if (event.type === 'pointerdown' && shareActionsRef.current?.contains(event.target)) return;
+      setShareActionsOpen(false);
+    };
+    document.addEventListener('pointerdown', closeShareActions);
+    document.addEventListener('keydown', closeShareActions);
+    return () => {
+      document.removeEventListener('pointerdown', closeShareActions);
+      document.removeEventListener('keydown', closeShareActions);
+    };
+  }, [shareActionsOpen]);
+  useEffect(() => () => window.clearTimeout(shareStatusTimerRef.current), []);
+  const annualActivity = useMemo(() => {
+    const byYear = {};
+    for (const subvencio of allEntitatSubvencions) {
+      const year = subvencio.año || Number(String(subvencio.fecha || '').slice(0, 4));
+      if (!year) continue;
+      if (!byYear[year]) byYear[year] = {
+        year,
+        amount: 0,
+        count: 0
+      };
+      byYear[year].amount += Number(subvencio.importe) || 0;
+      byYear[year].count += 1;
+    }
+    const items = Object.values(byYear).sort((a, b) => a.year - b.year);
+    const maxAmount = items.reduce((max, item) => Math.max(max, item.amount), 0);
+    const firstYear = items[0]?.year;
+    const lastYear = items[items.length - 1]?.year;
+    return {
+      items,
+      maxAmount,
+      period: firstYear ? firstYear === lastYear ? String(firstYear) : `${firstYear}–${lastYear}` : '—'
+    };
+  }, [allEntitatSubvencions]);
+  const filteredSubvencions = useMemo(() => {
+    const result = allEntitatSubvencions.filter(subvencio => {
+      if (searchTerm && !matchesSearchQuery([subvencio.descripcion, subvencio.adjudicatario, subvencio.codigo], searchTerm)) return false;
+      if (dateStart && subvencio.fecha < dateStart) return false;
+      if (dateEnd && subvencio.fecha > dateEnd) return false;
+      if (amountMin !== '' && subvencio.importe < Number(amountMin)) return false;
+      if (amountMax !== '' && subvencio.importe > Number(amountMax)) return false;
+      return true;
+    });
+    return result.sort((a, b) => {
+      if (sortBy === 'date-asc') return (Date.parse(a.fecha) || 0) - (Date.parse(b.fecha) || 0);
+      if (sortBy === 'amount-desc') return b.importe - a.importe;
+      if (sortBy === 'amount-asc') return a.importe - b.importe;
+      return (Date.parse(b.fecha) || 0) - (Date.parse(a.fecha) || 0);
+    });
+  }, [allEntitatSubvencions, searchTerm, sortBy, dateStart, dateEnd, amountMin, amountMax]);
+  const totalPages = Math.ceil(filteredSubvencions.length / itemsPerPage);
+  const pageSubvencions = filteredSubvencions.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+  const firstSubvencio = allEntitatSubvencions[0] || {};
+  const resetFilters = () => {
+    setSearchTerm('');
+    setSortBy('date-desc');
+    setDateStart('');
+    setDateEnd('');
+    setAmountMin('');
+    setAmountMax('');
+    setCurrentPage(1);
+  };
+  const activeFiltersCount = [dateStart, dateEnd, amountMin, amountMax, sortBy !== 'date-desc' ? sortBy : ''].filter(Boolean).length;
+  const copyEntitatLink = async () => {
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      setShareCopyStatus('Enllaç copiat');
+    } catch (_) {
+      setShareCopyStatus("No s'ha pogut copiar");
+    }
+    window.clearTimeout(shareStatusTimerRef.current);
+    shareStatusTimerRef.current = window.setTimeout(() => setShareCopyStatus(''), 1800);
+  };
+  return React.createElement("div", {
+    className: "container empresa-detail-page entitat-detail-page"
+  }, React.createElement("h1", {
+    className: "page-title"
+  }, "Detall d'entitat"), React.createElement("div", {
+    className: "empresa-detail-hero"
+  }, React.createElement("div", {
+    className: "empresa-detail-amount"
+  }, formatCurrency(totalImport)), React.createElement("div", {
+    className: "contract-header empresa-detail-title-row"
+  }, React.createElement("h2", {
+    className: "empresa-detail-title"
+  }, entitatNom)), React.createElement("div", {
+    className: "empresa-detail-contract-count"
+  }, allEntitatSubvencions.length, " subvencions")), React.createElement("div", {
+    className: "empresa-detail-info-card"
+  }, React.createElement("div", {
+    className: "contract-meta empresa-detail-info-meta"
+  }, firstSubvencio.cif_beneficiari && React.createElement("div", {
+    className: "contract-meta-item"
+  }, React.createElement("span", {
+    className: "contract-meta-label"
+  }, "CIF"), React.createElement("span", {
+    className: "contract-meta-value"
+  }, firstSubvencio.cif_beneficiari)), firstSubvencio.tipus_de_beneficiaris && React.createElement("div", {
+    className: "contract-meta-item"
+  }, React.createElement("span", {
+    className: "contract-meta-label"
+  }, "Tipus de beneficiari"), React.createElement("span", {
+    className: "contract-meta-value"
+  }, firstSubvencio.tipus_de_beneficiaris)), React.createElement("div", {
+    className: "contract-meta-item"
+  }, React.createElement("span", {
+    className: "contract-meta-label"
+  }, "Per\xEDode"), React.createElement("span", {
+    className: "contract-meta-value"
+  }, annualActivity.period)))), annualActivity.items.length > 1 && React.createElement("div", {
+    className: "empresa-activity-visual",
+    "aria-label": "Hist\xF2ric anual de les subvencions concedides a aquesta entitat"
+  }, React.createElement("div", {
+    className: "empresa-activity-header"
+  }, React.createElement("h3", {
+    className: "empresa-activity-title"
+  }, "Hist\xF2ric de subvencions")), React.createElement("div", {
+    className: "empresa-activity-bars"
+  }, annualActivity.items.map(item => React.createElement("div", {
+    key: item.year,
+    className: "empresa-activity-column"
+  }, React.createElement("div", {
+    className: "empresa-activity-bar-wrap",
+    "aria-hidden": "true"
+  }, React.createElement("span", {
+    style: {
+      height: `${Math.max(4, Math.round(item.amount / annualActivity.maxAmount * 100))}%`,
+      '--bar-width': `${Math.max(4, Math.round(item.amount / annualActivity.maxAmount * 100))}%`
+    }
+  })), React.createElement("div", {
+    className: "empresa-activity-meta"
+  }, React.createElement("span", null, item.year), React.createElement("small", null, formatCurrency(item.amount))))))), React.createElement("div", {
+    className: "search-section empresa-detail-contract-search"
+  }, React.createElement(SearchField, {
+    value: searchTerm,
+    onValueChange: setSearchTerm,
+    placeholder: "Cerca per descripci\xF3, entitat o codi d'expedient",
+    ariaLabel: "Cerca per descripci\xF3, entitat o codi d'expedient"
+  }), React.createElement(FilterActions, {
+    open: filtersOpen,
+    onToggle: () => setFiltersOpen(open => !open),
+    activeCount: activeFiltersCount,
+    onReset: resetFilters
+  }), React.createElement("div", {
+    className: 'filters search-filter-panel' + (!filtersOpen ? ' collapsed' : '')
+  }, React.createElement("div", {
+    className: "filter-group filter-group-standard"
+  }, React.createElement("label", {
+    className: "filter-label"
+  }, "Ordenar per"), React.createElement("select", {
+    className: "filter-select filter-select-standard",
+    value: sortBy,
+    onChange: event => setSortBy(event.target.value),
+    "aria-label": "Ordenar subvencions de l'entitat per"
+  }, React.createElement("option", {
+    value: "date-desc"
+  }, "Data (m\xE9s recents)"), React.createElement("option", {
+    value: "date-asc"
+  }, "Data (m\xE9s antics)"), React.createElement("option", {
+    value: "amount-desc"
+  }, "Import (descendent)"), React.createElement("option", {
+    value: "amount-asc"
+  }, "Import (ascendent)")))), React.createElement("div", {
+    className: 'filters-row search-filter-panel search-filter-panel-secondary' + (!filtersOpen ? ' collapsed' : '')
+  }, React.createElement("div", {
+    className: "filter-group"
+  }, React.createElement("label", {
+    className: "filter-label"
+  }, "Data inici"), React.createElement("input", {
+    type: "date",
+    className: "filter-input",
+    value: dateStart,
+    onChange: event => setDateStart(event.target.value)
+  })), React.createElement("div", {
+    className: "filter-group"
+  }, React.createElement("label", {
+    className: "filter-label"
+  }, "Data final"), React.createElement("input", {
+    type: "date",
+    className: "filter-input",
+    value: dateEnd,
+    onChange: event => setDateEnd(event.target.value)
+  })), React.createElement("div", {
+    className: "filter-group"
+  }, React.createElement("label", {
+    className: "filter-label"
+  }, "Des de"), React.createElement("input", {
+    type: "number",
+    min: "0",
+    step: "0.01",
+    inputMode: "decimal",
+    className: "filter-input",
+    placeholder: "Import m\xEDnim",
+    value: amountMin,
+    onChange: event => setAmountMin(event.target.value)
+  })), React.createElement("div", {
+    className: "filter-group"
+  }, React.createElement("label", {
+    className: "filter-label"
+  }, "Fins a"), React.createElement("input", {
+    type: "number",
+    min: "0",
+    step: "0.01",
+    inputMode: "decimal",
+    className: "filter-input",
+    placeholder: "Import m\xE0xim",
+    value: amountMax,
+    onChange: event => setAmountMax(event.target.value)
+  })))), React.createElement("div", {
+    className: "results-count",
+    role: "status",
+    "aria-live": "polite"
+  }, React.createElement("span", {
+    className: "results-count-total"
+  }, React.createElement("span", {
+    className: "results-count-prefix"
+  }, "S'han trobat "), React.createElement("strong", null, filteredSubvencions.length), " subvencions")), pageSubvencions.map(subvencio => React.createElement("div", {
+    key: subvencio.id,
+    className: "contract-card subvencio-card"
+  }, React.createElement("span", {
+    className: "contract-header"
+  }, React.createElement("span", {
+    className: "contract-title"
+  }, subvencio.descripcion), React.createElement("span", {
+    className: "contract-amount"
+  }, formatCurrency(subvencio.importe))), React.createElement("span", {
+    className: "contract-meta"
+  }, React.createElement("span", {
+    className: "contract-meta-item"
+  }, React.createElement("span", {
+    className: "contract-meta-label"
+  }, "Entitat adjudicat\xE0ria"), React.createElement("span", {
+    className: "contract-meta-value"
+  }, subvencio.adjudicatario)), React.createElement("span", {
+    className: "contract-meta-item"
+  }, React.createElement("span", {
+    className: "contract-meta-label"
+  }, "Data"), React.createElement("span", {
+    className: "contract-meta-value"
+  }, formatDate(subvencio.fecha))), React.createElement("span", {
+    className: "contract-meta-item"
+  }, React.createElement("span", {
+    className: "contract-meta-label"
+  }, "Codi expedient"), React.createElement("span", {
+    className: "contract-meta-value"
+  }, subvencio.codigo || '—'))))), filteredSubvencions.length === 0 && React.createElement(EmptySearchState, {
+    text: "No s'han trobat subvencions.",
+    onReset: resetFilters
+  }), filteredSubvencions.length > itemsPerPage && React.createElement(Pagination, {
+    currentPage: currentPage,
+    totalPages: totalPages,
+    onPageChange: setCurrentPage
+  }), React.createElement("div", {
+    className: "empresa-detail-actions-row contracte-detail-actions-row"
+  }, React.createElement("button", {
+    onClick: onBack,
+    className: "btn-share empresa-detail-back contracte-detail-back",
+    title: "Tornar",
+    "aria-label": "Tornar",
+    type: "button"
+  }, React.createElement("svg", {
+    className: "contracte-detail-back-icon",
+    xmlns: "http://www.w3.org/2000/svg",
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: "2",
+    strokeLinecap: "round",
+    strokeLinejoin: "round",
+    "aria-hidden": "true"
+  }, React.createElement("path", {
+    d: "M19 12H5"
+  }), React.createElement("polyline", {
+    points: "12 19 5 12 12 5"
+  })), React.createElement("span", null, "Tornar")), React.createElement("div", {
+    className: `contracte-detail-share contracte-detail-share-standalone${shareActionsOpen ? ' is-open' : ''}`,
+    ref: shareActionsRef
+  }, React.createElement("div", {
+    id: "entitat-share-actions",
+    className: "contracte-detail-share-actions",
+    "aria-hidden": !shareActionsOpen
+  }, React.createElement("button", {
+    className: "btn-share contracte-detail-share-btn",
+    onClick: copyEntitatLink,
+    tabIndex: shareActionsOpen ? 0 : -1,
+    type: "button"
+  }, shareCopyStatus || "Copia l'enllaç")), React.createElement("button", {
+    className: "btn-share contracte-detail-share-btn",
+    onClick: () => setShareActionsOpen(open => !open),
+    "aria-expanded": shareActionsOpen,
+    "aria-controls": "entitat-share-actions",
+    type: "button"
+  }, React.createElement("em", {
+    className: "share-arrow"
+  }), " Compartir"))));
+}
 function PersonesView({
   persones,
   onEmpresaSelect,
@@ -3325,11 +3659,12 @@ function PersonesView({
     className: "prose-link"
   }, "Av\xEDs legal"), ". El dret de supressi\xF3 (dret a l'oblit) queda limitat per l'art. 17.3.b) del RGPD quan les dades figuren en registres oficials p\xFAblics o en documentaci\xF3 administrativa de contractaci\xF3 p\xFAblica, sense perjudici del dret a sol\xB7licitar la revisi\xF3 de possibles errors factuals."))));
 }
-function SubvencionsView() {
-  const [subvencions, setSubvencions] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
-  const [retry, setRetry] = useState(0);
+function SubvencionsView({
+  subvencions,
+  onEntitatSelect
+}) {
+  const loading = false;
+  const error = false;
   const [searchTerm, setSearchTerm] = useState('');
   const [filtersOpen, setFiltersOpen] = useState(false);
   const [sortBy, setSortBy] = useState('date-desc');
@@ -3339,31 +3674,6 @@ function SubvencionsView() {
   const [amountMax, setAmountMax] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 25;
-  useEffect(() => {
-    const controller = new AbortController();
-    setLoading(true);
-    setError(false);
-    fetch(buildSubvencionsApiUrl(), {
-      cache: 'no-store',
-      signal: controller.signal,
-      headers: {
-        Accept: 'application/json'
-      }
-    }).then(response => {
-      if (!response.ok) throw new Error(`RAISC ${response.status}`);
-      return response.json();
-    }).then(rows => {
-      if (!Array.isArray(rows)) throw new Error('Resposta RAISC no vàlida');
-      setSubvencions(rows.map(normalizeSubvencio));
-    }).catch(fetchError => {
-      if (fetchError.name === 'AbortError') return;
-      console.error('Error loading subvencions:', fetchError);
-      setError(true);
-    }).finally(() => {
-      if (!controller.signal.aborted) setLoading(false);
-    });
-    return () => controller.abort();
-  }, [retry]);
   const filteredSubvencions = useMemo(() => {
     const filtered = subvencions.filter(subvencio => {
       if (searchTerm && !matchesSearchQuery([subvencio.descripcion, subvencio.adjudicatario, subvencio.codigo], searchTerm)) return false;
@@ -3442,7 +3752,6 @@ function SubvencionsView() {
     className: "empty-state-action"
   }, React.createElement("button", {
     className: "empty-state-btn",
-    onClick: () => setRetry(value => value + 1),
     type: "button"
   }, "Tornar-ho a provar"))), !loading && !error && React.createElement(React.Fragment, null, React.createElement("div", {
     className: "search-section"
@@ -3560,11 +3869,11 @@ function SubvencionsView() {
     className: "results-count-page-full"
   }, "P\xE0gina"), React.createElement("span", {
     className: "results-count-page-short"
-  }, "P\xE0g."), " ", React.createElement("strong", null, currentPage), " de ", React.createElement("strong", null, totalPages))), pageSubvencions.map(subvencio => React.createElement("button", {
+  }, "P\xE0g."), " ", React.createElement("strong", null, currentPage), " de ", React.createElement("strong", null, totalPages))), pageSubvencions.map(subvencio => React.createElement("a", {
     key: subvencio.id,
+    href: buildRouteUrl(`/entitats/${subvencio.entitat_slug}`),
     className: "contract-card subvencio-card",
-    onClick: () => {},
-    type: "button"
+    onClick: event => handleInternalLinkClick(event, () => onEntitatSelect(subvencio))
   }, React.createElement("span", {
     className: "contract-header"
   }, React.createElement("span", {
@@ -3995,6 +4304,7 @@ function App() {
     stats,
     summary,
     casosInvestigacio,
+    subvencions,
     loading,
     loadingProgress,
     investigacioLoaded,
@@ -4013,6 +4323,8 @@ function App() {
   const homeIntroPlayedRef = useRef(false);
   const activeInvestigacioSlug = getCurrentRoute().startsWith('/investigacio/') ? getCurrentRoute().slice('/investigacio/'.length) : null;
   const activeInvestigacioCase = casosInvestigacio.find(item => item.slug === activeInvestigacioSlug) || CASOS_INVESTIGACIO_FALLBACK.find(item => item.slug === activeInvestigacioSlug) || null;
+  const activeEntitatSlug = getCurrentRoute().startsWith('/entitats/') ? getCurrentRoute().slice('/entitats/'.length) : null;
+  const activeEntitatSubvencions = useMemo(() => activeEntitatSlug ? subvencions.filter(subvencio => subvencio.entitat_slug === activeEntitatSlug) : [], [subvencions, activeEntitatSlug]);
   const preservedInvestigationContracts = useMemo(() => casosInvestigacio.flatMap(caso => (caso.content || []).flatMap(block => block.contract_snapshots || [])), [casosInvestigacio]);
   useEffect(() => {
     if (activeTab !== 'home' || loading || homeIntroPlayedRef.current) return;
@@ -4491,6 +4803,7 @@ function App() {
       'empresa': '/empreses',
       'persones': '/persones',
       'subvencions': '/subvencions',
+      'entitat': '/subvencions',
       'analisi': '/analisi',
       'cas-fraccionament': '/analisi/fraccionament',
       'cas-concentracio': '/analisi/concentracio',
@@ -4519,6 +4832,12 @@ function App() {
       replace: true
     });
   }, [activeTab, investigacioLoaded, investigacioError, activeInvestigacioCase]);
+  useEffect(() => {
+    if (activeTab !== 'entitat' || !subvencions.length || activeEntitatSubvencions.length) return;
+    handleNavigation('subvencions', '/subvencions', {
+      replace: true
+    });
+  }, [activeTab, subvencions, activeEntitatSubvencions]);
   const runRouteTransition = useCallback(navigate => {
     if (homeRouteTransition) return;
     setHomeRouteTransition('is-entering');
@@ -4579,6 +4898,8 @@ function App() {
         setPendingEmpresaSlug(p.slice('/empreses/'.length));
         setSelectedEmpresa(null);
         setActiveTab('empresa');
+      } else if (p.startsWith('/entitats/')) {
+        setActiveTab('entitat');
       } else if (p.startsWith('/contractes/')) {
         setPendingContractSlug(p.slice('/contractes/'.length));
         setSelectedContractForDetail(null);
@@ -4783,6 +5104,10 @@ function App() {
       document.title = formatPageTitle(selectedEmpresa);
       return;
     }
+    if (activeTab === 'entitat' && activeEntitatSubvencions.length) {
+      document.title = formatPageTitle(activeEntitatSubvencions[0].adjudicatario);
+      return;
+    }
     if (activeTab === 'cas-fraccionament' && selectedCasoDetail) {
       document.title = formatPageTitle(`Cas #${selectedCasoDetail.id}`);
       return;
@@ -4806,13 +5131,14 @@ function App() {
       empreses: formatPageTitle('Empreses'),
       persones: formatPageTitle('Persones'),
       subvencions: formatPageTitle('Subvencions'),
+      entitat: formatPageTitle('Subvencions'),
       analisi: formatPageTitle('Anàlisi'),
       casos: formatPageTitle("Casos d'investigació"),
       sobre: formatPageTitle('Sobre'),
       legal: BRAND_NAME
     };
     document.title = titles[activeTab] || BRAND_NAME;
-  }, [activeTab, selectedContractForDetail, selectedEmpresa, selectedCasoDetail, selectedConcentracioDetail, selectedElectoralismeDetail, activeInvestigacioCase]);
+  }, [activeTab, selectedContractForDetail, selectedEmpresa, selectedCasoDetail, selectedConcentracioDetail, selectedElectoralismeDetail, activeInvestigacioCase, activeEntitatSubvencions]);
   const contractesFiltrats = useMemo(() => {
     let result = [...contracts];
     if (debouncedSearch) {
@@ -5080,6 +5406,7 @@ function App() {
     empresa: 'Empreses',
     persones: 'Persones',
     subvencions: 'Subvencions',
+    entitat: 'Subvencions',
     analisi: 'Anàlisi',
     'cas-fraccionament': 'Anàlisi',
     'cas-concentracio': 'Anàlisi',
@@ -5227,7 +5554,7 @@ function App() {
     const contractesActive = activeTab === 'buscador' || activeTab === 'contracte';
     const empresesActive = activeTab === 'empreses' || activeTab === 'empresa';
     const personesActive = activeTab === 'persones';
-    const subvencionsActive = activeTab === 'subvencions';
+    const subvencionsActive = activeTab === 'subvencions' || activeTab === 'entitat';
     const analisiActive = activeTab === 'analisi' || activeTab === 'cas-fraccionament' || activeTab === 'cas-concentracio' || activeTab === 'cas-electoralisme';
     return React.createElement("div", {
       className: "nav"
@@ -5859,6 +6186,9 @@ function App() {
       handleNavigation('empresa');
     }
   };
+  const handleEntitatClick = subvencio => {
+    handleNavigation('entitat', `/entitats/${subvencio.entitat_slug}`);
+  };
   const goBack = fallback => {
     saveCurrentScroll();
     const referrerPath = document.referrer ? new URL(document.referrer).pathname : '';
@@ -6146,7 +6476,14 @@ function App() {
     setCurrentPage: setPersonesPage,
     expandedIdx: personesExpanded,
     setExpandedIdx: setPersonesExpanded
-  }), activeTab === 'subvencions' && React.createElement(SubvencionsView, null), activeTab === 'casos' && React.createElement(CasosView, {
+  }), activeTab === 'subvencions' && canRenderDataTab && React.createElement(SubvencionsView, {
+    subvencions: subvencions,
+    onEntitatSelect: handleEntitatClick
+  }), activeTab === 'entitat' && activeEntitatSubvencions.length > 0 && canRenderDataTab && React.createElement(EntitatView, {
+    entitatSlug: activeEntitatSlug,
+    subvencions: subvencions,
+    onBack: () => goBack(() => handleNavigation('subvencions', '/subvencions'))
+  }), activeTab === 'casos' && React.createElement(CasosView, {
     casos: casosInvestigacio,
     onCasoSelect: handleInvestigacioClick
   }), activeTab === 'cas-investigacio' && canRenderDataTab && React.createElement(InvestigacioCaseView, {

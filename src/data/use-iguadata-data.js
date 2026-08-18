@@ -17,6 +17,7 @@ const ANALYSIS_TABS = [
     'cas-electoralisme',
 ];
 const INVESTIGATION_TABS = ['casos', 'cas-investigacio'];
+const SUBVENTION_TABS = ['subvencions', 'entitat'];
 
 function useIguadataData(activeTab) {
     const [contracts, setContracts] = useState([]);
@@ -29,6 +30,7 @@ function useIguadataData(activeTab) {
     const [stats, setStats] = useState(null);
     const [summary, setSummary] = useState(null);
     const [casosInvestigacio, setCasosInvestigacio] = useState(CASOS_INVESTIGACIO_FALLBACK);
+    const [subvencions, setSubvencions] = useState([]);
 
     const [loading, setLoading] = useState(true);
     const [loadingProgress, setLoadingProgress] = useState(0);
@@ -39,18 +41,40 @@ function useIguadataData(activeTab) {
     const [administradorsLoaded, setAdministradorsLoaded] = useState(false);
     const [analisiLoaded, setAnalisiLoaded] = useState(false);
     const [investigacioLoaded, setInvestigacioLoaded] = useState(false);
+    const [subvencionsLoaded, setSubvencionsLoaded] = useState(false);
 
     const [coreDataError, setCoreDataError] = useState(false);
     const [personesError, setPersonesError] = useState(false);
     const [administradorsError, setAdministradorsError] = useState(false);
     const [analisiError, setAnalisiError] = useState(false);
     const [investigacioError, setInvestigacioError] = useState(false);
+    const [subvencionsError, setSubvencionsError] = useState(false);
 
     const [coreRetry, setCoreRetry] = useState(0);
     const [personesRetry, setPersonesRetry] = useState(0);
     const [administradorsRetry, setAdministradorsRetry] = useState(0);
     const [analisiRetry, setAnalisiRetry] = useState(0);
     const [investigacioRetry, setInvestigacioRetry] = useState(0);
+    const [subvencionsRetry, setSubvencionsRetry] = useState(0);
+
+    useEffect(() => {
+        if (!SUBVENTION_TABS.includes(activeTab) || subvencionsLoaded) return;
+        let cancelled = false;
+        setSubvencionsError(false);
+        fetchJsonDataset('/json/subvencions.json', 'Subvencions')
+            .then(data => {
+                if (cancelled) return;
+                if (!Array.isArray(data)) throw new Error('Subvencions JSON no vàlid');
+                setSubvencions(data);
+                setSubvencionsLoaded(true);
+            })
+            .catch(error => {
+                if (cancelled) return;
+                console.error('Error loading subvencions:', error);
+                setSubvencionsError(true);
+            });
+        return () => { cancelled = true; };
+    }, [activeTab, subvencionsLoaded, subvencionsRetry]);
 
     useEffect(() => {
         if (!INVESTIGATION_TABS.includes(activeTab) || investigacioLoaded) return;
@@ -204,15 +228,17 @@ function useIguadataData(activeTab) {
         (activeTab === 'persones' && personesError) ||
         (activeTab === 'empresa' && administradorsError) ||
         (activeTab === 'cas-investigacio' && investigacioError) ||
+        (SUBVENTION_TABS.includes(activeTab) && subvencionsError) ||
         (ANALYSIS_TABS.includes(activeTab) && analisiError);
     const supplementalDataLoading =
         (activeTab === 'persones' && !personesLoaded) ||
         (activeTab === 'empresa' && !administradorsLoaded) ||
         (activeTab === 'cas-investigacio' && !investigacioLoaded) ||
+        (SUBVENTION_TABS.includes(activeTab) && !subvencionsLoaded) ||
         (ANALYSIS_TABS.includes(activeTab) && !analisiLoaded);
     const isDataTabLoading =
-        DATA_TABS.includes(activeTab) &&
-        (!coreDataLoaded || dataLoading || supplementalDataLoading);
+        (DATA_TABS.includes(activeTab) && (!coreDataLoaded || dataLoading || supplementalDataLoading)) ||
+        (SUBVENTION_TABS.includes(activeTab) && supplementalDataLoading);
 
     const retryActiveData = () => {
         if (coreDataError) {
@@ -236,6 +262,12 @@ function useIguadataData(activeTab) {
             setInvestigacioRetry(value => value + 1);
             return;
         }
+        if (SUBVENTION_TABS.includes(activeTab)) {
+            setSubvencionsLoaded(false);
+            setSubvencionsError(false);
+            setSubvencionsRetry(value => value + 1);
+            return;
+        }
         if (ANALYSIS_TABS.includes(activeTab)) {
             setAnalisiLoaded(false);
             setAnalisiError(false);
@@ -254,6 +286,7 @@ function useIguadataData(activeTab) {
         stats,
         summary,
         casosInvestigacio,
+        subvencions,
         loading,
         loadingProgress,
         investigacioLoaded,
