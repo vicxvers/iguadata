@@ -177,6 +177,31 @@ function matchesSearchQuery(values, query) {
     return terms.every(term => target.includes(term));
 }
 
+const SUBVENCIONS_API_ENDPOINT = 'https://analisi.transparenciacatalunya.cat/resource/s9xt-n979.json';
+
+function buildSubvencionsApiUrl() {
+    const params = new URLSearchParams({
+        '$select': 'clau,codi_raisc,objecte_de_la_convocat_ria,import_subvenci_pr_stec_ajut,ra_social_del_beneficiari,data_concessi,cif_beneficiari,entitat_oo_aa_o_departament_1',
+        '$where': "upper(entitat_oo_aa_o_departament_1) = upper('Ajuntament d''Igualada') AND cif_beneficiari NOT IN ('Benef. no publicable', 'Persona física')",
+        '$order': 'data_concessi DESC',
+        '$limit': '10000',
+    });
+    return `${SUBVENCIONS_API_ENDPOINT}?${params.toString()}`;
+}
+
+function normalizeSubvencio(row, index) {
+    const importe = Number(String(row.import_subvenci_pr_stec_ajut || '0').replace(',', '.'));
+    const fecha = String(row.data_concessi || '').slice(0, 10);
+    return {
+        id: row.clau || `${row.codi_raisc || 'subvencio'}-${fecha || index}-${index}`,
+        descripcion: row.objecte_de_la_convocat_ria || 'Subvenció sense descripció',
+        importe: Number.isFinite(importe) ? importe : 0,
+        adjudicatario: row.ra_social_del_beneficiari || 'Entitat no informada',
+        fecha,
+        codigo: row.codi_raisc || '—',
+    };
+}
+
 function normalizeContractCode(value) {
     return String(value || '')
         .toUpperCase()
@@ -2150,6 +2175,214 @@ function PersonesView({ persones, onEmpresaSelect, onNavigateLegal, searchTerm, 
     );
 }
 
+function SubvencionsView() {
+    const [subvencions, setSubvencions] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(false);
+    const [retry, setRetry] = useState(0);
+    const [searchTerm, setSearchTerm] = useState('');
+    const [filtersOpen, setFiltersOpen] = useState(false);
+    const [sortBy, setSortBy] = useState('date-desc');
+    const [dateStart, setDateStart] = useState('');
+    const [dateEnd, setDateEnd] = useState('');
+    const [amountMin, setAmountMin] = useState('');
+    const [amountMax, setAmountMax] = useState('');
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 25;
+
+    useEffect(() => {
+        const controller = new AbortController();
+        setLoading(true);
+        setError(false);
+        fetch(buildSubvencionsApiUrl(), {
+            cache: 'no-store',
+            signal: controller.signal,
+            headers: { Accept: 'application/json' },
+        })
+            .then(response => {
+                if (!response.ok) throw new Error(`RAISC ${response.status}`);
+                return response.json();
+            })
+            .then(rows => {
+                if (!Array.isArray(rows)) throw new Error('Resposta RAISC no vàlida');
+                setSubvencions(rows.map(normalizeSubvencio));
+            })
+            .catch(fetchError => {
+                if (fetchError.name === 'AbortError') return;
+                console.error('Error loading subvencions:', fetchError);
+                setError(true);
+            })
+            .finally(() => {
+                if (!controller.signal.aborted) setLoading(false);
+            });
+        return () => controller.abort();
+    }, [retry]);
+
+    const filteredSubvencions = useMemo(() => {
+        const filtered = subvencions.filter(subvencio => {
+            if (searchTerm && !matchesSearchQuery([subvencio.descripcion, subvencio.adjudicatario, subvencio.codigo], searchTerm)) return false;
+            if (dateStart && subvencio.fecha < dateStart) return false;
+            if (dateEnd && subvencio.fecha > dateEnd) return false;
+            if (amountMin !== '' && subvencio.importe < Number(amountMin)) return false;
+            if (amountMax !== '' && subvencio.importe > Number(amountMax)) return false;
+            return true;
+        });
+
+        return filtered.sort((a, b) => {
+            if (sortBy === 'date-asc') return (Date.parse(a.fecha) || 0) - (Date.parse(b.fecha) || 0);
+            if (sortBy === 'amount-desc') return b.importe - a.importe;
+            if (sortBy === 'amount-asc') return a.importe - b.importe;
+            return (Date.parse(b.fecha) || 0) - (Date.parse(a.fecha) || 0);
+        });
+    }, [subvencions, searchTerm, dateStart, dateEnd, amountMin, amountMax, sortBy]);
+
+    const totalPages = Math.ceil(filteredSubvencions.length / itemsPerPage);
+    const pageSubvencions = filteredSubvencions.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+    const activeFiltersCount = [dateStart, dateEnd, amountMin, amountMax].filter(value => value !== '').length + (sortBy !== 'date-desc' ? 1 : 0);
+
+    useEffect(() => {
+        const lastPage = Math.max(1, totalPages);
+        if (currentPage > lastPage) setCurrentPage(lastPage);
+    }, [currentPage, totalPages]);
+
+    const resetFilters = () => {
+        setSearchTerm('');
+        setSortBy('date-desc');
+        setDateStart('');
+        setDateEnd('');
+        setAmountMin('');
+        setAmountMax('');
+        setCurrentPage(1);
+    };
+
+    return (
+        <div className="container subvencions-page">
+            <h1 className="page-title">Cercador de subvencions</h1>
+
+            {loading && (
+                <div className="data-loading-container" role="status" aria-live="polite" aria-label="Carregant subvencions">
+                    <div className="search-section data-skeleton-search" aria-hidden="true">
+                        <div className="data-skeleton-input"></div>
+                        <div className="data-skeleton-actions">
+                            <div className="data-skeleton-control"></div>
+                            <div className="data-skeleton-control data-skeleton-control-square"></div>
+                        </div>
+                    </div>
+                    <div className="data-skeleton-list" aria-hidden="true">
+                        {Array.from({ length: 4 }, (_, index) => (
+                            <div key={index} className="contract-card data-skeleton-card">
+                                <div className="data-skeleton-line data-skeleton-line-title"></div>
+                                <div className="data-skeleton-line data-skeleton-line-medium"></div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            )}
+
+            {!loading && error && (
+                <div className="empty-state" role="alert">
+                    <div className="empty-state-icon" aria-hidden="true">!</div>
+                    <div className="empty-state-title">No s'han pogut carregar les subvencions</div>
+                    <div className="empty-state-text">La connexió amb el RAISC no està disponible ara mateix.</div>
+                    <div className="empty-state-action">
+                        <button className="empty-state-btn" onClick={() => setRetry(value => value + 1)} type="button">Tornar-ho a provar</button>
+                    </div>
+                </div>
+            )}
+
+            {!loading && !error && (
+                <>
+                    <div className="search-section">
+                        <SearchField
+                            value={searchTerm}
+                            onValueChange={value => { setSearchTerm(value); setCurrentPage(1); }}
+                            placeholder="Cerca per descripció, entitat o codi d'expedient"
+                            ariaLabel="Cerca per descripció, entitat o codi d'expedient"
+                        />
+
+                        <FilterActions
+                            open={filtersOpen}
+                            onToggle={() => setFiltersOpen(open => !open)}
+                            activeCount={activeFiltersCount}
+                            onReset={resetFilters}
+                            controlsId="subvencio-filter-primary subvencio-filter-secondary"
+                        />
+
+                        <div id="subvencio-filter-primary" className={'filters search-filter-panel' + (!filtersOpen ? ' collapsed' : '')}>
+                            <div className="filter-group filter-group-standard">
+                                <label className="filter-label">Ordenar per</label>
+                                <select className="filter-select filter-select-standard" value={sortBy} onChange={event => { setSortBy(event.target.value); setCurrentPage(1); }} aria-label="Ordenar subvencions per">
+                                    <option value="date-desc">Data (més recents)</option>
+                                    <option value="date-asc">Data (més antics)</option>
+                                    <option value="amount-desc">Import (descendent)</option>
+                                    <option value="amount-asc">Import (ascendent)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div id="subvencio-filter-secondary" className={'filters-row search-filter-panel search-filter-panel-secondary' + (!filtersOpen ? ' collapsed' : '')}>
+                            <div className="filter-group">
+                                <label className="filter-label">Data inici</label>
+                                <input type="date" className="filter-input" aria-label="Data inici" value={dateStart} onChange={event => { setDateStart(event.target.value); setCurrentPage(1); }} />
+                            </div>
+                            <div className="filter-group">
+                                <label className="filter-label">Data final</label>
+                                <input type="date" className="filter-input" aria-label="Data final" value={dateEnd} onChange={event => { setDateEnd(event.target.value); setCurrentPage(1); }} />
+                            </div>
+                            <div className="filter-group">
+                                <label className="filter-label">Des de</label>
+                                <input type="number" min="0" step="0.01" inputMode="decimal" className="filter-input" placeholder="Import mínim" aria-label="Import mínim" value={amountMin} onChange={event => { setAmountMin(event.target.value); setCurrentPage(1); }} />
+                            </div>
+                            <div className="filter-group">
+                                <label className="filter-label">Fins a</label>
+                                <input type="number" min="0" step="0.01" inputMode="decimal" className="filter-input" placeholder="Import màxim" aria-label="Import màxim" value={amountMax} onChange={event => { setAmountMax(event.target.value); setCurrentPage(1); }} />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="results-count" role="status" aria-live="polite">
+                        <span className="results-count-total"><span className="results-count-prefix">S'han trobat </span><strong>{filteredSubvencions.length}</strong> subvencions</span>
+                        {filteredSubvencions.length > itemsPerPage && (
+                            <span className="results-count-page"><span className="results-count-page-full">Pàgina</span><span className="results-count-page-short">Pàg.</span> <strong>{currentPage}</strong> de <strong>{totalPages}</strong></span>
+                        )}
+                    </div>
+
+                    {pageSubvencions.map(subvencio => (
+                        <button key={subvencio.id} className="contract-card subvencio-card" onClick={() => {}} type="button">
+                            <span className="contract-header">
+                                <span className="contract-title">{subvencio.descripcion}</span>
+                                <span className="contract-amount">{formatCurrency(subvencio.importe)}</span>
+                            </span>
+                            <span className="contract-meta">
+                                <span className="contract-meta-item">
+                                    <span className="contract-meta-label">Entitat adjudicatària</span>
+                                    <span className="contract-meta-value">{subvencio.adjudicatario}</span>
+                                </span>
+                                <span className="contract-meta-item">
+                                    <span className="contract-meta-label">Data</span>
+                                    <span className="contract-meta-value">{formatDate(subvencio.fecha)}</span>
+                                </span>
+                                <span className="contract-meta-item">
+                                    <span className="contract-meta-label">Codi expedient</span>
+                                    <span className="contract-meta-value">{subvencio.codigo}</span>
+                                </span>
+                            </span>
+                        </button>
+                    ))}
+
+                    {filteredSubvencions.length === 0 && (
+                        <EmptySearchState text="No s'han trobat subvencions." onReset={resetFilters} />
+                    )}
+
+                    {filteredSubvencions.length > itemsPerPage && (
+                        <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />
+                    )}
+                </>
+            )}
+        </div>
+    );
+}
+
 function CasosView({ casos, onCasoSelect }) {
     const casosOrdenats = casos
         .map((caso, index) => ({ caso, index }))
@@ -2164,12 +2397,22 @@ function CasosView({ casos, onCasoSelect }) {
     const featuredCaso = casosOrdenats[0];
     const gridCasos = casosOrdenats.slice(1);
 
+    if (!featuredCaso) {
+        return (
+            <div className="container casos-page">
+                <h1 className="page-title">Casos d'investigació</h1>
+                <div className="empty-state" role="status">
+                    <h2 className="empty-state-title">Encara no hi ha investigacions publicades</h2>
+                    <p className="empty-state-text">Els nous casos apareixeran aquí quan estiguin disponibles.</p>
+                </div>
+            </div>
+        );
+    }
+
     return (
         <div className="container casos-page">
             <h1 className="page-title">Casos d'investigació</h1>
-            {featuredCaso && (
-                <CasoPrincipalInvestigacio caso={featuredCaso} onSelect={onCasoSelect} />
-            )}
+            <CasoPrincipalInvestigacio caso={featuredCaso} onSelect={onCasoSelect} />
             <div className="casos-editorial-list" aria-label="Investigacions publicades">
                 {gridCasos.map((caso, idx) => (
                     <CasoEditorialCard key={caso.slug} caso={caso} idx={idx + 1} onSelect={onCasoSelect} />
@@ -2185,7 +2428,7 @@ function CasoPrincipalInvestigacio({ caso, onSelect }) {
             <div className="caso-principal-image-frame">
                 <img
                     src={assetUrl(caso.image)}
-                    alt={caso.title + ': ' + caso.subtitle}
+                    alt=""
                     className="caso-editorial-image"
                     loading="eager"
                 />
@@ -2229,7 +2472,7 @@ function CasoEditorialContent({ caso, idx, showImage }) {
         return (
             <div className="contract-header caso-list-header">
                 <div className="caso-list-copy">
-                    <div className="contract-title caso-editorial-title">{caso.title}</div>
+                    <h2 className="contract-title caso-editorial-title">{caso.title}</h2>
                     <div className="caso-editorial-subtitle">{caso.subtitle}</div>
                 </div>
                 {Number.isFinite(Number(caso.importe)) && (
@@ -2245,7 +2488,7 @@ function CasoEditorialContent({ caso, idx, showImage }) {
                 <div className="caso-editorial-image-frame">
                     <img
                         src={assetUrl(caso.image)}
-                        alt={`${caso.title}: ${caso.subtitle}`}
+                        alt=""
                         className="caso-editorial-image"
                         loading={idx === 0 ? 'eager' : 'lazy'}
                     />
@@ -2302,7 +2545,6 @@ function InvestigacioContractCard({ contract, onSelect, hideAdjudicatario = fals
 function InvestigacioPaginatedContracts({ block, contracts, onContractSelect }) {
     const itemsPerPage = block.itemsPerPage || 25;
     const [currentPage, setCurrentPage] = useState(1);
-    const sectionRef = useRef(null);
     const codes = block.codes || [];
     const frozenByCode = useMemo(() => {
         const map = new Map();
@@ -2345,7 +2587,7 @@ function InvestigacioPaginatedContracts({ block, contracts, onContractSelect }) 
     if (!blockContracts.length) return null;
 
     return (
-        <section ref={sectionRef} className="investigacio-embed investigacio-card-stack" aria-label={block.ariaLabel || 'Contractes relacionats'}>
+        <section className="investigacio-embed investigacio-card-stack" aria-label={block.ariaLabel || 'Contractes relacionats'}>
             {pageContracts.map(contract => <InvestigacioContractCard key={contract.slug} contract={contract} onSelect={onContractSelect} hideAdjudicatario={Boolean(block.hideAdjudicatario)} />)}
             {blockContracts.length > itemsPerPage && (
                 <Pagination
@@ -2358,23 +2600,61 @@ function InvestigacioPaginatedContracts({ block, contracts, onContractSelect }) 
     );
 }
 
-function InvestigacioCaseView({ caso, contracts, onContractSelect }) {
+function InvestigacioCaseView({ caso, contracts, onBack, onContractSelect }) {
+    const [shareActionsOpen, setShareActionsOpen] = useState(false);
+    const [shareCopyStatus, setShareCopyStatus] = useState('');
+    const shareActionsRef = useRef(null);
+    const shareStatusTimerRef = useRef(null);
+
+    useEffect(() => {
+        if (!shareActionsOpen) return;
+        const closeShareActions = (event) => {
+            if (event.type === 'keydown' && event.key !== 'Escape') return;
+            if (event.type === 'pointerdown' && shareActionsRef.current?.contains(event.target)) return;
+            setShareActionsOpen(false);
+        };
+        document.addEventListener('pointerdown', closeShareActions);
+        document.addEventListener('keydown', closeShareActions);
+        return () => {
+            document.removeEventListener('pointerdown', closeShareActions);
+            document.removeEventListener('keydown', closeShareActions);
+        };
+    }, [shareActionsOpen]);
+
+    useEffect(() => () => window.clearTimeout(shareStatusTimerRef.current), []);
+
+    if (!caso) return null;
+
+    const copyInvestigacioLink = async () => {
+        try {
+            await navigator.clipboard.writeText(window.location.href);
+            setShareCopyStatus('Enllaç copiat');
+        } catch (_) {
+            setShareCopyStatus("No s'ha pogut copiar");
+        }
+        window.clearTimeout(shareStatusTimerRef.current);
+        shareStatusTimerRef.current = window.setTimeout(() => setShareCopyStatus(''), 1800);
+    };
+
     return (
         <article className="container prose-page investigacio-detail-page">
-            <h1 className="page-title">{caso.title}</h1>
+            <header className="investigacio-detail-header">
+                <h1 className="page-title">{caso.title}</h1>
+                {Number.isFinite(Number(caso.importe)) && <div className="investigacio-detail-amount">{formatCurrency(Number(caso.importe))}</div>}
+                <p className="investigacio-detail-subtitle">{caso.subtitle}</p>
+            </header>
+
+            {caso.image && (
+                <div className="investigacio-featured-image-frame">
+                    <img
+                        src={assetUrl(caso.image)}
+                        alt={caso.title + ': ' + caso.subtitle}
+                        className="investigacio-featured-image"
+                    />
+                </div>
+            )}
 
             <div className="prose-wrapper investigacio-story">
-                <p className="caso-principal-subtitle investigacio-detail-subtitle">{caso.subtitle}</p>
-                {caso.date && <p className="prose-intro investigacio-date">{caso.date}</p>}
-                {caso.image && (
-                    <div className="investigacio-featured-image-frame">
-                        <img
-                            src={assetUrl(caso.image)}
-                            alt={caso.title + ': ' + caso.subtitle}
-                            className="investigacio-featured-image"
-                        />
-                    </div>
-                )}
                 {(caso.content || []).map((block, index) => {
                     const key = block.id || block.type + '-' + index;
                     if (block.type === 'heading') {
@@ -2405,6 +2685,19 @@ function InvestigacioCaseView({ caso, contracts, onContractSelect }) {
                     }
                     return null;
                 })}
+            </div>
+
+            <div className="contracte-detail-actions-row investigacio-detail-actions-row">
+                <button onClick={onBack} className="btn-share contracte-detail-back" title="Tornar" aria-label="Tornar" type="button">
+                    <svg className="contracte-detail-back-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M19 12H5" /><polyline points="12 19 5 12 12 5" /></svg>
+                    <span>Tornar</span>
+                </button>
+                <div className={`contracte-detail-share contracte-detail-share-standalone${shareActionsOpen ? ' is-open' : ''}`} ref={shareActionsRef}>
+                    <div id="investigacio-share-actions" className="contracte-detail-share-actions" aria-hidden={!shareActionsOpen}>
+                        <button className="btn-share contracte-detail-share-btn" onClick={copyInvestigacioLink} tabIndex={shareActionsOpen ? 0 : -1} type="button">{shareCopyStatus || "Copia l'enllaç"}</button>
+                    </div>
+                    <button className="btn-share contracte-detail-share-btn" onClick={() => setShareActionsOpen(open => !open)} aria-expanded={shareActionsOpen} aria-controls="investigacio-share-actions" type="button"><em className="share-arrow"></em> Compartir</button>
+                </div>
             </div>
         </article>
     );
@@ -2455,7 +2748,7 @@ function App() {
         : null;
     const activeInvestigacioCase = casosInvestigacio.find(item => item.slug === activeInvestigacioSlug)
         || CASOS_INVESTIGACIO_FALLBACK.find(item => item.slug === activeInvestigacioSlug)
-        || CASOS_INVESTIGACIO_FALLBACK[0];
+        || null;
     const preservedInvestigationContracts = useMemo(() =>
         casosInvestigacio.flatMap(caso =>
             (caso.content || []).flatMap(block => block.contract_snapshots || [])
@@ -2934,6 +3227,7 @@ function App() {
             'empreses': '/empreses',
             'empresa': '/empreses', // Fallback si no es passa customPath
             'persones': '/persones',
+            'subvencions': '/subvencions',
             'analisi': '/analisi',
             'cas-fraccionament': '/analisi/fraccionament',
             'cas-concentracio': '/analisi/concentracio',
@@ -2956,6 +3250,11 @@ function App() {
         }
         scheduleScrollTop();
     };
+
+    useEffect(() => {
+        if (activeTab !== 'cas-investigacio' || !investigacioLoaded || investigacioError || activeInvestigacioCase) return;
+        handleNavigation('casos', '/investigacio', { replace: true });
+    }, [activeTab, investigacioLoaded, investigacioError, activeInvestigacioCase]);
 
     const runRouteTransition = useCallback((navigate) => {
         if (homeRouteTransition) return;
@@ -3249,6 +3548,7 @@ function App() {
             buscador: formatPageTitle('Contractes'),
             empreses: formatPageTitle('Empreses'),
             persones: formatPageTitle('Persones'),
+            subvencions: formatPageTitle('Subvencions'),
             analisi: formatPageTitle('Anàlisi'),
             casos: formatPageTitle("Casos d'investigació"),
             sobre: formatPageTitle('Sobre'),
@@ -3568,6 +3868,7 @@ function App() {
         empreses: 'Empreses',
         empresa: 'Empreses',
         persones: 'Persones',
+        subvencions: 'Subvencions',
         analisi: 'Anàlisi',
         'cas-fraccionament': 'Anàlisi',
         'cas-concentracio': 'Anàlisi',
@@ -3725,15 +4026,15 @@ function App() {
         const contractesActive = activeTab === 'buscador' || activeTab === 'contracte';
         const empresesActive = activeTab === 'empreses' || activeTab === 'empresa';
         const personesActive = activeTab === 'persones';
+        const subvencionsActive = activeTab === 'subvencions';
         const analisiActive = activeTab === 'analisi' || activeTab === 'cas-fraccionament' || activeTab === 'cas-concentracio' || activeTab === 'cas-electoralisme';
-        const casosActive = activeTab === 'casos' || activeTab === 'cas-investigacio';
         return (
             <div className="nav">
                 <a href={buildRouteUrl('/contractes')} className={'nav-tab' + (showActive && contractesActive ? ' active' : '')} aria-current={showActive && contractesActive ? 'page' : undefined} onClick={(event) => handleNavClick(event, () => { handleNavigation('buscador'); setSelectedEmpresa(null); setIsMobileMenuOpen(false); })}>Contractes</a>
                 <a href={buildRouteUrl('/empreses')} className={'nav-tab' + (showActive && empresesActive ? ' active' : '')} aria-current={showActive && empresesActive ? 'page' : undefined} onClick={(event) => handleNavClick(event, () => { handleNavigation('empreses'); setSelectedEmpresa(null); setIsMobileMenuOpen(false); })}>Empreses</a>
                 <a href={buildRouteUrl('/persones')} className={'nav-tab' + (showActive && personesActive ? ' active' : '')} aria-current={showActive && personesActive ? 'page' : undefined} onClick={(event) => handleNavClick(event, () => { handleNavigation('persones'); setIsMobileMenuOpen(false); })}>Persones</a>
+                <a href={buildRouteUrl('/subvencions')} className={'nav-tab' + (showActive && subvencionsActive ? ' active' : '')} aria-current={showActive && subvencionsActive ? 'page' : undefined} onClick={(event) => handleNavClick(event, () => { handleNavigation('subvencions'); setIsMobileMenuOpen(false); })}>Subvencions</a>
                 <a href={buildRouteUrl('/analisi')} className={'nav-tab' + (showActive && analisiActive ? ' active' : '')} aria-current={showActive && analisiActive ? 'page' : undefined} onClick={(event) => handleNavClick(event, handleAnalisiNavClick)}>Anàlisi</a>
-                <a href={buildRouteUrl('/investigacio')} className={'nav-tab' + (showActive && casosActive ? ' active' : '')} aria-current={showActive && casosActive ? 'page' : undefined} onClick={(event) => handleNavClick(event, () => { handleNavigation('casos'); setIsMobileMenuOpen(false); })}>Investigació</a>
             </div>
         );
     };
@@ -4067,7 +4368,6 @@ function App() {
             <div className="page-title data-skeleton-title" aria-hidden="true"></div>
             <div className="prose-wrapper" aria-hidden="true">
                 <div className="data-skeleton-line investigacio-skeleton-subtitle"></div>
-                {caso?.date && <div className="data-skeleton-line investigacio-skeleton-date"></div>}
                 {caso?.image && <div className="data-skeleton-input investigacio-skeleton-media"></div>}
                 {(caso?.content || []).map((block, index) => {
                     const key = block.id || block.type + '-' + index;
@@ -4436,6 +4736,10 @@ function App() {
                 />
             )}
 
+            {activeTab === 'subvencions' && (
+                <SubvencionsView />
+            )}
+
             {activeTab === 'casos' && (
                 <CasosView casos={casosInvestigacio} onCasoSelect={handleInvestigacioClick} />
             )}
@@ -4445,6 +4749,7 @@ function App() {
                 <InvestigacioCaseView
                     caso={activeInvestigacioCase}
                     contracts={contracts}
+                    onBack={() => goBack(() => handleNavigation('casos', '/investigacio'))}
                     onContractSelect={handleDetailClick}
                 />
             )}
@@ -4970,9 +5275,9 @@ function App() {
 
             {
                 activeTab === 'sobre' && (
-                    <div className="container prose-page">
+                    <div className="container prose-page narrative-info-page">
                         <h1 className="page-title">Sobre el projecte</h1>
-                        <div className="prose-wrapper">
+                        <div className="prose-wrapper narrative-story">
                             <p className="prose-intro">
                                 {BRAND_NAME} és la plataforma independent de periodisme de dades per a l'anàlisi de la contractació pública de {AUTHORITY_NAME} i dels seus organismes municipals.<br /><br />El projecte combina dades obertes de contractació, informació mercantil i algoritmes propis per fer més accessible, comprensible i fiscalitzable la despesa pública municipal.
                             </p>
@@ -5033,9 +5338,9 @@ function App() {
 
             {
                 activeTab === 'legal' && (
-                    <div className="container prose-page">
+                    <div className="container prose-page narrative-info-page">
                         <h1 className="page-title">Avís Legal</h1>
-                        <div className="prose-wrapper">
+                        <div className="prose-wrapper narrative-story">
                             <h2 className="prose-heading">1. Identificació i titularitat</h2>
                             <p className="prose-paragraph">
                                 {BRAND_NAME} és un projecte independent de transparència, anàlisi de dades públiques i fiscalització cívica de la contractació pública vinculada a {AUTHORITY_NAME} i als seus organismes municipals relacionats.
@@ -5170,14 +5475,15 @@ function App() {
                                         <a href={BASE + '/contractes'} onClick={(e) => { e.preventDefault(); handleNavigation('buscador'); }} className="footer-link">Contractes</a>
                                         <a href={BASE + '/empreses'} onClick={(e) => { e.preventDefault(); handleNavigation('empreses'); }} className="footer-link">Empreses</a>
                                         <a href={BASE + '/persones'} onClick={(e) => { e.preventDefault(); handleNavigation('persones'); }} className="footer-link">Persones</a>
+                                        <a href={BASE + '/subvencions'} onClick={(e) => { e.preventDefault(); handleNavigation('subvencions'); }} className="footer-link">Subvencions</a>
                                         <a href={BASE + '/analisi'} onClick={(e) => { e.preventDefault(); handleNavigation('analisi'); }} className="footer-link">Anàlisi</a>
-                                        <a href={BASE + '/investigacio'} onClick={(e) => { e.preventDefault(); handleNavigation('casos'); }} className="footer-link">Investigació</a>
                                     </div>
                                     <div className="footer-nav-column">
+                                        <a href={BASE + '/investigacio'} onClick={(e) => { e.preventDefault(); handleNavigation('casos'); }} className="footer-link">Investigació</a>
                                         <a href={BASE + '/sobre'} onClick={(e) => { e.preventDefault(); handleNavigation('sobre'); }} className="footer-link">Sobre</a>
-                                        <a href={`mailto:${CONTACT_EMAIL}`} className="footer-link">Contacte</a>
-                                        <a href={REPOSITORY_URL} target="_blank" rel="noopener noreferrer" className="footer-link">Codi obert</a>
                                         <a href={BASE + '/avis-legal'} onClick={(e) => { e.preventDefault(); handleNavigation('legal'); }} className="footer-link">Avís legal</a>
+                                        <a href={REPOSITORY_URL} target="_blank" rel="noopener noreferrer" className="footer-link">Codi obert</a>
+                                        <a href={`mailto:${CONTACT_EMAIL}`} className="footer-link">Contacte</a>
                                     </div>
                                 </nav>
                             </div>

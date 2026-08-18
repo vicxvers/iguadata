@@ -56,6 +56,7 @@ function resolveRoute(path) {
     if (path === '/contractes') return { tab: 'buscador', canonicalPath: '/contractes' };
     if (path === '/empreses') return { tab: 'empreses', canonicalPath: '/empreses' };
     if (path === '/persones') return { tab: 'persones', canonicalPath: '/persones' };
+    if (path === '/subvencions') return { tab: 'subvencions', canonicalPath: '/subvencions' };
     if (path === '/analisi') return { tab: 'analisi', canonicalPath: '/analisi' };
     if (path === '/investigacio') return { tab: 'casos', canonicalPath: '/investigacio' };
     if (path.startsWith('/investigacio/')) return { tab: 'cas-investigacio', canonicalPath: path };

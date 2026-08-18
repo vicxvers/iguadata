@@ -202,6 +202,7 @@ html.home-lock-scroll {
 .contractes-page .page-title,
 .empreses-page .page-title,
 .persones-page .page-title,
+.subvencions-page .page-title,
 .analisi-page .page-title,
 .casos-page .page-title,
 .contracte-detail-page > .page-title,
@@ -215,6 +216,7 @@ html.home-lock-scroll {
 .contractes-page,
 .empreses-page,
 .persones-page,
+.subvencions-page,
 .analisi-page,
 .casos-page,
 .contracte-detail-page,
@@ -903,6 +905,20 @@ html.home-lock-scroll {
 
 .contract-card:hover::before {
     background: var(--navy);
+}
+
+.subvencio-card {
+    display: block;
+    width: 100%;
+    color: inherit;
+    font: inherit;
+    text-align: left;
+    appearance: none;
+}
+
+.subvencio-card:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.14);
 }
 
 .contract-header {
@@ -5269,6 +5285,63 @@ body.home-scroll-surface::-webkit-scrollbar {
     color: var(--text-light);
 }
 
+.narrative-info-page > .page-title {
+    width: 50vw;
+    margin-bottom: var(--pad-card-lg);
+    text-align: center;
+}
+
+.narrative-story {
+    width: 75%;
+    max-width: none;
+}
+
+.narrative-story .prose-intro,
+.narrative-story .prose-paragraph {
+    margin-bottom: 1.5rem;
+    color: var(--navy);
+    font-size: var(--text-lg);
+    font-weight: 400;
+    line-height: var(--leading-body);
+}
+
+.narrative-story .prose-heading {
+    margin-top: 3.5rem;
+    margin-bottom: 1.25rem;
+    color: var(--navy);
+    font-family: var(--font-display);
+    font-size: var(--display-md);
+    font-weight: 400;
+    line-height: var(--leading-display);
+    letter-spacing: var(--tracking-amount);
+}
+
+@media (max-width: 768px) {
+    .narrative-info-page {
+        padding-top: 1.5rem;
+    }
+
+    .narrative-info-page > .page-title {
+        width: auto;
+        margin-bottom: 2rem;
+        font-size: var(--display-lg);
+        text-align: center !important;
+    }
+
+    .narrative-story {
+        width: auto;
+    }
+
+    .narrative-story .prose-intro,
+    .narrative-story .prose-paragraph {
+        font-size: 1.0625rem;
+    }
+
+    .narrative-story .prose-heading {
+        margin-top: 2.75rem;
+    }
+}
+
 
 /* â”€â”€â”€ Footer extra line â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .footer-line {
@@ -5447,6 +5520,12 @@ body.home-scroll-surface::-webkit-scrollbar {
     margin-right: 0;
     margin-left: 0;
     width: 100%;
+}
+
+.caso-principal-linkable:focus-visible,
+.caso-editorial-link:focus-visible {
+    outline: 2px solid var(--navy);
+    outline-offset: 4px;
 }
 
 .caso-principal-image-frame {
@@ -6530,6 +6609,7 @@ body.home-scroll-surface::-webkit-scrollbar {
     .contractes-page .page-title,
     .empreses-page .page-title,
     .persones-page .page-title,
+    .subvencions-page .page-title,
     .analisi-page .page-title,
     .casos-page .page-title,
     .contracte-detail-page > .page-title {
@@ -6552,6 +6632,7 @@ body.home-scroll-surface::-webkit-scrollbar {
     .contractes-page,
     .empreses-page,
     .persones-page,
+    .subvencions-page,
     .analisi-page,
     .casos-page,
     .contracte-detail-page {
@@ -7591,6 +7672,7 @@ body.home-scroll-surface::-webkit-scrollbar {
     .contractes-page .page-title,
     .empreses-page .page-title,
     .persones-page .page-title,
+    .subvencions-page .page-title,
     .analisi-page .page-title,
     .casos-page .page-title,
     .contracte-detail-page > .page-title {
@@ -7949,57 +8031,66 @@ body.home-scroll-surface::-webkit-scrollbar {
     padding-bottom: calc(var(--pad-card-lg) * 2);
 }
 
-.investigacio-detail-page > .page-title,
-.investigacio-detail-page > .prose-wrapper {
+.investigacio-detail-header {
     width: 50vw;
+    margin: 0 auto var(--pad-card-lg);
+    text-align: center;
 }
 
-.investigacio-detail-page > .page-title {
-    font-size: calc(var(--display-xl) + var(--text-md));
-    line-height: var(--leading-display);
-    margin-bottom: var(--space-xl);
+.investigacio-detail-header .page-title {
+    width: 100%;
+    margin: 0 auto 1rem;
     text-align: center;
+}
+
+.investigacio-detail-amount {
+    margin-bottom: 1rem;
+    color: var(--navy);
+    font-family: var(--font-display);
+    font-size: var(--display-md);
+    font-weight: 400;
+    line-height: var(--leading-display);
+    letter-spacing: var(--tracking-amount);
+}
+
+.investigacio-detail-subtitle,
+.investigacio-copy {
+    max-width: none;
+    color: var(--navy);
+    font-size: var(--text-lg);
+    font-weight: 400;
+    line-height: var(--leading-body);
 }
 
 .investigacio-detail-subtitle {
-    max-width: none;
-    font-size: var(--text-xl);
-    line-height: var(--leading-subtitle);
-    margin-bottom: var(--space-xl);
-    text-align: center;
     cursor: default;
 }
 
-.investigacio-date {
-    color: var(--navy);
-    font-size: var(--text-md);
-    font-weight: 400;
-    line-height: var(--leading-body);
-    margin-bottom: var(--space-xl);
-    text-align: center;
+.investigacio-story {
+    width: 75%;
+    max-width: none;
 }
 
 .investigacio-copy {
-    color: var(--navy);
-    font-size: var(--text-lg);
-    font-weight: 500;
-    line-height: var(--leading-body);
-    margin-bottom: var(--space-2xl);
+    margin-bottom: 1.5rem;
 }
 
 .investigacio-detail-page .prose-heading {
     color: var(--navy);
-    font-size: var(--display-lg);
-    line-height: var(--leading-heading);
-    margin-top: calc(var(--space-xl) * 2);
-    margin-bottom: var(--space-md);
+    font-family: var(--font-display);
+    font-size: var(--display-md);
+    font-weight: 400;
+    line-height: var(--leading-display);
+    letter-spacing: var(--tracking-amount);
+    margin-top: 3.5rem;
+    margin-bottom: 1.25rem;
 }
 
 .investigacio-featured-image-frame {
     width: 100%;
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 2 / 1;
     overflow: hidden;
-    margin-bottom: var(--pad-card-lg);
+    margin: 0 auto var(--pad-card-lg);
     border-radius: var(--radius-lg);
     background: var(--navy);
 }
@@ -8019,10 +8110,16 @@ body.home-scroll-surface::-webkit-scrollbar {
     display: flex;
     flex-direction: column;
     gap: 0;
-    width: 62.5vw;
-    margin: var(--pad-card-lg) 0;
+    width: calc(min(100vw, 1400px) - 4rem);
+    margin: 2.5rem 0;
     margin-left: 50%;
     transform: translateX(-50%);
+    outline: none;
+}
+
+.investigacio-card-stack:focus-visible {
+    outline: 2px solid var(--navy);
+    outline-offset: 0.5rem;
 }
 
 .investigacio-card-stack:last-child {
@@ -8048,7 +8145,7 @@ body.home-scroll-surface::-webkit-scrollbar {
 }
 
 .investigacio-skeleton-media {
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 2 / 1;
     height: auto;
     margin-bottom: var(--pad-card-lg);
 }
@@ -8088,32 +8185,51 @@ body.home-scroll-surface::-webkit-scrollbar {
     transform: translateY(0);
 }
 
+.investigacio-detail-actions-row {
+    margin-top: 3.5rem;
+}
+
 @media (max-width: 768px) {
-    .investigacio-detail-page > .page-title,
-    .investigacio-detail-page > .prose-wrapper {
+    .investigacio-detail-page {
+        padding-top: 1.5rem;
+    }
+
+    .investigacio-detail-header {
+        width: auto;
+        margin-bottom: 1.5rem;
+    }
+
+    .investigacio-detail-header .page-title {
+        font-size: var(--display-lg);
+        margin-bottom: 1rem;
+    }
+
+    .investigacio-story {
         width: auto;
     }
 
-    .investigacio-detail-page > .page-title {
-        font-size: var(--display-lg) !important;
+    .investigacio-detail-subtitle,
+    .investigacio-copy {
+        font-size: 1.0625rem;
     }
 
-    .investigacio-detail-subtitle {
-        font-size: var(--text-lg);
-    }
-
-    .investigacio-featured-image-frame {
+    .investigacio-featured-image-frame,
+    .investigacio-skeleton-media {
         aspect-ratio: 3 / 4;
+    }
+
+    .investigacio-copy {
+        margin-bottom: 1.5rem;
+    }
+
+    .investigacio-detail-page .prose-heading {
+        margin-top: 2.75rem;
     }
 
     .investigacio-loading > .data-skeleton-title {
         width: 100%;
         height: var(--display-lg);
         margin-left: auto;
-    }
-
-    .investigacio-skeleton-media {
-        aspect-ratio: 3 / 4;
     }
 
     .investigacio-card-stack,
