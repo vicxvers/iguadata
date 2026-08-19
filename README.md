@@ -49,17 +49,3 @@ El codi font del projecte és públic i està disponible a [GitHub](https://gith
 ## Contacte
 
 Per a suggeriments, correccions factuals, col·laboracions o consultes sobre el projecte, es pot contactar a partir de [hola@iguadata.cat](mailto:hola@iguadata.cat).
-
-## Desenvolupament local
-
-Executa `dev.cmd` des de l'arrel del repositori i obre `http://localhost:8080`.
-
-El servidor local serveix els fitxers estàtics i aplica el fallback de la SPA. Això permet recarregar directament rutes dinàmiques com `/contractes/...` o `/empreses/...` sense obtenir un 404. Es pot triar un altre port amb `dev.cmd --port 8081`.
-
-La configuració bàsica de marca, municipi, domini i contacte viu a `config/project.json`. Després de modificar-la cal regenerar l'aplicació i les pàgines:
-
-```text
-node scripts/build-app.js
-node scripts/build-pages.js
-node scripts/validate-frontend-data.js
-```
