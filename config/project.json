@@ -1,0 +1,18 @@
+{
+  "brand": {
+    "name": "Iguadata",
+    "tagline": "El projecte de transparència d'Igualada"
+  },
+  "municipality": {
+    "name": "Igualada",
+    "authorityName": "Ajuntament d'Igualada"
+  },
+  "site": {
+    "url": "https://iguadata.cat",
+    "language": "ca",
+    "contactEmail": "hola@iguadata.cat",
+    "repositoryUrl": "https://github.com/vicxvers/iguadata",
+    "instagramUrl": "https://www.instagram.com/iguadata/",
+    "cloudflareBeaconToken": "23357f28d01044b1907564bc05717389"
+  }
+}

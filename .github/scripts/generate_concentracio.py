@@ -83,6 +83,14 @@ def risk_label(score: int) -> str:
     return "BAIX"
 
 
+def apply_historic_quota_floor(score: int, quota: float) -> int:
+    if quota >= 0.50:
+        return max(score, 85)
+    if quota >= 0.25:
+        return max(score, 65)
+    return score
+
+
 def build_company_meta(empreses: list[dict]) -> dict[str, dict]:
     meta = {}
     for emp in empreses:
@@ -216,6 +224,11 @@ def score_case(case: dict) -> tuple[int, list[str]]:
     elif amount >= 50000:
         score += 4
         motius.append("Import acumulat significatiu")
+
+    adjusted_score = apply_historic_quota_floor(score, quota)
+    if adjusted_score > score:
+        motius.append("Llindar mínim de risc per quota econòmica sectorial")
+    score = adjusted_score
 
     return min(score, 100), motius
 

@@ -1,0 +1,7 @@
+[
+  "src/core/runtime.js",
+  "src/data/contracts.js",
+  "src/data/use-iguadata-data.js",
+  "src/ui/primitives.jsx",
+  "src/app.jsx"
+]

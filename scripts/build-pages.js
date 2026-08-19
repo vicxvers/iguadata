@@ -1,11 +1,23 @@
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
+const { loadProjectConfig } = require('./lib/project-config');
 
 const root = path.resolve(__dirname, '..');
+const PROJECT_CONFIG = loadProjectConfig(root);
+const { brand, municipality, site } = PROJECT_CONFIG;
 const investigationsPath = path.join(root, 'json', 'investigacio.json');
 const sitemapPath = path.join(root, 'sitemap.xml');
-const APP_ASSET_VERSION = '20260713-maintenance';
+const assetVersion = relativePath => crypto
+    .createHash('sha256')
+    .update(fs.readFileSync(path.join(root, relativePath), 'utf8').replace(/\r\n?/g, '\n'))
+    .digest('hex')
+    .slice(0, 12);
+const ASSET_VERSIONS = {
+    bootstrap: assetVersion('assets/bootstrap.js'),
+    app: assetVersion('assets/app.js'),
+    styles: assetVersion('styles.css'),
+};
 const SPA_REDIRECT_SOURCE = `(function (location) {
     var segmentCount = location.hostname.endsWith('github.io') ? 1 : 0;
     location.replace(
@@ -20,37 +32,42 @@ const SPA_REDIRECT_SOURCE = `(function (location) {
 const primaryPages = [
     {
         route: '',
-        title: "Iguadata | El projecte de transparència d'Igualada",
-        description: "Iguadata és la plataforma independent de periodisme de dades que analitza la contractació pública de l'Ajuntament d'Igualada.",
+        title: `${brand.name} | ${brand.tagline}`,
+        description: `${brand.name} és la plataforma independent de periodisme de dades que analitza la contractació pública i les subvencions de l'Ajuntament d'${municipality.name}.`,
     },
     {
         route: 'contractes',
-        title: 'Contractes | Iguadata',
-        description: "Explora els contractes públics de l'Ajuntament d'Igualada.",
+        title: `Contractes | ${brand.name}`,
+        description: `Explora els contractes públics de l'Ajuntament d'${municipality.name}.`,
     },
     {
         route: 'empreses',
-        title: 'Empreses | Iguadata',
-        description: "Explora les empreses adjudicatàries dels contractes públics de l'Ajuntament d'Igualada.",
+        title: `Empreses | ${brand.name}`,
+        description: `Explora les empreses adjudicatàries dels contractes públics de l'Ajuntament d'${municipality.name}.`,
     },
     {
         route: 'persones',
-        title: 'Persones | Iguadata',
-        description: "Explora les persones vinculades als contractes públics de l'Ajuntament d'Igualada.",
+        title: `Persones | ${brand.name}`,
+        description: `Explora les persones vinculades als contractes públics de l'Ajuntament d'${municipality.name}.`,
+    },
+    {
+        route: 'subvencions',
+        title: `Subvencions | ${brand.name}`,
+        description: `Consulta les subvencions públiques de l'Ajuntament d'${municipality.name}.`,
     },
     {
         route: 'analisi',
-        title: 'Anàlisi | Iguadata',
-        description: 'Algoritmes de detecció de casos potencials de fraccionament, concentració i electoralisme.',
+        title: `Anàlisi | ${brand.name}`,
+        description: 'Algoritmes de detecció de casos potencials de fraccionament, concentració, electoralisme i dependència de subvencions.',
     },
     {
         route: 'investigacio',
-        title: "Casos d'investigació | Iguadata",
-        description: "Casos d'investigació sobre contractació pública a l'Ajuntament d'Igualada.",
+        title: `Casos d'investigació | ${brand.name}`,
+        description: `Casos d'investigació sobre la contractació pública i les subvencions de l'Ajuntament d'${municipality.name}.`,
     },
     {
         route: 'sobre',
-        title: 'Sobre | Iguadata',
+        title: `Sobre | ${brand.name}`,
         description: 'Coneix el projecte, la metodologia i les fonts de dades.',
         robots: 'noindex, follow',
         includeInSitemap: false,
@@ -83,7 +100,7 @@ function renderPage({
     const rootAttribute = dataNosnippet ? ' data-nosnippet' : '';
 
     return `<!DOCTYPE html>
-<html lang="ca">
+<html lang="${escapeHtml(site.language)}">
 
 <head>
     <meta charset="UTF-8">
@@ -94,7 +111,7 @@ function renderPage({
     <meta name="description" content="${escapeHtml(description)}">
     <link rel="canonical" href="${escapeHtml(canonical)}">
     <meta property="og:type" content="${type}">
-    <meta property="og:site_name" content="Iguadata">
+    <meta property="og:site_name" content="${escapeHtml(brand.name)}">
     <meta property="og:title" content="${escapeHtml(title)}">
     <meta property="og:description" content="${escapeHtml(description)}">
     <meta property="og:url" content="${escapeHtml(canonical)}">${imageMeta}
@@ -104,15 +121,15 @@ function renderPage({
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <title>${escapeHtml(title)}</title>
-    <script src="${prefix}assets/bootstrap.js?v=${APP_ASSET_VERSION}"></script>
+    <script src="${prefix}assets/bootstrap.js?v=${ASSET_VERSIONS.bootstrap}"></script>
     <link rel="icon" href="${prefix}favicon.ico" type="image/x-icon">
     <link rel="icon" href="${prefix}favicon-48x48.png" type="image/png" sizes="48x48">
     <link rel="stylesheet" href="${prefix}assets/fonts/fonts.css">
-    <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"23357f28d01044b1907564bc05717389"}'></script>
-    <link rel="stylesheet" href="${prefix}styles.css">
+    ${site.cloudflareBeaconToken ? `<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"${escapeHtml(site.cloudflareBeaconToken)}"}'></script>` : ''}
+    <link rel="stylesheet" href="${prefix}styles.css?v=${ASSET_VERSIONS.styles}">
     <script defer src="${prefix}assets/vendor/react.production.min.js"></script>
     <script defer src="${prefix}assets/vendor/react-dom.production.min.js"></script>
-    <script defer src="${prefix}assets/app.js?v=${APP_ASSET_VERSION}"></script>
+    <script defer src="${prefix}assets/app.js?v=${ASSET_VERSIONS.app}"></script>
 </head>
 
 <body>
@@ -126,14 +143,14 @@ function renderPage({
 function renderSpaFallback() {
     const scriptHash = crypto.createHash('sha256').update(SPA_REDIRECT_SOURCE).digest('base64');
     return `<!DOCTYPE html>
-<html lang="ca">
+<html lang="${escapeHtml(site.language)}">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'sha256-${scriptHash}'; object-src 'none'; base-uri 'none'; form-action 'none'; upgrade-insecure-requests">
     <meta name="referrer" content="strict-origin-when-cross-origin">
     <meta name="robots" content="noindex, nofollow">
-    <title>Iguadata</title>
+    <title>${escapeHtml(brand.name)}</title>
     <script>${SPA_REDIRECT_SOURCE}</script>
 </head>
 
@@ -144,7 +161,7 @@ function renderSpaFallback() {
 }
 
 function canonicalFor(route) {
-    return `https://iguadata.cat/${route ? `${route}/` : ''}`;
+    return `${site.url}/${route ? `${route}/` : ''}`;
 }
 
 for (const page of primaryPages) {
@@ -175,12 +192,12 @@ for (const investigation of investigations) {
     }
 
     fs.writeFileSync(path.join(outputDir, 'index.html'), renderPage({
-        title: `${investigation.title} | Iguadata`,
+        title: `${investigation.title} | ${brand.name}`,
         description: investigation.subtitle,
         canonical: canonicalFor(`investigacio/${investigation.slug}`),
         prefix: '../../',
         type: 'article',
-        socialImage: socialPath ? `https://iguadata.cat${socialPath}` : '',
+        socialImage: socialPath ? `${site.url}${socialPath}` : '',
     }), 'utf8');
 }
 

@@ -90,6 +90,46 @@ function formatTipus(tipo) {
     return m[tipo] || tipo;
 }
 
+function formatSubvencioSector(finalitat) {
+    const sectors = {
+        'Serveis Socials i Promoció Social': 'Social',
+        'Cultura': 'Cultura',
+        'Comerç, Turisme i Pimes': 'Comerç',
+        "Accés a l'habitatge i foment de l'edificació": 'Habitatge',
+        "Foment de l'Ocupació": 'Ocupació',
+        'Cooperació internacional per al desenvolupament i cultural': 'Cooperació',
+        'Educació': 'Educació',
+        'Sanitat': 'Sanitat',
+        'Altres actuacions de caràcter econòmic': 'Economia',
+        'Altres Prestacions econòmiques': 'Altres',
+    };
+    return sectors[finalitat] || 'Altres';
+}
+
+function isSubvencioDirecta(subvencio) {
+    const text = normalizeSearchText([
+        subvencio.objecte_de_la_convocat_ria,
+        subvencio.t_tol_convocat_ria_catal,
+        subvencio.t_tol_convocat_ria_castell,
+        subvencio.discriminador_de_la_concessi,
+        subvencio.descripcion,
+    ].join(' '));
+    return /\bdirect(?:a|e|es)?\b/.test(text);
+}
+
+const SUBVENCIO_TIPOLOGIES = [
+    'Serveis Socials i Promoció Social',
+    'Cultura',
+    'Comerç, Turisme i Pimes',
+    "Accés a l'habitatge i foment de l'edificació",
+    "Foment de l'Ocupació",
+    'Cooperació internacional per al desenvolupament i cultural',
+    'Educació',
+    'Sanitat',
+    'Altres actuacions de caràcter econòmic',
+    'Altres Prestacions econòmiques',
+];
+
 function formatTipusLimit(t) {
     const m = { 'obres': 'Obres', 'serveis': 'Serveis', 'subministraments': 'Subministraments' };
     return m[t] || (t ? t.charAt(0).toUpperCase() + t.slice(1) : '—');
@@ -158,66 +198,6 @@ function riskLabel(n) {
     if (n === 'ALT' || n === 'ALTO') return 'Risc mitjà';
     if (n === 'OBSERVACIO' || n === 'MITJÀ') return 'Risc baix';
     return 'Risc baix';
-}
-
-/* ---- Routing: BASE path + slug helpers -------------------------- */
-// En GH Pages el projecte es serveix sota /iguadata-dev/. En localhost, sense prefix.
-const BASE = window.__IGUADATA_BASE__ || '';
-const assetUrl = (path) => `${BASE}${path}`;
-let DATA_VERSION = '';
-const setDataVersion = (version) => { DATA_VERSION = version || ''; };
-const jsonAssetUrl = (path) => {
-    const suffix = DATA_VERSION ? `?v=${encodeURIComponent(DATA_VERSION)}` : '';
-    return `${assetUrl(path)}${suffix}`;
-};
-let threeLoaderPromise = null;
-function loadThree() {
-    if (window.THREE) return Promise.resolve(window.THREE);
-    if (threeLoaderPromise) return threeLoaderPromise;
-    threeLoaderPromise = new Promise((resolve, reject) => {
-        const script = document.createElement('script');
-        script.src = assetUrl('/assets/vendor/three.min.js');
-        script.async = true;
-        script.onload = () => resolve(window.THREE);
-        script.onerror = reject;
-        document.head.appendChild(script);
-    });
-    return threeLoaderPromise;
-}
-const buildRouteUrl = (path) => `${BASE}${path.startsWith('/') ? path : `/${path}`}`;
-const isMobile = () => window.matchMedia('(max-width: 768px)').matches;
-
-function isPlainLeftClick(event) {
-    return event.button === 0 && !event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey;
-}
-
-function handleInternalLinkClick(event, navigate) {
-    if (!isPlainLeftClick(event)) return;
-    event.preventDefault();
-    navigate();
-}
-
-function resolveRoute(path) {
-    if (path === '/') return { tab: 'home', canonicalPath: '/' };
-    if (path === '/contractes') return { tab: 'buscador', canonicalPath: '/contractes' };
-    if (path === '/empreses') return { tab: 'empreses', canonicalPath: '/empreses' };
-    if (path === '/persones') return { tab: 'persones', canonicalPath: '/persones' };
-    if (path === '/analisi') return { tab: 'analisi', canonicalPath: '/analisi' };
-    if (path === '/investigacio') return { tab: 'casos', canonicalPath: '/investigacio' };
-    if (path.startsWith('/investigacio/')) return { tab: 'cas-investigacio', canonicalPath: path };
-    if (path === '/sobre') return { tab: 'sobre', canonicalPath: '/sobre' };
-    if (path === '/avis-legal') return { tab: 'legal', canonicalPath: '/avis-legal' };
-    if (path.startsWith('/contractes/')) return { tab: 'contracte', canonicalPath: path };
-    if (path.startsWith('/empreses/')) return { tab: 'empresa', canonicalPath: path };
-    if (path.startsWith('/analisi/fraccionament/')) return { tab: 'cas-fraccionament', canonicalPath: path };
-    if (path.startsWith('/analisi/concentracio/')) return { tab: 'cas-concentracio', canonicalPath: path };
-    if (path.startsWith('/analisi/electoralisme/')) return { tab: 'cas-electoralisme', canonicalPath: path };
-    return { tab: 'home', canonicalPath: '/' };
-}
-
-function formatPageTitle(value) {
-    const trimmed = (value || '').trim();
-    return trimmed ? `${trimmed} | Iguadata` : 'Iguadata';
 }
 
 function normalizeSearchText(value) {
@@ -506,77 +486,6 @@ function categoriaToSector(cat) {
     return SECTOR_MAPPING[cat] || "Altres Serveis i Subministraments";
 }
 
-async function fetchContractsSnapshot() {
-    const resp = await fetch(jsonAssetUrl('/json/contractes.json'));
-    if (!resp.ok) throw new Error(`Contractes HTTP ${resp.status}`);
-    const data = await resp.json();
-    if (!Array.isArray(data)) return [];
-    return data
-        .filter(contract => !contract.preservat_iguadata && contract.exclos_analisis !== true)
-        .map(contract => ({
-            ...contract,
-            slug: contract.slug || buildContractSlug(contract),
-        }));
-}
-
-async function fetchEmpresaAliases() {
-    try {
-        const resp = await fetch(jsonAssetUrl('/json/empresa_aliases.json'));
-        if (!resp.ok) return { aliases: {} };
-        const data = await resp.json();
-        return data && data.aliases ? data : { aliases: {} };
-    } catch (e) {
-        return { aliases: {} };
-    }
-}
-
-function buildEmpreses(contracts, existingEmpreses) {
-    const existingByName = {};
-    for (const e of existingEmpreses) {
-        existingByName[e.nom.trim().toUpperCase()] = e;
-    }
-
-    const groups = {};
-    for (const c of contracts) {
-        const nom = c.adjudicatario;
-        if (!nom) continue;
-        if (!groups[nom]) groups[nom] = { ids: [], importe: 0, cpvs: [] };
-        groups[nom].ids.push(c.id);
-        groups[nom].importe += c.importe;
-        if (c.cpv) groups[nom].cpvs.push(c.cpv);
-    }
-
-    const result = [];
-    for (const [nom, data] of Object.entries(groups)) {
-        const existing = existingByName[nom];
-        let sector, categoria;
-        if (existing && existing.sector && existing.categoria) {
-            sector = existing.sector;
-            categoria = existing.categoria;
-        } else {
-            // New company: derive from most frequent CPV code
-            const cpvCount = {};
-            for (const cpv of data.cpvs) {
-                const div = String(cpv).replace(/\D/g, '').substring(0, 2);
-                cpvCount[div] = (cpvCount[div] || 0) + 1;
-            }
-            const topCpv = Object.entries(cpvCount).sort((a, b) => b[1] - a[1])[0];
-            categoria = topCpv ? (CPV_DIVISIONS[topCpv[0]] || "Altres serveis comunitaris") : "Altres serveis comunitaris";
-            sector = categoriaToSector(categoria);
-        }
-        result.push({
-            nom,
-            num_contratos: data.ids.length,
-            total_importe: Math.round(data.importe * 100) / 100,
-            contratos: data.ids.sort((a, b) => a - b),
-            sector,
-            categoria,
-        });
-    }
-    result.sort((a, b) => b.num_contratos - a.num_contratos);
-    return result;
-}
-
 /* ---- generateShareImage ----------------------------------------- */
 async function generateShareImage(contract) {
     const W = 1080, H = 1350;
@@ -725,28 +634,85 @@ async function generateShareImage(contract) {
 }
 
 /* ---- ContractDetailView ----------------------------------------- */
-function ContractDetailView({ contract: c, contracts, empreses, onBack, onEmpresaClick }) {
-    const empresaContracts = useMemo(() =>
-        contracts.filter(contract => contract.adjudicatario === c.adjudicatario)
-        , [contracts, c.adjudicatario]);
+function ContractDetailView({ contract: c, empreses, onBack, onEmpresaClick }) {
+    const [shareActionsOpen, setShareActionsOpen] = useState(false);
+    const [shareCopyStatus, setShareCopyStatus] = useState('');
+    const [shareDownloadStatus, setShareDownloadStatus] = useState('');
+    const shareActionsRef = useRef(null);
+    const shareStatusTimerRef = useRef(null);
+    const shareDownloadTimerRef = useRef(null);
+    const linkedEmpresa = empreses.find(empresa => empresa.nom === c.adjudicatario);
+    const empresaHref = buildRouteUrl(linkedEmpresa?.slug ? `/empreses/${linkedEmpresa.slug}` : '/empreses');
     const isPreserved = c.evidencia_congelada === true || c.estat_font === 'preservat_desaparegut_socrata' || c.preservat_iguadata;
+    const hasCpv = Boolean(String(c.cpv || '').trim());
+
+    useEffect(() => {
+        if (!shareActionsOpen) return;
+        const closeShareActions = (event) => {
+            if (event.type === 'keydown' && event.key !== 'Escape') return;
+            if (event.type === 'pointerdown' && shareActionsRef.current?.contains(event.target)) return;
+            setShareActionsOpen(false);
+        };
+        document.addEventListener('pointerdown', closeShareActions);
+        document.addEventListener('keydown', closeShareActions);
+        return () => {
+            document.removeEventListener('pointerdown', closeShareActions);
+            document.removeEventListener('keydown', closeShareActions);
+        };
+    }, [shareActionsOpen]);
+
+    useEffect(() => () => {
+        window.clearTimeout(shareStatusTimerRef.current);
+        window.clearTimeout(shareDownloadTimerRef.current);
+    }, []);
+
+    const copyContractLink = async () => {
+        try {
+            await navigator.clipboard.writeText(window.location.href);
+            setShareCopyStatus('Enllaç copiat');
+        } catch (_) {
+            setShareCopyStatus("No s'ha pogut copiar");
+        }
+        window.clearTimeout(shareStatusTimerRef.current);
+        shareStatusTimerRef.current = window.setTimeout(() => setShareCopyStatus(''), 1800);
+    };
+
+    const downloadContractImage = () => {
+        generateShareImage(c);
+        setShareDownloadStatus('Imatge descarregada');
+        window.clearTimeout(shareDownloadTimerRef.current);
+        shareDownloadTimerRef.current = window.setTimeout(() => setShareDownloadStatus(''), 1800);
+    };
 
     return (
         <div className="container contracte-detail-page">
-            <button onClick={onBack} className="btn-reset contracte-detail-back" style={{ marginBottom: '1.25rem' }} title="Tornar">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 12H5" /><polyline points="12 19 5 12 12 5" /></svg>
-            </button>
+            <h1 className="page-title">Detall de contracte</h1>
             <div className="contracte-detail-hero">
                 <div className="contracte-detail-amount">{formatCurrency(c.importe)}</div>
                 <div className="contract-header contracte-detail-title-row">
-                    <h1 className="contracte-detail-title">{c.descripcion}</h1>
+                    <h2 className="contracte-detail-title">{c.descripcion}</h2>
                 </div>
+                <div className="contracte-detail-hero-company">
+                    <div className="contract-header contracte-detail-company-row">
+                        <h2 className="contracte-detail-company-title">
+                            <a
+                                className="contracte-detail-company-link"
+                                href={empresaHref}
+                                onClick={(event) => handleInternalLinkClick(event, () => onEmpresaClick(c.adjudicatario))}
+                            >
+                                {c.adjudicatario}
+                            </a>
+                        </h2>
+                    </div>
+                </div>
+            </div>
+            <div className="contracte-detail-info-card">
                 {isPreserved && (
                     <div className="contracte-preserved-notice">
                         Aquest contracte és recuperat i ja no consta al registre públic. La fitxa i evidència es preserven per mantenir la traçabilitat de les dades.
                     </div>
                 )}
-                <div className="contract-meta contracte-detail-meta">
+                <div className={`contract-meta contracte-detail-meta contracte-detail-info-meta${hasCpv ? '' : ' contracte-detail-info-meta-without-cpv'}`}>
                     <div className="contract-meta-item">
                         <span className="contract-meta-label">Data</span>
                         <span className="contract-meta-value">{formatDate(c.fecha)}</span>
@@ -755,6 +721,12 @@ function ContractDetailView({ contract: c, contracts, empreses, onBack, onEmpres
                         <span className="contract-meta-label">Codi expedient</span>
                         <span className="contract-meta-value">{c.codigo}</span>
                     </div>
+                    {hasCpv && (
+                        <div className="contract-meta-item">
+                            <span className="contract-meta-label">CPV</span>
+                            <span className="contract-meta-value">{c.cpv}</span>
+                        </div>
+                    )}
                     <div className="contract-meta-item">
                         <span className="contract-meta-label">Contractant</span>
                         <span className="contract-meta-value">{c.organismo}</span>
@@ -768,39 +740,46 @@ function ContractDetailView({ contract: c, contracts, empreses, onBack, onEmpres
                         <span className="contract-meta-value">{formatProcediment(c.procedimiento)}</span>
                     </div>
                 </div>
-                <div className="contracte-detail-share">
-                    <button
-                        className="btn-share contracte-detail-share-btn"
-                        onClick={() => generateShareImage(c)}
-                    >
-                        Compartir <em className="share-arrow"></em>
-                    </button>
-                </div>
             </div>
-            <div className="contracte-detail-company-card">
-                <div className="contract-meta-label" style={{ marginBottom: '0.75rem' }}>
-                    Empresa adjudicatària
-                </div>
-                <div className="contract-header contracte-detail-company-row">
-                    <h2
-                        className="contracte-detail-company-title"
-                        onClick={() => onEmpresaClick(c.adjudicatario)}
-                        onKeyDown={(event) => {
-                            if (event.key === 'Enter' || event.key === ' ') {
-                                event.preventDefault();
-                                onEmpresaClick(c.adjudicatario);
-                            }
-                        }}
-                        role="link"
-                        tabIndex={0}
+            <div className="contracte-detail-actions-row">
+                <button onClick={onBack} className="btn-share contracte-detail-back" title="Tornar" aria-label="Tornar" type="button">
+                    <svg className="contracte-detail-back-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M19 12H5" /><polyline points="12 19 5 12 12 5" /></svg>
+                    <span>Tornar</span>
+                </button>
+                <div className={`contracte-detail-share contracte-detail-share-standalone${shareActionsOpen ? ' is-open' : ''}`} ref={shareActionsRef}>
+                    <div
+                        id="contract-share-actions"
+                        className="contracte-detail-share-actions"
+                        aria-hidden={!shareActionsOpen}
                     >
-                        {c.adjudicatario}
-                    </h2>
-                    <div className="contract-pills contracte-detail-company-pills">
-                        <button className="contract-pill contract-pill-button" onClick={() => onEmpresaClick(c.adjudicatario)}>
-                            {empresaContracts.length} contractes
+                        <button
+                            id="analisi-tab-fraccionament"
+                            className="btn-share contracte-detail-share-btn"
+                            onClick={copyContractLink}
+                            tabIndex={shareActionsOpen ? 0 : -1}
+                            type="button"
+                        >
+                            {shareCopyStatus || "Copia l'enllaç"}
+                        </button>
+                        <button
+                            id="analisi-tab-monopoli"
+                            className="btn-share contracte-detail-share-btn"
+                            onClick={downloadContractImage}
+                            tabIndex={shareActionsOpen ? 0 : -1}
+                            type="button"
+                        >
+                            {shareDownloadStatus || "Descarrega l'imatge"}
                         </button>
                     </div>
+                    <button
+                        className="btn-share contracte-detail-share-btn"
+                        onClick={() => setShareActionsOpen(open => !open)}
+                        aria-expanded={shareActionsOpen}
+                        aria-controls="contract-share-actions"
+                        type="button"
+                    >
+                        <em className="share-arrow"></em> Compartir
+                    </button>
                 </div>
             </div>
         </div>
@@ -918,9 +897,12 @@ function CasFraccionamentView({ caso, contracts, empreses, onBack, onContractSel
     const overLimit = pct > 100;
     const limitShare = overLimit && caso.import_total > 0 ? (caso.limit_legal / caso.import_total) * 100 : Math.min(pct, 100);
     const overShare = overLimit ? 100 - limitShare : 0;
-    const sepStyle = { marginTop: '1.25rem', paddingTop: '1.75rem', borderTop: '1px solid var(--border-on-dark)' };
     const itemsPerPage = 25;
     const [currentPage, setCurrentPage] = useState(1);
+    const [shareActionsOpen, setShareActionsOpen] = useState(false);
+    const [shareCopyStatus, setShareCopyStatus] = useState('');
+    const shareActionsRef = useRef(null);
+    const shareStatusTimerRef = useRef(null);
 
     const casContracts = useMemo(() =>
         (caso.contractes || []).map(cc => {
@@ -933,22 +915,41 @@ function CasFraccionamentView({ caso, contracts, empreses, onBack, onContractSel
     const totalPages = Math.ceil(casContracts.length / itemsPerPage);
     const contractesPaginats = casContracts.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
 
+    useEffect(() => {
+        if (!shareActionsOpen) return;
+        const closeShareActions = (event) => {
+            if (event.type === 'keydown' && event.key !== 'Escape') return;
+            if (event.type === 'pointerdown' && shareActionsRef.current?.contains(event.target)) return;
+            setShareActionsOpen(false);
+        };
+        document.addEventListener('pointerdown', closeShareActions);
+        document.addEventListener('keydown', closeShareActions);
+        return () => {
+            document.removeEventListener('pointerdown', closeShareActions);
+            document.removeEventListener('keydown', closeShareActions);
+        };
+    }, [shareActionsOpen]);
+
+    useEffect(() => () => window.clearTimeout(shareStatusTimerRef.current), []);
+
+    const copyFraccionamentLink = async () => {
+        try {
+            await navigator.clipboard.writeText(window.location.href);
+            setShareCopyStatus('Enllaç copiat');
+        } catch (_) {
+            setShareCopyStatus("No s'ha pogut copiar");
+        }
+        window.clearTimeout(shareStatusTimerRef.current);
+        shareStatusTimerRef.current = window.setTimeout(() => setShareCopyStatus(''), 1800);
+    };
+
     return (
         <div className="container analisi-detail-page">
-            <button onClick={onBack} className="btn-reset analisi-detail-back" style={{ marginBottom: '1.25rem' }} title="Tornar">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 12H5" /><polyline points="12 19 5 12 12 5" /></svg>
-            </button>
-
-            {/* -- Hero — idèntic a EmpresaView -- */}
+            <h1 className="page-title">Detall de fraccionament</h1>
             <div className="analisi-detail-hero analisi-case-hero analisi-case-fraccionament">
-                <div className="contract-pills analisi-mobile-risk-pills">
-                    <span className={"risk-badge " + riskClass(caso.nivell)}>{riskLabel(caso.nivell)}</span>
-                    <span className={"risk-badge " + riskClass(caso.nivell)} style={{ fontVariantNumeric: 'tabular-nums' }}>{Number.isInteger(caso.risc) ? caso.risc : Number(caso.risc).toFixed(1)}/100</span>
-                </div>
-
-                {/* Nom + import — exactament com empresa */}
-                <div className="contract-header analisi-case-header">
-                    <div className="analisi-case-title-wrap">
+                <div className="analisi-case-amount">{formatCurrency(caso.import_total)}</div>
+                <div className="contract-header analisi-case-header analisi-fraccionament-title-row">
+                    <h2 className="analisi-case-title-wrap">
                         {(caso.empreses || []).map((nom, i) => {
                             const emp = empreses.find(e => e.nom === nom);
                             const slug = emp ? emp.slug : buildEmpresaSlug(nom);
@@ -960,39 +961,54 @@ function CasFraccionamentView({ caso, contracts, empreses, onBack, onContractSel
                                 </a>
                             );
                         })}
-                    </div>
-                    <div className="analisi-case-amount">
-                        {formatCurrency(caso.import_total)}
-                    </div>
+                    </h2>
                 </div>
+                <div className="analisi-detail-contract-count">
+                    {casContracts.length} {casContracts.length === 1 ? 'contracte' : 'contractes'}
+                </div>
+                <div className="contract-pills analisi-detail-hero-pills">
+                    <span className={"risk-badge " + riskClass(caso.nivell)}>{riskLabel(caso.nivell)}</span>
+                    <span className={"risk-badge " + riskClass(caso.nivell)} style={{ fontVariantNumeric: 'tabular-nums' }}>{Number.isInteger(caso.risc) ? caso.risc : Number(caso.risc).toFixed(1)}/100</span>
+                </div>
+            </div>
 
-                {/* Meta — exactament com empresa: items + pills de risc a la dreta */}
-                <div className="contract-meta divider-on-dark">
+            <section className="analisi-detail-section-card" aria-labelledby="concentracio-company-title">
+                <h2 id="concentracio-company-title" className="analisi-detail-section-title">{caso.tipus_concentracio === 'xarxa' ? 'Xarxa mercantil concentrada' : 'Empresa dominant'}</h2>
+                <ul className="analisi-detail-text-list">
+                    {(caso.empreses || []).map(nom => {
+                        const emp = empreses.find(e => e.nom === nom);
+                        const slug = emp ? emp.slug : buildEmpresaSlug(nom);
+                        return <li key={nom}><a href={buildRouteUrl(`/empreses/${slug}`)} onClick={(event) => handleInternalLinkClick(event, () => onEmpresaClick(nom))} className="analisi-detail-company-link">{nom}</a></li>;
+                    })}
+                </ul>
+            </section>
+
+            <div className="analisi-detail-info-card">
+                <div className="contract-meta analisi-detail-info-meta">
                     <div className="contract-meta-item">
-                        <span className="contract-meta-label">{isSingleContractAlert ? 'Contracte' : 'Contractes'}</span>
-                        <span className="contract-meta-value">{casContracts.length}</span>
+                        <span className="contract-meta-label">Període</span>
+                        <span className="contract-meta-value">
+                            {isSingleContractAlert ? formatDate(caso.data_inici) : `${formatDate(caso.data_inici)} – ${formatDate(caso.data_fi)}`}
+                        </span>
                     </div>
                     <div className="contract-meta-item">
                         <span className="contract-meta-label">{isSingleContractAlert ? 'Import' : 'Similitud'}</span>
                         <span className="contract-meta-value">{isSingleContractAlert ? `${Math.round(pct)}% límit` : `${Math.round((caso.similitud_objecte || 0) * 100)}%`}</span>
                     </div>
                     <div className="contract-meta-item">
-                        <span className="contract-meta-label">{isSingleContractAlert ? 'Data' : 'Període'}</span>
-                        <span className="contract-meta-value">{isSingleContractAlert ? formatDate(caso.data_inici) : `${caso.dies_entre_primer_i_ultim} dies`}</span>
+                        <span className="contract-meta-label">Durada</span>
+                        <span className="contract-meta-value">{isSingleContractAlert ? 'Un dia' : `${caso.dies_entre_primer_i_ultim} dies`}</span>
                     </div>
                     <div className="contract-meta-item">
                         <span className="contract-meta-label">Tipus</span>
                         <span className="contract-meta-value">{formatTipusLimit(caso.tipus_limit)}</span>
                     </div>
-                    <div className="contract-pills">
-                        <span className={"risk-badge " + riskClass(caso.nivell)}>{riskLabel(caso.nivell)}</span>
-                        <span className={"risk-badge " + riskClass(caso.nivell)} style={{ fontVariantNumeric: 'tabular-nums' }}>{Number.isInteger(caso.risc) ? caso.risc : Number(caso.risc).toFixed(1)}/100</span>
-                    </div>
                 </div>
+            </div>
 
-                {/* Barra de progrés — mateix patró que la secció admins */}
-                <div className="analisi-case-section" style={sepStyle}>
-                    <div className="contract-meta-label" style={{ marginBottom: '0.5rem' }}>
+            <section className="analisi-detail-section-card analisi-fraccionament-limit" aria-label="Llindar del contracte menor">
+                <div className="analisi-detail-section-body">
+                    <div className="contract-meta-label analisi-detail-section-label">
                         {isSingleContractAlert ? 'Import del contracte' : 'Import acumulat'}
                     </div>
                     <ul className="stack-list">
@@ -1003,46 +1019,31 @@ function CasFraccionamentView({ caso, contracts, empreses, onBack, onContractSel
                             </span>
                         </li>
                     </ul>
-                    <div className="analisi-case-progress">
+                    <div className="analisi-case-progress" aria-hidden="true">
                         <div className="analisi-case-progress-segment analisi-case-progress-limit" style={{ width: limitShare + '%' }}></div>
                         {overLimit && <div className="analisi-case-progress-segment analisi-case-progress-over" style={{ width: overShare + '%' }}></div>}
                     </div>
                 </div>
+            </section>
 
-                {/* Administradors comuns — exactament igual que admins empresa */}
-                {(caso.administradors_comuns || []).length > 0 && (
-                    <div className="analisi-case-section" style={sepStyle}>
-                        <div className="contract-meta-label" style={{ marginBottom: '0.5rem' }}>
-                            Administradors comuns
-                        </div>
-                        <ul className="stack-list">
-                            {caso.administradors_comuns.map(a => (
-                                <li key={a} className="analisi-case-row">
-                                    <span style={{ fontWeight: 500 }}>{a}</span>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-                )}
+            {(caso.administradors_comuns || []).length > 0 && (
+                <section className="analisi-detail-section-card" aria-labelledby="fraccionament-relations-title">
+                    <h2 id="fraccionament-relations-title" className="analisi-detail-section-title">Administradors comuns</h2>
+                    <ul className="analisi-detail-text-list">
+                        {caso.administradors_comuns.map(a => <li key={a}>{a}</li>)}
+                    </ul>
+                </section>
+            )}
 
-                {/* Indicadors — exactament igual que admins empresa */}
-                {(caso.motius || []).length > 0 && (
-                    <div className="analisi-case-section" style={sepStyle}>
-                        <div className="contract-meta-label" style={{ marginBottom: '0.5rem' }}>
-                            Indicadors
-                        </div>
-                        <ul className="stack-list">
-                            {caso.motius.map(m => (
-                                <li key={m} className="analisi-case-row">
-                                    <span style={{ fontWeight: 400 }}>{formatMotiuFraccionament(m)}</span>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-                )}
-            </div>
+            {(caso.motius || []).length > 0 && (
+                <section className="analisi-detail-section-card" aria-labelledby="fraccionament-indicators-title">
+                    <h2 id="fraccionament-indicators-title" className="analisi-detail-section-title">Indicadors</h2>
+                    <ul className="analisi-detail-text-list">
+                        {caso.motius.map(m => <li key={m}>{formatMotiuFraccionament(m)}</li>)}
+                    </ul>
+                </section>
+            )}
 
-            {/* -- Contractes trobats -- */}
             {contractesPaginats.map((cc, i) => (
                 cc.slug && cc.fullObj ? (
                     <a key={`${cc.codigo}-${i}`} href={buildRouteUrl(`/contractes/${cc.slug}`)} className="card-link-wrapper" onClick={(event) => handleInternalLinkClick(event, () => onContractSelect(cc.fullObj))}>
@@ -1057,6 +1058,10 @@ function CasFraccionamentView({ caso, contracts, empreses, onBack, onContractSel
                                 <div className="contract-meta-item"><span className="contract-meta-label">Empresa adjudicatària</span><span className="contract-meta-value">{cc.adjudicatario}</span></div>
                                 <div className="contract-meta-item"><span className="contract-meta-label">Data</span><span className="contract-meta-value">{formatDate(cc.fecha)}</span></div>
                                 <div className="contract-meta-item"><span className="contract-meta-label">Codi expedient</span><span className="contract-meta-value">{cc.codigo}</span></div>
+                                <div className="contract-pills">
+                                    <span className="contract-pill">{formatTipus(cc.tipo)}</span>
+                                    <span className="contract-pill procedure">{formatProcediment(cc.procedimiento)}</span>
+                                </div>
                             </div>
                         </div>
                     </a>
@@ -1070,19 +1075,38 @@ function CasFraccionamentView({ caso, contracts, empreses, onBack, onContractSel
                             <div className="contract-meta-item"><span className="contract-meta-label">Empresa adjudicatària</span><span className="contract-meta-value">{cc.adjudicatario}</span></div>
                             <div className="contract-meta-item"><span className="contract-meta-label">Data</span><span className="contract-meta-value">{formatDate(cc.fecha)}</span></div>
                             <div className="contract-meta-item"><span className="contract-meta-label">Codi expedient</span><span className="contract-meta-value">{cc.codigo}</span></div>
+                            <div className="contract-pills">
+                                <span className="contract-pill">{formatTipus(cc.tipo)}</span>
+                                <span className="contract-pill procedure">{formatProcediment(cc.procedimiento)}</span>
+                            </div>
                         </div>
                     </div>
                 )
             ))}
             {casContracts.length > itemsPerPage && (
-                <div className="pagination">
-                    <button className="pagination-btn" onClick={() => { setCurrentPage(1) }} disabled={currentPage === 1}>«</button>
-                    <button className="pagination-btn" onClick={() => { setCurrentPage(p => Math.max(p - 1, 1)) }} disabled={currentPage === 1}>‹</button>
-                    <span className="pagination-info">Pàgina <strong>{currentPage}</strong> de <strong>{totalPages}</strong></span>
-                    <button className="pagination-btn" onClick={() => { setCurrentPage(p => Math.min(p + 1, totalPages)) }} disabled={currentPage === totalPages}>›</button>
-                    <button className="pagination-btn" onClick={() => { setCurrentPage(totalPages) }} disabled={currentPage === totalPages}>»</button>
-                </div>
+                <Pagination
+                    currentPage={currentPage}
+                    totalPages={totalPages}
+                    onPageChange={setCurrentPage}
+                    showTitles={false}
+                />
             )}
+            <div className="contracte-detail-actions-row">
+                <button onClick={onBack} className="btn-share contracte-detail-back" title="Tornar" aria-label="Tornar" type="button">
+                    <svg className="contracte-detail-back-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M19 12H5" /><polyline points="12 19 5 12 12 5" /></svg>
+                    <span>Tornar</span>
+                </button>
+                <div className={`contracte-detail-share contracte-detail-share-standalone${shareActionsOpen ? ' is-open' : ''}`} ref={shareActionsRef}>
+                    <div id="fraccionament-share-actions" className="contracte-detail-share-actions" aria-hidden={!shareActionsOpen}>
+                        <button className="btn-share contracte-detail-share-btn" onClick={copyFraccionamentLink} tabIndex={shareActionsOpen ? 0 : -1} type="button">
+                            {shareCopyStatus || "Copia l'enllaç"}
+                        </button>
+                    </div>
+                    <button className="btn-share contracte-detail-share-btn" onClick={() => setShareActionsOpen(open => !open)} aria-expanded={shareActionsOpen} aria-controls="fraccionament-share-actions" type="button">
+                        <em className="share-arrow"></em> Compartir
+                    </button>
+                </div>
+            </div>
         </div>
     );
 }
@@ -1090,9 +1114,12 @@ function CasFraccionamentView({ caso, contracts, empreses, onBack, onContractSel
 /* ---- CasConcentracioView ---------------------------------------- */
 function CasConcentracioView({ caso, contracts, empreses, onBack, onContractSelect, onEmpresaClick }) {
     if (!caso) return null;
-    const sepStyle = { marginTop: '1.25rem', paddingTop: '1.75rem', borderTop: '1px solid var(--border-on-dark)' };
     const itemsPerPage = 25;
     const [currentPage, setCurrentPage] = useState(1);
+    const [shareActionsOpen, setShareActionsOpen] = useState(false);
+    const [shareCopyStatus, setShareCopyStatus] = useState('');
+    const shareActionsRef = useRef(null);
+    const shareStatusTimerRef = useRef(null);
     const casContracts = useMemo(() =>
         (caso.contractes || []).map(cc => {
             const full = findMatchingContract(contracts, cc);
@@ -1104,105 +1131,78 @@ function CasConcentracioView({ caso, contracts, empreses, onBack, onContractSele
     const isHistoricConcentracio = caso.finestra === 'historic';
     const quotaPercent = Math.max(0, Math.min(100, Math.round((Number(caso.quota_import) || 0) * 100)));
     const quotaTone = quotaClass(caso.quota_import);
+    const concentrationType = isHistoricConcentracio ? 'Històrica' : 'Temporal';
+
+    useEffect(() => {
+        if (!shareActionsOpen) return;
+        const closeShareActions = (event) => {
+            if (event.type === 'keydown' && event.key !== 'Escape') return;
+            if (event.type === 'pointerdown' && shareActionsRef.current?.contains(event.target)) return;
+            setShareActionsOpen(false);
+        };
+        document.addEventListener('pointerdown', closeShareActions);
+        document.addEventListener('keydown', closeShareActions);
+        return () => {
+            document.removeEventListener('pointerdown', closeShareActions);
+            document.removeEventListener('keydown', closeShareActions);
+        };
+    }, [shareActionsOpen]);
+
+    useEffect(() => () => window.clearTimeout(shareStatusTimerRef.current), []);
+
+    const copyConcentracioLink = async () => {
+        try {
+            await navigator.clipboard.writeText(window.location.href);
+            setShareCopyStatus('Enllaç copiat');
+        } catch (_) {
+            setShareCopyStatus("No s'ha pogut copiar");
+        }
+        window.clearTimeout(shareStatusTimerRef.current);
+        shareStatusTimerRef.current = window.setTimeout(() => setShareCopyStatus(''), 1800);
+    };
 
     return (
         <div className="container analisi-detail-page">
-            <button onClick={onBack} className="btn-reset analisi-detail-back" style={{ marginBottom: '1.25rem' }} title="Tornar">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 12H5" /><polyline points="12 19 5 12 12 5" /></svg>
-            </button>
+            <h1 className="page-title">Detall de concentració</h1>
             <div className="analisi-detail-hero analisi-case-hero analisi-case-concentracio">
-                {!isHistoricConcentracio && (
-                    <div className="contract-pills analisi-mobile-risk-pills">
-                        <span className={"risk-badge " + riskClass(caso.nivell)}>{riskLabel(caso.nivell)}</span>
-                        <span className={"risk-badge " + riskClass(caso.nivell)} style={{ fontVariantNumeric: 'tabular-nums' }}>{Number.isInteger(caso.risc) ? caso.risc : Number(caso.risc).toFixed(1)}/100</span>
-                    </div>
-                )}
-                <div className="contract-header analisi-case-header">
-                    <div className="analisi-case-title-wrap">
-                        <div className="analisi-case-title">{formatSectorName(caso.sector)}</div>
-                        <div className="label-on-dark analisi-case-subtitle">{isHistoricConcentracio ? 'Registre històric' : formatConcentracioPeriod(caso)}</div>
-                    </div>
+                <div className="analisi-case-amount">{formatCurrency(caso.import_concentrat)}</div>
+                <div className="contract-header analisi-case-header analisi-fraccionament-title-row">
+                    <h2 className="analisi-case-title-wrap"><span className="analisi-case-title">{formatSectorName(caso.sector)}</span></h2>
                 </div>
-                {isHistoricConcentracio ? (
-                    <>
-                        <div className="analisi-case-section" style={sepStyle}>
-                            <div className="contract-meta-label" style={{ marginBottom: '0.75rem' }}>
-                                {caso.tipus_concentracio === 'xarxa' ? 'Xarxa mercantil concentrada' : 'Empresa dominant'}
-                            </div>
-                            <ul className="stack-list">
-                                {(caso.empreses || []).map(nom => {
-                                    const emp = empreses.find(e => e.nom === nom);
-                                    const slug = emp ? emp.slug : buildEmpresaSlug(nom);
-                                    return (
-                                        <li key={nom} className="analisi-case-company-item">
-                                            <a href={buildRouteUrl(`/empreses/${slug}`)} onClick={(event) => handleInternalLinkClick(event, () => onEmpresaClick(nom))} className="analisi-case-company-link">{nom}</a>
-                                        </li>
-                                    );
-                                })}
-                            </ul>
-                        </div>
-                        <div className="analisi-case-section" style={sepStyle}>
-                            <div className="contract-meta-label" style={{ marginBottom: '0.75rem' }}>Quota de mercat</div>
-                            <div className={"analisi-case-quota analisi-case-quota-" + quotaTone}>{quotaPercent}%</div>
-                            <div className="analisi-case-quota-bar">
-                                <div className={"analisi-case-quota-fill analisi-case-quota-fill-" + quotaTone} style={{ width: `${quotaPercent}%` }} />
-                            </div>
-                        </div>
-                        <div className="contract-meta divider-on-dark">
-                            <div className="contract-meta-item"><span className="contract-meta-label">Import</span><span className="contract-meta-value">{formatCurrency(caso.import_concentrat)} / {formatCurrency(caso.import_sector)}</span></div>
-                            <div className="contract-meta-item"><span className="contract-meta-label">Contractes</span><span className="contract-meta-value">{caso.contractes_concentrats} / {caso.contractes_sector}</span></div>
-                        </div>
-                    </>
-                ) : (
-                    <>
-                        <div className="analisi-case-section" style={sepStyle}>
-                            <div className="contract-meta-label" style={{ marginBottom: '0.75rem' }}>
-                                {caso.tipus_concentracio === 'xarxa' ? 'Xarxa mercantil concentrada' : 'Empresa dominant'}
-                            </div>
-                            <ul className="stack-list">
-                                {(caso.empreses || []).map(nom => {
-                                    const emp = empreses.find(e => e.nom === nom);
-                                    const slug = emp ? emp.slug : buildEmpresaSlug(nom);
-                                    return (
-                                        <li key={nom} className="analisi-case-company-item">
-                                            <a href={buildRouteUrl(`/empreses/${slug}`)} onClick={(event) => handleInternalLinkClick(event, () => onEmpresaClick(nom))} className="analisi-case-company-link">{nom}</a>
-                                        </li>
-                                    );
-                                })}
-                            </ul>
-                        </div>
-                        <div className="analisi-case-section" style={sepStyle}>
-                            <div className="contract-meta-label" style={{ marginBottom: '0.75rem' }}>Quota de mercat</div>
-                            <div className={"analisi-case-quota analisi-case-quota-" + quotaTone}>{quotaPercent}%</div>
-                            <div className="analisi-case-quota-bar">
-                                <div className={"analisi-case-quota-fill analisi-case-quota-fill-" + quotaTone} style={{ width: `${quotaPercent}%` }} />
-                            </div>
-                        </div>
-                        <div className="contract-meta divider-on-dark">
-                            <div className="contract-meta-item"><span className="contract-meta-label">Import</span><span className="contract-meta-value">{formatCurrency(caso.import_concentrat)} / {formatCurrency(caso.import_sector)}</span></div>
-                            <div className="contract-meta-item"><span className="contract-meta-label">Contractes</span><span className="contract-meta-value">{caso.contractes_concentrats} / {caso.contractes_sector}</span></div>
-                            <div className="contract-pills">
-                                <span className={"risk-badge " + riskClass(caso.nivell)}>{riskLabel(caso.nivell)}</span>
-                                <span className={"risk-badge " + riskClass(caso.nivell)} style={{ fontVariantNumeric: 'tabular-nums' }}>{Number.isInteger(caso.risc) ? caso.risc : Number(caso.risc).toFixed(1)}/100</span>
-                            </div>
-                        </div>
-                    </>
-                )}
-                {(caso.administradors_comuns || []).length > 0 && (
-                    <div className="analisi-case-section" style={sepStyle}>
-                        <div className="contract-meta-label" style={{ marginBottom: '0.5rem' }}>Administradors comuns</div>
-                        <ul className="stack-list">
-                            {caso.administradors_comuns.map(a => <li key={a} className="analisi-case-section-value">{a}</li>)}
-                        </ul>
-                    </div>
-                )}
-                <div className="analisi-case-section" style={sepStyle}>
-                    <div className="contract-meta-label" style={{ marginBottom: '0.5rem' }}>Indicadors</div>
-                    <ul className="stack-list">
-                        {(caso.motius || []).map(m => <li key={m} className="analisi-case-list-item">{m}</li>)}
-                    </ul>
+                <div className="analisi-detail-contract-count">{casContracts.length} {casContracts.length === 1 ? 'contracte' : 'contractes'}</div>
+                <div className="contract-pills analisi-detail-hero-pills">
+                    <span className={"risk-badge " + riskClass(caso.nivell)}>{riskLabel(caso.nivell)}</span>
+                    <span className={"risk-badge " + riskClass(caso.nivell)} style={{ fontVariantNumeric: 'tabular-nums' }}>{Number.isInteger(caso.risc) ? caso.risc : Number(caso.risc).toFixed(1)}/100</span>
                 </div>
             </div>
+
+            <div className="analisi-detail-info-card">
+                <div className={`contract-meta analisi-detail-info-meta analisi-detail-info-meta-concentracio${isHistoricConcentracio ? ' is-historic' : ''}`}>
+                    {!isHistoricConcentracio && <div className="contract-meta-item"><span className="contract-meta-label">Període</span><span className="contract-meta-value">{formatConcentracioPeriod(caso)}</span></div>}
+                    <div className="contract-meta-item"><span className="contract-meta-label">Tipus</span><span className="contract-meta-value">{concentrationType}</span></div>
+                    <div className="contract-meta-item"><span className="contract-meta-label">Import del sector</span><span className="contract-meta-value">{formatCurrency(caso.import_sector)}</span></div>
+                    <div className="contract-meta-item"><span className="contract-meta-label">Contractes del sector</span><span className="contract-meta-value">{caso.contractes_sector}</span></div>
+                    <div className="analisi-detail-info-extra">
+                        <span className="contract-meta-label">Quota de mercat</span>
+                        <span className={"analisi-case-quota analisi-case-quota-" + quotaTone}>{quotaPercent}%</span>
+                        <span className="analisi-case-quota-bar" aria-hidden="true"><span className={"analisi-case-quota-fill analisi-case-quota-fill-" + quotaTone} style={{ width: `${quotaPercent}%` }} /></span>
+                    </div>
+                </div>
+            </div>
+
+            {(caso.administradors_comuns || []).length > 0 && (
+                <section className="analisi-detail-section-card" aria-labelledby="concentracio-relations-title">
+                    <h2 id="concentracio-relations-title" className="analisi-detail-section-title">Administradors comuns</h2>
+                    <ul className="analisi-detail-text-list">{caso.administradors_comuns.map(a => <li key={a}>{a}</li>)}</ul>
+                </section>
+            )}
+
+            {(caso.motius || []).length > 0 && (
+                <section className="analisi-detail-section-card" aria-labelledby="concentracio-indicators-title">
+                    <h2 id="concentracio-indicators-title" className="analisi-detail-section-title">Indicadors</h2>
+                    <ul className="analisi-detail-text-list">{caso.motius.map(m => <li key={m}>{m}</li>)}</ul>
+                </section>
+            )}
 
             {contractesPaginats.map((cc, i) => (
                 cc.slug && cc.fullObj ? (
@@ -1213,24 +1213,37 @@ function CasConcentracioView({ caso, contracts, empreses, onBack, onContractSele
                                 <div className="contract-meta-item"><span className="contract-meta-label">Empresa adjudicatària</span><span className="contract-meta-value">{cc.adjudicatario}</span></div>
                                 <div className="contract-meta-item"><span className="contract-meta-label">Data</span><span className="contract-meta-value">{formatDate(cc.fecha)}</span></div>
                                 <div className="contract-meta-item"><span className="contract-meta-label">Codi expedient</span><span className="contract-meta-value">{cc.codigo}</span></div>
+                                <div className="contract-pills"><span className="contract-pill">{formatTipus(cc.tipo)}</span><span className="contract-pill procedure">{formatProcediment(cc.procedimiento)}</span></div>
                             </div>
                         </div>
                     </a>
                 ) : (
                     <div key={`${cc.codigo}-${i}`} className="contract-card">
                         <div className="contract-header"><div className="contract-title">{cc.descripcion}</div><div className="contract-amount">{formatCurrency(cc.importe)}</div></div>
+                        <div className="contract-meta">
+                            <div className="contract-meta-item"><span className="contract-meta-label">Empresa adjudicatària</span><span className="contract-meta-value">{cc.adjudicatario}</span></div>
+                            <div className="contract-meta-item"><span className="contract-meta-label">Data</span><span className="contract-meta-value">{formatDate(cc.fecha)}</span></div>
+                            <div className="contract-meta-item"><span className="contract-meta-label">Codi expedient</span><span className="contract-meta-value">{cc.codigo}</span></div>
+                            <div className="contract-pills"><span className="contract-pill">{formatTipus(cc.tipo)}</span><span className="contract-pill procedure">{formatProcediment(cc.procedimiento)}</span></div>
+                        </div>
                     </div>
                 )
             ))}
             {casContracts.length > itemsPerPage && (
-                <div className="pagination">
-                    <button className="pagination-btn" onClick={() => { setCurrentPage(1) }} disabled={currentPage === 1}>«</button>
-                    <button className="pagination-btn" onClick={() => { setCurrentPage(p => Math.max(p - 1, 1)) }} disabled={currentPage === 1}>‹</button>
-                    <span className="pagination-info">Pàgina <strong>{currentPage}</strong> de <strong>{totalPages}</strong></span>
-                    <button className="pagination-btn" onClick={() => { setCurrentPage(p => Math.min(p + 1, totalPages)) }} disabled={currentPage === totalPages}>›</button>
-                    <button className="pagination-btn" onClick={() => { setCurrentPage(totalPages) }} disabled={currentPage === totalPages}>»</button>
-                </div>
+                <Pagination
+                    currentPage={currentPage}
+                    totalPages={totalPages}
+                    onPageChange={setCurrentPage}
+                    showTitles={false}
+                />
             )}
+            <div className="contracte-detail-actions-row">
+                <button onClick={onBack} className="btn-share contracte-detail-back" title="Tornar" aria-label="Tornar" type="button"><svg className="contracte-detail-back-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M19 12H5" /><polyline points="12 19 5 12 12 5" /></svg><span>Tornar</span></button>
+                <div className={`contracte-detail-share contracte-detail-share-standalone${shareActionsOpen ? ' is-open' : ''}`} ref={shareActionsRef}>
+                    <div id="concentracio-share-actions" className="contracte-detail-share-actions" aria-hidden={!shareActionsOpen}><button className="btn-share contracte-detail-share-btn" onClick={copyConcentracioLink} tabIndex={shareActionsOpen ? 0 : -1} type="button">{shareCopyStatus || "Copia l'enllaç"}</button></div>
+                    <button className="btn-share contracte-detail-share-btn" onClick={() => setShareActionsOpen(open => !open)} aria-expanded={shareActionsOpen} aria-controls="concentracio-share-actions" type="button"><em className="share-arrow"></em> Compartir</button>
+                </div>
+            </div>
         </div>
     );
 }
@@ -1238,7 +1251,10 @@ function CasConcentracioView({ caso, contracts, empreses, onBack, onContractSele
 /* ---- CasElectoralismeView --------------------------------------- */
 function CasElectoralismeView({ caso, contracts, empreses, onBack, onContractSelect, onEmpresaClick }) {
     if (!caso) return null;
-    const sepStyle = { marginTop: '1.25rem', paddingTop: '1.75rem', borderTop: '1px solid var(--border-on-dark)' };
+    const [shareActionsOpen, setShareActionsOpen] = useState(false);
+    const [shareCopyStatus, setShareCopyStatus] = useState('');
+    const shareActionsRef = useRef(null);
+    const shareStatusTimerRef = useRef(null);
     const casContracts = useMemo(() =>
         (caso.contractes || []).map(cc => {
             const full = findMatchingContract(contracts, cc);
@@ -1272,51 +1288,73 @@ function CasElectoralismeView({ caso, contracts, empreses, onBack, onContractSel
     const temporalLabel = isPreElectoral ? 'Dies abans' : (isPostElectoral ? 'Dies després' : 'Votació en');
     const temporalValue = isPreElectoral ? (caso.dies_abans_convocatoria || 0) : (isPostElectoral ? (caso.dies_despres_votacio || 0) : caso.dies_fins_votacio);
 
+    useEffect(() => {
+        if (!shareActionsOpen) return;
+        const closeShareActions = (event) => {
+            if (event.type === 'keydown' && event.key !== 'Escape') return;
+            if (event.type === 'pointerdown' && shareActionsRef.current?.contains(event.target)) return;
+            setShareActionsOpen(false);
+        };
+        document.addEventListener('pointerdown', closeShareActions);
+        document.addEventListener('keydown', closeShareActions);
+        return () => {
+            document.removeEventListener('pointerdown', closeShareActions);
+            document.removeEventListener('keydown', closeShareActions);
+        };
+    }, [shareActionsOpen]);
+
+    useEffect(() => () => window.clearTimeout(shareStatusTimerRef.current), []);
+
+    const copyElectoralismeLink = async () => {
+        try {
+            await navigator.clipboard.writeText(window.location.href);
+            setShareCopyStatus('Enllaç copiat');
+        } catch (_) {
+            setShareCopyStatus("No s'ha pogut copiar");
+        }
+        window.clearTimeout(shareStatusTimerRef.current);
+        shareStatusTimerRef.current = window.setTimeout(() => setShareCopyStatus(''), 1800);
+    };
+
     return (
         <div className="container analisi-detail-page">
-            <button onClick={onBack} className="btn-reset analisi-detail-back" style={{ marginBottom: '1.25rem' }} title="Tornar">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 12H5" /><polyline points="12 19 5 12 12 5" /></svg>
-            </button>
-
+            <h1 className="page-title">Detall d'electoralisme</h1>
             <div className="analisi-detail-hero analisi-case-hero analisi-case-electoralisme">
-                <div className="contract-pills analisi-mobile-risk-pills">
+                <div className="analisi-case-amount">{formatCurrency(caso.import_total)}</div>
+                <div className="contract-header analisi-case-header analisi-fraccionament-title-row">
+                    <h2 className="analisi-case-title-wrap">
+                        <a href={buildRouteUrl(`/empreses/${empresaPrincipalSlug}`)} onClick={(event) => handleInternalLinkClick(event, () => onEmpresaClick(empresaPrincipal))} className="analisi-case-title-link">{empresaPrincipal}</a>
+                    </h2>
+                </div>
+                <div className="analisi-detail-contract-count">{casContracts.length} {casContracts.length === 1 ? 'contracte' : 'contractes'}</div>
+                <div className="contract-pills analisi-detail-hero-pills">
                     <span className={"risk-badge " + riskClass(caso.nivell)}>{riskLabel(caso.nivell)}</span>
                     <span className={"risk-badge " + riskClass(caso.nivell)} style={{ fontVariantNumeric: 'tabular-nums' }}>{Number.isInteger(caso.risc) ? caso.risc : Number(caso.risc).toFixed(1)}/100</span>
                 </div>
-                <div className="contract-header analisi-case-header">
-                    <div className="analisi-case-title-wrap">
-                        <a href={buildRouteUrl(`/empreses/${empresaPrincipalSlug}`)} onClick={(event) => handleInternalLinkClick(event, () => onEmpresaClick(empresaPrincipal))} className="analisi-case-title-link">{empresaPrincipal}</a>
-                    </div>
-                    <div className="analisi-case-amount">
-                        {formatCurrency(caso.import_total)}
-                    </div>
-                </div>
+            </div>
 
-                <div className="contract-meta divider-on-dark">
+            <div className="analisi-detail-info-card">
+                <div className="contract-meta analisi-detail-info-meta">
                     <div className="contract-meta-item"><span className="contract-meta-label">Període</span><span className="contract-meta-value">{caso.periode_electoral}</span></div>
                     <div className="contract-meta-item"><span className="contract-meta-label">Data</span><span className="contract-meta-value">{formatDate(caso.data_inici)}</span></div>
                     <div className="contract-meta-item"><span className="contract-meta-label">{temporalLabel}</span><span className="contract-meta-value">{temporalValue} dies</span></div>
-                    <div className="contract-meta-item"><span className="contract-meta-label">Contracte recurrent</span><span className="contract-meta-value">{hasRecurrencia ? 'Sí' : 'No'}</span></div>
-                    <div className="contract-pills">
-                        <span className={"risk-badge " + riskClass(caso.nivell)}>{riskLabel(caso.nivell)}</span>
-                        <span className={"risk-badge " + riskClass(caso.nivell)} style={{ fontVariantNumeric: 'tabular-nums' }}>{Number.isInteger(caso.risc) ? caso.risc : Number(caso.risc).toFixed(1)}/100</span>
-                    </div>
-                </div>
-
-                {(caso.termes_detectats || []).length > 0 && (
-                    <div className="analisi-case-section" style={sepStyle}>
-                        <div className="contract-meta-label" style={{ marginBottom: '0.5rem' }}>Conceptes</div>
-                        <div className="analisi-case-list-item">{conceptesText}</div>
-                    </div>
-                )}
-
-                <div className="analisi-case-section" style={sepStyle}>
-                    <div className="contract-meta-label" style={{ marginBottom: '0.5rem' }}>Indicadors</div>
-                    <ul className="stack-list">
-                        {(caso.motius || []).map(m => <li key={m} className="analisi-case-list-item">{m}</li>)}
-                    </ul>
+                    <div className="contract-meta-item"><span className="contract-meta-label">Recurrència</span><span className="contract-meta-value">{hasRecurrencia ? 'Sí' : 'No'}</span></div>
                 </div>
             </div>
+
+            {(caso.termes_detectats || []).length > 0 && (
+                <section className="analisi-detail-section-card" aria-labelledby="electoralisme-concepts-title">
+                    <h2 id="electoralisme-concepts-title" className="analisi-detail-section-title">Conceptes</h2>
+                    <div className="analisi-detail-section-value">{conceptesText}</div>
+                </section>
+            )}
+
+            {(caso.motius || []).length > 0 && (
+                <section className="analisi-detail-section-card" aria-labelledby="electoralisme-indicators-title">
+                    <h2 id="electoralisme-indicators-title" className="analisi-detail-section-title">Indicadors</h2>
+                    <ul className="analisi-detail-text-list">{caso.motius.map(m => <li key={m}>{m}</li>)}</ul>
+                </section>
+            )}
 
             {contracte.slug && contracte.fullObj ? (
                 <a href={buildRouteUrl(`/contractes/${contracte.slug}`)} className="card-link-wrapper" onClick={(event) => handleInternalLinkClick(event, () => onContractSelect(contracte.fullObj))}>
@@ -1326,39 +1364,132 @@ function CasElectoralismeView({ caso, contracts, empreses, onBack, onContractSel
                             <div className="contract-meta-item"><span className="contract-meta-label">Empresa adjudicatària</span><span className="contract-meta-value">{contracte.adjudicatario}</span></div>
                             <div className="contract-meta-item"><span className="contract-meta-label">Data</span><span className="contract-meta-value">{formatDate(contracte.fecha)}</span></div>
                             <div className="contract-meta-item"><span className="contract-meta-label">Codi expedient</span><span className="contract-meta-value">{contracte.codigo}</span></div>
+                            <div className="contract-pills"><span className="contract-pill">{formatTipus(contracte.tipo)}</span><span className="contract-pill procedure">{formatProcediment(contracte.procedimiento)}</span></div>
                         </div>
                     </div>
                 </a>
             ) : (
                 <div className="contract-card">
                     <div className="contract-header"><div className="contract-title">{contracte.descripcion}</div><div className="contract-amount">{formatCurrency(contracte.importe)}</div></div>
+                    <div className="contract-meta">
+                        <div className="contract-meta-item"><span className="contract-meta-label">Empresa adjudicatària</span><span className="contract-meta-value">{contracte.adjudicatario}</span></div>
+                        <div className="contract-meta-item"><span className="contract-meta-label">Data</span><span className="contract-meta-value">{formatDate(contracte.fecha)}</span></div>
+                        <div className="contract-meta-item"><span className="contract-meta-label">Codi expedient</span><span className="contract-meta-value">{contracte.codigo}</span></div>
+                        <div className="contract-pills"><span className="contract-pill">{formatTipus(contracte.tipo)}</span><span className="contract-pill procedure">{formatProcediment(contracte.procedimiento)}</span></div>
+                    </div>
                 </div>
             )}
+            <div className="contracte-detail-actions-row">
+                <button onClick={onBack} className="btn-share contracte-detail-back" title="Tornar" aria-label="Tornar" type="button"><svg className="contracte-detail-back-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M19 12H5" /><polyline points="12 19 5 12 12 5" /></svg><span>Tornar</span></button>
+                <div className={`contracte-detail-share contracte-detail-share-standalone${shareActionsOpen ? ' is-open' : ''}`} ref={shareActionsRef}>
+                    <div id="electoralisme-share-actions" className="contracte-detail-share-actions" aria-hidden={!shareActionsOpen}><button className="btn-share contracte-detail-share-btn" onClick={copyElectoralismeLink} tabIndex={shareActionsOpen ? 0 : -1} type="button">{shareCopyStatus || "Copia l'enllaç"}</button></div>
+                    <button className="btn-share contracte-detail-share-btn" onClick={() => setShareActionsOpen(open => !open)} aria-expanded={shareActionsOpen} aria-controls="electoralisme-share-actions" type="button"><em className="share-arrow"></em> Compartir</button>
+                </div>
+            </div>
         </div>
     );
 }
 
-function FilterActions({ open, onToggle, activeCount, onReset }) {
+/* ---- CasDependenciaView ----------------------------------------- */
+function CasDependenciaView({ caso, onBack }) {
+    if (!caso) return null;
+    const [shareActionsOpen, setShareActionsOpen] = useState(false);
+    const [shareCopyStatus, setShareCopyStatus] = useState('');
+    const shareActionsRef = useRef(null);
+    const shareStatusTimerRef = useRef(null);
+    const annualDependenciaStats = useMemo(() => {
+        const totalsByYear = {};
+        for (const subvencio of caso.subvencions || []) {
+            const year = subvencio.año || Number(String(subvencio.fecha || '').slice(0, 4));
+            if (!year) continue;
+            totalsByYear[year] = (totalsByYear[year] || 0) + (Number(subvencio.importe) || 0);
+        }
+        const annualTotals = Object.values(totalsByYear);
+        return {
+            average: annualTotals.length ? caso.import_total / annualTotals.length : 0,
+            maximum: annualTotals.length ? Math.max(...annualTotals) : 0,
+        };
+    }, [caso]);
+
+    useEffect(() => {
+        if (!shareActionsOpen) return;
+        const closeShareActions = (event) => {
+            if (event.type === 'keydown' && event.key !== 'Escape') return;
+            if (event.type === 'pointerdown' && shareActionsRef.current?.contains(event.target)) return;
+            setShareActionsOpen(false);
+        };
+        document.addEventListener('pointerdown', closeShareActions);
+        document.addEventListener('keydown', closeShareActions);
+        return () => {
+            document.removeEventListener('pointerdown', closeShareActions);
+            document.removeEventListener('keydown', closeShareActions);
+        };
+    }, [shareActionsOpen]);
+
+    useEffect(() => () => window.clearTimeout(shareStatusTimerRef.current), []);
+
+    const copyDependenciaLink = async () => {
+        try {
+            await navigator.clipboard.writeText(window.location.href);
+            setShareCopyStatus('Enllaç copiat');
+        } catch (_) {
+            setShareCopyStatus("No s'ha pogut copiar");
+        }
+        window.clearTimeout(shareStatusTimerRef.current);
+        shareStatusTimerRef.current = window.setTimeout(() => setShareCopyStatus(''), 1800);
+    };
+
     return (
-        <div className="filter-actions">
-            <button
-                className="filters-toggle-btn"
-                onClick={onToggle}
-                aria-expanded={open}
-                type="button"
-            >
-                <span>Filtres</span>
-                <span className="filters-toggle-meta">{activeCount}</span>
-            </button>
-            <button
-                className="btn-reset filters-mobile-reset"
-                onClick={onReset}
-                title="Restablir filtres"
-                aria-label="Restablir filtres"
-                type="button"
-            >
-                <svg className="filters-reset-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8" /><path d="M3 3v5h5" /></svg>
-            </button>
+        <div className="container analisi-detail-page">
+            <h1 className="page-title">Detall de dependència</h1>
+            <div className="analisi-detail-hero analisi-case-hero analisi-case-dependencia">
+                <div className="analisi-case-amount">{formatCurrency(caso.import_total)}</div>
+                <div className="contract-header analisi-case-header analisi-fraccionament-title-row">
+                    <h2 className="analisi-case-title-wrap">
+                        <a href={buildRouteUrl(`/entitats/${caso.entitat_slug}`)} className="analisi-case-title-link">{caso.entitat}</a>
+                    </h2>
+                </div>
+                <div className="analisi-detail-contract-count">{caso.num_subvencions} subvencions directes</div>
+                <div className="contract-pills analisi-detail-hero-pills">
+                    <span className={"risk-badge " + riskClass(caso.nivell)}>{riskLabel(caso.nivell)}</span>
+                    <span className={"risk-badge " + riskClass(caso.nivell)} style={{ fontVariantNumeric: 'tabular-nums' }}>{caso.risc}/100</span>
+                </div>
+            </div>
+
+            <div className="analisi-detail-info-card">
+                <div className="contract-meta analisi-detail-info-meta analisi-detail-info-meta-dependencia">
+                    <div className="contract-meta-item"><span className="contract-meta-label">Període</span><span className="contract-meta-value">Del {formatDate(caso.data_inici)} al {formatDate(caso.data_fi)}</span></div>
+                    <div className="contract-meta-item"><span className="contract-meta-label">Mitjana anual</span><span className="contract-meta-value">{formatCurrency(annualDependenciaStats.average)}</span></div>
+                    <div className="contract-meta-item"><span className="contract-meta-label">Màxim anual</span><span className="contract-meta-value">{formatCurrency(annualDependenciaStats.maximum)}</span></div>
+                </div>
+            </div>
+
+            <section className="analisi-detail-section-card" aria-labelledby="dependencia-indicators-title">
+                <h2 id="dependencia-indicators-title" className="analisi-detail-section-title">Indicadors</h2>
+                <ul className="analisi-detail-text-list">{(caso.motius || []).map(motiu => <li key={motiu}>{motiu}</li>)}</ul>
+            </section>
+
+            {(caso.subvencions || []).map(subvencio => (
+                <div key={subvencio.id} className="contract-card">
+                    <div className="contract-header">
+                        <div className="contract-title">{subvencio.descripcion}</div>
+                        <div className="contract-amount">{formatCurrency(subvencio.importe)}</div>
+                    </div>
+                    <div className="contract-meta">
+                        <div className="contract-meta-item"><span className="contract-meta-label">Data</span><span className="contract-meta-value">{formatDate(subvencio.fecha)}</span></div>
+                        <div className="contract-meta-item"><span className="contract-meta-label">Codi expedient</span><span className="contract-meta-value">{subvencio.codigo}</span></div>
+                        <div className="contract-pills"><span className="contract-pill">{formatSubvencioSector(subvencio.finalitat_p_blica)}</span></div>
+                    </div>
+                </div>
+            ))}
+
+            <div className="contracte-detail-actions-row">
+                <button onClick={onBack} className="btn-share contracte-detail-back" title="Tornar" aria-label="Tornar" type="button"><svg className="contracte-detail-back-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M19 12H5" /><polyline points="12 19 5 12 12 5" /></svg><span>Tornar</span></button>
+                <div className={`contracte-detail-share contracte-detail-share-standalone${shareActionsOpen ? ' is-open' : ''}`} ref={shareActionsRef}>
+                    <div id="dependencia-share-actions" className="contracte-detail-share-actions" aria-hidden={!shareActionsOpen}><button className="btn-share contracte-detail-share-btn" onClick={copyDependenciaLink} tabIndex={shareActionsOpen ? 0 : -1} type="button">{shareCopyStatus || "Copia l'enllaç"}</button></div>
+                    <button className="btn-share contracte-detail-share-btn" onClick={() => setShareActionsOpen(open => !open)} aria-expanded={shareActionsOpen} aria-controls="dependencia-share-actions" type="button"><em className="share-arrow"></em> Compartir</button>
+                </div>
+            </div>
         </div>
     );
 }
@@ -1454,42 +1585,16 @@ function EmpresesView({ empreses, onEmpresaSelect, searchTerm, setSearchTerm, se
         sortBy !== 'amount-desc' ? sortBy : ''
     ].filter(Boolean).length;
 
-    const sectorTissue = useMemo(() => {
-        const bySector = {};
-        for (const e of empreses) {
-            const sector = e.sector || 'Altres Serveis i Subministraments';
-            if (!bySector[sector]) bySector[sector] = { sector, count: 0 };
-            bySector[sector].count += 1;
-        }
-        const items = Object.values(bySector).sort((a, b) => {
-            if (a.sector === 'Altres Serveis i Subministraments') return 1;
-            if (b.sector === 'Altres Serveis i Subministraments') return -1;
-            return b.count - a.count;
-        });
-        const maxCount = items.reduce((max, item) => Math.max(max, item.count), 0);
-        return { items, maxCount };
-    }, [empreses]);
-
     return (
         <div className="container empreses-page">
             <h1 className="page-title">Cercador d'empreses</h1>
             <div className="search-section">
-                <div className="search-input-wrapper">
-                    <span className="search-icon">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                    </span>
-                    <input
-                        type="text"
-                        className="search-input"
-                        placeholder="Cerca per empresa"
-                        aria-label="Cerca per empresa"
-                        value={searchTerm}
-                        onChange={(e) => setSearchTerm(e.target.value)}
-                    />
-                    {searchTerm && (
-                        <button className="search-clear" onClick={() => setSearchTerm('')} type="button" aria-label="Netejar cerca">&times;</button>
-                    )}
-                </div>
+                <SearchField
+                    value={searchTerm}
+                    onValueChange={setSearchTerm}
+                    placeholder="Cerca per empresa"
+                    ariaLabel="Cerca per empresa"
+                />
 
                 <FilterActions
                     open={empresesFiltersOpen}
@@ -1499,18 +1604,18 @@ function EmpresesView({ empreses, onEmpresaSelect, searchTerm, setSearchTerm, se
                 />
 
                 <div className={"filters search-filter-panel" + (!empresesFiltersOpen ? " collapsed" : "")}>
-                    <div className="filter-group" style={{ flex: '1 1 200px' }}>
+                    <div className="filter-group filter-group-standard">
                         <label className="filter-label">Ordenar per</label>
-                        <select className="filter-select" style={{ height: '48px' }} value={sortBy} onChange={(e) => setSortBy(e.target.value)} aria-label="Ordenar empreses per">
+                        <select className="filter-select filter-select-standard" value={sortBy} onChange={(e) => setSortBy(e.target.value)} aria-label="Ordenar empreses per">
                             <option value="amount-desc">Import (descendent)</option>
                             <option value="amount-asc">Import (ascendent)</option>
                             <option value="contracts-desc">Nombre de contractes (descendent)</option>
                             <option value="contracts-asc">Nombre de contractes (ascendent)</option>
                         </select>
                     </div>
-                    <div className="filter-group" style={{ flex: '1 1 200px' }}>
+                    <div className="filter-group filter-group-standard">
                         <label className="filter-label">Sector</label>
-                        <select className="filter-select" style={{ height: '48px' }} value={sectorFilter} onChange={(e) => { setSectorFilter(e.target.value); setCategoriaFilter(''); }} aria-label="Sector">
+                        <select className="filter-select filter-select-standard" value={sectorFilter} onChange={(e) => { setSectorFilter(e.target.value); setCategoriaFilter(''); }} aria-label="Sector">
                             <option value="">Tots els sectors</option>
                             {allSectors
                                 .slice()
@@ -1524,9 +1629,9 @@ function EmpresesView({ empreses, onEmpresaSelect, searchTerm, setSearchTerm, se
                                 ))}
                         </select>
                     </div>
-                    <div className="filter-group" style={{ flex: '1 1 200px' }}>
+                    <div className="filter-group filter-group-standard">
                         <label className="filter-label">Categoria</label>
-                        <select className="filter-select" style={{ height: '48px' }} value={categoriaFilter} onChange={(e) => setCategoriaFilter(e.target.value)} disabled={!sectorFilter} aria-label="Categoria">
+                        <select className="filter-select filter-select-standard" value={categoriaFilter} onChange={(e) => setCategoriaFilter(e.target.value)} disabled={!sectorFilter} aria-label="Categoria">
                             <option value="">{sectorFilter ? 'Totes les categories' : 'Selecciona un sector'}</option>
                             {categoriesForSector
                                 .slice()
@@ -1568,13 +1673,13 @@ function EmpresesView({ empreses, onEmpresaSelect, searchTerm, setSearchTerm, se
                             </div>
                             <div className="contract-meta">
                                 {e.sector && (
-                                    <div className="contract-meta-item">
+                                    <div className="contract-meta-item empresa-list-sector">
                                         <span className="contract-meta-label">Sector</span>
                                         <span className="contract-meta-value">{e.sector}</span>
                                     </div>
                                 )}
                                 {e.categoria && (
-                                    <div className="contract-meta-item">
+                                    <div className="contract-meta-item empresa-list-category">
                                         <span className="contract-meta-label">Categoria</span>
                                         <span className="contract-meta-value">{e.categoria}</span>
                                     </div>
@@ -1589,102 +1694,22 @@ function EmpresesView({ empreses, onEmpresaSelect, searchTerm, setSearchTerm, se
             </div>
 
             {empresesFiltrades.length === 0 && (
-                <div className="empty-state">
-                    <div className="empty-state-icon">
-                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                    </div>
-                    <div className="empty-state-title">Sense resultats</div>
-                    <div className="empty-state-text">No s'han trobat empreses.</div>
-                    <div className="empty-state-action">
-                        <button className="empty-state-btn" onClick={resetFilters}>Restablir filtres</button>
-                    </div>
-                </div>
+                <EmptySearchState text="No s'han trobat empreses." onReset={resetFilters} />
             )}
 
             {empresesFiltrades.length > itemsPerPage && (
-                <div className="pagination">
-                    <button
-                        className="pagination-btn"
-                        onClick={() => { setCurrentPage(1) }}
-                        disabled={currentPage === 1}
-                        title="Primera pàgina"
-                    >
-                        «
-                    </button>
-                    <button
-                        className="pagination-btn"
-                        onClick={() => { setCurrentPage(prev => Math.max(prev - 1, 1)) }}
-                        disabled={currentPage === 1}
-                        title="Pàgina anterior"
-                    >
-                        ‹
-                    </button>
-                    <span className="pagination-info">
-                        Pàgina <strong>{currentPage}</strong> de <strong>{totalPages}</strong>
-                    </span>
-                    <button
-                        className="pagination-btn"
-                        onClick={() => { setCurrentPage(prev => Math.min(prev + 1, totalPages)) }}
-                        disabled={currentPage === totalPages}
-                        title="Pàgina següent"
-                    >
-                        ›
-                    </button>
-                    <button
-                        className="pagination-btn"
-                        onClick={() => { setCurrentPage(totalPages) }}
-                        disabled={currentPage === totalPages}
-                        title="Última pàgina"
-                    >
-                        »
-                    </button>
-                </div>
-            )}
-
-            {sectorTissue.items.length > 0 && (
-                <div className="sector-tissue-visual" aria-label="Distribució d'empreses adjudicatàries per sector">
-                    <div className="sector-tissue-header">
-                        <div className="chart-kicker">Visualització</div>
-                        <h3>Teixit de contractació</h3>
-                    </div>
-
-                    <div className="sector-tissue-bars">
-                        {sectorTissue.items.map(item => (
-                            <button
-                                key={item.sector}
-                                type="button"
-                                className={"sector-tissue-row" + (sectorFilter === item.sector ? " is-active" : "")}
-                                onClick={() => {
-                                    setSearchTerm('');
-                                    setDebouncedSearch('');
-                                    setSectorFilter(item.sector);
-                                    setCategoriaFilter('');
-                                    setSortBy('amount-desc');
-                                    setCurrentPage(1);
-                                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                                }}
-                                aria-label={`Filtrar empreses del sector ${formatSectorName(item.sector)}`}
-                            >
-                                <div className="sector-tissue-copy">
-                                    <span>{formatSectorName(item.sector)}</span>
-                                </div>
-                                <div className="sector-tissue-track" aria-hidden="true">
-                                    <span style={{ width: `${Math.max(4, Math.round((item.count / sectorTissue.maxCount) * 100))}%` }}></span>
-                                </div>
-                                <div className="sector-tissue-value">
-                                    <span>{item.count}</span>
-                                </div>
-                            </button>
-                        ))}
-                    </div>
-                </div>
+                <Pagination
+                    currentPage={currentPage}
+                    totalPages={totalPages}
+                    onPageChange={setCurrentPage}
+                />
             )}
 
             <div className="metodologia-wrapper">
                 <div className="metodologia">
                     <h3 className="metodologia-legal-title">Metodologia</h3>
                     <p className="metodologia-intro">
-                        Les empreses que apareixen en aquest cercador han estat adjudicatàries d'un o més contractes per part de l'Ajuntament d'Igualada, segons les dades publicades al Registre Públic de Contractes de la Generalitat de Catalunya.
+                        Les empreses que apareixen en aquest cercador han estat adjudicatàries d'un o més contractes per part de {AUTHORITY_NAME}, segons les dades publicades al Registre Públic de Contractes de la Generalitat de Catalunya.
                     </p>
                     <p className="metodologia-intro">
                         L'import total que figura al costat de cada empresa correspon a la suma dels valors d'adjudicació de tots els contractes que li han estat atorgats. Aparèixer en aquest llistat no implica cap irregularitat, sinó que reflecteix la informació pública disponible sobre la contractació municipal. Les dades poden contenir errors derivats de fonts públiques o processos automatitzats, i qualsevol correcció factual serà revisada.
@@ -1721,6 +1746,10 @@ function EmpresaView({ empresa: empresaNom, contracts, empreses, administradors,
     const [currentPage, setCurrentPage] = useState(1);
     const [showAllAdministradors, setShowAllAdministradors] = useState(false);
     const [empresaFiltersOpen, setEmpresaFiltersOpen] = useState(false);
+    const [shareActionsOpen, setShareActionsOpen] = useState(false);
+    const [shareCopyStatus, setShareCopyStatus] = useState('');
+    const shareActionsRef = useRef(null);
+    const shareStatusTimerRef = useRef(null);
     const itemsPerPage = 25;
     const maxAdministradorsInitial = isMobile() ? 5 : 10;
     const administradorsVisibles = administradorsEmpresa.slice(0, maxAdministradorsInitial);
@@ -1735,6 +1764,21 @@ function EmpresaView({ empresa: empresaNom, contracts, empreses, administradors,
         setCurrentPage(1);
     }, [debouncedSearch, tipusFilter, procedureFilter, dateStart, dateEnd, amountMin, amountMax, sortBy]);
     useEffect(() => { setShowAllAdministradors(false); }, [empresaNom]);
+    useEffect(() => {
+        if (!shareActionsOpen) return;
+        const closeShareActions = (event) => {
+            if (event.type === 'keydown' && event.key !== 'Escape') return;
+            if (event.type === 'pointerdown' && shareActionsRef.current?.contains(event.target)) return;
+            setShareActionsOpen(false);
+        };
+        document.addEventListener('pointerdown', closeShareActions);
+        document.addEventListener('keydown', closeShareActions);
+        return () => {
+            document.removeEventListener('pointerdown', closeShareActions);
+            document.removeEventListener('keydown', closeShareActions);
+        };
+    }, [shareActionsOpen]);
+    useEffect(() => () => window.clearTimeout(shareStatusTimerRef.current), []);
 
     const empresaContracts = useMemo(() => {
         let result = [...allEmpresaContracts];
@@ -1769,7 +1813,10 @@ function EmpresaView({ empresa: empresaNom, contracts, empreses, administradors,
         }
         const items = Object.values(byYear).sort((a, b) => a.year - b.year);
         const maxAmount = items.reduce((max, item) => Math.max(max, item.amount), 0);
-        return { items, maxAmount };
+        const firstYear = items[0]?.year;
+        const lastYear = items[items.length - 1]?.year;
+        const period = firstYear ? (firstYear === lastYear ? String(firstYear) : `${firstYear}–${lastYear}`) : '—';
+        return { items, maxAmount, period };
     }, [allEmpresaContracts]);
 
     const totalPages = Math.ceil(empresaContracts.length / itemsPerPage);
@@ -1797,25 +1844,29 @@ function EmpresaView({ empresa: empresaNom, contracts, empreses, administradors,
         sortBy !== 'date-desc' ? sortBy : ''
     ].filter(Boolean).length;
 
+    const copyEmpresaLink = async () => {
+        try {
+            await navigator.clipboard.writeText(window.location.href);
+            setShareCopyStatus('Enllaç copiat');
+        } catch (_) {
+            setShareCopyStatus("No s'ha pogut copiar");
+        }
+        window.clearTimeout(shareStatusTimerRef.current);
+        shareStatusTimerRef.current = window.setTimeout(() => setShareCopyStatus(''), 1800);
+    };
+
     return (
         <div className="container empresa-detail-page">
-            <button
-                onClick={onBack}
-                className="btn-reset contracte-detail-back"
-                style={{ marginBottom: '1.25rem' }}
-                title="Tornar"
-            >
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 12H5" /><polyline points="12 19 5 12 12 5" /></svg>
-            </button>
+            <h1 className="page-title">Detall d'empresa</h1>
             <div className="empresa-detail-hero">
+                <div className="empresa-detail-amount">{formatCurrency(totalImport)}</div>
                 <div className="contract-header empresa-detail-title-row">
-                    <h1 className="empresa-detail-title">{empresaNom}</h1>
-                    <div className="empresa-detail-amount">{formatCurrency(totalImport)}</div>
-                    <div className="contract-pills empresa-mobile-title-pills">
-                        <span className="contract-pill pill-on-dark">{allEmpresaContracts.length} contractes</span>
-                    </div>
+                    <h2 className="empresa-detail-title">{empresaNom}</h2>
                 </div>
-                <div className="contract-meta empresa-detail-meta">
+                <div className="empresa-detail-contract-count">{allEmpresaContracts.length} contractes</div>
+            </div>
+            <div className="empresa-detail-info-card">
+                <div className="contract-meta empresa-detail-info-meta">
                     {empresaData?.sector && (
                         <div className="contract-meta-item">
                             <span className="contract-meta-label">Sector</span>
@@ -1828,80 +1879,59 @@ function EmpresaView({ empresa: empresaNom, contracts, empreses, administradors,
                             <span className="contract-meta-value">{empresaData.categoria}</span>
                         </div>
                     )}
-                    <div className="contract-pills empresa-detail-title-pills">
-                        <span className="contract-pill pill-on-dark">{allEmpresaContracts.length} contractes</span>
+                    <div className="contract-meta-item">
+                        <span className="contract-meta-label">Període</span>
+                        <span className="contract-meta-value">{empresaAnnualActivity.period}</span>
                     </div>
-                </div>
-                <div className="empresa-detail-cargos">
-                    <div className="contract-meta-label empresa-detail-cargos-label">
-                        Càrrecs actius
-                    </div>
-                    {administradorsEmpresa.length > 0 ? (
-                        <ul className="empresa-detail-cargos-list">
-                            {administradorsVisibles.map((a, i) => (
-                                <li key={i} className="empresa-detail-cargo-item">
-                                    <span className="empresa-detail-cargo-name">{a.nombre}</span>
-                                    <span className="empresa-detail-cargo-meta">{a.cargo}<span>{a.fecha_nombramiento}</span></span>
-                                </li>
-                            ))}
-                            {administradorsEmpresa.length > maxAdministradorsInitial && (
-                                <li className="empresa-detail-cargos-more">
-                                    <div className={"empresa-detail-cargos-more-panel" + (showAllAdministradors ? " is-open" : "")}>
-                                        <div>
-                                            <ul className="empresa-detail-cargos-list">
-                                                {administradorsExtres.map((a, i) => (
-                                                    <li key={i} className="empresa-detail-cargo-item">
-                                                        <span className="empresa-detail-cargo-name">{a.nombre}</span>
-                                                        <span className="empresa-detail-cargo-meta">{a.cargo}<span>{a.fecha_nombramiento}</span></span>
-                                                    </li>
-                                                ))}
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <button
-                                        type="button"
-                                        onClick={() => setShowAllAdministradors(v => !v)}
-                                        className={"empresa-detail-cargos-toggle" + (showAllAdministradors ? " is-open" : "")}
-                                    >
-                                        {showAllAdministradors ? 'Veure menys' : 'Veure tots'}
-                                    </button>
-                                </li>
-                            )}
-                        </ul>
-                    ) : (
-                        <div className="empresa-detail-cargos-empty">
-                            No s'han trobat càrrecs actius
-                        </div>
-                    )}
                 </div>
             </div>
+            {administradorsEmpresa.length > 0 && (
+                <section className="empresa-detail-cargos" aria-labelledby="empresa-cargos-title">
+                    <h2 id="empresa-cargos-title" className="empresa-detail-cargos-title">Càrrecs actius</h2>
+                    <ul className="empresa-detail-cargos-list">
+                        {administradorsVisibles.map((a, i) => (
+                            <li key={i} className="empresa-detail-cargo-item">
+                                <span className="empresa-detail-cargo-name">{a.nombre}</span>
+                                <span className="empresa-detail-cargo-meta">{a.cargo}<span>{a.fecha_nombramiento}</span></span>
+                            </li>
+                        ))}
+                        {administradorsEmpresa.length > maxAdministradorsInitial && (
+                            <li className="empresa-detail-cargos-more">
+                                <div className={"empresa-detail-cargos-more-panel" + (showAllAdministradors ? " is-open" : "")}>
+                                    <div>
+                                        <ul className="empresa-detail-cargos-list">
+                                            {administradorsExtres.map((a, i) => (
+                                                <li key={i} className="empresa-detail-cargo-item">
+                                                    <span className="empresa-detail-cargo-name">{a.nombre}</span>
+                                                    <span className="empresa-detail-cargo-meta">{a.cargo}<span>{a.fecha_nombramiento}</span></span>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                </div>
+                                <button
+                                    type="button"
+                                    onClick={() => setShowAllAdministradors(v => !v)}
+                                    className={"empresa-detail-cargos-toggle" + (showAllAdministradors ? " is-open" : "")}
+                                >
+                                    {showAllAdministradors ? 'Veure menys' : 'Veure tots'}
+                                </button>
+                            </li>
+                        )}
+                    </ul>
+                </section>
+            )}
             {empresaAnnualActivity.items.length > 1 && (
-                <div className="empresa-activity-visual" aria-label="Evolució anual de l'import adjudicat a aquesta empresa">
+                <div className="empresa-activity-visual" aria-label="Històric anual de l'import adjudicat a aquesta empresa">
                     <div className="empresa-activity-header">
-                        <div className="chart-kicker">Visualització</div>
-                        <h3>Activitat de contractació</h3>
+                        <h3 className="empresa-activity-title">Històric de contractes</h3>
                     </div>
 
                     <div className="empresa-activity-bars">
                         {empresaAnnualActivity.items.map(item => (
-                            <button
+                            <div
                                 key={item.year}
-                                type="button"
-                                className={"empresa-activity-column" + (dateStart === `${item.year}-01-01` && dateEnd === `${item.year}-12-31` ? " is-active" : "")}
-                                onClick={() => {
-                                    setSearchTerm('');
-                                    setDebouncedSearch('');
-                                    setTipusFilter('');
-                                    setProcedureFilter('');
-                                    setAmountMin('');
-                                    setAmountMax('');
-                                    setSortBy('date-desc');
-                                    setDateStart(`${item.year}-01-01`);
-                                    setDateEnd(`${item.year}-12-31`);
-                                    setCurrentPage(1);
-                                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                                }}
-                                aria-label={`Filtrar contractes de ${empresaNom} de l'any ${item.year}`}
+                                className="empresa-activity-column"
                             >
                                 <div className="empresa-activity-bar-wrap" aria-hidden="true">
                                     <span style={{ height: `${Math.max(4, Math.round((item.amount / empresaAnnualActivity.maxAmount) * 100))}%`, '--bar-width': `${Math.max(4, Math.round((item.amount / empresaAnnualActivity.maxAmount) * 100))}%` }}></span>
@@ -1910,28 +1940,18 @@ function EmpresaView({ empresa: empresaNom, contracts, empreses, administradors,
                                     <span>{item.year}</span>
                                     <small>{formatCurrency(item.amount)}</small>
                                 </div>
-                            </button>
+                            </div>
                         ))}
                     </div>
                 </div>
             )}
-            <div className="search-section" style={{ marginBottom: '2rem' }}>
-                <div className="search-input-wrapper">
-                    <span className="search-icon">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                    </span>
-                    <input
-                        type="text"
-                        className="search-input"
-                        placeholder="Cerca per descripció, empresa o codi d'expedient"
-                        aria-label="Cerca per descripció, empresa o codi d'expedient"
-                        value={searchTerm}
-                        onChange={(e) => setSearchTerm(e.target.value)}
-                    />
-                    {searchTerm && (
-                        <button className="search-clear" onClick={() => setSearchTerm('')} type="button" aria-label="Netejar cerca">&times;</button>
-                    )}
-                </div>
+            <div className="search-section empresa-detail-contract-search">
+                <SearchField
+                    value={searchTerm}
+                    onValueChange={setSearchTerm}
+                    placeholder="Cerca per descripció o codi d'expedient"
+                    ariaLabel="Cerca per descripció o codi d'expedient"
+                />
                 <FilterActions
                     open={empresaFiltersOpen}
                     onToggle={() => setEmpresaFiltersOpen(prev => !prev)}
@@ -1940,18 +1960,18 @@ function EmpresaView({ empresa: empresaNom, contracts, empreses, administradors,
                 />
 
                 <div className={"filters search-filter-panel" + (!empresaFiltersOpen ? " collapsed" : "")}>
-                    <div className="filter-group" style={{ flex: '1 1 200px' }}>
+                    <div className="filter-group filter-group-standard">
                         <label className="filter-label">Ordenar per</label>
-                        <select className="filter-select" style={{ height: '48px' }} value={sortBy} onChange={(e) => setSortBy(e.target.value)} aria-label="Ordenar contractes de l'empresa per">
+                        <select className="filter-select filter-select-standard" value={sortBy} onChange={(e) => setSortBy(e.target.value)} aria-label="Ordenar contractes de l'empresa per">
                             <option value="date-desc">Data (més recents)</option>
                             <option value="date-asc">Data (més antics)</option>
                             <option value="amount-desc">Import (descendent)</option>
                             <option value="amount-asc">Import (ascendent)</option>
                         </select>
                     </div>
-                    <div className="filter-group" style={{ flex: '1 1 200px' }}>
+                    <div className="filter-group filter-group-standard">
                         <label className="filter-label">Procediment</label>
-                        <select className="filter-select" style={{ height: '48px' }} value={procedureFilter} onChange={(e) => setProcedureFilter(e.target.value)} aria-label="Procediment">
+                        <select className="filter-select filter-select-standard" value={procedureFilter} onChange={(e) => setProcedureFilter(e.target.value)} aria-label="Procediment">
                             <option value="">Tots els procediments</option>
                             <option value="Menor">Menor</option>
                             <option value="Obert">Obert</option>
@@ -1961,9 +1981,9 @@ function EmpresaView({ empresa: empresaNom, contracts, empreses, administradors,
                             <option value="Específic de sistema dinàmic de contractació">Sistema dinàmic</option>
                         </select>
                     </div>
-                    <div className="filter-group" style={{ flex: '1 1 200px' }}>
+                    <div className="filter-group filter-group-standard">
                         <label className="filter-label">Tipus</label>
-                        <select className="filter-select" style={{ height: '48px' }} value={tipusFilter} onChange={(e) => setTipusFilter(e.target.value)} aria-label="Tipus de contracte">
+                        <select className="filter-select filter-select-standard" value={tipusFilter} onChange={(e) => setTipusFilter(e.target.value)} aria-label="Tipus de contracte">
                             <option value="">Tots els tipus</option>
                             <option value="1. OBRES">Obres</option>
                             <option value="3. SUBMINISTRAMENTS">Subministraments</option>
@@ -1976,19 +1996,19 @@ function EmpresaView({ empresa: empresaNom, contracts, empreses, administradors,
                     </div>
                 </div>
                 <div className={"filters-row search-filter-panel search-filter-panel-secondary" + (!empresaFiltersOpen ? " collapsed" : "")}>
-                    <div className="filter-group" style={{ flex: '1 1 200px' }}>
+                    <div className="filter-group filter-group-standard">
                         <label className="filter-label">Data inici</label>
                         <input type="date" className="filter-input" aria-label="Data inici" value={dateStart} onChange={(e) => setDateStart(e.target.value)} />
                     </div>
-                    <div className="filter-group" style={{ flex: '1 1 200px' }}>
+                    <div className="filter-group filter-group-standard">
                         <label className="filter-label">Data final</label>
                         <input type="date" className="filter-input" aria-label="Data final" value={dateEnd} onChange={(e) => setDateEnd(e.target.value)} />
                     </div>
-                    <div className="filter-group" style={{ flex: '1 1 200px' }}>
+                    <div className="filter-group filter-group-standard">
                         <label className="filter-label">Des de</label>
                         <input type="number" min="0" step="0.01" inputMode="decimal" className="filter-input" placeholder="Import mínim" aria-label="Import mínim" value={amountMin} onChange={(e) => setAmountMin(e.target.value)} />
                     </div>
-                    <div className="filter-group" style={{ flex: '1 1 200px' }}>
+                    <div className="filter-group filter-group-standard">
                         <label className="filter-label">Fins a</label>
                         <input type="number" min="0" step="0.01" inputMode="decimal" className="filter-input" placeholder="Import màxim" aria-label="Import màxim" value={amountMax} onChange={(e) => setAmountMax(e.target.value)} />
                     </div>
@@ -2033,26 +2053,268 @@ function EmpresaView({ empresa: empresaNom, contracts, empreses, administradors,
                 </a>
             ))}
             {empresaContracts.length === 0 && (
-                <div className="empty-state">
-                    <div className="empty-state-icon">
-                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                    </div>
-                    <div className="empty-state-title">Sense resultats</div>
-                    <div className="empty-state-text">No s'han trobat contractes.</div>
-                    <div className="empty-state-action">
-                        <button className="empty-state-btn" onClick={resetFilters}>Restablir filtres</button>
-                    </div>
-                </div>
+                <EmptySearchState text="No s'han trobat contractes." onReset={resetFilters} />
             )}
             {empresaContracts.length > itemsPerPage && (
-                <div className="pagination">
-                    <button className="pagination-btn" onClick={() => { setCurrentPage(1) }} disabled={currentPage === 1} title="Primera pàgina">«</button>
-                    <button className="pagination-btn" onClick={() => { setCurrentPage(prev => Math.max(prev - 1, 1)) }} disabled={currentPage === 1} title="Pàgina anterior">‹</button>
-                    <span className="pagination-info">Pàgina <strong>{currentPage}</strong> de <strong>{totalPages}</strong></span>
-                    <button className="pagination-btn" onClick={() => { setCurrentPage(prev => Math.min(prev + 1, totalPages)) }} disabled={currentPage === totalPages} title="Pàgina següent">›</button>
-                    <button className="pagination-btn" onClick={() => { setCurrentPage(totalPages) }} disabled={currentPage === totalPages} title="Última pàgina">»</button>
+                <Pagination
+                    currentPage={currentPage}
+                    totalPages={totalPages}
+                    onPageChange={setCurrentPage}
+                />
+            )}
+            <div className="empresa-detail-actions-row contracte-detail-actions-row">
+                <button onClick={onBack} className="btn-share empresa-detail-back contracte-detail-back" title="Tornar" aria-label="Tornar" type="button">
+                    <svg className="contracte-detail-back-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M19 12H5" /><polyline points="12 19 5 12 12 5" /></svg>
+                    <span>Tornar</span>
+                </button>
+                <div className={`contracte-detail-share contracte-detail-share-standalone${shareActionsOpen ? ' is-open' : ''}`} ref={shareActionsRef}>
+                    <div id="empresa-share-actions" className="contracte-detail-share-actions" aria-hidden={!shareActionsOpen}>
+                        <button className="btn-share contracte-detail-share-btn" onClick={copyEmpresaLink} tabIndex={shareActionsOpen ? 0 : -1} type="button">{shareCopyStatus || "Copia l'enllaç"}</button>
+                    </div>
+                    <button className="btn-share contracte-detail-share-btn" onClick={() => setShareActionsOpen(open => !open)} aria-expanded={shareActionsOpen} aria-controls="empresa-share-actions" type="button"><em className="share-arrow"></em> Compartir</button>
+                </div>
+            </div>
+        </div>
+    );
+}
+
+function EntitatView({ entitatSlug, subvencions, onBack }) {
+    const allEntitatSubvencions = useMemo(
+        () => subvencions.filter(subvencio => subvencio.entitat_slug === entitatSlug),
+        [subvencions, entitatSlug]
+    );
+    const entitatNom = allEntitatSubvencions[0]?.adjudicatario || '';
+    const totalImport = allEntitatSubvencions.reduce((sum, subvencio) => sum + (Number(subvencio.importe) || 0), 0);
+    const [searchTerm, setSearchTerm] = useState('');
+    const [sortBy, setSortBy] = useState('date-desc');
+    const [tipologiaFilter, setTipologiaFilter] = useState('');
+    const [dateStart, setDateStart] = useState('');
+    const [dateEnd, setDateEnd] = useState('');
+    const [amountMin, setAmountMin] = useState('');
+    const [amountMax, setAmountMax] = useState('');
+    const [currentPage, setCurrentPage] = useState(1);
+    const [filtersOpen, setFiltersOpen] = useState(false);
+    const [shareActionsOpen, setShareActionsOpen] = useState(false);
+    const [shareCopyStatus, setShareCopyStatus] = useState('');
+    const shareActionsRef = useRef(null);
+    const shareStatusTimerRef = useRef(null);
+    const itemsPerPage = 25;
+
+    useEffect(() => setCurrentPage(1), [searchTerm, sortBy, tipologiaFilter, dateStart, dateEnd, amountMin, amountMax]);
+    useEffect(() => {
+        if (!shareActionsOpen) return;
+        const closeShareActions = event => {
+            if (event.type === 'keydown' && event.key !== 'Escape') return;
+            if (event.type === 'pointerdown' && shareActionsRef.current?.contains(event.target)) return;
+            setShareActionsOpen(false);
+        };
+        document.addEventListener('pointerdown', closeShareActions);
+        document.addEventListener('keydown', closeShareActions);
+        return () => {
+            document.removeEventListener('pointerdown', closeShareActions);
+            document.removeEventListener('keydown', closeShareActions);
+        };
+    }, [shareActionsOpen]);
+    useEffect(() => () => window.clearTimeout(shareStatusTimerRef.current), []);
+
+    const annualActivity = useMemo(() => {
+        const byYear = {};
+        for (const subvencio of allEntitatSubvencions) {
+            const year = subvencio.año || Number(String(subvencio.fecha || '').slice(0, 4));
+            if (!year) continue;
+            if (!byYear[year]) byYear[year] = { year, amount: 0, count: 0 };
+            byYear[year].amount += Number(subvencio.importe) || 0;
+            byYear[year].count += 1;
+        }
+        const items = Object.values(byYear).sort((a, b) => a.year - b.year);
+        const maxAmount = items.reduce((max, item) => Math.max(max, item.amount), 0);
+        const firstYear = items[0]?.year;
+        const lastYear = items[items.length - 1]?.year;
+        return {
+            items,
+            maxAmount,
+            period: firstYear ? (firstYear === lastYear ? String(firstYear) : `${firstYear}–${lastYear}`) : '—',
+        };
+    }, [allEntitatSubvencions]);
+
+    const principalSector = useMemo(() => {
+        const sectors = {};
+        for (const subvencio of allEntitatSubvencions) {
+            const finalitat = subvencio.finalitat_p_blica;
+            if (!finalitat) continue;
+            if (!sectors[finalitat]) sectors[finalitat] = { count: 0, amount: 0 };
+            sectors[finalitat].count += 1;
+            sectors[finalitat].amount += Number(subvencio.importe) || 0;
+        }
+        return Object.entries(sectors)
+            .sort(([, a], [, b]) => b.count - a.count || b.amount - a.amount)[0]?.[0] || '';
+    }, [allEntitatSubvencions]);
+
+    const concessionTypeStats = useMemo(() => {
+        const directes = allEntitatSubvencions.filter(isSubvencioDirecta).length;
+        const totals = allEntitatSubvencions.length;
+        return {
+            directes,
+            indirectes: totals - directes,
+            percentatgeDirectes: totals ? directes / totals : 0,
+        };
+    }, [allEntitatSubvencions]);
+
+    const filteredSubvencions = useMemo(() => {
+        const result = allEntitatSubvencions.filter(subvencio => {
+            if (searchTerm && !matchesSearchQuery([subvencio.descripcion, subvencio.adjudicatario, subvencio.codigo], searchTerm)) return false;
+            if (tipologiaFilter && subvencio.finalitat_p_blica !== tipologiaFilter) return false;
+            if (dateStart && subvencio.fecha < dateStart) return false;
+            if (dateEnd && subvencio.fecha > dateEnd) return false;
+            if (amountMin !== '' && subvencio.importe < Number(amountMin)) return false;
+            if (amountMax !== '' && subvencio.importe > Number(amountMax)) return false;
+            return true;
+        });
+        return result.sort((a, b) => {
+            if (sortBy === 'date-asc') return (Date.parse(a.fecha) || 0) - (Date.parse(b.fecha) || 0);
+            if (sortBy === 'amount-desc') return b.importe - a.importe;
+            if (sortBy === 'amount-asc') return a.importe - b.importe;
+            return (Date.parse(b.fecha) || 0) - (Date.parse(a.fecha) || 0);
+        });
+    }, [allEntitatSubvencions, searchTerm, sortBy, tipologiaFilter, dateStart, dateEnd, amountMin, amountMax]);
+
+    const totalPages = Math.ceil(filteredSubvencions.length / itemsPerPage);
+    const pageSubvencions = filteredSubvencions.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+    const resetFilters = () => {
+        setSearchTerm('');
+        setSortBy('date-desc');
+        setTipologiaFilter('');
+        setDateStart('');
+        setDateEnd('');
+        setAmountMin('');
+        setAmountMax('');
+        setCurrentPage(1);
+    };
+    const activeFiltersCount = [tipologiaFilter, dateStart, dateEnd, amountMin, amountMax, sortBy !== 'date-desc' ? sortBy : ''].filter(Boolean).length;
+    const copyEntitatLink = async () => {
+        try {
+            await navigator.clipboard.writeText(window.location.href);
+            setShareCopyStatus('Enllaç copiat');
+        } catch (_) {
+            setShareCopyStatus("No s'ha pogut copiar");
+        }
+        window.clearTimeout(shareStatusTimerRef.current);
+        shareStatusTimerRef.current = window.setTimeout(() => setShareCopyStatus(''), 1800);
+    };
+
+    return (
+        <div className="container empresa-detail-page entitat-detail-page">
+            <h1 className="page-title">Detall d'entitat</h1>
+            <div className="empresa-detail-hero">
+                <div className="empresa-detail-amount">{formatCurrency(totalImport)}</div>
+                <div className="contract-header empresa-detail-title-row">
+                    <h2 className="empresa-detail-title">{entitatNom}</h2>
+                </div>
+                <div className="empresa-detail-contract-count">{allEntitatSubvencions.length} subvencions</div>
+            </div>
+            <div className="empresa-detail-info-card">
+                <div className="contract-meta empresa-detail-info-meta entitat-detail-info-meta">
+                    {principalSector && (
+                        <div className="contract-meta-item">
+                            <span className="contract-meta-label">Sector</span>
+                            <span className="contract-meta-value">{formatSubvencioSector(principalSector)}</span>
+                        </div>
+                    )}
+                    <div className="contract-meta-item">
+                        <span className="contract-meta-label">Període</span>
+                        <span className="contract-meta-value">{annualActivity.period}</span>
+                    </div>
+                    <div className="contract-meta-item">
+                        <span className="contract-meta-label">Subvencions directes</span>
+                        <span className="contract-meta-value">{concessionTypeStats.directes} ({formatPercent(concessionTypeStats.percentatgeDirectes)})</span>
+                    </div>
+                    <div className="contract-meta-item">
+                        <span className="contract-meta-label">Altres subvencions</span>
+                        <span className="contract-meta-value">{concessionTypeStats.indirectes} ({formatPercent(1 - concessionTypeStats.percentatgeDirectes)})</span>
+                    </div>
+                </div>
+            </div>
+            {annualActivity.items.length > 1 && (
+                <div className="empresa-activity-visual" aria-label="Històric anual de les subvencions concedides a aquesta entitat">
+                    <div className="empresa-activity-header">
+                        <h3 className="empresa-activity-title">Històric de subvencions</h3>
+                    </div>
+                    <div className="empresa-activity-bars">
+                        {annualActivity.items.map(item => (
+                            <div key={item.year} className="empresa-activity-column">
+                                <div className="empresa-activity-bar-wrap" aria-hidden="true">
+                                    <span style={{ height: `${Math.max(4, Math.round((item.amount / annualActivity.maxAmount) * 100))}%`, '--bar-width': `${Math.max(4, Math.round((item.amount / annualActivity.maxAmount) * 100))}%` }}></span>
+                                </div>
+                                <div className="empresa-activity-meta">
+                                    <span>{item.year}</span>
+                                    <small>{formatCurrency(item.amount)}</small>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
                 </div>
             )}
+            <div className="search-section empresa-detail-contract-search">
+                <SearchField value={searchTerm} onValueChange={setSearchTerm} placeholder="Cerca per descripció o codi d'expedient" ariaLabel="Cerca per descripció o codi d'expedient" />
+                <FilterActions open={filtersOpen} onToggle={() => setFiltersOpen(open => !open)} activeCount={activeFiltersCount} onReset={resetFilters} />
+                <div className={'filters search-filter-panel subvencio-filter-primary' + (!filtersOpen ? ' collapsed' : '')}>
+                    <div className="filter-group filter-group-standard">
+                        <label className="filter-label">Ordenar per</label>
+                        <select className="filter-select filter-select-standard" value={sortBy} onChange={event => setSortBy(event.target.value)} aria-label="Ordenar subvencions de l'entitat per">
+                            <option value="date-desc">Data (més recents)</option>
+                            <option value="date-asc">Data (més antics)</option>
+                            <option value="amount-desc">Import (descendent)</option>
+                            <option value="amount-asc">Import (ascendent)</option>
+                        </select>
+                    </div>
+                    <div className="filter-group filter-group-standard">
+                        <label className="filter-label">Tipus</label>
+                        <select className="filter-select filter-select-standard" value={tipologiaFilter} onChange={event => setTipologiaFilter(event.target.value)} aria-label="Tipus de subvenció">
+                            <option value="">Tots els tipus</option>
+                            {SUBVENCIO_TIPOLOGIES.map(tipologia => (
+                                <option key={tipologia} value={tipologia}>{formatSubvencioSector(tipologia)}</option>
+                            ))}
+                        </select>
+                    </div>
+                </div>
+                <div className={'filters-row search-filter-panel search-filter-panel-secondary' + (!filtersOpen ? ' collapsed' : '')}>
+                    <div className="filter-group"><label className="filter-label">Data inici</label><input type="date" className="filter-input" value={dateStart} onChange={event => setDateStart(event.target.value)} /></div>
+                    <div className="filter-group"><label className="filter-label">Data final</label><input type="date" className="filter-input" value={dateEnd} onChange={event => setDateEnd(event.target.value)} /></div>
+                    <div className="filter-group"><label className="filter-label">Des de</label><input type="number" min="0" step="0.01" inputMode="decimal" className="filter-input" placeholder="Import mínim" value={amountMin} onChange={event => setAmountMin(event.target.value)} /></div>
+                    <div className="filter-group"><label className="filter-label">Fins a</label><input type="number" min="0" step="0.01" inputMode="decimal" className="filter-input" placeholder="Import màxim" value={amountMax} onChange={event => setAmountMax(event.target.value)} /></div>
+                </div>
+            </div>
+            <div className="results-count" role="status" aria-live="polite">
+                <span className="results-count-total"><span className="results-count-prefix">S'han trobat </span><strong>{filteredSubvencions.length}</strong> subvencions</span>
+            </div>
+            {pageSubvencions.map(subvencio => (
+                <div key={subvencio.id} className="contract-card subvencio-card">
+                    <span className="contract-header"><span className="contract-title">{subvencio.descripcion}</span><span className="contract-amount">{formatCurrency(subvencio.importe)}</span></span>
+                    <span className="contract-meta">
+                        <span className="contract-meta-item"><span className="contract-meta-label">Entitat adjudicatària</span><span className="contract-meta-value">{subvencio.adjudicatario}</span></span>
+                        <span className="contract-meta-item"><span className="contract-meta-label">Data</span><span className="contract-meta-value">{formatDate(subvencio.fecha)}</span></span>
+                        <span className="contract-meta-item"><span className="contract-meta-label">Codi expedient</span><span className="contract-meta-value">{subvencio.codigo || '—'}</span></span>
+                        <span className="contract-pills">
+                            <span className="contract-pill" title={subvencio.finalitat_p_blica} aria-label={`Finalitat pública: ${subvencio.finalitat_p_blica}`}>
+                                {formatSubvencioSector(subvencio.finalitat_p_blica)}
+                            </span>
+                        </span>
+                    </span>
+                </div>
+            ))}
+            {filteredSubvencions.length === 0 && <EmptySearchState text="No s'han trobat subvencions." onReset={resetFilters} />}
+            {filteredSubvencions.length > itemsPerPage && <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />}
+            <div className="empresa-detail-actions-row contracte-detail-actions-row">
+                <button onClick={onBack} className="btn-share empresa-detail-back contracte-detail-back" title="Tornar" aria-label="Tornar" type="button">
+                    <svg className="contracte-detail-back-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M19 12H5" /><polyline points="12 19 5 12 12 5" /></svg><span>Tornar</span>
+                </button>
+                <div className={`contracte-detail-share contracte-detail-share-standalone${shareActionsOpen ? ' is-open' : ''}`} ref={shareActionsRef}>
+                    <div id="entitat-share-actions" className="contracte-detail-share-actions" aria-hidden={!shareActionsOpen}>
+                        <button className="btn-share contracte-detail-share-btn" onClick={copyEntitatLink} tabIndex={shareActionsOpen ? 0 : -1} type="button">{shareCopyStatus || "Copia l'enllaç"}</button>
+                    </div>
+                    <button className="btn-share contracte-detail-share-btn" onClick={() => setShareActionsOpen(open => !open)} aria-expanded={shareActionsOpen} aria-controls="entitat-share-actions" type="button"><em className="share-arrow"></em> Compartir</button>
+                </div>
+            </div>
         </div>
     );
 }
@@ -2063,8 +2325,8 @@ function PersonesView({ persones, onEmpresaSelect, onNavigateLegal, searchTerm, 
     const [personesFiltersOpen, setPersonesFiltersOpen] = useState(false);
     const itemsPerPage = 25;
 
-    const togglePersona = (idx) => {
-        setExpandedIdx(prev => prev === idx ? null : idx);
+    const togglePersona = (personaId) => {
+        setExpandedIdx(prev => prev === personaId ? null : personaId);
     };
 
     const resetFilters = () => {
@@ -2128,34 +2390,25 @@ function PersonesView({ persones, onEmpresaSelect, onNavigateLegal, searchTerm, 
         <div className="container persones-page">
             <h1 className="page-title">Cercador de persones</h1>
             <div className="search-section">
-                <div className="search-input-wrapper">
-                    <span className="search-icon">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                    </span>
-                    <input
-                        type="text"
-                        className="search-input"
-                        placeholder="Cerca per persona o empresa vinculada"
-                        aria-label="Cerca per persona o empresa vinculada"
-                        value={searchTerm}
-                        onChange={(e) => setSearchTerm(e.target.value)}
-                    />
-                    {searchTerm && (
-                        <button className="search-clear" onClick={() => setSearchTerm('')} type="button" aria-label="Netejar cerca">&times;</button>
-                    )}
-                </div>
+                <SearchField
+                    value={searchTerm}
+                    onValueChange={setSearchTerm}
+                    placeholder="Cerca per persona o empresa vinculada"
+                    ariaLabel="Cerca per persona o empresa vinculada"
+                />
 
                 <FilterActions
                     open={personesFiltersOpen}
                     onToggle={() => setPersonesFiltersOpen(prev => !prev)}
                     activeCount={activeFiltersCount}
                     onReset={resetFilters}
+                    controlsId="persones-filter-panel"
                 />
 
-                <div className={"filters search-filter-panel search-filter-panel-single" + (!personesFiltersOpen ? " collapsed" : "")}>
-                    <div className="filter-group" style={{ flex: '1 1 200px' }}>
+                <div id="persones-filter-panel" className={"filters search-filter-panel search-filter-panel-single" + (!personesFiltersOpen ? " collapsed" : "")}>
+                    <div className="filter-group filter-group-standard">
                         <label className="filter-label">Ordenar per</label>
-                        <select className="filter-select" style={{ height: '48px' }} value={sortBy} onChange={(e) => setSortBy(e.target.value)} aria-label="Ordenar persones per">
+                        <select className="filter-select filter-select-standard" value={sortBy} onChange={(e) => setSortBy(e.target.value)} aria-label="Ordenar persones per">
                             <option value="companies-desc">Nombre d'empreses (descendent)</option>
                             <option value="companies-asc">Nombre d'empreses (ascendent)</option>
                             <option value="amount-desc">Import (descendent)</option>
@@ -2165,7 +2418,7 @@ function PersonesView({ persones, onEmpresaSelect, onNavigateLegal, searchTerm, 
                 </div>
             </div>
 
-            <div className="results-count">
+            <div className="results-count" role="status" aria-live="polite">
                 <span className="results-count-total"><span className="results-count-prefix">S'han trobat </span><strong>{personesFiltrades.length}</strong> persones</span>
                 {personesFiltrades.length > itemsPerPage && (
                     <span className="results-count-page"><span className="results-count-page-full">Pàgina</span><span className="results-count-page-short">Pàg.</span> <strong>{currentPage}</strong> de <strong>{totalPages}</strong></span>
@@ -2173,45 +2426,62 @@ function PersonesView({ persones, onEmpresaSelect, onNavigateLegal, searchTerm, 
             </div>
 
             <div className="persones-compact-list">
-                {personesPaginades.map((p, idx) => {
-                    const isExpanded = expandedIdx === idx;
+                {personesPaginades.map((p) => {
+                    const personaId = `persona-${stableHash([p.nom])}`;
+                    const panelId = `${personaId}-relacions`;
+                    const isExpanded = expandedIdx === personaId;
+                    const principalEmpresa = (p.relacions || []).reduce((principal, relacio) =>
+                        !principal || Number(relacio.import_empresa) > Number(principal.import_empresa)
+                            ? relacio
+                            : principal
+                        , null);
                     return (
-                        <div key={idx} className="contract-card persona-card">
+                        <div key={p.nom} className="contract-card persona-card">
                             <button
+                                id={`${personaId}-trigger`}
                                 type="button"
                                 className={`persona-row-header${isExpanded ? ' is-expanded' : ''}`}
-                                onClick={() => togglePersona(idx)}
+                                onClick={() => togglePersona(personaId)}
                                 aria-expanded={isExpanded}
+                                aria-controls={panelId}
                             >
-                                <div className="persona-row-header-left">
-                                    <div>
-                                        <div className="contract-title persona-title">{p.nom}</div>
+                                <div className="contract-header persona-row-main">
+                                    <div className="contract-title persona-title">{p.nom}</div>
+                                    <div className="contract-amount persona-amount">
+                                        {formatCurrency(p.total_adjudicat)}
                                     </div>
                                 </div>
-                                <div className="persona-row-header-right">
-                                    <div className="persona-row-amount">
-                                        <div className="contract-amount persona-amount">
-                                            {formatCurrency(p.total_adjudicat)}
+                                <div className="contract-meta persona-row-meta">
+                                    {principalEmpresa && (
+                                        <div className="contract-meta-item">
+                                            <span className="contract-meta-label">Empresa principal</span>
+                                            <span className="contract-meta-value persona-primary-company">{principalEmpresa.empresa}</span>
                                         </div>
-                                        <div className="contract-meta-value persona-amount-caption">
-                                            De {p.relacions.length} {p.relacions.length === 1 ? 'empresa' : 'empreses'}
-                                        </div>
-                                    </div>
-                                    <div className={`persona-row-chevron${isExpanded ? ' is-expanded' : ''}`}>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9" /></svg>
+                                    )}
+                                    <div className="contract-pills">
+                                        <span className="contract-pill">
+                                            {p.relacions.length} {p.relacions.length === 1 ? 'empresa' : 'empreses'}
+                                        </span>
                                     </div>
                                 </div>
                             </button>
 
-                            <div className={`persona-row-body-wrapper${isExpanded ? ' is-expanded' : ''}`}>
+                            <div
+                                id={panelId}
+                                className={`persona-row-body-wrapper${isExpanded ? ' is-expanded' : ''}`}
+                                role="region"
+                                aria-labelledby={`${personaId}-trigger`}
+                                aria-hidden={!isExpanded}
+                            >
                                 <div>
                                     <div className="persona-row-body">
                                         <div className="persona-relacions-list">
-                                            {p.relacions.map((emp, i) => (
+                                            {p.relacions.map((emp) => (
                                                 <a
-                                                    key={i}
+                                                    key={emp.empresa}
                                                     href={buildRouteUrl(`/empreses/${buildEmpresaSlug(emp.empresa)}`)}
                                                     className="persona-relacio-item"
+                                                    tabIndex={isExpanded ? 0 : -1}
                                                     onClick={(event) => handleInternalLinkClick(event, () => onEmpresaSelect(emp.empresa))}
                                                 >
                                                     <div className="persona-relacio-empresa">{emp.empresa}</div>
@@ -2230,63 +2500,25 @@ function PersonesView({ persones, onEmpresaSelect, onNavigateLegal, searchTerm, 
             </div>
 
             {personesFiltrades.length === 0 && (
-                <div className="empty-state">
-                    <div className="empty-state-icon">
-                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                    </div>
-                    <div className="empty-state-title">Sense resultats</div>
-                    <div className="empty-state-text">No s'han trobat persones.</div>
-                    <div className="empty-state-action">
-                        <button className="empty-state-btn" onClick={resetFilters}>Restablir filtres</button>
-                    </div>
-                </div>
+                <EmptySearchState text="No s'han trobat persones." onReset={resetFilters} />
             )}
 
             {personesFiltrades.length > itemsPerPage && (
-                <div className="pagination">
-                    <button
-                        className="pagination-btn"
-                        onClick={() => { setCurrentPage(1) }}
-                        disabled={currentPage === 1}
-                        title="Primera pàgina"
-                    >
-                        «
-                    </button>
-                    <button
-                        className="pagination-btn"
-                        onClick={() => { setCurrentPage(prev => Math.max(prev - 1, 1)) }}
-                        disabled={currentPage === 1}
-                        title="Pàgina anterior"
-                    >
-                        ‹
-                    </button>
-                    <span className="pagination-info">
-                        Pàgina <strong>{currentPage}</strong> de <strong>{totalPages}</strong>
-                    </span>
-                    <button
-                        className="pagination-btn"
-                        onClick={() => { setCurrentPage(prev => Math.min(prev + 1, totalPages)) }}
-                        disabled={currentPage === totalPages}
-                        title="Pàgina següent"
-                    >
-                        ›
-                    </button>
-                    <button
-                        className="pagination-btn"
-                        onClick={() => { setCurrentPage(totalPages) }}
-                        disabled={currentPage === totalPages}
-                        title="Última pàgina"
-                    >
-                        »
-                    </button>
-                </div>
+                <Pagination
+                    currentPage={currentPage}
+                    totalPages={totalPages}
+                    onPageChange={(page) => {
+                        setCurrentPage(page);
+                        setExpandedIdx(null);
+                    }}
+                />
             )}
 
             <div className="metodologia-wrapper">
                 <div className="metodologia">
                     <h3 className="metodologia-legal-title">Metodologia</h3>
                     <p className="metodologia-intro">
-                        Les persones que apareixen en aquest cercador es mostren en la seva condició de representants mercantils d'empreses adjudicatàries de l'Ajuntament d'Igualada, segons les dades del Butlletí Oficial del Registre Mercantil (BORME) i la plataforma de contractació municipal, registres oficials de caràcter públic i universal.
+                        Les persones que apareixen en aquest cercador es mostren en la seva condició de representants mercantils d'empreses adjudicatàries de {AUTHORITY_NAME}, segons les dades del Butlletí Oficial del Registre Mercantil (BORME) i la plataforma de contractació municipal, registres oficials de caràcter públic i universal.
                     </p>
                     <p className="metodologia-intro">
                         L'import que figura al costat de cada persona correspon al volum total adjudicat a les empreses on exerceix o ha exercit un càrrec mercantil. Aparèixer en aquest llistat no implica cap irregularitat, sinó que reflecteix únicament la vinculació professional pública entre la persona i les empreses que han contractat amb l'Ajuntament. Les dades poden contenir errors derivats de fonts públiques o processos automatitzats, i qualsevol correcció factual serà revisada.
@@ -2299,6 +2531,224 @@ function PersonesView({ persones, onEmpresaSelect, onNavigateLegal, searchTerm, 
                     </p>
                 </div>
             </div>
+        </div>
+    );
+}
+
+function SubvencionsView({ subvencions, onEntitatSelect }) {
+    const loading = false;
+    const error = false;
+    const [searchTerm, setSearchTerm] = useState('');
+    const [filtersOpen, setFiltersOpen] = useState(false);
+    const [sortBy, setSortBy] = useState('date-desc');
+    const [tipologiaFilter, setTipologiaFilter] = useState('');
+    const [dateStart, setDateStart] = useState('');
+    const [dateEnd, setDateEnd] = useState('');
+    const [amountMin, setAmountMin] = useState('');
+    const [amountMax, setAmountMax] = useState('');
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 25;
+
+    const filteredSubvencions = useMemo(() => {
+        const filtered = subvencions.filter(subvencio => {
+            if (searchTerm && !matchesSearchQuery([subvencio.descripcion, subvencio.adjudicatario, subvencio.codigo], searchTerm)) return false;
+            if (tipologiaFilter && subvencio.finalitat_p_blica !== tipologiaFilter) return false;
+            if (dateStart && subvencio.fecha < dateStart) return false;
+            if (dateEnd && subvencio.fecha > dateEnd) return false;
+            if (amountMin !== '' && subvencio.importe < Number(amountMin)) return false;
+            if (amountMax !== '' && subvencio.importe > Number(amountMax)) return false;
+            return true;
+        });
+
+        return filtered.sort((a, b) => {
+            if (sortBy === 'date-asc') return (Date.parse(a.fecha) || 0) - (Date.parse(b.fecha) || 0);
+            if (sortBy === 'amount-desc') return b.importe - a.importe;
+            if (sortBy === 'amount-asc') return a.importe - b.importe;
+            return (Date.parse(b.fecha) || 0) - (Date.parse(a.fecha) || 0);
+        });
+    }, [subvencions, searchTerm, tipologiaFilter, dateStart, dateEnd, amountMin, amountMax, sortBy]);
+
+    const totalPages = Math.ceil(filteredSubvencions.length / itemsPerPage);
+    const pageSubvencions = filteredSubvencions.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+    const activeFiltersCount = [tipologiaFilter, dateStart, dateEnd, amountMin, amountMax].filter(value => value !== '').length + (sortBy !== 'date-desc' ? 1 : 0);
+
+    useEffect(() => {
+        const lastPage = Math.max(1, totalPages);
+        if (currentPage > lastPage) setCurrentPage(lastPage);
+    }, [currentPage, totalPages]);
+
+    const resetFilters = () => {
+        setSearchTerm('');
+        setSortBy('date-desc');
+        setTipologiaFilter('');
+        setDateStart('');
+        setDateEnd('');
+        setAmountMin('');
+        setAmountMax('');
+        setCurrentPage(1);
+    };
+
+    return (
+        <div className="container subvencions-page">
+            <h1 className="page-title">Cercador de subvencions</h1>
+
+            {loading && (
+                <div className="data-loading-container" role="status" aria-live="polite" aria-label="Carregant subvencions">
+                    <div className="search-section data-skeleton-search" aria-hidden="true">
+                        <div className="data-skeleton-input"></div>
+                        <div className="data-skeleton-actions">
+                            <div className="data-skeleton-control"></div>
+                            <div className="data-skeleton-control data-skeleton-control-square"></div>
+                        </div>
+                    </div>
+                    <div className="data-skeleton-list" aria-hidden="true">
+                        {Array.from({ length: 4 }, (_, index) => (
+                            <div key={index} className="contract-card data-skeleton-card">
+                                <div className="data-skeleton-line data-skeleton-line-title"></div>
+                                <div className="data-skeleton-line data-skeleton-line-medium"></div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            )}
+
+            {!loading && error && (
+                <div className="empty-state" role="alert">
+                    <div className="empty-state-icon" aria-hidden="true">!</div>
+                    <div className="empty-state-title">No s'han pogut carregar les subvencions</div>
+                    <div className="empty-state-text">La connexió amb el RAISC no està disponible ara mateix.</div>
+                    <div className="empty-state-action">
+                        <button className="empty-state-btn" type="button">Tornar-ho a provar</button>
+                    </div>
+                </div>
+            )}
+
+            {!loading && !error && (
+                <>
+                    <div className="search-section">
+                        <SearchField
+                            value={searchTerm}
+                            onValueChange={value => { setSearchTerm(value); setCurrentPage(1); }}
+                            placeholder="Cerca per descripció, entitat o codi d'expedient"
+                            ariaLabel="Cerca per descripció, entitat o codi d'expedient"
+                        />
+
+                        <FilterActions
+                            open={filtersOpen}
+                            onToggle={() => setFiltersOpen(open => !open)}
+                            activeCount={activeFiltersCount}
+                            onReset={resetFilters}
+                            controlsId="subvencio-filter-primary subvencio-filter-secondary"
+                        />
+
+                        <div id="subvencio-filter-primary" className={'filters search-filter-panel subvencio-filter-primary' + (!filtersOpen ? ' collapsed' : '')}>
+                            <div className="filter-group filter-group-standard">
+                                <label className="filter-label">Ordenar per</label>
+                                <select className="filter-select filter-select-standard" value={sortBy} onChange={event => { setSortBy(event.target.value); setCurrentPage(1); }} aria-label="Ordenar subvencions per">
+                                    <option value="date-desc">Data (més recents)</option>
+                                    <option value="date-asc">Data (més antics)</option>
+                                    <option value="amount-desc">Import (descendent)</option>
+                                    <option value="amount-asc">Import (ascendent)</option>
+                                </select>
+                            </div>
+                            <div className="filter-group filter-group-standard">
+                                <label className="filter-label">Tipus</label>
+                                <select className="filter-select filter-select-standard" value={tipologiaFilter} onChange={event => { setTipologiaFilter(event.target.value); setCurrentPage(1); }} aria-label="Tipus de subvenció">
+                                    <option value="">Tots els tipus</option>
+                                    {SUBVENCIO_TIPOLOGIES.map(tipologia => (
+                                        <option key={tipologia} value={tipologia}>{formatSubvencioSector(tipologia)}</option>
+                                    ))}
+                                </select>
+                            </div>
+                        </div>
+
+                        <div id="subvencio-filter-secondary" className={'filters-row search-filter-panel search-filter-panel-secondary' + (!filtersOpen ? ' collapsed' : '')}>
+                            <div className="filter-group">
+                                <label className="filter-label">Data inici</label>
+                                <input type="date" className="filter-input" aria-label="Data inici" value={dateStart} onChange={event => { setDateStart(event.target.value); setCurrentPage(1); }} />
+                            </div>
+                            <div className="filter-group">
+                                <label className="filter-label">Data final</label>
+                                <input type="date" className="filter-input" aria-label="Data final" value={dateEnd} onChange={event => { setDateEnd(event.target.value); setCurrentPage(1); }} />
+                            </div>
+                            <div className="filter-group">
+                                <label className="filter-label">Des de</label>
+                                <input type="number" min="0" step="0.01" inputMode="decimal" className="filter-input" placeholder="Import mínim" aria-label="Import mínim" value={amountMin} onChange={event => { setAmountMin(event.target.value); setCurrentPage(1); }} />
+                            </div>
+                            <div className="filter-group">
+                                <label className="filter-label">Fins a</label>
+                                <input type="number" min="0" step="0.01" inputMode="decimal" className="filter-input" placeholder="Import màxim" aria-label="Import màxim" value={amountMax} onChange={event => { setAmountMax(event.target.value); setCurrentPage(1); }} />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="results-count" role="status" aria-live="polite">
+                        <span className="results-count-total"><span className="results-count-prefix">S'han trobat </span><strong>{filteredSubvencions.length}</strong> subvencions</span>
+                        {filteredSubvencions.length > itemsPerPage && (
+                            <span className="results-count-page"><span className="results-count-page-full">Pàgina</span><span className="results-count-page-short">Pàg.</span> <strong>{currentPage}</strong> de <strong>{totalPages}</strong></span>
+                        )}
+                    </div>
+
+                    {pageSubvencions.map(subvencio => (
+                        <a
+                            key={subvencio.id}
+                            href={buildRouteUrl(`/entitats/${subvencio.entitat_slug}`)}
+                            className="contract-card subvencio-card"
+                            onClick={event => handleInternalLinkClick(event, () => onEntitatSelect(subvencio))}
+                        >
+                            <span className="contract-header">
+                                <span className="contract-title">{subvencio.descripcion}</span>
+                                <span className="contract-amount">{formatCurrency(subvencio.importe)}</span>
+                            </span>
+                            <span className="contract-meta">
+                                <span className="contract-meta-item">
+                                    <span className="contract-meta-label">Entitat adjudicatària</span>
+                                    <span className="contract-meta-value">{subvencio.adjudicatario}</span>
+                                </span>
+                                <span className="contract-meta-item">
+                                    <span className="contract-meta-label">Data</span>
+                                    <span className="contract-meta-value">{formatDate(subvencio.fecha)}</span>
+                                </span>
+                                <span className="contract-meta-item">
+                                    <span className="contract-meta-label">Codi expedient</span>
+                                    <span className="contract-meta-value">{subvencio.codigo}</span>
+                                </span>
+                                <span className="contract-pills">
+                                    <span className="contract-pill" title={subvencio.finalitat_p_blica} aria-label={`Finalitat pública: ${subvencio.finalitat_p_blica}`}>
+                                        {formatSubvencioSector(subvencio.finalitat_p_blica)}
+                                    </span>
+                                </span>
+                            </span>
+                        </a>
+                    ))}
+
+                    {filteredSubvencions.length === 0 && (
+                        <EmptySearchState text="No s'han trobat subvencions." onReset={resetFilters} />
+                    )}
+
+                    {filteredSubvencions.length > itemsPerPage && (
+                        <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />
+                    )}
+
+                    <div className="metodologia-wrapper">
+                        <div className="metodologia">
+                            <h3 className="metodologia-legal-title">Metodologia</h3>
+                            <p className="metodologia-intro">
+                                Les subvencions que apareixen en aquest cercador corresponen a les concessions publicades al Registre d'Ajuts i Subvencions de Catalunya (RAISC).
+                            </p>
+                            <p className="metodologia-intro">
+                                L'import que figura a cada subvenció és la quantitat concedida publicada oficialment. La interfície mostra únicament els registres amb beneficiaris identificats com a entitats publicables, pel que les concessions associades a persones físiques o a beneficiaris no publicables no apareixen al cercador.
+                            </p>
+                            <p className="metodologia-intro">
+                                El tractament de les dades es realitza a l'empara de l'article 6.1.e) del Reglament UE 2016/679 (RGPD) d'interès públic i de la Llei 19/2013, de 9 de desembre, de transparència, accés a la informació pública i bon govern, que estableix l'obligació de publicitat activa en matèria de contractació pública. Les dades es limiten a la informació estrictament necessària per al propòsit de transparència i es tracten d'acord amb el principi de minimització de dades (art. 5.1.c RGPD). Tota la informació publicada prové de fonts oficials de caràcter públic i no inclou dades de la vida privada de les persones.
+                            </p>
+                            <p className="metodologia-intro metodologia-intro-last">
+                                Les persones interessades poden exercir els drets d'accés, rectificació, limitació o oposició al tractament posant-se en contacte a través de la secció <a href="/avis-legal" className="prose-link">Avís legal</a>. El dret de supressió (dret a l'oblit) queda limitat per l'art. 17.3.b) del RGPD quan les dades figuren en registres oficials públics o en documentació administrativa de contractació pública, sense perjudici del dret a sol·licitar la revisió de possibles errors factuals.
+                            </p>
+                        </div>
+                    </div>
+                </>
+            )}
         </div>
     );
 }
@@ -2317,12 +2767,22 @@ function CasosView({ casos, onCasoSelect }) {
     const featuredCaso = casosOrdenats[0];
     const gridCasos = casosOrdenats.slice(1);
 
+    if (!featuredCaso) {
+        return (
+            <div className="container casos-page">
+                <h1 className="page-title">Casos d'investigació</h1>
+                <div className="empty-state" role="status">
+                    <h2 className="empty-state-title">Encara no hi ha investigacions publicades</h2>
+                    <p className="empty-state-text">Els nous casos apareixeran aquí quan estiguin disponibles.</p>
+                </div>
+            </div>
+        );
+    }
+
     return (
         <div className="container casos-page">
             <h1 className="page-title">Casos d'investigació</h1>
-            {featuredCaso && (
-                <CasoPrincipalInvestigacio caso={featuredCaso} onSelect={onCasoSelect} />
-            )}
+            <CasoPrincipalInvestigacio caso={featuredCaso} onSelect={onCasoSelect} />
             <div className="casos-editorial-list" aria-label="Investigacions publicades">
                 {gridCasos.map((caso, idx) => (
                     <CasoEditorialCard key={caso.slug} caso={caso} idx={idx + 1} onSelect={onCasoSelect} />
@@ -2338,7 +2798,7 @@ function CasoPrincipalInvestigacio({ caso, onSelect }) {
             <div className="caso-principal-image-frame">
                 <img
                     src={assetUrl(caso.image)}
-                    alt={caso.title + ': ' + caso.subtitle}
+                    alt=""
                     className="caso-editorial-image"
                     loading="eager"
                 />
@@ -2382,7 +2842,7 @@ function CasoEditorialContent({ caso, idx, showImage }) {
         return (
             <div className="contract-header caso-list-header">
                 <div className="caso-list-copy">
-                    <div className="contract-title caso-editorial-title">{caso.title}</div>
+                    <h2 className="contract-title caso-editorial-title">{caso.title}</h2>
                     <div className="caso-editorial-subtitle">{caso.subtitle}</div>
                 </div>
                 {Number.isFinite(Number(caso.importe)) && (
@@ -2398,7 +2858,7 @@ function CasoEditorialContent({ caso, idx, showImage }) {
                 <div className="caso-editorial-image-frame">
                     <img
                         src={assetUrl(caso.image)}
-                        alt={`${caso.title}: ${caso.subtitle}`}
+                        alt=""
                         className="caso-editorial-image"
                         loading={idx === 0 ? 'eager' : 'lazy'}
                     />
@@ -2455,7 +2915,6 @@ function InvestigacioContractCard({ contract, onSelect, hideAdjudicatario = fals
 function InvestigacioPaginatedContracts({ block, contracts, onContractSelect }) {
     const itemsPerPage = block.itemsPerPage || 25;
     const [currentPage, setCurrentPage] = useState(1);
-    const sectionRef = useRef(null);
     const codes = block.codes || [];
     const frozenByCode = useMemo(() => {
         const map = new Map();
@@ -2498,38 +2957,74 @@ function InvestigacioPaginatedContracts({ block, contracts, onContractSelect }) 
     if (!blockContracts.length) return null;
 
     return (
-        <section ref={sectionRef} className="investigacio-embed investigacio-card-stack" aria-label={block.ariaLabel || 'Contractes relacionats'}>
+        <section className="investigacio-embed investigacio-card-stack" aria-label={block.ariaLabel || 'Contractes relacionats'}>
             {pageContracts.map(contract => <InvestigacioContractCard key={contract.slug} contract={contract} onSelect={onContractSelect} hideAdjudicatario={Boolean(block.hideAdjudicatario)} />)}
             {blockContracts.length > itemsPerPage && (
-                <div className="pagination">
-                    <button className="pagination-btn" onClick={() => goToPage(1)} disabled={currentPage === 1} title="Primera pàgina">«</button>
-                    <button className="pagination-btn" onClick={() => goToPage(currentPage - 1)} disabled={currentPage === 1} title="Pàgina anterior">‹</button>
-                    <span className="pagination-info">Pàgina <strong>{currentPage}</strong> de <strong>{totalPages}</strong></span>
-                    <button className="pagination-btn" onClick={() => goToPage(currentPage + 1)} disabled={currentPage === totalPages} title="Pàgina següent">›</button>
-                    <button className="pagination-btn" onClick={() => goToPage(totalPages)} disabled={currentPage === totalPages} title="Última pàgina">»</button>
-                </div>
+                <Pagination
+                    currentPage={currentPage}
+                    totalPages={totalPages}
+                    onPageChange={goToPage}
+                />
             )}
         </section>
     );
 }
 
-function InvestigacioCaseView({ caso, contracts, onContractSelect }) {
+function InvestigacioCaseView({ caso, contracts, onBack, onContractSelect }) {
+    const [shareActionsOpen, setShareActionsOpen] = useState(false);
+    const [shareCopyStatus, setShareCopyStatus] = useState('');
+    const shareActionsRef = useRef(null);
+    const shareStatusTimerRef = useRef(null);
+
+    useEffect(() => {
+        if (!shareActionsOpen) return;
+        const closeShareActions = (event) => {
+            if (event.type === 'keydown' && event.key !== 'Escape') return;
+            if (event.type === 'pointerdown' && shareActionsRef.current?.contains(event.target)) return;
+            setShareActionsOpen(false);
+        };
+        document.addEventListener('pointerdown', closeShareActions);
+        document.addEventListener('keydown', closeShareActions);
+        return () => {
+            document.removeEventListener('pointerdown', closeShareActions);
+            document.removeEventListener('keydown', closeShareActions);
+        };
+    }, [shareActionsOpen]);
+
+    useEffect(() => () => window.clearTimeout(shareStatusTimerRef.current), []);
+
+    if (!caso) return null;
+
+    const copyInvestigacioLink = async () => {
+        try {
+            await navigator.clipboard.writeText(window.location.href);
+            setShareCopyStatus('Enllaç copiat');
+        } catch (_) {
+            setShareCopyStatus("No s'ha pogut copiar");
+        }
+        window.clearTimeout(shareStatusTimerRef.current);
+        shareStatusTimerRef.current = window.setTimeout(() => setShareCopyStatus(''), 1800);
+    };
+
     return (
         <article className="container prose-page investigacio-detail-page">
-            <h1 className="page-title">{caso.title}</h1>
+            <header className="investigacio-detail-header">
+                <h1 className="page-title">{caso.title}</h1>
+                {Number.isFinite(Number(caso.importe)) && <div className="investigacio-detail-amount">{formatCurrency(Number(caso.importe))}</div>}
+                <p className="investigacio-detail-subtitle">{caso.subtitle}</p>
+            </header>
+
+            {caso.image && (
+                <div className="investigacio-featured-image-frame">
+                    <img
+                        src={assetUrl(caso.image)}
+                        alt={caso.title + ': ' + caso.subtitle}
+                        className="investigacio-featured-image"
+                    />
+                </div>
+            )}
 
             <div className="prose-wrapper investigacio-story">
-                <p className="caso-principal-subtitle investigacio-detail-subtitle">{caso.subtitle}</p>
-                {caso.date && <p className="prose-intro investigacio-date">{caso.date}</p>}
-                {caso.image && (
-                    <div className="investigacio-featured-image-frame">
-                        <img
-                            src={assetUrl(caso.image)}
-                            alt={caso.title + ': ' + caso.subtitle}
-                            className="investigacio-featured-image"
-                        />
-                    </div>
-                )}
                 {(caso.content || []).map((block, index) => {
                     const key = block.id || block.type + '-' + index;
                     if (block.type === 'heading') {
@@ -2561,59 +3056,58 @@ function InvestigacioCaseView({ caso, contracts, onContractSelect }) {
                     return null;
                 })}
             </div>
+
+            <div className="contracte-detail-actions-row investigacio-detail-actions-row">
+                <button onClick={onBack} className="btn-share contracte-detail-back" title="Tornar" aria-label="Tornar" type="button">
+                    <svg className="contracte-detail-back-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M19 12H5" /><polyline points="12 19 5 12 12 5" /></svg>
+                    <span>Tornar</span>
+                </button>
+                <div className={`contracte-detail-share contracte-detail-share-standalone${shareActionsOpen ? ' is-open' : ''}`} ref={shareActionsRef}>
+                    <div id="investigacio-share-actions" className="contracte-detail-share-actions" aria-hidden={!shareActionsOpen}>
+                        <button className="btn-share contracte-detail-share-btn" onClick={copyInvestigacioLink} tabIndex={shareActionsOpen ? 0 : -1} type="button">{shareCopyStatus || "Copia l'enllaç"}</button>
+                    </div>
+                    <button className="btn-share contracte-detail-share-btn" onClick={() => setShareActionsOpen(open => !open)} aria-expanded={shareActionsOpen} aria-controls="investigacio-share-actions" type="button"><em className="share-arrow"></em> Compartir</button>
+                </div>
+            </div>
         </article>
     );
 }
 function App() {
-    // Treu el prefix BASE i normalitza la URL actual
-    const getRoute = () => {
-        let p = window.location.pathname;
-        if (BASE && p.startsWith(BASE)) p = p.slice(BASE.length);
-        if (!p.startsWith('/')) p = '/' + p;
-        // Suporta /contractes/ amb barra final
-        if (p.length > 1 && p.endsWith('/')) p = p.slice(0, -1);
-        return p;
-    };
+    const initialContractSearch = useMemo(() => readContractSearchState(), []);
+    const initialAnalysisSearch = useMemo(() => readAnalysisSearchState(), []);
     const tabFromPath = (p) => resolveRoute(p).tab;
-    const [activeTab, setActiveTab] = useState(() => tabFromPath(getRoute()));
+    const [activeTab, setActiveTab] = useState(() => tabFromPath(getCurrentRoute()));
     const [pendingEmpresaSlug, setPendingEmpresaSlug] = useState(() => {
-        const p = getRoute();
+        const p = getCurrentRoute();
         return p.startsWith('/empreses/') ? p.slice('/empreses/'.length) : null;
     });
     const [pendingContractSlug, setPendingContractSlug] = useState(() => {
-        const p = getRoute();
+        const p = getCurrentRoute();
         return p.startsWith('/contractes/') ? p.slice('/contractes/'.length) : null;
     });
     const [selectedContractForDetail, setSelectedContractForDetail] = useState(null);
-    const [contracts, setContracts] = useState([]);
-    const [empreses, setEmpreses] = useState([]);
-    const [persones, setPersones] = useState([]);
-    const [administradors, setAdministradors] = useState({});
-    const [fraudes, setFraudes] = useState([]);
-    const [concentracio, setConcentracio] = useState([]);
-    const [electoral, setElectoral] = useState([]);
-    const [monopolio, setMonopolio] = useState(null);
-    const [stats, setStats] = useState(null);
-    const [loading, setLoading] = useState(true);
-    const [dataLoading, setDataLoading] = useState(true);
-    const [personesLoaded, setPersonesLoaded] = useState(false);
-    const [administradorsLoaded, setAdministradorsLoaded] = useState(false);
-    const [analisiLoaded, setAnalisiLoaded] = useState(false);
-    const [casosInvestigacio, setCasosInvestigacio] = useState(CASOS_INVESTIGACIO_FALLBACK);
-    const [investigacioLoaded, setInvestigacioLoaded] = useState(false);
-    const [coreDataError, setCoreDataError] = useState(false);
-    const [personesError, setPersonesError] = useState(false);
-    const [administradorsError, setAdministradorsError] = useState(false);
-    const [analisiError, setAnalisiError] = useState(false);
-    const [investigacioError, setInvestigacioError] = useState(false);
-    const [coreRetry, setCoreRetry] = useState(0);
-    const [personesRetry, setPersonesRetry] = useState(0);
-    const [administradorsRetry, setAdministradorsRetry] = useState(0);
-    const [analisiRetry, setAnalisiRetry] = useState(0);
-    const [investigacioRetry, setInvestigacioRetry] = useState(0);
-    const [summary, setSummary] = useState(null);
-    const [summaryResolved, setSummaryResolved] = useState(false);
-    const [loadingProgress, setLoadingProgress] = useState(0);
+    const {
+        contracts,
+        empreses,
+        persones,
+        administradors,
+        fraudes,
+        concentracio,
+        electoral,
+        dependencia,
+        stats,
+        summary,
+        casosInvestigacio,
+        subvencions,
+        loading,
+        loadingProgress,
+        investigacioLoaded,
+        investigacioError,
+        activeDataError,
+        isDataTabLoading,
+        canRenderDataTab,
+        retryActiveData,
+    } = useIguadataData(activeTab);
     const [homeIntroFading, setHomeIntroFading] = useState(false);
     const [threeReadyTick, setThreeReadyTick] = useState(0);
     const [showMobileScrollTop, setShowMobileScrollTop] = useState(false);
@@ -2621,83 +3115,24 @@ function App() {
     const [homeRouteTransition, setHomeRouteTransition] = useState('');
     const [homeMetricTransition, setHomeMetricTransition] = useState(null);
     const homeIntroPlayedRef = useRef(false);
-    const activeInvestigacioSlug = getRoute().startsWith('/investigacio/')
-        ? getRoute().slice('/investigacio/'.length)
+    const activeInvestigacioSlug = getCurrentRoute().startsWith('/investigacio/')
+        ? getCurrentRoute().slice('/investigacio/'.length)
         : null;
     const activeInvestigacioCase = casosInvestigacio.find(item => item.slug === activeInvestigacioSlug)
         || CASOS_INVESTIGACIO_FALLBACK.find(item => item.slug === activeInvestigacioSlug)
-        || CASOS_INVESTIGACIO_FALLBACK[0];
+        || null;
+    const activeEntitatSlug = getCurrentRoute().startsWith('/entitats/')
+        ? getCurrentRoute().slice('/entitats/'.length)
+        : null;
+    const activeEntitatSubvencions = useMemo(
+        () => activeEntitatSlug ? subvencions.filter(subvencio => subvencio.entitat_slug === activeEntitatSlug) : [],
+        [subvencions, activeEntitatSlug]
+    );
     const preservedInvestigationContracts = useMemo(() =>
         casosInvestigacio.flatMap(caso =>
             (caso.content || []).flatMap(block => block.contract_snapshots || [])
         )
         , [casosInvestigacio]);
-
-    useEffect(() => {
-        let cancelled = false;
-        setInvestigacioLoaded(false);
-        setInvestigacioError(false);
-        fetch(jsonAssetUrl('/json/investigacio.json'))
-            .then(res => {
-                if (!res.ok) throw new Error('Investigacio HTTP ' + res.status);
-                return res.json();
-            })
-            .then(data => {
-                if (cancelled) return;
-                if (!Array.isArray(data) || !data.length) throw new Error('Investigacio JSON buit');
-                setCasosInvestigacio(data);
-                setInvestigacioLoaded(true);
-            })
-            .catch(err => {
-                if (cancelled) return;
-                console.warn('Error loading investigacio:', err);
-                setInvestigacioError(true);
-            });
-        return () => { cancelled = true; };
-    }, [investigacioRetry]);
-
-    useEffect(() => {
-        if (!loading) return;
-        const startTime = Date.now();
-        const timer = setInterval(() => {
-            const elapsed = Date.now() - startTime;
-            const p = 95 * (1 - Math.exp(-elapsed / 800));
-            setLoadingProgress(Math.floor(p));
-        }, 50);
-        return () => clearInterval(timer);
-    }, [loading]);
-
-    useEffect(() => {
-        let cancelled = false;
-        fetch(assetUrl('/json/resum.json'), { cache: 'no-cache' })
-            .then(res => res.ok ? res.json() : null)
-            .then(data => {
-                if (cancelled) return;
-                if (data) {
-                    setDataVersion(data.version);
-                    setSummary(data);
-                    if (data.stats) {
-                        setStats({
-                            total_contratos: data.stats.total_contratos || 0,
-                            importe_total: data.stats.importe_total || 0,
-                            num_empresas: data.stats.num_empresas || 0,
-                        });
-                    }
-                }
-            })
-            .catch(err => {
-                console.warn('No s\'ha pogut carregar el resum inicial:', err);
-            })
-            .finally(() => {
-                if (cancelled) return;
-                setSummaryResolved(true);
-                setLoadingProgress(100);
-                setTimeout(() => {
-                    if (!cancelled) setLoading(false);
-                }, 180);
-            });
-        return () => { cancelled = true; };
-    }, []);
 
     useEffect(() => {
         if (activeTab !== 'home' || loading || homeIntroPlayedRef.current) return;
@@ -2990,45 +3425,81 @@ function App() {
 
     const [expandedId, setExpandedId] = useState(null);
     const [expandedMonopolyId, setExpandedMonopolyId] = useState(null);
-    const [searchTerm, setSearchTerm] = useState('');
-    const [debouncedSearch, setDebouncedSearch] = useState('');
-    const [typeFilter, setTypeFilter] = useState('');
-    const [procedureFilter, setProcedureFilter] = useState('');
-    const [riskFilter, setRiskFilter] = useState('TOTS');
-    const [analisiSearch, setAnalisiSearch] = useState('');
-    const [analisiSort, setAnalisiSort] = useState('risk-desc');
-    const [concentracioMode, setConcentracioMode] = useState('historic');
+    const [searchTerm, setSearchTerm] = useState(initialContractSearch.searchTerm);
+    const [debouncedSearch, setDebouncedSearch] = useState(initialContractSearch.searchTerm);
+    const [typeFilter, setTypeFilter] = useState(initialContractSearch.typeFilter);
+    const [procedureFilter, setProcedureFilter] = useState(initialContractSearch.procedureFilter);
+    const [analisiTab, setAnalisiTab] = useState(initialAnalysisSearch.tab);
+    const [analisiFiltersByTab, setAnalisiFiltersByTab] = useState(() => {
+        const defaults = () => ({ searchTerm: '', sortBy: 'risk-desc' });
+        const state = {
+            fraccionament: defaults(),
+            monopoli: defaults(),
+            electoral: defaults(),
+            dependencia: defaults(),
+        };
+        state[initialAnalysisSearch.tab] = {
+            searchTerm: initialAnalysisSearch.searchTerm,
+            sortBy: initialAnalysisSearch.sortBy,
+        };
+        return state;
+    });
+    const currentAnalisiFilters = analisiFiltersByTab[analisiTab];
+    const analisiSearch = currentAnalisiFilters.searchTerm;
+    const analisiSort = currentAnalisiFilters.sortBy;
+    const setAnalisiFilterValue = (key, value) => {
+        setAnalisiFiltersByTab(previous => ({
+            ...previous,
+            [analisiTab]: { ...previous[analisiTab], [key]: value },
+        }));
+        if (analisiTab === 'fraccionament') setAnalisiPageFrac(1);
+        if (analisiTab === 'monopoli') setAnalisiPageMonop(1);
+        if (analisiTab === 'electoral') setAnalisiPageElect(1);
+        if (analisiTab === 'dependencia') setAnalisiPageDependencia(1);
+    };
+    const setAnalisiSearch = value => setAnalisiFilterValue('searchTerm', value);
+    const setAnalisiSort = value => setAnalisiFilterValue('sortBy', value);
+    const [concentracioMode, setConcentracioMode] = useState(initialAnalysisSearch.concentrationMode);
     const [filtersOpen, setFiltersOpen] = useState(false);
     const [analisiFiltersOpen, setAnalisiFiltersOpen] = useState(false);
-    const [analisiPageFrac, setAnalisiPageFrac] = useState(1);
-    const [analisiPageElect, setAnalisiPageElect] = useState(1);
-    const [analisiPageMonop, setAnalisiPageMonop] = useState(1);
+    const [analisiPageFrac, setAnalisiPageFrac] = useState(initialAnalysisSearch.tab === 'fraccionament' ? initialAnalysisSearch.currentPage : 1);
+    const [analisiPageElect, setAnalisiPageElect] = useState(initialAnalysisSearch.tab === 'electoral' ? initialAnalysisSearch.currentPage : 1);
+    const [analisiPageMonop, setAnalisiPageMonop] = useState(initialAnalysisSearch.tab === 'monopoli' ? initialAnalysisSearch.currentPage : 1);
+    const [analisiPageDependencia, setAnalisiPageDependencia] = useState(initialAnalysisSearch.tab === 'dependencia' ? initialAnalysisSearch.currentPage : 1);
     const analisiItemsPerPage = 25;
-    const [dateStart, setDateStart] = useState('');
-    const [dateEnd, setDateEnd] = useState('');
-    const [amountMin, setAmountMin] = useState('');
-    const [amountMax, setAmountMax] = useState('');
-    const [sortBy, setSortBy] = useState('date-desc');
-    const [currentPage, setCurrentPage] = useState(1);
+    useEffect(() => {
+        setAnalisiFiltersOpen(false);
+    }, [analisiTab, concentracioMode]);
+    const [dateStart, setDateStart] = useState(initialContractSearch.dateStart);
+    const [dateEnd, setDateEnd] = useState(initialContractSearch.dateEnd);
+    const [amountMin, setAmountMin] = useState(initialContractSearch.amountMin);
+    const [amountMax, setAmountMax] = useState(initialContractSearch.amountMax);
+    const [sortBy, setSortBy] = useState(initialContractSearch.sortBy);
+    const [currentPage, setCurrentPage] = useState(initialContractSearch.currentPage);
     const itemsPerPage = 25;
-    const [analisiTab, setAnalisiTab] = useState('fraccionament');
     const [selectedCasoDetail, setSelectedCasoDetail] = useState(null);
     const [selectedConcentracioDetail, setSelectedConcentracioDetail] = useState(null);
     const [selectedElectoralismeDetail, setSelectedElectoralismeDetail] = useState(null);
+    const [selectedDependenciaDetail, setSelectedDependenciaDetail] = useState(null);
     const [pendingCasId, setPendingCasId] = useState(() => {
-        const p = getRoute();
+        const p = getCurrentRoute();
         return p.startsWith('/analisi/fraccionament/') ? p.slice('/analisi/fraccionament/'.length) : null;
     });
     const [pendingConcentracioId, setPendingConcentracioId] = useState(() => {
-        const p = getRoute();
+        const p = getCurrentRoute();
         return p.startsWith('/analisi/concentracio/') ? p.slice('/analisi/concentracio/'.length) : null;
     });
     const [pendingElectoralismeId, setPendingElectoralismeId] = useState(() => {
-        const p = getRoute();
+        const p = getCurrentRoute();
         return p.startsWith('/analisi/electoralisme/') ? p.slice('/analisi/electoralisme/'.length) : null;
+    });
+    const [pendingDependenciaId, setPendingDependenciaId] = useState(() => {
+        const p = getCurrentRoute();
+        return p.startsWith('/analisi/dependencia/') ? p.slice('/analisi/dependencia/'.length) : null;
     });
     const [selectedEmpresa, setSelectedEmpresa] = useState(null);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [isAnalisiMobileMenuOpen, setIsAnalisiMobileMenuOpen] = useState(false);
     useEffect(() => {
         document.documentElement.classList.toggle('mobile-menu-lock', isMobileMenuOpen);
         document.body.classList.toggle('mobile-menu-lock', isMobileMenuOpen);
@@ -3054,6 +3525,33 @@ function App() {
     const [personesSort, setPersonesSort] = useState('companies-desc');
     const [personesPage, setPersonesPage] = useState(1);
     const [personesExpanded, setPersonesExpanded] = useState(null);
+    const applyContractSearchState = (state = readContractSearchState()) => {
+        setSearchTerm(state.searchTerm);
+        setDebouncedSearch(state.searchTerm);
+        setTypeFilter(state.typeFilter);
+        setProcedureFilter(state.procedureFilter);
+        setDateStart(state.dateStart);
+        setDateEnd(state.dateEnd);
+        setAmountMin(state.amountMin);
+        setAmountMax(state.amountMax);
+        setSortBy(state.sortBy);
+        setCurrentPage(state.currentPage);
+    };
+    const applyAnalysisSearchState = (state = readAnalysisSearchState()) => {
+        setAnalisiTab(state.tab);
+        setConcentracioMode(state.concentrationMode);
+        setAnalisiFiltersByTab(previous => ({
+            ...previous,
+            [state.tab]: {
+                searchTerm: state.searchTerm,
+                sortBy: state.sortBy,
+            },
+        }));
+        if (state.tab === 'fraccionament') setAnalisiPageFrac(state.currentPage);
+        if (state.tab === 'monopoli') setAnalisiPageMonop(state.currentPage);
+        if (state.tab === 'electoral') setAnalisiPageElect(state.currentPage);
+        if (state.tab === 'dependencia') setAnalisiPageDependencia(state.currentPage);
+    };
     const resetAllFilters = () => {
         // Contractes
         setSearchTerm(''); setDebouncedSearch('');
@@ -3118,6 +3616,8 @@ function App() {
             'empreses': '/empreses',
             'empresa': '/empreses', // Fallback si no es passa customPath
             'persones': '/persones',
+            'subvencions': '/subvencions',
+            'entitat': '/subvencions',
             'analisi': '/analisi',
             'cas-fraccionament': '/analisi/fraccionament',
             'cas-concentracio': '/analisi/concentracio',
@@ -3129,7 +3629,7 @@ function App() {
         const route = customPath !== null ? customPath : (pathMap[tab] || '/');
         const normalizedRoute = (route.length > 1 && route.endsWith('/')) ? route.slice(0, -1) : route;
         const fullPath = (BASE + normalizedRoute).replace(/\/+$/, '') || '/';
-        if (getRoute() !== normalizedRoute) {
+        if (getCurrentRoute() !== normalizedRoute) {
             if (!replace) saveCurrentScroll();
             window.history[replace ? 'replaceState' : 'pushState']({
                 tab,
@@ -3140,6 +3640,16 @@ function App() {
         }
         scheduleScrollTop();
     };
+
+    useEffect(() => {
+        if (activeTab !== 'cas-investigacio' || !investigacioLoaded || investigacioError || activeInvestigacioCase) return;
+        handleNavigation('casos', '/investigacio', { replace: true });
+    }, [activeTab, investigacioLoaded, investigacioError, activeInvestigacioCase]);
+
+    useEffect(() => {
+        if (activeTab !== 'entitat' || !subvencions.length || activeEntitatSubvencions.length) return;
+        handleNavigation('subvencions', '/subvencions', { replace: true });
+    }, [activeTab, subvencions, activeEntitatSubvencions]);
 
     const runRouteTransition = useCallback((navigate) => {
         if (homeRouteTransition) return;
@@ -3187,7 +3697,7 @@ function App() {
             const state = event.state || window.history.state || {};
             const fallbackScroll = typeof state.scrollY === 'number' ? state.scrollY : 0;
             restoreScrollRef.current = getSavedScrollPosition(window.location.href, fallbackScroll);
-            const p = getRoute();
+            const p = getCurrentRoute();
             const resolved = resolveRoute(p);
             if (resolved.canonicalPath !== p) {
                 handleNavigation(resolved.tab, resolved.canonicalPath, { replace: true });
@@ -3199,6 +3709,9 @@ function App() {
                 setPendingEmpresaSlug(p.slice('/empreses/'.length));
                 setSelectedEmpresa(null);
                 setActiveTab('empresa');
+            }
+            else if (p.startsWith('/entitats/')) {
+                setActiveTab('entitat');
             }
             else if (p.startsWith('/contractes/')) {
                 setPendingContractSlug(p.slice('/contractes/'.length));
@@ -3220,10 +3733,19 @@ function App() {
                 setSelectedElectoralismeDetail(null);
                 setActiveTab('cas-electoralisme');
             }
+            else if (p.startsWith('/analisi/dependencia/')) {
+                setPendingDependenciaId(p.slice('/analisi/dependencia/'.length));
+                setSelectedDependenciaDetail(null);
+                setActiveTab('cas-dependencia');
+            }
             else {
                 const tab = resolved.tab;
                 if (tab === 'empreses') setSelectedEmpresa(null);
-                if (tab === 'buscador') setSelectedContractForDetail(null);
+                if (tab === 'buscador') {
+                    applyContractSearchState();
+                    setSelectedContractForDetail(null);
+                }
+                if (tab === 'analisi') applyAnalysisSearchState();
                 setActiveTab(tab);
             }
         };
@@ -3252,10 +3774,11 @@ function App() {
         if (activeTab === 'cas-fraccionament' && !selectedCasoDetail) return;
         if (activeTab === 'cas-concentracio' && !selectedConcentracioDetail) return;
         if (activeTab === 'cas-electoralisme' && !selectedElectoralismeDetail) return;
+        if (activeTab === 'cas-dependencia' && !selectedDependenciaDetail) return;
         const y = restoreScrollRef.current;
         restoreScrollRef.current = null;
         requestAnimationFrame(() => window.scrollTo({ top: y, behavior: 'auto' }));
-    }, [activeTab, selectedContractForDetail, selectedEmpresa, selectedCasoDetail, selectedConcentracioDetail, selectedElectoralismeDetail]);
+    }, [activeTab, selectedContractForDetail, selectedEmpresa, selectedCasoDetail, selectedConcentracioDetail, selectedElectoralismeDetail, selectedDependenciaDetail]);
 
     useEffect(() => {
         if (!pendingScrollTopRef.current || restoreScrollRef.current !== null) return;
@@ -3264,6 +3787,7 @@ function App() {
         if (activeTab === 'cas-fraccionament' && !selectedCasoDetail) return;
         if (activeTab === 'cas-concentracio' && !selectedConcentracioDetail) return;
         if (activeTab === 'cas-electoralisme' && !selectedElectoralismeDetail) return;
+        if (activeTab === 'cas-dependencia' && !selectedDependenciaDetail) return;
         pendingScrollTopRef.current = false;
 
         const scrollTop = () => window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
@@ -3273,7 +3797,7 @@ function App() {
             requestAnimationFrame(scrollTop);
         });
         window.setTimeout(scrollTop, 80);
-    }, [activeTab, selectedContractForDetail, selectedEmpresa, selectedCasoDetail, selectedConcentracioDetail, selectedElectoralismeDetail]);
+    }, [activeTab, selectedContractForDetail, selectedEmpresa, selectedCasoDetail, selectedConcentracioDetail, selectedElectoralismeDetail, selectedDependenciaDetail]);
     // ---------------------------------------------
 
     // Debounce de la cerca
@@ -3283,23 +3807,23 @@ function App() {
     }, [searchTerm]);
 
     const contractCount = useCountUp(stats?.total_contratos || 0, 2000, !loading && stats);
-    const importTotal = useCountUp(stats ? Math.floor(stats.importe_total / 1000000) : 0, 2000, !loading && stats);
-    const importTotalTenths = useCountUp(stats ? Math.round(stats.importe_total / 100000) : 0, 2000, !loading && stats);
+    const subvencionsCount = useCountUp(summary?.stats?.num_subvencions || 0, 2000, !loading && stats);
     const empresasCount = useCountUp(stats?.num_empresas || 0, 2000, !loading && stats);
     const personesMetricTotal = persones.length || summary?.stats?.num_persones || 0;
     const personesCount = useCountUp(personesMetricTotal, 2000, !loading && stats);
     const alertesVisibleTotal = useMemo(() =>
         fraudes.filter(f => f.nivell !== 'BAIX').length +
         concentracio.length +
-        electoral.filter(f => f.nivell !== 'BAIX').length
-        , [fraudes, concentracio, electoral]);
+        electoral.filter(f => f.nivell !== 'BAIX').length +
+        dependencia.filter(f => f.nivell !== 'BAIX').length
+        , [fraudes, concentracio, electoral, dependencia]);
     const alertesMetricTotal = alertesVisibleTotal || summary?.stats?.num_alertes || 0;
     const alertesCount = useCountUp(alertesMetricTotal, 2000, !loading && stats);
     const homeRiskCounts = useMemo(() => {
-        if (!fraudes.length && !concentracio.length && !electoral.length && summary?.home?.risk_counts) {
+        if (!fraudes.length && !concentracio.length && !electoral.length && !dependencia.length && summary?.home?.risk_counts) {
             return summary.home.risk_counts;
         }
-        const levels = [...fraudes, ...concentracio, ...electoral]
+        const levels = [...fraudes, ...concentracio, ...electoral, ...dependencia]
             .map(item => String(item.nivell || '').toUpperCase());
 
         return {
@@ -3307,196 +3831,10 @@ function App() {
             mitja: levels.filter(level => level === 'ALT').length,
             baix: levels.filter(level => level === 'OBSERVACIO' || level === 'BAIX').length,
         };
-    }, [fraudes, concentracio, electoral, summary]);
+    }, [fraudes, concentracio, electoral, dependencia, summary]);
 
     useEffect(() => {
-        if (!summaryResolved) return;
-        let cancelled = false;
-        setCoreDataError(false);
-        setDataLoading(true);
-        Promise.all([
-            fetchContractsSnapshot(),
-            fetch(jsonAssetUrl('/json/empreses.json')).then(res => {
-                if (!res.ok) throw new Error(`Empreses HTTP ${res.status}`);
-                return res.json();
-            }),
-            fetchEmpresaAliases()
-        ])
-            .then(async ([snapshotRows, existingEmpreses, empresaAliases]) => {
-                if (cancelled) return;
-                let contractsData = snapshotRows;
-                // Desambigua col·lisions de slug (extremadament rar): afegeix sufix -2, -3...
-                {
-                    const slugCounts = new Map();
-                    const legacySeen = new Map();
-                    for (const c of contractsData) {
-                        const baseSlug = buildContractSlug(c);
-                        slugCounts.set(baseSlug, (slugCounts.get(baseSlug) || 0) + 1);
-                    }
-                    for (const c of contractsData) {
-                        const baseSlug = buildContractSlug(c);
-                        const legacyBaseSlug = buildLegacyContractSlug(c);
-                        c.slug = slugCounts.get(baseSlug) > 1
-                            ? `${baseSlug}-${stableHash([c.fecha, c.importe, c.adjudicatario])}`
-                            : baseSlug;
-
-                        const legacyN = (legacySeen.get(legacyBaseSlug) || 0) + 1;
-                        legacySeen.set(legacyBaseSlug, legacyN);
-                        const legacySlug = legacyN > 1 ? `${legacyBaseSlug}-${legacyN}` : legacyBaseSlug;
-                        c.slug_aliases = Array.from(new Set([legacyBaseSlug, legacySlug].filter(s => s && s !== c.slug)));
-                    }
-                }
-                setContracts(contractsData);
-
-                // Compute stats on the fly
-                const uniqueEmps = new Set(contractsData.map(c => c.adjudicatario).filter(Boolean));
-                setStats({
-                    total_contratos: contractsData.length,
-                    importe_total: contractsData.reduce((s, c) => s + c.importe, 0),
-                    num_empresas: uniqueEmps.size,
-                });
-
-                // Build empreses: existing AI classifications + CPV for new ones
-                const empresesData = buildEmpreses(contractsData, existingEmpreses);
-
-                // Asignar IDs cronológicos a las empresas
-                empresesData.forEach(e => {
-                    e.firstContractId = Math.min(...e.contratos);
-                });
-                const sortedChronological = [...empresesData].sort((a, b) => a.firstContractId - b.firstContractId);
-                sortedChronological.forEach((e, index) => {
-                    e.id = index + 1; // 1-indexed (intern, ja no s'usa a la URL)
-                });
-                // Slugs estables a partir del nom; desambigua col·lisions amb sufix numèric
-                {
-                    const seen = new Map();
-                    for (const e of empresesData) {
-                        let s = buildEmpresaSlug(e.nom);
-                        const n = (seen.get(s) || 0) + 1;
-                        seen.set(s, n);
-                        if (n > 1) s = `${s}-${n}`;
-                        e.slug = s;
-                    }
-                    const aliasSlugMap = buildEmpresaAliasSlugMap(empresesData, empresaAliases);
-                    for (const e of empresesData) {
-                        e.slug_aliases = Array.from(aliasSlugMap.entries())
-                            .filter(([, targetSlug]) => targetSlug === e.slug)
-                            .map(([aliasSlug]) => aliasSlug);
-                    }
-                }
-                setEmpreses(empresesData);
-                setDataLoading(false);
-            })
-            .catch(err => {
-                if (cancelled) return;
-                console.error('Error loading data:', err);
-                setCoreDataError(true);
-                setDataLoading(false);
-            });
-        return () => { cancelled = true; };
-    }, [summaryResolved, coreRetry]);
-
-    useEffect(() => {
-        if (!summaryResolved || activeTab !== 'persones' || personesLoaded) return;
-        let cancelled = false;
-        setPersonesError(false);
-        fetch(jsonAssetUrl('/json/persones.json'))
-            .then(res => {
-                if (!res.ok) throw new Error(`Persones HTTP ${res.status}`);
-                return res.json();
-            })
-            .then(data => {
-                if (!cancelled) setPersones(data || []);
-            })
-            .catch(err => {
-                console.error('Error loading persones:', err);
-                if (!cancelled) setPersonesError(true);
-            })
-            .finally(() => {
-                if (!cancelled) setPersonesLoaded(true);
-            });
-        return () => { cancelled = true; };
-    }, [activeTab, summaryResolved, personesLoaded, personesRetry]);
-
-    useEffect(() => {
-        if (!summaryResolved || activeTab !== 'empresa' || administradorsLoaded) return;
-        let cancelled = false;
-        setAdministradorsError(false);
-        fetch(jsonAssetUrl('/json/carrecs.json'))
-            .then(res => {
-                if (!res.ok) throw new Error(`Carrecs HTTP ${res.status}`);
-                return res.json();
-            })
-            .then(data => {
-                if (!cancelled) setAdministradors(data || {});
-            })
-            .catch(err => {
-                console.error('Error loading carrecs:', err);
-                if (!cancelled) setAdministradorsError(true);
-            })
-            .finally(() => {
-                if (!cancelled) setAdministradorsLoaded(true);
-            });
-        return () => { cancelled = true; };
-    }, [activeTab, summaryResolved, administradorsLoaded, administradorsRetry]);
-
-    useEffect(() => {
-        const analisiTabs = ['analisi', 'cas-fraccionament', 'cas-concentracio', 'cas-electoralisme'];
-        const shouldLoadImmediately = analisiTabs.includes(activeTab);
-        const shouldLoadWhenIdle = activeTab === 'home' && !dataLoading;
-        if (!summaryResolved || analisiLoaded || (!shouldLoadImmediately && !shouldLoadWhenIdle)) return;
-
-        let cancelled = false;
-        let idleId = null;
-        let timeoutId = null;
-        const loadAnalisi = () => {
-            setAnalisiError(false);
-            Promise.all([
-                fetch(jsonAssetUrl('/json/fraccionament.json')).then(res => {
-                    if (!res.ok) throw new Error(`Fraccionament HTTP ${res.status}`);
-                    return res.json();
-                }),
-                fetch(jsonAssetUrl('/json/concentracio.json')).then(res => {
-                    if (!res.ok) throw new Error(`Concentracio HTTP ${res.status}`);
-                    return res.json();
-                }),
-                fetch(jsonAssetUrl('/json/electoralisme.json')).then(res => {
-                    if (!res.ok) throw new Error(`Electoralisme HTTP ${res.status}`);
-                    return res.json();
-                })
-            ])
-                .then(([fraccionamentData, concentracioData, electoralismeData]) => {
-                    if (cancelled) return;
-                    setFraudes((fraccionamentData && fraccionamentData.alertes) || []);
-                    setConcentracio((concentracioData && concentracioData.alertes) || []);
-                    setElectoral((electoralismeData && electoralismeData.alertes) || []);
-                })
-                .catch(err => {
-                    console.error('Error loading analysis data:', err);
-                    if (!cancelled) setAnalisiError(true);
-                })
-                .finally(() => {
-                    if (!cancelled) setAnalisiLoaded(true);
-                });
-        };
-
-        if (shouldLoadImmediately) {
-            loadAnalisi();
-        } else if ('requestIdleCallback' in window) {
-            idleId = window.requestIdleCallback(loadAnalisi, { timeout: 2500 });
-        } else {
-            timeoutId = window.setTimeout(loadAnalisi, 800);
-        }
-
-        return () => {
-            cancelled = true;
-            if (idleId !== null) window.cancelIdleCallback(idleId);
-            if (timeoutId !== null) window.clearTimeout(timeoutId);
-        };
-    }, [activeTab, summaryResolved, dataLoading, analisiLoaded, analisiRetry]);
-
-    useEffect(() => {
-        const route = getRoute();
+        const route = getCurrentRoute();
         const resolved = resolveRoute(route);
         if (resolved.canonicalPath !== route) {
             handleNavigation(resolved.tab, resolved.canonicalPath, { replace: true });
@@ -3550,6 +3888,7 @@ function App() {
             const cas = fraudes.find(f => String(f.id) === String(pendingCasId));
             if (cas) {
                 setSelectedCasoDetail(cas);
+                setAnalisiTab('fraccionament');
             } else {
                 handleNavigation('analisi', '/analisi', { replace: true });
             }
@@ -3562,6 +3901,7 @@ function App() {
             const cas = concentracio.find(f => String(f.id) === String(pendingConcentracioId));
             if (cas) {
                 setSelectedConcentracioDetail(cas);
+                setAnalisiTab('monopoli');
             } else {
                 handleNavigation('analisi', '/analisi', { replace: true });
             }
@@ -3574,6 +3914,7 @@ function App() {
             const cas = electoral.find(f => String(f.id) === String(pendingElectoralismeId));
             if (cas) {
                 setSelectedElectoralismeDetail(cas);
+                setAnalisiTab('electoral');
             } else {
                 handleNavigation('analisi', '/analisi', { replace: true });
             }
@@ -3582,12 +3923,29 @@ function App() {
     }, [electoral, pendingElectoralismeId]);
 
     useEffect(() => {
+        if (dependencia.length > 0 && pendingDependenciaId) {
+            const cas = dependencia.find(item => String(item.id) === String(pendingDependenciaId));
+            if (cas) {
+                setSelectedDependenciaDetail(cas);
+                setAnalisiTab('dependencia');
+            } else {
+                handleNavigation('analisi', '/analisi', { replace: true });
+            }
+            setPendingDependenciaId(null);
+        }
+    }, [dependencia, pendingDependenciaId]);
+
+    useEffect(() => {
         if (activeTab === 'contracte' && selectedContractForDetail) {
             document.title = formatPageTitle(selectedContractForDetail.descripcion);
             return;
         }
         if (activeTab === 'empresa' && selectedEmpresa) {
             document.title = formatPageTitle(selectedEmpresa);
+            return;
+        }
+        if (activeTab === 'entitat' && activeEntitatSubvencions.length) {
+            document.title = formatPageTitle(activeEntitatSubvencions[0].adjudicatario);
             return;
         }
         if (activeTab === 'cas-fraccionament' && selectedCasoDetail) {
@@ -3606,19 +3964,25 @@ function App() {
             document.title = formatPageTitle(activeInvestigacioCase?.title || 'Investigació');
             return;
         }
+        if (activeTab === 'cas-dependencia' && selectedDependenciaDetail) {
+            document.title = formatPageTitle(`Cas #${selectedDependenciaDetail.id}`);
+            return;
+        }
         const titles = {
-            'home': "Iguadata | El projecte de transparència d'Igualada",
-            'loading': 'Iguadata',
-            buscador: 'Contractes | Iguadata',
-            empreses: 'Empreses | Iguadata',
-            persones: 'Persones | Iguadata',
-            analisi: 'Anàlisi | Iguadata',
-            casos: "Casos d'investigació | Iguadata",
-            sobre: 'Sobre | Iguadata',
-            legal: 'Iguadata'
+            'home': `${BRAND_NAME} | ${BRAND_TAGLINE}`,
+            'loading': BRAND_NAME,
+            buscador: formatPageTitle('Contractes'),
+            empreses: formatPageTitle('Empreses'),
+            persones: formatPageTitle('Persones'),
+            subvencions: formatPageTitle('Subvencions'),
+            entitat: formatPageTitle('Subvencions'),
+            analisi: formatPageTitle('Anàlisi'),
+            casos: formatPageTitle("Casos d'investigació"),
+            sobre: formatPageTitle('Sobre'),
+            legal: BRAND_NAME
         };
-        document.title = titles[activeTab] || 'Iguadata';
-    }, [activeTab, selectedContractForDetail, selectedEmpresa, selectedCasoDetail, selectedConcentracioDetail, selectedElectoralismeDetail, activeInvestigacioCase]);
+        document.title = titles[activeTab] || BRAND_NAME;
+    }, [activeTab, selectedContractForDetail, selectedEmpresa, selectedCasoDetail, selectedConcentracioDetail, selectedElectoralismeDetail, selectedDependenciaDetail, activeInvestigacioCase, activeEntitatSubvencions]);
 
     const contractesFiltrats = useMemo(() => {
         let result = [...contracts];
@@ -3680,30 +4044,69 @@ function App() {
     const endIndex = startIndex + itemsPerPage;
     const contractesPaginats = contractesFiltrats.slice(startIndex, endIndex);
 
-    const contractesAnnualEvolution = useMemo(() => {
-        const byYear = {};
-        for (const c of contracts) {
-            const year = c.año || (c.fecha ? parseInt(String(c.fecha).slice(0, 4), 10) : null);
-            if (!year) continue;
-            if (!byYear[year]) byYear[year] = { year, amount: 0, count: 0 };
-            byYear[year].amount += Number(c.importe) || 0;
-            byYear[year].count += 1;
-        }
-        const items = Object.values(byYear).sort((a, b) => a.year - b.year);
-        const maxAmount = items.reduce((max, item) => Math.max(max, item.amount), 0);
-        const topYear = items.reduce((top, item) => item.amount > (top?.amount || 0) ? item : top, null);
-        return { items, maxAmount, topYear };
-    }, [contracts]);
+    useEffect(() => {
+        if (!contracts.length) return;
+        const lastPage = Math.max(1, totalPages);
+        if (currentPage > lastPage) setCurrentPage(lastPage);
+    }, [contracts.length, currentPage, totalPages]);
 
     useEffect(() => {
-        setCurrentPage(1);
-    }, [debouncedSearch, typeFilter, procedureFilter, dateStart, dateEnd, amountMin, amountMax, sortBy]);
+        if (activeTab !== 'buscador' || getCurrentRoute() !== '/contractes') return;
+        const query = buildContractSearchParams({
+            searchTerm,
+            typeFilter,
+            procedureFilter,
+            dateStart,
+            dateEnd,
+            amountMin,
+            amountMax,
+            sortBy,
+            currentPage,
+        });
+        const fullPath = `${BASE}/contractes${query ? `?${query}` : ''}`;
+        const nextHref = new URL(fullPath, window.location.origin).href;
+        if (nextHref === window.location.href) return;
+        const scrollY = window.scrollY;
+        window.history.replaceState({
+            ...(window.history.state || {}),
+            tab: 'buscador',
+            iguadata: true,
+            scrollY,
+        }, '', fullPath);
+        saveScrollPosition(nextHref, scrollY);
+    }, [activeTab, searchTerm, typeFilter, procedureFilter, dateStart, dateEnd, amountMin, amountMax, sortBy, currentPage]);
+
+    useEffect(() => {
+        if (activeTab !== 'analisi' || getCurrentRoute() !== '/analisi') return;
+        const currentPage = analisiTab === 'fraccionament'
+            ? analisiPageFrac
+            : analisiTab === 'monopoli'
+                ? analisiPageMonop
+                : analisiTab === 'electoral'
+                    ? analisiPageElect
+                    : analisiPageDependencia;
+        const query = buildAnalysisSearchParams({
+            tab: analisiTab,
+            concentrationMode: concentracioMode,
+            searchTerm: analisiSearch,
+            sortBy: analisiSort,
+            currentPage,
+        });
+        const fullPath = `${BASE}/analisi${query ? `?${query}` : ''}`;
+        const nextHref = new URL(fullPath, window.location.origin).href;
+        if (nextHref === window.location.href) return;
+        const scrollY = window.scrollY;
+        window.history.replaceState({
+            ...(window.history.state || {}),
+            tab: 'analisi',
+            iguadata: true,
+            scrollY,
+        }, '', fullPath);
+        saveScrollPosition(nextHref, scrollY);
+    }, [activeTab, analisiTab, concentracioMode, analisiSearch, analisiSort, analisiPageFrac, analisiPageMonop, analisiPageElect, analisiPageDependencia]);
 
     const fraudesFiltrats = useMemo(() => {
         let result = fraudes.filter(f => f.nivell !== 'BAIX');
-        if (riskFilter !== 'TOTS') {
-            result = result.filter(f => f.nivell === riskFilter || f.nivel_riesgo === riskFilter);
-        }
         if (analisiSearch.trim()) {
             result = result.filter(f => matchesSearchQuery(
                 [
@@ -3735,7 +4138,7 @@ function App() {
                 result.sort((a, b) => (b.risc || 0) - (a.risc || 0));
         }
         return result;
-    }, [fraudes, riskFilter, analisiSearch, analisiSort]);
+    }, [fraudes, analisiSearch, analisiSort]);
 
     const concentracioFiltradaBase = useMemo(() => [...concentracio], [concentracio]);
 
@@ -3803,27 +4206,13 @@ function App() {
             .sort((a, b) => (b.quota_import || 0) - (a.quota_import || 0));
     }, [bestConcentracioBySector, concentracioFiltradaBase]);
 
-    const concentracioSectorSnapshot = useMemo(() => {
-        const items = [...concentracioHistoric]
-            .sort((a, b) => (b.quota_import || 0) - (a.quota_import || 0))
-            .slice(0, 6);
-        const maxQuota = items.reduce((max, item) => Math.max(max, item.quota_import || 0), 0);
-        return { items, maxQuota };
-    }, [concentracioHistoric]);
-
     const concentracioTemporal = useMemo(() => {
         let result = concentracioTemporalBase.filter(f => f.finestra !== 'historic');
-        if (riskFilter !== 'TOTS') {
-            result = result.filter(f => f.nivell === riskFilter || (riskFilter === 'OBSERVACIO' && f.nivell === 'BAIX'));
-        }
         return orderConcentracio(result);
-    }, [concentracioTemporalBase, orderConcentracio, riskFilter]);
+    }, [concentracioTemporalBase, orderConcentracio]);
 
     const electoralFiltrats = useMemo(() => {
         let result = electoral.filter(f => f.nivell !== 'BAIX');
-        if (riskFilter !== 'TOTS') {
-            result = result.filter(f => f.nivell === riskFilter);
-        }
         if (analisiSearch.trim()) {
             result = result.filter(f => matchesSearchQuery(
                 [
@@ -3855,18 +4244,50 @@ function App() {
                 result.sort((a, b) => (b.risc || 0) - (a.risc || 0));
         }
         return result;
-    }, [electoral, riskFilter, analisiSearch, analisiSort]);
+    }, [electoral, analisiSearch, analisiSort]);
 
-    useEffect(() => { setAnalisiPageFrac(1); setAnalisiPageElect(1); setAnalisiPageMonop(1); }, [riskFilter, analisiSearch, analisiSort]);
-    useEffect(() => { setAnalisiPageFrac(1); setAnalisiPageElect(1); setAnalisiPageMonop(1); }, [analisiTab]);
+    const dependenciaFiltrada = useMemo(() => {
+        let result = dependencia.filter(item => item.nivell !== 'BAIX');
+        if (analisiSearch.trim()) {
+            result = result.filter(item => matchesSearchQuery(
+                [item.entitat, item.cif, item.id, ...(item.motius || []), ...(item.subvencions || []).map(row => row.descripcion)],
+                analisiSearch
+            ));
+        }
+        result = [...result];
+        switch (analisiSort) {
+            case 'risk-asc': result.sort((a, b) => a.risc - b.risc); break;
+            case 'amount-desc': result.sort((a, b) => b.import_total - a.import_total); break;
+            case 'amount-asc': result.sort((a, b) => a.import_total - b.import_total); break;
+            case 'date-desc': result.sort((a, b) => new Date(b.data_fi) - new Date(a.data_fi)); break;
+            case 'date-asc': result.sort((a, b) => new Date(a.data_inici) - new Date(b.data_inici)); break;
+            default: result.sort((a, b) => b.risc - a.risc);
+        }
+        return result;
+    }, [dependencia, analisiSearch, analisiSort]);
 
     const totalPagesFrac = Math.max(1, Math.ceil(fraudesFiltrats.length / analisiItemsPerPage));
     const totalPagesElect = Math.max(1, Math.ceil(electoralFiltrats.length / analisiItemsPerPage));
     const totalPagesMonop = Math.max(1, Math.ceil(concentracioTemporal.length / analisiItemsPerPage));
+    const totalPagesDependencia = Math.max(1, Math.ceil(dependenciaFiltrada.length / analisiItemsPerPage));
+
+    useEffect(() => {
+        if (analisiPageFrac > totalPagesFrac) setAnalisiPageFrac(totalPagesFrac);
+    }, [analisiPageFrac, totalPagesFrac]);
+    useEffect(() => {
+        if (analisiPageElect > totalPagesElect) setAnalisiPageElect(totalPagesElect);
+    }, [analisiPageElect, totalPagesElect]);
+    useEffect(() => {
+        if (analisiPageMonop > totalPagesMonop) setAnalisiPageMonop(totalPagesMonop);
+    }, [analisiPageMonop, totalPagesMonop]);
+    useEffect(() => {
+        if (analisiPageDependencia > totalPagesDependencia) setAnalisiPageDependencia(totalPagesDependencia);
+    }, [analisiPageDependencia, totalPagesDependencia]);
 
     const fraudesPaginats = fraudesFiltrats.slice((analisiPageFrac - 1) * analisiItemsPerPage, analisiPageFrac * analisiItemsPerPage);
     const electoralPaginats = electoralFiltrats.slice((analisiPageElect - 1) * analisiItemsPerPage, analisiPageElect * analisiItemsPerPage);
     const concentracioPaginada = concentracioTemporal.slice((analisiPageMonop - 1) * analisiItemsPerPage, analisiPageMonop * analisiItemsPerPage);
+    const dependenciaPaginada = dependenciaFiltrada.slice((analisiPageDependencia - 1) * analisiItemsPerPage, analisiPageDependencia * analisiItemsPerPage);
 
     const conteoRiesgos = useMemo(() => {
         const alto = fraudes.filter(f => f.nivel_riesgo === 'ALTO').length;
@@ -3901,15 +4322,18 @@ function App() {
         empreses: 'Empreses',
         empresa: 'Empreses',
         persones: 'Persones',
+        subvencions: 'Subvencions',
+        entitat: 'Subvencions',
         analisi: 'Anàlisi',
         'cas-fraccionament': 'Anàlisi',
         'cas-concentracio': 'Anàlisi',
         'cas-electoralisme': 'Anàlisi',
+        'cas-dependencia': 'Anàlisi',
         casos: 'Investigació',
         'cas-investigacio': 'Investigació',
         sobre: 'Sobre',
         legal: 'Avís legal'
-    }[activeTab] || 'Iguadata';
+    }[activeTab] || BRAND_NAME;
 
     const resetFilters = () => {
         setSearchTerm('');
@@ -3926,12 +4350,13 @@ function App() {
 
     const resetAnalisiFilters = () => {
         setAnalisiSearch('');
-        setRiskFilter('TOTS');
         setAnalisiSort('risk-desc');
         setAnalisiPageFrac(1);
         setAnalisiPageMonop(1);
+        setAnalisiPageElect(1);
+        setAnalisiPageDependencia(1);
     };
-    const activeAnalisiFiltersCount = (riskFilter !== 'TOTS' ? 1 : 0) + (analisiSort !== 'risk-desc' ? 1 : 0);
+    const activeAnalisiFiltersCount = analisiSort !== 'risk-desc' ? 1 : 0;
 
     const activeFiltersCount = [
         typeFilter,
@@ -4058,15 +4483,15 @@ function App() {
         const contractesActive = activeTab === 'buscador' || activeTab === 'contracte';
         const empresesActive = activeTab === 'empreses' || activeTab === 'empresa';
         const personesActive = activeTab === 'persones';
-        const analisiActive = activeTab === 'analisi' || activeTab === 'cas-fraccionament' || activeTab === 'cas-concentracio' || activeTab === 'cas-electoralisme';
-        const casosActive = activeTab === 'casos' || activeTab === 'cas-investigacio';
+        const subvencionsActive = activeTab === 'subvencions' || activeTab === 'entitat';
+        const analisiActive = activeTab === 'analisi' || activeTab === 'cas-fraccionament' || activeTab === 'cas-concentracio' || activeTab === 'cas-electoralisme' || activeTab === 'cas-dependencia';
         return (
             <div className="nav">
                 <a href={buildRouteUrl('/contractes')} className={'nav-tab' + (showActive && contractesActive ? ' active' : '')} aria-current={showActive && contractesActive ? 'page' : undefined} onClick={(event) => handleNavClick(event, () => { handleNavigation('buscador'); setSelectedEmpresa(null); setIsMobileMenuOpen(false); })}>Contractes</a>
                 <a href={buildRouteUrl('/empreses')} className={'nav-tab' + (showActive && empresesActive ? ' active' : '')} aria-current={showActive && empresesActive ? 'page' : undefined} onClick={(event) => handleNavClick(event, () => { handleNavigation('empreses'); setSelectedEmpresa(null); setIsMobileMenuOpen(false); })}>Empreses</a>
                 <a href={buildRouteUrl('/persones')} className={'nav-tab' + (showActive && personesActive ? ' active' : '')} aria-current={showActive && personesActive ? 'page' : undefined} onClick={(event) => handleNavClick(event, () => { handleNavigation('persones'); setIsMobileMenuOpen(false); })}>Persones</a>
+                <a href={buildRouteUrl('/subvencions')} className={'nav-tab' + (showActive && subvencionsActive ? ' active' : '')} aria-current={showActive && subvencionsActive ? 'page' : undefined} onClick={(event) => handleNavClick(event, () => { handleNavigation('subvencions'); setIsMobileMenuOpen(false); })}>Subvencions</a>
                 <a href={buildRouteUrl('/analisi')} className={'nav-tab' + (showActive && analisiActive ? ' active' : '')} aria-current={showActive && analisiActive ? 'page' : undefined} onClick={(event) => handleNavClick(event, handleAnalisiNavClick)}>Anàlisi</a>
-                <a href={buildRouteUrl('/investigacio')} className={'nav-tab' + (showActive && casosActive ? ' active' : '')} aria-current={showActive && casosActive ? 'page' : undefined} onClick={(event) => handleNavClick(event, () => { handleNavigation('casos'); setIsMobileMenuOpen(false); })}>Investigació</a>
             </div>
         );
     };
@@ -4124,7 +4549,7 @@ function App() {
                         <div className="home-copy">
                             <h1 className="home-title">Tot és <em>públic</em></h1>
                             <p className="home-deck">
-                                Contractes, empreses, persones, imports i anàlisi en una cartografia oberta de la contractació pública de l'Ajuntament d'Igualada.
+                                Contractes, empreses, persones, subvencions i anàlisi en una cartografia oberta de la contractació pública de {AUTHORITY_NAME}
                             </p>
                         </div>
 
@@ -4133,9 +4558,9 @@ function App() {
                                 <span className="home-metric-value">{contractCount.toLocaleString('ca-ES')}</span>
                                 <span className="home-metric-label">Contractes</span>
                             </a>
-                            <a href={buildRouteUrl('/contractes')} className="home-metric metric-import" onClick={interactive ? ((event) => handleHomeMetricLinkClick(event, () => { handleNavigation('buscador'); setIsMobileMenuOpen(false); })) : ((event) => event.preventDefault())} tabIndex={interactive ? 0 : -1}>
-                                <span className="home-metric-value">{(importTotalTenths / 10).toLocaleString('ca-ES', { minimumFractionDigits: 1, maximumFractionDigits: 1 })}M €</span>
-                                <span className="home-metric-label">Imports</span>
+                            <a href={buildRouteUrl('/subvencions')} className="home-metric metric-import" onClick={interactive ? ((event) => handleHomeMetricLinkClick(event, () => { handleNavigation('subvencions'); setIsMobileMenuOpen(false); })) : ((event) => event.preventDefault())} tabIndex={interactive ? 0 : -1}>
+                                <span className="home-metric-value">{subvencionsCount.toLocaleString('ca-ES')}</span>
+                                <span className="home-metric-label">Subvencions</span>
                             </a>
                             <a href={buildRouteUrl('/empreses')} className="home-metric metric-empreses" onClick={interactive ? ((event) => handleHomeMetricLinkClick(event, () => { handleNavigation('empreses'); setIsMobileMenuOpen(false); })) : ((event) => event.preventDefault())} tabIndex={interactive ? 0 : -1}>
                                 <span className="home-metric-value">{empresasCount.toLocaleString('ca-ES')}</span>
@@ -4161,7 +4586,7 @@ function App() {
                     <section className="home-chapter home-economic-scene" aria-labelledby="home-economic-title">
                         <div className="home-economic-heading">
                             <h2 id="home-economic-title">On van els <em>diners?</em></h2>
-                            <p>Els sectors amb més despesa de l'Ajuntament d'Igualada.</p>
+                            <p>Els sectors amb més despesa de {AUTHORITY_NAME}.</p>
                         </div>
                         <div className="home-economic-bars" aria-label="Sectors amb més import adjudicat">
                             {homeTopSectors.map(item => (
@@ -4192,7 +4617,7 @@ function App() {
                         </div>
                         <div className="home-categories-heading">
                             <h2 id="home-categories-title">Què es <em>compra</em>?</h2>
-                            <p>Els serveis més contractats de l'Ajuntament d'Igualada.</p>
+                            <p>Els serveis més contractats de {AUTHORITY_NAME}.</p>
                         </div>
                     </section>
 
@@ -4234,7 +4659,7 @@ function App() {
             <div className="home-copy">
                 <h1 className="home-title">Tot és <em>públic</em></h1>
                 <p className="home-deck">
-                    Contractes, empreses, persones, imports i anàlisi en una cartografia oberta de la contractació pública de l'Ajuntament d'Igualada.
+                    Contractes, empreses, persones, subvencions i anàlisi en una cartografia oberta de la contractació pública de {AUTHORITY_NAME}
                 </p>
             </div>
 
@@ -4243,9 +4668,9 @@ function App() {
                     <span className="home-metric-value">{contractCount.toLocaleString('ca-ES')}</span>
                     <span className="home-metric-label">Contractes</span>
                 </a>
-                <a href={buildRouteUrl('/contractes')} className="home-metric metric-import" onClick={interactive ? ((event) => handleHomeMetricLinkClick(event, () => { handleNavigation('buscador'); setIsMobileMenuOpen(false); })) : ((event) => event.preventDefault())} tabIndex={interactive && !isMobile() ? 0 : -1}>
-                    <span className="home-metric-value">{(importTotalTenths / 10).toLocaleString('ca-ES', { minimumFractionDigits: 1, maximumFractionDigits: 1 })}M €</span>
-                    <span className="home-metric-label">Imports</span>
+                <a href={buildRouteUrl('/subvencions')} className="home-metric metric-import" onClick={interactive ? ((event) => handleHomeMetricLinkClick(event, () => { handleNavigation('subvencions'); setIsMobileMenuOpen(false); })) : ((event) => event.preventDefault())} tabIndex={interactive && !isMobile() ? 0 : -1}>
+                    <span className="home-metric-value">{subvencionsCount.toLocaleString('ca-ES')}</span>
+                    <span className="home-metric-label">Subvencions</span>
                 </a>
                 <a href={buildRouteUrl('/empreses')} className="home-metric metric-empreses" onClick={interactive ? ((event) => handleHomeMetricLinkClick(event, () => { handleNavigation('empreses'); setIsMobileMenuOpen(false); })) : ((event) => event.preventDefault())} tabIndex={interactive && !isMobile() ? 0 : -1}>
                     <span className="home-metric-value">{empresasCount.toLocaleString('ca-ES')}</span>
@@ -4380,49 +4805,6 @@ function App() {
         </div>
     );
 
-    const dataTabs = ['buscador', 'empreses', 'persones', 'contracte', 'empresa', 'analisi', 'cas-fraccionament', 'cas-concentracio', 'cas-electoralisme', 'cas-investigacio'];
-    const analisiTabs = ['analisi', 'cas-fraccionament', 'cas-concentracio', 'cas-electoralisme'];
-    const activeDataError =
-        (dataTabs.includes(activeTab) && coreDataError) ||
-        (activeTab === 'persones' && personesError) ||
-        (activeTab === 'empresa' && administradorsError) ||
-        (activeTab === 'cas-investigacio' && investigacioError) ||
-        (analisiTabs.includes(activeTab) && analisiError);
-    const isSupplementalDataLoading =
-        (activeTab === 'persones' && !personesLoaded) ||
-        (activeTab === 'empresa' && !administradorsLoaded) ||
-        (activeTab === 'cas-investigacio' && !investigacioLoaded) ||
-        (analisiTabs.includes(activeTab) && !analisiLoaded);
-    const isDataTabLoading = dataTabs.includes(activeTab) && (dataLoading || isSupplementalDataLoading);
-    const canRenderDataTab = !isDataTabLoading && !activeDataError;
-    const retryActiveData = () => {
-        if (coreDataError) {
-            setCoreRetry(value => value + 1);
-            return;
-        }
-        if (activeTab === 'persones') {
-            setPersonesLoaded(false);
-            setPersonesError(false);
-            setPersonesRetry(value => value + 1);
-            return;
-        }
-        if (activeTab === 'empresa') {
-            setAdministradorsLoaded(false);
-            setAdministradorsError(false);
-            setAdministradorsRetry(value => value + 1);
-            return;
-        }
-        if (activeTab === 'cas-investigacio') {
-            setInvestigacioError(false);
-            setInvestigacioRetry(value => value + 1);
-            return;
-        }
-        if (analisiTabs.includes(activeTab)) {
-            setAnalisiLoaded(false);
-            setAnalisiError(false);
-            setAnalisiRetry(value => value + 1);
-        }
-    };
     const renderSkeletonCard = (className = '') => (
         <div className={`contract-card data-skeleton-card${className ? ` ${className}` : ''}`} aria-hidden="true">
             <div className="data-skeleton-line data-skeleton-line-short"></div>
@@ -4443,7 +4825,6 @@ function App() {
             <div className="page-title data-skeleton-title" aria-hidden="true"></div>
             <div className="prose-wrapper" aria-hidden="true">
                 <div className="data-skeleton-line investigacio-skeleton-subtitle"></div>
-                {caso?.date && <div className="data-skeleton-line investigacio-skeleton-date"></div>}
                 {caso?.image && <div className="data-skeleton-input investigacio-skeleton-media"></div>}
                 {(caso?.content || []).map((block, index) => {
                     const key = block.id || block.type + '-' + index;
@@ -4463,7 +4844,7 @@ function App() {
     );
     const renderDataLoading = () => {
         if (activeTab === 'cas-investigacio') return renderInvestigacioLoading(activeInvestigacioCase);
-        const isAnalisiLoading = analisiTabs.includes(activeTab);
+        const isAnalisiLoading = ANALYSIS_TABS.includes(activeTab);
         const pageClass =
             activeTab === 'persones' ? 'persones-page' :
                 activeTab === 'empreses' || activeTab === 'empresa' ? 'empreses-page' :
@@ -4518,7 +4899,7 @@ function App() {
         const detailPath = contract.evidencia_congelada === true
             ? `/contractes/evidencia/${contract.slug}`
             : `/contractes/${contract.slug}`;
-        handleNavigation('contracte', detailPath);
+        handleNavigation('contracte', detailPath, { keepFilters: true });
     };
 
     const handleCasoClick = (caso) => {
@@ -4534,6 +4915,11 @@ function App() {
     const handleElectoralismeClick = (caso) => {
         setSelectedElectoralismeDetail(caso);
         handleNavigation('cas-electoralisme', `/analisi/electoralisme/${caso.id}`);
+    };
+
+    const handleDependenciaClick = (caso) => {
+        setSelectedDependenciaDetail(caso);
+        handleNavigation('cas-dependencia', `/analisi/dependencia/${caso.id}`);
     };
 
     const handleInvestigacioClick = (caso) => {
@@ -4556,14 +4942,16 @@ function App() {
     const handleAnalisiTabKeyDown = (event) => {
         if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
         event.preventDefault();
-        const tabs = ['fraccionament', 'monopoli', 'electoral'];
+        const tabs = ['fraccionament', 'monopoli', 'electoral', 'dependencia'];
         const currentIndex = tabs.indexOf(analisiTab);
         let nextIndex = currentIndex;
         if (event.key === 'ArrowRight') nextIndex = (currentIndex + 1) % tabs.length;
         if (event.key === 'ArrowLeft') nextIndex = (currentIndex - 1 + tabs.length) % tabs.length;
         if (event.key === 'Home') nextIndex = 0;
         if (event.key === 'End') nextIndex = tabs.length - 1;
-        setAnalisiTab(tabs[nextIndex]);
+        const nextTab = tabs[nextIndex];
+        setAnalisiTab(nextTab);
+        if (nextTab === 'monopoli') setConcentracioMode('temporal');
         requestAnimationFrame(() => {
             const tabButtons = event.currentTarget.parentElement.querySelectorAll('[role="tab"]');
             tabButtons[nextIndex]?.focus();
@@ -4585,6 +4973,10 @@ function App() {
         } else {
             handleNavigation('empresa');
         }
+    };
+
+    const handleEntitatClick = subvencio => {
+        handleNavigation('entitat', `/entitats/${subvencio.entitat_slug}`);
     };
 
     const goBack = (fallback) => {
@@ -4620,43 +5012,34 @@ function App() {
                 <div className="container contractes-page">
                     <h1 className="page-title">Cercador de contractes</h1>
                     <div className="search-section">
-                        <div className="search-input-wrapper">
-                            <span className="search-icon">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                            </span>
-                            <input
-                                type="text"
-                                className="search-input"
-                                placeholder="Cerca per descripció, empresa o codi d'expedient"
-                                aria-label="Cerca per descripció, empresa o codi d'expedient"
-                                value={searchTerm}
-                                onChange={(e) => setSearchTerm(e.target.value)}
-                            />
-                            {searchTerm && (
-                                <button className="search-clear" onClick={() => setSearchTerm('')} type="button" aria-label="Netejar cerca">&times;</button>
-                            )}
-                        </div>
+                        <SearchField
+                            value={searchTerm}
+                            onValueChange={(value) => { setSearchTerm(value); setCurrentPage(1); }}
+                            placeholder="Cerca per descripció, empresa o codi d'expedient"
+                            ariaLabel="Cerca per descripció, empresa o codi d'expedient"
+                        />
 
                         <FilterActions
                             open={filtersOpen}
                             onToggle={() => setFiltersOpen(prev => !prev)}
                             activeCount={activeFiltersCount}
                             onReset={resetFilters}
+                            controlsId="contract-filter-primary contract-filter-secondary"
                         />
 
-                        <div className={"filters search-filter-panel" + (!filtersOpen ? " collapsed" : "")}>
-                            <div className="filter-group" style={{ flex: '1 1 200px' }}>
+                        <div id="contract-filter-primary" className={"filters search-filter-panel" + (!filtersOpen ? " collapsed" : "")}>
+                            <div className="filter-group filter-group-standard">
                                 <label className="filter-label">Ordenar per</label>
-                                <select className="filter-select" style={{ height: '48px' }} value={sortBy} onChange={(e) => setSortBy(e.target.value)} aria-label="Ordenar contractes per">
+                                <select className="filter-select filter-select-standard" value={sortBy} onChange={(e) => { setSortBy(e.target.value); setCurrentPage(1); }} aria-label="Ordenar contractes per">
                                     <option value="date-desc">Data (més recents)</option>
                                     <option value="date-asc">Data (més antics)</option>
                                     <option value="amount-desc">Import (descendent)</option>
                                     <option value="amount-asc">Import (ascendent)</option>
                                 </select>
                             </div>
-                            <div className="filter-group" style={{ flex: '1 1 200px' }}>
+                            <div className="filter-group filter-group-standard">
                                 <label className="filter-label">Procediment</label>
-                                <select className="filter-select" style={{ height: '48px' }} value={procedureFilter} onChange={(e) => setProcedureFilter(e.target.value)} aria-label="Procediment">
+                                <select className="filter-select filter-select-standard" value={procedureFilter} onChange={(e) => { setProcedureFilter(e.target.value); setCurrentPage(1); }} aria-label="Procediment">
                                     <option value="">Tots els procediments</option>
                                     <option value="Menor">Menor</option>
                                     <option value="Obert">Obert</option>
@@ -4666,9 +5049,9 @@ function App() {
                                     <option value="Específic de sistema dinàmic de contractació">Sistema dinàmic</option>
                                 </select>
                             </div>
-                            <div className="filter-group" style={{ flex: '1 1 200px' }}>
+                            <div className="filter-group filter-group-standard">
                                 <label className="filter-label">Tipus</label>
-                                <select className="filter-select" style={{ height: '48px' }} value={typeFilter} onChange={(e) => setTypeFilter(e.target.value)} aria-label="Tipus de contracte">
+                                <select className="filter-select filter-select-standard" value={typeFilter} onChange={(e) => { setTypeFilter(e.target.value); setCurrentPage(1); }} aria-label="Tipus de contracte">
                                     <option value="">Tots els tipus</option>
                                     <option value="1. OBRES">Obres</option>
                                     <option value="3. SUBMINISTRAMENTS">Subministraments</option>
@@ -4681,7 +5064,7 @@ function App() {
                             </div>
                         </div>
 
-                        <div className={"filters-row search-filter-panel search-filter-panel-secondary" + (!filtersOpen ? " collapsed" : "")}>
+                        <div id="contract-filter-secondary" className={"filters-row search-filter-panel search-filter-panel-secondary" + (!filtersOpen ? " collapsed" : "")}>
                             <div className="filter-group">
                                 <label className="filter-label">Data inici</label>
                                 <input
@@ -4689,7 +5072,7 @@ function App() {
                                     className="filter-input"
                                     aria-label="Data inici"
                                     value={dateStart}
-                                    onChange={(e) => setDateStart(e.target.value)}
+                                    onChange={(e) => { setDateStart(e.target.value); setCurrentPage(1); }}
                                 />
                             </div>
                             <div className="filter-group">
@@ -4699,21 +5082,21 @@ function App() {
                                     className="filter-input"
                                     aria-label="Data final"
                                     value={dateEnd}
-                                    onChange={(e) => setDateEnd(e.target.value)}
+                                    onChange={(e) => { setDateEnd(e.target.value); setCurrentPage(1); }}
                                 />
                             </div>
                             <div className="filter-group">
                                 <label className="filter-label">Des de</label>
-                                <input type="number" min="0" step="0.01" inputMode="decimal" className="filter-input" placeholder="Import mínim" aria-label="Import mínim" value={amountMin} onChange={(e) => setAmountMin(e.target.value)} />
+                                <input type="number" min="0" step="0.01" inputMode="decimal" className="filter-input" placeholder="Import mínim" aria-label="Import mínim" value={amountMin} onChange={(e) => { setAmountMin(e.target.value); setCurrentPage(1); }} />
                             </div>
                             <div className="filter-group">
                                 <label className="filter-label">Fins a</label>
-                                <input type="number" min="0" step="0.01" inputMode="decimal" className="filter-input" placeholder="Import màxim" aria-label="Import màxim" value={amountMax} onChange={(e) => setAmountMax(e.target.value)} />
+                                <input type="number" min="0" step="0.01" inputMode="decimal" className="filter-input" placeholder="Import màxim" aria-label="Import màxim" value={amountMax} onChange={(e) => { setAmountMax(e.target.value); setCurrentPage(1); }} />
                             </div>
                         </div>
                     </div>
 
-                    <div className="results-count">
+                    <div className="results-count" role="status" aria-live="polite">
                         <span className="results-count-total"><span className="results-count-prefix">S'han trobat </span><strong>{contractesFiltrats.length}</strong> contractes</span>
                         {contractesFiltrats.length > itemsPerPage && (
                             <span className="results-count-page"><span className="results-count-page-full">Pàgina</span><span className="results-count-page-short">Pàg.</span> <strong>{currentPage}</strong> de <strong>{totalPages}</strong></span>
@@ -4755,101 +5138,15 @@ function App() {
                     ))}
 
                     {contractesFiltrats.length === 0 && (
-                        <div className="empty-state">
-                            <div className="empty-state-icon">
-                                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                            </div>
-                            <div className="empty-state-title">Sense resultats</div>
-                            <div className="empty-state-text">No s'han trobat contractes.</div>
-                            <div className="empty-state-action">
-                                <button className="empty-state-btn" onClick={resetFilters}>Restablir filtres</button>
-                            </div>
-                        </div>
+                        <EmptySearchState text="No s'han trobat contractes." onReset={resetFilters} />
                     )}
 
                     {contractesFiltrats.length > itemsPerPage && (
-                        <div className="pagination">
-                            <button
-                                className="pagination-btn"
-                                onClick={() => { setCurrentPage(1) }}
-                                disabled={currentPage === 1}
-                                title="Primera pàgina"
-                            >
-                                «
-                            </button>
-                            <button
-                                className="pagination-btn"
-                                onClick={() => { setCurrentPage(currentPage - 1) }}
-                                disabled={currentPage === 1}
-                                title="Pàgina anterior"
-                            >
-                                ‹
-                            </button>
-
-                            <span className="pagination-info">
-                                Pàgina <strong>{currentPage}</strong> de <strong>{totalPages}</strong>
-                            </span>
-
-                            <button
-                                className="pagination-btn"
-                                onClick={() => { setCurrentPage(currentPage + 1) }}
-                                disabled={currentPage === totalPages}
-                                title="Pàgina següent"
-                            >
-                                ›
-                            </button>
-                            <button
-                                className="pagination-btn"
-                                onClick={() => { setCurrentPage(totalPages) }}
-                                disabled={currentPage === totalPages}
-                                title="Última pàgina"
-                            >
-                                »
-                            </button>
-                        </div>
-                    )}
-
-                    {contractesAnnualEvolution.items.length > 0 && (
-                        <div className="contract-evolution-visual" aria-label="Evolució anual de l'import adjudicat">
-                            <div className="contract-evolution-header">
-                                <div>
-                                    <div className="chart-kicker">Visualització</div>
-                                    <h3>Històric de contractació</h3>
-                                </div>
-                            </div>
-
-                            <div className="contract-evolution-bars">
-                                {contractesAnnualEvolution.items.map(item => (
-                                    <button
-                                        key={item.year}
-                                        type="button"
-                                        className={"contract-evolution-column" + (dateStart === `${item.year}-01-01` && dateEnd === `${item.year}-12-31` ? " is-active" : "")}
-                                        onClick={() => {
-                                            setSearchTerm('');
-                                            setDebouncedSearch('');
-                                            setTypeFilter('');
-                                            setProcedureFilter('');
-                                            setAmountMin('');
-                                            setAmountMax('');
-                                            setSortBy('date-desc');
-                                            setDateStart(`${item.year}-01-01`);
-                                            setDateEnd(`${item.year}-12-31`);
-                                            setCurrentPage(1);
-                                            window.scrollTo({ top: 0, behavior: 'smooth' });
-                                        }}
-                                        aria-label={`Filtrar contractes de l'any ${item.year}`}
-                                    >
-                                        <div className="contract-evolution-bar-wrap" aria-hidden="true">
-                                            <span style={{ height: `${Math.max(4, Math.round((item.amount / contractesAnnualEvolution.maxAmount) * 100))}%`, '--bar-width': `${Math.max(4, Math.round((item.amount / contractesAnnualEvolution.maxAmount) * 100))}%` }}></span>
-                                        </div>
-                                        <div className="contract-evolution-meta">
-                                            <span>{item.year}</span>
-                                            <small>{formatCurrency(item.amount)}</small>
-                                        </div>
-                                    </button>
-                                ))}
-                            </div>
-                        </div>
+                        <Pagination
+                            currentPage={currentPage}
+                            totalPages={totalPages}
+                            onPageChange={setCurrentPage}
+                        />
                     )}
 
                     <div className="metodologia-wrapper">
@@ -4905,6 +5202,18 @@ function App() {
                 />
             )}
 
+            {activeTab === 'subvencions' && canRenderDataTab && (
+                <SubvencionsView subvencions={subvencions} onEntitatSelect={handleEntitatClick} />
+            )}
+
+            {activeTab === 'entitat' && activeEntitatSubvencions.length > 0 && canRenderDataTab && (
+                <EntitatView
+                    entitatSlug={activeEntitatSlug}
+                    subvencions={subvencions}
+                    onBack={() => goBack(() => handleNavigation('subvencions', '/subvencions'))}
+                />
+            )}
+
             {activeTab === 'casos' && (
                 <CasosView casos={casosInvestigacio} onCasoSelect={handleInvestigacioClick} />
             )}
@@ -4914,13 +5223,13 @@ function App() {
                 <InvestigacioCaseView
                     caso={activeInvestigacioCase}
                     contracts={contracts}
+                    onBack={() => goBack(() => handleNavigation('casos', '/investigacio'))}
                     onContractSelect={handleDetailClick}
                 />
             )}
             {activeTab === 'contracte' && selectedContractForDetail && canRenderDataTab && (
                 <ContractDetailView
                     contract={selectedContractForDetail}
-                    contracts={contracts}
                     empreses={empreses}
                     onBack={() => goBack(() => { handleNavigation('buscador', null, { keepFilters: true }); setSelectedContractForDetail(null); })}
                     onEmpresaClick={handleEmpresaClick}
@@ -4971,11 +5280,19 @@ function App() {
                 />
             )}
 
+            {activeTab === 'cas-dependencia' && selectedDependenciaDetail && canRenderDataTab && (
+                <CasDependenciaView
+                    caso={selectedDependenciaDetail}
+                    onBack={() => goBack(() => { handleNavigation('analisi', '/analisi'); setSelectedDependenciaDetail(null); })}
+                />
+            )}
+
             {activeTab === 'analisi' && canRenderDataTab && (
                 <>
                     <div className={'analisi-tabs-wrapper' + (!isPageTop ? ' is-hidden-on-scroll' : '')}>
                         <div className="analisi-tabs" role="tablist" aria-label="Tipus d'anàlisi">
                         <button
+                            id="analisi-tab-electoral"
                             className={'analisi-tab' + (analisiTab === 'fraccionament' ? ' active' : '')}
                             onClick={() => setAnalisiTab('fraccionament')}
                             type="button"
@@ -4989,7 +5306,7 @@ function App() {
                         </button>
                         <button
                             className={'analisi-tab' + (analisiTab === 'monopoli' ? ' active' : '')}
-                            onClick={() => setAnalisiTab('monopoli')}
+                            onClick={() => { setAnalisiTab('monopoli'); setConcentracioMode('temporal'); }}
                             type="button"
                             role="tab"
                             aria-selected={analisiTab === 'monopoli'}
@@ -5011,6 +5328,54 @@ function App() {
                         >
                             Electoralisme
                         </button>
+                        <button
+                            id="analisi-tab-dependencia"
+                            className={'analisi-tab' + (analisiTab === 'dependencia' ? ' active' : '')}
+                            onClick={() => setAnalisiTab('dependencia')}
+                            type="button"
+                            role="tab"
+                            aria-selected={analisiTab === 'dependencia'}
+                            aria-controls="analisi-panel"
+                            tabIndex={analisiTab === 'dependencia' ? 0 : -1}
+                            onKeyDown={handleAnalisiTabKeyDown}
+                        >
+                            Dependència
+                        </button>
+                        </div>
+                        <div className={'analisi-mobile-selector' + (isAnalisiMobileMenuOpen ? ' open' : '')}>
+                            <button
+                                className="analisi-mobile-current"
+                                type="button"
+                                aria-expanded={isAnalisiMobileMenuOpen}
+                                aria-controls="analisi-mobile-options"
+                                onClick={() => setIsAnalisiMobileMenuOpen(open => !open)}
+                            >
+                                <span className="analisi-mobile-current-group">
+                                    <span>{analisiTab === 'fraccionament' ? 'Fraccionament' : analisiTab === 'monopoli' ? 'Concentració' : analisiTab === 'electoral' ? 'Electoralisme' : 'Dependència'}</span>
+                                    <svg className="analisi-mobile-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
+                                </span>
+                            </button>
+                            <div id="analisi-mobile-options" className="analisi-mobile-options">
+                                {[
+                                    ['fraccionament', 'Fraccionament'],
+                                    ['monopoli', 'Concentració'],
+                                    ['electoral', 'Electoralisme'],
+                                    ['dependencia', 'Dependència']
+                                ].filter(([value]) => value !== analisiTab).map(([value, label]) => (
+                                    <button
+                                        key={value}
+                                        className="analisi-mobile-option"
+                                        type="button"
+                                        onClick={() => {
+                                            setAnalisiTab(value);
+                                            if (value === 'monopoli') setConcentracioMode('temporal');
+                                            setIsAnalisiMobileMenuOpen(false);
+                                        }}
+                                    >
+                                        {label}
+                                    </button>
+                                ))}
+                            </div>
                         </div>
                     </div>
 
@@ -5018,14 +5383,26 @@ function App() {
                         className={`container analisi-page analisi-page-reordered analisi-page-${analisiTab}${analisiTab === 'monopoli' ? ` concentracio-mode-${concentracioMode}` : ''}`}
                         id="analisi-panel"
                         role="tabpanel"
+                        aria-labelledby={`analisi-tab-${analisiTab}`}
                     >
                         <h1 className="page-title">
                             {analisiTab === 'fraccionament'
                                 ? 'Anàlisi de fraccionament'
                                 : analisiTab === 'monopoli'
                                     ? 'Anàlisi de concentració'
-                                    : "Anàlisi d'electoralisme"}
+                                    : analisiTab === 'electoral'
+                                        ? "Anàlisi d'electoralisme"
+                                        : 'Anàlisi de dependència'}
                         </h1>
+                        <p className="investigacio-detail-subtitle analisi-page-subtitle">
+                            {analisiTab === 'fraccionament'
+                                ? "Contractes menors agrupats que poden indicar una possible divisió d'un mateix encàrrec"
+                                : analisiTab === 'monopoli'
+                                    ? "Concentració d'adjudicacions de contractes en una mateixa empresa o xarxa mercantil"
+                                    : analisiTab === 'electoral'
+                                        ? 'Contractes de comunicació, difusió o visibilitat pública adjudicats en períodes electorals'
+                                        : 'Acumulació de subvencions directes en una mateixa entitat'}
+                        </p>
 
                         {analisiTab === 'fraccionament' && (
                             <>
@@ -5067,34 +5444,25 @@ function App() {
                                 </div>
 
                                 <div className="search-section analisi-search-section">
-                                    <div className="search-input-wrapper">
-                                        <span className="search-icon">
-                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                                        </span>
-                                        <input
-                                            type="text"
-                                            className="search-input"
-                                            placeholder="Cerca per descripció, empresa o codi de cas"
-                                            aria-label="Cerca casos de fraccionament"
-                                            value={analisiSearch}
-                                            onChange={(e) => setAnalisiSearch(e.target.value)}
-                                        />
-                                        {analisiSearch && (
-                                            <button className="search-clear" onClick={() => setAnalisiSearch('')} type="button" aria-label="Netejar cerca">&times;</button>
-                                        )}
-                                    </div>
+                                    <SearchField
+                                        value={analisiSearch}
+                                        onValueChange={setAnalisiSearch}
+                                        placeholder="Cerca per descripció, empresa o codi de cas"
+                                        ariaLabel="Cerca casos de fraccionament"
+                                    />
 
                                     <FilterActions
                                         open={analisiFiltersOpen}
                                         onToggle={() => setAnalisiFiltersOpen(prev => !prev)}
                                         activeCount={activeAnalisiFiltersCount}
                                         onReset={resetAnalisiFilters}
+                                        controlsId="analisi-filter-panel-fraccionament"
                                     />
 
-                                    <div className={"filters search-filter-panel search-filter-panel-analysis" + (!analisiFiltersOpen ? " collapsed" : "")}>
-                                        <div className="filter-group" style={{ flex: '1 1 240px' }}>
+                                    <div id="analisi-filter-panel-fraccionament" className={"filters search-filter-panel search-filter-panel-analysis" + (!analisiFiltersOpen ? " collapsed" : "")}>
+                                        <div className="filter-group filter-group-wide">
                                             <label className="filter-label">Ordenar per</label>
-                                            <select className="filter-select" style={{ height: '48px' }} value={analisiSort} onChange={(e) => setAnalisiSort(e.target.value)} aria-label="Ordenar casos de fraccionament per">
+                                            <select className="filter-select filter-select-standard" value={analisiSort} onChange={(e) => setAnalisiSort(e.target.value)} aria-label="Ordenar casos de fraccionament per">
                                                 <option value="risk-desc">Puntuació de risc (descendent)</option>
                                                 <option value="risk-asc">Puntuació de risc (ascendent)</option>
                                                 <option value="amount-desc">Import (descendent)</option>
@@ -5103,27 +5471,10 @@ function App() {
                                                 <option value="date-asc">Data (més antics)</option>
                                             </select>
                                         </div>
-                                        <div className="filter-group analisi-risk-filter-group" style={{ flex: '1 1 280px' }}>
-                                            <label className="filter-label">Risc</label>
-                                            <div className="analisi-risk-filters">
-                                                <button className={'analisi-filter-btn analisi-filter-all' + (riskFilter === 'TOTS' ? ' active' : '')} onClick={() => setRiskFilter('TOTS')} type="button">
-                                                    Tots
-                                                </button>
-                                                {[
-                                                    ['CRITIC', 'Alt'],
-                                                    ['ALT', 'Mitjà'],
-                                                    ['OBSERVACIO', 'Baix'],
-                                                ].map(([value, label]) => (
-                                                    <button key={value} className={'analisi-filter-btn risk-' + riskClass(value) + (riskFilter === value ? ' active' : '')} onClick={() => setRiskFilter(value)} type="button">
-                                                        {label}
-                                                    </button>
-                                                ))}
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
 
-                                <div className="results-count">
+                                <div className="results-count" role="status" aria-live="polite">
                                     <span className="results-count-total"><span className="results-count-prefix">S'han trobat </span><strong>{fraudesFiltrats.length}</strong> alertes</span>
                                     {fraudesFiltrats.length > analisiItemsPerPage && (
                                         <span className="results-count-page"><span className="results-count-page-full">Pàgina</span><span className="results-count-page-short">Pàg.</span> <strong>{analisiPageFrac}</strong> de <strong>{totalPagesFrac}</strong></span>
@@ -5133,13 +5484,14 @@ function App() {
                                 <div className="analisi-alert-list">
                                     {fraudesPaginats.map(caso => (
                                         <a key={caso.id} href={buildRouteUrl(`/analisi/fraccionament/${caso.id}`)} className="card-link-wrapper" onClick={(event) => handleInternalLinkClick(event, () => handleCasoClick(caso))}>
-                                            <div className="contract-card fraccionament-card">
+                                            <div className="contract-card analysis-list-card fraccionament-card">
                                                 <div className="contract-header">
                                                     <div className="contract-title">{(caso.empreses || []).slice(0, 2).join(' & ')}</div>
                                                     <div className="contract-amount">{formatCurrency(caso.import_total)}</div>
                                                 </div>
-                                                <div className="contract-meta fraccionament-alert-meta">
-                                                    <div className="contract-meta-item fraccionament-card-object">
+                                                <div className="contract-meta analysis-list-meta">
+                                                    <div className="contract-meta-item analysis-list-primary analysis-list-primary-long">
+                                                        <span className="contract-meta-label">Objecte</span>
                                                         <span className="contract-meta-value">{(caso.contractes && caso.contractes[0] && caso.contractes[0].descripcion) || ''}</span>
                                                     </div>
                                                     <div className="contract-pills">
@@ -5152,14 +5504,16 @@ function App() {
                                     ))}
                                 </div>
 
+                                {fraudesFiltrats.length === 0 && (
+                                    <EmptySearchState text="No s'han trobat alertes de fraccionament." onReset={resetAnalisiFilters} />
+                                )}
+
                                 {fraudesFiltrats.length > analisiItemsPerPage && (
-                                    <div className="pagination">
-                                        <button className="pagination-btn" onClick={() => { setAnalisiPageFrac(1) }} disabled={analisiPageFrac === 1} title="Primera pàgina">«</button>
-                                        <button className="pagination-btn" onClick={() => { setAnalisiPageFrac(prev => Math.max(prev - 1, 1)) }} disabled={analisiPageFrac === 1} title="Pàgina anterior">‹</button>
-                                        <span className="pagination-info">Pàgina <strong>{analisiPageFrac}</strong> de <strong>{totalPagesFrac}</strong></span>
-                                        <button className="pagination-btn" onClick={() => { setAnalisiPageFrac(prev => Math.min(prev + 1, totalPagesFrac)) }} disabled={analisiPageFrac === totalPagesFrac} title="Pàgina següent">›</button>
-                                        <button className="pagination-btn" onClick={() => { setAnalisiPageFrac(totalPagesFrac) }} disabled={analisiPageFrac === totalPagesFrac} title="Última pàgina">»</button>
-                                    </div>
+                                    <Pagination
+                                        currentPage={analisiPageFrac}
+                                        totalPages={totalPagesFrac}
+                                        onPageChange={setAnalisiPageFrac}
+                                    />
                                 )}
                             </>
                         )}
@@ -5211,42 +5565,7 @@ function App() {
                                     </div>
                                 </div>
 
-                                {concentracioSectorSnapshot.items.length > 0 && (
-                                    <div className="sector-concentration-visual" aria-label="Sectors amb més concentració d'adjudicacions">
-                                        <div className="sector-concentration-header">
-                                            <div>
-                                                <div className="chart-kicker">Visualització</div>
-                                                <h3>Concentració de contractes</h3>
-                                            </div>
-                                        </div>
-
-                                        <div className="sector-concentration-bars">
-                                            {concentracioSectorSnapshot.items.map(caso => (
-                                                <div key={`snapshot-${caso.id}`} className="sector-concentration-row">
-                                                    <div className="sector-concentration-copy">
-                                                        <span>{formatSectorName(caso.sector)}</span>
-                                                        <small>{(caso.empreses || []).slice(0, 2).join(' · ')}</small>
-                                                    </div>
-                                                    <div className="sector-concentration-track" aria-hidden="true">
-                                                        <span style={{ width: `${Math.max(4, Math.round((caso.quota_import || 0) * 100))}%` }}></span>
-                                                    </div>
-                                                    <div className="sector-concentration-value">
-                                                        <span>{formatPercent(caso.quota_import)}</span>
-                                                    </div>
-                                                </div>
-                                            ))}
-                                        </div>
-                                    </div>
-                                )}
-
                                 <div className="concentracio-mode-switch" role="group" aria-label="Tipus de concentració">
-                                    <button
-                                        type="button"
-                                        className={'concentracio-mode-btn' + (concentracioMode === 'historic' ? ' active' : '')}
-                                        onClick={() => setConcentracioMode('historic')}
-                                    >
-                                        Sectors
-                                    </button>
                                     <button
                                         type="button"
                                         className={'concentracio-mode-btn' + (concentracioMode === 'temporal' ? ' active' : '')}
@@ -5254,38 +5573,36 @@ function App() {
                                     >
                                         Temporals
                                     </button>
+                                    <button
+                                        type="button"
+                                        className={'concentracio-mode-btn' + (concentracioMode === 'historic' ? ' active' : '')}
+                                        onClick={() => setConcentracioMode('historic')}
+                                    >
+                                        Sectors
+                                    </button>
                                 </div>
 
                                 {concentracioMode === 'temporal' && (
                                 <div className="search-section analisi-search-section">
-                                        <div className="search-input-wrapper">
-                                            <span className="search-icon">
-                                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                                            </span>
-                                            <input
-                                                type="text"
-                                                className="search-input"
-                                                placeholder="Cerca per descripció, empresa o codi de cas"
-                                                aria-label="Cerca casos de concentració"
-                                                value={analisiSearch}
-                                                onChange={(e) => setAnalisiSearch(e.target.value)}
-                                            />
-                                            {analisiSearch && (
-                                                <button className="search-clear" onClick={() => setAnalisiSearch('')} type="button" aria-label="Netejar cerca">&times;</button>
-                                            )}
-                                        </div>
+                                        <SearchField
+                                            value={analisiSearch}
+                                            onValueChange={setAnalisiSearch}
+                                            placeholder="Cerca per descripció, empresa o codi de cas"
+                                            ariaLabel="Cerca casos de concentració"
+                                        />
 
                                         <FilterActions
                                             open={analisiFiltersOpen}
                                             onToggle={() => setAnalisiFiltersOpen(prev => !prev)}
                                             activeCount={activeAnalisiFiltersCount}
                                             onReset={resetAnalisiFilters}
+                                            controlsId="analisi-filter-panel-concentracio"
                                         />
 
-                                        <div className={"filters search-filter-panel search-filter-panel-analysis" + (!analisiFiltersOpen ? " collapsed" : "")}>
-                                            <div className="filter-group" style={{ flex: '1 1 240px' }}>
+                                        <div id="analisi-filter-panel-concentracio" className={"filters search-filter-panel search-filter-panel-analysis" + (!analisiFiltersOpen ? " collapsed" : "")}>
+                                            <div className="filter-group filter-group-wide">
                                                 <label className="filter-label">Ordenar per</label>
-                                                <select className="filter-select" style={{ height: '48px' }} value={analisiSort} onChange={(e) => setAnalisiSort(e.target.value)} aria-label="Ordenar casos de concentració per">
+                                                <select className="filter-select filter-select-standard" value={analisiSort} onChange={(e) => setAnalisiSort(e.target.value)} aria-label="Ordenar casos de concentració per">
                                                     <option value="risk-desc">Puntuació de risc (descendent)</option>
                                                     <option value="risk-asc">Puntuació de risc (ascendent)</option>
                                                     <option value="amount-desc">Import (descendent)</option>
@@ -5293,21 +5610,6 @@ function App() {
                                                     <option value="date-desc">Data (més recents)</option>
                                                     <option value="date-asc">Data (més antics)</option>
                                                 </select>
-                                            </div>
-                                            <div className="filter-group analisi-risk-filter-group" style={{ flex: '1 1 280px' }}>
-                                                <label className="filter-label">Risc</label>
-                                                <div className="analisi-risk-filters">
-                                                    <button className={'analisi-filter-btn analisi-filter-all' + (riskFilter === 'TOTS' ? ' active' : '')} onClick={() => setRiskFilter('TOTS')} type="button">Tots</button>
-                                                    {[
-                                                        ['CRITIC', 'Alt'],
-                                                        ['ALT', 'Mitjà'],
-                                                        ['OBSERVACIO', 'Baix'],
-                                                    ].map(([value, label]) => (
-                                                        <button key={value} className={'analisi-filter-btn risk-' + riskClass(value) + (riskFilter === value ? ' active' : '')} onClick={() => setRiskFilter(value)} type="button">
-                                                            {label}
-                                                        </button>
-                                                    ))}
-                                                </div>
                                             </div>
                                         </div>
                                 </div>
@@ -5319,63 +5621,17 @@ function App() {
                                         <div className="analisi-alert-list">
                                             {concentracioHistoric.map(caso => (
                                                 <a key={caso.id} href={buildRouteUrl(`/analisi/concentracio/${caso.id}`)} className="card-link-wrapper" onClick={(event) => handleInternalLinkClick(event, () => handleConcentracioClick(caso))}>
-                                                    <div className="contract-card concentracio-card concentracio-card-historic">
-                                                        <div className="analysis-card-title">{formatSectorName(caso.sector)}</div>
-                                                        <div className="analysis-card-main">
-                                                            <div className="concentracio-card-company">
+                                                    <div className="contract-card analysis-list-card concentracio-card concentracio-card-historic">
+                                                        <div className="contract-header">
+                                                            <div className="contract-title">{formatSectorName(caso.sector)}</div>
+                                                            <div className="contract-amount">{formatCurrency(caso.import_concentrat)}</div>
+                                                        </div>
+                                                        <div className="contract-meta analysis-list-meta">
+                                                            <div className="contract-meta-item analysis-list-primary">
                                                                 <span className="contract-meta-label">Empresa dominant</span>
                                                                 <span className="contract-meta-value">{(caso.empreses || []).slice(0, 2).join(' · ')}</span>
                                                             </div>
-                                                            <div className="contract-amount">{formatPercent(caso.quota_import)}</div>
-                                                        </div>
-                                                        <div className="contract-meta concentracio-card-meta">
-                                                            <div className="contract-meta-item">
-                                                                <span className="contract-meta-label">Import</span>
-                                                                <span className="contract-meta-value">{formatCurrency(caso.import_concentrat)} / {formatCurrency(caso.import_sector)}</span>
-                                                            </div>
-                                                            <div className="contract-meta-item">
-                                                                <span className="contract-meta-label">Contractes</span>
-                                                                <span className="contract-meta-value">{caso.contractes_concentrats} / {caso.contractes_sector}</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            ))}
-                                        </div>
-                                    </>
-                                )}
-
-                                {concentracioMode === 'temporal' && (
-                                    <>
-                                        <div className="results-count">
-                                            <span className="results-count-total">S'han trobat <strong>{concentracioTemporal.length}</strong> concentracions</span>
-                                            {concentracioTemporal.length > analisiItemsPerPage && (
-                                                <span className="results-count-page"><span className="results-count-page-full">Pàgina</span><span className="results-count-page-short">Pàg.</span> <strong>{analisiPageMonop}</strong> de <strong>{totalPagesMonop}</strong></span>
-                                            )}
-                                        </div>
-
-                                        <div className="analisi-alert-list">
-                                            {concentracioPaginada.map(caso => (
-                                                <a key={caso.id} href={buildRouteUrl(`/analisi/concentracio/${caso.id}`)} className="card-link-wrapper" onClick={(event) => handleInternalLinkClick(event, () => handleConcentracioClick(caso))}>
-                                                    <div className="contract-card concentracio-card concentracio-card-temporal">
-                                                        <div className="analysis-card-title">{formatSectorName(caso.sector)}</div>
-                                                        <div className="analysis-card-main">
-                                                            <div className="concentracio-card-company">
-                                                                <span className="contract-meta-label">{caso.tipus_concentracio === 'xarxa' ? 'Xarxa mercantil' : 'Empresa dominant'}</span>
-                                                                <span className="contract-meta-value">{(caso.empreses || []).slice(0, 2).join(' · ')}</span>
-                                                            </div>
-                                                            <div className="contract-amount">{formatCurrency(caso.import_concentrat)}</div>
-                                                        </div>
-                                                        <div className="contract-meta concentracio-card-meta">
-                                                            <div className="contract-meta-item">
-                                                                <span className="contract-meta-label">Període</span>
-                                                                <span className="contract-meta-value">Del {formatDate(caso.data_inici)} al {formatDate(caso.data_fi)}</span>
-                                                            </div>
-                                                            <div className="contract-meta-item">
-                                                                <span className="contract-meta-label">Contractes</span>
-                                                                <span className="contract-meta-value">{caso.contractes_concentrats} / {caso.contractes_sector}</span>
-                                                            </div>
-                                                            <div className="contract-meta-item">
+                                                            <div className="contract-meta-item analysis-list-secondary">
                                                                 <span className="contract-meta-label">Quota de mercat</span>
                                                                 <span className="contract-meta-value">{formatPercent(caso.quota_import)}</span>
                                                             </div>
@@ -5388,15 +5644,55 @@ function App() {
                                                 </a>
                                             ))}
                                         </div>
+                                    </>
+                                )}
+
+                                {concentracioMode === 'temporal' && (
+                                    <>
+                                        <div className="results-count" role="status" aria-live="polite">
+                                            <span className="results-count-total">S'han trobat <strong>{concentracioTemporal.length}</strong> concentracions</span>
+                                            {concentracioTemporal.length > analisiItemsPerPage && (
+                                                <span className="results-count-page"><span className="results-count-page-full">Pàgina</span><span className="results-count-page-short">Pàg.</span> <strong>{analisiPageMonop}</strong> de <strong>{totalPagesMonop}</strong></span>
+                                            )}
+                                        </div>
+
+                                        <div className="analisi-alert-list">
+                                            {concentracioPaginada.map(caso => (
+                                                <a key={caso.id} href={buildRouteUrl(`/analisi/concentracio/${caso.id}`)} className="card-link-wrapper" onClick={(event) => handleInternalLinkClick(event, () => handleConcentracioClick(caso))}>
+                                                    <div className="contract-card analysis-list-card concentracio-card concentracio-card-temporal">
+                                                        <div className="contract-header">
+                                                            <div className="contract-title">{formatSectorName(caso.sector)}</div>
+                                                            <div className="contract-amount">{formatCurrency(caso.import_concentrat)}</div>
+                                                        </div>
+                                                        <div className="contract-meta analysis-list-meta">
+                                                            <div className="contract-meta-item analysis-list-primary">
+                                                                <span className="contract-meta-label">{caso.tipus_concentracio === 'xarxa' ? 'Xarxa mercantil' : 'Empresa dominant'}</span>
+                                                                <span className="contract-meta-value">{(caso.empreses || []).slice(0, 2).join(' · ')}</span>
+                                                            </div>
+                                                            <div className="contract-meta-item analysis-list-secondary">
+                                                                <span className="contract-meta-label">Període</span>
+                                                                <span className="contract-meta-value">Del {formatDate(caso.data_inici)} al {formatDate(caso.data_fi)}</span>
+                                                            </div>
+                                                            <div className="contract-pills">
+                                                                <span className={"risk-badge " + riskClass(caso.nivell)}>{riskLabel(caso.nivell)}</span>
+                                                                <span className={"risk-badge " + riskClass(caso.nivell)}>{Number.isInteger(caso.risc) ? caso.risc : Number(caso.risc).toFixed(1)}/100</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            ))}
+                                        </div>
+
+                                        {concentracioTemporal.length === 0 && (
+                                            <EmptySearchState text="No s'han trobat concentracions temporals." onReset={resetAnalisiFilters} />
+                                        )}
 
                                         {concentracioTemporal.length > analisiItemsPerPage && (
-                                            <div className="pagination">
-                                                <button className="pagination-btn" onClick={() => { setAnalisiPageMonop(1) }} disabled={analisiPageMonop === 1} title="Primera pàgina">«</button>
-                                                <button className="pagination-btn" onClick={() => { setAnalisiPageMonop(prev => Math.max(prev - 1, 1)) }} disabled={analisiPageMonop === 1} title="Pàgina anterior">‹</button>
-                                                <span className="pagination-info">Pàgina <strong>{analisiPageMonop}</strong> de <strong>{totalPagesMonop}</strong></span>
-                                                <button className="pagination-btn" onClick={() => { setAnalisiPageMonop(prev => Math.min(prev + 1, totalPagesMonop)) }} disabled={analisiPageMonop === totalPagesMonop} title="Pàgina següent">›</button>
-                                                <button className="pagination-btn" onClick={() => { setAnalisiPageMonop(totalPagesMonop) }} disabled={analisiPageMonop === totalPagesMonop} title="Última pàgina">»</button>
-                                            </div>
+                                            <Pagination
+                                                currentPage={analisiPageMonop}
+                                                totalPages={totalPagesMonop}
+                                                onPageChange={setAnalisiPageMonop}
+                                            />
                                         )}
                                     </>
                                 )}
@@ -5435,34 +5731,25 @@ function App() {
                                 </div>
 
                                 <div className="search-section analisi-search-section">
-                                    <div className="search-input-wrapper">
-                                        <span className="search-icon">
-                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                                        </span>
-                                        <input
-                                            type="text"
-                                            className="search-input"
-                                            placeholder="Cerca per descripció, empresa o codi de cas"
-                                            aria-label="Cerca casos d'electoralisme"
-                                            value={analisiSearch}
-                                            onChange={(e) => setAnalisiSearch(e.target.value)}
-                                        />
-                                        {analisiSearch && (
-                                            <button className="search-clear" onClick={() => setAnalisiSearch('')} type="button" aria-label="Netejar cerca">&times;</button>
-                                        )}
-                                    </div>
+                                    <SearchField
+                                        value={analisiSearch}
+                                        onValueChange={setAnalisiSearch}
+                                        placeholder="Cerca per descripció, empresa o codi de cas"
+                                        ariaLabel="Cerca casos d'electoralisme"
+                                    />
 
                                     <FilterActions
                                         open={analisiFiltersOpen}
                                         onToggle={() => setAnalisiFiltersOpen(prev => !prev)}
                                         activeCount={activeAnalisiFiltersCount}
                                         onReset={resetAnalisiFilters}
+                                        controlsId="analisi-filter-panel-electoralisme"
                                     />
 
-                                    <div className={"filters search-filter-panel search-filter-panel-analysis" + (!analisiFiltersOpen ? " collapsed" : "")}>
-                                        <div className="filter-group" style={{ flex: '1 1 240px' }}>
+                                    <div id="analisi-filter-panel-electoralisme" className={"filters search-filter-panel search-filter-panel-analysis" + (!analisiFiltersOpen ? " collapsed" : "")}>
+                                        <div className="filter-group filter-group-wide">
                                             <label className="filter-label">Ordenar per</label>
-                                            <select className="filter-select" style={{ height: '48px' }} value={analisiSort} onChange={(e) => setAnalisiSort(e.target.value)} aria-label="Ordenar casos d'electoralisme per">
+                                            <select className="filter-select filter-select-standard" value={analisiSort} onChange={(e) => setAnalisiSort(e.target.value)} aria-label="Ordenar casos d'electoralisme per">
                                                 <option value="risk-desc">Puntuació de risc (descendent)</option>
                                                 <option value="risk-asc">Puntuació de risc (ascendent)</option>
                                                 <option value="amount-desc">Import (descendent)</option>
@@ -5471,25 +5758,10 @@ function App() {
                                                 <option value="date-asc">Data (més antics)</option>
                                             </select>
                                         </div>
-                                        <div className="filter-group analisi-risk-filter-group" style={{ flex: '1 1 280px' }}>
-                                            <label className="filter-label">Risc</label>
-                                            <div className="analisi-risk-filters">
-                                                <button className={'analisi-filter-btn analisi-filter-all' + (riskFilter === 'TOTS' ? ' active' : '')} onClick={() => setRiskFilter('TOTS')} type="button">Tots</button>
-                                                {[
-                                                    ['CRITIC', 'Alt'],
-                                                    ['ALT', 'Mitjà'],
-                                                    ['OBSERVACIO', 'Baix'],
-                                                ].map(([value, label]) => (
-                                                    <button key={value} className={'analisi-filter-btn risk-' + riskClass(value) + (riskFilter === value ? ' active' : '')} onClick={() => setRiskFilter(value)} type="button">
-                                                        {label}
-                                                    </button>
-                                                ))}
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
 
-                                <div className="results-count">
+                                <div className="results-count" role="status" aria-live="polite">
                                     <span className="results-count-total"><span className="results-count-prefix">S'han trobat </span><strong>{electoralFiltrats.length}</strong> alertes</span>
                                     {electoralFiltrats.length > analisiItemsPerPage && (
                                         <span className="results-count-page"><span className="results-count-page-full">Pàgina</span><span className="results-count-page-short">Pàg.</span> <strong>{analisiPageElect}</strong> de <strong>{totalPagesElect}</strong></span>
@@ -5500,33 +5772,17 @@ function App() {
                                     {electoralPaginats.map(caso => {
                                         const cc = (caso.contractes && caso.contractes[0]) || {};
                                         const href = buildRouteUrl(`/analisi/electoralisme/${caso.id}`);
-                                        const isPreElectoral = caso.fase_temporal === 'Finestra administrativa prèvia';
-                                        const isPostElectoral = caso.fase_temporal === 'Finestra administrativa posterior';
-                                        const temporalLabel = isPreElectoral ? 'Dies abans' : (isPostElectoral ? 'Dies després' : 'Votació en');
-                                        const temporalValue = isPreElectoral ? (caso.dies_abans_convocatoria || 0) : (isPostElectoral ? (caso.dies_despres_votacio || 0) : caso.dies_fins_votacio);
                                         return (
                                             <a key={caso.id} href={href} className="card-link-wrapper" onClick={(event) => handleInternalLinkClick(event, () => handleElectoralismeClick(caso))}>
-                                                <div className="contract-card fraccionament-card electoralisme-card">
-                                                    <div className="analysis-card-title">{caso.empresa}</div>
-                                                    <div className="analysis-card-main">
-                                                        <div className="fraccionament-card-object">
-                                                            <span className="contract-meta-label">Objecte</span>
-                                                            <span className="contract-meta-value">{cc.descripcion || ''}</span>
-                                                        </div>
+                                                <div className="contract-card analysis-list-card electoralisme-card">
+                                                    <div className="contract-header">
+                                                        <div className="contract-title">{caso.empresa}</div>
                                                         <div className="contract-amount">{formatCurrency(caso.import_total)}</div>
                                                     </div>
-                                                    <div className="contract-meta fraccionament-card-meta">
-                                                        <div className="contract-meta-item">
-                                                            <span className="contract-meta-label">Període</span>
-                                                            <span className="contract-meta-value">{caso.periode_electoral}</span>
-                                                        </div>
-                                                        <div className="contract-meta-item">
-                                                            <span className="contract-meta-label">Data</span>
-                                                            <span className="contract-meta-value">{formatDate(caso.data_inici)}</span>
-                                                        </div>
-                                                        <div className="contract-meta-item">
-                                                            <span className="contract-meta-label">{temporalLabel}</span>
-                                                            <span className="contract-meta-value">{temporalValue} dies</span>
+                                                    <div className="contract-meta analysis-list-meta">
+                                                        <div className="contract-meta-item analysis-list-primary analysis-list-primary-long">
+                                                            <span className="contract-meta-label">Objecte</span>
+                                                            <span className="contract-meta-value">{cc.descripcion || ''}</span>
                                                         </div>
                                                         <div className="contract-pills">
                                                             <span className={"risk-badge " + riskClass(caso.nivell)}>{riskLabel(caso.nivell)}</span>
@@ -5539,15 +5795,74 @@ function App() {
                                     })}
                                 </div>
 
-                                {electoralFiltrats.length > analisiItemsPerPage && (
-                                    <div className="pagination">
-                                        <button className="pagination-btn" onClick={() => { setAnalisiPageElect(1) }} disabled={analisiPageElect === 1} title="Primera pàgina">«</button>
-                                        <button className="pagination-btn" onClick={() => { setAnalisiPageElect(prev => Math.max(prev - 1, 1)) }} disabled={analisiPageElect === 1} title="Pàgina anterior">‹</button>
-                                        <span className="pagination-info">Pàgina <strong>{analisiPageElect}</strong> de <strong>{totalPagesElect}</strong></span>
-                                        <button className="pagination-btn" onClick={() => { setAnalisiPageElect(prev => Math.min(prev + 1, totalPagesElect)) }} disabled={analisiPageElect === totalPagesElect} title="Pàgina següent">›</button>
-                                        <button className="pagination-btn" onClick={() => { setAnalisiPageElect(totalPagesElect) }} disabled={analisiPageElect === totalPagesElect} title="Última pàgina">»</button>
-                                    </div>
+                                {electoralFiltrats.length === 0 && (
+                                    <EmptySearchState text="No s'han trobat alertes d'electoralisme." onReset={resetAnalisiFilters} />
                                 )}
+
+                                {electoralFiltrats.length > analisiItemsPerPage && (
+                                    <Pagination
+                                        currentPage={analisiPageElect}
+                                        totalPages={totalPagesElect}
+                                        onPageChange={setAnalisiPageElect}
+                                    />
+                                )}
+                            </>
+                        )}
+
+                        {analisiTab === 'dependencia' && (
+                            <>
+                                <div className="metodologia-wrapper">
+                                    <div className="metodologia">
+                                        <h3 className="metodologia-title">Metodologia</h3>
+                                        <p className="metodologia-intro">L'algoritme Iguadata de dependència detecta entitats que acumulen subvencions directes o les reben de manera recurrent al llarg del temps. La identificació de patrons estadísticament rellevants i les alertes generades no impliquen cap irregularitat legal confirmada i han de ser interpretades en context.</p>
+                                        <div className="metodologia-steps-compact">
+                                            <div className="metodologia-step-compact"><span className="metodologia-step-num-compact">01</span><span className="metodologia-step-text-compact">Identificació de subvencions definides com a directes</span></div>
+                                            <div className="metodologia-step-compact"><span className="metodologia-step-num-compact">02</span><span className="metodologia-step-text-compact">Agrupació per entitat i any per mesurar recurrència, continuïtat i acumulació</span></div>
+                                            <div className="metodologia-step-compact"><span className="metodologia-step-num-compact">03</span><span className="metodologia-step-text-compact">Puntuació i classificació visual segons el nivell de risc</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="search-section analisi-search-section">
+                                    <SearchField value={analisiSearch} onValueChange={setAnalisiSearch} placeholder="Cerca per descripció, entitat o codi de cas" ariaLabel="Cerca casos de dependència" />
+                                    <FilterActions open={analisiFiltersOpen} onToggle={() => setAnalisiFiltersOpen(prev => !prev)} activeCount={activeAnalisiFiltersCount} onReset={resetAnalisiFilters} controlsId="analisi-filter-panel-dependencia" />
+                                    <div id="analisi-filter-panel-dependencia" className={"filters search-filter-panel search-filter-panel-analysis" + (!analisiFiltersOpen ? " collapsed" : "")}>
+                                        <div className="filter-group filter-group-wide">
+                                            <label className="filter-label">Ordenar per</label>
+                                            <select className="filter-select filter-select-standard" value={analisiSort} onChange={(event) => setAnalisiSort(event.target.value)} aria-label="Ordenar casos de dependència per">
+                                                <option value="risk-desc">Puntuació de risc (descendent)</option>
+                                                <option value="risk-asc">Puntuació de risc (ascendent)</option>
+                                                <option value="amount-desc">Import (descendent)</option>
+                                                <option value="amount-asc">Import (ascendent)</option>
+                                                <option value="date-desc">Data (més recents)</option>
+                                                <option value="date-asc">Data (més antics)</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="results-count" role="status" aria-live="polite">
+                                    <span className="results-count-total"><span className="results-count-prefix">S'han trobat </span><strong>{dependenciaFiltrada.length}</strong> alertes</span>
+                                    {dependenciaFiltrada.length > analisiItemsPerPage && <span className="results-count-page"><span className="results-count-page-full">Pàgina</span><span className="results-count-page-short">Pàg.</span> <strong>{analisiPageDependencia}</strong> de <strong>{totalPagesDependencia}</strong></span>}
+                                </div>
+
+                                <div className="analisi-alert-list">
+                                    {dependenciaPaginada.map(caso => (
+                                        <a key={caso.id} href={buildRouteUrl(`/analisi/dependencia/${caso.id}`)} className="card-link-wrapper" onClick={(event) => handleInternalLinkClick(event, () => handleDependenciaClick(caso))}>
+                                            <div className="contract-card analysis-list-card dependencia-card">
+                                                <div className="contract-header"><div className="contract-title">{caso.entitat}</div><div className="contract-amount">{formatCurrency(caso.import_total)}</div></div>
+                                                <div className="contract-meta analysis-list-meta">
+                                                    <div className="contract-meta-item analysis-list-primary"><span className="contract-meta-label">Acumulació</span><span className="contract-meta-value">{caso.num_subvencions} subvencions directes</span></div>
+                                                    <div className="contract-meta-item analysis-list-secondary"><span className="contract-meta-label">Període</span><span className="contract-meta-value">Del {formatDate(caso.data_inici)} al {formatDate(caso.data_fi)}</span></div>
+                                                    <div className="contract-pills"><span className={"risk-badge " + riskClass(caso.nivell)}>{riskLabel(caso.nivell)}</span><span className={"risk-badge " + riskClass(caso.nivell)}>{caso.risc}/100</span></div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    ))}
+                                </div>
+
+                                {dependenciaFiltrada.length === 0 && <EmptySearchState text="No s'han trobat alertes de dependència." onReset={resetAnalisiFilters} />}
+                                {dependenciaFiltrada.length > analisiItemsPerPage && <Pagination currentPage={analisiPageDependencia} totalPages={totalPagesDependencia} onPageChange={setAnalisiPageDependencia} />}
                             </>
                         )}
                     </div>
@@ -5557,11 +5872,11 @@ function App() {
 
             {
                 activeTab === 'sobre' && (
-                    <div className="container prose-page">
+                    <div className="container prose-page narrative-info-page">
                         <h1 className="page-title">Sobre el projecte</h1>
-                        <div className="prose-wrapper">
+                        <div className="prose-wrapper narrative-story">
                             <p className="prose-intro">
-                                Iguadata és la plataforma independent de periodisme de dades per a l'anàlisi de la contractació pública de l'Ajuntament d'Igualada i dels seus organismes municipals.<br /><br />El projecte combina dades obertes de contractació, informació mercantil i algoritmes propis per fer més accessible, comprensible i fiscalitzable la despesa pública municipal.
+                                {BRAND_NAME} és la plataforma independent de periodisme de dades per a l'anàlisi de la contractació pública i les subvencions de {AUTHORITY_NAME} i dels seus organismes municipals.<br /><br />El projecte combina dades obertes de contractació i subvencions, informació mercantil i algoritmes propis per fer més accessible, comprensible i fiscalitzable la despesa pública municipal.
                             </p>
                             <h2 className="prose-heading">Autoria</h2>
                             <p className="prose-paragraph">
@@ -5569,27 +5884,30 @@ function App() {
                             </p>
                             <h2 className="prose-heading">Objectius</h2>
                             <p className="prose-paragraph">
-                                Iguadata neix amb tres objectius principals: facilitar l'accés de la ciutadania a la contractació pública municipal, detectar patrons que puguin merèixer revisió periodística o institucional, i construir una metodologia replicable per altres municipis.
+                                Iguadata neix amb tres objectius principals: facilitar l'accés de la ciutadania a la contractació i les subvencions públiques municipals, detectar patrons que puguin merèixer revisió periodística o institucional, i construir una metodologia replicable per altres municipis.
                             </p>
                             <p className="prose-paragraph">
                                 La plataforma no substitueix la feina dels òrgans fiscalitzadors, jurídics o administratius. El seu paper és ordenar dades disperses, mostrar relacions i generar indicadors que ajudin a fer millors preguntes.
                             </p>
                             <h2 className="prose-heading">Què analitza</h2>
                             <p className="prose-paragraph">
-                                Iguadata permet consultar contractes, empreses adjudicatàries, persones vinculades a aquestes empreses i diferents indicadors d'anàlisi.
+                                Iguadata permet consultar contractes, empreses adjudicatàries, persones vinculades a aquestes empreses, subvencions, entitats beneficiàries i diferents indicadors d'anàlisi.
                             </p>
                             <p className="prose-paragraph">
-                                Els principals blocs d'anàlisi són el possible fraccionament de contractes menors, la concentració d'adjudicacions en determinades empreses o sectors, els vincles mercantils entre empreses adjudicatàries i els patrons d'electoralisme o comunicació institucional en períodes sensibles.
+                                Els principals blocs d'anàlisi són el possible fraccionament de contractes menors, la concentració d'adjudicacions en determinades empreses o sectors, els patrons d'electoralisme o comunicació institucional en períodes sensibles i l'acumulació o recurrència de subvencions directes en una mateixa entitat.
                             </p>
                             <h2 className="prose-heading">Font de dades</h2>
                             <p className="prose-paragraph">
-                                Les dades de contractació provenen del Registre Públic de Contractes de la Generalitat de Catalunya, consultat mitjançant l'API Socrata Open Data (SODA). Una actualització automàtica setmanal genera una fotografia coherent dels contractes, les empreses, les persones i els resultats analítics.
+                                Les dades de contractació provenen del Registre Públic de Contractes de la Generalitat de Catalunya, consultat mitjançant l'API Socrata Open Data (SODA).
+                            </p>
+                            <p className="prose-paragraph">
+                                Les dades de subvencions provenen del Registre d'Ajuts i Subvencions de Catalunya (RAISC). Iguadata selecciona les concessions emeses per {AUTHORITY_NAME} i publica únicament els registres amb beneficiaris identificats com a entitats publicables.
                             </p>
                             <p className="prose-paragraph">
                                 Les dades mercantils provenen del Butlletí Oficial del Registre Mercantil (BORME), registre oficial públic. Mitjançant un processament massiu, tècniques de mineria de dades i l'ús de programari de codi obert desenvolupat per <a href="https://github.com/BquantFinance" target="_blank" rel="noopener noreferrer" className="prose-link">Gerard Sánchez Vidal</a>, s'identifiquen els càrrecs actius de les empreses adjudicatàries.
                             </p>
                             <p className="prose-paragraph">
-                                També es generen fitxers JSON propis que permeten alimentar la interfície, accelerar la consulta i mantenir còpies de suport en cas de caiguda temporal de fonts externes.
+                                Una actualització automàtica setmanal genera una fotografia coherent dels contractes, les subvencions, les empreses, les entitats, les persones i els resultats analítics. També es generen fitxers JSON propis que permeten alimentar la interfície, accelerar la consulta i mantenir còpies de suport en cas de caiguda temporal de les fonts externes.
                             </p>
                             <h2 className="prose-heading">Metodologia</h2>
                             <p className="prose-paragraph">
@@ -5600,18 +5918,18 @@ function App() {
                             </p>
                             <h2 className="prose-heading">Limitacions</h2>
                             <p className="prose-paragraph">
-                                Les dades poden contenir errors d'origen, omissions, canvis posteriors o incidències derivades de la normalització automatitzada. L'aparició d'una empresa, persona o contracte en una alerta no implica cap irregularitat legal confirmada.
+                                Les dades poden contenir errors d'origen, omissions, duplicats, canvis posteriors o incidències derivades de la normalització i classificació automatitzades. L'aparició d'una empresa, entitat, persona, contracte o subvenció en una alerta no implica cap irregularitat legal confirmada.
                             </p>
                             <p className="prose-paragraph">
-                                Qualsevol conclusió periodística, administrativa o jurídica requereix contrastar les dades amb expedients originals, informes tècnics, resolucions, plecs i altres fonts documentals.
+                                Qualsevol conclusió periodística, administrativa o jurídica requereix contrastar les dades amb expedients originals, informes tècnics, resolucions, convocatòries, bases reguladores, plecs i altres fonts documentals.
                             </p>
                             <h2 className="prose-heading">Codi obert</h2>
                             <p className="prose-paragraph">
-                                El codi font del projecte és públic i està disponible a <a href="https://github.com/vicxvers/iguadata" target="_blank" rel="noopener noreferrer" className="prose-link">GitHub</a> sota llicència GNU GPL v3.0.
+                                El codi font del projecte és públic i està disponible a <a href={REPOSITORY_URL} target="_blank" rel="noopener noreferrer" className="prose-link">GitHub</a> sota llicència GNU GPL v3.0.
                             </p>
                             <h2 className="prose-heading">Contacte</h2>
                             <p className="prose-paragraph">
-                                Per a suggeriments, correccions factuals, col·laboracions o consultes sobre el projecte, es pot contactar a partir de <a href="mailto:hola@iguadata.cat" className="prose-link">hola@iguadata.cat</a>.
+                                Per a suggeriments, correccions factuals, col·laboracions o consultes sobre el projecte, es pot contactar a partir de <a href={`mailto:${CONTACT_EMAIL}`} className="prose-link">{CONTACT_EMAIL}</a>.
                             </p>
                         </div>
                     </div>
@@ -5620,22 +5938,25 @@ function App() {
 
             {
                 activeTab === 'legal' && (
-                    <div className="container prose-page">
+                    <div className="container prose-page narrative-info-page">
                         <h1 className="page-title">Avís Legal</h1>
-                        <div className="prose-wrapper">
+                        <div className="prose-wrapper narrative-story">
                             <h2 className="prose-heading">1. Identificació i titularitat</h2>
                             <p className="prose-paragraph">
-                                Iguadata és un projecte independent de transparència, anàlisi de dades públiques i fiscalització cívica de la contractació pública vinculada a l'Ajuntament d'Igualada i als seus organismes municipals relacionats.
+                                {BRAND_NAME} és un projecte independent de transparència, anàlisi de dades públiques i fiscalització cívica de la contractació i les subvencions públiques vinculades a {AUTHORITY_NAME} i als seus organismes municipals relacionats.
                             </p>
                             <p className="prose-paragraph">
                                 Iguadata no és una administració pública ni actua en nom de cap institució. La plataforma té finalitats informatives, periodístiques, educatives, de recerca i de divulgació.
                             </p>
                             <p className="prose-paragraph">
-                                Responsable del projecte i del tractament: Víctor Recio Rodríguez. Contacte: <a href="mailto:hola@iguadata.cat" className="prose-link">hola@iguadata.cat</a>.
+                                Responsable del projecte i del tractament: Víctor Recio Rodríguez. Contacte: <a href={`mailto:${CONTACT_EMAIL}`} className="prose-link">{CONTACT_EMAIL}</a>.
                             </p>
                             <h2 className="prose-heading">2. Origen de les dades</h2>
                             <p className="prose-paragraph">
                                 Les dades de contractació provenen del Registre Públic de Contractes de la Generalitat de Catalunya, consultat mitjançant l'API Socrata Open Data (SODA), i d'altres fonts públiques oficials de contractació.
+                            </p>
+                            <p className="prose-paragraph">
+                                Les dades de subvencions provenen del Registre d'Ajuts i Subvencions de Catalunya (RAISC). Iguadata selecciona les concessions emeses per {AUTHORITY_NAME} i processa la informació sobre els imports, les finalitats, els procediments de concessió i els beneficiaris que poden ser objecte de publicació.
                             </p>
                             <p className="prose-paragraph">
                                 Les dades mercantils provenen del Butlletí Oficial del Registre Mercantil (BORME), registre oficial de caràcter públic. Iguadata processa aquestes dades mitjançant eines automatitzades de descàrrega, extracció, normalització i encreuament de dades.
@@ -5645,14 +5966,14 @@ function App() {
                             </p>
                             <h2 className="prose-heading">3. Actualització i traçabilitat</h2>
                             <p className="prose-paragraph">
-                                La plataforma publica fotografies setmanals coherents generades a partir de fonts públiques. Part del procés d'actualització s'executa de manera automatitzada mitjançant GitHub Actions, amb controls tècnics de validació, còpies de seguretat i comprovació d'integritat dels fitxers generats.
+                                La plataforma publica fotografies setmanals coherents de contractes i subvencions generades a partir de fonts públiques. Part del procés d'actualització s'executa de manera automatitzada mitjançant GitHub Actions, amb controls tècnics de validació, preservació de registres, còpies de seguretat i comprovacions d'integritat dels fitxers generats.
                             </p>
                             <p className="prose-paragraph">
                                 Aquest procés no altera el sentit de les dades originals, sinó que les estructura, normalitza i encreua per facilitar-ne la consulta pública i l'anàlisi.
                             </p>
                             <h2 className="prose-heading">4. Finalitat del tractament</h2>
                             <p className="prose-paragraph">
-                                La finalitat d'Iguadata és facilitar l'accés, la comprensió i l'anàlisi de dades públiques sobre contractació municipal, concentració empresarial, vincles mercantils, possibles patrons de fraccionament i indicadors de risc electoral o institucional.
+                                La finalitat d'Iguadata és facilitar l'accés, la comprensió i l'anàlisi de dades públiques sobre contractació i subvencions municipals, concentració empresarial, vincles mercantils, possibles patrons de fraccionament, indicadors de risc electoral o institucional i acumulació o recurrència de subvencions directes.
                             </p>
                             <p className="prose-paragraph">
                                 Les visualitzacions, cercadors i alertes tenen una funció orientativa i d'interès públic. No constitueixen resolucions administratives, acusacions, proves concloents ni imputacions d'irregularitat.
@@ -5662,7 +5983,10 @@ function App() {
                                 Els indicadors generats per Iguadata identifiquen patrons estadístics o relacions documentals que poden ser d'interès públic, però requereixen sempre interpretació contextual i, si escau, verificació addicional amb expedients, informes, plecs, resolucions administratives o altres fonts originals.
                             </p>
                             <p className="prose-paragraph">
-                                L'aparició d'una empresa, persona, contracte o organisme dins d'un indicador no implica per si mateixa cap infracció legal, administrativa, ètica o penal.
+                                L'aparició d'una empresa, entitat, persona, contracte o subvenció dins d'un indicador no implica per si mateixa cap infracció legal, administrativa, ètica o penal.
+                            </p>
+                            <p className="prose-paragraph">
+                                En particular, les alertes de dependència identifiquen patrons d'acumulació o recurrència de subvencions directes. Aquests patrons poden tenir interès públic o periodístic, però no acrediten un ús indegut dels recursos públics ni una actuació irregular de l'entitat beneficiària o de l'administració concedent.
                             </p>
                             <h2 className="prose-heading">6. Protecció de dades personals</h2>
                             <p className="prose-paragraph">
@@ -5675,17 +5999,20 @@ function App() {
                                 L'import associat a una persona correspon al volum total adjudicat a les empreses amb les quals consta vinculada en els registres analitzats. Aquesta xifra no representa ingressos personals, patrimoni individual, remuneració ni benefici directe.
                             </p>
                             <p className="prose-paragraph">
+                                En l'àmbit de les subvencions, la interfície pública mostra únicament els registres corresponents a beneficiaris identificats com a entitats publicables. Les concessions associades a persones físiques o a beneficiaris no publicables es conserven només quan són necessàries per al tractament intern i l'anàlisi agregada, però no es mostren ni permeten identificar-ne els beneficiaris a la plataforma pública.
+                            </p>
+                            <p className="prose-paragraph">
                                 El tractament es fonamenta en l'article 6.1.e) del Reglament (UE) 2016/679 (RGPD), relatiu al compliment d'una missió realitzada en interès públic, i en la normativa de transparència i accés a la informació pública, inclosa la Llei 19/2013 i la Llei 19/2014 de transparència de Catalunya.
                             </p>
                             <p className="prose-paragraph">
-                                Les dades publicades es limiten a la informació estrictament necessària per a la finalitat de transparència i fiscalització pública, d'acord amb el principi de minimització de dades de l'article 5.1.c del RGPD. No es publiquen dades de la vida privada, domicilis personals, documents identificatius, dades de contacte privades ni informació aliena a la dimensió mercantil o contractual analitzada.
+                                Les dades publicades es limiten a la informació estrictament necessària per a la finalitat de transparència i fiscalització pública, d'acord amb el principi de minimització de dades de l'article 5.1.c del RGPD. No es publiquen dades de la vida privada, domicilis personals, documents identificatius, dades de contacte privades ni informació aliena a les dimensions mercantil, contractual o subvencional analitzades.
                             </p>
                             <h2 className="prose-heading">7. Exercici de drets i correccions</h2>
                             <p className="prose-paragraph">
-                                Les persones interessades poden exercir els drets d'accés, rectificació, limitació o oposició al tractament a <a href="mailto:hola@iguadata.cat" className="prose-link">hola@iguadata.cat</a>.
+                                Les persones interessades poden exercir els drets d'accés, rectificació, limitació o oposició al tractament a <a href={`mailto:${CONTACT_EMAIL}`} className="prose-link">{CONTACT_EMAIL}</a>.
                             </p>
                             <p className="prose-paragraph">
-                                També es poden comunicar errors factuals, homonímies, atribucions incorrectes, canvis de denominació, dades desactualitzades o incidències derivades del processament automatitzat.
+                                També es poden comunicar errors factuals, homonímies, atribucions incorrectes, canvis de denominació, classificacions errònies, dades desactualitzades o incidències derivades del processament automatitzat.
                             </p>
                             <p className="prose-paragraph">
                                 Quan es detecti un error factual, Iguadata podrà corregir, contextualitzar, limitar o retirar la informació afectada. El dret de supressió pot quedar limitat quan la informació procedeixi de registres oficials públics o documentació administrativa de contractació pública, d'acord amb l'article 17.3.b) del RGPD.
@@ -5699,7 +6026,7 @@ function App() {
                             </p>
                             <h2 className="prose-heading">9. Fonts normatives principals</h2>
                             <p className="prose-paragraph">
-                                El present avís legal es basa, entre altres, en el Reglament (UE) 2016/679 (RGPD), la Llei 19/2013, de transparència, accés a la informació pública i bon govern, i la Llei 19/2014, de transparència, accés a la informació pública i bon govern de Catalunya.
+                                El present avís legal es basa, entre altres, en el Reglament (UE) 2016/679 (RGPD), la Llei 19/2013, de transparència, accés a la informació pública i bon govern, la Llei 19/2014, de transparència, accés a la informació pública i bon govern de Catalunya, la Llei 38/2003, general de subvencions, i el Decret 271/2019, pel qual s'aprova el Reglament del Registre de subvencions i ajuts de Catalunya.
                             </p>
                         </div>
                     </div>
@@ -5731,19 +6058,19 @@ function App() {
                         <div className={`footer-content${activeTab === 'sobre' || activeTab === 'legal' || activeTab === 'cas-investigacio' ? ' footer-content-prose' : ''}`}>
                             <div className="footer-main">
                                 <div className="footer-brand">
-                                    <a href={BASE + '/'} onClick={(e) => { e.preventDefault(); handleNavigation('home'); }} className="footer-logo-link" aria-label="Iguadata, inici">
-                                        <img src={assetUrl('/assets/iguadata.svg')} alt="Iguadata" className="footer-logo" />
+                                    <a href={BASE + '/'} onClick={(e) => { e.preventDefault(); handleNavigation('home'); }} className="footer-logo-link" aria-label={`${BRAND_NAME}, inici`}>
+                                        <img src={assetUrl('/assets/iguadata.svg')} alt={BRAND_NAME} className="footer-logo" />
                                     </a>
-                                    <p className="footer-tagline">El projecte de transparència d'Igualada</p>
+                                    <p className="footer-tagline">{BRAND_TAGLINE}</p>
                                     <div className="footer-social">
-                                        <a href="https://www.instagram.com/iguadata/" target="_blank" rel="noopener noreferrer" className="footer-social-link" aria-label="Iguadata a Instagram">
+                                        <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" className="footer-social-link" aria-label={`${BRAND_NAME} a Instagram`}>
                                             <svg viewBox="0 0 24 24" aria-hidden="true">
                                                 <rect x="3" y="3" width="18" height="18" rx="5" />
                                                 <circle cx="12" cy="12" r="4" />
                                                 <circle cx="17.5" cy="6.5" r="1" className="footer-social-fill" />
                                             </svg>
                                         </a>
-                                        <a href="mailto:hola@iguadata.cat" className="footer-social-link" aria-label="Escriu a Iguadata">
+                                        <a href={`mailto:${CONTACT_EMAIL}`} className="footer-social-link" aria-label={`Escriu a ${BRAND_NAME}`}>
                                             <svg viewBox="0 0 24 24" aria-hidden="true">
                                                 <rect x="3" y="5" width="18" height="14" rx="2" />
                                                 <path d="m4 7 8 6 8-6" />
@@ -5757,19 +6084,20 @@ function App() {
                                         <a href={BASE + '/contractes'} onClick={(e) => { e.preventDefault(); handleNavigation('buscador'); }} className="footer-link">Contractes</a>
                                         <a href={BASE + '/empreses'} onClick={(e) => { e.preventDefault(); handleNavigation('empreses'); }} className="footer-link">Empreses</a>
                                         <a href={BASE + '/persones'} onClick={(e) => { e.preventDefault(); handleNavigation('persones'); }} className="footer-link">Persones</a>
+                                        <a href={BASE + '/subvencions'} onClick={(e) => { e.preventDefault(); handleNavigation('subvencions'); }} className="footer-link">Subvencions</a>
                                         <a href={BASE + '/analisi'} onClick={(e) => { e.preventDefault(); handleNavigation('analisi'); }} className="footer-link">Anàlisi</a>
-                                        <a href={BASE + '/investigacio'} onClick={(e) => { e.preventDefault(); handleNavigation('casos'); }} className="footer-link">Investigació</a>
                                     </div>
                                     <div className="footer-nav-column">
+                                        <a href={BASE + '/investigacio'} onClick={(e) => { e.preventDefault(); handleNavigation('casos'); }} className="footer-link">Investigació</a>
                                         <a href={BASE + '/sobre'} onClick={(e) => { e.preventDefault(); handleNavigation('sobre'); }} className="footer-link">Sobre</a>
-                                        <a href="mailto:hola@iguadata.cat" className="footer-link">Contacte</a>
-                                        <a href="https://github.com/vicxvers/iguadata" target="_blank" rel="noopener noreferrer" className="footer-link">Codi obert</a>
                                         <a href={BASE + '/avis-legal'} onClick={(e) => { e.preventDefault(); handleNavigation('legal'); }} className="footer-link">Avís legal</a>
+                                        <a href={REPOSITORY_URL} target="_blank" rel="noopener noreferrer" className="footer-link">Codi obert</a>
+                                        <a href={`mailto:${CONTACT_EMAIL}`} className="footer-link">Contacte</a>
                                     </div>
                                 </nav>
                             </div>
 
-                            <div className="footer-copyright">© 2026 Iguadata. Tots els drets reservats.</div>
+                            <div className="footer-copyright">© 2026 {BRAND_NAME}. Tots els drets reservats.</div>
                         </div>
                     </footer>
                 )

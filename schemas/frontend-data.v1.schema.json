@@ -1,0 +1,326 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Iguadata frontend data v1",
+  "type": "object",
+  "x-files": {
+    "resum": "resum.json",
+    "contractes": "contractes.json",
+    "empreses": "empreses.json",
+    "empresa_aliases": "empresa_aliases.json",
+    "persones": "persones.json",
+    "carrecs": "carrecs.json",
+    "fraccionament": "fraccionament.json",
+    "concentracio": "concentracio.json",
+    "electoralisme": "electoralisme.json",
+    "dependencia": "dependencia.json",
+    "investigacio": "investigacio.json",
+    "subvencions": "subvencions.json"
+  },
+  "required": [
+    "resum",
+    "contractes",
+    "empreses",
+    "empresa_aliases",
+    "persones",
+    "carrecs",
+    "fraccionament",
+    "concentracio",
+    "electoralisme",
+    "dependencia",
+    "investigacio",
+    "subvencions"
+  ],
+  "properties": {
+    "resum": {
+      "type": "object",
+      "required": ["version", "generated_at", "stats", "home"],
+      "properties": {
+        "version": { "type": "string", "minLength": 1 },
+        "generated_at": { "type": "string", "minLength": 1 },
+        "stats": {
+          "type": "object",
+          "required": ["total_contratos", "importe_total", "num_empresas", "num_persones", "num_alertes"],
+          "properties": {
+            "total_contratos": { "type": "integer", "minimum": 0 },
+            "importe_total": { "type": "number", "minimum": 0 },
+            "num_empresas": { "type": "integer", "minimum": 0 },
+            "num_persones": { "type": "integer", "minimum": 0 },
+            "num_alertes": { "type": "integer", "minimum": 0 }
+          }
+        },
+        "home": {
+          "type": "object",
+          "required": ["top_sectors", "top_categories", "minor_contract_trend", "risk_counts"]
+        }
+      }
+    },
+    "contractes": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/contract" }
+    },
+    "empreses": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/company" }
+    },
+    "empresa_aliases": {
+      "type": "object",
+      "required": ["version", "aliases"],
+      "properties": {
+        "version": { "type": "integer", "minimum": 1 },
+        "aliases": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": { "type": "string", "minLength": 1 }
+          }
+        }
+      }
+    },
+    "persones": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/person" }
+    },
+    "carrecs": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "array",
+        "items": { "$ref": "#/$defs/companyRole" }
+      }
+    },
+    "fraccionament": {
+      "$ref": "#/$defs/analysisDocument"
+    },
+    "concentracio": {
+      "$ref": "#/$defs/analysisDocument"
+    },
+    "electoralisme": {
+      "type": "object",
+      "required": ["metodologia", "generat_a", "eleccions_municipals", "total_alertes", "alertes"],
+      "properties": {
+        "metodologia": { "type": "string", "minLength": 1 },
+        "generat_a": { "type": "string", "minLength": 1 },
+        "eleccions_municipals": { "type": "array" },
+        "total_alertes": { "type": "integer", "minimum": 0 },
+        "alertes": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/analysisAlert" }
+        }
+      }
+    },
+    "dependencia": {
+      "$ref": "#/$defs/dependencyDocument"
+    },
+    "investigacio": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/investigation" }
+    },
+    "subvencions": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/subsidy" }
+    }
+  },
+  "$defs": {
+    "subsidy": {
+      "type": "object",
+      "required": ["id", "descripcion", "importe", "adjudicatario", "fecha", "codigo", "entitat_slug"],
+      "properties": {
+        "id": { "type": ["string", "integer"] },
+        "descripcion": { "type": "string", "minLength": 1 },
+        "importe": { "type": "number" },
+        "adjudicatario": { "type": "string", "minLength": 1 },
+        "fecha": { "type": "string" },
+        "codigo": { "type": "string" },
+        "entitat_slug": { "type": "string", "minLength": 1 },
+        "cif_beneficiari": { "type": "string" },
+        "tipus_de_beneficiaris": { "type": "string" }
+      }
+    },
+    "contract": {
+      "type": "object",
+      "required": [
+        "id",
+        "codigo",
+        "organismo",
+        "tipo",
+        "procedimiento",
+        "descripcion",
+        "importe",
+        "adjudicatario",
+        "fecha",
+        "año",
+        "mes",
+        "cpv",
+        "numero_lot",
+        "contracte_origen",
+        "estat_font",
+        "preservat_iguadata"
+      ],
+      "properties": {
+        "id": { "type": "integer" },
+        "codigo": { "type": "string" },
+        "organismo": { "type": "string" },
+        "tipo": { "type": "string" },
+        "procedimiento": { "type": "string" },
+        "descripcion": { "type": "string" },
+        "importe": { "type": "number", "minimum": 0 },
+        "adjudicatario": { "type": "string" },
+        "fecha": { "type": "string" },
+        "año": { "type": "integer" },
+        "mes": { "type": "integer", "minimum": 1, "maximum": 12 },
+        "cpv": { "type": "string" },
+        "numero_lot": { "type": "string" },
+        "contracte_origen": { "type": "string" },
+        "estat_font": { "type": "string" },
+        "preservat_iguadata": { "type": "boolean" }
+      }
+    },
+    "company": {
+      "type": "object",
+      "required": ["nom", "num_contratos", "total_importe", "contratos", "sector", "categoria"],
+      "properties": {
+        "nom": { "type": "string", "minLength": 1 },
+        "num_contratos": { "type": "integer", "minimum": 0 },
+        "total_importe": { "type": "number", "minimum": 0 },
+        "contratos": {
+          "type": "array",
+          "items": { "type": "integer" }
+        },
+        "sector": { "type": "string" },
+        "categoria": { "type": "string" }
+      }
+    },
+    "person": {
+      "type": "object",
+      "required": ["nom", "total_adjudicat", "relacions"],
+      "properties": {
+        "nom": { "type": "string", "minLength": 1 },
+        "total_adjudicat": { "type": "number", "minimum": 0 },
+        "relacions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["empresa", "import_empresa", "carrecs"],
+            "properties": {
+              "empresa": { "type": "string", "minLength": 1 },
+              "import_empresa": { "type": "number", "minimum": 0 },
+              "carrecs": {
+                "type": "array",
+                "items": { "type": "string", "minLength": 1 }
+              }
+            }
+          }
+        }
+      }
+    },
+    "companyRole": {
+      "type": "object",
+      "required": ["nombre", "cargo", "fecha_nombramiento", "tipo_entidad"],
+      "properties": {
+        "nombre": { "type": "string", "minLength": 1 },
+        "cargo": { "type": "string", "minLength": 1 },
+        "fecha_nombramiento": { "type": "string" },
+        "tipo_entidad": {
+          "type": "string",
+          "enum": ["persona", "empresa"]
+        }
+      }
+    },
+    "analysisDocument": {
+      "type": "object",
+      "required": ["metodologia", "generat_a", "total_alertes", "alertes"],
+      "properties": {
+        "metodologia": { "type": "string", "minLength": 1 },
+        "generat_a": { "type": "string", "minLength": 1 },
+        "total_alertes": { "type": "integer", "minimum": 0 },
+        "alertes": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/analysisAlert" }
+        }
+      }
+    },
+    "analysisAlert": {
+      "type": "object",
+      "required": ["id", "risc", "nivell", "contractes"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "risc": { "type": "integer", "minimum": 0 },
+        "nivell": { "type": "string", "minLength": 1 },
+        "contractes": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/analysisContract" }
+        }
+      }
+    },
+    "dependencyDocument": {
+      "type": "object",
+      "required": ["metodologia", "generat_a", "registres_font", "concessions_logiques", "duplicats_logics_exclosos", "total_alertes", "alertes"],
+      "properties": {
+        "metodologia": { "type": "string", "minLength": 1 },
+        "generat_a": { "type": "string", "minLength": 1 },
+        "registres_font": { "type": "integer", "minimum": 0 },
+        "concessions_logiques": { "type": "integer", "minimum": 0 },
+        "duplicats_logics_exclosos": { "type": "integer", "minimum": 0 },
+        "total_alertes": { "type": "integer", "minimum": 0 },
+        "alertes": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/dependencyAlert" }
+        }
+      }
+    },
+    "dependencyAlert": {
+      "type": "object",
+      "required": ["id", "risc", "nivell", "entitat", "import_total", "num_subvencions", "subvencions"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "risc": { "type": "integer", "minimum": 0, "maximum": 100 },
+        "nivell": { "type": "string", "minLength": 1 },
+        "entitat": { "type": "string", "minLength": 1 },
+        "import_total": { "type": "number", "minimum": 0 },
+        "num_subvencions": { "type": "integer", "minimum": 2 },
+        "subvencions": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/subsidy" }
+        }
+      }
+    },
+    "analysisContract": {
+      "type": "object",
+      "required": ["id", "codigo", "descripcion", "adjudicatario", "importe", "fecha"],
+      "properties": {
+        "id": { "type": "integer" },
+        "codigo": { "type": "string" },
+        "descripcion": { "type": "string" },
+        "adjudicatario": { "type": "string" },
+        "importe": { "type": "number", "minimum": 0 },
+        "fecha": { "type": "string" }
+      }
+    },
+    "investigation": {
+      "type": "object",
+      "required": ["slug", "title", "subtitle", "date", "publishedAt", "image", "importe", "content"],
+      "properties": {
+        "slug": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+        },
+        "title": { "type": "string", "minLength": 1 },
+        "subtitle": { "type": "string", "minLength": 1 },
+        "date": { "type": "string", "minLength": 1 },
+        "publishedAt": { "type": "string", "minLength": 1 },
+        "image": { "type": "string", "minLength": 1 },
+        "importe": { "type": "number", "minimum": 0 },
+        "content": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["type"],
+            "properties": {
+              "type": { "type": "string", "minLength": 1 }
+            }
+          }
+        }
+      }
+    }
+  }
+}

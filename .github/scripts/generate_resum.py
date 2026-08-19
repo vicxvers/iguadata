@@ -17,6 +17,8 @@ DATA_FILES = [
     "fraccionament.json",
     "concentracio.json",
     "electoralisme.json",
+    "dependencia.json",
+    "subvencions.json",
 ]
 
 
@@ -89,6 +91,8 @@ def main():
     fraccionament = load_json("fraccionament.json")
     concentracio = load_json("concentracio.json")
     electoralisme = load_json("electoralisme.json")
+    dependencia = load_json("dependencia.json")
+    subvencions = load_json("subvencions.json")
 
     alertes_fraccionament = [
         item for item in fraccionament.get("alertes", [])
@@ -102,6 +106,7 @@ def main():
         fraccionament.get("alertes", [])
         + concentracio.get("alertes", [])
         + electoralisme.get("alertes", [])
+        + dependencia.get("alertes", [])
     )
     nivells = [
         str(item.get("nivell") or "").upper()
@@ -120,7 +125,9 @@ def main():
                 len(alertes_fraccionament)
                 + len(concentracio.get("alertes", []))
                 + len(alertes_electoralisme)
+                + len(dependencia.get("alertes", []))
             ),
+            "num_subvencions": len(subvencions),
         },
         "home": {
             "top_sectors": top_company_totals(empreses, "sector", 5),

@@ -132,78 +132,6 @@ html.home-lock-scroll {
     background-color: var(--bg);
 }
 
-/* Header moderno */
-.header {
-    background: var(--navy);
-    padding: var(--header-pad-y) 0;
-    border-bottom: 1px solid var(--border);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-    transition: background 0.3s, border-color 0.3s;
-}
-
-/* Header sobre el hero dark */
-.header-dark {
-    background: var(--navy);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-    box-shadow: none;
-}
-
-.header-dark .header-logo-main {
-    color: var(--surface);
-}
-
-.header-dark .header-logo-main em {
-    color: var(--surface);
-}
-
-.header-dark .header-tag {
-    color: var(--surface);
-}
-
-.header-content {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 0 2rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.header-logo {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    cursor: pointer;
-}
-
-.header-logo-svg {
-    height: 1.75rem;
-    aspect-ratio: 306 / 102;
-    background-color: var(--surface);
-    -webkit-mask-image: url('assets/iguadata.svg');
-    -webkit-mask-size: contain;
-    -webkit-mask-repeat: no-repeat;
-    -webkit-mask-position: left center;
-    mask-image: url('assets/iguadata.svg');
-    mask-size: contain;
-    mask-repeat: no-repeat;
-    mask-position: left center;
-}
-
-.header-dark .header-logo-svg {
-    background-color: var(--surface);
-}
-
-
-.header-tag {
-    font-family: var(--font-mono);
-    font-size: var(--text-xs);
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--navy);
-}
-
 /* NavegaciÃ³n moderna con pills */
 .nav-wrapper {
     background: var(--surface);
@@ -213,26 +141,6 @@ html.home-lock-scroll {
     z-index: 100;
     backdrop-filter: blur(10px);
     transition: background 0.3s, border-color 0.3s;
-}
-
-.nav-wrapper.nav-dark {
-    background: var(--navy);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-}
-
-.nav-wrapper.nav-dark .nav-tab {
-    color: rgba(148, 163, 184, 0.7);
-}
-
-.nav-wrapper.nav-dark .nav-tab:hover {
-    background: rgba(255, 255, 255, 0.06);
-    color: var(--surface);
-}
-
-.nav-wrapper.nav-dark .nav-tab.active {
-    background: rgba(255, 255, 255, 0.12);
-    color: var(--surface);
-    box-shadow: none;
 }
 
 .nav {
@@ -274,47 +182,6 @@ html.home-lock-scroll {
     box-shadow: 0 4px 12px rgba(30, 58, 138, 0.2);
 }
 
-/* â”€â”€â”€ BotÃ³n Hamburguesa MÃ³vil â”€â”€â”€â”€ */
-.mobile-menu-btn {
-    display: none;
-    flex-direction: column;
-    justify-content: space-around;
-    width: 2rem;
-    height: 2rem;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    z-index: 105;
-}
-
-.mobile-menu-btn span {
-    width: 2rem;
-    height: 0.25rem;
-    background: var(--navy);
-    border-radius: 10px;
-    transition: all 0.3s linear;
-    position: relative;
-    transform-origin: 1px;
-}
-
-.header-dark .mobile-menu-btn span {
-    background: var(--surface);
-}
-
-.mobile-menu-btn.open span:nth-child(1) {
-    transform: rotate(45deg);
-}
-
-.mobile-menu-btn.open span:nth-child(2) {
-    opacity: 0;
-    transform: translateX(20px);
-}
-
-.mobile-menu-btn.open span:nth-child(3) {
-    transform: rotate(-45deg);
-}
-
 /* Container */
 .container {
     width: 100%;
@@ -335,8 +202,12 @@ html.home-lock-scroll {
 .contractes-page .page-title,
 .empreses-page .page-title,
 .persones-page .page-title,
+.subvencions-page .page-title,
 .analisi-page .page-title,
-.casos-page .page-title {
+.casos-page .page-title,
+.contracte-detail-page > .page-title,
+.empresa-detail-page > .page-title,
+.analisi-detail-page > .page-title {
     line-height: 1;
     margin: 0 0 var(--page-title-space-bottom, 3.75rem);
     text-align: center;
@@ -345,8 +216,12 @@ html.home-lock-scroll {
 .contractes-page,
 .empreses-page,
 .persones-page,
+.subvencions-page,
 .analisi-page,
-.casos-page {
+.casos-page,
+.contracte-detail-page,
+.empresa-detail-page,
+.analisi-detail-page {
     --page-title-space-top: 3rem;
     --page-title-space-bottom: 3.75rem;
     padding-top: var(--page-title-space-top);
@@ -358,7 +233,7 @@ html.home-lock-scroll {
 
 .site-chrome-brand:focus-visible,
 .home-chrome-brand:focus-visible,
-.contracte-detail-company-title:focus-visible {
+.contracte-detail-company-link:focus-visible {
     outline: 2px solid var(--navy);
     outline-offset: 4px;
 }
@@ -734,8 +609,12 @@ html.home-lock-scroll {
     grid-template-columns: 1fr;
 }
 
+.subvencio-filter-primary {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
 .search-filter-panel-analysis {
-    grid-template-columns: minmax(15rem, 1fr) minmax(18rem, 1.2fr);
+    grid-template-columns: minmax(0, 1fr);
 }
 
 .search-filter-panel-secondary {
@@ -852,61 +731,73 @@ html.home-lock-scroll {
 /* PaginaciÃ³n */
 .pagination {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    gap: 0.75rem;
-    margin-top: 3rem;
-    margin-bottom: 3rem;
-    padding: 2rem 0;
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
+    gap: 1.5rem;
+    margin-top: 0;
+    margin-bottom: 2.5rem;
+    padding: 1.25rem 0 0;
+}
+
+.pagination-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
 }
 
 .pagination-btn {
-    padding: 0.6rem 1rem;
-    border: 1px solid var(--border);
-    background: var(--surface);
+    appearance: none;
+    min-width: 0;
+    min-height: 0;
+    padding: 0 0.25rem;
+    border: 0;
+    background: transparent;
     color: var(--navy);
     font-family: var(--font-mono);
-    font-size: var(--text-xs);
-    text-transform: uppercase;
+    font-size: var(--text-sm);
     letter-spacing: 0.05em;
+    text-transform: uppercase;
     cursor: pointer;
-    border-radius: var(--radius-pill);
-    transition: all 0.2s;
+    border-radius: 0;
+    transition: color 0.2s, opacity 0.2s;
     font-weight: 600;
+    line-height: 1.35;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-width: 40px;
+    gap: 0.45rem;
 }
 
 .pagination-btn:hover:not(:disabled) {
-    background: var(--bg);
-    border-color: var(--navy-light);
-    color: var(--navy);
+    background: transparent;
+    color: var(--text-light);
 }
 
 .pagination-btn:disabled {
-    opacity: 0.3;
+    opacity: 0.22;
     cursor: not-allowed;
     background: transparent;
 }
 
-.pagination-btn.active {
-    background: var(--navy);
-    color: var(--surface);
-    border-color: var(--navy);
+.pagination-icon {
+    display: block;
+    flex: 0 0 auto;
 }
 
 .pagination-info {
+    display: inline-flex;
+    align-items: baseline;
+    justify-content: flex-start;
+    gap: 0.45rem;
     font-family: var(--font-mono);
-    font-size: var(--text-xs);
+    font-size: var(--text-sm);
     color: var(--text-light);
-    padding: 0 0.5rem;
+    padding: 0;
     text-transform: uppercase;
     letter-spacing: 0.05em;
     font-weight: 600;
+    line-height: 1.35;
+    white-space: nowrap;
 }
 
 .pagination-info strong {
@@ -918,6 +809,14 @@ html.home-lock-scroll {
     flex-direction: column;
     gap: 0.5rem;
     width: 100%;
+}
+
+.filter-group-standard {
+    flex: 1 1 200px;
+}
+
+.filter-group-wide {
+    flex: 1 1 240px;
 }
 
 .filter-label {
@@ -943,6 +842,10 @@ html.home-lock-scroll {
     color: var(--navy);
     cursor: pointer;
     transition: all 0.2s;
+}
+
+.filter-select-standard {
+    height: 48px;
 }
 
 .filter-select:hover {
@@ -1006,6 +909,21 @@ html.home-lock-scroll {
 
 .contract-card:hover::before {
     background: var(--navy);
+}
+
+.subvencio-card {
+    display: block;
+    width: 100%;
+    color: inherit;
+    text-decoration: none;
+    font: inherit;
+    text-align: left;
+    appearance: none;
+}
+
+.subvencio-card:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.14);
 }
 
 .contract-header {
@@ -1086,6 +1004,7 @@ html.home-lock-scroll {
 .contract-pill-button {
     background: var(--bg);
     cursor: pointer;
+    text-decoration: none;
 }
 
 .contract-detail-company {
@@ -1104,13 +1023,22 @@ html.home-lock-scroll {
 }
 
 /* Metodologia - bloc de text estÃ tic (contractes, empreses, persones) */
-.contracte-detail-hero {
+.contracte-detail-hero,
+.contracte-detail-info-card {
     background: var(--navy);
     border: none;
     border-radius: var(--radius-lg);
     padding: 2.5rem;
-    margin-bottom: 2rem;
     box-shadow: 0 8px 32px rgba(15, 23, 42, 0.12);
+}
+
+.contracte-detail-hero {
+    margin-bottom: 1.25rem;
+}
+
+.contracte-detail-info-card {
+    background: var(--surface);
+    margin-bottom: 0;
 }
 
 .contracte-detail-amount {
@@ -1125,6 +1053,7 @@ html.home-lock-scroll {
 
 .contracte-detail-title-row {
     align-items: center;
+    margin-bottom: 0;
 }
 
 .contracte-detail-title {
@@ -1150,10 +1079,135 @@ html.home-lock-scroll {
     border-top: 1px solid rgba(248, 250, 252, 0.14);
 }
 
-.contracte-detail-share {
+.contracte-detail-info-meta {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 1.5rem 2rem;
+    padding-top: 0;
+    border-top: 0;
+}
+
+.contracte-detail-info-meta-without-cpv {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.contracte-detail-info-card .contracte-preserved-notice {
+    margin: 0 0 1.75rem;
+    padding: 0 0 1.75rem;
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
+}
+
+.contracte-detail-hero-company {
     margin-top: 1.25rem;
-    padding-top: 1.75rem;
-    border-top: 1px solid rgba(248, 250, 252, 0.14);
+}
+
+.contracte-detail-share {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0;
+    margin: 0 0 0 auto;
+    padding: 0;
+    border-top: 0;
+}
+
+.contracte-detail-share-standalone {
+    justify-content: flex-end;
+}
+
+.contracte-detail-share-standalone .contracte-detail-share-btn {
+    border-color: var(--navy);
+    color: var(--navy);
+}
+
+.contracte-detail-share-standalone .contracte-detail-share-btn:hover {
+    border-color: var(--navy);
+    background: var(--navy);
+    color: var(--surface);
+}
+
+.contracte-detail-share-standalone.is-open > .contracte-detail-share-btn {
+    border-color: var(--navy);
+    background: var(--navy);
+    color: var(--surface);
+}
+
+.contracte-detail-actions-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 1.25rem;
+}
+
+.contracte-detail-page {
+    min-height: calc(100svh - 10.25rem);
+}
+
+.contracte-detail-actions-row .contracte-detail-back,
+.contracte-detail-actions-row .contracte-detail-share > .contracte-detail-share-btn {
+    width: auto;
+    min-height: 42px;
+    height: 42px;
+}
+
+.contracte-detail-actions-row .contracte-detail-back {
+    position: static;
+    margin: 0 !important;
+    border-radius: var(--radius-pill);
+}
+
+.contracte-detail-back-icon {
+    display: block;
+    width: 1rem;
+    height: 1rem;
+    flex: 0 0 auto;
+}
+
+.contracte-detail-share-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    max-width: 0;
+    opacity: 0;
+    overflow: hidden;
+    pointer-events: none;
+    transform: translateX(0.5rem);
+    visibility: hidden;
+    transition:
+        max-width 0.32s ease,
+        opacity 0.2s ease,
+        transform 0.32s ease,
+        visibility 0s linear 0.32s;
+}
+
+.contracte-detail-share.is-open {
+    gap: 0.75rem;
+}
+
+.contracte-detail-share.is-open > .contracte-detail-share-btn {
+    border-color: var(--navy);
+    background: var(--navy);
+    color: var(--surface);
+}
+
+.contracte-detail-share.is-open .contracte-detail-share-actions {
+    max-width: 28rem;
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(0);
+    visibility: visible;
+    transition-delay: 0s;
+}
+
+.contracte-detail-share-actions .contracte-detail-share-btn {
+    font-weight: 400;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .contracte-detail-share-actions {
+        transition: none;
+    }
 }
 
 .contracte-detail-share-btn {
@@ -1166,15 +1220,6 @@ html.home-lock-scroll {
     color: var(--navy);
 }
 
-.contracte-detail-company-card {
-    background: var(--surface);
-    border: none;
-    border-radius: var(--radius-lg);
-    padding: 2.5rem;
-    margin-bottom: 2rem;
-    box-shadow: 0 8px 32px rgba(15, 23, 42, 0.06);
-}
-
 .contracte-detail-company-row {
     align-items: center;
     margin-bottom: 0;
@@ -1182,14 +1227,19 @@ html.home-lock-scroll {
 
 .contracte-detail-company-title {
     margin: 0;
-    font-size: 1.5rem;
+    font-size: 1.125rem;
     font-family: var(--font-body);
-    font-weight: 500;
-    line-height: 1.5;
-    color: var(--navy);
+    font-weight: 400;
+    line-height: 1.4;
+    color: var(--surface);
     min-width: 0;
     flex: 1;
+}
+
+.contracte-detail-company-link {
+    color: inherit;
     cursor: pointer;
+    text-decoration: none;
 }
 
 .contracte-detail-company-pills {
@@ -1202,7 +1252,7 @@ html.home-lock-scroll {
     border: none;
     border-radius: var(--radius-lg);
     padding: 2.5rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1.25rem;
     box-shadow: 0 8px 32px rgba(15, 23, 42, 0.12);
 }
 
@@ -1364,8 +1414,165 @@ html.home-lock-scroll {
     background: var(--red);
 }
 
+.analisi-case-fraccionament .analisi-case-amount,
+.analisi-case-concentracio .analisi-case-amount,
+.analisi-case-electoralisme .analisi-case-amount,
+.analisi-case-dependencia .analisi-case-amount {
+    margin-bottom: 1.25rem;
+    font-size: var(--display-xl);
+    line-height: 1;
+}
+
+.analisi-fraccionament-title-row {
+    margin-bottom: 0;
+}
+
+.analisi-detail-contract-count {
+    margin-top: 1.25rem;
+    color: var(--surface);
+    font-family: var(--font-body);
+    font-size: 1.125rem;
+    font-weight: 400;
+    line-height: 1.4;
+    text-transform: uppercase;
+}
+
+.analisi-detail-hero-pills {
+    justify-content: flex-start;
+    margin-top: 1rem;
+    margin-left: 0;
+}
+
+.analisi-detail-info-card,
+.analisi-detail-section-card {
+    padding: 2.5rem;
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 8px 32px rgba(15, 23, 42, 0.12);
+}
+
+.analisi-detail-info-card,
+.analisi-detail-section-card {
+    margin-bottom: 1.25rem;
+}
+
+.analisi-detail-info-meta {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1.5rem 2rem;
+    padding-top: 0;
+    border-top: 0;
+}
+
+.analisi-detail-info-meta-concentracio.is-historic {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.analisi-detail-info-meta-dependencia {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.analisi-detail-info-extra {
+    grid-column: 1 / -1;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+}
+
+.analisi-detail-info-extra .analisi-case-quota {
+    display: block;
+    margin: 0.75rem 0 1rem;
+}
+
+.analisi-detail-info-extra .analisi-case-quota-bar {
+    display: block;
+    background: var(--border);
+}
+
+.analisi-detail-info-extra .analisi-case-quota-fill {
+    display: block;
+}
+
+.analisi-detail-section-title {
+    margin: 0 0 1.5rem;
+    color: var(--text-light);
+    font-family: var(--font-mono);
+    font-size: var(--text-2xs);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    line-height: 1.35;
+    text-transform: uppercase;
+}
+
+.analisi-detail-section-label {
+    margin-bottom: 0.75rem;
+}
+
+.analisi-detail-section-card .analisi-case-row {
+    color: var(--navy);
+}
+
+.analisi-detail-section-card .analisi-case-progress {
+    background: var(--border);
+}
+
+.analisi-detail-section-card .analisi-case-progress-limit {
+    background: var(--navy);
+}
+
+.analisi-detail-section-card .analisi-case-quota-bar {
+    background: var(--border);
+}
+
+.analisi-detail-section-value,
+.analisi-detail-company-link {
+    color: var(--navy);
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    line-height: 1.45;
+}
+
+.analisi-detail-company-link {
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.analisi-detail-company-link:hover {
+    text-decoration: underline;
+    text-underline-offset: 0.18em;
+}
+
+.analisi-detail-company-link:focus-visible {
+    outline: 2px solid var(--navy);
+    outline-offset: 4px;
+}
+
+.analisi-detail-text-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.analisi-detail-text-list li {
+    padding: 0.8rem 0;
+    border-top: 1px solid var(--border);
+    color: var(--navy);
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    line-height: 1.45;
+}
+
+.analisi-detail-text-list li:first-child {
+    padding-top: 0;
+    border-top: 0;
+}
+
+.analisi-detail-text-list li:last-child {
+    padding-bottom: 0;
+}
+
 .empresa-detail-title-row {
     align-items: center;
+    margin-bottom: 0;
 }
 
 .empresa-detail-title {
@@ -1381,11 +1588,46 @@ html.home-lock-scroll {
 
 .empresa-detail-amount {
     font-family: var(--font-display);
-    font-size: var(--display-md);
+    font-size: var(--display-xl);
     font-weight: 400;
     color: var(--surface);
     letter-spacing: var(--tracking-amount);
-    flex-shrink: 0;
+    line-height: 1;
+    margin-bottom: 1.25rem;
+}
+
+.empresa-detail-contract-count {
+    margin-top: 1.25rem;
+    color: var(--surface);
+    font-family: var(--font-body);
+    font-size: 1.125rem;
+    font-weight: 400;
+    line-height: 1.4;
+    text-transform: uppercase;
+}
+
+.empresa-detail-info-card,
+.empresa-detail-cargos {
+    padding: 2.5rem;
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 8px 32px rgba(15, 23, 42, 0.12);
+}
+
+.empresa-detail-info-card {
+    margin-bottom: 1.25rem;
+}
+
+.empresa-detail-info-meta {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.5rem 2rem;
+    padding-top: 0;
+    border-top: 0;
+}
+
+.entitat-detail-info-meta {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
 .empresa-detail-title-pills {
@@ -1405,14 +1647,27 @@ html.home-lock-scroll {
 }
 
 .empresa-detail-cargos {
-    margin-top: 1.25rem;
-    padding-top: 1.75rem;
-    border-top: 1px solid rgba(248, 250, 252, 0.14);
+    margin: 0;
 }
 
-.empresa-detail-cargos-label {
-    margin-bottom: 0.75rem;
-    color: rgba(248, 250, 252, 0.62);
+.empresa-detail-contract-search {
+    margin-bottom: 2rem;
+}
+
+.empresa-detail-cargos+.empresa-detail-contract-search {
+    margin-top: 2rem;
+}
+
+.empresa-detail-cargos-title,
+.empresa-activity-title {
+    margin: 0 0 1.5rem;
+    color: var(--text-light);
+    font-family: var(--font-mono);
+    font-size: var(--text-2xs);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    line-height: 1.35;
+    text-transform: uppercase;
 }
 
 .empresa-detail-cargos-list {
@@ -1421,7 +1676,7 @@ html.home-lock-scroll {
     margin: 0;
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 0;
 }
 
 .empresa-detail-cargo-item {
@@ -1430,8 +1685,19 @@ html.home-lock-scroll {
     align-items: baseline;
     gap: 1rem;
     font-family: var(--font-body);
-    font-size: 0.95rem;
-    color: var(--surface);
+    padding: 0.8rem 0;
+    border-top: 1px solid var(--border);
+    font-size: var(--text-base);
+    color: var(--navy);
+}
+
+.empresa-detail-cargo-item:first-child {
+    padding-top: 0;
+    border-top: 0;
+}
+
+.empresa-detail-cargo-item:last-child {
+    padding-bottom: 0;
 }
 
 .empresa-detail-cargo-name {
@@ -1442,16 +1708,18 @@ html.home-lock-scroll {
     display: inline-flex;
     gap: 0.75rem;
     font-size: 0.85rem;
-    color: rgba(248, 250, 252, 0.62);
+    color: var(--text-light);
     text-align: right;
     font-variant-numeric: tabular-nums;
 }
 
 .empresa-detail-cargos-more {
     display: block;
+    padding-top: 0.8rem;
+    border-top: 1px solid var(--border);
     font-family: var(--font-body);
     font-size: 0.95rem;
-    color: var(--surface);
+    color: var(--navy);
 }
 
 .empresa-detail-cargos-more-panel {
@@ -1476,7 +1744,7 @@ html.home-lock-scroll {
     background: transparent;
     padding: 0;
     margin: 0;
-    color: var(--surface);
+    color: var(--navy);
     font: inherit;
     font-weight: 400;
     cursor: pointer;
@@ -1489,32 +1757,34 @@ html.home-lock-scroll {
     margin-top: 0.5rem;
 }
 
-.empresa-detail-cargos-empty {
-    font-family: var(--font-body);
-    font-size: 0.95rem;
-    color: var(--surface);
-    font-weight: 400;
+.empresa-detail-actions-row {
+    display: flex;
+    align-items: center;
+    margin: 1.25rem 0 0;
+}
+
+.empresa-detail-back {
+    width: max-content;
+    min-height: 42px;
+    height: 42px;
+    background: var(--bg);
 }
 
 .empresa-activity-visual {
-    margin-bottom: 2rem;
-    padding: 2.25rem 0;
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
+    margin: 1.25rem 0 2rem;
+    padding: 2.5rem;
+    border: 0;
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+    box-shadow: 0 8px 32px rgba(15, 23, 42, 0.12);
 }
 
 .empresa-activity-header {
-    margin-bottom: 1.75rem;
+    margin-bottom: 1.5rem;
 }
 
 .empresa-activity-header h3 {
     margin: 0;
-    color: var(--navy);
-    font-family: var(--font-display);
-    font-size: clamp(1.9rem, 3.4vw, 3rem);
-    font-weight: 400;
-    letter-spacing: var(--tracking-title);
-    line-height: 1;
 }
 
 .empresa-activity-bars {
@@ -1534,14 +1804,9 @@ html.home-lock-scroll {
     border: 0;
     background: transparent;
     color: inherit;
-    cursor: pointer;
+    cursor: default;
     font: inherit;
     text-align: left;
-}
-
-.empresa-activity-column:focus-visible {
-    outline: 2px solid rgba(15, 23, 42, 0.18);
-    outline-offset: 0.35rem;
 }
 
 .empresa-activity-bar-wrap {
@@ -1560,11 +1825,6 @@ html.home-lock-scroll {
     background: var(--navy);
 }
 
-.empresa-activity-column:hover .empresa-activity-bar-wrap span,
-.empresa-activity-column.is-active .empresa-activity-bar-wrap span {
-    background: var(--navy-light);
-}
-
 .empresa-activity-meta span {
     display: block;
     color: var(--navy);
@@ -1579,10 +1839,10 @@ html.home-lock-scroll {
     display: block;
     margin-top: 0.35rem;
     color: var(--navy);
-    font-family: var(--font-display);
-    font-size: var(--text-lg);
-    font-weight: 400;
-    line-height: 1.05;
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    font-weight: 500;
+    line-height: 1.6;
 }
 
 .metodologia-wrapper {
@@ -1845,6 +2105,14 @@ body.home-scroll-surface::-webkit-scrollbar {
     translate: -50% -50%;
     opacity: 0;
     animation: homeLoadingTitle 0.9s ease-out 0.28s forwards;
+}
+
+.contracte-detail-hero .contract-pill {
+    border-color: rgba(248, 250, 252, 0.3);
+    background: rgba(248, 250, 252, 0.08);
+    padding-top: 0.8rem;
+    border-top: 1px solid var(--border);
+    color: var(--surface);
 }
 
 .home-loading-progress {
@@ -2123,7 +2391,7 @@ body.home-scroll-surface::-webkit-scrollbar {
 }
 
 .metric-alertes {
-    --node-x: 52.25%;
+    --node-x: 50%;
     --node-y: 80%;
     --metric-dot-x: 2.8rem;
     --float-delay: -5.8s;
@@ -4863,7 +5131,8 @@ body.home-scroll-surface::-webkit-scrollbar {
 }
 
 .analisi-tabs {
-    width: 37.5vw;
+    width: min(52vw, 760px);
+    min-width: 640px;
     margin: 0 auto;
     padding: 0.35rem;
     display: flex;
@@ -4920,7 +5189,8 @@ body.home-scroll-surface::-webkit-scrollbar {
     }
 
     .analisi-tabs {
-        width: 57vw;
+        width: min(76vw, 700px);
+        min-width: 0;
     }
 
     .analisi-tab {
@@ -4962,7 +5232,7 @@ body.home-scroll-surface::-webkit-scrollbar {
 }
 
 .contracts-table-row:last-of-type {
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1px solid rgba(248, 250, 252, 0.22);
 }
 
 .contracts-table-row .contract-amount {
@@ -5031,6 +5301,67 @@ body.home-scroll-surface::-webkit-scrollbar {
     color: var(--text-light);
 }
 
+.analisi-mobile-selector {
+    display: none;
+}
+
+.narrative-info-page > .page-title {
+    width: 50vw;
+    margin-bottom: var(--pad-card-lg);
+    text-align: center;
+}
+
+.narrative-story {
+    width: 75%;
+    max-width: none;
+}
+
+.narrative-story .prose-intro,
+.narrative-story .prose-paragraph {
+    margin-bottom: 1.5rem;
+    color: var(--navy);
+    font-size: var(--text-lg);
+    font-weight: 400;
+    line-height: var(--leading-body);
+}
+
+.narrative-story .prose-heading {
+    margin-top: 3.5rem;
+    margin-bottom: 1.25rem;
+    color: var(--navy);
+    font-family: var(--font-display);
+    font-size: var(--display-md);
+    font-weight: 400;
+    line-height: var(--leading-display);
+    letter-spacing: var(--tracking-amount);
+}
+
+@media (max-width: 768px) {
+    .narrative-info-page {
+        padding-top: 1.5rem;
+    }
+
+    .narrative-info-page > .page-title {
+        width: auto;
+        margin-bottom: 2rem;
+        font-size: var(--display-lg);
+        text-align: center !important;
+    }
+
+    .narrative-story {
+        width: auto;
+    }
+
+    .narrative-story .prose-intro,
+    .narrative-story .prose-paragraph {
+        font-size: 1.0625rem;
+    }
+
+    .narrative-story .prose-heading {
+        margin-top: 2.75rem;
+    }
+}
+
 
 /* â”€â”€â”€ Footer extra line â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .footer-line {
@@ -5057,138 +5388,10 @@ body.home-scroll-surface::-webkit-scrollbar {
     margin-top: 2rem;
 }
 
-.sector-tissue-visual {
-    margin-bottom: 0;
-    padding: 2.5rem 0;
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-}
-
-.sector-tissue-header {
-    margin-bottom: 2rem;
-}
-
-.sector-tissue-header h3 {
-    margin: 0;
-    color: var(--navy);
-    font-family: var(--font-display);
-    font-size: clamp(2rem, 4vw, 3.5rem);
-    font-weight: 400;
-    letter-spacing: var(--tracking-title);
-    line-height: 0.98;
-}
-
-.sector-tissue-bars {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-}
-
-.sector-tissue-row {
-    display: grid;
-    grid-template-columns: minmax(14rem, 1.2fr) minmax(10rem, 1fr) minmax(7rem, auto);
-    gap: 1.5rem;
-    align-items: center;
-    width: 100%;
-    padding: 1.1rem 0;
-    border: 0;
-    border-top: 1px solid var(--border);
-    background: transparent;
-    color: inherit;
-    cursor: pointer;
-    font: inherit;
-    text-align: left;
-}
-
-.sector-tissue-row:first-child {
-    border-top: 0;
-}
-
-.sector-tissue-row:last-child {
-    padding-bottom: 0;
-}
-
-.sector-tissue-row:focus-visible {
-    outline: 2px solid rgba(15, 23, 42, 0.18);
-    outline-offset: 0.35rem;
-}
-
-.sector-tissue-copy {
-    min-width: 0;
-}
-
-.sector-tissue-copy span {
-    display: block;
-    color: var(--navy);
-    font-family: var(--font-body);
-    font-size: var(--text-md);
-    font-weight: 500;
-    line-height: 1.35;
-    text-transform: none;
-}
-
-.sector-tissue-track {
-    height: 0.55rem;
-    overflow: hidden;
-    border-radius: var(--radius-pill);
-    background: #e5e7eb;
-}
-
-.sector-tissue-track span {
-    display: block;
-    height: 100%;
-    border-radius: inherit;
-    background: var(--navy);
-}
-
-.sector-tissue-row:hover .sector-tissue-track span,
-.sector-tissue-row.is-active .sector-tissue-track span {
-    background: var(--navy-light);
-}
-
-.sector-tissue-value {
-    text-align: right;
-}
-
-.sector-tissue-value span {
-    display: block;
-    margin-bottom: 0.25rem;
-    color: var(--navy);
-    font-family: var(--font-mono);
-    font-size: var(--text-md);
-    font-weight: 600;
-    line-height: 1;
-}
-
-.sector-tissue-value small {
-    display: block;
-    color: var(--text-muted);
-    font-family: var(--font-mono);
-    font-size: var(--text-sm);
-    font-weight: 600;
-    line-height: 1.35;
-}
-
-.empreses-page .pagination {
-    margin-bottom: 0;
-    border-bottom: 0;
-}
-
-.empreses-page .card-link-wrapper+.sector-tissue-visual,
-.empreses-page .empty-state+.sector-tissue-visual {
-    margin-top: 3rem;
-}
-
-.empreses-page .sector-tissue-visual+.metodologia-wrapper {
-    margin-top: 3rem;
-}
-
 .persona-row-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    display: block;
     width: 100%;
-    padding: 1.5rem 2.25rem;
+    padding: 2.25rem;
     border: 0;
     background-color: transparent;
     color: inherit;
@@ -5207,40 +5410,26 @@ body.home-scroll-surface::-webkit-scrollbar {
     background-color: transparent;
 }
 
-.persona-row-header-left {
+.persona-row-main {
     display: flex;
-    align-items: center;
-    gap: 1.25rem;
+    width: 100%;
+    margin-bottom: 1.5rem;
 }
 
-
-.persona-row-header-right {
+.persona-row-meta {
     display: flex;
+    width: 100%;
+    justify-content: flex-end;
     align-items: center;
-    gap: 2rem;
+    gap: 1rem;
 }
 
-.persona-row-amount {
-    text-align: right;
+.persona-row-meta .contract-meta-item {
+    min-width: 0;
 }
 
-.persona-amount-caption {
-    max-width: 18rem;
-    margin-top: 0.35rem;
-    line-height: 1.35;
-}
-
-.persona-row-chevron {
-    color: var(--text-light);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 24px;
-    transition: transform 0.2s;
-}
-
-.persona-row-chevron.is-expanded {
-    transform: rotate(180deg);
+.persona-primary-company {
+    overflow-wrap: anywhere;
 }
 
 .persona-row-body-wrapper {
@@ -5304,6 +5493,10 @@ body.home-scroll-surface::-webkit-scrollbar {
     gap: 0.75rem;
 }
 
+.persones-compact-list+.pagination {
+    padding-top: 2.5rem;
+}
+
 .persona-card {
     padding: 0;
     overflow: hidden;
@@ -5347,6 +5540,12 @@ body.home-scroll-surface::-webkit-scrollbar {
     margin-right: 0;
     margin-left: 0;
     width: 100%;
+}
+
+.caso-principal-linkable:focus-visible,
+.caso-editorial-link:focus-visible {
+    outline: 2px solid var(--navy);
+    outline-offset: 4px;
 }
 
 .caso-principal-image-frame {
@@ -5619,11 +5818,13 @@ body.home-scroll-surface::-webkit-scrollbar {
 }
 
 .analisi-page-reordered>.page-title {
-    margin-bottom: var(--analisi-title-space-bottom, 3rem);
+    margin-bottom: 1rem;
 }
 
-.analisi-page-reordered>.sector-concentration-visual {
-    order: 90;
+.analisi-page-subtitle {
+    width: 50vw;
+    margin: 0 auto var(--analisi-title-space-bottom, 3rem);
+    text-align: center;
 }
 
 .analisi-page-reordered>.metodologia-wrapper {
@@ -5633,80 +5834,18 @@ body.home-scroll-surface::-webkit-scrollbar {
 
 .analisi-page-reordered>.pagination,
 .analisi-page-reordered>*>.pagination {
-    margin-top: 3rem;
+    margin-top: 0;
     margin-bottom: 0;
+    padding-top: 2.5rem;
 }
 
 .analisi-page-reordered .analisi-alert-list .card-link-wrapper:last-child .contract-card {
     margin-bottom: 0;
 }
 
-.analisi-page-reordered.concentracio-mode-temporal>.sector-concentration-visual {
-    margin-top: 0;
-    border-top: 0;
-}
-
 .analisi-page-reordered .metodologia-title {
     padding-top: 0;
     border-top: 0;
-}
-
-.analisi-risk-filters {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 0.5rem;
-    min-height: 48px;
-    align-items: stretch;
-    width: 100%;
-}
-
-.analisi-filter-btn {
-    flex: 1 1 0;
-    min-width: 5.25rem;
-    border: 1px solid var(--border);
-    background: var(--surface);
-    color: var(--text-light);
-    border-radius: var(--radius-pill);
-    padding: 0.5rem 0.85rem;
-    font-family: var(--font-mono);
-    font-size: var(--text-xs);
-    font-weight: 600;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: background 0.2s, color 0.2s;
-}
-
-.analisi-filter-btn.active,
-.analisi-filter-btn:hover {
-    color: var(--surface);
-    background: var(--navy);
-    border-color: var(--navy);
-}
-
-.analisi-risk-filter-group .analisi-risk-filters {
-    max-width: 100%;
-}
-
-.analisi-filter-btn.risk-alto.active,
-.analisi-filter-btn.risk-alto:hover {
-    color: #991b1b;
-    background: #fee2e2;
-    border-color: #fecaca;
-}
-
-.analisi-filter-btn.risk-mitja.active,
-.analisi-filter-btn.risk-mitja:hover {
-    color: #92400e;
-    background: #fef3c7;
-    border-color: #fde68a;
-}
-
-.analisi-filter-btn.risk-baix.active,
-.analisi-filter-btn.risk-baix:hover {
-    color: #166534;
-    background: #dcfce7;
-    border-color: #bbf7d0;
 }
 
 .analisi-alert-list {
@@ -5808,315 +5947,49 @@ body.home-scroll-surface::-webkit-scrollbar {
     box-shadow: 0 8px 18px -14px rgba(15, 23, 42, 0.55);
 }
 
-.sector-concentration-visual {
-    margin-top: 3.25rem;
-    padding: 2.5rem 0;
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-}
-
-.sector-concentration-header {
-    margin-bottom: 2rem;
-}
-
-.chart-kicker {
-    margin-bottom: 0.75rem;
-    color: var(--text-muted);
-    font-family: var(--font-mono);
-    font-size: var(--text-xs);
-    font-weight: 600;
-    text-transform: uppercase;
-}
-
-.sector-concentration-header h3 {
-    margin: 0;
-    color: var(--navy);
-    font-family: var(--font-display);
-    font-size: clamp(2rem, 4vw, 3.5rem);
-    font-weight: 400;
-    letter-spacing: var(--tracking-title);
-    line-height: 0.98;
-}
-
-.sector-concentration-copy small,
-.sector-concentration-value small {
-    display: block;
-    color: var(--text-muted);
-    font-size: var(--text-xs);
-    line-height: 1.35;
-}
-
-.sector-concentration-bars {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-}
-
-.sector-concentration-row {
-    display: grid;
-    grid-template-columns: minmax(14rem, 1.2fr) minmax(10rem, 1fr) minmax(7rem, auto);
-    gap: 1.5rem;
-    align-items: center;
-    padding: 1.1rem 0;
-    border-top: 1px solid var(--border);
-    color: inherit;
-    text-decoration: none;
-}
-
-.sector-concentration-row:first-child {
-    border-top: 0;
-}
-
-.sector-concentration-copy {
-    min-width: 0;
-}
-
-.sector-concentration-copy span {
-    display: block;
-    margin-bottom: 0.35rem;
-    color: var(--navy);
-    font-family: var(--font-mono);
-    font-size: var(--text-sm);
-    font-weight: 600;
-    line-height: 1.35;
-    text-transform: uppercase;
-}
-
-.sector-concentration-copy small {
-    font-family: var(--font-body);
-    font-size: var(--text-md);
-    font-weight: 500;
-    text-transform: none;
-}
-
-.sector-concentration-track {
-    height: 0.55rem;
-    overflow: hidden;
-    border-radius: var(--radius-pill);
-    background: #e5e7eb;
-}
-
-.sector-concentration-track span {
-    display: block;
-    height: 100%;
-    border-radius: inherit;
-    background: var(--navy);
-}
-
-.sector-concentration-value {
-    text-align: right;
-}
-
-.sector-concentration-value span {
-    display: block;
-    margin-bottom: 0.25rem;
-    color: var(--navy);
-    font-family: var(--font-mono);
-    font-size: var(--text-md);
-    font-weight: 600;
-    line-height: 1;
-}
-
-.sector-concentration-value small {
-    font-family: var(--font-display);
-    font-size: var(--text-md);
-    font-weight: 400;
-    text-transform: none;
-}
-
-.contract-evolution-visual {
+.contractes-page .pagination+.metodologia-wrapper,
+.empreses-page .pagination+.metodologia-wrapper {
     margin-top: 0;
-    padding: 3rem 0;
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
 }
-
-.contract-evolution-header {
-    margin-bottom: 2.25rem;
-}
-
-.contract-evolution-header h3 {
-    margin: 0;
-    color: var(--navy);
-    font-family: var(--font-display);
-    font-size: clamp(2rem, 4vw, 3.5rem);
-    font-weight: 400;
-    letter-spacing: var(--tracking-title);
-    line-height: 0.98;
-}
-
-.contract-evolution-bars {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(4.25rem, 1fr));
-    gap: 1.2rem;
-    align-items: end;
-    min-height: 23rem;
-}
-
-.contract-evolution-column {
-    display: grid;
-    grid-template-rows: minmax(12rem, 1fr) auto;
-    gap: 1rem;
-    min-width: 0;
-    border: 0;
-    background: transparent;
-    color: inherit;
-    cursor: pointer;
-    font: inherit;
-    padding: 0;
-    text-align: left;
-}
-
-.contract-evolution-column:focus-visible {
-    outline: 2px solid rgba(15, 23, 42, 0.18);
-    outline-offset: 0.35rem;
-}
-
-.contract-evolution-column:hover .contract-evolution-bar-wrap span,
-.contract-evolution-column.is-active .contract-evolution-bar-wrap span {
-    background: var(--navy-light);
-}
-
-.contract-evolution-bar-wrap {
-    display: flex;
-    align-items: end;
-    height: 100%;
-    min-height: 12rem;
-    border-bottom: 1px solid var(--border);
-}
-
-.contract-evolution-bar-wrap span {
-    display: block;
-    width: 100%;
-    min-height: 0.5rem;
-    border-radius: 6px 6px 0 0;
-    background: var(--navy);
-}
-
-.contract-evolution-meta span {
-    display: block;
-    font-family: var(--font-mono);
-    font-size: var(--text-xs);
-    font-weight: 600;
-    line-height: 1.35;
-    text-transform: uppercase;
-}
-
-.contract-evolution-meta span {
-    color: var(--navy);
-}
-
-.contract-evolution-meta small {
-    display: block;
-    margin: 0.35rem 0 0.15rem;
-    color: var(--navy);
-    font-family: var(--font-display);
-    font-size: var(--text-lg);
-    font-weight: 400;
-    line-height: 1.05;
-}
-
-.contractes-page .pagination {
-    margin-bottom: 0;
-    border-bottom: 0;
-}
-
-.contractes-page .card-link-wrapper+.contract-evolution-visual {
-    margin-top: 3rem;
-}
-
-.contractes-page .contract-evolution-visual+.metodologia-wrapper {
-    margin-top: 3rem;
-}
-
-.concentracio-card {
-    padding: 2.25rem;
-}
-
-.analysis-card-title {
-    color: var(--navy);
-    font-size: var(--text-lg);
-    font-weight: 500;
-    line-height: 1.35;
-    padding-bottom: 1.75rem;
-    border-bottom: 1px solid var(--border);
-}
-
-.analysis-card-main {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 2rem;
-    padding: 1.75rem 0;
-    border-bottom: 1px solid var(--border);
-}
-
-.concentracio-card-company {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
+.analysis-list-primary {
     min-width: 0;
 }
 
-.concentracio-card-company .contract-meta-value {
-    font-size: var(--text-md);
-}
-
-.concentracio-card .contract-amount {
-    font-size: var(--display-md);
-}
-
-.concentracio-card-meta {
-    padding-top: 1.75rem;
-    border-top: 0;
-}
-
-.concentracio-card-meta .contract-pills {
-    margin-left: auto;
-}
-
-.electoralisme-card {
-    padding: 2.25rem;
-}
-
-.fraccionament-card-object {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    min-width: 0;
-}
-
-.fraccionament-card-object .contract-meta-value {
+.analysis-list-primary .contract-meta-value {
     font-size: var(--text-md);
     line-height: 1.45;
 }
 
+.analysis-list-meta .risk-badge,
+.analysis-list-meta .contract-pill {
+    white-space: nowrap;
+}
+
 @media (min-width: 769px) {
-    .fraccionament-alert-meta {
+    .analysis-list-meta {
         flex-wrap: nowrap;
         align-items: center;
     }
 
-    .fraccionament-alert-meta .fraccionament-card-object {
-        flex: 1 1 0;
+    .analysis-list-meta .analysis-list-primary {
+        flex: 0 1 auto;
     }
 
-    .fraccionament-alert-meta .contract-pills {
+    .analysis-list-meta .analysis-list-secondary {
+        flex: 0 1 auto;
+    }
+
+    .analysis-list-meta .contract-pills {
         flex: 0 0 auto;
     }
-}
 
-.electoralisme-card .contract-amount {
-    font-size: var(--display-md);
-}
+    .electoralisme-card .analysis-list-secondary {
+        flex: 0 0 8.5rem;
+    }
 
-.fraccionament-card-meta {
-    padding-top: 1.75rem;
-    border-top: 0;
-}
-
-.fraccionament-card-meta .contract-pills {
-    margin-left: auto;
+    .electoralisme-card .analysis-list-meta .contract-pills {
+        padding-left: 1.5rem;
+    }
 }
 
 .caso-metric-value {
@@ -6251,75 +6124,13 @@ body.home-scroll-surface::-webkit-scrollbar {
 }
 
 @media (max-width: 768px) {
-    .header-content {
-        padding: 0 1.5rem;
-    }
-
-    .nav-wrapper {
-        padding: 0 1.5rem;
-    }
-.search-section {
+    .search-section {
         padding: 1.5rem;
-    }
-
-    .filters {
-        grid-template-columns: 1fr;
-    }
-
-    .filters-row {
-        grid-template-columns: 1fr;
     }
 
     .contract-meta {
         flex-direction: column;
         gap: 0.5rem;
-    }
-
-    .empreses-grid {
-        grid-template-columns: 1fr;
-    }
-
-    /* Ajustament per a la nova llista compacta de persones al mÃ²bil */
-    .persona-row-header {
-        flex-direction: column;
-        align-items: flex-start !important;
-        gap: 1rem;
-    }
-
-    .persona-row-header>div:last-child {
-        width: 100%;
-        justify-content: space-between;
-        border-top: 1px solid var(--border);
-        padding-top: 1rem;
-    }
-
-
-    .filters {
-        grid-template-columns: 1fr;
-    }
-
-
-    .contract-header {
-        flex-direction: column;
-        gap: 1rem;
-    }
-
-    .nav {
-        padding: 0.75rem 1rem;
-    }
-
-    .container {
-        padding: 2rem 1rem;
-    }
-
-    .modal-overlay {
-        padding: 0;
-        align-items: flex-end;
-    }
-
-    .modal-content {
-        max-height: 95vh;
-        border-radius: var(--radius-lg) var(--radius-lg) 0 0;
     }
 
     .modal-header {
@@ -6328,131 +6139,6 @@ body.home-scroll-surface::-webkit-scrollbar {
 
     .modal-amount {
         font-size: 2.25rem;
-    }
-
-    .modal-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .contracts-table-head,
-    .contracts-table-row,
-    .contracts-table-total {
-        grid-template-columns: 1fr;
-        gap: 0.5rem;
-    }
-
-    .contracts-table-head {
-        display: none;
-    }
-
-    .contracts-table-row .contract-amount {
-        text-align: left;
-    }
-
-    .contracts-table-head {
-        grid-template-columns: 90px 1fr 90px;
-    }
-
-    .contracts-table-head span:nth-child(2) {
-        display: none;
-    }
-
-    .contracts-table-row {
-        grid-template-columns: 90px 1fr 90px;
-    }
-
-
-    .contracts-table-total {
-        grid-template-columns: 90px 1fr 90px;
-    }
-
-    .contracts-table-total span:nth-child(2) {
-        display: none;
-    }
-
-    /* 1. Header & Nav Burger */
-    .header {
-        position: sticky !important;
-        top: 0;
-        z-index: 101;
-        /* Above the mobile menu */
-    }
-
-    .header-content {
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        padding: 1rem 1.5rem;
-    }
-
-    .header-tag {
-        display: none;
-        /* Hide monitor tag on mobile to save space */
-    }
-
-    .mobile-menu-btn {
-        display: flex;
-    }
-
-    .nav-wrapper {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        height: 100dvh;
-        background: rgba(255, 255, 255, 0.98);
-        backdrop-filter: blur(16px);
-        transform: translateY(-100%);
-        transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-        z-index: 100;
-        /* Just below header */
-        padding-top: 80px;
-        /* Offset for the sticky header */
-        border-bottom: none;
-        box-shadow: none;
-        display: flex;
-        flex-direction: column;
-    }
-
-    .nav-wrapper.nav-dark {
-        background: rgba(13, 31, 60, 0.98);
-    }
-
-    .nav-wrapper.open {
-        transform: translateY(0);
-        max-height: none;
-    }
-
-    .nav {
-        flex-direction: column;
-        padding: 2rem 1rem;
-        gap: 1.5rem;
-        align-items: center;
-    }
-
-    .nav-tab {
-        flex: none;
-        width: 100%;
-        text-align: center;
-        padding: 0.5rem;
-        font-size: 1.75rem;
-        font-family: var(--font-display);
-        background: transparent !important;
-        box-shadow: none !important;
-        color: var(--navy);
-        letter-spacing: var(--tracking-title);
-        transition: color 0.3s;
-    }
-
-    .nav-dark .nav-tab {
-        color: rgba(255, 255, 255, 0.7);
-    }
-
-    .nav-tab.active,
-    .nav-dark .nav-tab.active {
-        color: var(--accent) !important;
-        font-style: italic;
     }
 
     /* 2. Page titles and containers */
@@ -6474,7 +6160,13 @@ body.home-scroll-surface::-webkit-scrollbar {
     }
 
     /* 5. Modals */
+    .modal-overlay {
+        align-items: flex-end;
+        padding: 0.75rem;
+    }
+
     .modal-content {
+        max-height: 95vh;
         max-width: 95%;
         border-radius: var(--radius-lg);
     }
@@ -6536,225 +6228,12 @@ body.home-scroll-surface::-webkit-scrollbar {
         border-bottom-width: 2px;
     }
 
-
-    /* Target modal layout fixes */
-    .modal-overlay {
-        padding: 0.75rem;
-    }
-
     .modal-body {
         padding: 1.5rem;
     }
 
     .caso-bar-row {
         grid-template-columns: 1fr;
-    }
-
-    /* â”€â”€â”€ FASE 1 â€” Header, nav tabs scrollables, footer â”€â”€â”€ */
-
-    /* Header: mÃ©s alt, editorial */
-    .header {
-        position: sticky;
-        top: 0;
-        z-index: 102;
-        background: var(--navy);
-        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-        box-shadow: none;
-        padding: 1.75rem 0;
-    }
-
-    .header-content {
-        padding: 0 var(--mobile-pad-x);
-    }
-
-    .header-logo-svg {
-        height: 2rem;
-        background-color: var(--surface);
-    }
-
-    .header-tag {
-        display: none !important;
-    }
-
-    /* Eliminar hamburguesa â€” substituÃ¯da per tabs scrollables */
-    .mobile-menu-btn {
-        display: none !important;
-    }
-
-    /* Nav: drawer â†’ tabs horitzontals scrollables */
-    .nav-wrapper,
-    .nav-wrapper.nav-dark,
-    .nav-wrapper.open {
-        position: sticky;
-        top: 5.5rem;
-        left: auto;
-        right: auto;
-        bottom: auto;
-        height: auto;
-        max-height: none;
-        transform: none !important;
-        background: var(--surface);
-        backdrop-filter: none;
-        padding-top: 0;
-        border-bottom: 1px solid var(--border);
-        border-radius: 0 0 var(--radius-lg) var(--radius-lg);
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
-        display: block;
-        z-index: 101;
-    }
-
-    .nav-wrapper.nav-dark {
-        background: var(--navy);
-        border-bottom-color: rgba(255, 255, 255, 0.08);
-    }
-
-    .nav {
-        flex-direction: row;
-        overflow-x: auto;
-        overflow-y: hidden;
-        gap: 0;
-        padding: 0 var(--mobile-pad-x);
-        align-items: stretch;
-        justify-content: flex-start;
-        scroll-snap-type: x proximity;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: none;
-        max-width: 100%;
-    }
-
-    .nav::-webkit-scrollbar {
-        display: none;
-    }
-
-    .nav-tab {
-        flex: 0 0 auto;
-        width: auto;
-        text-align: center;
-        padding: 0.875rem 1rem;
-        font-size: var(--text-sm);
-        font-family: var(--font-mono);
-        font-style: normal;
-        font-weight: 500;
-        letter-spacing: 0.05em;
-        text-transform: uppercase;
-        color: var(--text-light);
-        background: transparent !important;
-        box-shadow: none !important;
-        white-space: nowrap;
-        scroll-snap-align: start;
-        border-bottom: 2px solid transparent;
-        border-radius: 0;
-        transition: color 0.2s, border-color 0.2s;
-        min-height: 44px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .nav-dark .nav-tab {
-        color: rgba(255, 255, 255, 0.65);
-    }
-
-    .nav-tab.active,
-    .nav-dark .nav-tab.active {
-        color: var(--navy) !important;
-        border-bottom-color: var(--navy);
-        font-style: normal;
-        background: transparent !important;
-    }
-
-    .nav-dark .nav-tab.active {
-        color: var(--surface) !important;
-        border-bottom-color: var(--surface);
-    }
-
-    /* Nav mobil: seccio actual + index desplegable */
-    .mobile-nav-current {
-        display: grid;
-        grid-template-columns: 1.5rem auto 1.5rem;
-        column-gap: 0.875rem;
-        width: 100%;
-        min-height: var(--nav-height-mobile);
-        align-items: center;
-        justify-content: center;
-        border: 0;
-        background: transparent;
-        color: var(--navy);
-        font-family: var(--font-mono);
-        font-size: var(--text-sm);
-        font-weight: 600;
-        letter-spacing: 0.06em;
-        text-transform: uppercase;
-        cursor: pointer;
-    }
-
-    .mobile-nav-current span {
-        grid-column: 2;
-    }
-
-    .nav-dark .mobile-nav-current {
-        color: var(--surface);
-    }
-
-    .mobile-nav-chevron {
-        grid-column: 3;
-        transition: transform 0.22s ease;
-    }
-
-    .nav-wrapper.open .mobile-nav-chevron {
-        transform: rotate(180deg);
-    }
-
-    .nav {
-        flex-direction: column;
-        align-items: stretch;
-        justify-content: flex-start;
-        overflow: hidden;
-        max-height: 0;
-        opacity: 0;
-        padding: 0 var(--mobile-pad-x);
-        transition: max-height 0.28s ease, opacity 0.2s ease, padding-bottom 0.28s ease;
-    }
-
-    .nav-wrapper.open .nav {
-        max-height: 320px;
-        opacity: 1;
-        padding-bottom: 0.75rem;
-    }
-
-    .nav-tab {
-        justify-content: center;
-        width: 100%;
-        min-height: 44px;
-        padding: 0.75rem 1rem;
-        border-bottom: 1px solid var(--border);
-    }
-
-    .nav-dark .nav-tab {
-        border-bottom-color: rgba(255, 255, 255, 0.1);
-    }
-
-    .nav-tab:last-child {
-        border-bottom: 0;
-    }
-
-    .nav-tab-home {
-        display: none;
-    }
-
-    .nav-tab.active,
-    .nav-dark .nav-tab.active {
-        display: none;
-    }
-
-    .home-wrapper .header {
-        background: transparent;
-        border-bottom: 0;
-        box-shadow: none;
-    }
-
-    .home-wrapper .nav-wrapper {
-        display: none;
     }
 
     /* Footer compactat */
@@ -6814,8 +6293,8 @@ body.home-scroll-surface::-webkit-scrollbar {
     }
 
     .contracte-detail-back {
-        position: static;
-        margin-bottom: 1rem !important;
+        position: absolute;
+        margin: 0 !important;
         width: 44px;
         height: 44px;
         padding: 0 !important;
@@ -6851,55 +6330,20 @@ body.home-scroll-surface::-webkit-scrollbar {
     }
 
     /* FASE 3.2 - Contractes + filtres accordion */
-    .filter-actions {
-        display: flex !important;
-        width: 100%;
-        gap: 0.75rem;
-        margin-top: 1rem;
-        align-items: stretch;
-    }
-
     .filters-toggle-btn {
-        display: flex !important;
-        flex: 1 1 auto;
-        min-height: 48px;
-        margin: 0;
-        align-items: center;
-        justify-content: space-between;
-        gap: 1rem;
-        padding: 0.875rem 1rem;
-        border: 1px solid var(--border);
-        border-radius: var(--radius);
-        background: var(--surface);
-        color: var(--navy);
-        font-family: var(--font-mono);
-        font-size: var(--text-sm);
-        font-weight: 600;
-        letter-spacing: 0.05em;
-        text-transform: uppercase;
-        box-shadow: none;
-        cursor: pointer;
         transition: all 0.2s;
     }
 
     .filters-toggle-meta {
-        color: var(--text-light);
-        font-size: var(--text-2xs);
         letter-spacing: 0.05em;
     }
 
     .filters-mobile-reset {
-        display: flex !important;
-        flex: 0 0 48px;
-        width: 48px !important;
-        height: 48px !important;
-        padding: 0 !important;
-        align-items: center;
-        justify-content: center;
+        padding: 0;
     }
 
     .search-section {
-        padding: 1.5rem !important;
+        padding: 1.5rem;
         margin-bottom: var(--mobile-section-gap);
         border-radius: var(--radius-lg);
         background: var(--mobile-card-bg);
@@ -6915,10 +6359,10 @@ body.home-scroll-surface::-webkit-scrollbar {
 
     .search-section .search-filter-panel {
         width: 100%;
-        flex-direction: column !important;
-        align-items: stretch !important;
-        gap: 1rem !important;
-        margin-top: 1.25rem !important;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1rem;
+        margin-top: 1.25rem;
         max-height: 720px;
         opacity: 1;
         overflow: hidden;
@@ -6928,13 +6372,48 @@ body.home-scroll-surface::-webkit-scrollbar {
     .search-section .search-filter-panel.collapsed {
         max-height: 0;
         opacity: 0;
-        margin-top: 0 !important;
+        margin-top: 0;
         pointer-events: none;
     }
 
     .search-section .filter-group {
-        width: 100% !important;
-        flex: 1 1 100% !important;
+        width: 100%;
+        min-width: 0;
+        flex: 1 1 100%;
+    }
+
+    .search-section .filter-input[type="date"] {
+        display: block;
+        width: 100%;
+        min-width: 0;
+        max-width: 100%;
+        height: var(--control-h);
+        min-height: var(--control-h);
+        max-height: var(--control-h);
+    }
+
+    @supports (-webkit-touch-callout: none) {
+        .search-section .filter-input[type="date"] {
+            -webkit-appearance: none;
+            appearance: none;
+            line-height: 1.25rem;
+        }
+
+        .search-section .filter-input[type="date"]::-webkit-date-and-time-value {
+            display: block;
+            width: 100%;
+            min-width: 0;
+            height: 1.25rem;
+            min-height: 1.25rem;
+            line-height: 1.25rem;
+            text-align: left;
+        }
+
+        .search-section .filter-input[type="date"]::-webkit-datetime-edit {
+            display: block;
+            min-width: 0;
+            padding: 0;
+        }
     }
 
     .results-count {
@@ -7046,7 +6525,7 @@ body.home-scroll-surface::-webkit-scrollbar {
         max-height: none;
         display: block;
         padding: 0;
-        transform: none !important;
+        transform: none;
         border: 0;
         border-radius: 0;
         background: transparent;
@@ -7058,11 +6537,13 @@ body.home-scroll-surface::-webkit-scrollbar {
 
     .site-dock-nav .mobile-nav-current {
         display: flex;
+        width: 100%;
         height: 2.8rem;
         min-height: 2.8rem;
         align-items: center;
         justify-content: center;
         padding: 0 1rem;
+        border: 0;
         border-radius: var(--radius-pill);
         background: var(--navy);
         color: var(--surface);
@@ -7070,6 +6551,8 @@ body.home-scroll-surface::-webkit-scrollbar {
         font-size: var(--text-xs);
         font-weight: 500;
         letter-spacing: 0.05em;
+        text-transform: uppercase;
+        cursor: pointer;
         box-shadow: 0 12px 30px rgba(13, 31, 60, 0.16);
     }
 
@@ -7085,12 +6568,21 @@ body.home-scroll-surface::-webkit-scrollbar {
         grid-column: auto;
     }
 
+    .site-dock-nav .mobile-nav-chevron {
+        transition: transform 0.22s ease;
+    }
+
+    .site-dock-nav.open .mobile-nav-chevron {
+        transform: rotate(180deg);
+    }
+
     .site-dock-nav .nav {
         width: 100%;
         min-width: 0;
         max-height: 0;
         flex-direction: column;
         align-items: stretch;
+        justify-content: flex-start;
         gap: 0.35rem;
         overflow: visible;
         opacity: 0;
@@ -7110,36 +6602,43 @@ body.home-scroll-surface::-webkit-scrollbar {
     }
 
     .site-dock-nav .nav-tab {
-        display: flex !important;
+        display: flex;
         width: 100%;
         height: 2.8rem;
         min-height: 42px;
+        align-items: center;
         justify-content: center;
         padding: 0 1rem;
         border: 0;
         border-radius: var(--radius-pill);
-        background: var(--surface) !important;
-        color: var(--navy) !important;
+        background: var(--surface);
+        color: var(--navy);
         font-family: var(--font-mono);
         font-size: var(--text-xs);
         font-weight: 500;
         letter-spacing: 0.05em;
-        box-shadow: 0 12px 30px rgba(13, 31, 60, 0.16) !important;
+        text-align: center;
+        text-decoration: none;
+        text-transform: uppercase;
+        white-space: nowrap;
+        box-shadow: 0 12px 30px rgba(13, 31, 60, 0.16);
     }
 
     .site-dock-nav .nav-tab:hover {
-        background: var(--bg) !important;
+        background: var(--bg);
     }
 
     .site-dock-nav .nav-tab.active {
-        display: none !important;
+        display: none;
     }
 
     .contractes-page .page-title,
     .empreses-page .page-title,
     .persones-page .page-title,
+    .subvencions-page .page-title,
     .analisi-page .page-title,
-    .casos-page .page-title {
+    .casos-page .page-title,
+    .contracte-detail-page > .page-title {
         font-size: clamp(2.65rem, 11vw, 3.35rem) !important;
         line-height: 0.98;
         margin: 0 0 var(--page-title-space-bottom, 2.5rem);
@@ -7159,8 +6658,10 @@ body.home-scroll-surface::-webkit-scrollbar {
     .contractes-page,
     .empreses-page,
     .persones-page,
+    .subvencions-page,
     .analisi-page,
-    .casos-page {
+    .casos-page,
+    .contracte-detail-page {
         --page-title-space-top: 1.4rem;
         --page-title-space-bottom: 3rem;
         --analisi-title-space-bottom: 1rem;
@@ -7297,43 +6798,26 @@ body.home-scroll-surface::-webkit-scrollbar {
         margin-bottom: 1.35rem;
     }
 
-    .analisi-alert-list .fraccionament-card {
+    .analisi-alert-list .analysis-list-meta {
         display: flex;
         flex-direction: column;
+        align-items: stretch;
+        gap: 1.125rem;
     }
 
-    .analisi-alert-list .fraccionament-card .contract-header,
-    .analisi-alert-list .fraccionament-alert-meta {
-        display: contents;
-    }
-
-    .analisi-alert-list .fraccionament-alert-meta .contract-pills {
-        order: 1;
-        align-self: flex-start;
-        margin: 0 0 var(--mobile-rule-gap);
-    }
-
-    .analisi-alert-list .fraccionament-card .contract-title {
-        order: 2;
-        margin-bottom: 1.125rem;
-    }
-
-    .analisi-alert-list .fraccionament-card .contract-amount {
-        order: 3;
-    }
-
-    .analisi-alert-list .fraccionament-card-object {
-        order: 4;
-        padding-top: var(--mobile-rule-gap);
+    .analisi-alert-list .analysis-list-meta .contract-pills {
+        width: 100%;
+        padding-top: 1.125rem;
         border-top: 1px solid var(--border);
+        align-self: flex-start;
+        margin: 0;
     }
 
-    .analisi-page .concentracio-card-historic .contract-amount {
-        margin-bottom: 0;
-    }
-
-    .analisi-page .concentracio-card-temporal .contract-amount {
-        margin-bottom: 0;
+    .analisi-alert-list .analysis-list-primary-long .contract-meta-value {
+        display: -webkit-box;
+        overflow: hidden;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3;
     }
 
     .empreses-page .contract-card .contract-amount {
@@ -7349,65 +6833,36 @@ body.home-scroll-surface::-webkit-scrollbar {
         font-size: var(--display-sm) !important;
     }
 
+    .empreses-page .empresa-list-card .contract-header {
+        margin-bottom: 1.125rem !important;
+    }
+
     .empreses-page .empresa-list-card .contract-meta {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: center;
+        gap: 1.125rem 1rem;
         padding-top: 1.125rem;
     }
 
-    .sector-tissue-visual {
-        margin-bottom: 0;
-        padding: calc(var(--mobile-section-gap) * 1.15) 0;
+    .empreses-page .empresa-list-card .empresa-list-sector {
+        grid-column: 1;
     }
 
-    .empreses-page .pagination {
-        margin-bottom: 0;
-        padding-bottom: var(--mobile-section-gap);
+    .empreses-page .empresa-list-card .empresa-list-category {
+        display: none;
     }
 
-    .empreses-page .card-link-wrapper+.sector-tissue-visual,
-    .empreses-page .empty-state+.sector-tissue-visual {
-        margin-top: var(--mobile-section-gap);
-    }
-
-    .empreses-page .sector-tissue-visual+.metodologia-wrapper {
-        margin-top: var(--mobile-section-gap);
-    }
-
-    .sector-tissue-header {
-        margin-bottom: 1.85rem;
-    }
-
-    .sector-tissue-header h3 {
-        font-size: clamp(1.75rem, 7vw, 2.25rem);
-        line-height: 1.02;
-    }
-
-    .sector-tissue-row {
-        grid-template-columns: minmax(0, 1fr) auto;
-        gap: 0.7rem 1rem;
-        padding: 1.05rem 0;
-    }
-
-    .sector-tissue-copy span {
-        font-size: var(--text-sm);
-        line-height: 1.42;
-    }
-
-    .sector-tissue-track {
-        grid-column: 1 / -1;
-        grid-row: 2;
-    }
-
-    .sector-tissue-value {
+    .empreses-page .empresa-list-card .empresa-list-title-pills {
+        display: flex;
         grid-column: 2;
         grid-row: 1;
-        display: block;
-        align-items: baseline;
-        text-align: right;
+        align-self: center;
+        margin-left: 0;
     }
 
-    .sector-tissue-value span {
-        margin-bottom: 0;
-        font-size: var(--text-sm);
+    .empreses-page .empresa-list-card .empresa-mobile-title-pills {
+        display: none;
     }
 
     .empreses-page .empresa-list-title-pills,
@@ -7436,8 +6891,8 @@ body.home-scroll-surface::-webkit-scrollbar {
     }
 
     .empresa-activity-header h3 {
-        font-size: clamp(1.85rem, 7.4vw, 2.35rem);
-        line-height: 1.02;
+        font-size: var(--text-2xs);
+        line-height: 1.35;
     }
 
     .empresa-activity-bars {
@@ -7500,7 +6955,7 @@ body.home-scroll-surface::-webkit-scrollbar {
 
     .empresa-activity-meta small {
         margin: 0;
-        font-size: var(--text-lg);
+        font-size: var(--text-base);
         text-align: right;
     }
 
@@ -7520,21 +6975,33 @@ body.home-scroll-surface::-webkit-scrollbar {
 
     .persones-page .persona-row-header {
         padding: var(--mobile-card-pad) !important;
-        flex-direction: column;
-        align-items: flex-start !important;
-        gap: 1.125rem;
     }
 
-    .persones-page .persona-row-header-left,
-    .persones-page .persona-row-header-right {
+    .persones-page .persona-row-main,
+    .persones-page .persona-row-meta {
         width: 100%;
     }
 
-    .persones-page .persona-row-header-right {
+    .persones-page .persona-row-main {
+        margin-bottom: 1.125rem;
+    }
+
+    .persones-page .persona-row-meta {
+        flex-direction: row;
         justify-content: space-between;
+        align-items: center;
         gap: 1rem;
-        padding-top: 1.125rem;
-        border-top: 1px solid var(--border);
+    }
+
+    .persones-page .persona-row-meta .contract-meta-item {
+        flex: 1 1 auto;
+        align-items: flex-start;
+        text-align: left;
+    }
+
+    .persones-page .persona-row-meta .contract-pills {
+        flex: 0 0 auto;
+        margin-left: 0;
     }
 
     .persones-page .persona-title {
@@ -7544,50 +7011,40 @@ body.home-scroll-surface::-webkit-scrollbar {
         margin-bottom: 0;
     }
 
-    .persones-page .persona-row-amount {
-        text-align: left;
-    }
-
     .persones-page .persona-amount {
         font-size: var(--display-sm) !important;
         line-height: 1;
     }
 
-    .persones-page .persona-row-chevron {
-        width: 44px;
-        height: 44px;
-        border: 1px solid var(--border);
-        border-radius: 50%;
-        flex: 0 0 44px;
-        background: rgba(248, 250, 252, 0.72);
-    }
-
     .persones-page .persona-row-body {
-        padding: 0 var(--mobile-card-pad) var(--mobile-card-pad);
-        border-top: 0;
-        background: transparent;
+        padding: 1.25rem var(--mobile-card-pad) 1.5rem;
+        border-top: 1px solid var(--border);
+        background: var(--bg);
     }
 
     .persones-page .persona-relacions-list {
-        border-top: 1px solid var(--border);
+        border-top: 0;
     }
 
     .persones-page .persona-relacio-item {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.5rem;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: baseline;
+        gap: 1rem;
         padding: 1rem 0;
     }
 
     .persones-page .persona-relacio-empresa {
+        min-width: 0;
         font-size: var(--text-base);
         line-height: 1.45;
+        overflow-wrap: anywhere;
     }
 
     .persones-page .persona-card .persona-relacio-amount {
-        font-size: 1.5rem !important;
+        font-size: 1.3rem !important;
         line-height: 1;
-        text-align: left;
+        text-align: right;
     }
 
     .prose-page {
@@ -7628,11 +7085,19 @@ body.home-scroll-surface::-webkit-scrollbar {
         margin-bottom: 1.5rem;
     }
 
-    .contracte-detail-hero {
+    .contracte-detail-hero,
+    .contracte-detail-info-card {
         padding: var(--mobile-hero-pad-y) var(--mobile-card-pad);
-        margin-bottom: var(--mobile-section-gap);
         border-radius: var(--radius-lg);
         box-shadow: var(--mobile-hero-shadow);
+    }
+
+    .contracte-detail-hero {
+        margin-bottom: 1rem;
+    }
+
+    .contracte-detail-info-card {
+        margin-bottom: 0;
     }
 
     .contracte-detail-amount {
@@ -7640,8 +7105,12 @@ body.home-scroll-surface::-webkit-scrollbar {
         margin-bottom: 1.5rem;
     }
 
+    .contracte-detail-hero-company {
+        margin-top: 1.5rem;
+    }
+
     .contracte-detail-title-row {
-        margin-bottom: 1.5rem !important;
+        margin-bottom: 0 !important;
     }
 
     .contracte-detail-title {
@@ -7655,9 +7124,43 @@ body.home-scroll-surface::-webkit-scrollbar {
         padding-top: 1.5rem;
     }
 
+    .contracte-detail-info-meta {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1.5rem 1rem;
+        padding-top: 0;
+    }
+
     .contracte-detail-share {
-        margin-top: 1.5rem;
-        padding-top: 1.5rem;
+        align-items: stretch;
+        margin: 0 0 0 auto;
+        padding: 0;
+    }
+
+    .contracte-detail-share-actions {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        max-width: none;
+        max-height: 0;
+        width: 100%;
+        transform: translateY(-0.4rem);
+        transition:
+            max-height 0.28s ease,
+            opacity 0.2s ease,
+            transform 0.28s ease,
+            visibility 0s linear 0.28s;
+    }
+
+    .contracte-detail-share.is-open .contracte-detail-share-actions {
+        max-width: none;
+        max-height: 5rem;
+        transform: translateY(0);
+    }
+
+    .contracte-detail-share-actions .contracte-detail-share-btn {
+        justify-content: center;
+        min-width: 0;
+        padding-inline: 0.85rem;
+        white-space: normal;
     }
 
     .contracte-detail-share-btn {
@@ -7668,14 +7171,36 @@ body.home-scroll-surface::-webkit-scrollbar {
         background: rgba(255, 255, 255, 0.03);
     }
 
-    .contracte-detail-company-card {
-        padding: var(--mobile-card-pad);
-        margin-bottom: 2rem;
-        border-radius: var(--radius-lg);
-        background: var(--mobile-card-bg);
-        box-shadow: var(--mobile-card-shadow);
-        backdrop-filter: blur(14px);
-        -webkit-backdrop-filter: blur(14px);
+    .contracte-detail-share-standalone .contracte-detail-share-btn {
+        border-color: var(--navy);
+        background: transparent;
+        color: var(--navy);
+    }
+
+    .contracte-detail-share-standalone.is-open > .contracte-detail-share-btn {
+        background: var(--navy);
+        color: var(--surface);
+    }
+
+    .contracte-detail-actions-row {
+        margin-top: 1rem;
+    }
+
+    .contracte-detail-page {
+        min-height: calc(100svh - 8.75rem);
+    }
+
+    .contracte-detail-actions-row .contracte-detail-back,
+    .contracte-detail-actions-row .contracte-detail-share > .contracte-detail-share-btn {
+        min-height: 48px;
+        height: 48px;
+    }
+
+    .contracte-detail-actions-row .contracte-detail-back {
+        width: auto;
+        padding: 0.75rem 1.35rem !important;
+        font-family: var(--font-body);
+        font-size: var(--text-base);
     }
 
     .contracte-detail-company-row {
@@ -7686,8 +7211,8 @@ body.home-scroll-surface::-webkit-scrollbar {
 
     .contracte-detail-company-title {
         font-size: var(--text-md);
-        line-height: 1.5;
-        font-weight: 500;
+        line-height: 1.4;
+        font-weight: 400;
     }
 
     .contracte-detail-company-pills {
@@ -7772,6 +7297,7 @@ body.home-scroll-surface::-webkit-scrollbar {
 
     .analisi-tabs-wrapper {
         position: static;
+        margin-top: -0.5rem;
         padding: 0;
         overflow-x: visible;
         border-bottom: 0;
@@ -7781,38 +7307,106 @@ body.home-scroll-surface::-webkit-scrollbar {
     }
 
     .analisi-tabs {
-        width: calc(100% - (var(--mobile-pad-x) * 2));
-        min-width: 0;
-        margin: 1rem auto 0;
-        padding: 0.35rem;
-        flex-wrap: nowrap;
-        gap: 0.35rem;
-        border: 1px solid var(--border);
-        border-radius: var(--radius-pill);
-        background: rgba(255, 255, 255, 0.88);
-        box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
-        backdrop-filter: blur(14px);
-        -webkit-backdrop-filter: blur(14px);
+        display: none;
     }
 
-    .analisi-tab {
-        flex: 1 1 0;
-        min-width: 0;
-        min-height: 44px;
-        padding: 0.72rem 0.5rem;
+    .analisi-mobile-selector {
+        position: relative;
+        display: block;
+        width: 50vw;
+        min-width: 13rem;
+        max-width: calc(100vw - 2rem);
+        margin: 0 auto;
+    }
+
+    .analisi-mobile-current {
+        display: flex;
+        width: 100%;
+        height: 2.8rem;
+        min-height: 2.8rem;
+        align-items: center;
+        justify-content: center;
+        padding: 0 1rem;
         border: 0;
         border-radius: var(--radius-pill);
-        margin-bottom: 0;
-        background: transparent;
-        font-size: 0.625rem;
-        line-height: 1;
-        white-space: nowrap;
+        background: var(--surface);
+        color: var(--navy);
+        font-family: var(--font-mono);
+        font-size: var(--text-xs);
+        font-weight: 500;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        cursor: pointer;
+        box-shadow: 0 12px 30px rgba(13, 31, 60, 0.16);
+        transition: background 0.2s ease, color 0.2s ease;
     }
 
-    .analisi-tab.active {
-        border-color: var(--navy);
+    .analisi-mobile-selector.open .analisi-mobile-current {
         background: var(--navy);
         color: var(--surface);
+    }
+
+    .analisi-mobile-current-group {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.35rem;
+    }
+
+    .analisi-mobile-chevron {
+        transition: transform 0.22s ease;
+    }
+
+    .analisi-mobile-selector.open .analisi-mobile-chevron {
+        transform: rotate(180deg);
+    }
+
+    .analisi-mobile-options {
+        width: 100%;
+        height: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.35rem;
+        overflow: visible;
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        padding: 0;
+        transition: height 0.28s ease, opacity 0.2s ease, padding-top 0.28s ease, visibility 0s linear 0.28s;
+    }
+
+    .analisi-mobile-selector.open .analisi-mobile-options {
+        height: 9.45rem;
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        padding-top: 0.35rem;
+        transition-delay: 0s;
+    }
+
+    .analisi-mobile-option {
+        display: flex;
+        flex: 0 0 2.8rem;
+        width: 100%;
+        height: 2.8rem;
+        min-height: 42px;
+        align-items: center;
+        justify-content: center;
+        padding: 0 1rem;
+        border: 0;
+        border-radius: var(--radius-pill);
+        background: var(--surface);
+        color: var(--navy);
+        font-family: var(--font-mono);
+        font-size: var(--text-xs);
+        font-weight: 500;
+        letter-spacing: 0.05em;
+        text-align: center;
+        text-transform: uppercase;
+        white-space: nowrap;
+        cursor: pointer;
+        box-shadow: 0 12px 30px rgba(13, 31, 60, 0.16);
     }
 
     .analisi-page {
@@ -7825,8 +7419,13 @@ body.home-scroll-surface::-webkit-scrollbar {
     .analisi-page .page-title {
         font-size: clamp(2.65rem, 11vw, 3.35rem) !important;
         line-height: 0.98;
-        margin: 0 0 var(--analisi-title-space-bottom, 2rem);
+        margin: 0 0 1rem;
         text-align: center;
+    }
+
+    .analisi-page-subtitle {
+        width: auto;
+        margin-bottom: var(--analisi-title-space-bottom, 2rem);
     }
 
     .analisi-page .data-skeleton-title {
@@ -7900,25 +7499,15 @@ body.home-scroll-surface::-webkit-scrollbar {
         margin-top: 0;
     }
 
-    .analisi-risk-filters {
-        gap: 0.5rem;
-    }
-
-    .analisi-filter-btn {
-        min-height: 44px;
-        min-width: 0;
-        padding: 0.65rem 0.7rem;
-        font-size: var(--text-2xs);
-    }
-
     .analisi-alert-list {
-        gap: 1rem;
+        gap: 0;
     }
 
     .analisi-page-reordered>.pagination,
     .analisi-page-reordered>*>.pagination {
-        margin-top: var(--mobile-section-gap);
-        margin-bottom: 0;
+        margin-top: 0;
+        margin-bottom: 0.5rem;
+        padding-top: 2.5rem;
     }
 
     .concentracio-card {
@@ -7941,237 +7530,12 @@ body.home-scroll-surface::-webkit-scrollbar {
         font-size: var(--text-2xs);
     }
 
-    .sector-concentration-visual {
-        margin-top: var(--mobile-section-gap);
-        padding: calc(var(--mobile-section-gap) * 1.15) 0;
-    }
-
-    .sector-concentration-header {
-        margin-bottom: 1.85rem;
-    }
-
-    .sector-concentration-header h3 {
-        font-size: clamp(1.85rem, 7.4vw, 2.35rem);
-        line-height: 1.02;
-    }
-
-    .sector-concentration-row {
-        grid-template-columns: minmax(0, 1fr);
-        gap: 0.95rem;
-        padding: 1.35rem 0;
-    }
-
-    .sector-concentration-copy span {
-        font-size: var(--text-xs);
-        line-height: 1.42;
-    }
-
-    .sector-concentration-copy small {
-        font-size: var(--text-sm);
-        line-height: 1.45;
-    }
-
-    .sector-concentration-value span {
-        font-size: var(--text-sm);
-    }
-
-    .sector-concentration-value {
-        display: flex;
-        justify-content: space-between;
-        gap: 1rem;
-        align-items: baseline;
-        text-align: left;
-    }
-
-    .sector-concentration-value span {
-        margin-bottom: 0;
-    }
-
-    .contract-evolution-visual {
-        margin-top: 0;
-        padding: calc(var(--mobile-section-gap) * 1.15) 0;
-    }
-
-    .contractes-page .pagination {
-        margin-bottom: 0;
-        padding-bottom: var(--mobile-section-gap);
-    }
-
-    .contractes-page .card-link-wrapper+.contract-evolution-visual {
-        margin-top: var(--mobile-section-gap);
-    }
-
-    .contract-evolution-header {
-        margin-bottom: 1.85rem;
-    }
-
-    .contract-evolution-header h3 {
-        font-size: clamp(1.85rem, 7.4vw, 2.35rem);
-        line-height: 1.02;
-    }
-
-    .contract-evolution-bars {
-        display: flex;
-        flex-direction: column;
-        gap: 0;
-        align-items: stretch;
-        min-height: 0;
-    }
-
-    .contract-evolution-column {
-        display: grid;
-        grid-template-columns: minmax(0, 1fr);
-        grid-template-rows: auto;
-        gap: 0.7rem;
-        align-items: stretch;
-        padding: 1.05rem 0;
-        border-top: 1px solid var(--border);
-    }
-
-    .contract-evolution-column:first-child {
-        border-top: 0;
-    }
-
-    .contract-evolution-column:last-child {
-        padding-bottom: 0;
-    }
-
-    .contract-evolution-bar-wrap {
-        grid-column: 1;
-        grid-row: 2;
-        height: 0.55rem;
-        min-height: 0;
-        overflow: hidden;
-        border: 0;
-        border-radius: var(--radius-pill);
-        background: #e5e7eb;
-    }
-
-    .contract-evolution-bar-wrap span {
-        width: var(--bar-width);
-        height: 100% !important;
-        border-radius: inherit;
-    }
-
-    .contract-evolution-meta {
-        grid-column: 1 / -1;
-        grid-row: 1;
-        display: grid;
-        grid-template-columns: auto auto;
-        gap: 1rem;
-        justify-content: space-between;
-        align-items: baseline;
-        pointer-events: none;
-    }
-
-    .contract-evolution-meta span {
-        font-size: var(--text-xs);
-    }
-
-    .contract-evolution-meta small {
-        margin: 0;
-        font-size: var(--text-lg);
-        text-align: right;
-    }
-
-    .analysis-card-title {
-        order: 2;
-        font-size: var(--text-md);
-        line-height: 1.5;
-        padding-bottom: 1.35rem;
-        border-bottom: 1px solid var(--border);
-    }
-
-    .analysis-card-main {
-        order: 3;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 1.125rem;
-        padding: var(--mobile-rule-gap) 0;
-        border-bottom: 1px solid var(--border);
-        margin-bottom: var(--mobile-rule-gap);
-    }
-
-    .concentracio-card .contract-amount {
-        font-size: var(--display-sm) !important;
-        text-align: left;
-        line-height: 1;
-        margin-bottom: 0;
-    }
-
-    .concentracio-card-historic .analysis-card-main {
-        gap: 0.65rem;
-        padding: 1rem 0 0.95rem;
-        margin-bottom: 0.95rem;
-    }
-
-    .concentracio-card-historic .concentracio-card-meta .contract-meta-item {
-        margin-bottom: 0.85rem;
-    }
-
-    .concentracio-card-meta {
-        display: contents;
-        padding-top: var(--mobile-rule-gap);
-    }
-
-    .concentracio-card-meta .contract-pills {
-        order: 1;
-        margin-left: 0;
-        margin-bottom: var(--mobile-rule-gap);
-    }
-
-    .concentracio-card-meta .contract-meta-item {
-        order: 4;
-        margin-bottom: 1.125rem;
-    }
-
-    .concentracio-card-meta .contract-meta-item:last-of-type {
-        margin-bottom: 0;
-    }
-
-    .electoralisme-card {
-        padding: var(--mobile-card-pad) !important;
-        display: flex;
-        flex-direction: column;
-    }
-
-    .electoralisme-card .contract-amount {
-        font-size: var(--display-sm) !important;
-        text-align: left;
-        margin-bottom: 0 !important;
-    }
-
-    .fraccionament-card-meta {
-        display: contents;
-        padding-top: var(--mobile-rule-gap);
-        padding-bottom: var(--mobile-rule-gap);
-        border-top: 0;
-        border-bottom: 0;
-    }
-
-    .fraccionament-card-object .contract-meta-value,
-    .concentracio-card-company .contract-meta-value {
-        font-size: var(--text-base);
-        line-height: 1.5;
-    }
-
-    .fraccionament-card-meta .contract-meta-item {
-        order: 4;
-        margin-bottom: 1.125rem;
-    }
-
-    .fraccionament-card-meta .contract-meta-item:last-of-type {
-        margin-bottom: 0;
-    }
-
-    .fraccionament-card-meta .contract-pills {
-        order: 1;
-        margin-left: 0;
-        margin-bottom: var(--mobile-rule-gap);
-    }
-
     .analisi-detail-page {
         padding: 1.5rem var(--mobile-pad-x);
+    }
+
+    .analisi-detail-page > .page-title {
+        display: none;
     }
 
     .analisi-detail-back {
@@ -8191,6 +7555,55 @@ body.home-scroll-surface::-webkit-scrollbar {
         margin-bottom: var(--mobile-section-gap) !important;
         border-radius: var(--radius-lg) !important;
         box-shadow: var(--mobile-hero-shadow) !important;
+    }
+
+    .analisi-case-fraccionament .analisi-case-amount,
+    .analisi-case-concentracio .analisi-case-amount,
+    .analisi-case-electoralisme .analisi-case-amount {
+        margin-bottom: 1.5rem;
+        font-size: clamp(3rem, 14vw, 3.75rem) !important;
+    }
+
+    .analisi-fraccionament-title-row {
+        margin-bottom: 0 !important;
+    }
+
+    .analisi-detail-contract-count {
+        margin-top: 1.5rem;
+        font-size: var(--text-base);
+    }
+
+    .analisi-detail-info-card,
+    .analisi-detail-section-card {
+        padding: var(--mobile-hero-pad-y) var(--mobile-card-pad);
+        border-radius: var(--radius-lg);
+        box-shadow: var(--mobile-hero-shadow);
+    }
+
+    .analisi-detail-info-card {
+        padding-top: 1.5rem;
+    }
+
+    .contract-meta.analisi-detail-info-meta {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1rem;
+        padding: 0;
+    }
+
+    .analisi-detail-page .contract-card .contract-pills {
+        display: none;
+    }
+
+    .analisi-detail-section-card .analisi-case-row {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .analisi-detail-section-card .analisi-case-row-danger {
+        text-align: left !important;
     }
 
     .analisi-detail-hero .contract-header {
@@ -8359,8 +7772,10 @@ body.home-scroll-surface::-webkit-scrollbar {
     .contractes-page .page-title,
     .empreses-page .page-title,
     .persones-page .page-title,
+    .subvencions-page .page-title,
     .analisi-page .page-title,
-    .casos-page .page-title {
+    .casos-page .page-title,
+    .contracte-detail-page > .page-title {
         font-size: clamp(2.2rem, 11vw, 2.75rem);
     }
 
@@ -8376,7 +7791,6 @@ body.home-scroll-surface::-webkit-scrollbar {
     }
 
     .contract-title,
-    .analysis-card-title,
     .persones-page .persona-title {
         font-size: var(--text-md);
     }
@@ -8388,10 +7802,6 @@ body.home-scroll-surface::-webkit-scrollbar {
 
     .analisi-page .metodologia-step-num-compact {
         font-size: var(--display-md);
-    }
-
-    .analisi-filter-btn {
-        flex-basis: calc(50% - 0.25rem);
     }
 
     .analisi-case-hero .contract-header>div:first-child a,
@@ -8412,23 +7822,308 @@ body.home-scroll-surface::-webkit-scrollbar {
     }
 
     .pagination {
-        gap: 0.5rem;
-        padding: 1.5rem 0;
+        gap: 1rem;
+        padding: 1.25rem 0 0;
     }
 
     .pagination-btn {
-        min-width: 42px;
-        min-height: 42px;
-        padding: 0.55rem 0.75rem;
+        min-width: 0;
+        min-height: 0;
+        padding: 0;
     }
 
     .pagination-info {
-        padding: 0 0.25rem;
-        font-size: var(--text-2xs);
-        white-space: nowrap;
+        gap: 0.35rem;
+        padding: 0;
+        font-size: var(--text-xs);
     }
 
     /* FASE 4 overrides â€” telÃ¨fons petits */
+}
+
+@media (max-width: 768px) {
+    .contracte-detail-page {
+        padding-top: 1.5rem;
+        padding-bottom: 3rem;
+    }
+
+    .contracte-detail-page > .page-title {
+        display: none;
+    }
+
+    .contracte-detail-hero {
+        margin-bottom: 1rem;
+        padding: 1.75rem 1.5rem;
+        border-radius: var(--radius-lg);
+        box-shadow: var(--mobile-hero-shadow);
+    }
+
+    .contracte-detail-amount {
+        font-size: clamp(3rem, 14vw, 3.35rem);
+        margin-bottom: 1.5rem;
+    }
+
+    .contracte-detail-title {
+        font-size: clamp(1.35rem, 5.8vw, 1.55rem) !important;
+        line-height: 1.42;
+    }
+
+    .contracte-detail-hero-company {
+        margin-top: 1.5rem;
+        padding-top: 0;
+        border-top: 0;
+    }
+
+    .contracte-detail-company-title {
+        font-size: var(--text-base);
+        line-height: 1.4;
+    }
+
+    .contracte-detail-company-link {
+        color: var(--surface);
+    }
+
+    .contracte-detail-info-card {
+        padding: 1.5rem;
+        background: var(--surface);
+        border-radius: var(--radius-lg);
+        box-shadow: var(--mobile-card-shadow);
+    }
+
+    .contract-meta.contracte-detail-info-meta {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1rem;
+        padding: 0;
+        border-top: 0;
+        border-bottom: 0;
+    }
+
+    .contracte-detail-info-meta .contract-meta-label {
+        color: var(--text-light);
+    }
+
+    .contracte-detail-info-meta .contract-meta-value {
+        color: var(--navy);
+        font-size: var(--text-base);
+    }
+
+    .contracte-detail-actions-row {
+        display: grid;
+        grid-template-columns: auto auto;
+        align-items: start;
+        justify-content: space-between;
+        gap: 0;
+        column-gap: 0.75rem;
+        margin-top: 1rem;
+        padding: 0;
+        background: transparent;
+        border-radius: 0;
+        box-shadow: none;
+    }
+
+    .contracte-detail-share {
+        display: contents;
+    }
+
+    .contracte-detail-actions-row .contracte-detail-back,
+    .contracte-detail-actions-row .contracte-detail-share > .contracte-detail-share-btn {
+        width: max-content;
+        min-height: 48px;
+        height: 48px;
+        justify-content: center;
+        padding: 0.75rem 1rem !important;
+    }
+
+    .contracte-detail-actions-row .contracte-detail-back {
+        background: var(--bg);
+        border-color: var(--navy);
+        color: var(--navy);
+    }
+
+    .contracte-detail-share > .contracte-detail-share-btn {
+        grid-column: 2;
+        grid-row: 1;
+        justify-self: end;
+        border-color: var(--navy);
+        background: transparent;
+        color: var(--navy);
+    }
+
+    .contracte-detail-share.is-open > .contracte-detail-share-btn {
+        border-color: var(--navy);
+        background: var(--navy);
+        color: var(--surface);
+    }
+
+    .contracte-detail-share-actions {
+        grid-column: 2;
+        grid-row: 2;
+        width: auto;
+        max-width: none;
+        max-height: 0;
+        margin-top: 0;
+        grid-template-columns: 1fr;
+        justify-items: end;
+        gap: 0.5rem;
+        overflow: visible;
+        border: 0;
+        border-radius: 0;
+        background: transparent;
+        box-shadow: none;
+    }
+
+    .contracte-detail-share.is-open .contracte-detail-share-actions {
+        max-width: none;
+        max-height: 6.5rem;
+        margin-top: 0.75rem;
+        box-shadow: none;
+    }
+
+    .contracte-detail-share-actions .contracte-detail-share-btn {
+        width: auto;
+        height: 48px;
+        min-height: 48px;
+        padding: 0.75rem 1rem;
+        border: 1px solid var(--navy);
+        border-radius: var(--radius-pill);
+        background: var(--bg);
+        color: var(--navy);
+        font-size: var(--text-base);
+        line-height: normal;
+    }
+
+    .contracte-detail-share-actions .contracte-detail-share-btn:last-child {
+        border-bottom: 1px solid var(--navy);
+    }
+
+    .contracte-detail-share-actions .contracte-detail-share-btn:hover {
+        background: var(--navy);
+        color: var(--surface);
+    }
+}
+
+@media (max-width: 768px) {
+    .empresa-detail-page {
+        padding-top: 1.5rem;
+        padding-bottom: 3rem;
+    }
+
+    .empresa-detail-page > .page-title {
+        display: none;
+    }
+
+    .empresa-detail-hero {
+        margin-bottom: 1rem;
+        padding: 1.75rem 1.5rem;
+        border-radius: var(--radius-lg);
+        box-shadow: var(--mobile-hero-shadow);
+    }
+
+    .empresa-detail-amount {
+        font-size: clamp(3rem, 14vw, 3.35rem) !important;
+        margin-bottom: 1.5rem;
+    }
+
+    .empresa-detail-title-row {
+        gap: 0 !important;
+        margin-bottom: 0 !important;
+    }
+
+    .empresa-detail-title {
+        font-size: clamp(1.35rem, 5.8vw, 1.55rem) !important;
+        line-height: 1.42;
+    }
+
+    .empresa-detail-contract-count {
+        margin-top: 1.5rem;
+        font-size: var(--text-base);
+    }
+
+    .empresa-detail-info-card,
+    .empresa-detail-cargos {
+        padding: 1.5rem;
+        border-radius: var(--radius-lg);
+        box-shadow: var(--mobile-card-shadow);
+    }
+
+    .empresa-detail-info-card {
+        margin-bottom: 1rem;
+    }
+
+    .contract-meta.empresa-detail-info-meta {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1rem;
+        padding: 0;
+        border: 0;
+    }
+
+    .empresa-detail-cargos {
+        margin: 0;
+    }
+
+    .empresa-detail-cargos-title {
+        margin-bottom: 1.25rem;
+        font-size: var(--text-2xs);
+    }
+
+    .empresa-detail-cargo-item {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 0.35rem;
+        padding: 0.8rem 0;
+    }
+
+    .empresa-detail-cargo-meta {
+        flex-direction: row;
+        justify-content: flex-start;
+        gap: 0.75rem;
+        text-align: left;
+    }
+
+    .empresa-detail-actions-row {
+        margin: 1.5rem 0 0;
+    }
+
+    .empresa-detail-back {
+        width: max-content;
+        min-height: 48px;
+        height: 48px;
+        padding: 0.75rem 1rem;
+        background: var(--bg);
+    }
+
+    .empresa-detail-page .contract-card .contract-pills {
+        display: none;
+    }
+
+    .empresa-activity-visual {
+        margin: 1rem 0 var(--mobile-section-gap);
+        padding: 1.5rem;
+        border-radius: var(--radius-lg);
+    }
+
+    .empresa-activity-header {
+        margin-bottom: 1.25rem;
+    }
+
+    .empresa-activity-column {
+        border-top-color: var(--border);
+    }
+
+    .empresa-activity-bar-wrap {
+        background: #e5e7eb;
+    }
+
+    .empresa-activity-meta span {
+        color: var(--navy);
+    }
+
+    .empresa-activity-meta small {
+        color: var(--navy);
+    }
 }
 
 /* Investigation detail */
@@ -8436,57 +8131,66 @@ body.home-scroll-surface::-webkit-scrollbar {
     padding-bottom: calc(var(--pad-card-lg) * 2);
 }
 
-.investigacio-detail-page > .page-title,
-.investigacio-detail-page > .prose-wrapper {
+.investigacio-detail-header {
     width: 50vw;
+    margin: 0 auto var(--pad-card-lg);
+    text-align: center;
 }
 
-.investigacio-detail-page > .page-title {
-    font-size: calc(var(--display-xl) + var(--text-md));
-    line-height: var(--leading-display);
-    margin-bottom: var(--space-xl);
+.investigacio-detail-header .page-title {
+    width: 100%;
+    margin: 0 auto 1rem;
     text-align: center;
+}
+
+.investigacio-detail-amount {
+    margin-bottom: 1rem;
+    color: var(--navy);
+    font-family: var(--font-display);
+    font-size: var(--display-md);
+    font-weight: 400;
+    line-height: var(--leading-display);
+    letter-spacing: var(--tracking-amount);
+}
+
+.investigacio-detail-subtitle,
+.investigacio-copy {
+    max-width: none;
+    color: var(--navy);
+    font-size: var(--text-lg);
+    font-weight: 400;
+    line-height: var(--leading-body);
 }
 
 .investigacio-detail-subtitle {
-    max-width: none;
-    font-size: var(--text-xl);
-    line-height: var(--leading-subtitle);
-    margin-bottom: var(--space-xl);
-    text-align: center;
     cursor: default;
 }
 
-.investigacio-date {
-    color: var(--navy);
-    font-size: var(--text-md);
-    font-weight: 400;
-    line-height: var(--leading-body);
-    margin-bottom: var(--space-xl);
-    text-align: center;
+.investigacio-story {
+    width: 75%;
+    max-width: none;
 }
 
 .investigacio-copy {
-    color: var(--navy);
-    font-size: var(--text-lg);
-    font-weight: 500;
-    line-height: var(--leading-body);
-    margin-bottom: var(--space-2xl);
+    margin-bottom: 1.5rem;
 }
 
 .investigacio-detail-page .prose-heading {
     color: var(--navy);
-    font-size: var(--display-lg);
-    line-height: var(--leading-heading);
-    margin-top: calc(var(--space-xl) * 2);
-    margin-bottom: var(--space-md);
+    font-family: var(--font-display);
+    font-size: var(--display-md);
+    font-weight: 400;
+    line-height: var(--leading-display);
+    letter-spacing: var(--tracking-amount);
+    margin-top: 3.5rem;
+    margin-bottom: 1.25rem;
 }
 
 .investigacio-featured-image-frame {
     width: 100%;
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 2 / 1;
     overflow: hidden;
-    margin-bottom: var(--pad-card-lg);
+    margin: 0 auto var(--pad-card-lg);
     border-radius: var(--radius-lg);
     background: var(--navy);
 }
@@ -8506,10 +8210,16 @@ body.home-scroll-surface::-webkit-scrollbar {
     display: flex;
     flex-direction: column;
     gap: 0;
-    width: 62.5vw;
-    margin: var(--pad-card-lg) 0;
+    width: calc(min(100vw, 1400px) - 4rem);
+    margin: 2.5rem 0;
     margin-left: 50%;
     transform: translateX(-50%);
+    outline: none;
+}
+
+.investigacio-card-stack:focus-visible {
+    outline: 2px solid var(--navy);
+    outline-offset: 0.5rem;
 }
 
 .investigacio-card-stack:last-child {
@@ -8535,7 +8245,7 @@ body.home-scroll-surface::-webkit-scrollbar {
 }
 
 .investigacio-skeleton-media {
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 2 / 1;
     height: auto;
     margin-bottom: var(--pad-card-lg);
 }
@@ -8575,32 +8285,51 @@ body.home-scroll-surface::-webkit-scrollbar {
     transform: translateY(0);
 }
 
+.investigacio-detail-actions-row {
+    margin-top: 3.5rem;
+}
+
 @media (max-width: 768px) {
-    .investigacio-detail-page > .page-title,
-    .investigacio-detail-page > .prose-wrapper {
+    .investigacio-detail-page {
+        padding-top: 1.5rem;
+    }
+
+    .investigacio-detail-header {
+        width: auto;
+        margin-bottom: 1.5rem;
+    }
+
+    .investigacio-detail-header .page-title {
+        font-size: var(--display-lg);
+        margin-bottom: 1rem;
+    }
+
+    .investigacio-story {
         width: auto;
     }
 
-    .investigacio-detail-page > .page-title {
-        font-size: var(--display-lg) !important;
+    .investigacio-detail-subtitle,
+    .investigacio-copy {
+        font-size: 1.0625rem;
     }
 
-    .investigacio-detail-subtitle {
-        font-size: var(--text-lg);
-    }
-
-    .investigacio-featured-image-frame {
+    .investigacio-featured-image-frame,
+    .investigacio-skeleton-media {
         aspect-ratio: 3 / 4;
+    }
+
+    .investigacio-copy {
+        margin-bottom: 1.5rem;
+    }
+
+    .investigacio-detail-page .prose-heading {
+        margin-top: 2.75rem;
     }
 
     .investigacio-loading > .data-skeleton-title {
         width: 100%;
         height: var(--display-lg);
         margin-left: auto;
-    }
-
-    .investigacio-skeleton-media {
-        aspect-ratio: 3 / 4;
     }
 
     .investigacio-card-stack,
