@@ -33,37 +33,37 @@ const primaryPages = [
     {
         route: '',
         title: `${brand.name} | ${brand.tagline}`,
-        description: `${brand.name} és la plataforma independent de periodisme de dades que analitza la contractació pública de ${municipality.authorityName}.`,
+        description: `${brand.name} és la plataforma independent de periodisme de dades que analitza la contractació pública i les subvencions de l'Ajuntament d'${municipality.name}.`,
     },
     {
         route: 'contractes',
         title: `Contractes | ${brand.name}`,
-        description: `Explora els contractes públics de ${municipality.authorityName}.`,
+        description: `Explora els contractes públics de l'Ajuntament d'${municipality.name}.`,
     },
     {
         route: 'empreses',
         title: `Empreses | ${brand.name}`,
-        description: `Explora les empreses adjudicatàries dels contractes públics de ${municipality.authorityName}.`,
+        description: `Explora les empreses adjudicatàries dels contractes públics de l'Ajuntament d'${municipality.name}.`,
     },
     {
         route: 'persones',
         title: `Persones | ${brand.name}`,
-        description: `Explora les persones vinculades als contractes públics de ${municipality.authorityName}.`,
+        description: `Explora les persones vinculades als contractes públics de l'Ajuntament d'${municipality.name}.`,
     },
     {
         route: 'subvencions',
         title: `Subvencions | ${brand.name}`,
-        description: `Consulta les subvencions públiques de ${municipality.authorityName}.`,
+        description: `Consulta les subvencions públiques de l'Ajuntament d'${municipality.name}.`,
     },
     {
         route: 'analisi',
         title: `Anàlisi | ${brand.name}`,
-        description: 'Algoritmes de detecció de casos potencials de fraccionament, concentració i electoralisme.',
+        description: 'Algoritmes de detecció de casos potencials de fraccionament, concentració, electoralisme i dependència de subvencions.',
     },
     {
         route: 'investigacio',
         title: `Casos d'investigació | ${brand.name}`,
-        description: `Casos d'investigació sobre contractació pública a ${municipality.authorityName}.`,
+        description: `Casos d'investigació sobre la contractació pública i les subvencions de l'Ajuntament d'${municipality.name}.`,
     },
     {
         route: 'sobre',

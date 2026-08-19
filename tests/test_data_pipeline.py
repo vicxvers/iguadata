@@ -10,6 +10,7 @@ import time
 import unittest
 import urllib.error
 import urllib.request
+import xml.etree.ElementTree as ET
 from datetime import date
 from pathlib import Path
 
@@ -289,6 +290,38 @@ class DataPipelineTests(unittest.TestCase):
         self.assertIn(f'<link rel="canonical" href="{config["site"]["url"]}/">', index_html)
         self.assertIn(f'content="{config["brand"]["name"]}"', index_html)
         self.assertIn(f'"contactEmail": "{config["site"]["contactEmail"]}"', app_bundle)
+
+    def test_sitemap_contains_only_stable_indexable_routes(self):
+        config = json.loads((ROOT / "config" / "project.json").read_text(encoding="utf-8"))
+        investigations = json.loads((ROOT / "json" / "investigacio.json").read_text(encoding="utf-8"))
+        site_url = config["site"]["url"].rstrip("/")
+        stable_routes = ["", "contractes", "empreses", "persones", "subvencions", "analisi", "investigacio"]
+        expected = {
+            f"{site_url}/{route + '/' if route else ''}"
+            for route in stable_routes
+        }
+        expected.update(
+            f"{site_url}/investigacio/{investigation['slug']}/"
+            for investigation in investigations
+        )
+
+        root = ET.fromstring((ROOT / "sitemap.xml").read_text(encoding="utf-8"))
+        namespace = {"sitemap": "http://www.sitemaps.org/schemas/sitemap/0.9"}
+        actual = {
+            node.text
+            for node in root.findall("sitemap:url/sitemap:loc", namespace)
+        }
+
+        self.assertEqual(actual, expected)
+        self.assertEqual(len(actual), 15)
+
+        for url in expected:
+            route = url.removeprefix(f"{site_url}/").strip("/")
+            output = ROOT / route / "index.html" if route else ROOT / "index.html"
+            self.assertTrue(output.exists(), f"Missing static page for {url}")
+            html = output.read_text(encoding="utf-8")
+            self.assertIn('<meta name="robots" content="index, follow">', html)
+            self.assertIn(f'<link rel="canonical" href="{url}">', html)
 
     def test_local_server_supports_spa_fallback_and_blocks_sources(self):
         node = shutil.which("node")
