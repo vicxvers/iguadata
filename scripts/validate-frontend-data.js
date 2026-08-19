@@ -108,7 +108,7 @@ for (const [property, filename] of Object.entries(schema['x-files'])) {
 
 validate(datasets, schema, '');
 
-for (const analysisName of ['fraccionament', 'concentracio', 'electoralisme']) {
+for (const analysisName of ['fraccionament', 'concentracio', 'electoralisme', 'dependencia']) {
     const analysis = datasets[analysisName];
     if (analysis && analysis.total_alertes !== analysis.alertes.length) {
         errors.push(`/${analysisName}: total_alertes does not match alertes.length`);

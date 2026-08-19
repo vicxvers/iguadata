@@ -90,6 +90,46 @@ function formatTipus(tipo) {
     return m[tipo] || tipo;
 }
 
+function formatSubvencioSector(finalitat) {
+    const sectors = {
+        'Serveis Socials i Promoció Social': 'Social',
+        'Cultura': 'Cultura',
+        'Comerç, Turisme i Pimes': 'Comerç',
+        "Accés a l'habitatge i foment de l'edificació": 'Habitatge',
+        "Foment de l'Ocupació": 'Ocupació',
+        'Cooperació internacional per al desenvolupament i cultural': 'Cooperació',
+        'Educació': 'Educació',
+        'Sanitat': 'Sanitat',
+        'Altres actuacions de caràcter econòmic': 'Economia',
+        'Altres Prestacions econòmiques': 'Altres',
+    };
+    return sectors[finalitat] || 'Altres';
+}
+
+function isSubvencioDirecta(subvencio) {
+    const text = normalizeSearchText([
+        subvencio.objecte_de_la_convocat_ria,
+        subvencio.t_tol_convocat_ria_catal,
+        subvencio.t_tol_convocat_ria_castell,
+        subvencio.discriminador_de_la_concessi,
+        subvencio.descripcion,
+    ].join(' '));
+    return /\bdirect(?:a|e|es)?\b/.test(text);
+}
+
+const SUBVENCIO_TIPOLOGIES = [
+    'Serveis Socials i Promoció Social',
+    'Cultura',
+    'Comerç, Turisme i Pimes',
+    "Accés a l'habitatge i foment de l'edificació",
+    "Foment de l'Ocupació",
+    'Cooperació internacional per al desenvolupament i cultural',
+    'Educació',
+    'Sanitat',
+    'Altres actuacions de caràcter econòmic',
+    'Altres Prestacions econòmiques',
+];
+
 function formatTipusLimit(t) {
     const m = { 'obres': 'Obres', 'serveis': 'Serveis', 'subministraments': 'Subministraments' };
     return m[t] || (t ? t.charAt(0).toUpperCase() + t.slice(1) : '—');
@@ -1350,6 +1390,110 @@ function CasElectoralismeView({ caso, contracts, empreses, onBack, onContractSel
     );
 }
 
+/* ---- CasDependenciaView ----------------------------------------- */
+function CasDependenciaView({ caso, onBack }) {
+    if (!caso) return null;
+    const [shareActionsOpen, setShareActionsOpen] = useState(false);
+    const [shareCopyStatus, setShareCopyStatus] = useState('');
+    const shareActionsRef = useRef(null);
+    const shareStatusTimerRef = useRef(null);
+    const annualDependenciaStats = useMemo(() => {
+        const totalsByYear = {};
+        for (const subvencio of caso.subvencions || []) {
+            const year = subvencio.año || Number(String(subvencio.fecha || '').slice(0, 4));
+            if (!year) continue;
+            totalsByYear[year] = (totalsByYear[year] || 0) + (Number(subvencio.importe) || 0);
+        }
+        const annualTotals = Object.values(totalsByYear);
+        return {
+            average: annualTotals.length ? caso.import_total / annualTotals.length : 0,
+            maximum: annualTotals.length ? Math.max(...annualTotals) : 0,
+        };
+    }, [caso]);
+
+    useEffect(() => {
+        if (!shareActionsOpen) return;
+        const closeShareActions = (event) => {
+            if (event.type === 'keydown' && event.key !== 'Escape') return;
+            if (event.type === 'pointerdown' && shareActionsRef.current?.contains(event.target)) return;
+            setShareActionsOpen(false);
+        };
+        document.addEventListener('pointerdown', closeShareActions);
+        document.addEventListener('keydown', closeShareActions);
+        return () => {
+            document.removeEventListener('pointerdown', closeShareActions);
+            document.removeEventListener('keydown', closeShareActions);
+        };
+    }, [shareActionsOpen]);
+
+    useEffect(() => () => window.clearTimeout(shareStatusTimerRef.current), []);
+
+    const copyDependenciaLink = async () => {
+        try {
+            await navigator.clipboard.writeText(window.location.href);
+            setShareCopyStatus('Enllaç copiat');
+        } catch (_) {
+            setShareCopyStatus("No s'ha pogut copiar");
+        }
+        window.clearTimeout(shareStatusTimerRef.current);
+        shareStatusTimerRef.current = window.setTimeout(() => setShareCopyStatus(''), 1800);
+    };
+
+    return (
+        <div className="container analisi-detail-page">
+            <h1 className="page-title">Detall de dependència</h1>
+            <div className="analisi-detail-hero analisi-case-hero analisi-case-dependencia">
+                <div className="analisi-case-amount">{formatCurrency(caso.import_total)}</div>
+                <div className="contract-header analisi-case-header analisi-fraccionament-title-row">
+                    <h2 className="analisi-case-title-wrap">
+                        <a href={buildRouteUrl(`/entitats/${caso.entitat_slug}`)} className="analisi-case-title-link">{caso.entitat}</a>
+                    </h2>
+                </div>
+                <div className="analisi-detail-contract-count">{caso.num_subvencions} subvencions directes</div>
+                <div className="contract-pills analisi-detail-hero-pills">
+                    <span className={"risk-badge " + riskClass(caso.nivell)}>{riskLabel(caso.nivell)}</span>
+                    <span className={"risk-badge " + riskClass(caso.nivell)} style={{ fontVariantNumeric: 'tabular-nums' }}>{caso.risc}/100</span>
+                </div>
+            </div>
+
+            <div className="analisi-detail-info-card">
+                <div className="contract-meta analisi-detail-info-meta analisi-detail-info-meta-dependencia">
+                    <div className="contract-meta-item"><span className="contract-meta-label">Període</span><span className="contract-meta-value">Del {formatDate(caso.data_inici)} al {formatDate(caso.data_fi)}</span></div>
+                    <div className="contract-meta-item"><span className="contract-meta-label">Mitjana anual</span><span className="contract-meta-value">{formatCurrency(annualDependenciaStats.average)}</span></div>
+                    <div className="contract-meta-item"><span className="contract-meta-label">Màxim anual</span><span className="contract-meta-value">{formatCurrency(annualDependenciaStats.maximum)}</span></div>
+                </div>
+            </div>
+
+            <section className="analisi-detail-section-card" aria-labelledby="dependencia-indicators-title">
+                <h2 id="dependencia-indicators-title" className="analisi-detail-section-title">Indicadors</h2>
+                <ul className="analisi-detail-text-list">{(caso.motius || []).map(motiu => <li key={motiu}>{motiu}</li>)}</ul>
+            </section>
+
+            {(caso.subvencions || []).map(subvencio => (
+                <div key={subvencio.id} className="contract-card">
+                    <div className="contract-header">
+                        <div className="contract-title">{subvencio.descripcion}</div>
+                        <div className="contract-amount">{formatCurrency(subvencio.importe)}</div>
+                    </div>
+                    <div className="contract-meta">
+                        <div className="contract-meta-item"><span className="contract-meta-label">Data</span><span className="contract-meta-value">{formatDate(subvencio.fecha)}</span></div>
+                        <div className="contract-meta-item"><span className="contract-meta-label">Codi expedient</span><span className="contract-meta-value">{subvencio.codigo}</span></div>
+                        <div className="contract-pills"><span className="contract-pill">{formatSubvencioSector(subvencio.finalitat_p_blica)}</span></div>
+                    </div>
+                </div>
+            ))}
+
+            <div className="contracte-detail-actions-row">
+                <button onClick={onBack} className="btn-share contracte-detail-back" title="Tornar" aria-label="Tornar" type="button"><svg className="contracte-detail-back-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M19 12H5" /><polyline points="12 19 5 12 12 5" /></svg><span>Tornar</span></button>
+                <div className={`contracte-detail-share contracte-detail-share-standalone${shareActionsOpen ? ' is-open' : ''}`} ref={shareActionsRef}>
+                    <div id="dependencia-share-actions" className="contracte-detail-share-actions" aria-hidden={!shareActionsOpen}><button className="btn-share contracte-detail-share-btn" onClick={copyDependenciaLink} tabIndex={shareActionsOpen ? 0 : -1} type="button">{shareCopyStatus || "Copia l'enllaç"}</button></div>
+                    <button className="btn-share contracte-detail-share-btn" onClick={() => setShareActionsOpen(open => !open)} aria-expanded={shareActionsOpen} aria-controls="dependencia-share-actions" type="button"><em className="share-arrow"></em> Compartir</button>
+                </div>
+            </div>
+        </div>
+    );
+}
+
 /* ---- EmpresesView ----------------------------------------------- */
 function EmpresesView({ empreses, onEmpresaSelect, searchTerm, setSearchTerm, sectorFilter, setSectorFilter, categoriaFilter, setCategoriaFilter, sortBy, setSortBy, currentPage, setCurrentPage }) {
     const [debouncedSearch, setDebouncedSearch] = useState(searchTerm);
@@ -1805,8 +1949,8 @@ function EmpresaView({ empresa: empresaNom, contracts, empreses, administradors,
                 <SearchField
                     value={searchTerm}
                     onValueChange={setSearchTerm}
-                    placeholder="Cerca per descripció, empresa o codi d'expedient"
-                    ariaLabel="Cerca per descripció, empresa o codi d'expedient"
+                    placeholder="Cerca per descripció o codi d'expedient"
+                    ariaLabel="Cerca per descripció o codi d'expedient"
                 />
                 <FilterActions
                     open={empresaFiltersOpen}
@@ -1943,6 +2087,7 @@ function EntitatView({ entitatSlug, subvencions, onBack }) {
     const totalImport = allEntitatSubvencions.reduce((sum, subvencio) => sum + (Number(subvencio.importe) || 0), 0);
     const [searchTerm, setSearchTerm] = useState('');
     const [sortBy, setSortBy] = useState('date-desc');
+    const [tipologiaFilter, setTipologiaFilter] = useState('');
     const [dateStart, setDateStart] = useState('');
     const [dateEnd, setDateEnd] = useState('');
     const [amountMin, setAmountMin] = useState('');
@@ -1955,7 +2100,7 @@ function EntitatView({ entitatSlug, subvencions, onBack }) {
     const shareStatusTimerRef = useRef(null);
     const itemsPerPage = 25;
 
-    useEffect(() => setCurrentPage(1), [searchTerm, sortBy, dateStart, dateEnd, amountMin, amountMax]);
+    useEffect(() => setCurrentPage(1), [searchTerm, sortBy, tipologiaFilter, dateStart, dateEnd, amountMin, amountMax]);
     useEffect(() => {
         if (!shareActionsOpen) return;
         const closeShareActions = event => {
@@ -1992,9 +2137,33 @@ function EntitatView({ entitatSlug, subvencions, onBack }) {
         };
     }, [allEntitatSubvencions]);
 
+    const principalSector = useMemo(() => {
+        const sectors = {};
+        for (const subvencio of allEntitatSubvencions) {
+            const finalitat = subvencio.finalitat_p_blica;
+            if (!finalitat) continue;
+            if (!sectors[finalitat]) sectors[finalitat] = { count: 0, amount: 0 };
+            sectors[finalitat].count += 1;
+            sectors[finalitat].amount += Number(subvencio.importe) || 0;
+        }
+        return Object.entries(sectors)
+            .sort(([, a], [, b]) => b.count - a.count || b.amount - a.amount)[0]?.[0] || '';
+    }, [allEntitatSubvencions]);
+
+    const concessionTypeStats = useMemo(() => {
+        const directes = allEntitatSubvencions.filter(isSubvencioDirecta).length;
+        const totals = allEntitatSubvencions.length;
+        return {
+            directes,
+            indirectes: totals - directes,
+            percentatgeDirectes: totals ? directes / totals : 0,
+        };
+    }, [allEntitatSubvencions]);
+
     const filteredSubvencions = useMemo(() => {
         const result = allEntitatSubvencions.filter(subvencio => {
             if (searchTerm && !matchesSearchQuery([subvencio.descripcion, subvencio.adjudicatario, subvencio.codigo], searchTerm)) return false;
+            if (tipologiaFilter && subvencio.finalitat_p_blica !== tipologiaFilter) return false;
             if (dateStart && subvencio.fecha < dateStart) return false;
             if (dateEnd && subvencio.fecha > dateEnd) return false;
             if (amountMin !== '' && subvencio.importe < Number(amountMin)) return false;
@@ -2007,21 +2176,21 @@ function EntitatView({ entitatSlug, subvencions, onBack }) {
             if (sortBy === 'amount-asc') return a.importe - b.importe;
             return (Date.parse(b.fecha) || 0) - (Date.parse(a.fecha) || 0);
         });
-    }, [allEntitatSubvencions, searchTerm, sortBy, dateStart, dateEnd, amountMin, amountMax]);
+    }, [allEntitatSubvencions, searchTerm, sortBy, tipologiaFilter, dateStart, dateEnd, amountMin, amountMax]);
 
     const totalPages = Math.ceil(filteredSubvencions.length / itemsPerPage);
     const pageSubvencions = filteredSubvencions.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
-    const firstSubvencio = allEntitatSubvencions[0] || {};
     const resetFilters = () => {
         setSearchTerm('');
         setSortBy('date-desc');
+        setTipologiaFilter('');
         setDateStart('');
         setDateEnd('');
         setAmountMin('');
         setAmountMax('');
         setCurrentPage(1);
     };
-    const activeFiltersCount = [dateStart, dateEnd, amountMin, amountMax, sortBy !== 'date-desc' ? sortBy : ''].filter(Boolean).length;
+    const activeFiltersCount = [tipologiaFilter, dateStart, dateEnd, amountMin, amountMax, sortBy !== 'date-desc' ? sortBy : ''].filter(Boolean).length;
     const copyEntitatLink = async () => {
         try {
             await navigator.clipboard.writeText(window.location.href);
@@ -2044,22 +2213,24 @@ function EntitatView({ entitatSlug, subvencions, onBack }) {
                 <div className="empresa-detail-contract-count">{allEntitatSubvencions.length} subvencions</div>
             </div>
             <div className="empresa-detail-info-card">
-                <div className="contract-meta empresa-detail-info-meta">
-                    {firstSubvencio.cif_beneficiari && (
+                <div className="contract-meta empresa-detail-info-meta entitat-detail-info-meta">
+                    {principalSector && (
                         <div className="contract-meta-item">
-                            <span className="contract-meta-label">CIF</span>
-                            <span className="contract-meta-value">{firstSubvencio.cif_beneficiari}</span>
-                        </div>
-                    )}
-                    {firstSubvencio.tipus_de_beneficiaris && (
-                        <div className="contract-meta-item">
-                            <span className="contract-meta-label">Tipus de beneficiari</span>
-                            <span className="contract-meta-value">{firstSubvencio.tipus_de_beneficiaris}</span>
+                            <span className="contract-meta-label">Sector</span>
+                            <span className="contract-meta-value">{formatSubvencioSector(principalSector)}</span>
                         </div>
                     )}
                     <div className="contract-meta-item">
                         <span className="contract-meta-label">Període</span>
                         <span className="contract-meta-value">{annualActivity.period}</span>
+                    </div>
+                    <div className="contract-meta-item">
+                        <span className="contract-meta-label">Subvencions directes</span>
+                        <span className="contract-meta-value">{concessionTypeStats.directes} ({formatPercent(concessionTypeStats.percentatgeDirectes)})</span>
+                    </div>
+                    <div className="contract-meta-item">
+                        <span className="contract-meta-label">Altres subvencions</span>
+                        <span className="contract-meta-value">{concessionTypeStats.indirectes} ({formatPercent(1 - concessionTypeStats.percentatgeDirectes)})</span>
                     </div>
                 </div>
             </div>
@@ -2084,9 +2255,9 @@ function EntitatView({ entitatSlug, subvencions, onBack }) {
                 </div>
             )}
             <div className="search-section empresa-detail-contract-search">
-                <SearchField value={searchTerm} onValueChange={setSearchTerm} placeholder="Cerca per descripció, entitat o codi d'expedient" ariaLabel="Cerca per descripció, entitat o codi d'expedient" />
+                <SearchField value={searchTerm} onValueChange={setSearchTerm} placeholder="Cerca per descripció o codi d'expedient" ariaLabel="Cerca per descripció o codi d'expedient" />
                 <FilterActions open={filtersOpen} onToggle={() => setFiltersOpen(open => !open)} activeCount={activeFiltersCount} onReset={resetFilters} />
-                <div className={'filters search-filter-panel' + (!filtersOpen ? ' collapsed' : '')}>
+                <div className={'filters search-filter-panel subvencio-filter-primary' + (!filtersOpen ? ' collapsed' : '')}>
                     <div className="filter-group filter-group-standard">
                         <label className="filter-label">Ordenar per</label>
                         <select className="filter-select filter-select-standard" value={sortBy} onChange={event => setSortBy(event.target.value)} aria-label="Ordenar subvencions de l'entitat per">
@@ -2094,6 +2265,15 @@ function EntitatView({ entitatSlug, subvencions, onBack }) {
                             <option value="date-asc">Data (més antics)</option>
                             <option value="amount-desc">Import (descendent)</option>
                             <option value="amount-asc">Import (ascendent)</option>
+                        </select>
+                    </div>
+                    <div className="filter-group filter-group-standard">
+                        <label className="filter-label">Tipus</label>
+                        <select className="filter-select filter-select-standard" value={tipologiaFilter} onChange={event => setTipologiaFilter(event.target.value)} aria-label="Tipus de subvenció">
+                            <option value="">Tots els tipus</option>
+                            {SUBVENCIO_TIPOLOGIES.map(tipologia => (
+                                <option key={tipologia} value={tipologia}>{formatSubvencioSector(tipologia)}</option>
+                            ))}
                         </select>
                     </div>
                 </div>
@@ -2114,6 +2294,11 @@ function EntitatView({ entitatSlug, subvencions, onBack }) {
                         <span className="contract-meta-item"><span className="contract-meta-label">Entitat adjudicatària</span><span className="contract-meta-value">{subvencio.adjudicatario}</span></span>
                         <span className="contract-meta-item"><span className="contract-meta-label">Data</span><span className="contract-meta-value">{formatDate(subvencio.fecha)}</span></span>
                         <span className="contract-meta-item"><span className="contract-meta-label">Codi expedient</span><span className="contract-meta-value">{subvencio.codigo || '—'}</span></span>
+                        <span className="contract-pills">
+                            <span className="contract-pill" title={subvencio.finalitat_p_blica} aria-label={`Finalitat pública: ${subvencio.finalitat_p_blica}`}>
+                                {formatSubvencioSector(subvencio.finalitat_p_blica)}
+                            </span>
+                        </span>
                     </span>
                 </div>
             ))}
@@ -2356,6 +2541,7 @@ function SubvencionsView({ subvencions, onEntitatSelect }) {
     const [searchTerm, setSearchTerm] = useState('');
     const [filtersOpen, setFiltersOpen] = useState(false);
     const [sortBy, setSortBy] = useState('date-desc');
+    const [tipologiaFilter, setTipologiaFilter] = useState('');
     const [dateStart, setDateStart] = useState('');
     const [dateEnd, setDateEnd] = useState('');
     const [amountMin, setAmountMin] = useState('');
@@ -2366,6 +2552,7 @@ function SubvencionsView({ subvencions, onEntitatSelect }) {
     const filteredSubvencions = useMemo(() => {
         const filtered = subvencions.filter(subvencio => {
             if (searchTerm && !matchesSearchQuery([subvencio.descripcion, subvencio.adjudicatario, subvencio.codigo], searchTerm)) return false;
+            if (tipologiaFilter && subvencio.finalitat_p_blica !== tipologiaFilter) return false;
             if (dateStart && subvencio.fecha < dateStart) return false;
             if (dateEnd && subvencio.fecha > dateEnd) return false;
             if (amountMin !== '' && subvencio.importe < Number(amountMin)) return false;
@@ -2379,11 +2566,11 @@ function SubvencionsView({ subvencions, onEntitatSelect }) {
             if (sortBy === 'amount-asc') return a.importe - b.importe;
             return (Date.parse(b.fecha) || 0) - (Date.parse(a.fecha) || 0);
         });
-    }, [subvencions, searchTerm, dateStart, dateEnd, amountMin, amountMax, sortBy]);
+    }, [subvencions, searchTerm, tipologiaFilter, dateStart, dateEnd, amountMin, amountMax, sortBy]);
 
     const totalPages = Math.ceil(filteredSubvencions.length / itemsPerPage);
     const pageSubvencions = filteredSubvencions.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
-    const activeFiltersCount = [dateStart, dateEnd, amountMin, amountMax].filter(value => value !== '').length + (sortBy !== 'date-desc' ? 1 : 0);
+    const activeFiltersCount = [tipologiaFilter, dateStart, dateEnd, amountMin, amountMax].filter(value => value !== '').length + (sortBy !== 'date-desc' ? 1 : 0);
 
     useEffect(() => {
         const lastPage = Math.max(1, totalPages);
@@ -2393,6 +2580,7 @@ function SubvencionsView({ subvencions, onEntitatSelect }) {
     const resetFilters = () => {
         setSearchTerm('');
         setSortBy('date-desc');
+        setTipologiaFilter('');
         setDateStart('');
         setDateEnd('');
         setAmountMin('');
@@ -2453,7 +2641,7 @@ function SubvencionsView({ subvencions, onEntitatSelect }) {
                             controlsId="subvencio-filter-primary subvencio-filter-secondary"
                         />
 
-                        <div id="subvencio-filter-primary" className={'filters search-filter-panel' + (!filtersOpen ? ' collapsed' : '')}>
+                        <div id="subvencio-filter-primary" className={'filters search-filter-panel subvencio-filter-primary' + (!filtersOpen ? ' collapsed' : '')}>
                             <div className="filter-group filter-group-standard">
                                 <label className="filter-label">Ordenar per</label>
                                 <select className="filter-select filter-select-standard" value={sortBy} onChange={event => { setSortBy(event.target.value); setCurrentPage(1); }} aria-label="Ordenar subvencions per">
@@ -2461,6 +2649,15 @@ function SubvencionsView({ subvencions, onEntitatSelect }) {
                                     <option value="date-asc">Data (més antics)</option>
                                     <option value="amount-desc">Import (descendent)</option>
                                     <option value="amount-asc">Import (ascendent)</option>
+                                </select>
+                            </div>
+                            <div className="filter-group filter-group-standard">
+                                <label className="filter-label">Tipus</label>
+                                <select className="filter-select filter-select-standard" value={tipologiaFilter} onChange={event => { setTipologiaFilter(event.target.value); setCurrentPage(1); }} aria-label="Tipus de subvenció">
+                                    <option value="">Tots els tipus</option>
+                                    {SUBVENCIO_TIPOLOGIES.map(tipologia => (
+                                        <option key={tipologia} value={tipologia}>{formatSubvencioSector(tipologia)}</option>
+                                    ))}
                                 </select>
                             </div>
                         </div>
@@ -2516,6 +2713,11 @@ function SubvencionsView({ subvencions, onEntitatSelect }) {
                                     <span className="contract-meta-label">Codi expedient</span>
                                     <span className="contract-meta-value">{subvencio.codigo}</span>
                                 </span>
+                                <span className="contract-pills">
+                                    <span className="contract-pill" title={subvencio.finalitat_p_blica} aria-label={`Finalitat pública: ${subvencio.finalitat_p_blica}`}>
+                                        {formatSubvencioSector(subvencio.finalitat_p_blica)}
+                                    </span>
+                                </span>
                             </span>
                         </a>
                     ))}
@@ -2527,6 +2729,24 @@ function SubvencionsView({ subvencions, onEntitatSelect }) {
                     {filteredSubvencions.length > itemsPerPage && (
                         <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />
                     )}
+
+                    <div className="metodologia-wrapper">
+                        <div className="metodologia">
+                            <h3 className="metodologia-legal-title">Metodologia</h3>
+                            <p className="metodologia-intro">
+                                Les subvencions que apareixen en aquest cercador corresponen a les concessions publicades al Registre d'Ajuts i Subvencions de Catalunya (RAISC).
+                            </p>
+                            <p className="metodologia-intro">
+                                L'import que figura a cada subvenció és la quantitat concedida publicada oficialment. La interfície mostra únicament els registres amb beneficiaris identificats com a entitats publicables, pel que les concessions associades a persones físiques o a beneficiaris no publicables no apareixen al cercador.
+                            </p>
+                            <p className="metodologia-intro">
+                                El tractament de les dades es realitza a l'empara de l'article 6.1.e) del Reglament UE 2016/679 (RGPD) d'interès públic i de la Llei 19/2013, de 9 de desembre, de transparència, accés a la informació pública i bon govern, que estableix l'obligació de publicitat activa en matèria de contractació pública. Les dades es limiten a la informació estrictament necessària per al propòsit de transparència i es tracten d'acord amb el principi de minimització de dades (art. 5.1.c RGPD). Tota la informació publicada prové de fonts oficials de caràcter públic i no inclou dades de la vida privada de les persones.
+                            </p>
+                            <p className="metodologia-intro metodologia-intro-last">
+                                Les persones interessades poden exercir els drets d'accés, rectificació, limitació o oposició al tractament posant-se en contacte a través de la secció <a href="/avis-legal" className="prose-link">Avís legal</a>. El dret de supressió (dret a l'oblit) queda limitat per l'art. 17.3.b) del RGPD quan les dades figuren en registres oficials públics o en documentació administrativa de contractació pública, sense perjudici del dret a sol·licitar la revisió de possibles errors factuals.
+                            </p>
+                        </div>
+                    </div>
                 </>
             )}
         </div>
@@ -2874,6 +3094,7 @@ function App() {
         fraudes,
         concentracio,
         electoral,
+        dependencia,
         stats,
         summary,
         casosInvestigacio,
@@ -3215,6 +3436,7 @@ function App() {
             fraccionament: defaults(),
             monopoli: defaults(),
             electoral: defaults(),
+            dependencia: defaults(),
         };
         state[initialAnalysisSearch.tab] = {
             searchTerm: initialAnalysisSearch.searchTerm,
@@ -3233,6 +3455,7 @@ function App() {
         if (analisiTab === 'fraccionament') setAnalisiPageFrac(1);
         if (analisiTab === 'monopoli') setAnalisiPageMonop(1);
         if (analisiTab === 'electoral') setAnalisiPageElect(1);
+        if (analisiTab === 'dependencia') setAnalisiPageDependencia(1);
     };
     const setAnalisiSearch = value => setAnalisiFilterValue('searchTerm', value);
     const setAnalisiSort = value => setAnalisiFilterValue('sortBy', value);
@@ -3242,6 +3465,7 @@ function App() {
     const [analisiPageFrac, setAnalisiPageFrac] = useState(initialAnalysisSearch.tab === 'fraccionament' ? initialAnalysisSearch.currentPage : 1);
     const [analisiPageElect, setAnalisiPageElect] = useState(initialAnalysisSearch.tab === 'electoral' ? initialAnalysisSearch.currentPage : 1);
     const [analisiPageMonop, setAnalisiPageMonop] = useState(initialAnalysisSearch.tab === 'monopoli' ? initialAnalysisSearch.currentPage : 1);
+    const [analisiPageDependencia, setAnalisiPageDependencia] = useState(initialAnalysisSearch.tab === 'dependencia' ? initialAnalysisSearch.currentPage : 1);
     const analisiItemsPerPage = 25;
     useEffect(() => {
         setAnalisiFiltersOpen(false);
@@ -3256,6 +3480,7 @@ function App() {
     const [selectedCasoDetail, setSelectedCasoDetail] = useState(null);
     const [selectedConcentracioDetail, setSelectedConcentracioDetail] = useState(null);
     const [selectedElectoralismeDetail, setSelectedElectoralismeDetail] = useState(null);
+    const [selectedDependenciaDetail, setSelectedDependenciaDetail] = useState(null);
     const [pendingCasId, setPendingCasId] = useState(() => {
         const p = getCurrentRoute();
         return p.startsWith('/analisi/fraccionament/') ? p.slice('/analisi/fraccionament/'.length) : null;
@@ -3268,8 +3493,13 @@ function App() {
         const p = getCurrentRoute();
         return p.startsWith('/analisi/electoralisme/') ? p.slice('/analisi/electoralisme/'.length) : null;
     });
+    const [pendingDependenciaId, setPendingDependenciaId] = useState(() => {
+        const p = getCurrentRoute();
+        return p.startsWith('/analisi/dependencia/') ? p.slice('/analisi/dependencia/'.length) : null;
+    });
     const [selectedEmpresa, setSelectedEmpresa] = useState(null);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [isAnalisiMobileMenuOpen, setIsAnalisiMobileMenuOpen] = useState(false);
     useEffect(() => {
         document.documentElement.classList.toggle('mobile-menu-lock', isMobileMenuOpen);
         document.body.classList.toggle('mobile-menu-lock', isMobileMenuOpen);
@@ -3320,6 +3550,7 @@ function App() {
         if (state.tab === 'fraccionament') setAnalisiPageFrac(state.currentPage);
         if (state.tab === 'monopoli') setAnalisiPageMonop(state.currentPage);
         if (state.tab === 'electoral') setAnalisiPageElect(state.currentPage);
+        if (state.tab === 'dependencia') setAnalisiPageDependencia(state.currentPage);
     };
     const resetAllFilters = () => {
         // Contractes
@@ -3502,6 +3733,11 @@ function App() {
                 setSelectedElectoralismeDetail(null);
                 setActiveTab('cas-electoralisme');
             }
+            else if (p.startsWith('/analisi/dependencia/')) {
+                setPendingDependenciaId(p.slice('/analisi/dependencia/'.length));
+                setSelectedDependenciaDetail(null);
+                setActiveTab('cas-dependencia');
+            }
             else {
                 const tab = resolved.tab;
                 if (tab === 'empreses') setSelectedEmpresa(null);
@@ -3538,10 +3774,11 @@ function App() {
         if (activeTab === 'cas-fraccionament' && !selectedCasoDetail) return;
         if (activeTab === 'cas-concentracio' && !selectedConcentracioDetail) return;
         if (activeTab === 'cas-electoralisme' && !selectedElectoralismeDetail) return;
+        if (activeTab === 'cas-dependencia' && !selectedDependenciaDetail) return;
         const y = restoreScrollRef.current;
         restoreScrollRef.current = null;
         requestAnimationFrame(() => window.scrollTo({ top: y, behavior: 'auto' }));
-    }, [activeTab, selectedContractForDetail, selectedEmpresa, selectedCasoDetail, selectedConcentracioDetail, selectedElectoralismeDetail]);
+    }, [activeTab, selectedContractForDetail, selectedEmpresa, selectedCasoDetail, selectedConcentracioDetail, selectedElectoralismeDetail, selectedDependenciaDetail]);
 
     useEffect(() => {
         if (!pendingScrollTopRef.current || restoreScrollRef.current !== null) return;
@@ -3550,6 +3787,7 @@ function App() {
         if (activeTab === 'cas-fraccionament' && !selectedCasoDetail) return;
         if (activeTab === 'cas-concentracio' && !selectedConcentracioDetail) return;
         if (activeTab === 'cas-electoralisme' && !selectedElectoralismeDetail) return;
+        if (activeTab === 'cas-dependencia' && !selectedDependenciaDetail) return;
         pendingScrollTopRef.current = false;
 
         const scrollTop = () => window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
@@ -3559,7 +3797,7 @@ function App() {
             requestAnimationFrame(scrollTop);
         });
         window.setTimeout(scrollTop, 80);
-    }, [activeTab, selectedContractForDetail, selectedEmpresa, selectedCasoDetail, selectedConcentracioDetail, selectedElectoralismeDetail]);
+    }, [activeTab, selectedContractForDetail, selectedEmpresa, selectedCasoDetail, selectedConcentracioDetail, selectedElectoralismeDetail, selectedDependenciaDetail]);
     // ---------------------------------------------
 
     // Debounce de la cerca
@@ -3569,23 +3807,23 @@ function App() {
     }, [searchTerm]);
 
     const contractCount = useCountUp(stats?.total_contratos || 0, 2000, !loading && stats);
-    const importTotal = useCountUp(stats ? Math.floor(stats.importe_total / 1000000) : 0, 2000, !loading && stats);
-    const importTotalTenths = useCountUp(stats ? Math.round(stats.importe_total / 100000) : 0, 2000, !loading && stats);
+    const subvencionsCount = useCountUp(summary?.stats?.num_subvencions || 0, 2000, !loading && stats);
     const empresasCount = useCountUp(stats?.num_empresas || 0, 2000, !loading && stats);
     const personesMetricTotal = persones.length || summary?.stats?.num_persones || 0;
     const personesCount = useCountUp(personesMetricTotal, 2000, !loading && stats);
     const alertesVisibleTotal = useMemo(() =>
         fraudes.filter(f => f.nivell !== 'BAIX').length +
         concentracio.length +
-        electoral.filter(f => f.nivell !== 'BAIX').length
-        , [fraudes, concentracio, electoral]);
+        electoral.filter(f => f.nivell !== 'BAIX').length +
+        dependencia.filter(f => f.nivell !== 'BAIX').length
+        , [fraudes, concentracio, electoral, dependencia]);
     const alertesMetricTotal = alertesVisibleTotal || summary?.stats?.num_alertes || 0;
     const alertesCount = useCountUp(alertesMetricTotal, 2000, !loading && stats);
     const homeRiskCounts = useMemo(() => {
-        if (!fraudes.length && !concentracio.length && !electoral.length && summary?.home?.risk_counts) {
+        if (!fraudes.length && !concentracio.length && !electoral.length && !dependencia.length && summary?.home?.risk_counts) {
             return summary.home.risk_counts;
         }
-        const levels = [...fraudes, ...concentracio, ...electoral]
+        const levels = [...fraudes, ...concentracio, ...electoral, ...dependencia]
             .map(item => String(item.nivell || '').toUpperCase());
 
         return {
@@ -3593,7 +3831,7 @@ function App() {
             mitja: levels.filter(level => level === 'ALT').length,
             baix: levels.filter(level => level === 'OBSERVACIO' || level === 'BAIX').length,
         };
-    }, [fraudes, concentracio, electoral, summary]);
+    }, [fraudes, concentracio, electoral, dependencia, summary]);
 
     useEffect(() => {
         const route = getCurrentRoute();
@@ -3685,6 +3923,19 @@ function App() {
     }, [electoral, pendingElectoralismeId]);
 
     useEffect(() => {
+        if (dependencia.length > 0 && pendingDependenciaId) {
+            const cas = dependencia.find(item => String(item.id) === String(pendingDependenciaId));
+            if (cas) {
+                setSelectedDependenciaDetail(cas);
+                setAnalisiTab('dependencia');
+            } else {
+                handleNavigation('analisi', '/analisi', { replace: true });
+            }
+            setPendingDependenciaId(null);
+        }
+    }, [dependencia, pendingDependenciaId]);
+
+    useEffect(() => {
         if (activeTab === 'contracte' && selectedContractForDetail) {
             document.title = formatPageTitle(selectedContractForDetail.descripcion);
             return;
@@ -3713,6 +3964,10 @@ function App() {
             document.title = formatPageTitle(activeInvestigacioCase?.title || 'Investigació');
             return;
         }
+        if (activeTab === 'cas-dependencia' && selectedDependenciaDetail) {
+            document.title = formatPageTitle(`Cas #${selectedDependenciaDetail.id}`);
+            return;
+        }
         const titles = {
             'home': `${BRAND_NAME} | ${BRAND_TAGLINE}`,
             'loading': BRAND_NAME,
@@ -3727,7 +3982,7 @@ function App() {
             legal: BRAND_NAME
         };
         document.title = titles[activeTab] || BRAND_NAME;
-    }, [activeTab, selectedContractForDetail, selectedEmpresa, selectedCasoDetail, selectedConcentracioDetail, selectedElectoralismeDetail, activeInvestigacioCase, activeEntitatSubvencions]);
+    }, [activeTab, selectedContractForDetail, selectedEmpresa, selectedCasoDetail, selectedConcentracioDetail, selectedElectoralismeDetail, selectedDependenciaDetail, activeInvestigacioCase, activeEntitatSubvencions]);
 
     const contractesFiltrats = useMemo(() => {
         let result = [...contracts];
@@ -3827,7 +4082,9 @@ function App() {
             ? analisiPageFrac
             : analisiTab === 'monopoli'
                 ? analisiPageMonop
-                : analisiPageElect;
+                : analisiTab === 'electoral'
+                    ? analisiPageElect
+                    : analisiPageDependencia;
         const query = buildAnalysisSearchParams({
             tab: analisiTab,
             concentrationMode: concentracioMode,
@@ -3846,7 +4103,7 @@ function App() {
             scrollY,
         }, '', fullPath);
         saveScrollPosition(nextHref, scrollY);
-    }, [activeTab, analisiTab, concentracioMode, analisiSearch, analisiSort, analisiPageFrac, analisiPageMonop, analisiPageElect]);
+    }, [activeTab, analisiTab, concentracioMode, analisiSearch, analisiSort, analisiPageFrac, analisiPageMonop, analisiPageElect, analisiPageDependencia]);
 
     const fraudesFiltrats = useMemo(() => {
         let result = fraudes.filter(f => f.nivell !== 'BAIX');
@@ -3989,9 +4246,30 @@ function App() {
         return result;
     }, [electoral, analisiSearch, analisiSort]);
 
+    const dependenciaFiltrada = useMemo(() => {
+        let result = dependencia.filter(item => item.nivell !== 'BAIX');
+        if (analisiSearch.trim()) {
+            result = result.filter(item => matchesSearchQuery(
+                [item.entitat, item.cif, item.id, ...(item.motius || []), ...(item.subvencions || []).map(row => row.descripcion)],
+                analisiSearch
+            ));
+        }
+        result = [...result];
+        switch (analisiSort) {
+            case 'risk-asc': result.sort((a, b) => a.risc - b.risc); break;
+            case 'amount-desc': result.sort((a, b) => b.import_total - a.import_total); break;
+            case 'amount-asc': result.sort((a, b) => a.import_total - b.import_total); break;
+            case 'date-desc': result.sort((a, b) => new Date(b.data_fi) - new Date(a.data_fi)); break;
+            case 'date-asc': result.sort((a, b) => new Date(a.data_inici) - new Date(b.data_inici)); break;
+            default: result.sort((a, b) => b.risc - a.risc);
+        }
+        return result;
+    }, [dependencia, analisiSearch, analisiSort]);
+
     const totalPagesFrac = Math.max(1, Math.ceil(fraudesFiltrats.length / analisiItemsPerPage));
     const totalPagesElect = Math.max(1, Math.ceil(electoralFiltrats.length / analisiItemsPerPage));
     const totalPagesMonop = Math.max(1, Math.ceil(concentracioTemporal.length / analisiItemsPerPage));
+    const totalPagesDependencia = Math.max(1, Math.ceil(dependenciaFiltrada.length / analisiItemsPerPage));
 
     useEffect(() => {
         if (analisiPageFrac > totalPagesFrac) setAnalisiPageFrac(totalPagesFrac);
@@ -4002,10 +4280,14 @@ function App() {
     useEffect(() => {
         if (analisiPageMonop > totalPagesMonop) setAnalisiPageMonop(totalPagesMonop);
     }, [analisiPageMonop, totalPagesMonop]);
+    useEffect(() => {
+        if (analisiPageDependencia > totalPagesDependencia) setAnalisiPageDependencia(totalPagesDependencia);
+    }, [analisiPageDependencia, totalPagesDependencia]);
 
     const fraudesPaginats = fraudesFiltrats.slice((analisiPageFrac - 1) * analisiItemsPerPage, analisiPageFrac * analisiItemsPerPage);
     const electoralPaginats = electoralFiltrats.slice((analisiPageElect - 1) * analisiItemsPerPage, analisiPageElect * analisiItemsPerPage);
     const concentracioPaginada = concentracioTemporal.slice((analisiPageMonop - 1) * analisiItemsPerPage, analisiPageMonop * analisiItemsPerPage);
+    const dependenciaPaginada = dependenciaFiltrada.slice((analisiPageDependencia - 1) * analisiItemsPerPage, analisiPageDependencia * analisiItemsPerPage);
 
     const conteoRiesgos = useMemo(() => {
         const alto = fraudes.filter(f => f.nivel_riesgo === 'ALTO').length;
@@ -4046,6 +4328,7 @@ function App() {
         'cas-fraccionament': 'Anàlisi',
         'cas-concentracio': 'Anàlisi',
         'cas-electoralisme': 'Anàlisi',
+        'cas-dependencia': 'Anàlisi',
         casos: 'Investigació',
         'cas-investigacio': 'Investigació',
         sobre: 'Sobre',
@@ -4071,6 +4354,7 @@ function App() {
         setAnalisiPageFrac(1);
         setAnalisiPageMonop(1);
         setAnalisiPageElect(1);
+        setAnalisiPageDependencia(1);
     };
     const activeAnalisiFiltersCount = analisiSort !== 'risk-desc' ? 1 : 0;
 
@@ -4200,7 +4484,7 @@ function App() {
         const empresesActive = activeTab === 'empreses' || activeTab === 'empresa';
         const personesActive = activeTab === 'persones';
         const subvencionsActive = activeTab === 'subvencions' || activeTab === 'entitat';
-        const analisiActive = activeTab === 'analisi' || activeTab === 'cas-fraccionament' || activeTab === 'cas-concentracio' || activeTab === 'cas-electoralisme';
+        const analisiActive = activeTab === 'analisi' || activeTab === 'cas-fraccionament' || activeTab === 'cas-concentracio' || activeTab === 'cas-electoralisme' || activeTab === 'cas-dependencia';
         return (
             <div className="nav">
                 <a href={buildRouteUrl('/contractes')} className={'nav-tab' + (showActive && contractesActive ? ' active' : '')} aria-current={showActive && contractesActive ? 'page' : undefined} onClick={(event) => handleNavClick(event, () => { handleNavigation('buscador'); setSelectedEmpresa(null); setIsMobileMenuOpen(false); })}>Contractes</a>
@@ -4265,7 +4549,7 @@ function App() {
                         <div className="home-copy">
                             <h1 className="home-title">Tot és <em>públic</em></h1>
                             <p className="home-deck">
-                                Contractes, empreses, persones, imports i anàlisi en una cartografia oberta de la contractació pública de {AUTHORITY_NAME}.
+                                Contractes, empreses, persones, subvencions i anàlisi en una cartografia oberta de la contractació pública de {AUTHORITY_NAME}
                             </p>
                         </div>
 
@@ -4274,9 +4558,9 @@ function App() {
                                 <span className="home-metric-value">{contractCount.toLocaleString('ca-ES')}</span>
                                 <span className="home-metric-label">Contractes</span>
                             </a>
-                            <a href={buildRouteUrl('/contractes')} className="home-metric metric-import" onClick={interactive ? ((event) => handleHomeMetricLinkClick(event, () => { handleNavigation('buscador'); setIsMobileMenuOpen(false); })) : ((event) => event.preventDefault())} tabIndex={interactive ? 0 : -1}>
-                                <span className="home-metric-value">{(importTotalTenths / 10).toLocaleString('ca-ES', { minimumFractionDigits: 1, maximumFractionDigits: 1 })}M €</span>
-                                <span className="home-metric-label">Imports</span>
+                            <a href={buildRouteUrl('/subvencions')} className="home-metric metric-import" onClick={interactive ? ((event) => handleHomeMetricLinkClick(event, () => { handleNavigation('subvencions'); setIsMobileMenuOpen(false); })) : ((event) => event.preventDefault())} tabIndex={interactive ? 0 : -1}>
+                                <span className="home-metric-value">{subvencionsCount.toLocaleString('ca-ES')}</span>
+                                <span className="home-metric-label">Subvencions</span>
                             </a>
                             <a href={buildRouteUrl('/empreses')} className="home-metric metric-empreses" onClick={interactive ? ((event) => handleHomeMetricLinkClick(event, () => { handleNavigation('empreses'); setIsMobileMenuOpen(false); })) : ((event) => event.preventDefault())} tabIndex={interactive ? 0 : -1}>
                                 <span className="home-metric-value">{empresasCount.toLocaleString('ca-ES')}</span>
@@ -4375,7 +4659,7 @@ function App() {
             <div className="home-copy">
                 <h1 className="home-title">Tot és <em>públic</em></h1>
                 <p className="home-deck">
-                    Contractes, empreses, persones, imports i anàlisi en una cartografia oberta de la contractació pública de {AUTHORITY_NAME}.
+                    Contractes, empreses, persones, subvencions i anàlisi en una cartografia oberta de la contractació pública de {AUTHORITY_NAME}
                 </p>
             </div>
 
@@ -4384,9 +4668,9 @@ function App() {
                     <span className="home-metric-value">{contractCount.toLocaleString('ca-ES')}</span>
                     <span className="home-metric-label">Contractes</span>
                 </a>
-                <a href={buildRouteUrl('/contractes')} className="home-metric metric-import" onClick={interactive ? ((event) => handleHomeMetricLinkClick(event, () => { handleNavigation('buscador'); setIsMobileMenuOpen(false); })) : ((event) => event.preventDefault())} tabIndex={interactive && !isMobile() ? 0 : -1}>
-                    <span className="home-metric-value">{(importTotalTenths / 10).toLocaleString('ca-ES', { minimumFractionDigits: 1, maximumFractionDigits: 1 })}M €</span>
-                    <span className="home-metric-label">Imports</span>
+                <a href={buildRouteUrl('/subvencions')} className="home-metric metric-import" onClick={interactive ? ((event) => handleHomeMetricLinkClick(event, () => { handleNavigation('subvencions'); setIsMobileMenuOpen(false); })) : ((event) => event.preventDefault())} tabIndex={interactive && !isMobile() ? 0 : -1}>
+                    <span className="home-metric-value">{subvencionsCount.toLocaleString('ca-ES')}</span>
+                    <span className="home-metric-label">Subvencions</span>
                 </a>
                 <a href={buildRouteUrl('/empreses')} className="home-metric metric-empreses" onClick={interactive ? ((event) => handleHomeMetricLinkClick(event, () => { handleNavigation('empreses'); setIsMobileMenuOpen(false); })) : ((event) => event.preventDefault())} tabIndex={interactive && !isMobile() ? 0 : -1}>
                     <span className="home-metric-value">{empresasCount.toLocaleString('ca-ES')}</span>
@@ -4633,6 +4917,11 @@ function App() {
         handleNavigation('cas-electoralisme', `/analisi/electoralisme/${caso.id}`);
     };
 
+    const handleDependenciaClick = (caso) => {
+        setSelectedDependenciaDetail(caso);
+        handleNavigation('cas-dependencia', `/analisi/dependencia/${caso.id}`);
+    };
+
     const handleInvestigacioClick = (caso) => {
         handleNavigation('cas-investigacio', '/investigacio/' + caso.slug);
     };
@@ -4653,7 +4942,7 @@ function App() {
     const handleAnalisiTabKeyDown = (event) => {
         if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
         event.preventDefault();
-        const tabs = ['fraccionament', 'monopoli', 'electoral'];
+        const tabs = ['fraccionament', 'monopoli', 'electoral', 'dependencia'];
         const currentIndex = tabs.indexOf(analisiTab);
         let nextIndex = currentIndex;
         if (event.key === 'ArrowRight') nextIndex = (currentIndex + 1) % tabs.length;
@@ -4991,6 +5280,13 @@ function App() {
                 />
             )}
 
+            {activeTab === 'cas-dependencia' && selectedDependenciaDetail && canRenderDataTab && (
+                <CasDependenciaView
+                    caso={selectedDependenciaDetail}
+                    onBack={() => goBack(() => { handleNavigation('analisi', '/analisi'); setSelectedDependenciaDetail(null); })}
+                />
+            )}
+
             {activeTab === 'analisi' && canRenderDataTab && (
                 <>
                     <div className={'analisi-tabs-wrapper' + (!isPageTop ? ' is-hidden-on-scroll' : '')}>
@@ -5032,6 +5328,54 @@ function App() {
                         >
                             Electoralisme
                         </button>
+                        <button
+                            id="analisi-tab-dependencia"
+                            className={'analisi-tab' + (analisiTab === 'dependencia' ? ' active' : '')}
+                            onClick={() => setAnalisiTab('dependencia')}
+                            type="button"
+                            role="tab"
+                            aria-selected={analisiTab === 'dependencia'}
+                            aria-controls="analisi-panel"
+                            tabIndex={analisiTab === 'dependencia' ? 0 : -1}
+                            onKeyDown={handleAnalisiTabKeyDown}
+                        >
+                            Dependència
+                        </button>
+                        </div>
+                        <div className={'analisi-mobile-selector' + (isAnalisiMobileMenuOpen ? ' open' : '')}>
+                            <button
+                                className="analisi-mobile-current"
+                                type="button"
+                                aria-expanded={isAnalisiMobileMenuOpen}
+                                aria-controls="analisi-mobile-options"
+                                onClick={() => setIsAnalisiMobileMenuOpen(open => !open)}
+                            >
+                                <span className="analisi-mobile-current-group">
+                                    <span>{analisiTab === 'fraccionament' ? 'Fraccionament' : analisiTab === 'monopoli' ? 'Concentració' : analisiTab === 'electoral' ? 'Electoralisme' : 'Dependència'}</span>
+                                    <svg className="analisi-mobile-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
+                                </span>
+                            </button>
+                            <div id="analisi-mobile-options" className="analisi-mobile-options">
+                                {[
+                                    ['fraccionament', 'Fraccionament'],
+                                    ['monopoli', 'Concentració'],
+                                    ['electoral', 'Electoralisme'],
+                                    ['dependencia', 'Dependència']
+                                ].filter(([value]) => value !== analisiTab).map(([value, label]) => (
+                                    <button
+                                        key={value}
+                                        className="analisi-mobile-option"
+                                        type="button"
+                                        onClick={() => {
+                                            setAnalisiTab(value);
+                                            if (value === 'monopoli') setConcentracioMode('temporal');
+                                            setIsAnalisiMobileMenuOpen(false);
+                                        }}
+                                    >
+                                        {label}
+                                    </button>
+                                ))}
+                            </div>
                         </div>
                     </div>
 
@@ -5046,8 +5390,19 @@ function App() {
                                 ? 'Anàlisi de fraccionament'
                                 : analisiTab === 'monopoli'
                                     ? 'Anàlisi de concentració'
-                                    : "Anàlisi d'electoralisme"}
+                                    : analisiTab === 'electoral'
+                                        ? "Anàlisi d'electoralisme"
+                                        : 'Anàlisi de dependència'}
                         </h1>
+                        <p className="investigacio-detail-subtitle analisi-page-subtitle">
+                            {analisiTab === 'fraccionament'
+                                ? "Contractes menors agrupats que poden indicar una possible divisió d'un mateix encàrrec"
+                                : analisiTab === 'monopoli'
+                                    ? "Concentració d'adjudicacions de contractes en una mateixa empresa o xarxa mercantil"
+                                    : analisiTab === 'electoral'
+                                        ? 'Contractes de comunicació, difusió o visibilitat pública adjudicats en períodes electorals'
+                                        : 'Acumulació de subvencions directes en una mateixa entitat'}
+                        </p>
 
                         {analisiTab === 'fraccionament' && (
                             <>
@@ -5453,6 +5808,63 @@ function App() {
                                 )}
                             </>
                         )}
+
+                        {analisiTab === 'dependencia' && (
+                            <>
+                                <div className="metodologia-wrapper">
+                                    <div className="metodologia">
+                                        <h3 className="metodologia-title">Metodologia</h3>
+                                        <p className="metodologia-intro">L'algoritme Iguadata de dependència detecta entitats que acumulen subvencions directes o les reben de manera recurrent al llarg del temps. La identificació de patrons estadísticament rellevants i les alertes generades no impliquen cap irregularitat legal confirmada i han de ser interpretades en context.</p>
+                                        <div className="metodologia-steps-compact">
+                                            <div className="metodologia-step-compact"><span className="metodologia-step-num-compact">01</span><span className="metodologia-step-text-compact">Identificació de subvencions definides com a directes</span></div>
+                                            <div className="metodologia-step-compact"><span className="metodologia-step-num-compact">02</span><span className="metodologia-step-text-compact">Agrupació per entitat i any per mesurar recurrència, continuïtat i acumulació</span></div>
+                                            <div className="metodologia-step-compact"><span className="metodologia-step-num-compact">03</span><span className="metodologia-step-text-compact">Puntuació i classificació visual segons el nivell de risc</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="search-section analisi-search-section">
+                                    <SearchField value={analisiSearch} onValueChange={setAnalisiSearch} placeholder="Cerca per descripció, entitat o codi de cas" ariaLabel="Cerca casos de dependència" />
+                                    <FilterActions open={analisiFiltersOpen} onToggle={() => setAnalisiFiltersOpen(prev => !prev)} activeCount={activeAnalisiFiltersCount} onReset={resetAnalisiFilters} controlsId="analisi-filter-panel-dependencia" />
+                                    <div id="analisi-filter-panel-dependencia" className={"filters search-filter-panel search-filter-panel-analysis" + (!analisiFiltersOpen ? " collapsed" : "")}>
+                                        <div className="filter-group filter-group-wide">
+                                            <label className="filter-label">Ordenar per</label>
+                                            <select className="filter-select filter-select-standard" value={analisiSort} onChange={(event) => setAnalisiSort(event.target.value)} aria-label="Ordenar casos de dependència per">
+                                                <option value="risk-desc">Puntuació de risc (descendent)</option>
+                                                <option value="risk-asc">Puntuació de risc (ascendent)</option>
+                                                <option value="amount-desc">Import (descendent)</option>
+                                                <option value="amount-asc">Import (ascendent)</option>
+                                                <option value="date-desc">Data (més recents)</option>
+                                                <option value="date-asc">Data (més antics)</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="results-count" role="status" aria-live="polite">
+                                    <span className="results-count-total"><span className="results-count-prefix">S'han trobat </span><strong>{dependenciaFiltrada.length}</strong> alertes</span>
+                                    {dependenciaFiltrada.length > analisiItemsPerPage && <span className="results-count-page"><span className="results-count-page-full">Pàgina</span><span className="results-count-page-short">Pàg.</span> <strong>{analisiPageDependencia}</strong> de <strong>{totalPagesDependencia}</strong></span>}
+                                </div>
+
+                                <div className="analisi-alert-list">
+                                    {dependenciaPaginada.map(caso => (
+                                        <a key={caso.id} href={buildRouteUrl(`/analisi/dependencia/${caso.id}`)} className="card-link-wrapper" onClick={(event) => handleInternalLinkClick(event, () => handleDependenciaClick(caso))}>
+                                            <div className="contract-card analysis-list-card dependencia-card">
+                                                <div className="contract-header"><div className="contract-title">{caso.entitat}</div><div className="contract-amount">{formatCurrency(caso.import_total)}</div></div>
+                                                <div className="contract-meta analysis-list-meta">
+                                                    <div className="contract-meta-item analysis-list-primary"><span className="contract-meta-label">Acumulació</span><span className="contract-meta-value">{caso.num_subvencions} subvencions directes</span></div>
+                                                    <div className="contract-meta-item analysis-list-secondary"><span className="contract-meta-label">Període</span><span className="contract-meta-value">Del {formatDate(caso.data_inici)} al {formatDate(caso.data_fi)}</span></div>
+                                                    <div className="contract-pills"><span className={"risk-badge " + riskClass(caso.nivell)}>{riskLabel(caso.nivell)}</span><span className={"risk-badge " + riskClass(caso.nivell)}>{caso.risc}/100</span></div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    ))}
+                                </div>
+
+                                {dependenciaFiltrada.length === 0 && <EmptySearchState text="No s'han trobat alertes de dependència." onReset={resetAnalisiFilters} />}
+                                {dependenciaFiltrada.length > analisiItemsPerPage && <Pagination currentPage={analisiPageDependencia} totalPages={totalPagesDependencia} onPageChange={setAnalisiPageDependencia} />}
+                            </>
+                        )}
                     </div>
                 </>
             )
@@ -5464,7 +5876,7 @@ function App() {
                         <h1 className="page-title">Sobre el projecte</h1>
                         <div className="prose-wrapper narrative-story">
                             <p className="prose-intro">
-                                {BRAND_NAME} és la plataforma independent de periodisme de dades per a l'anàlisi de la contractació pública de {AUTHORITY_NAME} i dels seus organismes municipals.<br /><br />El projecte combina dades obertes de contractació, informació mercantil i algoritmes propis per fer més accessible, comprensible i fiscalitzable la despesa pública municipal.
+                                {BRAND_NAME} és la plataforma independent de periodisme de dades per a l'anàlisi de la contractació pública i les subvencions de {AUTHORITY_NAME} i dels seus organismes municipals.<br /><br />El projecte combina dades obertes de contractació i subvencions, informació mercantil i algoritmes propis per fer més accessible, comprensible i fiscalitzable la despesa pública municipal.
                             </p>
                             <h2 className="prose-heading">Autoria</h2>
                             <p className="prose-paragraph">
@@ -5472,27 +5884,30 @@ function App() {
                             </p>
                             <h2 className="prose-heading">Objectius</h2>
                             <p className="prose-paragraph">
-                                Iguadata neix amb tres objectius principals: facilitar l'accés de la ciutadania a la contractació pública municipal, detectar patrons que puguin merèixer revisió periodística o institucional, i construir una metodologia replicable per altres municipis.
+                                Iguadata neix amb tres objectius principals: facilitar l'accés de la ciutadania a la contractació i les subvencions públiques municipals, detectar patrons que puguin merèixer revisió periodística o institucional, i construir una metodologia replicable per altres municipis.
                             </p>
                             <p className="prose-paragraph">
                                 La plataforma no substitueix la feina dels òrgans fiscalitzadors, jurídics o administratius. El seu paper és ordenar dades disperses, mostrar relacions i generar indicadors que ajudin a fer millors preguntes.
                             </p>
                             <h2 className="prose-heading">Què analitza</h2>
                             <p className="prose-paragraph">
-                                Iguadata permet consultar contractes, empreses adjudicatàries, persones vinculades a aquestes empreses i diferents indicadors d'anàlisi.
+                                Iguadata permet consultar contractes, empreses adjudicatàries, persones vinculades a aquestes empreses, subvencions, entitats beneficiàries i diferents indicadors d'anàlisi.
                             </p>
                             <p className="prose-paragraph">
-                                Els principals blocs d'anàlisi són el possible fraccionament de contractes menors, la concentració d'adjudicacions en determinades empreses o sectors, els vincles mercantils entre empreses adjudicatàries i els patrons d'electoralisme o comunicació institucional en períodes sensibles.
+                                Els principals blocs d'anàlisi són el possible fraccionament de contractes menors, la concentració d'adjudicacions en determinades empreses o sectors, els patrons d'electoralisme o comunicació institucional en períodes sensibles i l'acumulació o recurrència de subvencions directes en una mateixa entitat.
                             </p>
                             <h2 className="prose-heading">Font de dades</h2>
                             <p className="prose-paragraph">
-                                Les dades de contractació provenen del Registre Públic de Contractes de la Generalitat de Catalunya, consultat mitjançant l'API Socrata Open Data (SODA). Una actualització automàtica setmanal genera una fotografia coherent dels contractes, les empreses, les persones i els resultats analítics.
+                                Les dades de contractació provenen del Registre Públic de Contractes de la Generalitat de Catalunya, consultat mitjançant l'API Socrata Open Data (SODA).
+                            </p>
+                            <p className="prose-paragraph">
+                                Les dades de subvencions provenen del Registre d'Ajuts i Subvencions de Catalunya (RAISC). Iguadata selecciona les concessions emeses per {AUTHORITY_NAME} i publica únicament els registres amb beneficiaris identificats com a entitats publicables.
                             </p>
                             <p className="prose-paragraph">
                                 Les dades mercantils provenen del Butlletí Oficial del Registre Mercantil (BORME), registre oficial públic. Mitjançant un processament massiu, tècniques de mineria de dades i l'ús de programari de codi obert desenvolupat per <a href="https://github.com/BquantFinance" target="_blank" rel="noopener noreferrer" className="prose-link">Gerard Sánchez Vidal</a>, s'identifiquen els càrrecs actius de les empreses adjudicatàries.
                             </p>
                             <p className="prose-paragraph">
-                                També es generen fitxers JSON propis que permeten alimentar la interfície, accelerar la consulta i mantenir còpies de suport en cas de caiguda temporal de fonts externes.
+                                Una actualització automàtica setmanal genera una fotografia coherent dels contractes, les subvencions, les empreses, les entitats, les persones i els resultats analítics. També es generen fitxers JSON propis que permeten alimentar la interfície, accelerar la consulta i mantenir còpies de suport en cas de caiguda temporal de les fonts externes.
                             </p>
                             <h2 className="prose-heading">Metodologia</h2>
                             <p className="prose-paragraph">
@@ -5503,10 +5918,10 @@ function App() {
                             </p>
                             <h2 className="prose-heading">Limitacions</h2>
                             <p className="prose-paragraph">
-                                Les dades poden contenir errors d'origen, omissions, canvis posteriors o incidències derivades de la normalització automatitzada. L'aparició d'una empresa, persona o contracte en una alerta no implica cap irregularitat legal confirmada.
+                                Les dades poden contenir errors d'origen, omissions, duplicats, canvis posteriors o incidències derivades de la normalització i classificació automatitzades. L'aparició d'una empresa, entitat, persona, contracte o subvenció en una alerta no implica cap irregularitat legal confirmada.
                             </p>
                             <p className="prose-paragraph">
-                                Qualsevol conclusió periodística, administrativa o jurídica requereix contrastar les dades amb expedients originals, informes tècnics, resolucions, plecs i altres fonts documentals.
+                                Qualsevol conclusió periodística, administrativa o jurídica requereix contrastar les dades amb expedients originals, informes tècnics, resolucions, convocatòries, bases reguladores, plecs i altres fonts documentals.
                             </p>
                             <h2 className="prose-heading">Codi obert</h2>
                             <p className="prose-paragraph">
@@ -5528,7 +5943,7 @@ function App() {
                         <div className="prose-wrapper narrative-story">
                             <h2 className="prose-heading">1. Identificació i titularitat</h2>
                             <p className="prose-paragraph">
-                                {BRAND_NAME} és un projecte independent de transparència, anàlisi de dades públiques i fiscalització cívica de la contractació pública vinculada a {AUTHORITY_NAME} i als seus organismes municipals relacionats.
+                                {BRAND_NAME} és un projecte independent de transparència, anàlisi de dades públiques i fiscalització cívica de la contractació i les subvencions públiques vinculades a {AUTHORITY_NAME} i als seus organismes municipals relacionats.
                             </p>
                             <p className="prose-paragraph">
                                 Iguadata no és una administració pública ni actua en nom de cap institució. La plataforma té finalitats informatives, periodístiques, educatives, de recerca i de divulgació.
@@ -5541,6 +5956,9 @@ function App() {
                                 Les dades de contractació provenen del Registre Públic de Contractes de la Generalitat de Catalunya, consultat mitjançant l'API Socrata Open Data (SODA), i d'altres fonts públiques oficials de contractació.
                             </p>
                             <p className="prose-paragraph">
+                                Les dades de subvencions provenen del Registre d'Ajuts i Subvencions de Catalunya (RAISC). Iguadata selecciona les concessions emeses per {AUTHORITY_NAME} i processa la informació sobre els imports, les finalitats, els procediments de concessió i els beneficiaris que poden ser objecte de publicació.
+                            </p>
+                            <p className="prose-paragraph">
                                 Les dades mercantils provenen del Butlletí Oficial del Registre Mercantil (BORME), registre oficial de caràcter públic. Iguadata processa aquestes dades mitjançant eines automatitzades de descàrrega, extracció, normalització i encreuament de dades.
                             </p>
                             <p className="prose-paragraph">
@@ -5548,14 +5966,14 @@ function App() {
                             </p>
                             <h2 className="prose-heading">3. Actualització i traçabilitat</h2>
                             <p className="prose-paragraph">
-                                La plataforma publica fotografies setmanals coherents generades a partir de fonts públiques. Part del procés d'actualització s'executa de manera automatitzada mitjançant GitHub Actions, amb controls tècnics de validació, còpies de seguretat i comprovació d'integritat dels fitxers generats.
+                                La plataforma publica fotografies setmanals coherents de contractes i subvencions generades a partir de fonts públiques. Part del procés d'actualització s'executa de manera automatitzada mitjançant GitHub Actions, amb controls tècnics de validació, preservació de registres, còpies de seguretat i comprovacions d'integritat dels fitxers generats.
                             </p>
                             <p className="prose-paragraph">
                                 Aquest procés no altera el sentit de les dades originals, sinó que les estructura, normalitza i encreua per facilitar-ne la consulta pública i l'anàlisi.
                             </p>
                             <h2 className="prose-heading">4. Finalitat del tractament</h2>
                             <p className="prose-paragraph">
-                                La finalitat d'Iguadata és facilitar l'accés, la comprensió i l'anàlisi de dades públiques sobre contractació municipal, concentració empresarial, vincles mercantils, possibles patrons de fraccionament i indicadors de risc electoral o institucional.
+                                La finalitat d'Iguadata és facilitar l'accés, la comprensió i l'anàlisi de dades públiques sobre contractació i subvencions municipals, concentració empresarial, vincles mercantils, possibles patrons de fraccionament, indicadors de risc electoral o institucional i acumulació o recurrència de subvencions directes.
                             </p>
                             <p className="prose-paragraph">
                                 Les visualitzacions, cercadors i alertes tenen una funció orientativa i d'interès públic. No constitueixen resolucions administratives, acusacions, proves concloents ni imputacions d'irregularitat.
@@ -5565,7 +5983,10 @@ function App() {
                                 Els indicadors generats per Iguadata identifiquen patrons estadístics o relacions documentals que poden ser d'interès públic, però requereixen sempre interpretació contextual i, si escau, verificació addicional amb expedients, informes, plecs, resolucions administratives o altres fonts originals.
                             </p>
                             <p className="prose-paragraph">
-                                L'aparició d'una empresa, persona, contracte o organisme dins d'un indicador no implica per si mateixa cap infracció legal, administrativa, ètica o penal.
+                                L'aparició d'una empresa, entitat, persona, contracte o subvenció dins d'un indicador no implica per si mateixa cap infracció legal, administrativa, ètica o penal.
+                            </p>
+                            <p className="prose-paragraph">
+                                En particular, les alertes de dependència identifiquen patrons d'acumulació o recurrència de subvencions directes. Aquests patrons poden tenir interès públic o periodístic, però no acrediten un ús indegut dels recursos públics ni una actuació irregular de l'entitat beneficiària o de l'administració concedent.
                             </p>
                             <h2 className="prose-heading">6. Protecció de dades personals</h2>
                             <p className="prose-paragraph">
@@ -5578,17 +5999,20 @@ function App() {
                                 L'import associat a una persona correspon al volum total adjudicat a les empreses amb les quals consta vinculada en els registres analitzats. Aquesta xifra no representa ingressos personals, patrimoni individual, remuneració ni benefici directe.
                             </p>
                             <p className="prose-paragraph">
+                                En l'àmbit de les subvencions, la interfície pública mostra únicament els registres corresponents a beneficiaris identificats com a entitats publicables. Les concessions associades a persones físiques o a beneficiaris no publicables es conserven només quan són necessàries per al tractament intern i l'anàlisi agregada, però no es mostren ni permeten identificar-ne els beneficiaris a la plataforma pública.
+                            </p>
+                            <p className="prose-paragraph">
                                 El tractament es fonamenta en l'article 6.1.e) del Reglament (UE) 2016/679 (RGPD), relatiu al compliment d'una missió realitzada en interès públic, i en la normativa de transparència i accés a la informació pública, inclosa la Llei 19/2013 i la Llei 19/2014 de transparència de Catalunya.
                             </p>
                             <p className="prose-paragraph">
-                                Les dades publicades es limiten a la informació estrictament necessària per a la finalitat de transparència i fiscalització pública, d'acord amb el principi de minimització de dades de l'article 5.1.c del RGPD. No es publiquen dades de la vida privada, domicilis personals, documents identificatius, dades de contacte privades ni informació aliena a la dimensió mercantil o contractual analitzada.
+                                Les dades publicades es limiten a la informació estrictament necessària per a la finalitat de transparència i fiscalització pública, d'acord amb el principi de minimització de dades de l'article 5.1.c del RGPD. No es publiquen dades de la vida privada, domicilis personals, documents identificatius, dades de contacte privades ni informació aliena a les dimensions mercantil, contractual o subvencional analitzades.
                             </p>
                             <h2 className="prose-heading">7. Exercici de drets i correccions</h2>
                             <p className="prose-paragraph">
                                 Les persones interessades poden exercir els drets d'accés, rectificació, limitació o oposició al tractament a <a href={`mailto:${CONTACT_EMAIL}`} className="prose-link">{CONTACT_EMAIL}</a>.
                             </p>
                             <p className="prose-paragraph">
-                                També es poden comunicar errors factuals, homonímies, atribucions incorrectes, canvis de denominació, dades desactualitzades o incidències derivades del processament automatitzat.
+                                També es poden comunicar errors factuals, homonímies, atribucions incorrectes, canvis de denominació, classificacions errònies, dades desactualitzades o incidències derivades del processament automatitzat.
                             </p>
                             <p className="prose-paragraph">
                                 Quan es detecti un error factual, Iguadata podrà corregir, contextualitzar, limitar o retirar la informació afectada. El dret de supressió pot quedar limitat quan la informació procedeixi de registres oficials públics o documentació administrativa de contractació pública, d'acord amb l'article 17.3.b) del RGPD.
@@ -5602,7 +6026,7 @@ function App() {
                             </p>
                             <h2 className="prose-heading">9. Fonts normatives principals</h2>
                             <p className="prose-paragraph">
-                                El present avís legal es basa, entre altres, en el Reglament (UE) 2016/679 (RGPD), la Llei 19/2013, de transparència, accés a la informació pública i bon govern, i la Llei 19/2014, de transparència, accés a la informació pública i bon govern de Catalunya.
+                                El present avís legal es basa, entre altres, en el Reglament (UE) 2016/679 (RGPD), la Llei 19/2013, de transparència, accés a la informació pública i bon govern, la Llei 19/2014, de transparència, accés a la informació pública i bon govern de Catalunya, la Llei 38/2003, general de subvencions, i el Decret 271/2019, pel qual s'aprova el Reglament del Registre de subvencions i ajuts de Catalunya.
                             </p>
                         </div>
                     </div>

@@ -609,6 +609,10 @@ html.home-lock-scroll {
     grid-template-columns: 1fr;
 }
 
+.subvencio-filter-primary {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
 .search-filter-panel-analysis {
     grid-template-columns: minmax(0, 1fr);
 }
@@ -1412,7 +1416,8 @@ html.home-lock-scroll {
 
 .analisi-case-fraccionament .analisi-case-amount,
 .analisi-case-concentracio .analisi-case-amount,
-.analisi-case-electoralisme .analisi-case-amount {
+.analisi-case-electoralisme .analisi-case-amount,
+.analisi-case-dependencia .analisi-case-amount {
     margin-bottom: 1.25rem;
     font-size: var(--display-xl);
     line-height: 1;
@@ -1460,6 +1465,10 @@ html.home-lock-scroll {
 }
 
 .analisi-detail-info-meta-concentracio.is-historic {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.analisi-detail-info-meta-dependencia {
     grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
@@ -1615,6 +1624,10 @@ html.home-lock-scroll {
     gap: 1.5rem 2rem;
     padding-top: 0;
     border-top: 0;
+}
+
+.entitat-detail-info-meta {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
 .empresa-detail-title-pills {
@@ -2378,7 +2391,7 @@ body.home-scroll-surface::-webkit-scrollbar {
 }
 
 .metric-alertes {
-    --node-x: 52.25%;
+    --node-x: 50%;
     --node-y: 80%;
     --metric-dot-x: 2.8rem;
     --float-delay: -5.8s;
@@ -5118,7 +5131,8 @@ body.home-scroll-surface::-webkit-scrollbar {
 }
 
 .analisi-tabs {
-    width: 37.5vw;
+    width: min(52vw, 760px);
+    min-width: 640px;
     margin: 0 auto;
     padding: 0.35rem;
     display: flex;
@@ -5175,7 +5189,8 @@ body.home-scroll-surface::-webkit-scrollbar {
     }
 
     .analisi-tabs {
-        width: 57vw;
+        width: min(76vw, 700px);
+        min-width: 0;
     }
 
     .analisi-tab {
@@ -5284,6 +5299,10 @@ body.home-scroll-surface::-webkit-scrollbar {
     line-height: 1.7;
     margin-bottom: 1.5rem;
     color: var(--text-light);
+}
+
+.analisi-mobile-selector {
+    display: none;
 }
 
 .narrative-info-page > .page-title {
@@ -5799,7 +5818,13 @@ body.home-scroll-surface::-webkit-scrollbar {
 }
 
 .analisi-page-reordered>.page-title {
-    margin-bottom: var(--analisi-title-space-bottom, 3rem);
+    margin-bottom: 1rem;
+}
+
+.analisi-page-subtitle {
+    width: 50vw;
+    margin: 0 auto var(--analisi-title-space-bottom, 3rem);
+    text-align: center;
 }
 
 .analisi-page-reordered>.metodologia-wrapper {
@@ -7272,6 +7297,7 @@ body.home-scroll-surface::-webkit-scrollbar {
 
     .analisi-tabs-wrapper {
         position: static;
+        margin-top: -0.5rem;
         padding: 0;
         overflow-x: visible;
         border-bottom: 0;
@@ -7281,38 +7307,106 @@ body.home-scroll-surface::-webkit-scrollbar {
     }
 
     .analisi-tabs {
-        width: calc(100% - (var(--mobile-pad-x) * 2));
-        min-width: 0;
-        margin: 1rem auto 0;
-        padding: 0.35rem;
-        flex-wrap: nowrap;
-        gap: 0.35rem;
-        border: 1px solid var(--border);
-        border-radius: var(--radius-pill);
-        background: rgba(255, 255, 255, 0.88);
-        box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
-        backdrop-filter: blur(14px);
-        -webkit-backdrop-filter: blur(14px);
+        display: none;
     }
 
-    .analisi-tab {
-        flex: 1 1 0;
-        min-width: 0;
-        min-height: 44px;
-        padding: 0.72rem 0.5rem;
+    .analisi-mobile-selector {
+        position: relative;
+        display: block;
+        width: 50vw;
+        min-width: 13rem;
+        max-width: calc(100vw - 2rem);
+        margin: 0 auto;
+    }
+
+    .analisi-mobile-current {
+        display: flex;
+        width: 100%;
+        height: 2.8rem;
+        min-height: 2.8rem;
+        align-items: center;
+        justify-content: center;
+        padding: 0 1rem;
         border: 0;
         border-radius: var(--radius-pill);
-        margin-bottom: 0;
-        background: transparent;
-        font-size: 0.625rem;
-        line-height: 1;
-        white-space: nowrap;
+        background: var(--surface);
+        color: var(--navy);
+        font-family: var(--font-mono);
+        font-size: var(--text-xs);
+        font-weight: 500;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        cursor: pointer;
+        box-shadow: 0 12px 30px rgba(13, 31, 60, 0.16);
+        transition: background 0.2s ease, color 0.2s ease;
     }
 
-    .analisi-tab.active {
-        border-color: var(--navy);
+    .analisi-mobile-selector.open .analisi-mobile-current {
         background: var(--navy);
         color: var(--surface);
+    }
+
+    .analisi-mobile-current-group {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.35rem;
+    }
+
+    .analisi-mobile-chevron {
+        transition: transform 0.22s ease;
+    }
+
+    .analisi-mobile-selector.open .analisi-mobile-chevron {
+        transform: rotate(180deg);
+    }
+
+    .analisi-mobile-options {
+        width: 100%;
+        height: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.35rem;
+        overflow: visible;
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        padding: 0;
+        transition: height 0.28s ease, opacity 0.2s ease, padding-top 0.28s ease, visibility 0s linear 0.28s;
+    }
+
+    .analisi-mobile-selector.open .analisi-mobile-options {
+        height: 9.45rem;
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        padding-top: 0.35rem;
+        transition-delay: 0s;
+    }
+
+    .analisi-mobile-option {
+        display: flex;
+        flex: 0 0 2.8rem;
+        width: 100%;
+        height: 2.8rem;
+        min-height: 42px;
+        align-items: center;
+        justify-content: center;
+        padding: 0 1rem;
+        border: 0;
+        border-radius: var(--radius-pill);
+        background: var(--surface);
+        color: var(--navy);
+        font-family: var(--font-mono);
+        font-size: var(--text-xs);
+        font-weight: 500;
+        letter-spacing: 0.05em;
+        text-align: center;
+        text-transform: uppercase;
+        white-space: nowrap;
+        cursor: pointer;
+        box-shadow: 0 12px 30px rgba(13, 31, 60, 0.16);
     }
 
     .analisi-page {
@@ -7325,8 +7419,13 @@ body.home-scroll-surface::-webkit-scrollbar {
     .analisi-page .page-title {
         font-size: clamp(2.65rem, 11vw, 3.35rem) !important;
         line-height: 0.98;
-        margin: 0 0 var(--analisi-title-space-bottom, 2rem);
+        margin: 0 0 1rem;
         text-align: center;
+    }
+
+    .analisi-page-subtitle {
+        width: auto;
+        margin-bottom: var(--analisi-title-space-bottom, 2rem);
     }
 
     .analisi-page .data-skeleton-title {

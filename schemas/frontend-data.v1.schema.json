@@ -12,6 +12,7 @@
     "fraccionament": "fraccionament.json",
     "concentracio": "concentracio.json",
     "electoralisme": "electoralisme.json",
+    "dependencia": "dependencia.json",
     "investigacio": "investigacio.json",
     "subvencions": "subvencions.json"
   },
@@ -25,6 +26,7 @@
     "fraccionament",
     "concentracio",
     "electoralisme",
+    "dependencia",
     "investigacio",
     "subvencions"
   ],
@@ -104,6 +106,9 @@
           "items": { "$ref": "#/$defs/analysisAlert" }
         }
       }
+    },
+    "dependencia": {
+      "$ref": "#/$defs/dependencyDocument"
     },
     "investigacio": {
       "type": "array",
@@ -243,6 +248,38 @@
         "contractes": {
           "type": "array",
           "items": { "$ref": "#/$defs/analysisContract" }
+        }
+      }
+    },
+    "dependencyDocument": {
+      "type": "object",
+      "required": ["metodologia", "generat_a", "registres_font", "concessions_logiques", "duplicats_logics_exclosos", "total_alertes", "alertes"],
+      "properties": {
+        "metodologia": { "type": "string", "minLength": 1 },
+        "generat_a": { "type": "string", "minLength": 1 },
+        "registres_font": { "type": "integer", "minimum": 0 },
+        "concessions_logiques": { "type": "integer", "minimum": 0 },
+        "duplicats_logics_exclosos": { "type": "integer", "minimum": 0 },
+        "total_alertes": { "type": "integer", "minimum": 0 },
+        "alertes": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/dependencyAlert" }
+        }
+      }
+    },
+    "dependencyAlert": {
+      "type": "object",
+      "required": ["id", "risc", "nivell", "entitat", "import_total", "num_subvencions", "subvencions"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "risc": { "type": "integer", "minimum": 0, "maximum": 100 },
+        "nivell": { "type": "string", "minLength": 1 },
+        "entitat": { "type": "string", "minLength": 1 },
+        "import_total": { "type": "number", "minimum": 0 },
+        "num_subvencions": { "type": "integer", "minimum": 2 },
+        "subvencions": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/subsidy" }
         }
       }
     },

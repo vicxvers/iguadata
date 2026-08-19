@@ -129,6 +129,10 @@ function resolveRoute(path) {
     tab: 'cas-electoralisme',
     canonicalPath: path
   };
+  if (path.startsWith('/analisi/dependencia/')) return {
+    tab: 'cas-dependencia',
+    canonicalPath: path
+  };
   return {
     tab: 'home',
     canonicalPath: '/'
@@ -211,7 +215,8 @@ const ANALYSIS_SEARCH_DEFAULTS = {
 const ANALYSIS_TAB_QUERY_VALUES = {
   fraccionament: 'fraccionament',
   monopoli: 'concentracio',
-  electoral: 'electoralisme'
+  electoral: 'electoralisme',
+  dependencia: 'dependencia'
 };
 const ANALYSIS_MODE_QUERY_VALUES = {
   historic: 'sectors',
@@ -386,8 +391,8 @@ async function fetchCoreData() {
     }
   };
 }
-const DATA_TABS = ['buscador', 'empreses', 'persones', 'contracte', 'empresa', 'analisi', 'cas-fraccionament', 'cas-concentracio', 'cas-electoralisme', 'cas-investigacio'];
-const ANALYSIS_TABS = ['analisi', 'cas-fraccionament', 'cas-concentracio', 'cas-electoralisme'];
+const DATA_TABS = ['buscador', 'empreses', 'persones', 'contracte', 'empresa', 'analisi', 'cas-fraccionament', 'cas-concentracio', 'cas-electoralisme', 'cas-dependencia', 'cas-investigacio'];
+const ANALYSIS_TABS = ['analisi', 'cas-fraccionament', 'cas-concentracio', 'cas-electoralisme', 'cas-dependencia'];
 const INVESTIGATION_TABS = ['casos', 'cas-investigacio'];
 const SUBVENTION_TABS = ['subvencions', 'entitat'];
 function useIguadataData(activeTab) {
@@ -398,6 +403,7 @@ function useIguadataData(activeTab) {
   const [fraudes, setFraudes] = useState([]);
   const [concentracio, setConcentracio] = useState([]);
   const [electoral, setElectoral] = useState([]);
+  const [dependencia, setDependencia] = useState([]);
   const [stats, setStats] = useState(null);
   const [summary, setSummary] = useState(null);
   const [casosInvestigacio, setCasosInvestigacio] = useState(CASOS_INVESTIGACIO_FALLBACK);
@@ -558,11 +564,12 @@ function useIguadataData(activeTab) {
     if (!summaryResolved || !ANALYSIS_TABS.includes(activeTab) || analisiLoaded) return;
     let cancelled = false;
     setAnalisiError(false);
-    Promise.all([fetchJsonDataset('/json/fraccionament.json', 'Fraccionament'), fetchJsonDataset('/json/concentracio.json', 'Concentracio'), fetchJsonDataset('/json/electoralisme.json', 'Electoralisme')]).then(([fraccionamentData, concentracioData, electoralismeData]) => {
+    Promise.all([fetchJsonDataset('/json/fraccionament.json', 'Fraccionament'), fetchJsonDataset('/json/concentracio.json', 'Concentracio'), fetchJsonDataset('/json/electoralisme.json', 'Electoralisme'), fetchJsonDataset('/json/dependencia.json', 'Dependència')]).then(([fraccionamentData, concentracioData, electoralismeData, dependenciaData]) => {
       if (cancelled) return;
       setFraudes(fraccionamentData && fraccionamentData.alertes || []);
       setConcentracio(concentracioData && concentracioData.alertes || []);
       setElectoral(electoralismeData && electoralismeData.alertes || []);
+      setDependencia(dependenciaData && dependenciaData.alertes || []);
     }).catch(error => {
       console.error('Error loading analysis data:', error);
       if (!cancelled) setAnalisiError(true);
@@ -618,6 +625,7 @@ function useIguadataData(activeTab) {
     fraudes,
     concentracio,
     electoral,
+    dependencia,
     stats,
     summary,
     casosInvestigacio,
@@ -889,6 +897,26 @@ function formatTipus(tipo) {
   };
   return m[tipo] || tipo;
 }
+function formatSubvencioSector(finalitat) {
+  const sectors = {
+    'Serveis Socials i Promoció Social': 'Social',
+    'Cultura': 'Cultura',
+    'Comerç, Turisme i Pimes': 'Comerç',
+    "Accés a l'habitatge i foment de l'edificació": 'Habitatge',
+    "Foment de l'Ocupació": 'Ocupació',
+    'Cooperació internacional per al desenvolupament i cultural': 'Cooperació',
+    'Educació': 'Educació',
+    'Sanitat': 'Sanitat',
+    'Altres actuacions de caràcter econòmic': 'Economia',
+    'Altres Prestacions econòmiques': 'Altres'
+  };
+  return sectors[finalitat] || 'Altres';
+}
+function isSubvencioDirecta(subvencio) {
+  const text = normalizeSearchText([subvencio.objecte_de_la_convocat_ria, subvencio.t_tol_convocat_ria_catal, subvencio.t_tol_convocat_ria_castell, subvencio.discriminador_de_la_concessi, subvencio.descripcion].join(' '));
+  return /\bdirect(?:a|e|es)?\b/.test(text);
+}
+const SUBVENCIO_TIPOLOGIES = ['Serveis Socials i Promoció Social', 'Cultura', 'Comerç, Turisme i Pimes', "Accés a l'habitatge i foment de l'edificació", "Foment de l'Ocupació", 'Cooperació internacional per al desenvolupament i cultural', 'Educació', 'Sanitat', 'Altres actuacions de caràcter econòmic', 'Altres Prestacions econòmiques'];
 function formatTipusLimit(t) {
   const m = {
     'obres': 'Obres',
@@ -2466,6 +2494,182 @@ function CasElectoralismeView({
     className: "share-arrow"
   }), " Compartir"))));
 }
+function CasDependenciaView({
+  caso,
+  onBack
+}) {
+  if (!caso) return null;
+  const [shareActionsOpen, setShareActionsOpen] = useState(false);
+  const [shareCopyStatus, setShareCopyStatus] = useState('');
+  const shareActionsRef = useRef(null);
+  const shareStatusTimerRef = useRef(null);
+  const annualDependenciaStats = useMemo(() => {
+    const totalsByYear = {};
+    for (const subvencio of caso.subvencions || []) {
+      const year = subvencio.año || Number(String(subvencio.fecha || '').slice(0, 4));
+      if (!year) continue;
+      totalsByYear[year] = (totalsByYear[year] || 0) + (Number(subvencio.importe) || 0);
+    }
+    const annualTotals = Object.values(totalsByYear);
+    return {
+      average: annualTotals.length ? caso.import_total / annualTotals.length : 0,
+      maximum: annualTotals.length ? Math.max(...annualTotals) : 0
+    };
+  }, [caso]);
+  useEffect(() => {
+    if (!shareActionsOpen) return;
+    const closeShareActions = event => {
+      if (event.type === 'keydown' && event.key !== 'Escape') return;
+      if (event.type === 'pointerdown' && shareActionsRef.current?.contains(event.target)) return;
+      setShareActionsOpen(false);
+    };
+    document.addEventListener('pointerdown', closeShareActions);
+    document.addEventListener('keydown', closeShareActions);
+    return () => {
+      document.removeEventListener('pointerdown', closeShareActions);
+      document.removeEventListener('keydown', closeShareActions);
+    };
+  }, [shareActionsOpen]);
+  useEffect(() => () => window.clearTimeout(shareStatusTimerRef.current), []);
+  const copyDependenciaLink = async () => {
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      setShareCopyStatus('Enllaç copiat');
+    } catch (_) {
+      setShareCopyStatus("No s'ha pogut copiar");
+    }
+    window.clearTimeout(shareStatusTimerRef.current);
+    shareStatusTimerRef.current = window.setTimeout(() => setShareCopyStatus(''), 1800);
+  };
+  return React.createElement("div", {
+    className: "container analisi-detail-page"
+  }, React.createElement("h1", {
+    className: "page-title"
+  }, "Detall de depend\xE8ncia"), React.createElement("div", {
+    className: "analisi-detail-hero analisi-case-hero analisi-case-dependencia"
+  }, React.createElement("div", {
+    className: "analisi-case-amount"
+  }, formatCurrency(caso.import_total)), React.createElement("div", {
+    className: "contract-header analisi-case-header analisi-fraccionament-title-row"
+  }, React.createElement("h2", {
+    className: "analisi-case-title-wrap"
+  }, React.createElement("a", {
+    href: buildRouteUrl(`/entitats/${caso.entitat_slug}`),
+    className: "analisi-case-title-link"
+  }, caso.entitat))), React.createElement("div", {
+    className: "analisi-detail-contract-count"
+  }, caso.num_subvencions, " subvencions directes"), React.createElement("div", {
+    className: "contract-pills analisi-detail-hero-pills"
+  }, React.createElement("span", {
+    className: "risk-badge " + riskClass(caso.nivell)
+  }, riskLabel(caso.nivell)), React.createElement("span", {
+    className: "risk-badge " + riskClass(caso.nivell),
+    style: {
+      fontVariantNumeric: 'tabular-nums'
+    }
+  }, caso.risc, "/100"))), React.createElement("div", {
+    className: "analisi-detail-info-card"
+  }, React.createElement("div", {
+    className: "contract-meta analisi-detail-info-meta analisi-detail-info-meta-dependencia"
+  }, React.createElement("div", {
+    className: "contract-meta-item"
+  }, React.createElement("span", {
+    className: "contract-meta-label"
+  }, "Per\xEDode"), React.createElement("span", {
+    className: "contract-meta-value"
+  }, "Del ", formatDate(caso.data_inici), " al ", formatDate(caso.data_fi))), React.createElement("div", {
+    className: "contract-meta-item"
+  }, React.createElement("span", {
+    className: "contract-meta-label"
+  }, "Mitjana anual"), React.createElement("span", {
+    className: "contract-meta-value"
+  }, formatCurrency(annualDependenciaStats.average))), React.createElement("div", {
+    className: "contract-meta-item"
+  }, React.createElement("span", {
+    className: "contract-meta-label"
+  }, "M\xE0xim anual"), React.createElement("span", {
+    className: "contract-meta-value"
+  }, formatCurrency(annualDependenciaStats.maximum))))), React.createElement("section", {
+    className: "analisi-detail-section-card",
+    "aria-labelledby": "dependencia-indicators-title"
+  }, React.createElement("h2", {
+    id: "dependencia-indicators-title",
+    className: "analisi-detail-section-title"
+  }, "Indicadors"), React.createElement("ul", {
+    className: "analisi-detail-text-list"
+  }, (caso.motius || []).map(motiu => React.createElement("li", {
+    key: motiu
+  }, motiu)))), (caso.subvencions || []).map(subvencio => React.createElement("div", {
+    key: subvencio.id,
+    className: "contract-card"
+  }, React.createElement("div", {
+    className: "contract-header"
+  }, React.createElement("div", {
+    className: "contract-title"
+  }, subvencio.descripcion), React.createElement("div", {
+    className: "contract-amount"
+  }, formatCurrency(subvencio.importe))), React.createElement("div", {
+    className: "contract-meta"
+  }, React.createElement("div", {
+    className: "contract-meta-item"
+  }, React.createElement("span", {
+    className: "contract-meta-label"
+  }, "Data"), React.createElement("span", {
+    className: "contract-meta-value"
+  }, formatDate(subvencio.fecha))), React.createElement("div", {
+    className: "contract-meta-item"
+  }, React.createElement("span", {
+    className: "contract-meta-label"
+  }, "Codi expedient"), React.createElement("span", {
+    className: "contract-meta-value"
+  }, subvencio.codigo)), React.createElement("div", {
+    className: "contract-pills"
+  }, React.createElement("span", {
+    className: "contract-pill"
+  }, formatSubvencioSector(subvencio.finalitat_p_blica)))))), React.createElement("div", {
+    className: "contracte-detail-actions-row"
+  }, React.createElement("button", {
+    onClick: onBack,
+    className: "btn-share contracte-detail-back",
+    title: "Tornar",
+    "aria-label": "Tornar",
+    type: "button"
+  }, React.createElement("svg", {
+    className: "contracte-detail-back-icon",
+    xmlns: "http://www.w3.org/2000/svg",
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: "2",
+    strokeLinecap: "round",
+    strokeLinejoin: "round",
+    "aria-hidden": "true"
+  }, React.createElement("path", {
+    d: "M19 12H5"
+  }), React.createElement("polyline", {
+    points: "12 19 5 12 12 5"
+  })), React.createElement("span", null, "Tornar")), React.createElement("div", {
+    className: `contracte-detail-share contracte-detail-share-standalone${shareActionsOpen ? ' is-open' : ''}`,
+    ref: shareActionsRef
+  }, React.createElement("div", {
+    id: "dependencia-share-actions",
+    className: "contracte-detail-share-actions",
+    "aria-hidden": !shareActionsOpen
+  }, React.createElement("button", {
+    className: "btn-share contracte-detail-share-btn",
+    onClick: copyDependenciaLink,
+    tabIndex: shareActionsOpen ? 0 : -1,
+    type: "button"
+  }, shareCopyStatus || "Copia l'enllaç")), React.createElement("button", {
+    className: "btn-share contracte-detail-share-btn",
+    onClick: () => setShareActionsOpen(open => !open),
+    "aria-expanded": shareActionsOpen,
+    "aria-controls": "dependencia-share-actions",
+    type: "button"
+  }, React.createElement("em", {
+    className: "share-arrow"
+  }), " Compartir"))));
+}
 function EmpresesView({
   empreses,
   onEmpresaSelect,
@@ -2912,8 +3116,8 @@ function EmpresaView({
   }, React.createElement(SearchField, {
     value: searchTerm,
     onValueChange: setSearchTerm,
-    placeholder: "Cerca per descripci\xF3, empresa o codi d'expedient",
-    ariaLabel: "Cerca per descripci\xF3, empresa o codi d'expedient"
+    placeholder: "Cerca per descripci\xF3 o codi d'expedient",
+    ariaLabel: "Cerca per descripci\xF3 o codi d'expedient"
   }), React.createElement(FilterActions, {
     open: empresaFiltersOpen,
     onToggle: () => setEmpresaFiltersOpen(prev => !prev),
@@ -3142,6 +3346,7 @@ function EntitatView({
   const totalImport = allEntitatSubvencions.reduce((sum, subvencio) => sum + (Number(subvencio.importe) || 0), 0);
   const [searchTerm, setSearchTerm] = useState('');
   const [sortBy, setSortBy] = useState('date-desc');
+  const [tipologiaFilter, setTipologiaFilter] = useState('');
   const [dateStart, setDateStart] = useState('');
   const [dateEnd, setDateEnd] = useState('');
   const [amountMin, setAmountMin] = useState('');
@@ -3153,7 +3358,7 @@ function EntitatView({
   const shareActionsRef = useRef(null);
   const shareStatusTimerRef = useRef(null);
   const itemsPerPage = 25;
-  useEffect(() => setCurrentPage(1), [searchTerm, sortBy, dateStart, dateEnd, amountMin, amountMax]);
+  useEffect(() => setCurrentPage(1), [searchTerm, sortBy, tipologiaFilter, dateStart, dateEnd, amountMin, amountMax]);
   useEffect(() => {
     if (!shareActionsOpen) return;
     const closeShareActions = event => {
@@ -3192,9 +3397,33 @@ function EntitatView({
       period: firstYear ? firstYear === lastYear ? String(firstYear) : `${firstYear}–${lastYear}` : '—'
     };
   }, [allEntitatSubvencions]);
+  const principalSector = useMemo(() => {
+    const sectors = {};
+    for (const subvencio of allEntitatSubvencions) {
+      const finalitat = subvencio.finalitat_p_blica;
+      if (!finalitat) continue;
+      if (!sectors[finalitat]) sectors[finalitat] = {
+        count: 0,
+        amount: 0
+      };
+      sectors[finalitat].count += 1;
+      sectors[finalitat].amount += Number(subvencio.importe) || 0;
+    }
+    return Object.entries(sectors).sort(([, a], [, b]) => b.count - a.count || b.amount - a.amount)[0]?.[0] || '';
+  }, [allEntitatSubvencions]);
+  const concessionTypeStats = useMemo(() => {
+    const directes = allEntitatSubvencions.filter(isSubvencioDirecta).length;
+    const totals = allEntitatSubvencions.length;
+    return {
+      directes,
+      indirectes: totals - directes,
+      percentatgeDirectes: totals ? directes / totals : 0
+    };
+  }, [allEntitatSubvencions]);
   const filteredSubvencions = useMemo(() => {
     const result = allEntitatSubvencions.filter(subvencio => {
       if (searchTerm && !matchesSearchQuery([subvencio.descripcion, subvencio.adjudicatario, subvencio.codigo], searchTerm)) return false;
+      if (tipologiaFilter && subvencio.finalitat_p_blica !== tipologiaFilter) return false;
       if (dateStart && subvencio.fecha < dateStart) return false;
       if (dateEnd && subvencio.fecha > dateEnd) return false;
       if (amountMin !== '' && subvencio.importe < Number(amountMin)) return false;
@@ -3207,20 +3436,20 @@ function EntitatView({
       if (sortBy === 'amount-asc') return a.importe - b.importe;
       return (Date.parse(b.fecha) || 0) - (Date.parse(a.fecha) || 0);
     });
-  }, [allEntitatSubvencions, searchTerm, sortBy, dateStart, dateEnd, amountMin, amountMax]);
+  }, [allEntitatSubvencions, searchTerm, sortBy, tipologiaFilter, dateStart, dateEnd, amountMin, amountMax]);
   const totalPages = Math.ceil(filteredSubvencions.length / itemsPerPage);
   const pageSubvencions = filteredSubvencions.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
-  const firstSubvencio = allEntitatSubvencions[0] || {};
   const resetFilters = () => {
     setSearchTerm('');
     setSortBy('date-desc');
+    setTipologiaFilter('');
     setDateStart('');
     setDateEnd('');
     setAmountMin('');
     setAmountMax('');
     setCurrentPage(1);
   };
-  const activeFiltersCount = [dateStart, dateEnd, amountMin, amountMax, sortBy !== 'date-desc' ? sortBy : ''].filter(Boolean).length;
+  const activeFiltersCount = [tipologiaFilter, dateStart, dateEnd, amountMin, amountMax, sortBy !== 'date-desc' ? sortBy : ''].filter(Boolean).length;
   const copyEntitatLink = async () => {
     try {
       await navigator.clipboard.writeText(window.location.href);
@@ -3248,26 +3477,32 @@ function EntitatView({
   }, allEntitatSubvencions.length, " subvencions")), React.createElement("div", {
     className: "empresa-detail-info-card"
   }, React.createElement("div", {
-    className: "contract-meta empresa-detail-info-meta"
-  }, firstSubvencio.cif_beneficiari && React.createElement("div", {
+    className: "contract-meta empresa-detail-info-meta entitat-detail-info-meta"
+  }, principalSector && React.createElement("div", {
     className: "contract-meta-item"
   }, React.createElement("span", {
     className: "contract-meta-label"
-  }, "CIF"), React.createElement("span", {
+  }, "Sector"), React.createElement("span", {
     className: "contract-meta-value"
-  }, firstSubvencio.cif_beneficiari)), firstSubvencio.tipus_de_beneficiaris && React.createElement("div", {
-    className: "contract-meta-item"
-  }, React.createElement("span", {
-    className: "contract-meta-label"
-  }, "Tipus de beneficiari"), React.createElement("span", {
-    className: "contract-meta-value"
-  }, firstSubvencio.tipus_de_beneficiaris)), React.createElement("div", {
+  }, formatSubvencioSector(principalSector))), React.createElement("div", {
     className: "contract-meta-item"
   }, React.createElement("span", {
     className: "contract-meta-label"
   }, "Per\xEDode"), React.createElement("span", {
     className: "contract-meta-value"
-  }, annualActivity.period)))), annualActivity.items.length > 1 && React.createElement("div", {
+  }, annualActivity.period)), React.createElement("div", {
+    className: "contract-meta-item"
+  }, React.createElement("span", {
+    className: "contract-meta-label"
+  }, "Subvencions directes"), React.createElement("span", {
+    className: "contract-meta-value"
+  }, concessionTypeStats.directes, " (", formatPercent(concessionTypeStats.percentatgeDirectes), ")")), React.createElement("div", {
+    className: "contract-meta-item"
+  }, React.createElement("span", {
+    className: "contract-meta-label"
+  }, "Altres subvencions"), React.createElement("span", {
+    className: "contract-meta-value"
+  }, concessionTypeStats.indirectes, " (", formatPercent(1 - concessionTypeStats.percentatgeDirectes), ")")))), annualActivity.items.length > 1 && React.createElement("div", {
     className: "empresa-activity-visual",
     "aria-label": "Hist\xF2ric anual de les subvencions concedides a aquesta entitat"
   }, React.createElement("div", {
@@ -3294,15 +3529,15 @@ function EntitatView({
   }, React.createElement(SearchField, {
     value: searchTerm,
     onValueChange: setSearchTerm,
-    placeholder: "Cerca per descripci\xF3, entitat o codi d'expedient",
-    ariaLabel: "Cerca per descripci\xF3, entitat o codi d'expedient"
+    placeholder: "Cerca per descripci\xF3 o codi d'expedient",
+    ariaLabel: "Cerca per descripci\xF3 o codi d'expedient"
   }), React.createElement(FilterActions, {
     open: filtersOpen,
     onToggle: () => setFiltersOpen(open => !open),
     activeCount: activeFiltersCount,
     onReset: resetFilters
   }), React.createElement("div", {
-    className: 'filters search-filter-panel' + (!filtersOpen ? ' collapsed' : '')
+    className: 'filters search-filter-panel subvencio-filter-primary' + (!filtersOpen ? ' collapsed' : '')
   }, React.createElement("div", {
     className: "filter-group filter-group-standard"
   }, React.createElement("label", {
@@ -3320,7 +3555,21 @@ function EntitatView({
     value: "amount-desc"
   }, "Import (descendent)"), React.createElement("option", {
     value: "amount-asc"
-  }, "Import (ascendent)")))), React.createElement("div", {
+  }, "Import (ascendent)"))), React.createElement("div", {
+    className: "filter-group filter-group-standard"
+  }, React.createElement("label", {
+    className: "filter-label"
+  }, "Tipus"), React.createElement("select", {
+    className: "filter-select filter-select-standard",
+    value: tipologiaFilter,
+    onChange: event => setTipologiaFilter(event.target.value),
+    "aria-label": "Tipus de subvenci\xF3"
+  }, React.createElement("option", {
+    value: ""
+  }, "Tots els tipus"), SUBVENCIO_TIPOLOGIES.map(tipologia => React.createElement("option", {
+    key: tipologia,
+    value: tipologia
+  }, formatSubvencioSector(tipologia)))))), React.createElement("div", {
     className: 'filters-row search-filter-panel search-filter-panel-secondary' + (!filtersOpen ? ' collapsed' : '')
   }, React.createElement("div", {
     className: "filter-group"
@@ -3403,7 +3652,13 @@ function EntitatView({
     className: "contract-meta-label"
   }, "Codi expedient"), React.createElement("span", {
     className: "contract-meta-value"
-  }, subvencio.codigo || '—'))))), filteredSubvencions.length === 0 && React.createElement(EmptySearchState, {
+  }, subvencio.codigo || '—')), React.createElement("span", {
+    className: "contract-pills"
+  }, React.createElement("span", {
+    className: "contract-pill",
+    title: subvencio.finalitat_p_blica,
+    "aria-label": `Finalitat pública: ${subvencio.finalitat_p_blica}`
+  }, formatSubvencioSector(subvencio.finalitat_p_blica)))))), filteredSubvencions.length === 0 && React.createElement(EmptySearchState, {
     text: "No s'han trobat subvencions.",
     onReset: resetFilters
   }), filteredSubvencions.length > itemsPerPage && React.createElement(Pagination, {
@@ -3668,6 +3923,7 @@ function SubvencionsView({
   const [searchTerm, setSearchTerm] = useState('');
   const [filtersOpen, setFiltersOpen] = useState(false);
   const [sortBy, setSortBy] = useState('date-desc');
+  const [tipologiaFilter, setTipologiaFilter] = useState('');
   const [dateStart, setDateStart] = useState('');
   const [dateEnd, setDateEnd] = useState('');
   const [amountMin, setAmountMin] = useState('');
@@ -3677,6 +3933,7 @@ function SubvencionsView({
   const filteredSubvencions = useMemo(() => {
     const filtered = subvencions.filter(subvencio => {
       if (searchTerm && !matchesSearchQuery([subvencio.descripcion, subvencio.adjudicatario, subvencio.codigo], searchTerm)) return false;
+      if (tipologiaFilter && subvencio.finalitat_p_blica !== tipologiaFilter) return false;
       if (dateStart && subvencio.fecha < dateStart) return false;
       if (dateEnd && subvencio.fecha > dateEnd) return false;
       if (amountMin !== '' && subvencio.importe < Number(amountMin)) return false;
@@ -3689,10 +3946,10 @@ function SubvencionsView({
       if (sortBy === 'amount-asc') return a.importe - b.importe;
       return (Date.parse(b.fecha) || 0) - (Date.parse(a.fecha) || 0);
     });
-  }, [subvencions, searchTerm, dateStart, dateEnd, amountMin, amountMax, sortBy]);
+  }, [subvencions, searchTerm, tipologiaFilter, dateStart, dateEnd, amountMin, amountMax, sortBy]);
   const totalPages = Math.ceil(filteredSubvencions.length / itemsPerPage);
   const pageSubvencions = filteredSubvencions.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
-  const activeFiltersCount = [dateStart, dateEnd, amountMin, amountMax].filter(value => value !== '').length + (sortBy !== 'date-desc' ? 1 : 0);
+  const activeFiltersCount = [tipologiaFilter, dateStart, dateEnd, amountMin, amountMax].filter(value => value !== '').length + (sortBy !== 'date-desc' ? 1 : 0);
   useEffect(() => {
     const lastPage = Math.max(1, totalPages);
     if (currentPage > lastPage) setCurrentPage(lastPage);
@@ -3700,6 +3957,7 @@ function SubvencionsView({
   const resetFilters = () => {
     setSearchTerm('');
     setSortBy('date-desc');
+    setTipologiaFilter('');
     setDateStart('');
     setDateEnd('');
     setAmountMin('');
@@ -3771,7 +4029,7 @@ function SubvencionsView({
     controlsId: "subvencio-filter-primary subvencio-filter-secondary"
   }), React.createElement("div", {
     id: "subvencio-filter-primary",
-    className: 'filters search-filter-panel' + (!filtersOpen ? ' collapsed' : '')
+    className: 'filters search-filter-panel subvencio-filter-primary' + (!filtersOpen ? ' collapsed' : '')
   }, React.createElement("div", {
     className: "filter-group filter-group-standard"
   }, React.createElement("label", {
@@ -3792,7 +4050,24 @@ function SubvencionsView({
     value: "amount-desc"
   }, "Import (descendent)"), React.createElement("option", {
     value: "amount-asc"
-  }, "Import (ascendent)")))), React.createElement("div", {
+  }, "Import (ascendent)"))), React.createElement("div", {
+    className: "filter-group filter-group-standard"
+  }, React.createElement("label", {
+    className: "filter-label"
+  }, "Tipus"), React.createElement("select", {
+    className: "filter-select filter-select-standard",
+    value: tipologiaFilter,
+    onChange: event => {
+      setTipologiaFilter(event.target.value);
+      setCurrentPage(1);
+    },
+    "aria-label": "Tipus de subvenci\xF3"
+  }, React.createElement("option", {
+    value: ""
+  }, "Tots els tipus"), SUBVENCIO_TIPOLOGIES.map(tipologia => React.createElement("option", {
+    key: tipologia,
+    value: tipologia
+  }, formatSubvencioSector(tipologia)))))), React.createElement("div", {
     id: "subvencio-filter-secondary",
     className: 'filters-row search-filter-panel search-filter-panel-secondary' + (!filtersOpen ? ' collapsed' : '')
   }, React.createElement("div", {
@@ -3900,14 +4175,37 @@ function SubvencionsView({
     className: "contract-meta-label"
   }, "Codi expedient"), React.createElement("span", {
     className: "contract-meta-value"
-  }, subvencio.codigo))))), filteredSubvencions.length === 0 && React.createElement(EmptySearchState, {
+  }, subvencio.codigo)), React.createElement("span", {
+    className: "contract-pills"
+  }, React.createElement("span", {
+    className: "contract-pill",
+    title: subvencio.finalitat_p_blica,
+    "aria-label": `Finalitat pública: ${subvencio.finalitat_p_blica}`
+  }, formatSubvencioSector(subvencio.finalitat_p_blica)))))), filteredSubvencions.length === 0 && React.createElement(EmptySearchState, {
     text: "No s'han trobat subvencions.",
     onReset: resetFilters
   }), filteredSubvencions.length > itemsPerPage && React.createElement(Pagination, {
     currentPage: currentPage,
     totalPages: totalPages,
     onPageChange: setCurrentPage
-  })));
+  }), React.createElement("div", {
+    className: "metodologia-wrapper"
+  }, React.createElement("div", {
+    className: "metodologia"
+  }, React.createElement("h3", {
+    className: "metodologia-legal-title"
+  }, "Metodologia"), React.createElement("p", {
+    className: "metodologia-intro"
+  }, "Les subvencions que apareixen en aquest cercador corresponen a les concessions publicades al Registre d'Ajuts i Subvencions de Catalunya (RAISC)."), React.createElement("p", {
+    className: "metodologia-intro"
+  }, "L'import que figura a cada subvenci\xF3 \xE9s la quantitat concedida publicada oficialment. La interf\xEDcie mostra \xFAnicament els registres amb beneficiaris identificats com a entitats publicables, pel que les concessions associades a persones f\xEDsiques o a beneficiaris no publicables no apareixen al cercador."), React.createElement("p", {
+    className: "metodologia-intro"
+  }, "El tractament de les dades es realitza a l'empara de l'article 6.1.e) del Reglament UE 2016/679 (RGPD) d'inter\xE8s p\xFAblic i de la Llei 19/2013, de 9 de desembre, de transpar\xE8ncia, acc\xE9s a la informaci\xF3 p\xFAblica i bon govern, que estableix l'obligaci\xF3 de publicitat activa en mat\xE8ria de contractaci\xF3 p\xFAblica. Les dades es limiten a la informaci\xF3 estrictament necess\xE0ria per al prop\xF2sit de transpar\xE8ncia i es tracten d'acord amb el principi de minimitzaci\xF3 de dades (art. 5.1.c RGPD). Tota la informaci\xF3 publicada prov\xE9 de fonts oficials de car\xE0cter p\xFAblic i no inclou dades de la vida privada de les persones."), React.createElement("p", {
+    className: "metodologia-intro metodologia-intro-last"
+  }, "Les persones interessades poden exercir els drets d'acc\xE9s, rectificaci\xF3, limitaci\xF3 o oposici\xF3 al tractament posant-se en contacte a trav\xE9s de la secci\xF3 ", React.createElement("a", {
+    href: "/avis-legal",
+    className: "prose-link"
+  }, "Av\xEDs legal"), ". El dret de supressi\xF3 (dret a l'oblit) queda limitat per l'art. 17.3.b) del RGPD quan les dades figuren en registres oficials p\xFAblics o en documentaci\xF3 administrativa de contractaci\xF3 p\xFAblica, sense perjudici del dret a sol\xB7licitar la revisi\xF3 de possibles errors factuals.")))));
 }
 function CasosView({
   casos,
@@ -4301,6 +4599,7 @@ function App() {
     fraudes,
     concentracio,
     electoral,
+    dependencia,
     stats,
     summary,
     casosInvestigacio,
@@ -4626,7 +4925,8 @@ function App() {
     const state = {
       fraccionament: defaults(),
       monopoli: defaults(),
-      electoral: defaults()
+      electoral: defaults(),
+      dependencia: defaults()
     };
     state[initialAnalysisSearch.tab] = {
       searchTerm: initialAnalysisSearch.searchTerm,
@@ -4648,6 +4948,7 @@ function App() {
     if (analisiTab === 'fraccionament') setAnalisiPageFrac(1);
     if (analisiTab === 'monopoli') setAnalisiPageMonop(1);
     if (analisiTab === 'electoral') setAnalisiPageElect(1);
+    if (analisiTab === 'dependencia') setAnalisiPageDependencia(1);
   };
   const setAnalisiSearch = value => setAnalisiFilterValue('searchTerm', value);
   const setAnalisiSort = value => setAnalisiFilterValue('sortBy', value);
@@ -4657,6 +4958,7 @@ function App() {
   const [analisiPageFrac, setAnalisiPageFrac] = useState(initialAnalysisSearch.tab === 'fraccionament' ? initialAnalysisSearch.currentPage : 1);
   const [analisiPageElect, setAnalisiPageElect] = useState(initialAnalysisSearch.tab === 'electoral' ? initialAnalysisSearch.currentPage : 1);
   const [analisiPageMonop, setAnalisiPageMonop] = useState(initialAnalysisSearch.tab === 'monopoli' ? initialAnalysisSearch.currentPage : 1);
+  const [analisiPageDependencia, setAnalisiPageDependencia] = useState(initialAnalysisSearch.tab === 'dependencia' ? initialAnalysisSearch.currentPage : 1);
   const analisiItemsPerPage = 25;
   useEffect(() => {
     setAnalisiFiltersOpen(false);
@@ -4671,6 +4973,7 @@ function App() {
   const [selectedCasoDetail, setSelectedCasoDetail] = useState(null);
   const [selectedConcentracioDetail, setSelectedConcentracioDetail] = useState(null);
   const [selectedElectoralismeDetail, setSelectedElectoralismeDetail] = useState(null);
+  const [selectedDependenciaDetail, setSelectedDependenciaDetail] = useState(null);
   const [pendingCasId, setPendingCasId] = useState(() => {
     const p = getCurrentRoute();
     return p.startsWith('/analisi/fraccionament/') ? p.slice('/analisi/fraccionament/'.length) : null;
@@ -4683,8 +4986,13 @@ function App() {
     const p = getCurrentRoute();
     return p.startsWith('/analisi/electoralisme/') ? p.slice('/analisi/electoralisme/'.length) : null;
   });
+  const [pendingDependenciaId, setPendingDependenciaId] = useState(() => {
+    const p = getCurrentRoute();
+    return p.startsWith('/analisi/dependencia/') ? p.slice('/analisi/dependencia/'.length) : null;
+  });
   const [selectedEmpresa, setSelectedEmpresa] = useState(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isAnalisiMobileMenuOpen, setIsAnalisiMobileMenuOpen] = useState(false);
   useEffect(() => {
     document.documentElement.classList.toggle('mobile-menu-lock', isMobileMenuOpen);
     document.body.classList.toggle('mobile-menu-lock', isMobileMenuOpen);
@@ -4731,6 +5039,7 @@ function App() {
     if (state.tab === 'fraccionament') setAnalisiPageFrac(state.currentPage);
     if (state.tab === 'monopoli') setAnalisiPageMonop(state.currentPage);
     if (state.tab === 'electoral') setAnalisiPageElect(state.currentPage);
+    if (state.tab === 'dependencia') setAnalisiPageDependencia(state.currentPage);
   };
   const resetAllFilters = () => {
     setSearchTerm('');
@@ -4916,6 +5225,10 @@ function App() {
         setPendingElectoralismeId(p.slice('/analisi/electoralisme/'.length));
         setSelectedElectoralismeDetail(null);
         setActiveTab('cas-electoralisme');
+      } else if (p.startsWith('/analisi/dependencia/')) {
+        setPendingDependenciaId(p.slice('/analisi/dependencia/'.length));
+        setSelectedDependenciaDetail(null);
+        setActiveTab('cas-dependencia');
       } else {
         const tab = resolved.tab;
         if (tab === 'empreses') setSelectedEmpresa(null);
@@ -4952,13 +5265,14 @@ function App() {
     if (activeTab === 'cas-fraccionament' && !selectedCasoDetail) return;
     if (activeTab === 'cas-concentracio' && !selectedConcentracioDetail) return;
     if (activeTab === 'cas-electoralisme' && !selectedElectoralismeDetail) return;
+    if (activeTab === 'cas-dependencia' && !selectedDependenciaDetail) return;
     const y = restoreScrollRef.current;
     restoreScrollRef.current = null;
     requestAnimationFrame(() => window.scrollTo({
       top: y,
       behavior: 'auto'
     }));
-  }, [activeTab, selectedContractForDetail, selectedEmpresa, selectedCasoDetail, selectedConcentracioDetail, selectedElectoralismeDetail]);
+  }, [activeTab, selectedContractForDetail, selectedEmpresa, selectedCasoDetail, selectedConcentracioDetail, selectedElectoralismeDetail, selectedDependenciaDetail]);
   useEffect(() => {
     if (!pendingScrollTopRef.current || restoreScrollRef.current !== null) return;
     if (activeTab === 'contracte' && !selectedContractForDetail) return;
@@ -4966,6 +5280,7 @@ function App() {
     if (activeTab === 'cas-fraccionament' && !selectedCasoDetail) return;
     if (activeTab === 'cas-concentracio' && !selectedConcentracioDetail) return;
     if (activeTab === 'cas-electoralisme' && !selectedElectoralismeDetail) return;
+    if (activeTab === 'cas-dependencia' && !selectedDependenciaDetail) return;
     pendingScrollTopRef.current = false;
     const scrollTop = () => window.scrollTo({
       top: 0,
@@ -4978,31 +5293,30 @@ function App() {
       requestAnimationFrame(scrollTop);
     });
     window.setTimeout(scrollTop, 80);
-  }, [activeTab, selectedContractForDetail, selectedEmpresa, selectedCasoDetail, selectedConcentracioDetail, selectedElectoralismeDetail]);
+  }, [activeTab, selectedContractForDetail, selectedEmpresa, selectedCasoDetail, selectedConcentracioDetail, selectedElectoralismeDetail, selectedDependenciaDetail]);
   useEffect(() => {
     const timer = setTimeout(() => setDebouncedSearch(searchTerm), 300);
     return () => clearTimeout(timer);
   }, [searchTerm]);
   const contractCount = useCountUp(stats?.total_contratos || 0, 2000, !loading && stats);
-  const importTotal = useCountUp(stats ? Math.floor(stats.importe_total / 1000000) : 0, 2000, !loading && stats);
-  const importTotalTenths = useCountUp(stats ? Math.round(stats.importe_total / 100000) : 0, 2000, !loading && stats);
+  const subvencionsCount = useCountUp(summary?.stats?.num_subvencions || 0, 2000, !loading && stats);
   const empresasCount = useCountUp(stats?.num_empresas || 0, 2000, !loading && stats);
   const personesMetricTotal = persones.length || summary?.stats?.num_persones || 0;
   const personesCount = useCountUp(personesMetricTotal, 2000, !loading && stats);
-  const alertesVisibleTotal = useMemo(() => fraudes.filter(f => f.nivell !== 'BAIX').length + concentracio.length + electoral.filter(f => f.nivell !== 'BAIX').length, [fraudes, concentracio, electoral]);
+  const alertesVisibleTotal = useMemo(() => fraudes.filter(f => f.nivell !== 'BAIX').length + concentracio.length + electoral.filter(f => f.nivell !== 'BAIX').length + dependencia.filter(f => f.nivell !== 'BAIX').length, [fraudes, concentracio, electoral, dependencia]);
   const alertesMetricTotal = alertesVisibleTotal || summary?.stats?.num_alertes || 0;
   const alertesCount = useCountUp(alertesMetricTotal, 2000, !loading && stats);
   const homeRiskCounts = useMemo(() => {
-    if (!fraudes.length && !concentracio.length && !electoral.length && summary?.home?.risk_counts) {
+    if (!fraudes.length && !concentracio.length && !electoral.length && !dependencia.length && summary?.home?.risk_counts) {
       return summary.home.risk_counts;
     }
-    const levels = [...fraudes, ...concentracio, ...electoral].map(item => String(item.nivell || '').toUpperCase());
+    const levels = [...fraudes, ...concentracio, ...electoral, ...dependencia].map(item => String(item.nivell || '').toUpperCase());
     return {
       alt: levels.filter(level => level === 'CRITIC').length,
       mitja: levels.filter(level => level === 'ALT').length,
       baix: levels.filter(level => level === 'OBSERVACIO' || level === 'BAIX').length
     };
-  }, [fraudes, concentracio, electoral, summary]);
+  }, [fraudes, concentracio, electoral, dependencia, summary]);
   useEffect(() => {
     const route = getCurrentRoute();
     const resolved = resolveRoute(route);
@@ -5096,6 +5410,20 @@ function App() {
     }
   }, [electoral, pendingElectoralismeId]);
   useEffect(() => {
+    if (dependencia.length > 0 && pendingDependenciaId) {
+      const cas = dependencia.find(item => String(item.id) === String(pendingDependenciaId));
+      if (cas) {
+        setSelectedDependenciaDetail(cas);
+        setAnalisiTab('dependencia');
+      } else {
+        handleNavigation('analisi', '/analisi', {
+          replace: true
+        });
+      }
+      setPendingDependenciaId(null);
+    }
+  }, [dependencia, pendingDependenciaId]);
+  useEffect(() => {
     if (activeTab === 'contracte' && selectedContractForDetail) {
       document.title = formatPageTitle(selectedContractForDetail.descripcion);
       return;
@@ -5124,6 +5452,10 @@ function App() {
       document.title = formatPageTitle(activeInvestigacioCase?.title || 'Investigació');
       return;
     }
+    if (activeTab === 'cas-dependencia' && selectedDependenciaDetail) {
+      document.title = formatPageTitle(`Cas #${selectedDependenciaDetail.id}`);
+      return;
+    }
     const titles = {
       'home': `${BRAND_NAME} | ${BRAND_TAGLINE}`,
       'loading': BRAND_NAME,
@@ -5138,7 +5470,7 @@ function App() {
       legal: BRAND_NAME
     };
     document.title = titles[activeTab] || BRAND_NAME;
-  }, [activeTab, selectedContractForDetail, selectedEmpresa, selectedCasoDetail, selectedConcentracioDetail, selectedElectoralismeDetail, activeInvestigacioCase, activeEntitatSubvencions]);
+  }, [activeTab, selectedContractForDetail, selectedEmpresa, selectedCasoDetail, selectedConcentracioDetail, selectedElectoralismeDetail, selectedDependenciaDetail, activeInvestigacioCase, activeEntitatSubvencions]);
   const contractesFiltrats = useMemo(() => {
     let result = [...contracts];
     if (debouncedSearch) {
@@ -5218,7 +5550,7 @@ function App() {
   }, [activeTab, searchTerm, typeFilter, procedureFilter, dateStart, dateEnd, amountMin, amountMax, sortBy, currentPage]);
   useEffect(() => {
     if (activeTab !== 'analisi' || getCurrentRoute() !== '/analisi') return;
-    const currentPage = analisiTab === 'fraccionament' ? analisiPageFrac : analisiTab === 'monopoli' ? analisiPageMonop : analisiPageElect;
+    const currentPage = analisiTab === 'fraccionament' ? analisiPageFrac : analisiTab === 'monopoli' ? analisiPageMonop : analisiTab === 'electoral' ? analisiPageElect : analisiPageDependencia;
     const query = buildAnalysisSearchParams({
       tab: analisiTab,
       concentrationMode: concentracioMode,
@@ -5237,7 +5569,7 @@ function App() {
       scrollY
     }, '', fullPath);
     saveScrollPosition(nextHref, scrollY);
-  }, [activeTab, analisiTab, concentracioMode, analisiSearch, analisiSort, analisiPageFrac, analisiPageMonop, analisiPageElect]);
+  }, [activeTab, analisiTab, concentracioMode, analisiSearch, analisiSort, analisiPageFrac, analisiPageMonop, analisiPageElect, analisiPageDependencia]);
   const fraudesFiltrats = useMemo(() => {
     let result = fraudes.filter(f => f.nivell !== 'BAIX');
     if (analisiSearch.trim()) {
@@ -5349,9 +5681,37 @@ function App() {
     }
     return result;
   }, [electoral, analisiSearch, analisiSort]);
+  const dependenciaFiltrada = useMemo(() => {
+    let result = dependencia.filter(item => item.nivell !== 'BAIX');
+    if (analisiSearch.trim()) {
+      result = result.filter(item => matchesSearchQuery([item.entitat, item.cif, item.id, ...(item.motius || []), ...(item.subvencions || []).map(row => row.descripcion)], analisiSearch));
+    }
+    result = [...result];
+    switch (analisiSort) {
+      case 'risk-asc':
+        result.sort((a, b) => a.risc - b.risc);
+        break;
+      case 'amount-desc':
+        result.sort((a, b) => b.import_total - a.import_total);
+        break;
+      case 'amount-asc':
+        result.sort((a, b) => a.import_total - b.import_total);
+        break;
+      case 'date-desc':
+        result.sort((a, b) => new Date(b.data_fi) - new Date(a.data_fi));
+        break;
+      case 'date-asc':
+        result.sort((a, b) => new Date(a.data_inici) - new Date(b.data_inici));
+        break;
+      default:
+        result.sort((a, b) => b.risc - a.risc);
+    }
+    return result;
+  }, [dependencia, analisiSearch, analisiSort]);
   const totalPagesFrac = Math.max(1, Math.ceil(fraudesFiltrats.length / analisiItemsPerPage));
   const totalPagesElect = Math.max(1, Math.ceil(electoralFiltrats.length / analisiItemsPerPage));
   const totalPagesMonop = Math.max(1, Math.ceil(concentracioTemporal.length / analisiItemsPerPage));
+  const totalPagesDependencia = Math.max(1, Math.ceil(dependenciaFiltrada.length / analisiItemsPerPage));
   useEffect(() => {
     if (analisiPageFrac > totalPagesFrac) setAnalisiPageFrac(totalPagesFrac);
   }, [analisiPageFrac, totalPagesFrac]);
@@ -5361,9 +5721,13 @@ function App() {
   useEffect(() => {
     if (analisiPageMonop > totalPagesMonop) setAnalisiPageMonop(totalPagesMonop);
   }, [analisiPageMonop, totalPagesMonop]);
+  useEffect(() => {
+    if (analisiPageDependencia > totalPagesDependencia) setAnalisiPageDependencia(totalPagesDependencia);
+  }, [analisiPageDependencia, totalPagesDependencia]);
   const fraudesPaginats = fraudesFiltrats.slice((analisiPageFrac - 1) * analisiItemsPerPage, analisiPageFrac * analisiItemsPerPage);
   const electoralPaginats = electoralFiltrats.slice((analisiPageElect - 1) * analisiItemsPerPage, analisiPageElect * analisiItemsPerPage);
   const concentracioPaginada = concentracioTemporal.slice((analisiPageMonop - 1) * analisiItemsPerPage, analisiPageMonop * analisiItemsPerPage);
+  const dependenciaPaginada = dependenciaFiltrada.slice((analisiPageDependencia - 1) * analisiItemsPerPage, analisiPageDependencia * analisiItemsPerPage);
   const conteoRiesgos = useMemo(() => {
     const alto = fraudes.filter(f => f.nivel_riesgo === 'ALTO').length;
     const mitja = fraudes.filter(f => f.nivel_riesgo === 'MITJÀ').length;
@@ -5411,6 +5775,7 @@ function App() {
     'cas-fraccionament': 'Anàlisi',
     'cas-concentracio': 'Anàlisi',
     'cas-electoralisme': 'Anàlisi',
+    'cas-dependencia': 'Anàlisi',
     casos: 'Investigació',
     'cas-investigacio': 'Investigació',
     sobre: 'Sobre',
@@ -5434,6 +5799,7 @@ function App() {
     setAnalisiPageFrac(1);
     setAnalisiPageMonop(1);
     setAnalisiPageElect(1);
+    setAnalisiPageDependencia(1);
   };
   const activeAnalisiFiltersCount = analisiSort !== 'risk-desc' ? 1 : 0;
   const activeFiltersCount = [typeFilter, procedureFilter, dateStart, dateEnd, amountMin, amountMax, sortBy !== 'date-desc' ? sortBy : ''].filter(Boolean).length;
@@ -5555,7 +5921,7 @@ function App() {
     const empresesActive = activeTab === 'empreses' || activeTab === 'empresa';
     const personesActive = activeTab === 'persones';
     const subvencionsActive = activeTab === 'subvencions' || activeTab === 'entitat';
-    const analisiActive = activeTab === 'analisi' || activeTab === 'cas-fraccionament' || activeTab === 'cas-concentracio' || activeTab === 'cas-electoralisme';
+    const analisiActive = activeTab === 'analisi' || activeTab === 'cas-fraccionament' || activeTab === 'cas-concentracio' || activeTab === 'cas-electoralisme' || activeTab === 'cas-dependencia';
     return React.createElement("div", {
       className: "nav"
     }, React.createElement("a", {
@@ -5671,7 +6037,7 @@ function App() {
     className: "home-title"
   }, "Tot \xE9s ", React.createElement("em", null, "p\xFAblic")), React.createElement("p", {
     className: "home-deck"
-  }, "Contractes, empreses, persones, imports i an\xE0lisi en una cartografia oberta de la contractaci\xF3 p\xFAblica de ", AUTHORITY_NAME, ".")), React.createElement("div", {
+  }, "Contractes, empreses, persones, subvencions i an\xE0lisi en una cartografia oberta de la contractaci\xF3 p\xFAblica de ", AUTHORITY_NAME)), React.createElement("div", {
     className: "home-metrics",
     "aria-label": "Indicadors principals"
   }, React.createElement("a", {
@@ -5687,21 +6053,18 @@ function App() {
   }, contractCount.toLocaleString('ca-ES')), React.createElement("span", {
     className: "home-metric-label"
   }, "Contractes")), React.createElement("a", {
-    href: buildRouteUrl('/contractes'),
+    href: buildRouteUrl('/subvencions'),
     className: "home-metric metric-import",
     onClick: interactive ? event => handleHomeMetricLinkClick(event, () => {
-      handleNavigation('buscador');
+      handleNavigation('subvencions');
       setIsMobileMenuOpen(false);
     }) : event => event.preventDefault(),
     tabIndex: interactive ? 0 : -1
   }, React.createElement("span", {
     className: "home-metric-value"
-  }, (importTotalTenths / 10).toLocaleString('ca-ES', {
-    minimumFractionDigits: 1,
-    maximumFractionDigits: 1
-  }), "M \u20AC"), React.createElement("span", {
+  }, subvencionsCount.toLocaleString('ca-ES')), React.createElement("span", {
     className: "home-metric-label"
-  }, "Imports")), React.createElement("a", {
+  }, "Subvencions")), React.createElement("a", {
     href: buildRouteUrl('/empreses'),
     className: "home-metric metric-empreses",
     onClick: interactive ? event => handleHomeMetricLinkClick(event, () => {
@@ -5824,7 +6187,7 @@ function App() {
     className: "home-title"
   }, "Tot \xE9s ", React.createElement("em", null, "p\xFAblic")), React.createElement("p", {
     className: "home-deck"
-  }, "Contractes, empreses, persones, imports i an\xE0lisi en una cartografia oberta de la contractaci\xF3 p\xFAblica de ", AUTHORITY_NAME, ".")), React.createElement("div", {
+  }, "Contractes, empreses, persones, subvencions i an\xE0lisi en una cartografia oberta de la contractaci\xF3 p\xFAblica de ", AUTHORITY_NAME)), React.createElement("div", {
     className: "home-metrics",
     "aria-label": "Indicadors principals"
   }, React.createElement("a", {
@@ -5840,21 +6203,18 @@ function App() {
   }, contractCount.toLocaleString('ca-ES')), React.createElement("span", {
     className: "home-metric-label"
   }, "Contractes")), React.createElement("a", {
-    href: buildRouteUrl('/contractes'),
+    href: buildRouteUrl('/subvencions'),
     className: "home-metric metric-import",
     onClick: interactive ? event => handleHomeMetricLinkClick(event, () => {
-      handleNavigation('buscador');
+      handleNavigation('subvencions');
       setIsMobileMenuOpen(false);
     }) : event => event.preventDefault(),
     tabIndex: interactive && !isMobile() ? 0 : -1
   }, React.createElement("span", {
     className: "home-metric-value"
-  }, (importTotalTenths / 10).toLocaleString('ca-ES', {
-    minimumFractionDigits: 1,
-    maximumFractionDigits: 1
-  }), "M \u20AC"), React.createElement("span", {
+  }, subvencionsCount.toLocaleString('ca-ES')), React.createElement("span", {
     className: "home-metric-label"
-  }, "Imports")), React.createElement("a", {
+  }, "Subvencions")), React.createElement("a", {
     href: buildRouteUrl('/empreses'),
     className: "home-metric metric-empreses",
     onClick: interactive ? event => handleHomeMetricLinkClick(event, () => {
@@ -6138,6 +6498,10 @@ function App() {
     setSelectedElectoralismeDetail(caso);
     handleNavigation('cas-electoralisme', `/analisi/electoralisme/${caso.id}`);
   };
+  const handleDependenciaClick = caso => {
+    setSelectedDependenciaDetail(caso);
+    handleNavigation('cas-dependencia', `/analisi/dependencia/${caso.id}`);
+  };
   const handleInvestigacioClick = caso => {
     handleNavigation('cas-investigacio', '/investigacio/' + caso.slug);
   };
@@ -6156,7 +6520,7 @@ function App() {
   const handleAnalisiTabKeyDown = event => {
     if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
     event.preventDefault();
-    const tabs = ['fraccionament', 'monopoli', 'electoral'];
+    const tabs = ['fraccionament', 'monopoli', 'electoral', 'dependencia'];
     const currentIndex = tabs.indexOf(analisiTab);
     let nextIndex = currentIndex;
     if (event.key === 'ArrowRight') nextIndex = (currentIndex + 1) % tabs.length;
@@ -6543,6 +6907,12 @@ function App() {
     }),
     onContractSelect: handleDetailClick,
     onEmpresaClick: handleEmpresaClick
+  }), activeTab === 'cas-dependencia' && selectedDependenciaDetail && canRenderDataTab && React.createElement(CasDependenciaView, {
+    caso: selectedDependenciaDetail,
+    onBack: () => goBack(() => {
+      handleNavigation('analisi', '/analisi');
+      setSelectedDependenciaDetail(null);
+    })
   }), activeTab === 'analisi' && canRenderDataTab && React.createElement(React.Fragment, null, React.createElement("div", {
     className: 'analisi-tabs-wrapper' + (!isPageTop ? ' is-hidden-on-scroll' : '')
   }, React.createElement("div", {
@@ -6580,14 +6950,61 @@ function App() {
     "aria-controls": "analisi-panel",
     tabIndex: analisiTab === 'electoral' ? 0 : -1,
     onKeyDown: handleAnalisiTabKeyDown
-  }, "Electoralisme"))), React.createElement("div", {
+  }, "Electoralisme"), React.createElement("button", {
+    id: "analisi-tab-dependencia",
+    className: 'analisi-tab' + (analisiTab === 'dependencia' ? ' active' : ''),
+    onClick: () => setAnalisiTab('dependencia'),
+    type: "button",
+    role: "tab",
+    "aria-selected": analisiTab === 'dependencia',
+    "aria-controls": "analisi-panel",
+    tabIndex: analisiTab === 'dependencia' ? 0 : -1,
+    onKeyDown: handleAnalisiTabKeyDown
+  }, "Depend\xE8ncia")), React.createElement("div", {
+    className: 'analisi-mobile-selector' + (isAnalisiMobileMenuOpen ? ' open' : '')
+  }, React.createElement("button", {
+    className: "analisi-mobile-current",
+    type: "button",
+    "aria-expanded": isAnalisiMobileMenuOpen,
+    "aria-controls": "analisi-mobile-options",
+    onClick: () => setIsAnalisiMobileMenuOpen(open => !open)
+  }, React.createElement("span", {
+    className: "analisi-mobile-current-group"
+  }, React.createElement("span", null, analisiTab === 'fraccionament' ? 'Fraccionament' : analisiTab === 'monopoli' ? 'Concentració' : analisiTab === 'electoral' ? 'Electoralisme' : 'Dependència'), React.createElement("svg", {
+    className: "analisi-mobile-chevron",
+    width: "16",
+    height: "16",
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: "1.8",
+    strokeLinecap: "round",
+    strokeLinejoin: "round",
+    "aria-hidden": "true"
+  }, React.createElement("path", {
+    d: "m6 9 6 6 6-6"
+  })))), React.createElement("div", {
+    id: "analisi-mobile-options",
+    className: "analisi-mobile-options"
+  }, [['fraccionament', 'Fraccionament'], ['monopoli', 'Concentració'], ['electoral', 'Electoralisme'], ['dependencia', 'Dependència']].filter(([value]) => value !== analisiTab).map(([value, label]) => React.createElement("button", {
+    key: value,
+    className: "analisi-mobile-option",
+    type: "button",
+    onClick: () => {
+      setAnalisiTab(value);
+      if (value === 'monopoli') setConcentracioMode('temporal');
+      setIsAnalisiMobileMenuOpen(false);
+    }
+  }, label))))), React.createElement("div", {
     className: `container analisi-page analisi-page-reordered analisi-page-${analisiTab}${analisiTab === 'monopoli' ? ` concentracio-mode-${concentracioMode}` : ''}`,
     id: "analisi-panel",
     role: "tabpanel",
     "aria-labelledby": `analisi-tab-${analisiTab}`
   }, React.createElement("h1", {
     className: "page-title"
-  }, analisiTab === 'fraccionament' ? 'Anàlisi de fraccionament' : analisiTab === 'monopoli' ? 'Anàlisi de concentració' : "Anàlisi d'electoralisme"), analisiTab === 'fraccionament' && React.createElement(React.Fragment, null, React.createElement("div", {
+  }, analisiTab === 'fraccionament' ? 'Anàlisi de fraccionament' : analisiTab === 'monopoli' ? 'Anàlisi de concentració' : analisiTab === 'electoral' ? "Anàlisi d'electoralisme" : 'Anàlisi de dependència'), React.createElement("p", {
+    className: "investigacio-detail-subtitle analisi-page-subtitle"
+  }, analisiTab === 'fraccionament' ? "Contractes menors agrupats que poden indicar una possible divisió d'un mateix encàrrec" : analisiTab === 'monopoli' ? "Concentració d'adjudicacions de contractes en una mateixa empresa o xarxa mercantil" : analisiTab === 'electoral' ? 'Contractes de comunicació, difusió o visibilitat pública adjudicats en períodes electorals' : 'Acumulació de subvencions directes en una mateixa entitat'), analisiTab === 'fraccionament' && React.createElement(React.Fragment, null, React.createElement("div", {
     className: "metodologia-wrapper"
   }, React.createElement("div", {
     className: "metodologia"
@@ -7059,6 +7476,127 @@ function App() {
     currentPage: analisiPageElect,
     totalPages: totalPagesElect,
     onPageChange: setAnalisiPageElect
+  })), analisiTab === 'dependencia' && React.createElement(React.Fragment, null, React.createElement("div", {
+    className: "metodologia-wrapper"
+  }, React.createElement("div", {
+    className: "metodologia"
+  }, React.createElement("h3", {
+    className: "metodologia-title"
+  }, "Metodologia"), React.createElement("p", {
+    className: "metodologia-intro"
+  }, "L'algoritme Iguadata de depend\xE8ncia detecta entitats que acumulen subvencions directes o les reben de manera recurrent al llarg del temps. La identificaci\xF3 de patrons estad\xEDsticament rellevants i les alertes generades no impliquen cap irregularitat legal confirmada i han de ser interpretades en context."), React.createElement("div", {
+    className: "metodologia-steps-compact"
+  }, React.createElement("div", {
+    className: "metodologia-step-compact"
+  }, React.createElement("span", {
+    className: "metodologia-step-num-compact"
+  }, "01"), React.createElement("span", {
+    className: "metodologia-step-text-compact"
+  }, "Identificaci\xF3 de subvencions definides com a directes")), React.createElement("div", {
+    className: "metodologia-step-compact"
+  }, React.createElement("span", {
+    className: "metodologia-step-num-compact"
+  }, "02"), React.createElement("span", {
+    className: "metodologia-step-text-compact"
+  }, "Agrupaci\xF3 per entitat i any per mesurar recurr\xE8ncia, continu\xEFtat i acumulaci\xF3")), React.createElement("div", {
+    className: "metodologia-step-compact"
+  }, React.createElement("span", {
+    className: "metodologia-step-num-compact"
+  }, "03"), React.createElement("span", {
+    className: "metodologia-step-text-compact"
+  }, "Puntuaci\xF3 i classificaci\xF3 visual segons el nivell de risc"))))), React.createElement("div", {
+    className: "search-section analisi-search-section"
+  }, React.createElement(SearchField, {
+    value: analisiSearch,
+    onValueChange: setAnalisiSearch,
+    placeholder: "Cerca per descripci\xF3, entitat o codi de cas",
+    ariaLabel: "Cerca casos de depend\xE8ncia"
+  }), React.createElement(FilterActions, {
+    open: analisiFiltersOpen,
+    onToggle: () => setAnalisiFiltersOpen(prev => !prev),
+    activeCount: activeAnalisiFiltersCount,
+    onReset: resetAnalisiFilters,
+    controlsId: "analisi-filter-panel-dependencia"
+  }), React.createElement("div", {
+    id: "analisi-filter-panel-dependencia",
+    className: "filters search-filter-panel search-filter-panel-analysis" + (!analisiFiltersOpen ? " collapsed" : "")
+  }, React.createElement("div", {
+    className: "filter-group filter-group-wide"
+  }, React.createElement("label", {
+    className: "filter-label"
+  }, "Ordenar per"), React.createElement("select", {
+    className: "filter-select filter-select-standard",
+    value: analisiSort,
+    onChange: event => setAnalisiSort(event.target.value),
+    "aria-label": "Ordenar casos de depend\xE8ncia per"
+  }, React.createElement("option", {
+    value: "risk-desc"
+  }, "Puntuaci\xF3 de risc (descendent)"), React.createElement("option", {
+    value: "risk-asc"
+  }, "Puntuaci\xF3 de risc (ascendent)"), React.createElement("option", {
+    value: "amount-desc"
+  }, "Import (descendent)"), React.createElement("option", {
+    value: "amount-asc"
+  }, "Import (ascendent)"), React.createElement("option", {
+    value: "date-desc"
+  }, "Data (m\xE9s recents)"), React.createElement("option", {
+    value: "date-asc"
+  }, "Data (m\xE9s antics)"))))), React.createElement("div", {
+    className: "results-count",
+    role: "status",
+    "aria-live": "polite"
+  }, React.createElement("span", {
+    className: "results-count-total"
+  }, React.createElement("span", {
+    className: "results-count-prefix"
+  }, "S'han trobat "), React.createElement("strong", null, dependenciaFiltrada.length), " alertes"), dependenciaFiltrada.length > analisiItemsPerPage && React.createElement("span", {
+    className: "results-count-page"
+  }, React.createElement("span", {
+    className: "results-count-page-full"
+  }, "P\xE0gina"), React.createElement("span", {
+    className: "results-count-page-short"
+  }, "P\xE0g."), " ", React.createElement("strong", null, analisiPageDependencia), " de ", React.createElement("strong", null, totalPagesDependencia))), React.createElement("div", {
+    className: "analisi-alert-list"
+  }, dependenciaPaginada.map(caso => React.createElement("a", {
+    key: caso.id,
+    href: buildRouteUrl(`/analisi/dependencia/${caso.id}`),
+    className: "card-link-wrapper",
+    onClick: event => handleInternalLinkClick(event, () => handleDependenciaClick(caso))
+  }, React.createElement("div", {
+    className: "contract-card analysis-list-card dependencia-card"
+  }, React.createElement("div", {
+    className: "contract-header"
+  }, React.createElement("div", {
+    className: "contract-title"
+  }, caso.entitat), React.createElement("div", {
+    className: "contract-amount"
+  }, formatCurrency(caso.import_total))), React.createElement("div", {
+    className: "contract-meta analysis-list-meta"
+  }, React.createElement("div", {
+    className: "contract-meta-item analysis-list-primary"
+  }, React.createElement("span", {
+    className: "contract-meta-label"
+  }, "Acumulaci\xF3"), React.createElement("span", {
+    className: "contract-meta-value"
+  }, caso.num_subvencions, " subvencions directes")), React.createElement("div", {
+    className: "contract-meta-item analysis-list-secondary"
+  }, React.createElement("span", {
+    className: "contract-meta-label"
+  }, "Per\xEDode"), React.createElement("span", {
+    className: "contract-meta-value"
+  }, "Del ", formatDate(caso.data_inici), " al ", formatDate(caso.data_fi))), React.createElement("div", {
+    className: "contract-pills"
+  }, React.createElement("span", {
+    className: "risk-badge " + riskClass(caso.nivell)
+  }, riskLabel(caso.nivell)), React.createElement("span", {
+    className: "risk-badge " + riskClass(caso.nivell)
+  }, caso.risc, "/100"))))))), dependenciaFiltrada.length === 0 && React.createElement(EmptySearchState, {
+    text: "No s'han trobat alertes de depend\xE8ncia.",
+    onReset: resetAnalisiFilters
+  }), dependenciaFiltrada.length > analisiItemsPerPage && React.createElement(Pagination, {
+    currentPage: analisiPageDependencia,
+    totalPages: totalPagesDependencia,
+    onPageChange: setAnalisiPageDependencia
   })))), activeTab === 'sobre' && React.createElement("div", {
     className: "container prose-page narrative-info-page"
   }, React.createElement("h1", {
@@ -7067,7 +7605,7 @@ function App() {
     className: "prose-wrapper narrative-story"
   }, React.createElement("p", {
     className: "prose-intro"
-  }, BRAND_NAME, " \xE9s la plataforma independent de periodisme de dades per a l'an\xE0lisi de la contractaci\xF3 p\xFAblica de ", AUTHORITY_NAME, " i dels seus organismes municipals.", React.createElement("br", null), React.createElement("br", null), "El projecte combina dades obertes de contractaci\xF3, informaci\xF3 mercantil i algoritmes propis per fer m\xE9s accessible, comprensible i fiscalitzable la despesa p\xFAblica municipal."), React.createElement("h2", {
+  }, BRAND_NAME, " \xE9s la plataforma independent de periodisme de dades per a l'an\xE0lisi de la contractaci\xF3 p\xFAblica i les subvencions de ", AUTHORITY_NAME, " i dels seus organismes municipals.", React.createElement("br", null), React.createElement("br", null), "El projecte combina dades obertes de contractaci\xF3 i subvencions, informaci\xF3 mercantil i algoritmes propis per fer m\xE9s accessible, comprensible i fiscalitzable la despesa p\xFAblica municipal."), React.createElement("h2", {
     className: "prose-heading"
   }, "Autoria"), React.createElement("p", {
     className: "prose-paragraph"
@@ -7080,19 +7618,21 @@ function App() {
     className: "prose-heading"
   }, "Objectius"), React.createElement("p", {
     className: "prose-paragraph"
-  }, "Iguadata neix amb tres objectius principals: facilitar l'acc\xE9s de la ciutadania a la contractaci\xF3 p\xFAblica municipal, detectar patrons que puguin mer\xE8ixer revisi\xF3 period\xEDstica o institucional, i construir una metodologia replicable per altres municipis."), React.createElement("p", {
+  }, "Iguadata neix amb tres objectius principals: facilitar l'acc\xE9s de la ciutadania a la contractaci\xF3 i les subvencions p\xFAbliques municipals, detectar patrons que puguin mer\xE8ixer revisi\xF3 period\xEDstica o institucional, i construir una metodologia replicable per altres municipis."), React.createElement("p", {
     className: "prose-paragraph"
   }, "La plataforma no substitueix la feina dels \xF2rgans fiscalitzadors, jur\xEDdics o administratius. El seu paper \xE9s ordenar dades disperses, mostrar relacions i generar indicadors que ajudin a fer millors preguntes."), React.createElement("h2", {
     className: "prose-heading"
   }, "Qu\xE8 analitza"), React.createElement("p", {
     className: "prose-paragraph"
-  }, "Iguadata permet consultar contractes, empreses adjudicat\xE0ries, persones vinculades a aquestes empreses i diferents indicadors d'an\xE0lisi."), React.createElement("p", {
+  }, "Iguadata permet consultar contractes, empreses adjudicat\xE0ries, persones vinculades a aquestes empreses, subvencions, entitats benefici\xE0ries i diferents indicadors d'an\xE0lisi."), React.createElement("p", {
     className: "prose-paragraph"
-  }, "Els principals blocs d'an\xE0lisi s\xF3n el possible fraccionament de contractes menors, la concentraci\xF3 d'adjudicacions en determinades empreses o sectors, els vincles mercantils entre empreses adjudicat\xE0ries i els patrons d'electoralisme o comunicaci\xF3 institucional en per\xEDodes sensibles."), React.createElement("h2", {
+  }, "Els principals blocs d'an\xE0lisi s\xF3n el possible fraccionament de contractes menors, la concentraci\xF3 d'adjudicacions en determinades empreses o sectors, els patrons d'electoralisme o comunicaci\xF3 institucional en per\xEDodes sensibles i l'acumulaci\xF3 o recurr\xE8ncia de subvencions directes en una mateixa entitat."), React.createElement("h2", {
     className: "prose-heading"
   }, "Font de dades"), React.createElement("p", {
     className: "prose-paragraph"
-  }, "Les dades de contractaci\xF3 provenen del Registre P\xFAblic de Contractes de la Generalitat de Catalunya, consultat mitjan\xE7ant l'API Socrata Open Data (SODA). Una actualitzaci\xF3 autom\xE0tica setmanal genera una fotografia coherent dels contractes, les empreses, les persones i els resultats anal\xEDtics."), React.createElement("p", {
+  }, "Les dades de contractaci\xF3 provenen del Registre P\xFAblic de Contractes de la Generalitat de Catalunya, consultat mitjan\xE7ant l'API Socrata Open Data (SODA)."), React.createElement("p", {
+    className: "prose-paragraph"
+  }, "Les dades de subvencions provenen del Registre d'Ajuts i Subvencions de Catalunya (RAISC). Iguadata selecciona les concessions emeses per ", AUTHORITY_NAME, " i publica \xFAnicament els registres amb beneficiaris identificats com a entitats publicables."), React.createElement("p", {
     className: "prose-paragraph"
   }, "Les dades mercantils provenen del Butllet\xED Oficial del Registre Mercantil (BORME), registre oficial p\xFAblic. Mitjan\xE7ant un processament massiu, t\xE8cniques de mineria de dades i l'\xFAs de programari de codi obert desenvolupat per ", React.createElement("a", {
     href: "https://github.com/BquantFinance",
@@ -7101,7 +7641,7 @@ function App() {
     className: "prose-link"
   }, "Gerard S\xE1nchez Vidal"), ", s'identifiquen els c\xE0rrecs actius de les empreses adjudicat\xE0ries."), React.createElement("p", {
     className: "prose-paragraph"
-  }, "Tamb\xE9 es generen fitxers JSON propis que permeten alimentar la interf\xEDcie, accelerar la consulta i mantenir c\xF2pies de suport en cas de caiguda temporal de fonts externes."), React.createElement("h2", {
+  }, "Una actualitzaci\xF3 autom\xE0tica setmanal genera una fotografia coherent dels contractes, les subvencions, les empreses, les entitats, les persones i els resultats anal\xEDtics. Tamb\xE9 es generen fitxers JSON propis que permeten alimentar la interf\xEDcie, accelerar la consulta i mantenir c\xF2pies de suport en cas de caiguda temporal de les fonts externes."), React.createElement("h2", {
     className: "prose-heading"
   }, "Metodologia"), React.createElement("p", {
     className: "prose-paragraph"
@@ -7111,9 +7651,9 @@ function App() {
     className: "prose-heading"
   }, "Limitacions"), React.createElement("p", {
     className: "prose-paragraph"
-  }, "Les dades poden contenir errors d'origen, omissions, canvis posteriors o incid\xE8ncies derivades de la normalitzaci\xF3 automatitzada. L'aparici\xF3 d'una empresa, persona o contracte en una alerta no implica cap irregularitat legal confirmada."), React.createElement("p", {
+  }, "Les dades poden contenir errors d'origen, omissions, duplicats, canvis posteriors o incid\xE8ncies derivades de la normalitzaci\xF3 i classificaci\xF3 automatitzades. L'aparici\xF3 d'una empresa, entitat, persona, contracte o subvenci\xF3 en una alerta no implica cap irregularitat legal confirmada."), React.createElement("p", {
     className: "prose-paragraph"
-  }, "Qualsevol conclusi\xF3 period\xEDstica, administrativa o jur\xEDdica requereix contrastar les dades amb expedients originals, informes t\xE8cnics, resolucions, plecs i altres fonts documentals."), React.createElement("h2", {
+  }, "Qualsevol conclusi\xF3 period\xEDstica, administrativa o jur\xEDdica requereix contrastar les dades amb expedients originals, informes t\xE8cnics, resolucions, convocat\xF2ries, bases reguladores, plecs i altres fonts documentals."), React.createElement("h2", {
     className: "prose-heading"
   }, "Codi obert"), React.createElement("p", {
     className: "prose-paragraph"
@@ -7139,7 +7679,7 @@ function App() {
     className: "prose-heading"
   }, "1. Identificaci\xF3 i titularitat"), React.createElement("p", {
     className: "prose-paragraph"
-  }, BRAND_NAME, " \xE9s un projecte independent de transpar\xE8ncia, an\xE0lisi de dades p\xFAbliques i fiscalitzaci\xF3 c\xEDvica de la contractaci\xF3 p\xFAblica vinculada a ", AUTHORITY_NAME, " i als seus organismes municipals relacionats."), React.createElement("p", {
+  }, BRAND_NAME, " \xE9s un projecte independent de transpar\xE8ncia, an\xE0lisi de dades p\xFAbliques i fiscalitzaci\xF3 c\xEDvica de la contractaci\xF3 i les subvencions p\xFAbliques vinculades a ", AUTHORITY_NAME, " i als seus organismes municipals relacionats."), React.createElement("p", {
     className: "prose-paragraph"
   }, "Iguadata no \xE9s una administraci\xF3 p\xFAblica ni actua en nom de cap instituci\xF3. La plataforma t\xE9 finalitats informatives, period\xEDstiques, educatives, de recerca i de divulgaci\xF3."), React.createElement("p", {
     className: "prose-paragraph"
@@ -7152,19 +7692,21 @@ function App() {
     className: "prose-paragraph"
   }, "Les dades de contractaci\xF3 provenen del Registre P\xFAblic de Contractes de la Generalitat de Catalunya, consultat mitjan\xE7ant l'API Socrata Open Data (SODA), i d'altres fonts p\xFAbliques oficials de contractaci\xF3."), React.createElement("p", {
     className: "prose-paragraph"
+  }, "Les dades de subvencions provenen del Registre d'Ajuts i Subvencions de Catalunya (RAISC). Iguadata selecciona les concessions emeses per ", AUTHORITY_NAME, " i processa la informaci\xF3 sobre els imports, les finalitats, els procediments de concessi\xF3 i els beneficiaris que poden ser objecte de publicaci\xF3."), React.createElement("p", {
+    className: "prose-paragraph"
   }, "Les dades mercantils provenen del Butllet\xED Oficial del Registre Mercantil (BORME), registre oficial de car\xE0cter p\xFAblic. Iguadata processa aquestes dades mitjan\xE7ant eines automatitzades de desc\xE0rrega, extracci\xF3, normalitzaci\xF3 i encreuament de dades."), React.createElement("p", {
     className: "prose-paragraph"
   }, "La informaci\xF3 publicada es basa en fonts p\xFAbliques i oficials. Tot i aix\xF2, poden existir errors d'origen, omissions, canvis posteriors, difer\xE8ncies de normalitzaci\xF3 de noms o incid\xE8ncies derivades del processament automatitzat."), React.createElement("h2", {
     className: "prose-heading"
   }, "3. Actualitzaci\xF3 i tra\xE7abilitat"), React.createElement("p", {
     className: "prose-paragraph"
-  }, "La plataforma publica fotografies setmanals coherents generades a partir de fonts p\xFAbliques. Part del proc\xE9s d'actualitzaci\xF3 s'executa de manera automatitzada mitjan\xE7ant GitHub Actions, amb controls t\xE8cnics de validaci\xF3, c\xF2pies de seguretat i comprovaci\xF3 d'integritat dels fitxers generats."), React.createElement("p", {
+  }, "La plataforma publica fotografies setmanals coherents de contractes i subvencions generades a partir de fonts p\xFAbliques. Part del proc\xE9s d'actualitzaci\xF3 s'executa de manera automatitzada mitjan\xE7ant GitHub Actions, amb controls t\xE8cnics de validaci\xF3, preservaci\xF3 de registres, c\xF2pies de seguretat i comprovacions d'integritat dels fitxers generats."), React.createElement("p", {
     className: "prose-paragraph"
   }, "Aquest proc\xE9s no altera el sentit de les dades originals, sin\xF3 que les estructura, normalitza i encreua per facilitar-ne la consulta p\xFAblica i l'an\xE0lisi."), React.createElement("h2", {
     className: "prose-heading"
   }, "4. Finalitat del tractament"), React.createElement("p", {
     className: "prose-paragraph"
-  }, "La finalitat d'Iguadata \xE9s facilitar l'acc\xE9s, la comprensi\xF3 i l'an\xE0lisi de dades p\xFAbliques sobre contractaci\xF3 municipal, concentraci\xF3 empresarial, vincles mercantils, possibles patrons de fraccionament i indicadors de risc electoral o institucional."), React.createElement("p", {
+  }, "La finalitat d'Iguadata \xE9s facilitar l'acc\xE9s, la comprensi\xF3 i l'an\xE0lisi de dades p\xFAbliques sobre contractaci\xF3 i subvencions municipals, concentraci\xF3 empresarial, vincles mercantils, possibles patrons de fraccionament, indicadors de risc electoral o institucional i acumulaci\xF3 o recurr\xE8ncia de subvencions directes."), React.createElement("p", {
     className: "prose-paragraph"
   }, "Les visualitzacions, cercadors i alertes tenen una funci\xF3 orientativa i d'inter\xE8s p\xFAblic. No constitueixen resolucions administratives, acusacions, proves concloents ni imputacions d'irregularitat."), React.createElement("h2", {
     className: "prose-heading"
@@ -7172,7 +7714,9 @@ function App() {
     className: "prose-paragraph"
   }, "Els indicadors generats per Iguadata identifiquen patrons estad\xEDstics o relacions documentals que poden ser d'inter\xE8s p\xFAblic, per\xF2 requereixen sempre interpretaci\xF3 contextual i, si escau, verificaci\xF3 addicional amb expedients, informes, plecs, resolucions administratives o altres fonts originals."), React.createElement("p", {
     className: "prose-paragraph"
-  }, "L'aparici\xF3 d'una empresa, persona, contracte o organisme dins d'un indicador no implica per si mateixa cap infracci\xF3 legal, administrativa, \xE8tica o penal."), React.createElement("h2", {
+  }, "L'aparici\xF3 d'una empresa, entitat, persona, contracte o subvenci\xF3 dins d'un indicador no implica per si mateixa cap infracci\xF3 legal, administrativa, \xE8tica o penal."), React.createElement("p", {
+    className: "prose-paragraph"
+  }, "En particular, les alertes de depend\xE8ncia identifiquen patrons d'acumulaci\xF3 o recurr\xE8ncia de subvencions directes. Aquests patrons poden tenir inter\xE8s p\xFAblic o period\xEDstic, per\xF2 no acrediten un \xFAs indegut dels recursos p\xFAblics ni una actuaci\xF3 irregular de l'entitat benefici\xE0ria o de l'administraci\xF3 concedent."), React.createElement("h2", {
     className: "prose-heading"
   }, "6. Protecci\xF3 de dades personals"), React.createElement("p", {
     className: "prose-paragraph"
@@ -7182,9 +7726,11 @@ function App() {
     className: "prose-paragraph"
   }, "L'import associat a una persona correspon al volum total adjudicat a les empreses amb les quals consta vinculada en els registres analitzats. Aquesta xifra no representa ingressos personals, patrimoni individual, remuneraci\xF3 ni benefici directe."), React.createElement("p", {
     className: "prose-paragraph"
+  }, "En l'\xE0mbit de les subvencions, la interf\xEDcie p\xFAblica mostra \xFAnicament els registres corresponents a beneficiaris identificats com a entitats publicables. Les concessions associades a persones f\xEDsiques o a beneficiaris no publicables es conserven nom\xE9s quan s\xF3n necess\xE0ries per al tractament intern i l'an\xE0lisi agregada, per\xF2 no es mostren ni permeten identificar-ne els beneficiaris a la plataforma p\xFAblica."), React.createElement("p", {
+    className: "prose-paragraph"
   }, "El tractament es fonamenta en l'article 6.1.e) del Reglament (UE) 2016/679 (RGPD), relatiu al compliment d'una missi\xF3 realitzada en inter\xE8s p\xFAblic, i en la normativa de transpar\xE8ncia i acc\xE9s a la informaci\xF3 p\xFAblica, inclosa la Llei 19/2013 i la Llei 19/2014 de transpar\xE8ncia de Catalunya."), React.createElement("p", {
     className: "prose-paragraph"
-  }, "Les dades publicades es limiten a la informaci\xF3 estrictament necess\xE0ria per a la finalitat de transpar\xE8ncia i fiscalitzaci\xF3 p\xFAblica, d'acord amb el principi de minimitzaci\xF3 de dades de l'article 5.1.c del RGPD. No es publiquen dades de la vida privada, domicilis personals, documents identificatius, dades de contacte privades ni informaci\xF3 aliena a la dimensi\xF3 mercantil o contractual analitzada."), React.createElement("h2", {
+  }, "Les dades publicades es limiten a la informaci\xF3 estrictament necess\xE0ria per a la finalitat de transpar\xE8ncia i fiscalitzaci\xF3 p\xFAblica, d'acord amb el principi de minimitzaci\xF3 de dades de l'article 5.1.c del RGPD. No es publiquen dades de la vida privada, domicilis personals, documents identificatius, dades de contacte privades ni informaci\xF3 aliena a les dimensions mercantil, contractual o subvencional analitzades."), React.createElement("h2", {
     className: "prose-heading"
   }, "7. Exercici de drets i correccions"), React.createElement("p", {
     className: "prose-paragraph"
@@ -7193,7 +7739,7 @@ function App() {
     className: "prose-link"
   }, CONTACT_EMAIL), "."), React.createElement("p", {
     className: "prose-paragraph"
-  }, "Tamb\xE9 es poden comunicar errors factuals, homon\xEDmies, atribucions incorrectes, canvis de denominaci\xF3, dades desactualitzades o incid\xE8ncies derivades del processament automatitzat."), React.createElement("p", {
+  }, "Tamb\xE9 es poden comunicar errors factuals, homon\xEDmies, atribucions incorrectes, canvis de denominaci\xF3, classificacions err\xF2nies, dades desactualitzades o incid\xE8ncies derivades del processament automatitzat."), React.createElement("p", {
     className: "prose-paragraph"
   }, "Quan es detecti un error factual, Iguadata podr\xE0 corregir, contextualitzar, limitar o retirar la informaci\xF3 afectada. El dret de supressi\xF3 pot quedar limitat quan la informaci\xF3 procedeixi de registres oficials p\xFAblics o documentaci\xF3 administrativa de contractaci\xF3 p\xFAblica, d'acord amb l'article 17.3.b) del RGPD."), React.createElement("h2", {
     className: "prose-heading"
@@ -7205,7 +7751,7 @@ function App() {
     className: "prose-heading"
   }, "9. Fonts normatives principals"), React.createElement("p", {
     className: "prose-paragraph"
-  }, "El present av\xEDs legal es basa, entre altres, en el Reglament (UE) 2016/679 (RGPD), la Llei 19/2013, de transpar\xE8ncia, acc\xE9s a la informaci\xF3 p\xFAblica i bon govern, i la Llei 19/2014, de transpar\xE8ncia, acc\xE9s a la informaci\xF3 p\xFAblica i bon govern de Catalunya.")))), activeTab !== 'home' && React.createElement("button", {
+  }, "El present av\xEDs legal es basa, entre altres, en el Reglament (UE) 2016/679 (RGPD), la Llei 19/2013, de transpar\xE8ncia, acc\xE9s a la informaci\xF3 p\xFAblica i bon govern, la Llei 19/2014, de transpar\xE8ncia, acc\xE9s a la informaci\xF3 p\xFAblica i bon govern de Catalunya, la Llei 38/2003, general de subvencions, i el Decret 271/2019, pel qual s'aprova el Reglament del Registre de subvencions i ajuts de Catalunya.")))), activeTab !== 'home' && React.createElement("button", {
     type: "button",
     className: `btn-reset contracte-detail-back mobile-scroll-top${showMobileScrollTop ? ' is-visible' : ''}`,
     onClick: () => window.scrollTo({

@@ -194,6 +194,7 @@ jobs:
           python .github/scripts/generate_fraccionament.py
           python .github/scripts/generate_concentracio.py
           python .github/scripts/generate_electoralisme.py
+          python .github/scripts/generate_dependencia.py
           python .github/scripts/generate_resum.py
           python .github/scripts/generate_audit_impact.py --previous-dir scratch/previous
           python .github/scripts/freeze_investigacio_contracts.py --check
@@ -217,6 +218,7 @@ jobs:
               "json/fraccionament.json": 10_000,
               "json/concentracio.json": 10_000,
               "json/electoralisme.json": 10_000,
+              "json/dependencia.json": 10_000,
               "json/resum.json": 100,
               ".github/scripts/alias_empreses.json": 1_000_000,
           }
@@ -267,7 +269,7 @@ jobs:
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add json/carrecs.json json/persones.json
-          git add json/empreses.json json/empresa_aliases.json json/contractes.json json/fraccionament.json json/concentracio.json json/electoralisme.json
+          git add json/empreses.json json/empresa_aliases.json json/contractes.json json/fraccionament.json json/concentracio.json json/electoralisme.json json/dependencia.json
           git add json/subvencions.json .github/data/subvencions_raisc.json
           git add .github/audit/contractes_arxiu.json .github/audit/canvis_contractes.json
           git add json/resum.json

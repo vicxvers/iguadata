@@ -29,12 +29,35 @@ from contract_audit import change_id, contract_differences, identity_key
 from freeze_investigacio_contracts import freeze
 from generate_audit_impact import enrich_changes
 import generate_electoralisme
+import generate_dependencia
 import generate_concentracio
 import generate_fraccionament
 import validate_contractes_snapshot
 
 
 class DataPipelineTests(unittest.TestCase):
+    def test_subsidy_republications_are_deduplicated_logically(self):
+        base = {
+            "codi_raisc": "AJ360-25-001",
+            "codi_bdns": "123",
+            "discriminador_de_la_concessi": "DIRECTA",
+            "cif_beneficiari": "G123",
+            "importe": 900,
+            "descripcion": "Subvenció directa activitat",
+            "fecha": "2025-01-01",
+        }
+        logical, duplicates = generate_dependencia.deduplicate([
+            base,
+            {**base, "fecha": "2025-01-03"},
+        ])
+        self.assertEqual((len(logical), duplicates), (1, 1))
+        self.assertEqual(logical[0]["versions_font"], 2)
+
+    def test_isolated_direct_subsidy_has_no_dependency_score(self):
+        row = {"año": 2025, "fecha": "2025-01-01", "importe": 5000}
+        metrics = generate_dependencia.score_case([row], [row])
+        self.assertLess(metrics["score"], 40)
+
     def test_historic_concentration_has_quota_risk_floors(self):
         self.assertEqual(generate_concentracio.apply_historic_quota_floor(68, 0.80), 85)
         self.assertEqual(generate_concentracio.apply_historic_quota_floor(43, 0.45), 65)

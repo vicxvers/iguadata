@@ -8,6 +8,7 @@ const DATA_TABS = [
     'cas-fraccionament',
     'cas-concentracio',
     'cas-electoralisme',
+    'cas-dependencia',
     'cas-investigacio',
 ];
 const ANALYSIS_TABS = [
@@ -15,6 +16,7 @@ const ANALYSIS_TABS = [
     'cas-fraccionament',
     'cas-concentracio',
     'cas-electoralisme',
+    'cas-dependencia',
 ];
 const INVESTIGATION_TABS = ['casos', 'cas-investigacio'];
 const SUBVENTION_TABS = ['subvencions', 'entitat'];
@@ -27,6 +29,7 @@ function useIguadataData(activeTab) {
     const [fraudes, setFraudes] = useState([]);
     const [concentracio, setConcentracio] = useState([]);
     const [electoral, setElectoral] = useState([]);
+    const [dependencia, setDependencia] = useState([]);
     const [stats, setStats] = useState(null);
     const [summary, setSummary] = useState(null);
     const [casosInvestigacio, setCasosInvestigacio] = useState(CASOS_INVESTIGACIO_FALLBACK);
@@ -206,12 +209,14 @@ function useIguadataData(activeTab) {
             fetchJsonDataset('/json/fraccionament.json', 'Fraccionament'),
             fetchJsonDataset('/json/concentracio.json', 'Concentracio'),
             fetchJsonDataset('/json/electoralisme.json', 'Electoralisme'),
+            fetchJsonDataset('/json/dependencia.json', 'Dependència'),
         ])
-            .then(([fraccionamentData, concentracioData, electoralismeData]) => {
+            .then(([fraccionamentData, concentracioData, electoralismeData, dependenciaData]) => {
                 if (cancelled) return;
                 setFraudes((fraccionamentData && fraccionamentData.alertes) || []);
                 setConcentracio((concentracioData && concentracioData.alertes) || []);
                 setElectoral((electoralismeData && electoralismeData.alertes) || []);
+                setDependencia((dependenciaData && dependenciaData.alertes) || []);
             })
             .catch(error => {
                 console.error('Error loading analysis data:', error);
@@ -283,6 +288,7 @@ function useIguadataData(activeTab) {
         fraudes,
         concentracio,
         electoral,
+        dependencia,
         stats,
         summary,
         casosInvestigacio,

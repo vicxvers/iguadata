@@ -43,6 +43,7 @@ jobs:
             .github/audit/contractes_arxiu.json
             .github/audit/canvis_contractes.json
             json/electoralisme.json
+            json/dependencia.json
             json/empresa_aliases.json
             json/empreses.json
             json/fraccionament.json

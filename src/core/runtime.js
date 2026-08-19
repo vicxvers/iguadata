@@ -68,6 +68,7 @@ function resolveRoute(path) {
     if (path.startsWith('/analisi/fraccionament/')) return { tab: 'cas-fraccionament', canonicalPath: path };
     if (path.startsWith('/analisi/concentracio/')) return { tab: 'cas-concentracio', canonicalPath: path };
     if (path.startsWith('/analisi/electoralisme/')) return { tab: 'cas-electoralisme', canonicalPath: path };
+    if (path.startsWith('/analisi/dependencia/')) return { tab: 'cas-dependencia', canonicalPath: path };
     return { tab: 'home', canonicalPath: '/' };
 }
 
@@ -157,6 +158,7 @@ const ANALYSIS_TAB_QUERY_VALUES = {
     fraccionament: 'fraccionament',
     monopoli: 'concentracio',
     electoral: 'electoralisme',
+    dependencia: 'dependencia',
 };
 
 const ANALYSIS_MODE_QUERY_VALUES = {
