@@ -25,6 +25,7 @@ venv/
 
 # JavaScript dependencies and tool caches
 node_modules/
+.wrangler/
 .eslintcache
 
 # Editors and operating systems

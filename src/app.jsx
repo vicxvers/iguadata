@@ -1,4 +1,4 @@
-const { useState, useMemo, useEffect, useCallback, useRef } = React;
+const { useState, useMemo, useEffect, useLayoutEffect, useCallback, useRef } = React;
 
 /* ---- useCountUp ------------------------------------------------- */
 function useCountUp(target, duration, active) {
@@ -488,6 +488,7 @@ function App() {
     const [showMobileScrollTop, setShowMobileScrollTop] = useState(false);
     const [isPageTop, setIsPageTop] = useState(() => window.scrollY < 24);
     const [homeRouteTransition, setHomeRouteTransition] = useState('');
+    const [assistantCloseSignal, setAssistantCloseSignal] = useState(0);
     const [homeMetricTransition, setHomeMetricTransition] = useState(null);
     const homeIntroPlayedRef = useRef(false);
     const activeInvestigacioSlug = getCurrentRoute().startsWith('/investigacio/')
@@ -1679,6 +1680,7 @@ function App() {
     }), [fraudes]);
 
     const goToHome = () => {
+        if (activeTab !== 'home') setAssistantCloseSignal(current => current + 1);
         if (activeTab === 'home' || !isPageTop) {
             setIsMobileMenuOpen(false);
             window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -3003,7 +3005,7 @@ function App() {
                         <div className={`footer-content${activeTab === 'sobre' || activeTab === 'legal' || activeTab === 'cas-investigacio' ? ' footer-content-prose' : ''}`}>
                             <div className="footer-main">
                                 <div className="footer-brand">
-                                    <a href={BASE + '/'} onClick={(e) => { e.preventDefault(); handleNavigation('home'); }} className="footer-logo-link" aria-label={`${BRAND_NAME}, inici`}>
+                                    <a href={BASE + '/'} onClick={(e) => { e.preventDefault(); setAssistantCloseSignal(current => current + 1); handleNavigation('home'); }} className="footer-logo-link" aria-label={`${BRAND_NAME}, inici`}>
                                         <img src={assetUrl('/assets/iguadata.svg')} alt={BRAND_NAME} className="footer-logo" />
                                     </a>
                                     <p className="footer-tagline">{BRAND_TAGLINE}</p>
@@ -3047,6 +3049,12 @@ function App() {
                     </footer>
                 )
             }
+            <AssistentIguadata
+                contracts={contracts}
+                empreses={empreses}
+                visible={activeTab !== 'home'}
+                closeSignal={assistantCloseSignal}
+            />
             {homeMetricTransition && (
                 <div
                     className={`home-metric-transition ${homeMetricTransition.phase || 'is-expanding'}`}
