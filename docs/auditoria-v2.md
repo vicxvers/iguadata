@@ -3,6 +3,21 @@
 Fecha de referencia: 2026-07-27
 Commit de partida: `11e2a5481ecabf1b0426af3610da53f827bb4126`
 
+## Decisión posterior al lanzamiento
+
+Actualización: 2026-08-20.
+
+La replicación técnica a otros municipios queda aparcada. Los puntos de esta auditoría relativos a configuración multiinstancia, extracción completa de referencias municipales y documentación de una segunda instancia dejan de formar parte del trabajo activo.
+
+La fase posterior a v2 se concentra en robustez interna sin cambios visuales:
+
+1. Blindar build, rutas, datos y estructura del repositorio mediante pruebas.
+2. Reducir progresivamente `src/app.jsx` por áreas funcionales.
+3. Separar lógica, estado y presentación conservando el HTML y el comportamiento actuales.
+4. Reforzar el pipeline, los errores y las escrituras atómicas.
+5. Eliminar únicamente archivos sin consumidores demostrables y evitar nuevos archivos huérfanos.
+6. Detenerse después de cada área para revisión local de Víctor.
+
 ## Objetivo
 
 Convertir la instancia actual de Iguadata en una base limpia, verificable y reutilizable sin alterar de golpe su identidad editorial ni su funcionamiento público.

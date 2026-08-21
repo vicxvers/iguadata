@@ -3,5 +3,13 @@
   "src/data/contracts.js",
   "src/data/use-iguadata-data.js",
   "src/ui/primitives.jsx",
+  "src/features/analisi.jsx",
+  "src/features/contractes.jsx",
+  "src/features/empreses.jsx",
+  "src/features/home.jsx",
+  "src/features/informacio.jsx",
+  "src/features/investigacio.jsx",
+  "src/features/persones.jsx",
+  "src/features/subvencions.jsx",
   "src/app.jsx"
 ]

@@ -28,4 +28,4 @@ jobs:
         run: |
           node scripts/build-app.js
           node scripts/build-pages.js
-          git diff --exit-code -- assets/app.js 404.html index.html sitemap.xml contractes empreses persones analisi sobre investigacio
+          git diff --exit-code -- assets/app.js 404.html index.html sitemap.xml contractes empreses persones subvencions analisi sobre investigacio

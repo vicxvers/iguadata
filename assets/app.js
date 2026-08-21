@@ -806,854 +806,6 @@ function FilterActions({
     d: "M3 3v5h5"
   }))));
 }
-const {
-  useState,
-  useMemo,
-  useEffect,
-  useCallback,
-  useRef
-} = React;
-function useCountUp(target, duration, active) {
-  const [count, setCount] = useState(0);
-  const countRef = useRef(0);
-  const hasActivatedRef = useRef(false);
-  const isActive = Boolean(active);
-  useEffect(() => {
-    if (!isActive) {
-      if (!hasActivatedRef.current) {
-        countRef.current = 0;
-        setCount(0);
-      }
-      return;
-    }
-    hasActivatedRef.current = true;
-    const nextTarget = Number(target) || 0;
-    const startValue = countRef.current;
-    if (startValue === nextTarget) return;
-    const startedAt = performance.now();
-    let frameId;
-    const tick = now => {
-      const progress = Math.min(1, (now - startedAt) / duration);
-      const current = startValue + (nextTarget - startValue) * progress;
-      const displayed = nextTarget >= startValue ? Math.floor(current) : Math.ceil(current);
-      countRef.current = displayed;
-      setCount(displayed);
-      if (progress < 1) {
-        frameId = requestAnimationFrame(tick);
-      } else {
-        countRef.current = nextTarget;
-        setCount(nextTarget);
-      }
-    };
-    frameId = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(frameId);
-  }, [target, duration, isActive]);
-  return count;
-}
-function formatCurrency(amount) {
-  return new Intl.NumberFormat('ca-ES', {
-    style: 'currency',
-    currency: 'EUR',
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2
-  }).format(amount);
-}
-function formatCompactCurrency(amount) {
-  const value = Number(amount) || 0;
-  if (Math.abs(value) >= 1000000) {
-    return `${(value / 1000000).toLocaleString('ca-ES', {
-      maximumFractionDigits: 1
-    })}M €`;
-  }
-  if (Math.abs(value) >= 1000) {
-    return `${(value / 1000).toLocaleString('ca-ES', {
-      maximumFractionDigits: 0
-    })}k €`;
-  }
-  return formatCurrency(value);
-}
-function formatDate(dateStr) {
-  if (!dateStr) return '—';
-  const p = dateStr.split('-');
-  return p.length === 3 ? `${p[2]}/${p[1]}/${p[0]}` : dateStr;
-}
-function formatTipus(tipo) {
-  const m = {
-    '1. OBRES': 'Obres',
-    'OBRES': 'Obres',
-    '3. SUBMINISTRAMENTS': 'Subministraments',
-    'SUBMINISTRAMENTS': 'Subministraments',
-    '5. SERVEIS': 'Serveis',
-    'SERVEIS': 'Serveis',
-    '6. ADMINISTRATIU ESPECIAL': 'Administratiu especial',
-    'ADMINISTRATIU ESPECIAL': 'Administratiu especial',
-    '2. GESTIÓ DE SERVEI PÚBLIC': 'Gestió de servei públic',
-    'GESTIÓ DE SERVEI PÚBLIC': 'Gestió de servei públic',
-    '8. CONCESSIÓ DE SERVEIS': 'Concessió de serveis',
-    '8. CONCESSÍÓ DE SERVEIS': 'Concessió de serveis',
-    'CONCESSIÓ DE SERVEIS': 'Concessió de serveis',
-    "10. PRIVAT D'ADMINISTRACIO PUBLICA": "Privat d'administració pública",
-    "PRIVAT D'ADMINISTRACIO PUBLICA": "Privat d'administració pública"
-  };
-  return m[tipo] || tipo;
-}
-function formatSubvencioSector(finalitat) {
-  const sectors = {
-    'Serveis Socials i Promoció Social': 'Social',
-    'Cultura': 'Cultura',
-    'Comerç, Turisme i Pimes': 'Comerç',
-    "Accés a l'habitatge i foment de l'edificació": 'Habitatge',
-    "Foment de l'Ocupació": 'Ocupació',
-    'Cooperació internacional per al desenvolupament i cultural': 'Cooperació',
-    'Educació': 'Educació',
-    'Sanitat': 'Sanitat',
-    'Altres actuacions de caràcter econòmic': 'Economia',
-    'Altres Prestacions econòmiques': 'Altres'
-  };
-  return sectors[finalitat] || 'Altres';
-}
-function isSubvencioDirecta(subvencio) {
-  const text = normalizeSearchText([subvencio.objecte_de_la_convocat_ria, subvencio.t_tol_convocat_ria_catal, subvencio.t_tol_convocat_ria_castell, subvencio.discriminador_de_la_concessi, subvencio.descripcion].join(' '));
-  return /\bdirect(?:a|e|es)?\b/.test(text);
-}
-const SUBVENCIO_TIPOLOGIES = ['Serveis Socials i Promoció Social', 'Cultura', 'Comerç, Turisme i Pimes', "Accés a l'habitatge i foment de l'edificació", "Foment de l'Ocupació", 'Cooperació internacional per al desenvolupament i cultural', 'Educació', 'Sanitat', 'Altres actuacions de caràcter econòmic', 'Altres Prestacions econòmiques'];
-function formatTipusLimit(t) {
-  const m = {
-    'obres': 'Obres',
-    'serveis': 'Serveis',
-    'subministraments': 'Subministraments'
-  };
-  return m[t] || (t ? t.charAt(0).toUpperCase() + t.slice(1) : '—');
-}
-function formatMotiuFraccionament(motiu) {
-  const m = {
-    'Mateixa empresa adjudicataria': 'Mateixa empresa adjudicatària',
-    'Contractes menors amb la mateixa empresa adjudicataria': 'Contractes menors amb la mateixa empresa adjudicatària',
-    'Empreses connectades per administrador comu': 'Empreses connectades per administrador comú',
-    'Mateixa divisio CPV': "Mateix sector d'activitat",
-    'Import acumulat superior al limit legal del contracte menor': 'Import acumulat superior al límit legal',
-    'Import acumulat proper al limit legal del contracte menor': 'Import acumulat proper al límit legal',
-    'Almenys una fraccio queda prop del limit individual': 'Almenys una fracció propera al límit legal',
-    'Contracte menor superior al limit legal': 'Contracte menor superior al límit legal',
-    'Contracte menor molt proper al limit legal': 'Contracte menor molt proper al límit legal',
-    'Contracte menor proper al limit legal': 'Contracte menor proper al límit legal',
-    'Imports rodons o ajustats al llindar': 'Imports rodons o ajustats al llindar',
-    'Repeticio multianual del mateix objecte': 'Repetició multianual del mateix objecte',
-    'Contractes en exercicis diferents': 'Contractes en exercicis diferents',
-    'Imports individuals propers al limit legal': 'Imports individuals propers al límit legal'
-  };
-  return m[motiu] || motiu;
-}
-function formatPercent(value) {
-  return `${Math.round((Number(value) || 0) * 100)}%`;
-}
-function quotaClass(value) {
-  const percent = Math.round((Number(value) || 0) * 100);
-  if (percent < 25) return 'success';
-  if (percent < 50) return 'warn';
-  return 'danger';
-}
-function formatSectorName(sector) {
-  return sector === 'Altres Serveis i Subministraments' ? 'Altres' : sector;
-}
-function formatConcentracioPeriod(caso) {
-  if (caso?.finestra === 'historic') return caso.finestra_label;
-  return `Del ${formatDate(caso.data_inici)} al ${formatDate(caso.data_fi)}`;
-}
-function formatProcediment(proc) {
-  const m = {
-    'Menor': 'Menor',
-    'Obert': 'Obert',
-    'Negociat sense publicitat': 'Negociat sense publicitat',
-    'Licitació amb negociació': 'Licitació amb negociació',
-    'Adjudicacions directes no menors': 'Adjudicació directa',
-    'Adjudicació directa': 'Adjudicació directa',
-    'Específic de sistema dinàmic de contractació': 'Sistema dinàmic',
-    'Sistema dinàmic': 'Sistema dinàmic'
-  };
-  return m[proc] || proc;
-}
-function riskClass(n) {
-  return n === 'CRITIC' ? 'alto' : n === 'ALT' || n === 'ALTO' ? 'mitja' : n === 'OBSERVACIO' || n === 'MITJÀ' ? 'baix' : 'baix';
-}
-function riskLabel(n) {
-  if (n === 'CRITIC') return 'Risc alt';
-  if (n === 'ALT' || n === 'ALTO') return 'Risc mitjà';
-  if (n === 'OBSERVACIO' || n === 'MITJÀ') return 'Risc baix';
-  return 'Risc baix';
-}
-function normalizeSearchText(value) {
-  return String(value || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
-}
-function matchesSearchQuery(values, query) {
-  const terms = normalizeSearchText(query).split(/\s+/).filter(Boolean);
-  if (!terms.length) return true;
-  const target = normalizeSearchText(Array.isArray(values) ? values.join(' ') : values);
-  return terms.every(term => target.includes(term));
-}
-function normalizeContractCode(value) {
-  return String(value || '').toUpperCase().trim().replace(/\s+/g, ' ').replace(/\s*([/.-])\s*/g, '$1');
-}
-function looksLikeContractCodeQuery(query) {
-  return /\d\s*[/.-]\s*\d/.test(String(query || ''));
-}
-function contractCodeStartsWithQuery(code, query) {
-  const normalizedCode = normalizeContractCode(code);
-  const normalizedQuery = normalizeContractCode(query);
-  if (!normalizedQuery || !normalizedCode.startsWith(normalizedQuery)) return false;
-  const nextCharacter = normalizedCode.charAt(normalizedQuery.length);
-  return !nextCharacter || !/[A-Z0-9]/.test(nextCharacter);
-}
-function filterContractsBySearch(contracts, query, searchableValues) {
-  if (!query) return contracts;
-  if (looksLikeContractCodeQuery(query)) {
-    const codeMatches = contracts.filter(contract => contractCodeStartsWithQuery(contract.codigo, query));
-    if (codeMatches.length) return codeMatches;
-  }
-  return contracts.filter(contract => matchesSearchQuery(searchableValues(contract), query));
-}
-function cyrb53(str) {
-  let h1 = 0xdeadbeef,
-    h2 = 0x41c6ce57;
-  for (let i = 0, ch; i < str.length; i++) {
-    ch = str.charCodeAt(i);
-    h1 = Math.imul(h1 ^ ch, 2654435761);
-    h2 = Math.imul(h2 ^ ch, 1597334677);
-  }
-  h1 = Math.imul(h1 ^ h1 >>> 16, 2246822507) ^ Math.imul(h2 ^ h2 >>> 13, 3266489909);
-  h2 = Math.imul(h2 ^ h2 >>> 16, 2246822507) ^ Math.imul(h1 ^ h1 >>> 13, 3266489909);
-  return 4294967296 * (2097151 & h2) + (h1 >>> 0);
-}
-function slugify(str) {
-  return (str || '').toString().normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/['"`´]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 60);
-}
-function stableHash(values) {
-  const canonical = values.map(v => v == null ? '' : String(v).trim()).join('|');
-  return cyrb53(canonical).toString(36).padStart(11, '0').slice(-7);
-}
-const CASOS_INVESTIGACIO_FALLBACK = [{
-  slug: 'passeig-verdaguer',
-  title: 'Passeig Verdaguer',
-  subtitle: 'Cinc contractes a dit per començar la remodelació',
-  publishedAt: '2026-06-22',
-  image: '/assets/investigacio/passeig-verdaguer.webp',
-  importe: 65500
-}, {
-  slug: 'neteja-parc-central',
-  title: 'Neteja del Parc Central',
-  subtitle: "Un contracte il·legal després d'anys al límit",
-  importe: 58062.93
-}, {
-  slug: 'llums-de-nadal',
-  title: 'Llums de Nadal',
-  subtitle: 'Quatre anys, un mateix proveïdor i preus calcats al límit legal',
-  importe: 59171.05
-}, {
-  slug: 'igualada-urban-running',
-  title: 'Igualada Urban Running',
-  subtitle: 'Cursa de contractes amb un sol guanyador durant anys',
-  importe: 66413.80
-}, {
-  slug: 'la-masuca',
-  title: 'La Masuca',
-  subtitle: 'Dos contractes per a dues empreses connectades',
-  importe: 29700
-}, {
-  slug: 'zones-verdes-igualada',
-  title: "Zones verdes d'Igualada",
-  subtitle: 'Set contractes, un mateix servei i imports al límit legal',
-  importe: 104260
-}, {
-  slug: 'parc-central',
-  title: 'Parc Central',
-  subtitle: 'Quatre contractes, una mateixa actuació i imports al límit legal',
-  importe: 58900
-}];
-function buildContractSlug(c) {
-  const date = (c.fecha || '0000-00-00').slice(0, 10);
-  const codeSlug = slugify(c.codigo);
-  if (codeSlug) return `${date}-${codeSlug}`;
-  const empSlug = slugify(c.adjudicatario) || 'sense-adjudicatari';
-  const h = stableHash([c.fecha, c.importe, c.adjudicatario]);
-  return `${date}-${empSlug}-${h}`;
-}
-function buildLegacyContractSlug(c) {
-  const date = (c.fecha || '0000-00-00').slice(0, 10);
-  const empSlug = slugify(c.adjudicatario) || 'sense-adjudicatari';
-  const h = stableHash([c.codigo, c.adjudicatario, c.fecha, c.importe, c.cpv, c.descripcion]);
-  return `${date}-${empSlug}-${h}`;
-}
-function contractMatchesSlug(contract, slug) {
-  return contract.slug === slug || (contract.slug_aliases || []).includes(slug);
-}
-function sameContractEvidence(current, frozen) {
-  const fields = ['codigo', 'organismo', 'fecha', 'importe', 'adjudicatario', 'descripcion'];
-  return fields.every(field => String(current?.[field] ?? '').trim() === String(frozen?.[field] ?? '').trim());
-}
-function buildEmpresaSlug(name) {
-  return slugify(name) || 'sense-nom';
-}
-function empresaMatchesSlug(empresa, slug) {
-  return empresa.slug === slug || (empresa.slug_aliases || []).includes(slug);
-}
-function buildEmpresaAliasSlugMap(empreses, empresaAliases) {
-  const byName = new Map(empreses.map(e => [String(e.nom || '').trim().toUpperCase(), e]));
-  const result = new Map();
-  for (const [currentName, aliases] of Object.entries(empresaAliases && empresaAliases.aliases || {})) {
-    const empresa = byName.get(String(currentName || '').trim().toUpperCase());
-    if (!empresa || !empresa.slug) continue;
-    for (const alias of aliases || []) {
-      const aliasSlug = buildEmpresaSlug(alias);
-      if (aliasSlug && aliasSlug !== empresa.slug) result.set(aliasSlug, empresa.slug);
-    }
-  }
-  return result;
-}
-function findMatchingContract(contracts, partial) {
-  const sameFingerprint = ct => String(ct.adjudicatario || '').trim() === String(partial.adjudicatario || '').trim() && String(ct.fecha || '').slice(0, 10) === String(partial.fecha || '').slice(0, 10) && Math.abs((Number(ct.importe) || 0) - (Number(partial.importe) || 0)) < 0.01;
-  const sameCode = contracts.filter(ct => String(ct.codigo || '').trim() === String(partial.codigo || '').trim());
-  const exactByCode = sameCode.find(sameFingerprint);
-  if (exactByCode) return exactByCode;
-  if (sameCode.length === 1 && !partial.adjudicatario && !partial.fecha) return sameCode[0];
-  return contracts.find(ct => sameFingerprint(ct) && String(ct.descripcion || '').trim() === String(partial.descripcion || '').trim()) || null;
-}
-const CPV_DIVISIONS = {
-  "03": "Productes agrícoles i ramaders",
-  "09": "Productes petrolífers i energia",
-  "14": "Productes de mineria",
-  "15": "Aliments i begudes",
-  "16": "Maquinària agrícola",
-  "18": "Roba i calçat",
-  "19": "Cuir i tèxtils",
-  "22": "Impresos i productes relacionats",
-  "24": "Productes químics",
-  "30": "Maquinària d'oficina i informàtica",
-  "31": "Maquinària elèctrica",
-  "32": "Equips de telecomunicacions",
-  "33": "Equipament mèdic i farmacèutic",
-  "34": "Equips de transport",
-  "35": "Equips de seguretat i defensa",
-  "37": "Instruments musicals i esportius",
-  "38": "Equips de laboratori i precisió",
-  "39": "Mobiliari i equipament",
-  "42": "Maquinària industrial",
-  "43": "Maquinària de mineria",
-  "44": "Materials de construcció",
-  "45": "Obres de construcció",
-  "48": "Paquets de programari",
-  "50": "Serveis de reparació i manteniment",
-  "51": "Serveis d'instal·lació",
-  "55": "Serveis d'hostaleria i restauració",
-  "60": "Serveis de transport",
-  "63": "Serveis auxiliars de transport",
-  "64": "Serveis postals i telecomunicacions",
-  "65": "Serveis públics (aigua, energia)",
-  "66": "Serveis financers i d'assegurances",
-  "70": "Serveis immobiliaris",
-  "71": "Serveis d'arquitectura i enginyeria",
-  "72": "Serveis informàtics (TI)",
-  "73": "Serveis d'investigació (R+D)",
-  "75": "Serveis d'administració pública",
-  "76": "Serveis del sector petroler",
-  "77": "Serveis agrícoles i forestals",
-  "79": "Serveis empresarials i de consultoria",
-  "80": "Serveis d'ensenyament i formació",
-  "85": "Serveis sanitaris i socials",
-  "90": "Aigües residuals, residus i neteja",
-  "92": "Serveis recreatius i culturals",
-  "98": "Altres serveis comunitaris"
-};
-const SECTOR_MAPPING = {
-  "Productes agrícoles i ramaders": "Agricultura i Alimentació",
-  "Productes petrolífers i energia": "Indústria, Maquinària i Energia",
-  "Productes de mineria": "Indústria, Maquinària i Energia",
-  "Aliments i begudes": "Agricultura i Alimentació",
-  "Maquinària agrícola": "Agricultura i Alimentació",
-  "Roba i calçat": "Béns de Consum i Comerç",
-  "Cuir i tèxtils": "Béns de Consum i Comerç",
-  "Impresos i productes relacionats": "Béns de Consum i Comerç",
-  "Productes químics": "Indústria, Maquinària i Energia",
-  "Maquinària d'oficina i informàtica": "Tecnologia i Telecomunicacions",
-  "Maquinària elèctrica": "Indústria, Maquinària i Energia",
-  "Equips de telecomunicacions": "Tecnologia i Telecomunicacions",
-  "Equipament mèdic i farmacèutic": "Salut i Serveis Socials",
-  "Equips de transport": "Transport i Logística",
-  "Equips de seguretat i defensa": "Seguretat i Defensa",
-  "Instruments musicals i esportius": "Cultura, Oci i Esport",
-  "Equips de laboratori i precisió": "Indústria, Maquinària i Energia",
-  "Mobiliari i equipament": "Béns de Consum i Comerç",
-  "Maquinària industrial": "Indústria, Maquinària i Energia",
-  "Maquinària de mineria": "Indústria, Maquinària i Energia",
-  "Materials de construcció": "Construcció i Infraestructures",
-  "Obres de construcció": "Construcció i Infraestructures",
-  "Paquets de programari": "Tecnologia i Telecomunicacions",
-  "Serveis de reparació i manteniment": "Medi Ambient, Neteja i Manteniment",
-  "Serveis d'instal·lació": "Construcció i Infraestructures",
-  "Serveis d'hostaleria i restauració": "Agricultura i Alimentació",
-  "Serveis de transport": "Transport i Logística",
-  "Serveis auxiliars de transport": "Transport i Logística",
-  "Serveis postals i telecomunicacions": "Tecnologia i Telecomunicacions",
-  "Serveis públics (aigua, energia)": "Indústria, Maquinària i Energia",
-  "Serveis financers i d'assegurances": "Serveis Professionals i Corporatius",
-  "Serveis immobiliaris": "Serveis Professionals i Corporatius",
-  "Serveis d'arquitectura i enginyeria": "Construcció i Infraestructures",
-  "Serveis informàtics (TI)": "Tecnologia i Telecomunicacions",
-  "Serveis d'investigació (R+D)": "Educació i Recerca",
-  "Serveis d'administració pública": "Serveis Professionals i Corporatius",
-  "Serveis del sector petroler": "Indústria, Maquinària i Energia",
-  "Serveis agrícoles i forestals": "Agricultura i Alimentació",
-  "Serveis empresarials i de consultoria": "Serveis Professionals i Corporatius",
-  "Serveis d'ensenyament i formació": "Educació i Recerca",
-  "Serveis sanitaris i socials": "Salut i Serveis Socials",
-  "Aigües residuals, residus i neteja": "Medi Ambient, Neteja i Manteniment",
-  "Serveis recreatius i culturals": "Cultura, Oci i Esport",
-  "Altres serveis comunitaris": "Altres Serveis i Subministraments"
-};
-function categoriaToSector(cat) {
-  return SECTOR_MAPPING[cat] || "Altres Serveis i Subministraments";
-}
-async function generateShareImage(contract) {
-  const W = 1080,
-    H = 1350;
-  const PAD_L = 68;
-  const PAD_TOP = 135;
-  const PAD_BOT = 135;
-  const BG = '#0d1f3c';
-  const TEXT = '#f8fafc';
-  const LABEL = 'rgba(248,250,252,0.65)';
-  const canvas = document.createElement('canvas');
-  canvas.width = W;
-  canvas.height = H;
-  const ctx = canvas.getContext('2d');
-  ctx.fillStyle = BG;
-  ctx.fillRect(0, 0, W, H);
-  function ls(size) {
-    return `${(size * -0.025).toFixed(2)}px`;
-  }
-  const maxW = W - PAD_L * 2;
-  const amountSize = 144;
-  const amountBaseline = PAD_TOP + Math.round(amountSize * 0.72);
-  const rawAmount = new Intl.NumberFormat('ca-ES', {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2
-  }).format(contract.importe);
-  ctx.font = `400 ${amountSize}px 'Instrument Serif', serif`;
-  ctx.fillStyle = TEXT;
-  ctx.letterSpacing = ls(amountSize);
-  ctx.fillText(rawAmount + '\u20ac', PAD_L, amountBaseline);
-  const fieldsStartY = H * 0.635;
-  const titleMaxBottom = fieldsStartY - 135;
-  const titleGroupTop = amountBaseline + Math.round(amountSize * 0.22) + 68;
-  function getTitleStartY(size) {
-    return titleGroupTop + Math.round(size * 0.72);
-  }
-  function measureLastY(size) {
-    const lh = Math.round(size * 1.125);
-    const startY = getTitleStartY(size);
-    ctx.font = `500 ${size}px 'Instrument Sans', sans-serif`;
-    ctx.letterSpacing = ls(size);
-    const words = contract.descripcion.split(' ');
-    let line = '',
-      curY = startY;
-    for (const w of words) {
-      const t = line ? line + ' ' + w : w;
-      if (ctx.measureText(t).width > maxW && line) {
-        line = w;
-        curY += lh;
-      } else {
-        line = t;
-      }
-    }
-    return curY;
-  }
-  let fontSize = 64;
-  while (fontSize >= 28 && measureLastY(fontSize) > titleMaxBottom) {
-    fontSize -= 4;
-  }
-  const lineH = Math.round(fontSize * 1.125);
-  const titleStartY = getTitleStartY(fontSize);
-  ctx.font = `500 ${fontSize}px 'Instrument Sans', sans-serif`;
-  ctx.fillStyle = TEXT;
-  ctx.letterSpacing = ls(fontSize);
-  const titleWords = contract.descripcion.split(' ');
-  let tLine = '',
-    tY = titleStartY;
-  for (const w of titleWords) {
-    const t = tLine ? tLine + ' ' + w : w;
-    if (ctx.measureText(t).width > maxW && tLine) {
-      ctx.fillText(tLine, PAD_L, tY);
-      tLine = w;
-      tY += lineH;
-    } else {
-      tLine = t;
-    }
-  }
-  if (tLine) ctx.fillText(tLine, PAD_L, tY);
-  const fields = [{
-    label: 'CONTRACTANT',
-    value: contract.organismo
-  }, {
-    label: 'TIPUS DE CONTRACTE',
-    value: formatTipus(contract.tipo)
-  }, {
-    label: 'PROCEDIMENT',
-    value: contract.procedimiento && contract.procedimiento !== 'nan' ? formatProcediment(contract.procedimiento) : '\u2014'
-  }, {
-    label: "DATA D'ADJUDICACI\u00d3",
-    value: formatDate(contract.fecha)
-  }];
-  const colW = maxW / 2;
-  const rowH = 185;
-  function drawLabel(text, x, sy) {
-    const lbSize = 28,
-      lbLineH = 38,
-      lbMaxW = colW - 40;
-    ctx.font = `600 ${lbSize}px 'Zalando Sans Expanded', sans-serif`;
-    ctx.fillStyle = LABEL;
-    ctx.letterSpacing = ls(lbSize);
-    const ws = text.split(' ');
-    let l = '',
-      ly = sy;
-    for (const w of ws) {
-      const t = l ? l + ' ' + w : w;
-      if (ctx.measureText(t).width > lbMaxW && l) {
-        ctx.fillText(l, x, ly);
-        l = w;
-        ly += lbLineH;
-      } else {
-        l = t;
-      }
-    }
-    if (l) ctx.fillText(l, x, ly);
-    return ly;
-  }
-  fields.forEach((f, i) => {
-    const col = i % 2;
-    const row = Math.floor(i / 2);
-    const x = PAD_L + col * colW;
-    const fy = fieldsStartY + row * rowH;
-    const labelEndY = drawLabel(f.label, x, fy);
-    const valMaxW = colW - 40;
-    let val = f.value || '\u2014';
-    ctx.font = `400 32px 'Instrument Sans', sans-serif`;
-    ctx.fillStyle = TEXT;
-    ctx.letterSpacing = ls(32);
-    while (ctx.measureText(val).width > valMaxW && val.length > 5) {
-      val = val.slice(0, -4) + '\u2026';
-    }
-    ctx.fillText(val, x, labelEndY + 48);
-  });
-  const logoHeight = 72;
-  const logoWidth = 216;
-  const img = new Image();
-  img.src = assetUrl('/assets/iguadata.svg');
-  await new Promise(resolve => {
-    img.onload = resolve;
-    img.onerror = resolve;
-  });
-  if (img.complete && img.naturalWidth > 0) {
-    const tempCanvas = document.createElement('canvas');
-    tempCanvas.width = logoWidth;
-    tempCanvas.height = logoHeight;
-    const tCtx = tempCanvas.getContext('2d');
-    tCtx.drawImage(img, 0, 0, logoWidth, logoHeight);
-    tCtx.globalCompositeOperation = 'source-in';
-    tCtx.fillStyle = TEXT;
-    tCtx.fillRect(0, 0, logoWidth, logoHeight);
-    ctx.drawImage(tempCanvas, PAD_L, H - PAD_BOT - logoHeight + 20);
-  }
-  const link = document.createElement('a');
-  link.download = `iguadata-${contract.slug || buildContractSlug(contract)}.png`;
-  link.href = canvas.toDataURL('image/png');
-  link.click();
-}
-function ContractDetailView({
-  contract: c,
-  empreses,
-  onBack,
-  onEmpresaClick
-}) {
-  const [shareActionsOpen, setShareActionsOpen] = useState(false);
-  const [shareCopyStatus, setShareCopyStatus] = useState('');
-  const [shareDownloadStatus, setShareDownloadStatus] = useState('');
-  const shareActionsRef = useRef(null);
-  const shareStatusTimerRef = useRef(null);
-  const shareDownloadTimerRef = useRef(null);
-  const linkedEmpresa = empreses.find(empresa => empresa.nom === c.adjudicatario);
-  const empresaHref = buildRouteUrl(linkedEmpresa?.slug ? `/empreses/${linkedEmpresa.slug}` : '/empreses');
-  const isPreserved = c.evidencia_congelada === true || c.estat_font === 'preservat_desaparegut_socrata' || c.preservat_iguadata;
-  const hasCpv = Boolean(String(c.cpv || '').trim());
-  useEffect(() => {
-    if (!shareActionsOpen) return;
-    const closeShareActions = event => {
-      if (event.type === 'keydown' && event.key !== 'Escape') return;
-      if (event.type === 'pointerdown' && shareActionsRef.current?.contains(event.target)) return;
-      setShareActionsOpen(false);
-    };
-    document.addEventListener('pointerdown', closeShareActions);
-    document.addEventListener('keydown', closeShareActions);
-    return () => {
-      document.removeEventListener('pointerdown', closeShareActions);
-      document.removeEventListener('keydown', closeShareActions);
-    };
-  }, [shareActionsOpen]);
-  useEffect(() => () => {
-    window.clearTimeout(shareStatusTimerRef.current);
-    window.clearTimeout(shareDownloadTimerRef.current);
-  }, []);
-  const copyContractLink = async () => {
-    try {
-      await navigator.clipboard.writeText(window.location.href);
-      setShareCopyStatus('Enllaç copiat');
-    } catch (_) {
-      setShareCopyStatus("No s'ha pogut copiar");
-    }
-    window.clearTimeout(shareStatusTimerRef.current);
-    shareStatusTimerRef.current = window.setTimeout(() => setShareCopyStatus(''), 1800);
-  };
-  const downloadContractImage = () => {
-    generateShareImage(c);
-    setShareDownloadStatus('Imatge descarregada');
-    window.clearTimeout(shareDownloadTimerRef.current);
-    shareDownloadTimerRef.current = window.setTimeout(() => setShareDownloadStatus(''), 1800);
-  };
-  return React.createElement("div", {
-    className: "container contracte-detail-page"
-  }, React.createElement("h1", {
-    className: "page-title"
-  }, "Detall de contracte"), React.createElement("div", {
-    className: "contracte-detail-hero"
-  }, React.createElement("div", {
-    className: "contracte-detail-amount"
-  }, formatCurrency(c.importe)), React.createElement("div", {
-    className: "contract-header contracte-detail-title-row"
-  }, React.createElement("h2", {
-    className: "contracte-detail-title"
-  }, c.descripcion)), React.createElement("div", {
-    className: "contracte-detail-hero-company"
-  }, React.createElement("div", {
-    className: "contract-header contracte-detail-company-row"
-  }, React.createElement("h2", {
-    className: "contracte-detail-company-title"
-  }, React.createElement("a", {
-    className: "contracte-detail-company-link",
-    href: empresaHref,
-    onClick: event => handleInternalLinkClick(event, () => onEmpresaClick(c.adjudicatario))
-  }, c.adjudicatario))))), React.createElement("div", {
-    className: "contracte-detail-info-card"
-  }, isPreserved && React.createElement("div", {
-    className: "contracte-preserved-notice"
-  }, "Aquest contracte \xE9s recuperat i ja no consta al registre p\xFAblic. La fitxa i evid\xE8ncia es preserven per mantenir la tra\xE7abilitat de les dades."), React.createElement("div", {
-    className: `contract-meta contracte-detail-meta contracte-detail-info-meta${hasCpv ? '' : ' contracte-detail-info-meta-without-cpv'}`
-  }, React.createElement("div", {
-    className: "contract-meta-item"
-  }, React.createElement("span", {
-    className: "contract-meta-label"
-  }, "Data"), React.createElement("span", {
-    className: "contract-meta-value"
-  }, formatDate(c.fecha))), React.createElement("div", {
-    className: "contract-meta-item"
-  }, React.createElement("span", {
-    className: "contract-meta-label"
-  }, "Codi expedient"), React.createElement("span", {
-    className: "contract-meta-value"
-  }, c.codigo)), hasCpv && React.createElement("div", {
-    className: "contract-meta-item"
-  }, React.createElement("span", {
-    className: "contract-meta-label"
-  }, "CPV"), React.createElement("span", {
-    className: "contract-meta-value"
-  }, c.cpv)), React.createElement("div", {
-    className: "contract-meta-item"
-  }, React.createElement("span", {
-    className: "contract-meta-label"
-  }, "Contractant"), React.createElement("span", {
-    className: "contract-meta-value"
-  }, c.organismo)), React.createElement("div", {
-    className: "contract-meta-item"
-  }, React.createElement("span", {
-    className: "contract-meta-label"
-  }, "Tipus"), React.createElement("span", {
-    className: "contract-meta-value"
-  }, formatTipus(c.tipo))), React.createElement("div", {
-    className: "contract-meta-item"
-  }, React.createElement("span", {
-    className: "contract-meta-label"
-  }, "Procediment"), React.createElement("span", {
-    className: "contract-meta-value"
-  }, formatProcediment(c.procedimiento))))), React.createElement("div", {
-    className: "contracte-detail-actions-row"
-  }, React.createElement("button", {
-    onClick: onBack,
-    className: "btn-share contracte-detail-back",
-    title: "Tornar",
-    "aria-label": "Tornar",
-    type: "button"
-  }, React.createElement("svg", {
-    className: "contracte-detail-back-icon",
-    xmlns: "http://www.w3.org/2000/svg",
-    viewBox: "0 0 24 24",
-    fill: "none",
-    stroke: "currentColor",
-    strokeWidth: "2",
-    strokeLinecap: "round",
-    strokeLinejoin: "round",
-    "aria-hidden": "true"
-  }, React.createElement("path", {
-    d: "M19 12H5"
-  }), React.createElement("polyline", {
-    points: "12 19 5 12 12 5"
-  })), React.createElement("span", null, "Tornar")), React.createElement("div", {
-    className: `contracte-detail-share contracte-detail-share-standalone${shareActionsOpen ? ' is-open' : ''}`,
-    ref: shareActionsRef
-  }, React.createElement("div", {
-    id: "contract-share-actions",
-    className: "contracte-detail-share-actions",
-    "aria-hidden": !shareActionsOpen
-  }, React.createElement("button", {
-    id: "analisi-tab-fraccionament",
-    className: "btn-share contracte-detail-share-btn",
-    onClick: copyContractLink,
-    tabIndex: shareActionsOpen ? 0 : -1,
-    type: "button"
-  }, shareCopyStatus || "Copia l'enllaç"), React.createElement("button", {
-    id: "analisi-tab-monopoli",
-    className: "btn-share contracte-detail-share-btn",
-    onClick: downloadContractImage,
-    tabIndex: shareActionsOpen ? 0 : -1,
-    type: "button"
-  }, shareDownloadStatus || "Descarrega l'imatge")), React.createElement("button", {
-    className: "btn-share contracte-detail-share-btn",
-    onClick: () => setShareActionsOpen(open => !open),
-    "aria-expanded": shareActionsOpen,
-    "aria-controls": "contract-share-actions",
-    type: "button"
-  }, React.createElement("em", {
-    className: "share-arrow"
-  }), " Compartir"))));
-}
-function CasoModal({
-  caso,
-  onClose
-}) {
-  const closeButtonRef = useRef(null);
-  useEffect(() => {
-    const previousFocus = document.activeElement;
-    document.body.style.overflow = 'hidden';
-    requestAnimationFrame(() => closeButtonRef.current?.focus());
-    const handleKeyDown = event => {
-      if (event.key === 'Escape') onClose();
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => {
-      document.body.style.overflow = '';
-      window.removeEventListener('keydown', handleKeyDown);
-      previousFocus?.focus?.();
-    };
-  }, [onClose]);
-  const rc = riskClass(caso.nivel_riesgo);
-  const pct = caso.umbral > 0 ? caso.importe_total / caso.umbral * 100 : 0;
-  return React.createElement("div", {
-    className: "modal-overlay",
-    onClick: onClose
-  }, React.createElement("div", {
-    className: "modal-content",
-    onClick: e => e.stopPropagation(),
-    role: "dialog",
-    "aria-modal": "true",
-    "aria-label": `Detall de ${caso.empresa}`
-  }, React.createElement("div", {
-    className: "modal-header"
-  }, React.createElement("div", {
-    className: "modal-header-top"
-  }, React.createElement("button", {
-    ref: closeButtonRef,
-    className: "modal-close",
-    onClick: onClose,
-    type: "button",
-    "aria-label": "Tancar"
-  }, "?")), React.createElement("span", {
-    className: "risk-badge modal-risk-badge " + rc
-  }, riskLabel(caso.nivel_riesgo)), React.createElement("div", {
-    className: "modal-amount"
-  }, formatCurrency(caso.importe_total)), React.createElement("div", {
-    className: "modal-empresa"
-  }, caso.empresa), React.createElement("div", {
-    className: "modal-data"
-  }, caso.año, " \xB7 ", caso.tipo))), React.createElement("div", {
-    className: "modal-body"
-  }, React.createElement("div", {
-    className: "caso-hero"
-  }, React.createElement("div", {
-    className: "contract-meta-label"
-  }, "Import adjudicat / Llindar legal (contractes menors)"), React.createElement("div", {
-    className: "caso-hero-amount"
-  }, formatCurrency(caso.importe_total), ' ', React.createElement("span", {
-    className: "caso-hero-limit"
-  }, "/ ", formatCurrency(caso.umbral)))), React.createElement("div", {
-    className: "caso-bar-row"
-  }, React.createElement("div", {
-    className: "caso-bar-label"
-  }, "Concentraci\xF3 sobre l\xEDmit"), React.createElement("div", {
-    className: "caso-bar-bg"
-  }, React.createElement("div", {
-    className: "caso-bar-fill" + (pct > 100 ? ' error' : ' navy'),
-    style: {
-      width: Math.min(pct, 100) + '%'
-    }
-  })), React.createElement("div", {
-    className: "caso-bar-pct"
-  }, Math.round(pct), "%")), React.createElement("div", {
-    className: "modal-grid",
-    style: {
-      marginTop: '1.5rem'
-    }
-  }, React.createElement("div", null, React.createElement("div", {
-    className: "contract-meta-label"
-  }, "Nombre de contractes"), React.createElement("div", {
-    className: "contract-meta-value"
-  }, caso.num_contratos)), React.createElement("div", null, React.createElement("div", {
-    className: "contract-meta-label"
-  }, "Similitud mitjana"), React.createElement("div", {
-    className: "contract-meta-value"
-  }, Math.round(caso.similitud_media * 100), "%")), React.createElement("div", null, React.createElement("div", {
-    className: "contract-meta-label"
-  }, "Dies entre primer i \xFAltim"), React.createElement("div", {
-    className: "contract-meta-value"
-  }, caso.dias_entre_contratos)), React.createElement("div", null, React.createElement("div", {
-    className: "contract-meta-label"
-  }, "Exc\xE9s sobre llindar"), React.createElement("div", {
-    className: "contract-meta-value"
-  }, formatCurrency(caso.exceso)))), caso.contratos_detalles && caso.contratos_detalles.length > 0 && React.createElement(React.Fragment, null, React.createElement("h3", {
-    className: "caso-detail-heading"
-  }, "Contractes detectats (", caso.contratos_detalles.length, ")"), caso.contratos_detalles.map((c, i) => React.createElement("div", {
-    key: i,
-    className: "contract-card",
-    style: {
-      marginBottom: '0.75rem'
-    }
-  }, React.createElement("div", {
-    className: "contract-header"
-  }, React.createElement("div", {
-    className: "contract-title"
-  }, c.descripcion), React.createElement("div", {
-    className: "contract-amount"
-  }, formatCurrency(c.importe))), React.createElement("div", {
-    className: "contract-meta"
-  }, React.createElement("div", {
-    className: "contract-meta-item"
-  }, React.createElement("span", {
-    className: "contract-meta-label"
-  }, "Data"), React.createElement("span", {
-    className: "contract-meta-value"
-  }, formatDate(c.fecha))), React.createElement("div", {
-    className: "contract-meta-item"
-  }, React.createElement("span", {
-    className: "contract-meta-label"
-  }, "Codi"), React.createElement("span", {
-    className: "contract-meta-value"
-  }, c.codigo))))))));
-}
 function CasFraccionamentView({
   caso,
   contracts,
@@ -2670,6 +1822,326 @@ function CasDependenciaView({
     className: "share-arrow"
   }), " Compartir"))));
 }
+async function generateShareImage(contract) {
+  const W = 1080,
+    H = 1350;
+  const PAD_L = 68;
+  const PAD_TOP = 135;
+  const PAD_BOT = 135;
+  const BG = '#0d1f3c';
+  const TEXT = '#f8fafc';
+  const LABEL = 'rgba(248,250,252,0.65)';
+  const canvas = document.createElement('canvas');
+  canvas.width = W;
+  canvas.height = H;
+  const ctx = canvas.getContext('2d');
+  ctx.fillStyle = BG;
+  ctx.fillRect(0, 0, W, H);
+  function ls(size) {
+    return `${(size * -0.025).toFixed(2)}px`;
+  }
+  const maxW = W - PAD_L * 2;
+  const amountSize = 144;
+  const amountBaseline = PAD_TOP + Math.round(amountSize * 0.72);
+  const rawAmount = new Intl.NumberFormat('ca-ES', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  }).format(contract.importe);
+  ctx.font = `400 ${amountSize}px 'Instrument Serif', serif`;
+  ctx.fillStyle = TEXT;
+  ctx.letterSpacing = ls(amountSize);
+  ctx.fillText(rawAmount + '\u20ac', PAD_L, amountBaseline);
+  const fieldsStartY = H * 0.635;
+  const titleMaxBottom = fieldsStartY - 135;
+  const titleGroupTop = amountBaseline + Math.round(amountSize * 0.22) + 68;
+  function getTitleStartY(size) {
+    return titleGroupTop + Math.round(size * 0.72);
+  }
+  function measureLastY(size) {
+    const lh = Math.round(size * 1.125);
+    const startY = getTitleStartY(size);
+    ctx.font = `500 ${size}px 'Instrument Sans', sans-serif`;
+    ctx.letterSpacing = ls(size);
+    const words = contract.descripcion.split(' ');
+    let line = '',
+      curY = startY;
+    for (const w of words) {
+      const t = line ? line + ' ' + w : w;
+      if (ctx.measureText(t).width > maxW && line) {
+        line = w;
+        curY += lh;
+      } else {
+        line = t;
+      }
+    }
+    return curY;
+  }
+  let fontSize = 64;
+  while (fontSize >= 28 && measureLastY(fontSize) > titleMaxBottom) {
+    fontSize -= 4;
+  }
+  const lineH = Math.round(fontSize * 1.125);
+  const titleStartY = getTitleStartY(fontSize);
+  ctx.font = `500 ${fontSize}px 'Instrument Sans', sans-serif`;
+  ctx.fillStyle = TEXT;
+  ctx.letterSpacing = ls(fontSize);
+  const titleWords = contract.descripcion.split(' ');
+  let tLine = '',
+    tY = titleStartY;
+  for (const w of titleWords) {
+    const t = tLine ? tLine + ' ' + w : w;
+    if (ctx.measureText(t).width > maxW && tLine) {
+      ctx.fillText(tLine, PAD_L, tY);
+      tLine = w;
+      tY += lineH;
+    } else {
+      tLine = t;
+    }
+  }
+  if (tLine) ctx.fillText(tLine, PAD_L, tY);
+  const fields = [{
+    label: 'CONTRACTANT',
+    value: contract.organismo
+  }, {
+    label: 'TIPUS DE CONTRACTE',
+    value: formatTipus(contract.tipo)
+  }, {
+    label: 'PROCEDIMENT',
+    value: contract.procedimiento && contract.procedimiento !== 'nan' ? formatProcediment(contract.procedimiento) : '\u2014'
+  }, {
+    label: "DATA D'ADJUDICACI\u00d3",
+    value: formatDate(contract.fecha)
+  }];
+  const colW = maxW / 2;
+  const rowH = 185;
+  function drawLabel(text, x, sy) {
+    const lbSize = 28,
+      lbLineH = 38,
+      lbMaxW = colW - 40;
+    ctx.font = `600 ${lbSize}px 'Zalando Sans Expanded', sans-serif`;
+    ctx.fillStyle = LABEL;
+    ctx.letterSpacing = ls(lbSize);
+    const ws = text.split(' ');
+    let l = '',
+      ly = sy;
+    for (const w of ws) {
+      const t = l ? l + ' ' + w : w;
+      if (ctx.measureText(t).width > lbMaxW && l) {
+        ctx.fillText(l, x, ly);
+        l = w;
+        ly += lbLineH;
+      } else {
+        l = t;
+      }
+    }
+    if (l) ctx.fillText(l, x, ly);
+    return ly;
+  }
+  fields.forEach((f, i) => {
+    const col = i % 2;
+    const row = Math.floor(i / 2);
+    const x = PAD_L + col * colW;
+    const fy = fieldsStartY + row * rowH;
+    const labelEndY = drawLabel(f.label, x, fy);
+    const valMaxW = colW - 40;
+    let val = f.value || '\u2014';
+    ctx.font = `400 32px 'Instrument Sans', sans-serif`;
+    ctx.fillStyle = TEXT;
+    ctx.letterSpacing = ls(32);
+    while (ctx.measureText(val).width > valMaxW && val.length > 5) {
+      val = val.slice(0, -4) + '\u2026';
+    }
+    ctx.fillText(val, x, labelEndY + 48);
+  });
+  const logoHeight = 72;
+  const logoWidth = 216;
+  const img = new Image();
+  img.src = assetUrl('/assets/iguadata.svg');
+  await new Promise(resolve => {
+    img.onload = resolve;
+    img.onerror = resolve;
+  });
+  if (img.complete && img.naturalWidth > 0) {
+    const tempCanvas = document.createElement('canvas');
+    tempCanvas.width = logoWidth;
+    tempCanvas.height = logoHeight;
+    const tCtx = tempCanvas.getContext('2d');
+    tCtx.drawImage(img, 0, 0, logoWidth, logoHeight);
+    tCtx.globalCompositeOperation = 'source-in';
+    tCtx.fillStyle = TEXT;
+    tCtx.fillRect(0, 0, logoWidth, logoHeight);
+    ctx.drawImage(tempCanvas, PAD_L, H - PAD_BOT - logoHeight + 20);
+  }
+  const link = document.createElement('a');
+  link.download = `iguadata-${contract.slug || buildContractSlug(contract)}.png`;
+  link.href = canvas.toDataURL('image/png');
+  link.click();
+}
+function ContractDetailView({
+  contract: c,
+  empreses,
+  onBack,
+  onEmpresaClick
+}) {
+  const [shareActionsOpen, setShareActionsOpen] = useState(false);
+  const [shareCopyStatus, setShareCopyStatus] = useState('');
+  const [shareDownloadStatus, setShareDownloadStatus] = useState('');
+  const shareActionsRef = useRef(null);
+  const shareStatusTimerRef = useRef(null);
+  const shareDownloadTimerRef = useRef(null);
+  const linkedEmpresa = empreses.find(empresa => empresa.nom === c.adjudicatario);
+  const empresaHref = buildRouteUrl(linkedEmpresa?.slug ? `/empreses/${linkedEmpresa.slug}` : '/empreses');
+  const isPreserved = c.evidencia_congelada === true || c.estat_font === 'preservat_desaparegut_socrata' || c.preservat_iguadata;
+  const hasCpv = Boolean(String(c.cpv || '').trim());
+  useEffect(() => {
+    if (!shareActionsOpen) return;
+    const closeShareActions = event => {
+      if (event.type === 'keydown' && event.key !== 'Escape') return;
+      if (event.type === 'pointerdown' && shareActionsRef.current?.contains(event.target)) return;
+      setShareActionsOpen(false);
+    };
+    document.addEventListener('pointerdown', closeShareActions);
+    document.addEventListener('keydown', closeShareActions);
+    return () => {
+      document.removeEventListener('pointerdown', closeShareActions);
+      document.removeEventListener('keydown', closeShareActions);
+    };
+  }, [shareActionsOpen]);
+  useEffect(() => () => {
+    window.clearTimeout(shareStatusTimerRef.current);
+    window.clearTimeout(shareDownloadTimerRef.current);
+  }, []);
+  const copyContractLink = async () => {
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      setShareCopyStatus('Enllaç copiat');
+    } catch (_) {
+      setShareCopyStatus("No s'ha pogut copiar");
+    }
+    window.clearTimeout(shareStatusTimerRef.current);
+    shareStatusTimerRef.current = window.setTimeout(() => setShareCopyStatus(''), 1800);
+  };
+  const downloadContractImage = () => {
+    generateShareImage(c);
+    setShareDownloadStatus('Imatge descarregada');
+    window.clearTimeout(shareDownloadTimerRef.current);
+    shareDownloadTimerRef.current = window.setTimeout(() => setShareDownloadStatus(''), 1800);
+  };
+  return React.createElement("div", {
+    className: "container contracte-detail-page"
+  }, React.createElement("h1", {
+    className: "page-title"
+  }, "Detall de contracte"), React.createElement("div", {
+    className: "contracte-detail-hero"
+  }, React.createElement("div", {
+    className: "contracte-detail-amount"
+  }, formatCurrency(c.importe)), React.createElement("div", {
+    className: "contract-header contracte-detail-title-row"
+  }, React.createElement("h2", {
+    className: "contracte-detail-title"
+  }, c.descripcion)), React.createElement("div", {
+    className: "contracte-detail-hero-company"
+  }, React.createElement("div", {
+    className: "contract-header contracte-detail-company-row"
+  }, React.createElement("h2", {
+    className: "contracte-detail-company-title"
+  }, React.createElement("a", {
+    className: "contracte-detail-company-link",
+    href: empresaHref,
+    onClick: event => handleInternalLinkClick(event, () => onEmpresaClick(c.adjudicatario))
+  }, c.adjudicatario))))), React.createElement("div", {
+    className: "contracte-detail-info-card"
+  }, isPreserved && React.createElement("div", {
+    className: "contracte-preserved-notice"
+  }, "Aquest contracte \xE9s recuperat i ja no consta al registre p\xFAblic. La fitxa i evid\xE8ncia es preserven per mantenir la tra\xE7abilitat de les dades."), React.createElement("div", {
+    className: `contract-meta contracte-detail-meta contracte-detail-info-meta${hasCpv ? '' : ' contracte-detail-info-meta-without-cpv'}`
+  }, React.createElement("div", {
+    className: "contract-meta-item"
+  }, React.createElement("span", {
+    className: "contract-meta-label"
+  }, "Data"), React.createElement("span", {
+    className: "contract-meta-value"
+  }, formatDate(c.fecha))), React.createElement("div", {
+    className: "contract-meta-item"
+  }, React.createElement("span", {
+    className: "contract-meta-label"
+  }, "Codi expedient"), React.createElement("span", {
+    className: "contract-meta-value"
+  }, c.codigo)), hasCpv && React.createElement("div", {
+    className: "contract-meta-item"
+  }, React.createElement("span", {
+    className: "contract-meta-label"
+  }, "CPV"), React.createElement("span", {
+    className: "contract-meta-value"
+  }, c.cpv)), React.createElement("div", {
+    className: "contract-meta-item"
+  }, React.createElement("span", {
+    className: "contract-meta-label"
+  }, "Contractant"), React.createElement("span", {
+    className: "contract-meta-value"
+  }, c.organismo)), React.createElement("div", {
+    className: "contract-meta-item"
+  }, React.createElement("span", {
+    className: "contract-meta-label"
+  }, "Tipus"), React.createElement("span", {
+    className: "contract-meta-value"
+  }, formatTipus(c.tipo))), React.createElement("div", {
+    className: "contract-meta-item"
+  }, React.createElement("span", {
+    className: "contract-meta-label"
+  }, "Procediment"), React.createElement("span", {
+    className: "contract-meta-value"
+  }, formatProcediment(c.procedimiento))))), React.createElement("div", {
+    className: "contracte-detail-actions-row"
+  }, React.createElement("button", {
+    onClick: onBack,
+    className: "btn-share contracte-detail-back",
+    title: "Tornar",
+    "aria-label": "Tornar",
+    type: "button"
+  }, React.createElement("svg", {
+    className: "contracte-detail-back-icon",
+    xmlns: "http://www.w3.org/2000/svg",
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: "2",
+    strokeLinecap: "round",
+    strokeLinejoin: "round",
+    "aria-hidden": "true"
+  }, React.createElement("path", {
+    d: "M19 12H5"
+  }), React.createElement("polyline", {
+    points: "12 19 5 12 12 5"
+  })), React.createElement("span", null, "Tornar")), React.createElement("div", {
+    className: `contracte-detail-share contracte-detail-share-standalone${shareActionsOpen ? ' is-open' : ''}`,
+    ref: shareActionsRef
+  }, React.createElement("div", {
+    id: "contract-share-actions",
+    className: "contracte-detail-share-actions",
+    "aria-hidden": !shareActionsOpen
+  }, React.createElement("button", {
+    id: "analisi-tab-fraccionament",
+    className: "btn-share contracte-detail-share-btn",
+    onClick: copyContractLink,
+    tabIndex: shareActionsOpen ? 0 : -1,
+    type: "button"
+  }, shareCopyStatus || "Copia l'enllaç"), React.createElement("button", {
+    id: "analisi-tab-monopoli",
+    className: "btn-share contracte-detail-share-btn",
+    onClick: downloadContractImage,
+    tabIndex: shareActionsOpen ? 0 : -1,
+    type: "button"
+  }, shareDownloadStatus || "Descarrega l'imatge")), React.createElement("button", {
+    className: "btn-share contracte-detail-share-btn",
+    onClick: () => setShareActionsOpen(open => !open),
+    "aria-expanded": shareActionsOpen,
+    "aria-controls": "contract-share-actions",
+    type: "button"
+  }, React.createElement("em", {
+    className: "share-arrow"
+  }), " Compartir"))));
+}
 function EmpresesView({
   empreses,
   onEmpresaSelect,
@@ -3336,6 +2808,984 @@ function EmpresaView({
     className: "share-arrow"
   }), " Compartir"))));
 }
+function HomeChrome({
+  interactive = true,
+  goToHome
+}) {
+  return React.createElement("div", {
+    className: "home-chrome"
+  }, React.createElement("div", {
+    className: "home-chrome-gradient is-visible",
+    "aria-hidden": "true"
+  }), React.createElement("div", {
+    className: "home-brand home-chrome-brand",
+    onClick: interactive ? goToHome : undefined,
+    onKeyDown: interactive ? event => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        goToHome();
+      }
+    } : undefined,
+    role: interactive ? 'link' : undefined,
+    tabIndex: interactive ? 0 : undefined
+  }, React.createElement("div", {
+    className: "home-logo",
+    role: "img",
+    "aria-label": "Iguadata"
+  })));
+}
+function HomeSection({
+  extraClassName = '',
+  interactive = true,
+  homeCanvasRef,
+  handleHomeMetricLinkClick,
+  handleNavigation,
+  setIsMobileMenuOpen,
+  handleAnalisiNavClick,
+  contractCount,
+  subvencionsCount,
+  empresasCount,
+  personesCount,
+  alertesCount,
+  homeTopSectors,
+  homeTopCategories,
+  homeRiskCounts
+}) {
+  return React.createElement("section", {
+    className: `home${extraClassName ? ` ${extraClassName}` : ''}`,
+    "aria-label": "Portada editorial Iguadata",
+    "aria-hidden": !interactive
+  }, React.createElement("div", {
+    className: "home-scroll-story"
+  }, React.createElement("div", {
+    className: "home-hero"
+  }, React.createElement("canvas", {
+    ref: homeCanvasRef,
+    className: "home-particles",
+    "aria-hidden": "true"
+  }), React.createElement("div", {
+    className: "home-hero-bottom-gradient",
+    "aria-hidden": "true"
+  }), React.createElement("div", {
+    className: "home-intro-scene"
+  }, React.createElement("div", {
+    className: "home-copy"
+  }, React.createElement("h1", {
+    className: "home-title"
+  }, "Tot \xE9s ", React.createElement("em", null, "p\xFAblic")), React.createElement("p", {
+    className: "home-deck"
+  }, "Contractes, empreses, persones, subvencions i an\xE0lisi en una cartografia oberta de la contractaci\xF3 p\xFAblica de ", AUTHORITY_NAME)), React.createElement("div", {
+    className: "home-metrics",
+    "aria-label": "Indicadors principals"
+  }, React.createElement("a", {
+    href: buildRouteUrl('/contractes'),
+    className: "home-metric metric-contractes",
+    onClick: interactive ? event => handleHomeMetricLinkClick(event, () => {
+      handleNavigation('buscador');
+      setIsMobileMenuOpen(false);
+    }) : event => event.preventDefault(),
+    tabIndex: interactive ? 0 : -1
+  }, React.createElement("span", {
+    className: "home-metric-value"
+  }, contractCount.toLocaleString('ca-ES')), React.createElement("span", {
+    className: "home-metric-label"
+  }, "Contractes")), React.createElement("a", {
+    href: buildRouteUrl('/subvencions'),
+    className: "home-metric metric-import",
+    onClick: interactive ? event => handleHomeMetricLinkClick(event, () => {
+      handleNavigation('subvencions');
+      setIsMobileMenuOpen(false);
+    }) : event => event.preventDefault(),
+    tabIndex: interactive ? 0 : -1
+  }, React.createElement("span", {
+    className: "home-metric-value"
+  }, subvencionsCount.toLocaleString('ca-ES')), React.createElement("span", {
+    className: "home-metric-label"
+  }, "Subvencions")), React.createElement("a", {
+    href: buildRouteUrl('/empreses'),
+    className: "home-metric metric-empreses",
+    onClick: interactive ? event => handleHomeMetricLinkClick(event, () => {
+      handleNavigation('empreses');
+      setIsMobileMenuOpen(false);
+    }) : event => event.preventDefault(),
+    tabIndex: interactive ? 0 : -1
+  }, React.createElement("span", {
+    className: "home-metric-value"
+  }, empresasCount.toLocaleString('ca-ES')), React.createElement("span", {
+    className: "home-metric-label"
+  }, "Empreses")), React.createElement("a", {
+    href: buildRouteUrl('/persones'),
+    className: "home-metric metric-persones",
+    onClick: interactive ? event => handleHomeMetricLinkClick(event, () => {
+      handleNavigation('persones');
+      setIsMobileMenuOpen(false);
+    }) : event => event.preventDefault(),
+    tabIndex: interactive ? 0 : -1
+  }, React.createElement("span", {
+    className: "home-metric-value"
+  }, personesCount.toLocaleString('ca-ES')), React.createElement("span", {
+    className: "home-metric-label"
+  }, "Persones")), React.createElement("a", {
+    href: buildRouteUrl('/analisi'),
+    className: "home-metric metric-alertes",
+    onClick: interactive ? event => handleHomeMetricLinkClick(event, handleAnalisiNavClick) : event => event.preventDefault(),
+    tabIndex: interactive ? 0 : -1
+  }, React.createElement("span", {
+    className: "home-metric-value"
+  }, alertesCount.toLocaleString('ca-ES')), React.createElement("span", {
+    className: "home-metric-label"
+  }, "Alertes"))), React.createElement("div", {
+    className: "home-scroll-invitation",
+    "aria-hidden": "true"
+  }, React.createElement("svg", {
+    width: "24",
+    height: "24",
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: "1.5",
+    strokeLinecap: "round",
+    strokeLinejoin: "round"
+  }, React.createElement("path", {
+    d: "m6 9 6 6 6-6"
+  })))), React.createElement("section", {
+    className: "home-chapter home-economic-scene",
+    "aria-labelledby": "home-economic-title"
+  }, React.createElement("div", {
+    className: "home-economic-heading"
+  }, React.createElement("h2", {
+    id: "home-economic-title"
+  }, "On van els ", React.createElement("em", null, "diners?")), React.createElement("p", null, "Els sectors amb m\xE9s despesa de ", AUTHORITY_NAME, ".")), React.createElement("div", {
+    className: "home-economic-bars",
+    "aria-label": "Sectors amb m\xE9s import adjudicat"
+  }, homeTopSectors.map(item => React.createElement("div", {
+    key: item.label,
+    className: "home-economic-row",
+    style: {
+      '--economic-scale': item.share
+    }
+  }, React.createElement("span", null, item.label), React.createElement("strong", null, formatCompactCurrency(item.amount)))))), React.createElement("section", {
+    className: "home-chapter home-categories-scene",
+    "aria-labelledby": "home-categories-title"
+  }, React.createElement("div", {
+    className: "home-categories-cloud",
+    "aria-label": "Categories amb m\xE9s import adjudicat"
+  }, homeTopCategories.map(item => React.createElement("div", {
+    key: item.label,
+    className: `home-category-word home-category-word-${Math.min(item.rank, 6)}`,
+    style: {
+      '--category-scale': 0.82 + item.share * 2.4
+    }
+  }, React.createElement("span", null, item.label), React.createElement("strong", null, formatCompactCurrency(item.amount))))), React.createElement("div", {
+    className: "home-categories-heading"
+  }, React.createElement("h2", {
+    id: "home-categories-title"
+  }, "Qu\xE8 es ", React.createElement("em", null, "compra"), "?"), React.createElement("p", null, "Els serveis m\xE9s contractats de ", AUTHORITY_NAME, "."))), React.createElement("section", {
+    className: "home-chapter home-patterns-scene",
+    "aria-labelledby": "home-patterns-title"
+  }, React.createElement("div", {
+    className: "home-patterns-heading"
+  }, React.createElement("h2", {
+    id: "home-patterns-title"
+  }, "I quan les dades es connecten, apareixen ", React.createElement("em", null, "patrons."))), React.createElement("div", {
+    className: "home-risk-metrics",
+    "aria-label": "Alertes per nivell de risc"
+  }, React.createElement("div", {
+    className: "home-risk-metric"
+  }, React.createElement("strong", null, homeRiskCounts.alt.toLocaleString('ca-ES')), React.createElement("span", null, "Risc alt")), React.createElement("div", {
+    className: "home-risk-metric"
+  }, React.createElement("strong", null, homeRiskCounts.mitja.toLocaleString('ca-ES')), React.createElement("span", null, "Risc mitj\xE0")), React.createElement("div", {
+    className: "home-risk-metric"
+  }, React.createElement("strong", null, homeRiskCounts.baix.toLocaleString('ca-ES')), React.createElement("span", null, "Risc baix")))), React.createElement("section", {
+    className: "home-chapter home-loop-scene",
+    "aria-labelledby": "home-loop-title"
+  }, React.createElement("div", {
+    className: "home-loop-copy"
+  }, React.createElement("h2", {
+    id: "home-loop-title",
+    className: "home-loop-title"
+  }, "El projecte de transpar\xE8ncia ", React.createElement("em", null, "d'Igualada")))))));
+}
+function HomeLoading({
+  isDissolving = false,
+  homeCanvasRef,
+  loadingProgress
+}) {
+  return React.createElement("div", {
+    className: `home home-loading-screen${isDissolving ? ' is-dissolving' : ''}`
+  }, React.createElement("div", {
+    className: "home-brand"
+  }, React.createElement("div", {
+    className: "home-logo",
+    role: "img",
+    "aria-label": "Iguadata"
+  })), !isDissolving && React.createElement("canvas", {
+    ref: homeCanvasRef,
+    className: "home-particles",
+    "aria-hidden": "true"
+  }), React.createElement("div", {
+    className: "home-copy home-loading-copy"
+  }, React.createElement("h1", {
+    className: "home-title"
+  }, "Tot \xE9s ", React.createElement("em", null, "p\xFAblic")), React.createElement("div", {
+    className: "home-loading-progress"
+  }, loadingProgress.toLocaleString('ca-ES'), "%")));
+}
+function SobreView() {
+  return React.createElement("div", {
+    className: "container prose-page narrative-info-page"
+  }, React.createElement("h1", {
+    className: "page-title"
+  }, "Sobre el projecte"), React.createElement("div", {
+    className: "prose-wrapper narrative-story"
+  }, React.createElement("p", {
+    className: "prose-intro"
+  }, BRAND_NAME, " \xE9s la plataforma independent de periodisme de dades per a l'an\xE0lisi de la contractaci\xF3 p\xFAblica i les subvencions de ", AUTHORITY_NAME, " i dels seus organismes municipals.", React.createElement("br", null), React.createElement("br", null), "El projecte combina dades obertes de contractaci\xF3 i subvencions, informaci\xF3 mercantil i algoritmes propis per fer m\xE9s accessible, comprensible i fiscalitzable la despesa p\xFAblica municipal."), React.createElement("h2", {
+    className: "prose-heading"
+  }, "Autoria"), React.createElement("p", {
+    className: "prose-paragraph"
+  }, "Iguadata \xE9s un projecte de l'igualad\xED ", React.createElement("a", {
+    href: "https://x.com/viictxxr",
+    target: "_blank",
+    rel: "noopener noreferrer",
+    className: "prose-link"
+  }, "V\xEDctor Recio Rodr\xEDguez"), ", desenvolupat com a Treball Final del M\xE0ster en Periodisme i Comunicaci\xF3 Digital: Dades i Noves Narratives de la Universitat Oberta de Catalunya (UOC), sota la tutoria de Carlos L\xF3pez Olano."), React.createElement("h2", {
+    className: "prose-heading"
+  }, "Objectius"), React.createElement("p", {
+    className: "prose-paragraph"
+  }, "Iguadata neix amb tres objectius principals: facilitar l'acc\xE9s de la ciutadania a la contractaci\xF3 i les subvencions p\xFAbliques municipals, detectar patrons que puguin mer\xE8ixer revisi\xF3 period\xEDstica o institucional, i construir una metodologia replicable per altres municipis."), React.createElement("p", {
+    className: "prose-paragraph"
+  }, "La plataforma no substitueix la feina dels \xF2rgans fiscalitzadors, jur\xEDdics o administratius. El seu paper \xE9s ordenar dades disperses, mostrar relacions i generar indicadors que ajudin a fer millors preguntes."), React.createElement("h2", {
+    className: "prose-heading"
+  }, "Qu\xE8 analitza"), React.createElement("p", {
+    className: "prose-paragraph"
+  }, "Iguadata permet consultar contractes, empreses adjudicat\xE0ries, persones vinculades a aquestes empreses, subvencions, entitats benefici\xE0ries i diferents indicadors d'an\xE0lisi."), React.createElement("p", {
+    className: "prose-paragraph"
+  }, "Els principals blocs d'an\xE0lisi s\xF3n el possible fraccionament de contractes menors, la concentraci\xF3 d'adjudicacions en determinades empreses o sectors, els patrons d'electoralisme o comunicaci\xF3 institucional en per\xEDodes sensibles i l'acumulaci\xF3 o recurr\xE8ncia de subvencions directes en una mateixa entitat."), React.createElement("h2", {
+    className: "prose-heading"
+  }, "Font de dades"), React.createElement("p", {
+    className: "prose-paragraph"
+  }, "Les dades de contractaci\xF3 provenen del Registre P\xFAblic de Contractes de la Generalitat de Catalunya, consultat mitjan\xE7ant l'API Socrata Open Data (SODA)."), React.createElement("p", {
+    className: "prose-paragraph"
+  }, "Les dades de subvencions provenen del Registre d'Ajuts i Subvencions de Catalunya (RAISC). Iguadata selecciona les concessions emeses per ", AUTHORITY_NAME, " i publica \xFAnicament els registres amb beneficiaris identificats com a entitats publicables."), React.createElement("p", {
+    className: "prose-paragraph"
+  }, "Les dades mercantils provenen del Butllet\xED Oficial del Registre Mercantil (BORME), registre oficial p\xFAblic. Mitjan\xE7ant un processament massiu, t\xE8cniques de mineria de dades i l'\xFAs de programari de codi obert desenvolupat per ", React.createElement("a", {
+    href: "https://github.com/BquantFinance",
+    target: "_blank",
+    rel: "noopener noreferrer",
+    className: "prose-link"
+  }, "Gerard S\xE1nchez Vidal"), ", s'identifiquen els c\xE0rrecs actius de les empreses adjudicat\xE0ries."), React.createElement("p", {
+    className: "prose-paragraph"
+  }, "Una actualitzaci\xF3 autom\xE0tica setmanal genera una fotografia coherent dels contractes, les subvencions, les empreses, les entitats, les persones i els resultats anal\xEDtics. Tamb\xE9 es generen fitxers JSON propis que permeten alimentar la interf\xEDcie, accelerar la consulta i mantenir c\xF2pies de suport en cas de caiguda temporal de les fonts externes."), React.createElement("h2", {
+    className: "prose-heading"
+  }, "Metodologia"), React.createElement("p", {
+    className: "prose-paragraph"
+  }, "El projecte utilitza scripts de Python per descarregar, netejar, normalitzar i encreuar dades. Part del proc\xE9s d'actualitzaci\xF3 s'executa autom\xE0ticament mitjan\xE7ant GitHub Actions, amb controls de validaci\xF3, c\xF2pies de seguretat i comprovacions d'integritat."), React.createElement("p", {
+    className: "prose-paragraph"
+  }, "Els algoritmes d'Iguadata no emeten veredictes. Detecten patrons, acumulacions, recurr\xE8ncies, proximitats temporals, vincles mercantils o combinacions de factors que poden tenir inter\xE8s p\xFAblic i period\xEDstic."), React.createElement("h2", {
+    className: "prose-heading"
+  }, "Limitacions"), React.createElement("p", {
+    className: "prose-paragraph"
+  }, "Les dades poden contenir errors d'origen, omissions, duplicats, canvis posteriors o incid\xE8ncies derivades de la normalitzaci\xF3 i classificaci\xF3 automatitzades. L'aparici\xF3 d'una empresa, entitat, persona, contracte o subvenci\xF3 en una alerta no implica cap irregularitat legal confirmada."), React.createElement("p", {
+    className: "prose-paragraph"
+  }, "Qualsevol conclusi\xF3 period\xEDstica, administrativa o jur\xEDdica requereix contrastar les dades amb expedients originals, informes t\xE8cnics, resolucions, convocat\xF2ries, bases reguladores, plecs i altres fonts documentals."), React.createElement("h2", {
+    className: "prose-heading"
+  }, "Codi obert"), React.createElement("p", {
+    className: "prose-paragraph"
+  }, "El codi font del projecte \xE9s p\xFAblic i est\xE0 disponible a ", React.createElement("a", {
+    href: REPOSITORY_URL,
+    target: "_blank",
+    rel: "noopener noreferrer",
+    className: "prose-link"
+  }, "GitHub"), " sota llic\xE8ncia GNU GPL v3.0."), React.createElement("h2", {
+    className: "prose-heading"
+  }, "Contacte"), React.createElement("p", {
+    className: "prose-paragraph"
+  }, "Per a suggeriments, correccions factuals, col\xB7laboracions o consultes sobre el projecte, es pot contactar a partir de ", React.createElement("a", {
+    href: `mailto:${CONTACT_EMAIL}`,
+    className: "prose-link"
+  }, CONTACT_EMAIL), ".")));
+}
+function LegalView() {
+  return React.createElement("div", {
+    className: "container prose-page narrative-info-page"
+  }, React.createElement("h1", {
+    className: "page-title"
+  }, "Av\xEDs Legal"), React.createElement("div", {
+    className: "prose-wrapper narrative-story"
+  }, React.createElement("h2", {
+    className: "prose-heading"
+  }, "1. Identificaci\xF3 i titularitat"), React.createElement("p", {
+    className: "prose-paragraph"
+  }, BRAND_NAME, " \xE9s un projecte independent de transpar\xE8ncia, an\xE0lisi de dades p\xFAbliques i fiscalitzaci\xF3 c\xEDvica de la contractaci\xF3 i les subvencions p\xFAbliques vinculades a ", AUTHORITY_NAME, " i als seus organismes municipals relacionats."), React.createElement("p", {
+    className: "prose-paragraph"
+  }, "Iguadata no \xE9s una administraci\xF3 p\xFAblica ni actua en nom de cap instituci\xF3. La plataforma t\xE9 finalitats informatives, period\xEDstiques, educatives, de recerca i de divulgaci\xF3."), React.createElement("p", {
+    className: "prose-paragraph"
+  }, "Responsable del projecte i del tractament: V\xEDctor Recio Rodr\xEDguez. Contacte: ", React.createElement("a", {
+    href: `mailto:${CONTACT_EMAIL}`,
+    className: "prose-link"
+  }, CONTACT_EMAIL), "."), React.createElement("h2", {
+    className: "prose-heading"
+  }, "2. Origen de les dades"), React.createElement("p", {
+    className: "prose-paragraph"
+  }, "Les dades de contractaci\xF3 provenen del Registre P\xFAblic de Contractes de la Generalitat de Catalunya, consultat mitjan\xE7ant l'API Socrata Open Data (SODA), i d'altres fonts p\xFAbliques oficials de contractaci\xF3."), React.createElement("p", {
+    className: "prose-paragraph"
+  }, "Les dades de subvencions provenen del Registre d'Ajuts i Subvencions de Catalunya (RAISC). Iguadata selecciona les concessions emeses per ", AUTHORITY_NAME, " i processa la informaci\xF3 sobre els imports, les finalitats, els procediments de concessi\xF3 i els beneficiaris que poden ser objecte de publicaci\xF3."), React.createElement("p", {
+    className: "prose-paragraph"
+  }, "Les dades mercantils provenen del Butllet\xED Oficial del Registre Mercantil (BORME), registre oficial de car\xE0cter p\xFAblic. Iguadata processa aquestes dades mitjan\xE7ant eines automatitzades de desc\xE0rrega, extracci\xF3, normalitzaci\xF3 i encreuament de dades."), React.createElement("p", {
+    className: "prose-paragraph"
+  }, "La informaci\xF3 publicada es basa en fonts p\xFAbliques i oficials. Tot i aix\xF2, poden existir errors d'origen, omissions, canvis posteriors, difer\xE8ncies de normalitzaci\xF3 de noms o incid\xE8ncies derivades del processament automatitzat."), React.createElement("h2", {
+    className: "prose-heading"
+  }, "3. Actualitzaci\xF3 i tra\xE7abilitat"), React.createElement("p", {
+    className: "prose-paragraph"
+  }, "La plataforma publica fotografies setmanals coherents de contractes i subvencions generades a partir de fonts p\xFAbliques. Part del proc\xE9s d'actualitzaci\xF3 s'executa de manera automatitzada mitjan\xE7ant GitHub Actions, amb controls t\xE8cnics de validaci\xF3, preservaci\xF3 de registres, c\xF2pies de seguretat i comprovacions d'integritat dels fitxers generats."), React.createElement("p", {
+    className: "prose-paragraph"
+  }, "Aquest proc\xE9s no altera el sentit de les dades originals, sin\xF3 que les estructura, normalitza i encreua per facilitar-ne la consulta p\xFAblica i l'an\xE0lisi."), React.createElement("h2", {
+    className: "prose-heading"
+  }, "4. Finalitat del tractament"), React.createElement("p", {
+    className: "prose-paragraph"
+  }, "La finalitat d'Iguadata \xE9s facilitar l'acc\xE9s, la comprensi\xF3 i l'an\xE0lisi de dades p\xFAbliques sobre contractaci\xF3 i subvencions municipals, concentraci\xF3 empresarial, vincles mercantils, possibles patrons de fraccionament, indicadors de risc electoral o institucional i acumulaci\xF3 o recurr\xE8ncia de subvencions directes."), React.createElement("p", {
+    className: "prose-paragraph"
+  }, "Les visualitzacions, cercadors i alertes tenen una funci\xF3 orientativa i d'inter\xE8s p\xFAblic. No constitueixen resolucions administratives, acusacions, proves concloents ni imputacions d'irregularitat."), React.createElement("h2", {
+    className: "prose-heading"
+  }, "5. Limitaci\xF3 de responsabilitat"), React.createElement("p", {
+    className: "prose-paragraph"
+  }, "Els indicadors generats per Iguadata identifiquen patrons estad\xEDstics o relacions documentals que poden ser d'inter\xE8s p\xFAblic, per\xF2 requereixen sempre interpretaci\xF3 contextual i, si escau, verificaci\xF3 addicional amb expedients, informes, plecs, resolucions administratives o altres fonts originals."), React.createElement("p", {
+    className: "prose-paragraph"
+  }, "L'aparici\xF3 d'una empresa, entitat, persona, contracte o subvenci\xF3 dins d'un indicador no implica per si mateixa cap infracci\xF3 legal, administrativa, \xE8tica o penal."), React.createElement("p", {
+    className: "prose-paragraph"
+  }, "En particular, les alertes de depend\xE8ncia identifiquen patrons d'acumulaci\xF3 o recurr\xE8ncia de subvencions directes. Aquests patrons poden tenir inter\xE8s p\xFAblic o period\xEDstic, per\xF2 no acrediten un \xFAs indegut dels recursos p\xFAblics ni una actuaci\xF3 irregular de l'entitat benefici\xE0ria o de l'administraci\xF3 concedent."), React.createElement("h2", {
+    className: "prose-heading"
+  }, "6. Protecci\xF3 de dades personals"), React.createElement("p", {
+    className: "prose-paragraph"
+  }, "Iguadata no utilitza cookies de seguiment ni eines d'anal\xEDtica orientades a perfilar usuaris. La plataforma pot utilitzar anal\xEDtica web agregada i respectuosa amb la privacitat per con\xE8ixer l'\xFAs general del projecte, sense identificar individualment els visitants ni crear perfils personals."), React.createElement("p", {
+    className: "prose-paragraph"
+  }, "Les persones que apareixen en el cercador de persones es mostren en la seva condici\xF3 de representants mercantils, administradors, apoderats, auditors, socis \xFAnics o altres c\xE0rrecs societaris vinculats a empreses adjudicat\xE0ries, segons dades publicades al BORME i en fonts oficials de contractaci\xF3 p\xFAblica."), React.createElement("p", {
+    className: "prose-paragraph"
+  }, "L'import associat a una persona correspon al volum total adjudicat a les empreses amb les quals consta vinculada en els registres analitzats. Aquesta xifra no representa ingressos personals, patrimoni individual, remuneraci\xF3 ni benefici directe."), React.createElement("p", {
+    className: "prose-paragraph"
+  }, "En l'\xE0mbit de les subvencions, la interf\xEDcie p\xFAblica mostra \xFAnicament els registres corresponents a beneficiaris identificats com a entitats publicables. Les concessions associades a persones f\xEDsiques o a beneficiaris no publicables es conserven nom\xE9s quan s\xF3n necess\xE0ries per al tractament intern i l'an\xE0lisi agregada, per\xF2 no es mostren ni permeten identificar-ne els beneficiaris a la plataforma p\xFAblica."), React.createElement("p", {
+    className: "prose-paragraph"
+  }, "El tractament es fonamenta en l'article 6.1.e) del Reglament (UE) 2016/679 (RGPD), relatiu al compliment d'una missi\xF3 realitzada en inter\xE8s p\xFAblic, i en la normativa de transpar\xE8ncia i acc\xE9s a la informaci\xF3 p\xFAblica, inclosa la Llei 19/2013 i la Llei 19/2014 de transpar\xE8ncia de Catalunya."), React.createElement("p", {
+    className: "prose-paragraph"
+  }, "Les dades publicades es limiten a la informaci\xF3 estrictament necess\xE0ria per a la finalitat de transpar\xE8ncia i fiscalitzaci\xF3 p\xFAblica, d'acord amb el principi de minimitzaci\xF3 de dades de l'article 5.1.c del RGPD. No es publiquen dades de la vida privada, domicilis personals, documents identificatius, dades de contacte privades ni informaci\xF3 aliena a les dimensions mercantil, contractual o subvencional analitzades."), React.createElement("h2", {
+    className: "prose-heading"
+  }, "7. Exercici de drets i correccions"), React.createElement("p", {
+    className: "prose-paragraph"
+  }, "Les persones interessades poden exercir els drets d'acc\xE9s, rectificaci\xF3, limitaci\xF3 o oposici\xF3 al tractament a ", React.createElement("a", {
+    href: `mailto:${CONTACT_EMAIL}`,
+    className: "prose-link"
+  }, CONTACT_EMAIL), "."), React.createElement("p", {
+    className: "prose-paragraph"
+  }, "Tamb\xE9 es poden comunicar errors factuals, homon\xEDmies, atribucions incorrectes, canvis de denominaci\xF3, classificacions err\xF2nies, dades desactualitzades o incid\xE8ncies derivades del processament automatitzat."), React.createElement("p", {
+    className: "prose-paragraph"
+  }, "Quan es detecti un error factual, Iguadata podr\xE0 corregir, contextualitzar, limitar o retirar la informaci\xF3 afectada. El dret de supressi\xF3 pot quedar limitat quan la informaci\xF3 procedeixi de registres oficials p\xFAblics o documentaci\xF3 administrativa de contractaci\xF3 p\xFAblica, d'acord amb l'article 17.3.b) del RGPD."), React.createElement("h2", {
+    className: "prose-heading"
+  }, "8. Propietat intel\xB7lectual i codi obert"), React.createElement("p", {
+    className: "prose-paragraph"
+  }, "El disseny, la metodologia, el codi font i les transformacions de dades desenvolupades espec\xEDficament s\xF3n de propietat d'Iguadata."), React.createElement("p", {
+    className: "prose-paragraph"
+  }, "El codi font es publica sota llic\xE8ncia GNU GPL v3.0 a GitHub. Les dades originals pertanyen a les seves fonts p\xFAbliques respectives i es reutilitzen amb finalitats de transpar\xE8ncia, recerca i inter\xE8s p\xFAblic."), React.createElement("h2", {
+    className: "prose-heading"
+  }, "9. Fonts normatives principals"), React.createElement("p", {
+    className: "prose-paragraph"
+  }, "El present av\xEDs legal es basa, entre altres, en el Reglament (UE) 2016/679 (RGPD), la Llei 19/2013, de transpar\xE8ncia, acc\xE9s a la informaci\xF3 p\xFAblica i bon govern, la Llei 19/2014, de transpar\xE8ncia, acc\xE9s a la informaci\xF3 p\xFAblica i bon govern de Catalunya, la Llei 38/2003, general de subvencions, i el Decret 271/2019, pel qual s'aprova el Reglament del Registre de subvencions i ajuts de Catalunya.")));
+}
+function CasosView({
+  casos,
+  onCasoSelect
+}) {
+  const casosOrdenats = casos.map((caso, index) => ({
+    caso,
+    index
+  })).sort((a, b) => {
+    const dateA = Date.parse(a.caso.publishedAt || '');
+    const dateB = Date.parse(b.caso.publishedAt || '');
+    if (Number.isFinite(dateA) && Number.isFinite(dateB) && dateA !== dateB) return dateB - dateA;
+    if (Number.isFinite(dateA) !== Number.isFinite(dateB)) return Number.isFinite(dateA) ? -1 : 1;
+    return a.index - b.index;
+  }).map(item => item.caso);
+  const featuredCaso = casosOrdenats[0];
+  const gridCasos = casosOrdenats.slice(1);
+  if (!featuredCaso) {
+    return React.createElement("div", {
+      className: "container casos-page"
+    }, React.createElement("h1", {
+      className: "page-title"
+    }, "Casos d'investigaci\xF3"), React.createElement("div", {
+      className: "empty-state",
+      role: "status"
+    }, React.createElement("h2", {
+      className: "empty-state-title"
+    }, "Encara no hi ha investigacions publicades"), React.createElement("p", {
+      className: "empty-state-text"
+    }, "Els nous casos apareixeran aqu\xED quan estiguin disponibles.")));
+  }
+  return React.createElement("div", {
+    className: "container casos-page"
+  }, React.createElement("h1", {
+    className: "page-title"
+  }, "Casos d'investigaci\xF3"), React.createElement(CasoPrincipalInvestigacio, {
+    caso: featuredCaso,
+    onSelect: onCasoSelect
+  }), React.createElement("div", {
+    className: "casos-editorial-list",
+    "aria-label": "Investigacions publicades"
+  }, gridCasos.map((caso, idx) => React.createElement(CasoEditorialCard, {
+    key: caso.slug,
+    caso: caso,
+    idx: idx + 1,
+    onSelect: onCasoSelect
+  }))));
+}
+function CasoPrincipalInvestigacio({
+  caso,
+  onSelect
+}) {
+  const content = React.createElement(React.Fragment, null, React.createElement("div", {
+    className: "caso-principal-image-frame"
+  }, React.createElement("img", {
+    src: assetUrl(caso.image),
+    alt: "",
+    className: "caso-editorial-image",
+    loading: "eager"
+  })), React.createElement("div", {
+    className: "caso-principal-copy"
+  }, React.createElement("h2", {
+    className: "caso-principal-title"
+  }, caso.title), React.createElement("p", {
+    className: "caso-principal-subtitle"
+  }, caso.subtitle), Number.isFinite(Number(caso.importe)) && React.createElement("div", {
+    className: "caso-principal-amount"
+  }, formatCurrency(Number(caso.importe)))));
+  return React.createElement("a", {
+    href: buildRouteUrl('/investigacio/' + caso.slug),
+    className: "caso-principal caso-principal-linkable",
+    onClick: event => handleInternalLinkClick(event, () => onSelect(caso))
+  }, content);
+}
+function CasoEditorialCard({
+  caso,
+  idx,
+  className = '',
+  showImage = false,
+  onSelect
+}) {
+  return React.createElement("article", {
+    className: 'contract-card caso-editorial-card caso-editorial-card-linkable' + (className ? ' ' + className : '')
+  }, React.createElement("a", {
+    href: buildRouteUrl('/investigacio/' + caso.slug),
+    className: "caso-editorial-link",
+    onClick: event => handleInternalLinkClick(event, () => onSelect(caso))
+  }, React.createElement(CasoEditorialContent, {
+    caso: caso,
+    idx: idx,
+    showImage: showImage
+  })));
+}
+function CasoEditorialContent({
+  caso,
+  idx,
+  showImage
+}) {
+  if (!showImage) {
+    return React.createElement("div", {
+      className: "contract-header caso-list-header"
+    }, React.createElement("div", {
+      className: "caso-list-copy"
+    }, React.createElement("h2", {
+      className: "contract-title caso-editorial-title"
+    }, caso.title), React.createElement("div", {
+      className: "caso-editorial-subtitle"
+    }, caso.subtitle)), Number.isFinite(Number(caso.importe)) && React.createElement("div", {
+      className: "contract-amount caso-list-amount"
+    }, formatCurrency(Number(caso.importe))));
+  }
+  return React.createElement(React.Fragment, null, showImage && React.createElement("div", {
+    className: "caso-editorial-image-frame"
+  }, React.createElement("img", {
+    src: assetUrl(caso.image),
+    alt: "",
+    className: "caso-editorial-image",
+    loading: idx === 0 ? 'eager' : 'lazy'
+  })), React.createElement("div", {
+    className: "caso-editorial-copy"
+  }, React.createElement("h2", {
+    className: "caso-editorial-title"
+  }, caso.title), React.createElement("p", {
+    className: "caso-editorial-subtitle"
+  }, caso.subtitle)));
+}
+function InvestigacioContractCard({
+  contract,
+  onSelect,
+  hideAdjudicatario = false
+}) {
+  const frozen = contract.evidencia_congelada === true;
+  const card = React.createElement("div", {
+    className: "contract-card"
+  }, React.createElement("div", {
+    className: "contract-header"
+  }, React.createElement("div", {
+    className: "contract-title"
+  }, contract.descripcion), React.createElement("div", {
+    className: "contract-amount"
+  }, formatCurrency(contract.importe))), React.createElement("div", {
+    className: "contract-meta"
+  }, !hideAdjudicatario && React.createElement("div", {
+    className: "contract-meta-item"
+  }, React.createElement("span", {
+    className: "contract-meta-label"
+  }, "Empresa adjudicat\xE0ria"), React.createElement("span", {
+    className: "contract-meta-value"
+  }, contract.adjudicatario)), React.createElement("div", {
+    className: "contract-meta-item"
+  }, React.createElement("span", {
+    className: "contract-meta-label"
+  }, "Data"), React.createElement("span", {
+    className: "contract-meta-value"
+  }, formatDate(contract.fecha))), React.createElement("div", {
+    className: "contract-meta-item"
+  }, React.createElement("span", {
+    className: "contract-meta-label"
+  }, "Codi expedient"), React.createElement("span", {
+    className: "contract-meta-value"
+  }, contract.codigo)), React.createElement("div", {
+    className: "contract-pills"
+  }, React.createElement("span", {
+    className: "contract-pill"
+  }, formatTipus(contract.tipo)), React.createElement("span", {
+    className: "contract-pill procedure"
+  }, formatProcediment(contract.procedimiento)))));
+  const detailPath = frozen ? `/contractes/evidencia/${contract.slug}` : `/contractes/${contract.slug}`;
+  return React.createElement("a", {
+    href: buildRouteUrl(detailPath),
+    className: "card-link-wrapper",
+    onClick: event => handleInternalLinkClick(event, () => onSelect(contract))
+  }, card);
+}
+function InvestigacioPaginatedContracts({
+  block,
+  contracts,
+  onContractSelect
+}) {
+  const itemsPerPage = block.itemsPerPage || 25;
+  const [currentPage, setCurrentPage] = useState(1);
+  const codes = block.codes || [];
+  const frozenByCode = useMemo(() => {
+    const map = new Map();
+    (block.contract_snapshots || []).forEach(contract => {
+      const code = String(contract.codigo || '').trim();
+      if (code && !map.has(code)) map.set(code, contract);
+    });
+    return map;
+  }, [block.contract_snapshots]);
+  const contractsByCode = useMemo(() => {
+    const map = new Map();
+    contracts.forEach(contract => {
+      const code = String(contract.codigo || '').trim();
+      if (code) map.set(code, [...(map.get(code) || []), contract]);
+    });
+    return map;
+  }, [contracts]);
+  const blockContracts = useMemo(() => {
+    const resolved = codes.map(code => {
+      const normalized = String(code || '').trim();
+      const frozen = frozenByCode.get(normalized);
+      const candidates = contractsByCode.get(normalized) || [];
+      if (!frozen) return candidates[0];
+      return candidates.find(contract => sameContractEvidence(contract, frozen)) || frozen;
+    }).filter(Boolean);
+    if (block.sort === 'date-desc') {
+      resolved.sort((a, b) => String(b.fecha || '').localeCompare(String(a.fecha || '')) || String(b.codigo || '').localeCompare(String(a.codigo || '')));
+    }
+    return resolved;
+  }, [codes, contractsByCode, frozenByCode, block.sort]);
+  const totalPages = Math.ceil(blockContracts.length / itemsPerPage);
+  const pageContracts = blockContracts.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+  const goToPage = page => {
+    const nextPage = Math.max(1, Math.min(page, totalPages || 1));
+    setCurrentPage(nextPage);
+  };
+  if (!blockContracts.length) return null;
+  return React.createElement("section", {
+    className: "investigacio-embed investigacio-card-stack",
+    "aria-label": block.ariaLabel || 'Contractes relacionats'
+  }, pageContracts.map(contract => React.createElement(InvestigacioContractCard, {
+    key: contract.slug,
+    contract: contract,
+    onSelect: onContractSelect,
+    hideAdjudicatario: Boolean(block.hideAdjudicatario)
+  })), blockContracts.length > itemsPerPage && React.createElement(Pagination, {
+    currentPage: currentPage,
+    totalPages: totalPages,
+    onPageChange: goToPage
+  }));
+}
+function InvestigacioCaseView({
+  caso,
+  contracts,
+  onBack,
+  onContractSelect
+}) {
+  const [shareActionsOpen, setShareActionsOpen] = useState(false);
+  const [shareCopyStatus, setShareCopyStatus] = useState('');
+  const shareActionsRef = useRef(null);
+  const shareStatusTimerRef = useRef(null);
+  useEffect(() => {
+    if (!shareActionsOpen) return;
+    const closeShareActions = event => {
+      if (event.type === 'keydown' && event.key !== 'Escape') return;
+      if (event.type === 'pointerdown' && shareActionsRef.current?.contains(event.target)) return;
+      setShareActionsOpen(false);
+    };
+    document.addEventListener('pointerdown', closeShareActions);
+    document.addEventListener('keydown', closeShareActions);
+    return () => {
+      document.removeEventListener('pointerdown', closeShareActions);
+      document.removeEventListener('keydown', closeShareActions);
+    };
+  }, [shareActionsOpen]);
+  useEffect(() => () => window.clearTimeout(shareStatusTimerRef.current), []);
+  if (!caso) return null;
+  const copyInvestigacioLink = async () => {
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      setShareCopyStatus('Enllaç copiat');
+    } catch (_) {
+      setShareCopyStatus("No s'ha pogut copiar");
+    }
+    window.clearTimeout(shareStatusTimerRef.current);
+    shareStatusTimerRef.current = window.setTimeout(() => setShareCopyStatus(''), 1800);
+  };
+  return React.createElement("article", {
+    className: "container prose-page investigacio-detail-page"
+  }, React.createElement("header", {
+    className: "investigacio-detail-header"
+  }, React.createElement("h1", {
+    className: "page-title"
+  }, caso.title), Number.isFinite(Number(caso.importe)) && React.createElement("div", {
+    className: "investigacio-detail-amount"
+  }, formatCurrency(Number(caso.importe))), React.createElement("p", {
+    className: "investigacio-detail-subtitle"
+  }, caso.subtitle)), caso.image && React.createElement("div", {
+    className: "investigacio-featured-image-frame"
+  }, React.createElement("img", {
+    src: assetUrl(caso.image),
+    alt: caso.title + ': ' + caso.subtitle,
+    className: "investigacio-featured-image"
+  })), React.createElement("div", {
+    className: "prose-wrapper investigacio-story"
+  }, (caso.content || []).map((block, index) => {
+    const key = block.id || block.type + '-' + index;
+    if (block.type === 'heading') {
+      return React.createElement("h2", {
+        key: key,
+        className: "prose-heading"
+      }, block.text);
+    }
+    if (block.type === 'paragraph') {
+      return React.createElement("p", {
+        key: key,
+        className: "prose-intro investigacio-copy"
+      }, block.text);
+    }
+    if (block.type === 'contracts') {
+      const frozenBySlug = new Map((block.contract_snapshots || []).map(contract => [contract.slug, contract]));
+      const blockContracts = (block.slugs || []).map(slug => {
+        const current = contracts.find(contract => contractMatchesSlug(contract, slug));
+        const frozen = frozenBySlug.get(slug);
+        if (!frozen) return current;
+        return current && sameContractEvidence(current, frozen) ? current : frozen;
+      }).filter(Boolean).sort((a, b) => String(a.fecha || '').localeCompare(String(b.fecha || '')));
+      return React.createElement("section", {
+        key: key,
+        className: "investigacio-embed investigacio-card-stack",
+        "aria-label": block.ariaLabel || 'Contractes relacionats'
+      }, blockContracts.map(contract => React.createElement(InvestigacioContractCard, {
+        key: contract.slug,
+        contract: contract,
+        onSelect: onContractSelect
+      })));
+    }
+    if (block.type === 'contracts_paginated') {
+      return React.createElement(InvestigacioPaginatedContracts, {
+        key: key,
+        block: block,
+        contracts: contracts,
+        onContractSelect: onContractSelect
+      });
+    }
+    return null;
+  })), React.createElement("div", {
+    className: "contracte-detail-actions-row investigacio-detail-actions-row"
+  }, React.createElement("button", {
+    onClick: onBack,
+    className: "btn-share contracte-detail-back",
+    title: "Tornar",
+    "aria-label": "Tornar",
+    type: "button"
+  }, React.createElement("svg", {
+    className: "contracte-detail-back-icon",
+    xmlns: "http://www.w3.org/2000/svg",
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: "2",
+    strokeLinecap: "round",
+    strokeLinejoin: "round",
+    "aria-hidden": "true"
+  }, React.createElement("path", {
+    d: "M19 12H5"
+  }), React.createElement("polyline", {
+    points: "12 19 5 12 12 5"
+  })), React.createElement("span", null, "Tornar")), React.createElement("div", {
+    className: `contracte-detail-share contracte-detail-share-standalone${shareActionsOpen ? ' is-open' : ''}`,
+    ref: shareActionsRef
+  }, React.createElement("div", {
+    id: "investigacio-share-actions",
+    className: "contracte-detail-share-actions",
+    "aria-hidden": !shareActionsOpen
+  }, React.createElement("button", {
+    className: "btn-share contracte-detail-share-btn",
+    onClick: copyInvestigacioLink,
+    tabIndex: shareActionsOpen ? 0 : -1,
+    type: "button"
+  }, shareCopyStatus || "Copia l'enllaç")), React.createElement("button", {
+    className: "btn-share contracte-detail-share-btn",
+    onClick: () => setShareActionsOpen(open => !open),
+    "aria-expanded": shareActionsOpen,
+    "aria-controls": "investigacio-share-actions",
+    type: "button"
+  }, React.createElement("em", {
+    className: "share-arrow"
+  }), " Compartir"))));
+}
+function PersonesView({
+  persones,
+  onEmpresaSelect,
+  onNavigateLegal,
+  searchTerm,
+  setSearchTerm,
+  sortBy,
+  setSortBy,
+  currentPage,
+  setCurrentPage,
+  expandedIdx,
+  setExpandedIdx
+}) {
+  const [debouncedSearch, setDebouncedSearch] = useState(searchTerm);
+  const [personesFiltersOpen, setPersonesFiltersOpen] = useState(false);
+  const itemsPerPage = 25;
+  const togglePersona = personaId => {
+    setExpandedIdx(prev => prev === personaId ? null : personaId);
+  };
+  const resetFilters = () => {
+    setSearchTerm('');
+    setDebouncedSearch('');
+    setSortBy('companies-desc');
+    setCurrentPage(1);
+    setExpandedIdx(null);
+  };
+  useEffect(() => {
+    const timer = setTimeout(() => setDebouncedSearch(searchTerm), 300);
+    return () => clearTimeout(timer);
+  }, [searchTerm]);
+  useEffect(() => {
+    setCurrentPage(1);
+    setExpandedIdx(null);
+  }, [debouncedSearch, sortBy]);
+  const personesFiltrades = useMemo(() => {
+    let result = [...persones];
+    if (debouncedSearch) {
+      result = result.filter(p => matchesSearchQuery([p.nom, ...(p.relacions || []).map(e => e.empresa)], debouncedSearch));
+    }
+    switch (sortBy) {
+      case 'amount-desc':
+        result.sort((a, b) => b.total_adjudicat - a.total_adjudicat);
+        break;
+      case 'amount-asc':
+        result.sort((a, b) => a.total_adjudicat - b.total_adjudicat);
+        break;
+      case 'companies-desc':
+        result.sort((a, b) => b.relacions.length - a.relacions.length);
+        break;
+      case 'companies-asc':
+        result.sort((a, b) => a.relacions.length - b.relacions.length);
+        break;
+      case 'name-asc':
+        result.sort((a, b) => a.nom.localeCompare(b.nom, 'ca'));
+        break;
+      default:
+        result.sort((a, b) => b.total_adjudicat - a.total_adjudicat);
+    }
+    return result;
+  }, [persones, debouncedSearch, sortBy]);
+  const totalPages = Math.ceil(personesFiltrades.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const personesPaginades = personesFiltrades.slice(startIndex, endIndex);
+  const activeFiltersCount = sortBy !== 'companies-desc' ? 1 : 0;
+  return React.createElement("div", {
+    className: "container persones-page"
+  }, React.createElement("h1", {
+    className: "page-title"
+  }, "Cercador de persones"), React.createElement("div", {
+    className: "search-section"
+  }, React.createElement(SearchField, {
+    value: searchTerm,
+    onValueChange: setSearchTerm,
+    placeholder: "Cerca per persona o empresa vinculada",
+    ariaLabel: "Cerca per persona o empresa vinculada"
+  }), React.createElement(FilterActions, {
+    open: personesFiltersOpen,
+    onToggle: () => setPersonesFiltersOpen(prev => !prev),
+    activeCount: activeFiltersCount,
+    onReset: resetFilters,
+    controlsId: "persones-filter-panel"
+  }), React.createElement("div", {
+    id: "persones-filter-panel",
+    className: "filters search-filter-panel search-filter-panel-single" + (!personesFiltersOpen ? " collapsed" : "")
+  }, React.createElement("div", {
+    className: "filter-group filter-group-standard"
+  }, React.createElement("label", {
+    className: "filter-label"
+  }, "Ordenar per"), React.createElement("select", {
+    className: "filter-select filter-select-standard",
+    value: sortBy,
+    onChange: e => setSortBy(e.target.value),
+    "aria-label": "Ordenar persones per"
+  }, React.createElement("option", {
+    value: "companies-desc"
+  }, "Nombre d'empreses (descendent)"), React.createElement("option", {
+    value: "companies-asc"
+  }, "Nombre d'empreses (ascendent)"), React.createElement("option", {
+    value: "amount-desc"
+  }, "Import (descendent)"), React.createElement("option", {
+    value: "amount-asc"
+  }, "Import (ascendent)"))))), React.createElement("div", {
+    className: "results-count",
+    role: "status",
+    "aria-live": "polite"
+  }, React.createElement("span", {
+    className: "results-count-total"
+  }, React.createElement("span", {
+    className: "results-count-prefix"
+  }, "S'han trobat "), React.createElement("strong", null, personesFiltrades.length), " persones"), personesFiltrades.length > itemsPerPage && React.createElement("span", {
+    className: "results-count-page"
+  }, React.createElement("span", {
+    className: "results-count-page-full"
+  }, "P\xE0gina"), React.createElement("span", {
+    className: "results-count-page-short"
+  }, "P\xE0g."), " ", React.createElement("strong", null, currentPage), " de ", React.createElement("strong", null, totalPages))), React.createElement("div", {
+    className: "persones-compact-list"
+  }, personesPaginades.map(p => {
+    const personaId = `persona-${stableHash([p.nom])}`;
+    const panelId = `${personaId}-relacions`;
+    const isExpanded = expandedIdx === personaId;
+    const principalEmpresa = (p.relacions || []).reduce((principal, relacio) => !principal || Number(relacio.import_empresa) > Number(principal.import_empresa) ? relacio : principal, null);
+    return React.createElement("div", {
+      key: p.nom,
+      className: "contract-card persona-card"
+    }, React.createElement("button", {
+      id: `${personaId}-trigger`,
+      type: "button",
+      className: `persona-row-header${isExpanded ? ' is-expanded' : ''}`,
+      onClick: () => togglePersona(personaId),
+      "aria-expanded": isExpanded,
+      "aria-controls": panelId
+    }, React.createElement("div", {
+      className: "contract-header persona-row-main"
+    }, React.createElement("div", {
+      className: "contract-title persona-title"
+    }, p.nom), React.createElement("div", {
+      className: "contract-amount persona-amount"
+    }, formatCurrency(p.total_adjudicat))), React.createElement("div", {
+      className: "contract-meta persona-row-meta"
+    }, principalEmpresa && React.createElement("div", {
+      className: "contract-meta-item"
+    }, React.createElement("span", {
+      className: "contract-meta-label"
+    }, "Empresa principal"), React.createElement("span", {
+      className: "contract-meta-value persona-primary-company"
+    }, principalEmpresa.empresa)), React.createElement("div", {
+      className: "contract-pills"
+    }, React.createElement("span", {
+      className: "contract-pill"
+    }, p.relacions.length, " ", p.relacions.length === 1 ? 'empresa' : 'empreses')))), React.createElement("div", {
+      id: panelId,
+      className: `persona-row-body-wrapper${isExpanded ? ' is-expanded' : ''}`,
+      role: "region",
+      "aria-labelledby": `${personaId}-trigger`,
+      "aria-hidden": !isExpanded
+    }, React.createElement("div", null, React.createElement("div", {
+      className: "persona-row-body"
+    }, React.createElement("div", {
+      className: "persona-relacions-list"
+    }, p.relacions.map(emp => React.createElement("a", {
+      key: emp.empresa,
+      href: buildRouteUrl(`/empreses/${buildEmpresaSlug(emp.empresa)}`),
+      className: "persona-relacio-item",
+      tabIndex: isExpanded ? 0 : -1,
+      onClick: event => handleInternalLinkClick(event, () => onEmpresaSelect(emp.empresa))
+    }, React.createElement("div", {
+      className: "persona-relacio-empresa"
+    }, emp.empresa), React.createElement("div", {
+      className: "contract-amount persona-relacio-amount"
+    }, formatCurrency(emp.import_empresa)))))))));
+  })), personesFiltrades.length === 0 && React.createElement(EmptySearchState, {
+    text: "No s'han trobat persones.",
+    onReset: resetFilters
+  }), personesFiltrades.length > itemsPerPage && React.createElement(Pagination, {
+    currentPage: currentPage,
+    totalPages: totalPages,
+    onPageChange: page => {
+      setCurrentPage(page);
+      setExpandedIdx(null);
+    }
+  }), React.createElement("div", {
+    className: "metodologia-wrapper"
+  }, React.createElement("div", {
+    className: "metodologia"
+  }, React.createElement("h3", {
+    className: "metodologia-legal-title"
+  }, "Metodologia"), React.createElement("p", {
+    className: "metodologia-intro"
+  }, "Les persones que apareixen en aquest cercador es mostren en la seva condici\xF3 de representants mercantils d'empreses adjudicat\xE0ries de ", AUTHORITY_NAME, ", segons les dades del Butllet\xED Oficial del Registre Mercantil (BORME) i la plataforma de contractaci\xF3 municipal, registres oficials de car\xE0cter p\xFAblic i universal."), React.createElement("p", {
+    className: "metodologia-intro"
+  }, "L'import que figura al costat de cada persona correspon al volum total adjudicat a les empreses on exerceix o ha exercit un c\xE0rrec mercantil. Apar\xE8ixer en aquest llistat no implica cap irregularitat, sin\xF3 que reflecteix \xFAnicament la vinculaci\xF3 professional p\xFAblica entre la persona i les empreses que han contractat amb l'Ajuntament. Les dades poden contenir errors derivats de fonts p\xFAbliques o processos automatitzats, i qualsevol correcci\xF3 factual ser\xE0 revisada."), React.createElement("p", {
+    className: "metodologia-intro"
+  }, "El tractament de les dades es realitza a l'empara de l'article 6.1.e) del Reglament UE 2016/679 (RGPD) d'inter\xE8s p\xFAblic i de la Llei 19/2013, de 9 de desembre, de transpar\xE8ncia, acc\xE9s a la informaci\xF3 p\xFAblica i bon govern, que estableix l'obligaci\xF3 de publicitat activa en mat\xE8ria de contractaci\xF3 p\xFAblica. Les dades es limiten a la informaci\xF3 estrictament necess\xE0ria per al prop\xF2sit de transpar\xE8ncia i es tracten d'acord amb el principi de minimitzaci\xF3 de dades (art. 5.1.c RGPD). Tota la informaci\xF3 publicada prov\xE9 de fonts oficials de car\xE0cter p\xFAblic i no inclou dades de la vida privada de les persones."), React.createElement("p", {
+    className: "metodologia-intro metodologia-intro-last"
+  }, "Les persones interessades poden exercir els drets d'acc\xE9s, rectificaci\xF3, limitaci\xF3 o oposici\xF3 al tractament posant-se en contacte a trav\xE9s de la secci\xF3 ", React.createElement("a", {
+    href: "/avis-legal",
+    onClick: e => {
+      e.preventDefault();
+      onNavigateLegal();
+    },
+    className: "prose-link"
+  }, "Av\xEDs legal"), ". El dret de supressi\xF3 (dret a l'oblit) queda limitat per l'art. 17.3.b) del RGPD quan les dades figuren en registres oficials p\xFAblics o en documentaci\xF3 administrativa de contractaci\xF3 p\xFAblica, sense perjudici del dret a sol\xB7licitar la revisi\xF3 de possibles errors factuals."))));
+}
+function formatSubvencioSector(finalitat) {
+  const sectors = {
+    'Serveis Socials i Promoció Social': 'Social',
+    'Cultura': 'Cultura',
+    'Comerç, Turisme i Pimes': 'Comerç',
+    "Accés a l'habitatge i foment de l'edificació": 'Habitatge',
+    "Foment de l'Ocupació": 'Ocupació',
+    'Cooperació internacional per al desenvolupament i cultural': 'Cooperació',
+    'Educació': 'Educació',
+    'Sanitat': 'Sanitat',
+    'Altres actuacions de caràcter econòmic': 'Economia',
+    'Altres Prestacions econòmiques': 'Altres'
+  };
+  return sectors[finalitat] || 'Altres';
+}
+function isSubvencioDirecta(subvencio) {
+  const text = normalizeSearchText([subvencio.objecte_de_la_convocat_ria, subvencio.t_tol_convocat_ria_catal, subvencio.t_tol_convocat_ria_castell, subvencio.discriminador_de_la_concessi, subvencio.descripcion].join(' '));
+  return /\bdirect(?:a|e|es)?\b/.test(text);
+}
+const SUBVENCIO_TIPOLOGIES = ['Serveis Socials i Promoció Social', 'Cultura', 'Comerç, Turisme i Pimes', "Accés a l'habitatge i foment de l'edificació", "Foment de l'Ocupació", 'Cooperació internacional per al desenvolupament i cultural', 'Educació', 'Sanitat', 'Altres actuacions de caràcter econòmic', 'Altres Prestacions econòmiques'];
 function EntitatView({
   entitatSlug,
   subvencions,
@@ -3709,211 +4159,6 @@ function EntitatView({
     className: "share-arrow"
   }), " Compartir"))));
 }
-function PersonesView({
-  persones,
-  onEmpresaSelect,
-  onNavigateLegal,
-  searchTerm,
-  setSearchTerm,
-  sortBy,
-  setSortBy,
-  currentPage,
-  setCurrentPage,
-  expandedIdx,
-  setExpandedIdx
-}) {
-  const [debouncedSearch, setDebouncedSearch] = useState(searchTerm);
-  const [personesFiltersOpen, setPersonesFiltersOpen] = useState(false);
-  const itemsPerPage = 25;
-  const togglePersona = personaId => {
-    setExpandedIdx(prev => prev === personaId ? null : personaId);
-  };
-  const resetFilters = () => {
-    setSearchTerm('');
-    setDebouncedSearch('');
-    setSortBy('companies-desc');
-    setCurrentPage(1);
-    setExpandedIdx(null);
-  };
-  useEffect(() => {
-    const timer = setTimeout(() => setDebouncedSearch(searchTerm), 300);
-    return () => clearTimeout(timer);
-  }, [searchTerm]);
-  useEffect(() => {
-    setCurrentPage(1);
-    setExpandedIdx(null);
-  }, [debouncedSearch, sortBy]);
-  const personesFiltrades = useMemo(() => {
-    let result = [...persones];
-    if (debouncedSearch) {
-      result = result.filter(p => matchesSearchQuery([p.nom, ...(p.relacions || []).map(e => e.empresa)], debouncedSearch));
-    }
-    switch (sortBy) {
-      case 'amount-desc':
-        result.sort((a, b) => b.total_adjudicat - a.total_adjudicat);
-        break;
-      case 'amount-asc':
-        result.sort((a, b) => a.total_adjudicat - b.total_adjudicat);
-        break;
-      case 'companies-desc':
-        result.sort((a, b) => b.relacions.length - a.relacions.length);
-        break;
-      case 'companies-asc':
-        result.sort((a, b) => a.relacions.length - b.relacions.length);
-        break;
-      case 'name-asc':
-        result.sort((a, b) => a.nom.localeCompare(b.nom, 'ca'));
-        break;
-      default:
-        result.sort((a, b) => b.total_adjudicat - a.total_adjudicat);
-    }
-    return result;
-  }, [persones, debouncedSearch, sortBy]);
-  const totalPages = Math.ceil(personesFiltrades.length / itemsPerPage);
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-  const personesPaginades = personesFiltrades.slice(startIndex, endIndex);
-  const activeFiltersCount = sortBy !== 'companies-desc' ? 1 : 0;
-  return React.createElement("div", {
-    className: "container persones-page"
-  }, React.createElement("h1", {
-    className: "page-title"
-  }, "Cercador de persones"), React.createElement("div", {
-    className: "search-section"
-  }, React.createElement(SearchField, {
-    value: searchTerm,
-    onValueChange: setSearchTerm,
-    placeholder: "Cerca per persona o empresa vinculada",
-    ariaLabel: "Cerca per persona o empresa vinculada"
-  }), React.createElement(FilterActions, {
-    open: personesFiltersOpen,
-    onToggle: () => setPersonesFiltersOpen(prev => !prev),
-    activeCount: activeFiltersCount,
-    onReset: resetFilters,
-    controlsId: "persones-filter-panel"
-  }), React.createElement("div", {
-    id: "persones-filter-panel",
-    className: "filters search-filter-panel search-filter-panel-single" + (!personesFiltersOpen ? " collapsed" : "")
-  }, React.createElement("div", {
-    className: "filter-group filter-group-standard"
-  }, React.createElement("label", {
-    className: "filter-label"
-  }, "Ordenar per"), React.createElement("select", {
-    className: "filter-select filter-select-standard",
-    value: sortBy,
-    onChange: e => setSortBy(e.target.value),
-    "aria-label": "Ordenar persones per"
-  }, React.createElement("option", {
-    value: "companies-desc"
-  }, "Nombre d'empreses (descendent)"), React.createElement("option", {
-    value: "companies-asc"
-  }, "Nombre d'empreses (ascendent)"), React.createElement("option", {
-    value: "amount-desc"
-  }, "Import (descendent)"), React.createElement("option", {
-    value: "amount-asc"
-  }, "Import (ascendent)"))))), React.createElement("div", {
-    className: "results-count",
-    role: "status",
-    "aria-live": "polite"
-  }, React.createElement("span", {
-    className: "results-count-total"
-  }, React.createElement("span", {
-    className: "results-count-prefix"
-  }, "S'han trobat "), React.createElement("strong", null, personesFiltrades.length), " persones"), personesFiltrades.length > itemsPerPage && React.createElement("span", {
-    className: "results-count-page"
-  }, React.createElement("span", {
-    className: "results-count-page-full"
-  }, "P\xE0gina"), React.createElement("span", {
-    className: "results-count-page-short"
-  }, "P\xE0g."), " ", React.createElement("strong", null, currentPage), " de ", React.createElement("strong", null, totalPages))), React.createElement("div", {
-    className: "persones-compact-list"
-  }, personesPaginades.map(p => {
-    const personaId = `persona-${stableHash([p.nom])}`;
-    const panelId = `${personaId}-relacions`;
-    const isExpanded = expandedIdx === personaId;
-    const principalEmpresa = (p.relacions || []).reduce((principal, relacio) => !principal || Number(relacio.import_empresa) > Number(principal.import_empresa) ? relacio : principal, null);
-    return React.createElement("div", {
-      key: p.nom,
-      className: "contract-card persona-card"
-    }, React.createElement("button", {
-      id: `${personaId}-trigger`,
-      type: "button",
-      className: `persona-row-header${isExpanded ? ' is-expanded' : ''}`,
-      onClick: () => togglePersona(personaId),
-      "aria-expanded": isExpanded,
-      "aria-controls": panelId
-    }, React.createElement("div", {
-      className: "contract-header persona-row-main"
-    }, React.createElement("div", {
-      className: "contract-title persona-title"
-    }, p.nom), React.createElement("div", {
-      className: "contract-amount persona-amount"
-    }, formatCurrency(p.total_adjudicat))), React.createElement("div", {
-      className: "contract-meta persona-row-meta"
-    }, principalEmpresa && React.createElement("div", {
-      className: "contract-meta-item"
-    }, React.createElement("span", {
-      className: "contract-meta-label"
-    }, "Empresa principal"), React.createElement("span", {
-      className: "contract-meta-value persona-primary-company"
-    }, principalEmpresa.empresa)), React.createElement("div", {
-      className: "contract-pills"
-    }, React.createElement("span", {
-      className: "contract-pill"
-    }, p.relacions.length, " ", p.relacions.length === 1 ? 'empresa' : 'empreses')))), React.createElement("div", {
-      id: panelId,
-      className: `persona-row-body-wrapper${isExpanded ? ' is-expanded' : ''}`,
-      role: "region",
-      "aria-labelledby": `${personaId}-trigger`,
-      "aria-hidden": !isExpanded
-    }, React.createElement("div", null, React.createElement("div", {
-      className: "persona-row-body"
-    }, React.createElement("div", {
-      className: "persona-relacions-list"
-    }, p.relacions.map(emp => React.createElement("a", {
-      key: emp.empresa,
-      href: buildRouteUrl(`/empreses/${buildEmpresaSlug(emp.empresa)}`),
-      className: "persona-relacio-item",
-      tabIndex: isExpanded ? 0 : -1,
-      onClick: event => handleInternalLinkClick(event, () => onEmpresaSelect(emp.empresa))
-    }, React.createElement("div", {
-      className: "persona-relacio-empresa"
-    }, emp.empresa), React.createElement("div", {
-      className: "contract-amount persona-relacio-amount"
-    }, formatCurrency(emp.import_empresa)))))))));
-  })), personesFiltrades.length === 0 && React.createElement(EmptySearchState, {
-    text: "No s'han trobat persones.",
-    onReset: resetFilters
-  }), personesFiltrades.length > itemsPerPage && React.createElement(Pagination, {
-    currentPage: currentPage,
-    totalPages: totalPages,
-    onPageChange: page => {
-      setCurrentPage(page);
-      setExpandedIdx(null);
-    }
-  }), React.createElement("div", {
-    className: "metodologia-wrapper"
-  }, React.createElement("div", {
-    className: "metodologia"
-  }, React.createElement("h3", {
-    className: "metodologia-legal-title"
-  }, "Metodologia"), React.createElement("p", {
-    className: "metodologia-intro"
-  }, "Les persones que apareixen en aquest cercador es mostren en la seva condici\xF3 de representants mercantils d'empreses adjudicat\xE0ries de ", AUTHORITY_NAME, ", segons les dades del Butllet\xED Oficial del Registre Mercantil (BORME) i la plataforma de contractaci\xF3 municipal, registres oficials de car\xE0cter p\xFAblic i universal."), React.createElement("p", {
-    className: "metodologia-intro"
-  }, "L'import que figura al costat de cada persona correspon al volum total adjudicat a les empreses on exerceix o ha exercit un c\xE0rrec mercantil. Apar\xE8ixer en aquest llistat no implica cap irregularitat, sin\xF3 que reflecteix \xFAnicament la vinculaci\xF3 professional p\xFAblica entre la persona i les empreses que han contractat amb l'Ajuntament. Les dades poden contenir errors derivats de fonts p\xFAbliques o processos automatitzats, i qualsevol correcci\xF3 factual ser\xE0 revisada."), React.createElement("p", {
-    className: "metodologia-intro"
-  }, "El tractament de les dades es realitza a l'empara de l'article 6.1.e) del Reglament UE 2016/679 (RGPD) d'inter\xE8s p\xFAblic i de la Llei 19/2013, de 9 de desembre, de transpar\xE8ncia, acc\xE9s a la informaci\xF3 p\xFAblica i bon govern, que estableix l'obligaci\xF3 de publicitat activa en mat\xE8ria de contractaci\xF3 p\xFAblica. Les dades es limiten a la informaci\xF3 estrictament necess\xE0ria per al prop\xF2sit de transpar\xE8ncia i es tracten d'acord amb el principi de minimitzaci\xF3 de dades (art. 5.1.c RGPD). Tota la informaci\xF3 publicada prov\xE9 de fonts oficials de car\xE0cter p\xFAblic i no inclou dades de la vida privada de les persones."), React.createElement("p", {
-    className: "metodologia-intro metodologia-intro-last"
-  }, "Les persones interessades poden exercir els drets d'acc\xE9s, rectificaci\xF3, limitaci\xF3 o oposici\xF3 al tractament posant-se en contacte a trav\xE9s de la secci\xF3 ", React.createElement("a", {
-    href: "/avis-legal",
-    onClick: e => {
-      e.preventDefault();
-      onNavigateLegal();
-    },
-    className: "prose-link"
-  }, "Av\xEDs legal"), ". El dret de supressi\xF3 (dret a l'oblit) queda limitat per l'art. 17.3.b) del RGPD quan les dades figuren en registres oficials p\xFAblics o en documentaci\xF3 administrativa de contractaci\xF3 p\xFAblica, sense perjudici del dret a sol\xB7licitar la revisi\xF3 de possibles errors factuals."))));
-}
 function SubvencionsView({
   subvencions,
   onEntitatSelect
@@ -4207,375 +4452,391 @@ function SubvencionsView({
     className: "prose-link"
   }, "Av\xEDs legal"), ". El dret de supressi\xF3 (dret a l'oblit) queda limitat per l'art. 17.3.b) del RGPD quan les dades figuren en registres oficials p\xFAblics o en documentaci\xF3 administrativa de contractaci\xF3 p\xFAblica, sense perjudici del dret a sol\xB7licitar la revisi\xF3 de possibles errors factuals.")))));
 }
-function CasosView({
-  casos,
-  onCasoSelect
-}) {
-  const casosOrdenats = casos.map((caso, index) => ({
-    caso,
-    index
-  })).sort((a, b) => {
-    const dateA = Date.parse(a.caso.publishedAt || '');
-    const dateB = Date.parse(b.caso.publishedAt || '');
-    if (Number.isFinite(dateA) && Number.isFinite(dateB) && dateA !== dateB) return dateB - dateA;
-    if (Number.isFinite(dateA) !== Number.isFinite(dateB)) return Number.isFinite(dateA) ? -1 : 1;
-    return a.index - b.index;
-  }).map(item => item.caso);
-  const featuredCaso = casosOrdenats[0];
-  const gridCasos = casosOrdenats.slice(1);
-  if (!featuredCaso) {
-    return React.createElement("div", {
-      className: "container casos-page"
-    }, React.createElement("h1", {
-      className: "page-title"
-    }, "Casos d'investigaci\xF3"), React.createElement("div", {
-      className: "empty-state",
-      role: "status"
-    }, React.createElement("h2", {
-      className: "empty-state-title"
-    }, "Encara no hi ha investigacions publicades"), React.createElement("p", {
-      className: "empty-state-text"
-    }, "Els nous casos apareixeran aqu\xED quan estiguin disponibles.")));
-  }
-  return React.createElement("div", {
-    className: "container casos-page"
-  }, React.createElement("h1", {
-    className: "page-title"
-  }, "Casos d'investigaci\xF3"), React.createElement(CasoPrincipalInvestigacio, {
-    caso: featuredCaso,
-    onSelect: onCasoSelect
-  }), React.createElement("div", {
-    className: "casos-editorial-list",
-    "aria-label": "Investigacions publicades"
-  }, gridCasos.map((caso, idx) => React.createElement(CasoEditorialCard, {
-    key: caso.slug,
-    caso: caso,
-    idx: idx + 1,
-    onSelect: onCasoSelect
-  }))));
-}
-function CasoPrincipalInvestigacio({
-  caso,
-  onSelect
-}) {
-  const content = React.createElement(React.Fragment, null, React.createElement("div", {
-    className: "caso-principal-image-frame"
-  }, React.createElement("img", {
-    src: assetUrl(caso.image),
-    alt: "",
-    className: "caso-editorial-image",
-    loading: "eager"
-  })), React.createElement("div", {
-    className: "caso-principal-copy"
-  }, React.createElement("h2", {
-    className: "caso-principal-title"
-  }, caso.title), React.createElement("p", {
-    className: "caso-principal-subtitle"
-  }, caso.subtitle), Number.isFinite(Number(caso.importe)) && React.createElement("div", {
-    className: "caso-principal-amount"
-  }, formatCurrency(Number(caso.importe)))));
-  return React.createElement("a", {
-    href: buildRouteUrl('/investigacio/' + caso.slug),
-    className: "caso-principal caso-principal-linkable",
-    onClick: event => handleInternalLinkClick(event, () => onSelect(caso))
-  }, content);
-}
-function CasoEditorialCard({
-  caso,
-  idx,
-  className = '',
-  showImage = false,
-  onSelect
-}) {
-  return React.createElement("article", {
-    className: 'contract-card caso-editorial-card caso-editorial-card-linkable' + (className ? ' ' + className : '')
-  }, React.createElement("a", {
-    href: buildRouteUrl('/investigacio/' + caso.slug),
-    className: "caso-editorial-link",
-    onClick: event => handleInternalLinkClick(event, () => onSelect(caso))
-  }, React.createElement(CasoEditorialContent, {
-    caso: caso,
-    idx: idx,
-    showImage: showImage
-  })));
-}
-function CasoEditorialContent({
-  caso,
-  idx,
-  showImage
-}) {
-  if (!showImage) {
-    return React.createElement("div", {
-      className: "contract-header caso-list-header"
-    }, React.createElement("div", {
-      className: "caso-list-copy"
-    }, React.createElement("h2", {
-      className: "contract-title caso-editorial-title"
-    }, caso.title), React.createElement("div", {
-      className: "caso-editorial-subtitle"
-    }, caso.subtitle)), Number.isFinite(Number(caso.importe)) && React.createElement("div", {
-      className: "contract-amount caso-list-amount"
-    }, formatCurrency(Number(caso.importe))));
-  }
-  return React.createElement(React.Fragment, null, showImage && React.createElement("div", {
-    className: "caso-editorial-image-frame"
-  }, React.createElement("img", {
-    src: assetUrl(caso.image),
-    alt: "",
-    className: "caso-editorial-image",
-    loading: idx === 0 ? 'eager' : 'lazy'
-  })), React.createElement("div", {
-    className: "caso-editorial-copy"
-  }, React.createElement("h2", {
-    className: "caso-editorial-title"
-  }, caso.title), React.createElement("p", {
-    className: "caso-editorial-subtitle"
-  }, caso.subtitle)));
-}
-function InvestigacioContractCard({
-  contract,
-  onSelect,
-  hideAdjudicatario = false
-}) {
-  const frozen = contract.evidencia_congelada === true;
-  const card = React.createElement("div", {
-    className: "contract-card"
-  }, React.createElement("div", {
-    className: "contract-header"
-  }, React.createElement("div", {
-    className: "contract-title"
-  }, contract.descripcion), React.createElement("div", {
-    className: "contract-amount"
-  }, formatCurrency(contract.importe))), React.createElement("div", {
-    className: "contract-meta"
-  }, !hideAdjudicatario && React.createElement("div", {
-    className: "contract-meta-item"
-  }, React.createElement("span", {
-    className: "contract-meta-label"
-  }, "Empresa adjudicat\xE0ria"), React.createElement("span", {
-    className: "contract-meta-value"
-  }, contract.adjudicatario)), React.createElement("div", {
-    className: "contract-meta-item"
-  }, React.createElement("span", {
-    className: "contract-meta-label"
-  }, "Data"), React.createElement("span", {
-    className: "contract-meta-value"
-  }, formatDate(contract.fecha))), React.createElement("div", {
-    className: "contract-meta-item"
-  }, React.createElement("span", {
-    className: "contract-meta-label"
-  }, "Codi expedient"), React.createElement("span", {
-    className: "contract-meta-value"
-  }, contract.codigo)), React.createElement("div", {
-    className: "contract-pills"
-  }, React.createElement("span", {
-    className: "contract-pill"
-  }, formatTipus(contract.tipo)), React.createElement("span", {
-    className: "contract-pill procedure"
-  }, formatProcediment(contract.procedimiento)))));
-  const detailPath = frozen ? `/contractes/evidencia/${contract.slug}` : `/contractes/${contract.slug}`;
-  return React.createElement("a", {
-    href: buildRouteUrl(detailPath),
-    className: "card-link-wrapper",
-    onClick: event => handleInternalLinkClick(event, () => onSelect(contract))
-  }, card);
-}
-function InvestigacioPaginatedContracts({
-  block,
-  contracts,
-  onContractSelect
-}) {
-  const itemsPerPage = block.itemsPerPage || 25;
-  const [currentPage, setCurrentPage] = useState(1);
-  const codes = block.codes || [];
-  const frozenByCode = useMemo(() => {
-    const map = new Map();
-    (block.contract_snapshots || []).forEach(contract => {
-      const code = String(contract.codigo || '').trim();
-      if (code && !map.has(code)) map.set(code, contract);
-    });
-    return map;
-  }, [block.contract_snapshots]);
-  const contractsByCode = useMemo(() => {
-    const map = new Map();
-    contracts.forEach(contract => {
-      const code = String(contract.codigo || '').trim();
-      if (code) map.set(code, [...(map.get(code) || []), contract]);
-    });
-    return map;
-  }, [contracts]);
-  const blockContracts = useMemo(() => {
-    const resolved = codes.map(code => {
-      const normalized = String(code || '').trim();
-      const frozen = frozenByCode.get(normalized);
-      const candidates = contractsByCode.get(normalized) || [];
-      if (!frozen) return candidates[0];
-      return candidates.find(contract => sameContractEvidence(contract, frozen)) || frozen;
-    }).filter(Boolean);
-    if (block.sort === 'date-desc') {
-      resolved.sort((a, b) => String(b.fecha || '').localeCompare(String(a.fecha || '')) || String(b.codigo || '').localeCompare(String(a.codigo || '')));
-    }
-    return resolved;
-  }, [codes, contractsByCode, frozenByCode, block.sort]);
-  const totalPages = Math.ceil(blockContracts.length / itemsPerPage);
-  const pageContracts = blockContracts.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
-  const goToPage = page => {
-    const nextPage = Math.max(1, Math.min(page, totalPages || 1));
-    setCurrentPage(nextPage);
-  };
-  if (!blockContracts.length) return null;
-  return React.createElement("section", {
-    className: "investigacio-embed investigacio-card-stack",
-    "aria-label": block.ariaLabel || 'Contractes relacionats'
-  }, pageContracts.map(contract => React.createElement(InvestigacioContractCard, {
-    key: contract.slug,
-    contract: contract,
-    onSelect: onContractSelect,
-    hideAdjudicatario: Boolean(block.hideAdjudicatario)
-  })), blockContracts.length > itemsPerPage && React.createElement(Pagination, {
-    currentPage: currentPage,
-    totalPages: totalPages,
-    onPageChange: goToPage
-  }));
-}
-function InvestigacioCaseView({
-  caso,
-  contracts,
-  onBack,
-  onContractSelect
-}) {
-  const [shareActionsOpen, setShareActionsOpen] = useState(false);
-  const [shareCopyStatus, setShareCopyStatus] = useState('');
-  const shareActionsRef = useRef(null);
-  const shareStatusTimerRef = useRef(null);
+const {
+  useState,
+  useMemo,
+  useEffect,
+  useCallback,
+  useRef
+} = React;
+function useCountUp(target, duration, active) {
+  const [count, setCount] = useState(0);
+  const countRef = useRef(0);
+  const hasActivatedRef = useRef(false);
+  const isActive = Boolean(active);
   useEffect(() => {
-    if (!shareActionsOpen) return;
-    const closeShareActions = event => {
-      if (event.type === 'keydown' && event.key !== 'Escape') return;
-      if (event.type === 'pointerdown' && shareActionsRef.current?.contains(event.target)) return;
-      setShareActionsOpen(false);
-    };
-    document.addEventListener('pointerdown', closeShareActions);
-    document.addEventListener('keydown', closeShareActions);
-    return () => {
-      document.removeEventListener('pointerdown', closeShareActions);
-      document.removeEventListener('keydown', closeShareActions);
-    };
-  }, [shareActionsOpen]);
-  useEffect(() => () => window.clearTimeout(shareStatusTimerRef.current), []);
-  if (!caso) return null;
-  const copyInvestigacioLink = async () => {
-    try {
-      await navigator.clipboard.writeText(window.location.href);
-      setShareCopyStatus('Enllaç copiat');
-    } catch (_) {
-      setShareCopyStatus("No s'ha pogut copiar");
+    if (!isActive) {
+      if (!hasActivatedRef.current) {
+        countRef.current = 0;
+        setCount(0);
+      }
+      return;
     }
-    window.clearTimeout(shareStatusTimerRef.current);
-    shareStatusTimerRef.current = window.setTimeout(() => setShareCopyStatus(''), 1800);
+    hasActivatedRef.current = true;
+    const nextTarget = Number(target) || 0;
+    const startValue = countRef.current;
+    if (startValue === nextTarget) return;
+    const startedAt = performance.now();
+    let frameId;
+    const tick = now => {
+      const progress = Math.min(1, (now - startedAt) / duration);
+      const current = startValue + (nextTarget - startValue) * progress;
+      const displayed = nextTarget >= startValue ? Math.floor(current) : Math.ceil(current);
+      countRef.current = displayed;
+      setCount(displayed);
+      if (progress < 1) {
+        frameId = requestAnimationFrame(tick);
+      } else {
+        countRef.current = nextTarget;
+        setCount(nextTarget);
+      }
+    };
+    frameId = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(frameId);
+  }, [target, duration, isActive]);
+  return count;
+}
+function formatCurrency(amount) {
+  return new Intl.NumberFormat('ca-ES', {
+    style: 'currency',
+    currency: 'EUR',
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  }).format(amount);
+}
+function formatCompactCurrency(amount) {
+  const value = Number(amount) || 0;
+  if (Math.abs(value) >= 1000000) {
+    return `${(value / 1000000).toLocaleString('ca-ES', {
+      maximumFractionDigits: 1
+    })}M €`;
+  }
+  if (Math.abs(value) >= 1000) {
+    return `${(value / 1000).toLocaleString('ca-ES', {
+      maximumFractionDigits: 0
+    })}k €`;
+  }
+  return formatCurrency(value);
+}
+function formatDate(dateStr) {
+  if (!dateStr) return '—';
+  const p = dateStr.split('-');
+  return p.length === 3 ? `${p[2]}/${p[1]}/${p[0]}` : dateStr;
+}
+function formatTipus(tipo) {
+  const m = {
+    '1. OBRES': 'Obres',
+    'OBRES': 'Obres',
+    '3. SUBMINISTRAMENTS': 'Subministraments',
+    'SUBMINISTRAMENTS': 'Subministraments',
+    '5. SERVEIS': 'Serveis',
+    'SERVEIS': 'Serveis',
+    '6. ADMINISTRATIU ESPECIAL': 'Administratiu especial',
+    'ADMINISTRATIU ESPECIAL': 'Administratiu especial',
+    '2. GESTIÓ DE SERVEI PÚBLIC': 'Gestió de servei públic',
+    'GESTIÓ DE SERVEI PÚBLIC': 'Gestió de servei públic',
+    '8. CONCESSIÓ DE SERVEIS': 'Concessió de serveis',
+    '8. CONCESSÍÓ DE SERVEIS': 'Concessió de serveis',
+    'CONCESSIÓ DE SERVEIS': 'Concessió de serveis',
+    "10. PRIVAT D'ADMINISTRACIO PUBLICA": "Privat d'administració pública",
+    "PRIVAT D'ADMINISTRACIO PUBLICA": "Privat d'administració pública"
   };
-  return React.createElement("article", {
-    className: "container prose-page investigacio-detail-page"
-  }, React.createElement("header", {
-    className: "investigacio-detail-header"
-  }, React.createElement("h1", {
-    className: "page-title"
-  }, caso.title), Number.isFinite(Number(caso.importe)) && React.createElement("div", {
-    className: "investigacio-detail-amount"
-  }, formatCurrency(Number(caso.importe))), React.createElement("p", {
-    className: "investigacio-detail-subtitle"
-  }, caso.subtitle)), caso.image && React.createElement("div", {
-    className: "investigacio-featured-image-frame"
-  }, React.createElement("img", {
-    src: assetUrl(caso.image),
-    alt: caso.title + ': ' + caso.subtitle,
-    className: "investigacio-featured-image"
-  })), React.createElement("div", {
-    className: "prose-wrapper investigacio-story"
-  }, (caso.content || []).map((block, index) => {
-    const key = block.id || block.type + '-' + index;
-    if (block.type === 'heading') {
-      return React.createElement("h2", {
-        key: key,
-        className: "prose-heading"
-      }, block.text);
+  return m[tipo] || tipo;
+}
+function formatTipusLimit(t) {
+  const m = {
+    'obres': 'Obres',
+    'serveis': 'Serveis',
+    'subministraments': 'Subministraments'
+  };
+  return m[t] || (t ? t.charAt(0).toUpperCase() + t.slice(1) : '—');
+}
+function formatMotiuFraccionament(motiu) {
+  const m = {
+    'Mateixa empresa adjudicataria': 'Mateixa empresa adjudicatària',
+    'Contractes menors amb la mateixa empresa adjudicataria': 'Contractes menors amb la mateixa empresa adjudicatària',
+    'Empreses connectades per administrador comu': 'Empreses connectades per administrador comú',
+    'Mateixa divisio CPV': "Mateix sector d'activitat",
+    'Import acumulat superior al limit legal del contracte menor': 'Import acumulat superior al límit legal',
+    'Import acumulat proper al limit legal del contracte menor': 'Import acumulat proper al límit legal',
+    'Almenys una fraccio queda prop del limit individual': 'Almenys una fracció propera al límit legal',
+    'Contracte menor superior al limit legal': 'Contracte menor superior al límit legal',
+    'Contracte menor molt proper al limit legal': 'Contracte menor molt proper al límit legal',
+    'Contracte menor proper al limit legal': 'Contracte menor proper al límit legal',
+    'Imports rodons o ajustats al llindar': 'Imports rodons o ajustats al llindar',
+    'Repeticio multianual del mateix objecte': 'Repetició multianual del mateix objecte',
+    'Contractes en exercicis diferents': 'Contractes en exercicis diferents',
+    'Imports individuals propers al limit legal': 'Imports individuals propers al límit legal'
+  };
+  return m[motiu] || motiu;
+}
+function formatPercent(value) {
+  return `${Math.round((Number(value) || 0) * 100)}%`;
+}
+function quotaClass(value) {
+  const percent = Math.round((Number(value) || 0) * 100);
+  if (percent < 25) return 'success';
+  if (percent < 50) return 'warn';
+  return 'danger';
+}
+function formatSectorName(sector) {
+  return sector === 'Altres Serveis i Subministraments' ? 'Altres' : sector;
+}
+function formatConcentracioPeriod(caso) {
+  if (caso?.finestra === 'historic') return caso.finestra_label;
+  return `Del ${formatDate(caso.data_inici)} al ${formatDate(caso.data_fi)}`;
+}
+function formatProcediment(proc) {
+  const m = {
+    'Menor': 'Menor',
+    'Obert': 'Obert',
+    'Negociat sense publicitat': 'Negociat sense publicitat',
+    'Licitació amb negociació': 'Licitació amb negociació',
+    'Adjudicacions directes no menors': 'Adjudicació directa',
+    'Adjudicació directa': 'Adjudicació directa',
+    'Específic de sistema dinàmic de contractació': 'Sistema dinàmic',
+    'Sistema dinàmic': 'Sistema dinàmic'
+  };
+  return m[proc] || proc;
+}
+function riskClass(n) {
+  return n === 'CRITIC' ? 'alto' : n === 'ALT' || n === 'ALTO' ? 'mitja' : n === 'OBSERVACIO' || n === 'MITJÀ' ? 'baix' : 'baix';
+}
+function riskLabel(n) {
+  if (n === 'CRITIC') return 'Risc alt';
+  if (n === 'ALT' || n === 'ALTO') return 'Risc mitjà';
+  if (n === 'OBSERVACIO' || n === 'MITJÀ') return 'Risc baix';
+  return 'Risc baix';
+}
+function normalizeSearchText(value) {
+  return String(value || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+}
+function matchesSearchQuery(values, query) {
+  const terms = normalizeSearchText(query).split(/\s+/).filter(Boolean);
+  if (!terms.length) return true;
+  const target = normalizeSearchText(Array.isArray(values) ? values.join(' ') : values);
+  return terms.every(term => target.includes(term));
+}
+function normalizeContractCode(value) {
+  return String(value || '').toUpperCase().trim().replace(/\s+/g, ' ').replace(/\s*([/.-])\s*/g, '$1');
+}
+function looksLikeContractCodeQuery(query) {
+  return /\d\s*[/.-]\s*\d/.test(String(query || ''));
+}
+function contractCodeStartsWithQuery(code, query) {
+  const normalizedCode = normalizeContractCode(code);
+  const normalizedQuery = normalizeContractCode(query);
+  if (!normalizedQuery || !normalizedCode.startsWith(normalizedQuery)) return false;
+  const nextCharacter = normalizedCode.charAt(normalizedQuery.length);
+  return !nextCharacter || !/[A-Z0-9]/.test(nextCharacter);
+}
+function filterContractsBySearch(contracts, query, searchableValues) {
+  if (!query) return contracts;
+  if (looksLikeContractCodeQuery(query)) {
+    const codeMatches = contracts.filter(contract => contractCodeStartsWithQuery(contract.codigo, query));
+    if (codeMatches.length) return codeMatches;
+  }
+  return contracts.filter(contract => matchesSearchQuery(searchableValues(contract), query));
+}
+function cyrb53(str) {
+  let h1 = 0xdeadbeef,
+    h2 = 0x41c6ce57;
+  for (let i = 0, ch; i < str.length; i++) {
+    ch = str.charCodeAt(i);
+    h1 = Math.imul(h1 ^ ch, 2654435761);
+    h2 = Math.imul(h2 ^ ch, 1597334677);
+  }
+  h1 = Math.imul(h1 ^ h1 >>> 16, 2246822507) ^ Math.imul(h2 ^ h2 >>> 13, 3266489909);
+  h2 = Math.imul(h2 ^ h2 >>> 16, 2246822507) ^ Math.imul(h1 ^ h1 >>> 13, 3266489909);
+  return 4294967296 * (2097151 & h2) + (h1 >>> 0);
+}
+function slugify(str) {
+  return (str || '').toString().normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/['"`´]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 60);
+}
+function stableHash(values) {
+  const canonical = values.map(v => v == null ? '' : String(v).trim()).join('|');
+  return cyrb53(canonical).toString(36).padStart(11, '0').slice(-7);
+}
+const CASOS_INVESTIGACIO_FALLBACK = [{
+  slug: 'passeig-verdaguer',
+  title: 'Passeig Verdaguer',
+  subtitle: 'Cinc contractes a dit per començar la remodelació',
+  publishedAt: '2026-06-22',
+  image: '/assets/investigacio/passeig-verdaguer.webp',
+  importe: 65500
+}, {
+  slug: 'neteja-parc-central',
+  title: 'Neteja del Parc Central',
+  subtitle: "Un contracte il·legal després d'anys al límit",
+  importe: 58062.93
+}, {
+  slug: 'llums-de-nadal',
+  title: 'Llums de Nadal',
+  subtitle: 'Quatre anys, un mateix proveïdor i preus calcats al límit legal',
+  importe: 59171.05
+}, {
+  slug: 'igualada-urban-running',
+  title: 'Igualada Urban Running',
+  subtitle: 'Cursa de contractes amb un sol guanyador durant anys',
+  importe: 66413.80
+}, {
+  slug: 'la-masuca',
+  title: 'La Masuca',
+  subtitle: 'Dos contractes per a dues empreses connectades',
+  importe: 29700
+}, {
+  slug: 'zones-verdes-igualada',
+  title: "Zones verdes d'Igualada",
+  subtitle: 'Set contractes, un mateix servei i imports al límit legal',
+  importe: 104260
+}, {
+  slug: 'parc-central',
+  title: 'Parc Central',
+  subtitle: 'Quatre contractes, una mateixa actuació i imports al límit legal',
+  importe: 58900
+}];
+function buildContractSlug(c) {
+  const date = (c.fecha || '0000-00-00').slice(0, 10);
+  const codeSlug = slugify(c.codigo);
+  if (codeSlug) return `${date}-${codeSlug}`;
+  const empSlug = slugify(c.adjudicatario) || 'sense-adjudicatari';
+  const h = stableHash([c.fecha, c.importe, c.adjudicatario]);
+  return `${date}-${empSlug}-${h}`;
+}
+function buildLegacyContractSlug(c) {
+  const date = (c.fecha || '0000-00-00').slice(0, 10);
+  const empSlug = slugify(c.adjudicatario) || 'sense-adjudicatari';
+  const h = stableHash([c.codigo, c.adjudicatario, c.fecha, c.importe, c.cpv, c.descripcion]);
+  return `${date}-${empSlug}-${h}`;
+}
+function contractMatchesSlug(contract, slug) {
+  return contract.slug === slug || (contract.slug_aliases || []).includes(slug);
+}
+function sameContractEvidence(current, frozen) {
+  const fields = ['codigo', 'organismo', 'fecha', 'importe', 'adjudicatario', 'descripcion'];
+  return fields.every(field => String(current?.[field] ?? '').trim() === String(frozen?.[field] ?? '').trim());
+}
+function buildEmpresaSlug(name) {
+  return slugify(name) || 'sense-nom';
+}
+function empresaMatchesSlug(empresa, slug) {
+  return empresa.slug === slug || (empresa.slug_aliases || []).includes(slug);
+}
+function buildEmpresaAliasSlugMap(empreses, empresaAliases) {
+  const byName = new Map(empreses.map(e => [String(e.nom || '').trim().toUpperCase(), e]));
+  const result = new Map();
+  for (const [currentName, aliases] of Object.entries(empresaAliases && empresaAliases.aliases || {})) {
+    const empresa = byName.get(String(currentName || '').trim().toUpperCase());
+    if (!empresa || !empresa.slug) continue;
+    for (const alias of aliases || []) {
+      const aliasSlug = buildEmpresaSlug(alias);
+      if (aliasSlug && aliasSlug !== empresa.slug) result.set(aliasSlug, empresa.slug);
     }
-    if (block.type === 'paragraph') {
-      return React.createElement("p", {
-        key: key,
-        className: "prose-intro investigacio-copy"
-      }, block.text);
-    }
-    if (block.type === 'contracts') {
-      const frozenBySlug = new Map((block.contract_snapshots || []).map(contract => [contract.slug, contract]));
-      const blockContracts = (block.slugs || []).map(slug => {
-        const current = contracts.find(contract => contractMatchesSlug(contract, slug));
-        const frozen = frozenBySlug.get(slug);
-        if (!frozen) return current;
-        return current && sameContractEvidence(current, frozen) ? current : frozen;
-      }).filter(Boolean).sort((a, b) => String(a.fecha || '').localeCompare(String(b.fecha || '')));
-      return React.createElement("section", {
-        key: key,
-        className: "investigacio-embed investigacio-card-stack",
-        "aria-label": block.ariaLabel || 'Contractes relacionats'
-      }, blockContracts.map(contract => React.createElement(InvestigacioContractCard, {
-        key: contract.slug,
-        contract: contract,
-        onSelect: onContractSelect
-      })));
-    }
-    if (block.type === 'contracts_paginated') {
-      return React.createElement(InvestigacioPaginatedContracts, {
-        key: key,
-        block: block,
-        contracts: contracts,
-        onContractSelect: onContractSelect
-      });
-    }
-    return null;
-  })), React.createElement("div", {
-    className: "contracte-detail-actions-row investigacio-detail-actions-row"
-  }, React.createElement("button", {
-    onClick: onBack,
-    className: "btn-share contracte-detail-back",
-    title: "Tornar",
-    "aria-label": "Tornar",
-    type: "button"
-  }, React.createElement("svg", {
-    className: "contracte-detail-back-icon",
-    xmlns: "http://www.w3.org/2000/svg",
-    viewBox: "0 0 24 24",
-    fill: "none",
-    stroke: "currentColor",
-    strokeWidth: "2",
-    strokeLinecap: "round",
-    strokeLinejoin: "round",
-    "aria-hidden": "true"
-  }, React.createElement("path", {
-    d: "M19 12H5"
-  }), React.createElement("polyline", {
-    points: "12 19 5 12 12 5"
-  })), React.createElement("span", null, "Tornar")), React.createElement("div", {
-    className: `contracte-detail-share contracte-detail-share-standalone${shareActionsOpen ? ' is-open' : ''}`,
-    ref: shareActionsRef
-  }, React.createElement("div", {
-    id: "investigacio-share-actions",
-    className: "contracte-detail-share-actions",
-    "aria-hidden": !shareActionsOpen
-  }, React.createElement("button", {
-    className: "btn-share contracte-detail-share-btn",
-    onClick: copyInvestigacioLink,
-    tabIndex: shareActionsOpen ? 0 : -1,
-    type: "button"
-  }, shareCopyStatus || "Copia l'enllaç")), React.createElement("button", {
-    className: "btn-share contracte-detail-share-btn",
-    onClick: () => setShareActionsOpen(open => !open),
-    "aria-expanded": shareActionsOpen,
-    "aria-controls": "investigacio-share-actions",
-    type: "button"
-  }, React.createElement("em", {
-    className: "share-arrow"
-  }), " Compartir"))));
+  }
+  return result;
+}
+function findMatchingContract(contracts, partial) {
+  const sameFingerprint = ct => String(ct.adjudicatario || '').trim() === String(partial.adjudicatario || '').trim() && String(ct.fecha || '').slice(0, 10) === String(partial.fecha || '').slice(0, 10) && Math.abs((Number(ct.importe) || 0) - (Number(partial.importe) || 0)) < 0.01;
+  const sameCode = contracts.filter(ct => String(ct.codigo || '').trim() === String(partial.codigo || '').trim());
+  const exactByCode = sameCode.find(sameFingerprint);
+  if (exactByCode) return exactByCode;
+  if (sameCode.length === 1 && !partial.adjudicatario && !partial.fecha) return sameCode[0];
+  return contracts.find(ct => sameFingerprint(ct) && String(ct.descripcion || '').trim() === String(partial.descripcion || '').trim()) || null;
+}
+const CPV_DIVISIONS = {
+  "03": "Productes agrícoles i ramaders",
+  "09": "Productes petrolífers i energia",
+  "14": "Productes de mineria",
+  "15": "Aliments i begudes",
+  "16": "Maquinària agrícola",
+  "18": "Roba i calçat",
+  "19": "Cuir i tèxtils",
+  "22": "Impresos i productes relacionats",
+  "24": "Productes químics",
+  "30": "Maquinària d'oficina i informàtica",
+  "31": "Maquinària elèctrica",
+  "32": "Equips de telecomunicacions",
+  "33": "Equipament mèdic i farmacèutic",
+  "34": "Equips de transport",
+  "35": "Equips de seguretat i defensa",
+  "37": "Instruments musicals i esportius",
+  "38": "Equips de laboratori i precisió",
+  "39": "Mobiliari i equipament",
+  "42": "Maquinària industrial",
+  "43": "Maquinària de mineria",
+  "44": "Materials de construcció",
+  "45": "Obres de construcció",
+  "48": "Paquets de programari",
+  "50": "Serveis de reparació i manteniment",
+  "51": "Serveis d'instal·lació",
+  "55": "Serveis d'hostaleria i restauració",
+  "60": "Serveis de transport",
+  "63": "Serveis auxiliars de transport",
+  "64": "Serveis postals i telecomunicacions",
+  "65": "Serveis públics (aigua, energia)",
+  "66": "Serveis financers i d'assegurances",
+  "70": "Serveis immobiliaris",
+  "71": "Serveis d'arquitectura i enginyeria",
+  "72": "Serveis informàtics (TI)",
+  "73": "Serveis d'investigació (R+D)",
+  "75": "Serveis d'administració pública",
+  "76": "Serveis del sector petroler",
+  "77": "Serveis agrícoles i forestals",
+  "79": "Serveis empresarials i de consultoria",
+  "80": "Serveis d'ensenyament i formació",
+  "85": "Serveis sanitaris i socials",
+  "90": "Aigües residuals, residus i neteja",
+  "92": "Serveis recreatius i culturals",
+  "98": "Altres serveis comunitaris"
+};
+const SECTOR_MAPPING = {
+  "Productes agrícoles i ramaders": "Agricultura i Alimentació",
+  "Productes petrolífers i energia": "Indústria, Maquinària i Energia",
+  "Productes de mineria": "Indústria, Maquinària i Energia",
+  "Aliments i begudes": "Agricultura i Alimentació",
+  "Maquinària agrícola": "Agricultura i Alimentació",
+  "Roba i calçat": "Béns de Consum i Comerç",
+  "Cuir i tèxtils": "Béns de Consum i Comerç",
+  "Impresos i productes relacionats": "Béns de Consum i Comerç",
+  "Productes químics": "Indústria, Maquinària i Energia",
+  "Maquinària d'oficina i informàtica": "Tecnologia i Telecomunicacions",
+  "Maquinària elèctrica": "Indústria, Maquinària i Energia",
+  "Equips de telecomunicacions": "Tecnologia i Telecomunicacions",
+  "Equipament mèdic i farmacèutic": "Salut i Serveis Socials",
+  "Equips de transport": "Transport i Logística",
+  "Equips de seguretat i defensa": "Seguretat i Defensa",
+  "Instruments musicals i esportius": "Cultura, Oci i Esport",
+  "Equips de laboratori i precisió": "Indústria, Maquinària i Energia",
+  "Mobiliari i equipament": "Béns de Consum i Comerç",
+  "Maquinària industrial": "Indústria, Maquinària i Energia",
+  "Maquinària de mineria": "Indústria, Maquinària i Energia",
+  "Materials de construcció": "Construcció i Infraestructures",
+  "Obres de construcció": "Construcció i Infraestructures",
+  "Paquets de programari": "Tecnologia i Telecomunicacions",
+  "Serveis de reparació i manteniment": "Medi Ambient, Neteja i Manteniment",
+  "Serveis d'instal·lació": "Construcció i Infraestructures",
+  "Serveis d'hostaleria i restauració": "Agricultura i Alimentació",
+  "Serveis de transport": "Transport i Logística",
+  "Serveis auxiliars de transport": "Transport i Logística",
+  "Serveis postals i telecomunicacions": "Tecnologia i Telecomunicacions",
+  "Serveis públics (aigua, energia)": "Indústria, Maquinària i Energia",
+  "Serveis financers i d'assegurances": "Serveis Professionals i Corporatius",
+  "Serveis immobiliaris": "Serveis Professionals i Corporatius",
+  "Serveis d'arquitectura i enginyeria": "Construcció i Infraestructures",
+  "Serveis informàtics (TI)": "Tecnologia i Telecomunicacions",
+  "Serveis d'investigació (R+D)": "Educació i Recerca",
+  "Serveis d'administració pública": "Serveis Professionals i Corporatius",
+  "Serveis del sector petroler": "Indústria, Maquinària i Energia",
+  "Serveis agrícoles i forestals": "Agricultura i Alimentació",
+  "Serveis empresarials i de consultoria": "Serveis Professionals i Corporatius",
+  "Serveis d'ensenyament i formació": "Educació i Recerca",
+  "Serveis sanitaris i socials": "Salut i Serveis Socials",
+  "Aigües residuals, residus i neteja": "Medi Ambient, Neteja i Manteniment",
+  "Serveis recreatius i culturals": "Cultura, Oci i Esport",
+  "Altres serveis comunitaris": "Altres Serveis i Subministraments"
+};
+function categoriaToSector(cat) {
+  return SECTOR_MAPPING[cat] || "Altres Serveis i Subministraments";
 }
 function App() {
   const initialContractSearch = useMemo(() => readContractSearchState(), []);
@@ -5894,27 +6155,6 @@ function App() {
       percentLabel: `${Math.round(row.percent * 100)}%`
     }));
   }, [contracts, summary]);
-  const renderHomeChrome = (interactive = true) => React.createElement("div", {
-    className: "home-chrome"
-  }, React.createElement("div", {
-    className: "home-chrome-gradient is-visible",
-    "aria-hidden": "true"
-  }), React.createElement("div", {
-    className: "home-brand home-chrome-brand",
-    onClick: interactive ? goToHome : undefined,
-    onKeyDown: interactive ? event => {
-      if (event.key === 'Enter' || event.key === ' ') {
-        event.preventDefault();
-        goToHome();
-      }
-    } : undefined,
-    role: interactive ? 'link' : undefined,
-    tabIndex: interactive ? 0 : undefined
-  }, React.createElement("div", {
-    className: "home-logo",
-    role: "img",
-    "aria-label": "Iguadata"
-  })));
   const renderNavTabs = (showActive = true, useTransition = false) => {
     const handleNavClick = useTransition ? handleTransitionLinkClick : handleInternalLinkClick;
     const contractesActive = activeTab === 'buscador' || activeTab === 'contracte';
@@ -6014,359 +6254,6 @@ function App() {
   }, React.createElement("path", {
     d: "m6 9 6 6 6-6"
   })))), renderNavTabs(true, false))));
-  const renderHomeSection = (extraClassName = '', interactive = true) => React.createElement("section", {
-    className: `home${extraClassName ? ` ${extraClassName}` : ''}`,
-    "aria-label": "Portada editorial Iguadata",
-    "aria-hidden": !interactive
-  }, React.createElement("div", {
-    className: "home-scroll-story"
-  }, React.createElement("div", {
-    className: "home-hero"
-  }, React.createElement("canvas", {
-    ref: homeCanvasRef,
-    className: "home-particles",
-    "aria-hidden": "true"
-  }), React.createElement("div", {
-    className: "home-hero-bottom-gradient",
-    "aria-hidden": "true"
-  }), React.createElement("div", {
-    className: "home-intro-scene"
-  }, React.createElement("div", {
-    className: "home-copy"
-  }, React.createElement("h1", {
-    className: "home-title"
-  }, "Tot \xE9s ", React.createElement("em", null, "p\xFAblic")), React.createElement("p", {
-    className: "home-deck"
-  }, "Contractes, empreses, persones, subvencions i an\xE0lisi en una cartografia oberta de la contractaci\xF3 p\xFAblica de ", AUTHORITY_NAME)), React.createElement("div", {
-    className: "home-metrics",
-    "aria-label": "Indicadors principals"
-  }, React.createElement("a", {
-    href: buildRouteUrl('/contractes'),
-    className: "home-metric metric-contractes",
-    onClick: interactive ? event => handleHomeMetricLinkClick(event, () => {
-      handleNavigation('buscador');
-      setIsMobileMenuOpen(false);
-    }) : event => event.preventDefault(),
-    tabIndex: interactive ? 0 : -1
-  }, React.createElement("span", {
-    className: "home-metric-value"
-  }, contractCount.toLocaleString('ca-ES')), React.createElement("span", {
-    className: "home-metric-label"
-  }, "Contractes")), React.createElement("a", {
-    href: buildRouteUrl('/subvencions'),
-    className: "home-metric metric-import",
-    onClick: interactive ? event => handleHomeMetricLinkClick(event, () => {
-      handleNavigation('subvencions');
-      setIsMobileMenuOpen(false);
-    }) : event => event.preventDefault(),
-    tabIndex: interactive ? 0 : -1
-  }, React.createElement("span", {
-    className: "home-metric-value"
-  }, subvencionsCount.toLocaleString('ca-ES')), React.createElement("span", {
-    className: "home-metric-label"
-  }, "Subvencions")), React.createElement("a", {
-    href: buildRouteUrl('/empreses'),
-    className: "home-metric metric-empreses",
-    onClick: interactive ? event => handleHomeMetricLinkClick(event, () => {
-      handleNavigation('empreses');
-      setIsMobileMenuOpen(false);
-    }) : event => event.preventDefault(),
-    tabIndex: interactive ? 0 : -1
-  }, React.createElement("span", {
-    className: "home-metric-value"
-  }, empresasCount.toLocaleString('ca-ES')), React.createElement("span", {
-    className: "home-metric-label"
-  }, "Empreses")), React.createElement("a", {
-    href: buildRouteUrl('/persones'),
-    className: "home-metric metric-persones",
-    onClick: interactive ? event => handleHomeMetricLinkClick(event, () => {
-      handleNavigation('persones');
-      setIsMobileMenuOpen(false);
-    }) : event => event.preventDefault(),
-    tabIndex: interactive ? 0 : -1
-  }, React.createElement("span", {
-    className: "home-metric-value"
-  }, personesCount.toLocaleString('ca-ES')), React.createElement("span", {
-    className: "home-metric-label"
-  }, "Persones")), React.createElement("a", {
-    href: buildRouteUrl('/analisi'),
-    className: "home-metric metric-alertes",
-    onClick: interactive ? event => handleHomeMetricLinkClick(event, handleAnalisiNavClick) : event => event.preventDefault(),
-    tabIndex: interactive ? 0 : -1
-  }, React.createElement("span", {
-    className: "home-metric-value"
-  }, alertesCount.toLocaleString('ca-ES')), React.createElement("span", {
-    className: "home-metric-label"
-  }, "Alertes"))), React.createElement("div", {
-    className: "home-scroll-invitation",
-    "aria-hidden": "true"
-  }, React.createElement("svg", {
-    width: "24",
-    height: "24",
-    viewBox: "0 0 24 24",
-    fill: "none",
-    stroke: "currentColor",
-    strokeWidth: "1.5",
-    strokeLinecap: "round",
-    strokeLinejoin: "round"
-  }, React.createElement("path", {
-    d: "m6 9 6 6 6-6"
-  })))), React.createElement("section", {
-    className: "home-chapter home-economic-scene",
-    "aria-labelledby": "home-economic-title"
-  }, React.createElement("div", {
-    className: "home-economic-heading"
-  }, React.createElement("h2", {
-    id: "home-economic-title"
-  }, "On van els ", React.createElement("em", null, "diners?")), React.createElement("p", null, "Els sectors amb m\xE9s despesa de ", AUTHORITY_NAME, ".")), React.createElement("div", {
-    className: "home-economic-bars",
-    "aria-label": "Sectors amb m\xE9s import adjudicat"
-  }, homeTopSectors.map(item => React.createElement("div", {
-    key: item.label,
-    className: "home-economic-row",
-    style: {
-      '--economic-scale': item.share
-    }
-  }, React.createElement("span", null, item.label), React.createElement("strong", null, formatCompactCurrency(item.amount)))))), React.createElement("section", {
-    className: "home-chapter home-categories-scene",
-    "aria-labelledby": "home-categories-title"
-  }, React.createElement("div", {
-    className: "home-categories-cloud",
-    "aria-label": "Categories amb m\xE9s import adjudicat"
-  }, homeTopCategories.map(item => React.createElement("div", {
-    key: item.label,
-    className: `home-category-word home-category-word-${Math.min(item.rank, 6)}`,
-    style: {
-      '--category-scale': 0.82 + item.share * 2.4
-    }
-  }, React.createElement("span", null, item.label), React.createElement("strong", null, formatCompactCurrency(item.amount))))), React.createElement("div", {
-    className: "home-categories-heading"
-  }, React.createElement("h2", {
-    id: "home-categories-title"
-  }, "Qu\xE8 es ", React.createElement("em", null, "compra"), "?"), React.createElement("p", null, "Els serveis m\xE9s contractats de ", AUTHORITY_NAME, "."))), React.createElement("section", {
-    className: "home-chapter home-patterns-scene",
-    "aria-labelledby": "home-patterns-title"
-  }, React.createElement("div", {
-    className: "home-patterns-heading"
-  }, React.createElement("h2", {
-    id: "home-patterns-title"
-  }, "I quan les dades es connecten, apareixen ", React.createElement("em", null, "patrons."))), React.createElement("div", {
-    className: "home-risk-metrics",
-    "aria-label": "Alertes per nivell de risc"
-  }, React.createElement("div", {
-    className: "home-risk-metric"
-  }, React.createElement("strong", null, homeRiskCounts.alt.toLocaleString('ca-ES')), React.createElement("span", null, "Risc alt")), React.createElement("div", {
-    className: "home-risk-metric"
-  }, React.createElement("strong", null, homeRiskCounts.mitja.toLocaleString('ca-ES')), React.createElement("span", null, "Risc mitj\xE0")), React.createElement("div", {
-    className: "home-risk-metric"
-  }, React.createElement("strong", null, homeRiskCounts.baix.toLocaleString('ca-ES')), React.createElement("span", null, "Risc baix")))), React.createElement("section", {
-    className: "home-chapter home-loop-scene",
-    "aria-labelledby": "home-loop-title"
-  }, React.createElement("div", {
-    className: "home-loop-copy"
-  }, React.createElement("h2", {
-    id: "home-loop-title",
-    className: "home-loop-title"
-  }, "El projecte de transpar\xE8ncia ", React.createElement("em", null, "d'Igualada")))))));
-  const renderLegacyHomeSection = (extraClassName = '', interactive = true) => React.createElement("section", {
-    className: `home${extraClassName ? ` ${extraClassName}` : ''}`,
-    "aria-label": "Portada editorial Iguadata",
-    "aria-hidden": !interactive
-  }, React.createElement("div", {
-    className: "home-hero"
-  }, React.createElement("canvas", {
-    ref: homeCanvasRef,
-    className: "home-particles",
-    "aria-hidden": "true"
-  }), React.createElement("div", {
-    className: "home-hero-bottom-gradient",
-    "aria-hidden": "true"
-  }), React.createElement("div", {
-    className: "home-copy"
-  }, React.createElement("h1", {
-    className: "home-title"
-  }, "Tot \xE9s ", React.createElement("em", null, "p\xFAblic")), React.createElement("p", {
-    className: "home-deck"
-  }, "Contractes, empreses, persones, subvencions i an\xE0lisi en una cartografia oberta de la contractaci\xF3 p\xFAblica de ", AUTHORITY_NAME)), React.createElement("div", {
-    className: "home-metrics",
-    "aria-label": "Indicadors principals"
-  }, React.createElement("a", {
-    href: buildRouteUrl('/contractes'),
-    className: "home-metric metric-contractes",
-    onClick: interactive ? event => handleHomeMetricLinkClick(event, () => {
-      handleNavigation('buscador');
-      setIsMobileMenuOpen(false);
-    }) : event => event.preventDefault(),
-    tabIndex: interactive && !isMobile() ? 0 : -1
-  }, React.createElement("span", {
-    className: "home-metric-value"
-  }, contractCount.toLocaleString('ca-ES')), React.createElement("span", {
-    className: "home-metric-label"
-  }, "Contractes")), React.createElement("a", {
-    href: buildRouteUrl('/subvencions'),
-    className: "home-metric metric-import",
-    onClick: interactive ? event => handleHomeMetricLinkClick(event, () => {
-      handleNavigation('subvencions');
-      setIsMobileMenuOpen(false);
-    }) : event => event.preventDefault(),
-    tabIndex: interactive && !isMobile() ? 0 : -1
-  }, React.createElement("span", {
-    className: "home-metric-value"
-  }, subvencionsCount.toLocaleString('ca-ES')), React.createElement("span", {
-    className: "home-metric-label"
-  }, "Subvencions")), React.createElement("a", {
-    href: buildRouteUrl('/empreses'),
-    className: "home-metric metric-empreses",
-    onClick: interactive ? event => handleHomeMetricLinkClick(event, () => {
-      handleNavigation('empreses');
-      setIsMobileMenuOpen(false);
-    }) : event => event.preventDefault(),
-    tabIndex: interactive && !isMobile() ? 0 : -1
-  }, React.createElement("span", {
-    className: "home-metric-value"
-  }, empresasCount.toLocaleString('ca-ES')), React.createElement("span", {
-    className: "home-metric-label"
-  }, "Empreses")), React.createElement("a", {
-    href: buildRouteUrl('/persones'),
-    className: "home-metric metric-persones",
-    onClick: interactive ? event => handleHomeMetricLinkClick(event, () => {
-      handleNavigation('persones');
-      setIsMobileMenuOpen(false);
-    }) : event => event.preventDefault(),
-    tabIndex: interactive && !isMobile() ? 0 : -1
-  }, React.createElement("span", {
-    className: "home-metric-value"
-  }, personesCount.toLocaleString('ca-ES')), React.createElement("span", {
-    className: "home-metric-label"
-  }, "Persones")), React.createElement("a", {
-    href: buildRouteUrl('/analisi'),
-    className: "home-metric metric-alertes",
-    onClick: interactive ? event => handleHomeMetricLinkClick(event, handleAnalisiNavClick) : event => event.preventDefault(),
-    tabIndex: interactive && !isMobile() ? 0 : -1
-  }, React.createElement("span", {
-    className: "home-metric-value"
-  }, alertesCount.toLocaleString('ca-ES')), React.createElement("span", {
-    className: "home-metric-label"
-  }, "Alertes")))), React.createElement("div", {
-    id: "dades",
-    className: "home-landing",
-    "aria-label": "Dades destacades"
-  }, React.createElement("div", {
-    className: "home-atlas",
-    style: {
-      '--atlas-panels': 4
-    }
-  }, React.createElement("div", {
-    className: "home-atlas-sticky"
-  }, React.createElement("div", {
-    className: "home-atlas-rail",
-    "aria-hidden": "true"
-  }, Array.from({
-    length: 4
-  }, (_, index) => React.createElement("span", {
-    key: index
-  }, String(index + 1).padStart(2, '0')))), React.createElement("div", {
-    className: "home-atlas-track"
-  }, React.createElement("section", {
-    className: "home-story home-atlas-panel home-story-manifest"
-  }, React.createElement("h2", null, "Una manera nova de mirar Igualada"), React.createElement("div", {
-    className: "home-manifest-copy"
-  }, React.createElement("p", null, "Una dada pot ser p\xFAblica i continuar sent invisible. Un contracte pot estar penjat en un registre oficial i no explicar res a ning\xFA."), React.createElement("p", null, "Iguadata ordena la contractaci\xF3 municipal perqu\xE8 contractes, empreses, imports, persones vinculades i alertes es puguin llegir com un mapa."), React.createElement("p", null, "No substitueix el periodisme, l'activa: converteix informaci\xF3 dispersa i t\xE8cnica en una infraestructura c\xEDvica per preguntar millor com circulen els diners p\xFAblics."))), React.createElement("section", {
-    className: "home-story home-atlas-panel home-story-minors"
-  }, React.createElement("div", {
-    className: "home-story-header"
-  }, React.createElement("h2", null, "El pes del contracte menor"), React.createElement("p", null, "No tots els contractes menors s\xF3n problem\xE0tics. Per\xF2 mirar-ne l'evoluci\xF3 ajuda a entendre com es contracta.")), React.createElement("div", {
-    className: "home-minors-chart",
-    "aria-label": "Percentatge anual de contractes menors"
-  }, homeMinorContractTrend.map(item => React.createElement("div", {
-    key: item.year,
-    className: "home-minors-bar",
-    style: {
-      '--minor-scale': item.barScale
-    }
-  }, React.createElement("span", {
-    className: "home-minors-value"
-  }, item.percentLabel), React.createElement("span", {
-    className: "home-minors-fill",
-    "aria-hidden": "true"
-  }), React.createElement("span", {
-    className: "home-minors-year"
-  }, item.year))))), React.createElement("section", {
-    className: "home-story home-atlas-panel home-story-sectors"
-  }, React.createElement("div", {
-    className: "home-story-header"
-  }, React.createElement("h2", null, "On van els diners?"), React.createElement("p", null, "Els sectors que concentren m\xE9s contractes.")), React.createElement("div", {
-    className: "home-sector-bars",
-    "aria-label": "Sectors amb m\xE9s import adjudicat"
-  }, homeTopSectors.map(item => React.createElement("a", {
-    key: item.label,
-    href: buildRouteUrl('/empreses'),
-    className: "home-sector-row",
-    style: {
-      '--bar-scale': item.share
-    },
-    onClick: interactive ? event => handleInternalLinkClick(event, () => {
-      setEmpresesSector(item.label);
-      setEmpresesCategoria('');
-      setEmpresesPage(1);
-      handleNavigation('empreses', '/empreses', {
-        keepFilters: true
-      });
-    }) : event => event.preventDefault(),
-    tabIndex: interactive ? 0 : -1
-  }, React.createElement("span", {
-    className: "home-sector-rank"
-  }, String(item.rank).padStart(2, '0')), React.createElement("span", {
-    className: "home-sector-name"
-  }, item.label), React.createElement("span", {
-    className: "home-sector-amount"
-  }, formatCompactCurrency(item.amount)))))), React.createElement("section", {
-    className: "home-story home-atlas-panel home-story-categories"
-  }, React.createElement("div", {
-    className: "home-category-cloud",
-    "aria-label": "Categories amb m\xE9s import adjudicat"
-  }, homeTopCategories.map(item => React.createElement("a", {
-    key: item.label,
-    href: buildRouteUrl('/empreses'),
-    className: `home-category-chip home-category-chip-${Math.min(item.rank, 6)}`,
-    style: {
-      '--chip-scale': 0.72 + item.share * 2.8
-    },
-    onClick: interactive ? event => handleInternalLinkClick(event, () => {
-      setEmpresesCategoria(item.label);
-      setEmpresesSector('');
-      setEmpresesPage(1);
-      handleNavigation('empreses', '/empreses', {
-        keepFilters: true
-      });
-    }) : event => event.preventDefault(),
-    tabIndex: interactive ? 0 : -1
-  }, React.createElement("span", null, item.label), React.createElement("strong", null, formatCompactCurrency(item.amount))))), React.createElement("div", {
-    className: "home-story-header home-story-header-offset"
-  }, React.createElement("h2", null, "Qu\xE8 compra l'Ajuntament?"), React.createElement("p", null, "Categories f\xE0cils de llegir, no codis opacs.")))))), React.createElement("section", {
-    className: "home-story home-story-trust"
-  }, React.createElement("div", {
-    className: "home-trust-strip"
-  }, React.createElement("div", null, React.createElement("span", null, "\xDAltima actualitzaci\xF3"), React.createElement("strong", null, summary?.generated_at ? formatDate(summary.generated_at.slice(0, 10)) : 'Automàtica')), React.createElement("div", null, React.createElement("span", null, "Fonts"), React.createElement("strong", null, "Socrata \xB7 BORME")), React.createElement("div", null, React.createElement("span", null, "Lectura responsable"), React.createElement("strong", null, "Les alertes no impliquen irregularitat"))))));
-  const renderHomeLoading = (isDissolving = false) => React.createElement("div", {
-    className: `home home-loading-screen${isDissolving ? ' is-dissolving' : ''}`
-  }, React.createElement("div", {
-    className: "home-brand"
-  }, React.createElement("div", {
-    className: "home-logo",
-    role: "img",
-    "aria-label": "Iguadata"
-  })), !isDissolving && React.createElement("canvas", {
-    ref: homeCanvasRef,
-    className: "home-particles",
-    "aria-hidden": "true"
-  }), React.createElement("div", {
-    className: "home-copy home-loading-copy"
-  }, React.createElement("h1", {
-    className: "home-title"
-  }, "Tot \xE9s ", React.createElement("em", null, "p\xFAblic")), React.createElement("div", {
-    className: "home-loading-progress"
-  }, loadingProgress.toLocaleString('ca-ES'), "%")));
   const renderSkeletonCard = (className = '') => React.createElement("div", {
     className: `contract-card data-skeleton-card${className ? ` ${className}` : ''}`,
     "aria-hidden": "true"
@@ -6477,7 +6364,10 @@ function App() {
     type: "button"
   }, "Tornar-ho a provar"))));
   if (loading) {
-    return renderHomeLoading(false);
+    return React.createElement(HomeLoading, {
+      homeCanvasRef: homeCanvasRef,
+      loadingProgress: loadingProgress
+    });
   }
   const handleDetailClick = contract => {
     setSelectedContractForDetail(contract);
@@ -6565,10 +6455,31 @@ function App() {
   };
   return React.createElement("div", {
     className: activeTab === 'home' ? 'home-wrapper' : 'app-shell app-shell-chrome'
-  }, activeTab !== 'home' && renderSiteChrome(), activeTab === 'home' && React.createElement(React.Fragment, null, renderHomeChrome(), React.createElement("main", {
+  }, activeTab !== 'home' && renderSiteChrome(), activeTab === 'home' && React.createElement(React.Fragment, null, React.createElement(HomeChrome, {
+    goToHome: goToHome
+  }), React.createElement("main", {
     id: "main-content",
     className: "home-dissolve-stage"
-  }, renderHomeSection(homeIntroFading ? 'home-intro-target' : ''), homeIntroFading && renderHomeLoading(true))), activeTab !== 'home' && React.createElement("main", {
+  }, React.createElement(HomeSection, {
+    extraClassName: homeIntroFading ? 'home-intro-target' : '',
+    homeCanvasRef: homeCanvasRef,
+    handleHomeMetricLinkClick: handleHomeMetricLinkClick,
+    handleNavigation: handleNavigation,
+    setIsMobileMenuOpen: setIsMobileMenuOpen,
+    handleAnalisiNavClick: handleAnalisiNavClick,
+    contractCount: contractCount,
+    subvencionsCount: subvencionsCount,
+    empresasCount: empresasCount,
+    personesCount: personesCount,
+    alertesCount: alertesCount,
+    homeTopSectors: homeTopSectors,
+    homeTopCategories: homeTopCategories,
+    homeRiskCounts: homeRiskCounts
+  }), homeIntroFading && React.createElement(HomeLoading, {
+    isDissolving: true,
+    homeCanvasRef: homeCanvasRef,
+    loadingProgress: loadingProgress
+  }))), activeTab !== 'home' && React.createElement("main", {
     id: "main-content",
     className: "site-main",
     tabIndex: -1
@@ -7597,161 +7508,7 @@ function App() {
     currentPage: analisiPageDependencia,
     totalPages: totalPagesDependencia,
     onPageChange: setAnalisiPageDependencia
-  })))), activeTab === 'sobre' && React.createElement("div", {
-    className: "container prose-page narrative-info-page"
-  }, React.createElement("h1", {
-    className: "page-title"
-  }, "Sobre el projecte"), React.createElement("div", {
-    className: "prose-wrapper narrative-story"
-  }, React.createElement("p", {
-    className: "prose-intro"
-  }, BRAND_NAME, " \xE9s la plataforma independent de periodisme de dades per a l'an\xE0lisi de la contractaci\xF3 p\xFAblica i les subvencions de ", AUTHORITY_NAME, " i dels seus organismes municipals.", React.createElement("br", null), React.createElement("br", null), "El projecte combina dades obertes de contractaci\xF3 i subvencions, informaci\xF3 mercantil i algoritmes propis per fer m\xE9s accessible, comprensible i fiscalitzable la despesa p\xFAblica municipal."), React.createElement("h2", {
-    className: "prose-heading"
-  }, "Autoria"), React.createElement("p", {
-    className: "prose-paragraph"
-  }, "Iguadata \xE9s un projecte de l'igualad\xED ", React.createElement("a", {
-    href: "https://x.com/viictxxr",
-    target: "_blank",
-    rel: "noopener noreferrer",
-    className: "prose-link"
-  }, "V\xEDctor Recio Rodr\xEDguez"), ", desenvolupat com a Treball Final del M\xE0ster en Periodisme i Comunicaci\xF3 Digital: Dades i Noves Narratives de la Universitat Oberta de Catalunya (UOC), sota la tutoria de Carlos L\xF3pez Olano."), React.createElement("h2", {
-    className: "prose-heading"
-  }, "Objectius"), React.createElement("p", {
-    className: "prose-paragraph"
-  }, "Iguadata neix amb tres objectius principals: facilitar l'acc\xE9s de la ciutadania a la contractaci\xF3 i les subvencions p\xFAbliques municipals, detectar patrons que puguin mer\xE8ixer revisi\xF3 period\xEDstica o institucional, i construir una metodologia replicable per altres municipis."), React.createElement("p", {
-    className: "prose-paragraph"
-  }, "La plataforma no substitueix la feina dels \xF2rgans fiscalitzadors, jur\xEDdics o administratius. El seu paper \xE9s ordenar dades disperses, mostrar relacions i generar indicadors que ajudin a fer millors preguntes."), React.createElement("h2", {
-    className: "prose-heading"
-  }, "Qu\xE8 analitza"), React.createElement("p", {
-    className: "prose-paragraph"
-  }, "Iguadata permet consultar contractes, empreses adjudicat\xE0ries, persones vinculades a aquestes empreses, subvencions, entitats benefici\xE0ries i diferents indicadors d'an\xE0lisi."), React.createElement("p", {
-    className: "prose-paragraph"
-  }, "Els principals blocs d'an\xE0lisi s\xF3n el possible fraccionament de contractes menors, la concentraci\xF3 d'adjudicacions en determinades empreses o sectors, els patrons d'electoralisme o comunicaci\xF3 institucional en per\xEDodes sensibles i l'acumulaci\xF3 o recurr\xE8ncia de subvencions directes en una mateixa entitat."), React.createElement("h2", {
-    className: "prose-heading"
-  }, "Font de dades"), React.createElement("p", {
-    className: "prose-paragraph"
-  }, "Les dades de contractaci\xF3 provenen del Registre P\xFAblic de Contractes de la Generalitat de Catalunya, consultat mitjan\xE7ant l'API Socrata Open Data (SODA)."), React.createElement("p", {
-    className: "prose-paragraph"
-  }, "Les dades de subvencions provenen del Registre d'Ajuts i Subvencions de Catalunya (RAISC). Iguadata selecciona les concessions emeses per ", AUTHORITY_NAME, " i publica \xFAnicament els registres amb beneficiaris identificats com a entitats publicables."), React.createElement("p", {
-    className: "prose-paragraph"
-  }, "Les dades mercantils provenen del Butllet\xED Oficial del Registre Mercantil (BORME), registre oficial p\xFAblic. Mitjan\xE7ant un processament massiu, t\xE8cniques de mineria de dades i l'\xFAs de programari de codi obert desenvolupat per ", React.createElement("a", {
-    href: "https://github.com/BquantFinance",
-    target: "_blank",
-    rel: "noopener noreferrer",
-    className: "prose-link"
-  }, "Gerard S\xE1nchez Vidal"), ", s'identifiquen els c\xE0rrecs actius de les empreses adjudicat\xE0ries."), React.createElement("p", {
-    className: "prose-paragraph"
-  }, "Una actualitzaci\xF3 autom\xE0tica setmanal genera una fotografia coherent dels contractes, les subvencions, les empreses, les entitats, les persones i els resultats anal\xEDtics. Tamb\xE9 es generen fitxers JSON propis que permeten alimentar la interf\xEDcie, accelerar la consulta i mantenir c\xF2pies de suport en cas de caiguda temporal de les fonts externes."), React.createElement("h2", {
-    className: "prose-heading"
-  }, "Metodologia"), React.createElement("p", {
-    className: "prose-paragraph"
-  }, "El projecte utilitza scripts de Python per descarregar, netejar, normalitzar i encreuar dades. Part del proc\xE9s d'actualitzaci\xF3 s'executa autom\xE0ticament mitjan\xE7ant GitHub Actions, amb controls de validaci\xF3, c\xF2pies de seguretat i comprovacions d'integritat."), React.createElement("p", {
-    className: "prose-paragraph"
-  }, "Els algoritmes d'Iguadata no emeten veredictes. Detecten patrons, acumulacions, recurr\xE8ncies, proximitats temporals, vincles mercantils o combinacions de factors que poden tenir inter\xE8s p\xFAblic i period\xEDstic."), React.createElement("h2", {
-    className: "prose-heading"
-  }, "Limitacions"), React.createElement("p", {
-    className: "prose-paragraph"
-  }, "Les dades poden contenir errors d'origen, omissions, duplicats, canvis posteriors o incid\xE8ncies derivades de la normalitzaci\xF3 i classificaci\xF3 automatitzades. L'aparici\xF3 d'una empresa, entitat, persona, contracte o subvenci\xF3 en una alerta no implica cap irregularitat legal confirmada."), React.createElement("p", {
-    className: "prose-paragraph"
-  }, "Qualsevol conclusi\xF3 period\xEDstica, administrativa o jur\xEDdica requereix contrastar les dades amb expedients originals, informes t\xE8cnics, resolucions, convocat\xF2ries, bases reguladores, plecs i altres fonts documentals."), React.createElement("h2", {
-    className: "prose-heading"
-  }, "Codi obert"), React.createElement("p", {
-    className: "prose-paragraph"
-  }, "El codi font del projecte \xE9s p\xFAblic i est\xE0 disponible a ", React.createElement("a", {
-    href: REPOSITORY_URL,
-    target: "_blank",
-    rel: "noopener noreferrer",
-    className: "prose-link"
-  }, "GitHub"), " sota llic\xE8ncia GNU GPL v3.0."), React.createElement("h2", {
-    className: "prose-heading"
-  }, "Contacte"), React.createElement("p", {
-    className: "prose-paragraph"
-  }, "Per a suggeriments, correccions factuals, col\xB7laboracions o consultes sobre el projecte, es pot contactar a partir de ", React.createElement("a", {
-    href: `mailto:${CONTACT_EMAIL}`,
-    className: "prose-link"
-  }, CONTACT_EMAIL), "."))), activeTab === 'legal' && React.createElement("div", {
-    className: "container prose-page narrative-info-page"
-  }, React.createElement("h1", {
-    className: "page-title"
-  }, "Av\xEDs Legal"), React.createElement("div", {
-    className: "prose-wrapper narrative-story"
-  }, React.createElement("h2", {
-    className: "prose-heading"
-  }, "1. Identificaci\xF3 i titularitat"), React.createElement("p", {
-    className: "prose-paragraph"
-  }, BRAND_NAME, " \xE9s un projecte independent de transpar\xE8ncia, an\xE0lisi de dades p\xFAbliques i fiscalitzaci\xF3 c\xEDvica de la contractaci\xF3 i les subvencions p\xFAbliques vinculades a ", AUTHORITY_NAME, " i als seus organismes municipals relacionats."), React.createElement("p", {
-    className: "prose-paragraph"
-  }, "Iguadata no \xE9s una administraci\xF3 p\xFAblica ni actua en nom de cap instituci\xF3. La plataforma t\xE9 finalitats informatives, period\xEDstiques, educatives, de recerca i de divulgaci\xF3."), React.createElement("p", {
-    className: "prose-paragraph"
-  }, "Responsable del projecte i del tractament: V\xEDctor Recio Rodr\xEDguez. Contacte: ", React.createElement("a", {
-    href: `mailto:${CONTACT_EMAIL}`,
-    className: "prose-link"
-  }, CONTACT_EMAIL), "."), React.createElement("h2", {
-    className: "prose-heading"
-  }, "2. Origen de les dades"), React.createElement("p", {
-    className: "prose-paragraph"
-  }, "Les dades de contractaci\xF3 provenen del Registre P\xFAblic de Contractes de la Generalitat de Catalunya, consultat mitjan\xE7ant l'API Socrata Open Data (SODA), i d'altres fonts p\xFAbliques oficials de contractaci\xF3."), React.createElement("p", {
-    className: "prose-paragraph"
-  }, "Les dades de subvencions provenen del Registre d'Ajuts i Subvencions de Catalunya (RAISC). Iguadata selecciona les concessions emeses per ", AUTHORITY_NAME, " i processa la informaci\xF3 sobre els imports, les finalitats, els procediments de concessi\xF3 i els beneficiaris que poden ser objecte de publicaci\xF3."), React.createElement("p", {
-    className: "prose-paragraph"
-  }, "Les dades mercantils provenen del Butllet\xED Oficial del Registre Mercantil (BORME), registre oficial de car\xE0cter p\xFAblic. Iguadata processa aquestes dades mitjan\xE7ant eines automatitzades de desc\xE0rrega, extracci\xF3, normalitzaci\xF3 i encreuament de dades."), React.createElement("p", {
-    className: "prose-paragraph"
-  }, "La informaci\xF3 publicada es basa en fonts p\xFAbliques i oficials. Tot i aix\xF2, poden existir errors d'origen, omissions, canvis posteriors, difer\xE8ncies de normalitzaci\xF3 de noms o incid\xE8ncies derivades del processament automatitzat."), React.createElement("h2", {
-    className: "prose-heading"
-  }, "3. Actualitzaci\xF3 i tra\xE7abilitat"), React.createElement("p", {
-    className: "prose-paragraph"
-  }, "La plataforma publica fotografies setmanals coherents de contractes i subvencions generades a partir de fonts p\xFAbliques. Part del proc\xE9s d'actualitzaci\xF3 s'executa de manera automatitzada mitjan\xE7ant GitHub Actions, amb controls t\xE8cnics de validaci\xF3, preservaci\xF3 de registres, c\xF2pies de seguretat i comprovacions d'integritat dels fitxers generats."), React.createElement("p", {
-    className: "prose-paragraph"
-  }, "Aquest proc\xE9s no altera el sentit de les dades originals, sin\xF3 que les estructura, normalitza i encreua per facilitar-ne la consulta p\xFAblica i l'an\xE0lisi."), React.createElement("h2", {
-    className: "prose-heading"
-  }, "4. Finalitat del tractament"), React.createElement("p", {
-    className: "prose-paragraph"
-  }, "La finalitat d'Iguadata \xE9s facilitar l'acc\xE9s, la comprensi\xF3 i l'an\xE0lisi de dades p\xFAbliques sobre contractaci\xF3 i subvencions municipals, concentraci\xF3 empresarial, vincles mercantils, possibles patrons de fraccionament, indicadors de risc electoral o institucional i acumulaci\xF3 o recurr\xE8ncia de subvencions directes."), React.createElement("p", {
-    className: "prose-paragraph"
-  }, "Les visualitzacions, cercadors i alertes tenen una funci\xF3 orientativa i d'inter\xE8s p\xFAblic. No constitueixen resolucions administratives, acusacions, proves concloents ni imputacions d'irregularitat."), React.createElement("h2", {
-    className: "prose-heading"
-  }, "5. Limitaci\xF3 de responsabilitat"), React.createElement("p", {
-    className: "prose-paragraph"
-  }, "Els indicadors generats per Iguadata identifiquen patrons estad\xEDstics o relacions documentals que poden ser d'inter\xE8s p\xFAblic, per\xF2 requereixen sempre interpretaci\xF3 contextual i, si escau, verificaci\xF3 addicional amb expedients, informes, plecs, resolucions administratives o altres fonts originals."), React.createElement("p", {
-    className: "prose-paragraph"
-  }, "L'aparici\xF3 d'una empresa, entitat, persona, contracte o subvenci\xF3 dins d'un indicador no implica per si mateixa cap infracci\xF3 legal, administrativa, \xE8tica o penal."), React.createElement("p", {
-    className: "prose-paragraph"
-  }, "En particular, les alertes de depend\xE8ncia identifiquen patrons d'acumulaci\xF3 o recurr\xE8ncia de subvencions directes. Aquests patrons poden tenir inter\xE8s p\xFAblic o period\xEDstic, per\xF2 no acrediten un \xFAs indegut dels recursos p\xFAblics ni una actuaci\xF3 irregular de l'entitat benefici\xE0ria o de l'administraci\xF3 concedent."), React.createElement("h2", {
-    className: "prose-heading"
-  }, "6. Protecci\xF3 de dades personals"), React.createElement("p", {
-    className: "prose-paragraph"
-  }, "Iguadata no utilitza cookies de seguiment ni eines d'anal\xEDtica orientades a perfilar usuaris. La plataforma pot utilitzar anal\xEDtica web agregada i respectuosa amb la privacitat per con\xE8ixer l'\xFAs general del projecte, sense identificar individualment els visitants ni crear perfils personals."), React.createElement("p", {
-    className: "prose-paragraph"
-  }, "Les persones que apareixen en el cercador de persones es mostren en la seva condici\xF3 de representants mercantils, administradors, apoderats, auditors, socis \xFAnics o altres c\xE0rrecs societaris vinculats a empreses adjudicat\xE0ries, segons dades publicades al BORME i en fonts oficials de contractaci\xF3 p\xFAblica."), React.createElement("p", {
-    className: "prose-paragraph"
-  }, "L'import associat a una persona correspon al volum total adjudicat a les empreses amb les quals consta vinculada en els registres analitzats. Aquesta xifra no representa ingressos personals, patrimoni individual, remuneraci\xF3 ni benefici directe."), React.createElement("p", {
-    className: "prose-paragraph"
-  }, "En l'\xE0mbit de les subvencions, la interf\xEDcie p\xFAblica mostra \xFAnicament els registres corresponents a beneficiaris identificats com a entitats publicables. Les concessions associades a persones f\xEDsiques o a beneficiaris no publicables es conserven nom\xE9s quan s\xF3n necess\xE0ries per al tractament intern i l'an\xE0lisi agregada, per\xF2 no es mostren ni permeten identificar-ne els beneficiaris a la plataforma p\xFAblica."), React.createElement("p", {
-    className: "prose-paragraph"
-  }, "El tractament es fonamenta en l'article 6.1.e) del Reglament (UE) 2016/679 (RGPD), relatiu al compliment d'una missi\xF3 realitzada en inter\xE8s p\xFAblic, i en la normativa de transpar\xE8ncia i acc\xE9s a la informaci\xF3 p\xFAblica, inclosa la Llei 19/2013 i la Llei 19/2014 de transpar\xE8ncia de Catalunya."), React.createElement("p", {
-    className: "prose-paragraph"
-  }, "Les dades publicades es limiten a la informaci\xF3 estrictament necess\xE0ria per a la finalitat de transpar\xE8ncia i fiscalitzaci\xF3 p\xFAblica, d'acord amb el principi de minimitzaci\xF3 de dades de l'article 5.1.c del RGPD. No es publiquen dades de la vida privada, domicilis personals, documents identificatius, dades de contacte privades ni informaci\xF3 aliena a les dimensions mercantil, contractual o subvencional analitzades."), React.createElement("h2", {
-    className: "prose-heading"
-  }, "7. Exercici de drets i correccions"), React.createElement("p", {
-    className: "prose-paragraph"
-  }, "Les persones interessades poden exercir els drets d'acc\xE9s, rectificaci\xF3, limitaci\xF3 o oposici\xF3 al tractament a ", React.createElement("a", {
-    href: `mailto:${CONTACT_EMAIL}`,
-    className: "prose-link"
-  }, CONTACT_EMAIL), "."), React.createElement("p", {
-    className: "prose-paragraph"
-  }, "Tamb\xE9 es poden comunicar errors factuals, homon\xEDmies, atribucions incorrectes, canvis de denominaci\xF3, classificacions err\xF2nies, dades desactualitzades o incid\xE8ncies derivades del processament automatitzat."), React.createElement("p", {
-    className: "prose-paragraph"
-  }, "Quan es detecti un error factual, Iguadata podr\xE0 corregir, contextualitzar, limitar o retirar la informaci\xF3 afectada. El dret de supressi\xF3 pot quedar limitat quan la informaci\xF3 procedeixi de registres oficials p\xFAblics o documentaci\xF3 administrativa de contractaci\xF3 p\xFAblica, d'acord amb l'article 17.3.b) del RGPD."), React.createElement("h2", {
-    className: "prose-heading"
-  }, "8. Propietat intel\xB7lectual i codi obert"), React.createElement("p", {
-    className: "prose-paragraph"
-  }, "El disseny, la metodologia, el codi font i les transformacions de dades desenvolupades espec\xEDficament s\xF3n de propietat d'Iguadata."), React.createElement("p", {
-    className: "prose-paragraph"
-  }, "El codi font es publica sota llic\xE8ncia GNU GPL v3.0 a GitHub. Les dades originals pertanyen a les seves fonts p\xFAbliques respectives i es reutilitzen amb finalitats de transpar\xE8ncia, recerca i inter\xE8s p\xFAblic."), React.createElement("h2", {
-    className: "prose-heading"
-  }, "9. Fonts normatives principals"), React.createElement("p", {
-    className: "prose-paragraph"
-  }, "El present av\xEDs legal es basa, entre altres, en el Reglament (UE) 2016/679 (RGPD), la Llei 19/2013, de transpar\xE8ncia, acc\xE9s a la informaci\xF3 p\xFAblica i bon govern, la Llei 19/2014, de transpar\xE8ncia, acc\xE9s a la informaci\xF3 p\xFAblica i bon govern de Catalunya, la Llei 38/2003, general de subvencions, i el Decret 271/2019, pel qual s'aprova el Reglament del Registre de subvencions i ajuts de Catalunya.")))), activeTab !== 'home' && React.createElement("button", {
+  })))), activeTab === 'sobre' && React.createElement(SobreView, null), activeTab === 'legal' && React.createElement(LegalView, null)), activeTab !== 'home' && React.createElement("button", {
     type: "button",
     className: `btn-reset contracte-detail-back mobile-scroll-top${showMobileScrollTop ? ' is-visible' : ''}`,
     onClick: () => window.scrollTo({

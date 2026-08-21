@@ -195,22 +195,79 @@ class DataPipelineTests(unittest.TestCase):
         self.assertIn("src/core/runtime.js", source_files)
         self.assertIn("src/data/use-iguadata-data.js", source_files)
         self.assertIn("src/ui/primitives.jsx", source_files)
+        self.assertIn("src/features/analisi.jsx", source_files)
+        self.assertIn("src/features/contractes.jsx", source_files)
+        self.assertIn("src/features/empreses.jsx", source_files)
+        self.assertIn("src/features/home.jsx", source_files)
+        self.assertIn("src/features/informacio.jsx", source_files)
+        self.assertIn("src/features/investigacio.jsx", source_files)
+        self.assertIn("src/features/persones.jsx", source_files)
+        self.assertIn("src/features/subvencions.jsx", source_files)
         for source_file in source_files:
             source_path = (ROOT / source_file).resolve()
             self.assertTrue(source_path.is_relative_to((ROOT / "src").resolve()))
             self.assertTrue(source_path.is_file())
 
+        declared_sources = {Path(source_file).as_posix() for source_file in source_files}
+        actual_sources = {
+            path.relative_to(ROOT).as_posix()
+            for pattern in ("*.js", "*.jsx")
+            for path in (ROOT / "src").rglob(pattern)
+        }
+        self.assertEqual(declared_sources, actual_sources)
+
         app_source = (ROOT / "src" / "app.jsx").read_text(encoding="utf-8")
         primitives_source = (ROOT / "src" / "ui" / "primitives.jsx").read_text(encoding="utf-8")
+        analisi_source = (ROOT / "src" / "features" / "analisi.jsx").read_text(encoding="utf-8")
+        contractes_source = (ROOT / "src" / "features" / "contractes.jsx").read_text(encoding="utf-8")
+        empreses_source = (ROOT / "src" / "features" / "empreses.jsx").read_text(encoding="utf-8")
+        home_source = (ROOT / "src" / "features" / "home.jsx").read_text(encoding="utf-8")
+        informacio_source = (ROOT / "src" / "features" / "informacio.jsx").read_text(encoding="utf-8")
+        investigacio_source = (ROOT / "src" / "features" / "investigacio.jsx").read_text(encoding="utf-8")
+        persones_source = (ROOT / "src" / "features" / "persones.jsx").read_text(encoding="utf-8")
+        subvencions_source = (ROOT / "src" / "features" / "subvencions.jsx").read_text(encoding="utf-8")
+        self.assertIn("function ContractDetailView(", contractes_source)
+        self.assertIn("async function generateShareImage(", contractes_source)
+        self.assertNotIn("function ContractDetailView(", app_source)
+        self.assertNotIn("async function generateShareImage(", app_source)
+        self.assertIn("function EmpresesView(", empreses_source)
+        self.assertIn("function EmpresaView(", empreses_source)
+        self.assertNotIn("function EmpresesView(", app_source)
+        self.assertNotIn("function EmpresaView(", app_source)
+        self.assertIn("function PersonesView(", persones_source)
+        self.assertNotIn("function PersonesView(", app_source)
+        self.assertIn("function CasFraccionamentView(", analisi_source)
+        self.assertIn("function CasConcentracioView(", analisi_source)
+        self.assertIn("function CasElectoralismeView(", analisi_source)
+        self.assertIn("function CasDependenciaView(", analisi_source)
+        self.assertNotIn("function CasFraccionamentView(", app_source)
+        self.assertIn("function CasosView(", investigacio_source)
+        self.assertIn("function InvestigacioCaseView(", investigacio_source)
+        self.assertNotIn("function InvestigacioCaseView(", app_source)
+        self.assertIn("function HomeChrome(", home_source)
+        self.assertIn("function HomeSection(", home_source)
+        self.assertIn("function HomeLoading(", home_source)
+        self.assertNotIn("renderLegacyHomeSection", app_source)
+        self.assertNotIn("renderLegacyHomeSection", home_source)
+        self.assertIn("function SobreView(", informacio_source)
+        self.assertIn("function LegalView(", informacio_source)
+        self.assertNotIn('<h1 className="page-title">Sobre el projecte</h1>', app_source)
+        self.assertNotIn('<h1 className="page-title">Avís Legal</h1>', app_source)
+        self.assertNotIn("function CasoModal(", app_source)
+        self.assertNotIn("function CasoModal(", analisi_source)
+        self.assertIn("function EntitatView(", subvencions_source)
+        self.assertIn("function SubvencionsView(", subvencions_source)
+        self.assertNotIn("function EntitatView(", app_source)
+        self.assertNotIn("function SubvencionsView(", app_source)
         self.assertIn("function Pagination(", primitives_source)
         self.assertIn("function EmptySearchState(", primitives_source)
         self.assertIn("function SearchField(", primitives_source)
         self.assertIn('aria-label="Paginació"', primitives_source)
         self.assertIn('aria-controls={controlsId}', primitives_source)
         self.assertIn("{activeCount > 0 ? activeCount : 'Ø'}", primitives_source)
-        self.assertIn('controlsId="persones-filter-panel"', app_source)
-        self.assertIn('id="persones-filter-panel"', app_source)
-        self.assertIn('tabIndex={isExpanded ? 0 : -1}', app_source)
+        self.assertIn('controlsId="persones-filter-panel"', persones_source)
+        self.assertIn('id="persones-filter-panel"', persones_source)
+        self.assertIn('tabIndex={isExpanded ? 0 : -1}', persones_source)
         self.assertNotIn('className="pagination"', app_source)
         self.assertNotIn('className="search-input-wrapper"', app_source)
         self.assertNotIn("style={{ flex: '1 1 200px' }}", app_source)
@@ -234,7 +291,7 @@ class DataPipelineTests(unittest.TestCase):
         self.assertIn('controlsId="analisi-filter-panel-fraccionament"', app_source)
         self.assertNotIn('riskFilter', app_source)
         self.assertNotIn('analisiRiskOptions', app_source)
-        self.assertIn('className="search-section empresa-detail-contract-search"', app_source)
+        self.assertIn('className="search-section empresa-detail-contract-search"', empreses_source)
         self.assertIn("No s'han trobat alertes de fraccionament.", app_source)
         self.assertIn('aria-labelledby={`analisi-tab-${analisiTab}`}', app_source)
         self.assertIn('<span className="contract-meta-label">Objecte</span>', app_source)
@@ -253,24 +310,24 @@ class DataPipelineTests(unittest.TestCase):
         self.assertNotIn('analysis-card-title', app_source)
         self.assertIn("handleNavigation('contracte', detailPath, { keepFilters: true })", app_source)
         self.assertIn('controlsId="contract-filter-primary contract-filter-secondary"', app_source)
-        self.assertIn('aria-controls="contract-share-actions"', app_source)
-        self.assertIn("Copia l'enllaç", app_source)
-        self.assertIn("Descarrega l'imatge", app_source)
-        self.assertIn("Imatge descarregada", app_source)
-        self.assertIn('className="contracte-detail-info-card"', app_source)
-        self.assertNotIn('contracte-expedient-card', app_source)
-        self.assertIn('<span className="contract-meta-label">CPV</span>', app_source)
-        self.assertNotIn('<em>Actual</em>', app_source)
+        self.assertIn('aria-controls="contract-share-actions"', contractes_source)
+        self.assertIn("Copia l'enllaç", contractes_source)
+        self.assertIn("Descarrega l'imatge", contractes_source)
+        self.assertIn("Imatge descarregada", contractes_source)
+        self.assertIn('className="contracte-detail-info-card"', contractes_source)
+        self.assertNotIn('contracte-expedient-card', contractes_source)
+        self.assertIn('<span className="contract-meta-label">CPV</span>', contractes_source)
+        self.assertNotIn('<em>Actual</em>', contractes_source)
 
         contracts_source = (ROOT / "src" / "data" / "contracts.js").read_text(encoding="utf-8")
         self.assertIn('contract.numero_lot', contracts_source)
         self.assertIn('contract.contracte_origen', contracts_source)
-        self.assertIn('className="contracte-detail-hero-company"', app_source)
-        self.assertNotIn('contract-meta-label contracte-detail-company-label', app_source)
-        self.assertIn('contracte-detail-share-standalone', app_source)
-        self.assertIn('className="contracte-detail-actions-row"', app_source)
-        self.assertIn('<h1 className="page-title">Detall de contracte</h1>', app_source)
-        self.assertIn('<span>Tornar</span>', app_source)
+        self.assertIn('className="contracte-detail-hero-company"', contractes_source)
+        self.assertNotIn('contract-meta-label contracte-detail-company-label', contractes_source)
+        self.assertIn('contracte-detail-share-standalone', contractes_source)
+        self.assertIn('className="contracte-detail-actions-row"', contractes_source)
+        self.assertIn('<h1 className="page-title">Detall de contracte</h1>', contractes_source)
+        self.assertIn('<span>Tornar</span>', contractes_source)
 
         styles = (ROOT / "styles.css").read_text(encoding="utf-8")
         self.assertIn('.search-section .filter-input[type="date"]', styles)
@@ -322,6 +379,46 @@ class DataPipelineTests(unittest.TestCase):
             html = output.read_text(encoding="utf-8")
             self.assertIn('<meta name="robots" content="index, follow">', html)
             self.assertIn(f'<link rel="canonical" href="{url}">', html)
+
+    def test_repository_root_contains_only_approved_files(self):
+        approved_root_files = {
+            ".gitignore",
+            "404.html",
+            "CNAME",
+            "LICENSE",
+            "README.md",
+            "_headers",
+            "dev.cmd",
+            "favicon-48x48.png",
+            "favicon.ico",
+            "index.html",
+            "robots.txt",
+            "sitemap.xml",
+            "styles.css",
+            "sync.cmd",
+        }
+        tracked_root_files = {
+            path
+            for path in subprocess.run(
+                ["git", "ls-files"],
+                cwd=ROOT,
+                capture_output=True,
+                text=True,
+                check=True,
+            ).stdout.splitlines()
+            if "/" not in path
+        }
+        self.assertEqual(tracked_root_files, approved_root_files)
+
+    def test_ci_verifies_every_generated_static_route(self):
+        workflow = (ROOT / ".github" / "workflows" / "ci.yml").read_text(encoding="utf-8")
+        verification_line = next(
+            line.strip()
+            for line in workflow.splitlines()
+            if "git diff --exit-code --" in line
+        )
+        for route in ("contractes", "empreses", "persones", "subvencions", "analisi", "sobre", "investigacio"):
+            self.assertIn(route, verification_line.split())
 
     def test_local_server_supports_spa_fallback_and_blocks_sources(self):
         node = shutil.which("node")
