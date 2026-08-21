@@ -397,18 +397,49 @@ class DataPipelineTests(unittest.TestCase):
             "styles.css",
             "sync.cmd",
         }
-        tracked_root_files = {
-            path
-            for path in subprocess.run(
-                ["git", "ls-files"],
-                cwd=ROOT,
-                capture_output=True,
-                text=True,
-                check=True,
-            ).stdout.splitlines()
-            if "/" not in path
-        }
+        tracked_paths = subprocess.run(
+            ["git", "ls-files"],
+            cwd=ROOT,
+            capture_output=True,
+            text=True,
+            check=True,
+        ).stdout.splitlines()
+        tracked_root_files = {path for path in tracked_paths if "/" not in path}
         self.assertEqual(tracked_root_files, approved_root_files)
+
+        approved_top_level_entries = approved_root_files | {
+            ".github",
+            "analisi",
+            "assets",
+            "config",
+            "contractes",
+            "empreses",
+            "investigacio",
+            "json",
+            "persones",
+            "schemas",
+            "scripts",
+            "sobre",
+            "src",
+            "subvencions",
+            "tests",
+        }
+        tracked_top_level_entries = {path.split("/", 1)[0] for path in tracked_paths}
+        self.assertEqual(tracked_top_level_entries, approved_top_level_entries)
+
+        forbidden_parts = {
+            "__pycache__",
+            ".pytest_cache",
+            ".mypy_cache",
+            ".ruff_cache",
+            "node_modules",
+            "coverage",
+            "htmlcov",
+        }
+        forbidden_suffixes = (".bak", ".orig", ".rej", ".tmp", ".temp", "~")
+        for path in tracked_paths:
+            self.assertTrue(forbidden_parts.isdisjoint(path.split("/")), path)
+            self.assertFalse(path.lower().endswith(forbidden_suffixes), path)
 
     def test_ci_verifies_every_generated_static_route(self):
         workflow = (ROOT / ".github" / "workflows" / "ci.yml").read_text(encoding="utf-8")
