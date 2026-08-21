@@ -1,0 +1,38 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "iguadata-assistent",
+  "main": "src/index.mjs",
+  "compatibility_date": "2026-08-21",
+  "workers_dev": true,
+  "preview_urls": false,
+  "vars": {
+    "OPENAI_ASSISTANT_MODEL": "gpt-5.6-luna"
+  },
+  "secrets": {
+    "required": [
+      "OPENAI_API_KEY",
+      "TURNSTILE_SECRET_KEY"
+    ]
+  },
+  "ratelimits": [
+    {
+      "name": "IP_RATE_LIMITER",
+      "namespace_id": "1001",
+      "simple": {
+        "limit": 6,
+        "period": 60
+      }
+    },
+    {
+      "name": "GLOBAL_RATE_LIMITER",
+      "namespace_id": "1002",
+      "simple": {
+        "limit": 60,
+        "period": 60
+      }
+    }
+  ],
+  "observability": {
+    "enabled": true
+  }
+}
