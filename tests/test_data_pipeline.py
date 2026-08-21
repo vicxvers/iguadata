@@ -423,6 +423,7 @@ class DataPipelineTests(unittest.TestCase):
             "src",
             "subvencions",
             "tests",
+            "workers",
         }
         tracked_top_level_entries = {path.split("/", 1)[0] for path in tracked_paths}
         self.assertEqual(tracked_top_level_entries, approved_top_level_entries)
