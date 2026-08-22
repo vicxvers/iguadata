@@ -135,17 +135,7 @@ function LegalView() {
                 <p className="prose-paragraph">
                     Les dades publicades es limiten a la informació estrictament necessària per a la finalitat de transparència i fiscalització pública, d'acord amb el principi de minimització de dades de l'article 5.1.c del RGPD. No es publiquen dades de la vida privada, domicilis personals, documents identificatius, dades de contacte privades ni informació aliena a les dimensions mercantil, contractual o subvencional analitzades.
                 </p>
-                <h2 className="prose-heading">7. Assistent d’intel·ligència artificial</h2>
-                <p className="prose-paragraph">
-                    Quan una persona utilitza l’assistent d’Iguadata, la pregunta introduïda i una selecció de dades públiques relacionades amb la consulta es transmeten a l’API d’OpenAI exclusivament per generar la resposta. Iguadata no demana ni necessita que s’hi introdueixin dades personals, confidencials o sensibles.
-                </p>
-                <p className="prose-paragraph">
-                    Les peticions es configuren sense emmagatzematge de la resposta per part de l’aplicació. OpenAI pot conservar temporalment registres necessaris per prevenir abusos i garantir la seguretat del servei, d’acord amb les seves polítiques aplicables a l’API. Les respostes són generades automàticament, poden contenir errors i s’han de contrastar amb les fonts públiques originals.
-                </p>
-                <p className="prose-paragraph">
-                    Per protegir l’assistent contra usos automatitzats i abusius, Iguadata utilitza Cloudflare Turnstile. Aquest mecanisme verifica el navegador abans de cada consulta i no rep el contingut de la pregunta.
-                </p>
-                <h2 className="prose-heading">8. Exercici de drets i correccions</h2>
+                <h2 className="prose-heading">7. Exercici de drets i correccions</h2>
                 <p className="prose-paragraph">
                     Les persones interessades poden exercir els drets d'accés, rectificació, limitació o oposició al tractament a <a href={`mailto:${CONTACT_EMAIL}`} className="prose-link">{CONTACT_EMAIL}</a>.
                 </p>
@@ -155,14 +145,14 @@ function LegalView() {
                 <p className="prose-paragraph">
                     Quan es detecti un error factual, Iguadata podrà corregir, contextualitzar, limitar o retirar la informació afectada. El dret de supressió pot quedar limitat quan la informació procedeixi de registres oficials públics o documentació administrativa de contractació pública, d'acord amb l'article 17.3.b) del RGPD.
                 </p>
-                <h2 className="prose-heading">9. Propietat intel·lectual i codi obert</h2>
+                <h2 className="prose-heading">8. Propietat intel·lectual i codi obert</h2>
                 <p className="prose-paragraph">
                     El disseny, la metodologia, el codi font i les transformacions de dades desenvolupades específicament són de propietat d'Iguadata.
                 </p>
                 <p className="prose-paragraph">
                     El codi font es publica sota llicència GNU GPL v3.0 a GitHub. Les dades originals pertanyen a les seves fonts públiques respectives i es reutilitzen amb finalitats de transparència, recerca i interès públic.
                 </p>
-                <h2 className="prose-heading">10. Fonts normatives principals</h2>
+                <h2 className="prose-heading">9. Fonts normatives principals</h2>
                 <p className="prose-paragraph">
                     El present avís legal es basa, entre altres, en el Reglament (UE) 2016/679 (RGPD), la Llei 19/2013, de transparència, accés a la informació pública i bon govern, la Llei 19/2014, de transparència, accés a la informació pública i bon govern de Catalunya, la Llei 38/2003, general de subvencions, i el Decret 271/2019, pel qual s'aprova el Reglament del Registre de subvencions i ajuts de Catalunya.
                 </p>

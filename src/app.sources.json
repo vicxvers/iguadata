@@ -11,6 +11,5 @@
   "src/features/investigacio.jsx",
   "src/features/persones.jsx",
   "src/features/subvencions.jsx",
-  "src/features/assistent.jsx",
   "src/app.jsx"
 ]

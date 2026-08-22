@@ -1,7 +1,6 @@
 const fs = require('fs');
 const http = require('http');
 const path = require('path');
-const { createAssistantApi } = require('./assistant-api');
 
 const root = path.resolve(__dirname, '..');
 const args = process.argv.slice(2);
@@ -13,7 +12,6 @@ function readOption(name, fallback) {
 
 const port = Number(readOption('--port', '8080'));
 const host = readOption('--host', '127.0.0.1');
-const handleAssistantApi = createAssistantApi(root);
 
 if (!Number.isInteger(port) || port < 1 || port > 65535) {
     throw new Error('El port ha de ser un enter entre 1 i 65535.');
@@ -88,16 +86,14 @@ function prepareDevelopmentHtml(filePath) {
         .replace(/;\s*upgrade-insecure-requests/g, '');
 }
 
-const server = http.createServer(async (request, response) => {
-    const requestUrl = new URL(request.url, `http://${host}:${port}`);
-    if (await handleAssistantApi(request, response, requestUrl)) return;
-
+const server = http.createServer((request, response) => {
     if (!['GET', 'HEAD'].includes(request.method)) {
         response.writeHead(405, { Allow: 'GET, HEAD' });
         response.end();
         return;
     }
 
+    const requestUrl = new URL(request.url, `http://${host}:${port}`);
     const result = resolvePublicFile(requestUrl.pathname);
     if (result.spaFallback) {
         const route = requestUrl.pathname.slice(1).replace(/&/g, '~and~');
