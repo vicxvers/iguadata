@@ -621,66 +621,6 @@
     ]
   },
   {
-    "nom": "MICO HERNANDEZ JESUS MARIA",
-    "total_adjudicat": 12571377.32,
-    "relacions": [
-      {
-        "empresa": "FCC MEDIO AMBIENTE",
-        "import_empresa": 12523143.07,
-        "carrecs": [
-          "Apoderado"
-        ]
-      },
-      {
-        "empresa": "IMESAPI S.A.",
-        "import_empresa": 48234.25,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "GONZALEZ PLANA ADOLFO",
-    "total_adjudicat": 12571377.32,
-    "relacions": [
-      {
-        "empresa": "FCC MEDIO AMBIENTE",
-        "import_empresa": 12523143.07,
-        "carrecs": [
-          "Apoderado"
-        ]
-      },
-      {
-        "empresa": "IMESAPI S.A.",
-        "import_empresa": 48234.25,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "GONZALEZ PRETEL JOSE MARIA",
-    "total_adjudicat": 12571377.32,
-    "relacions": [
-      {
-        "empresa": "FCC MEDIO AMBIENTE",
-        "import_empresa": 12523143.07,
-        "carrecs": [
-          "Apoderado"
-        ]
-      },
-      {
-        "empresa": "IMESAPI S.A.",
-        "import_empresa": 48234.25,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
     "nom": "SANTAMARIA ALBERQUILLA IGNACIO",
     "total_adjudicat": 12571377.32,
     "relacions": [
@@ -736,6 +676,66 @@
         "import_empresa": 48234.25,
         "carrecs": [
           "Apo.Sol."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "MICO HERNANDEZ JESUS MARIA",
+    "total_adjudicat": 12571377.32,
+    "relacions": [
+      {
+        "empresa": "FCC MEDIO AMBIENTE",
+        "import_empresa": 12523143.07,
+        "carrecs": [
+          "Apoderado"
+        ]
+      },
+      {
+        "empresa": "IMESAPI S.A.",
+        "import_empresa": 48234.25,
+        "carrecs": [
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "GONZALEZ PLANA ADOLFO",
+    "total_adjudicat": 12571377.32,
+    "relacions": [
+      {
+        "empresa": "FCC MEDIO AMBIENTE",
+        "import_empresa": 12523143.07,
+        "carrecs": [
+          "Apoderado"
+        ]
+      },
+      {
+        "empresa": "IMESAPI S.A.",
+        "import_empresa": 48234.25,
+        "carrecs": [
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "GONZALEZ PRETEL JOSE MARIA",
+    "total_adjudicat": 12571377.32,
+    "relacions": [
+      {
+        "empresa": "FCC MEDIO AMBIENTE",
+        "import_empresa": 12523143.07,
+        "carrecs": [
+          "Apoderado"
+        ]
+      },
+      {
+        "empresa": "IMESAPI S.A.",
+        "import_empresa": 48234.25,
+        "carrecs": [
+          "Apoderado"
         ]
       }
     ]
@@ -20222,19 +20222,6 @@
     ]
   },
   {
-    "nom": "NICOLAS POVEDA JOSE",
-    "total_adjudicat": 323619.38,
-    "relacions": [
-      {
-        "empresa": "SPAI INNOVA ASTIGITAS, SL",
-        "import_empresa": 323619.38,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
     "nom": "GOMEZ LAGUNA MARINA DEL CARMEN",
     "total_adjudicat": 323619.38,
     "relacions": [
@@ -20242,13 +20229,13 @@
         "empresa": "SPAI INNOVA ASTIGITAS, SL",
         "import_empresa": 323619.38,
         "carrecs": [
-          "Apoderado"
+          "Apo.Sol."
         ]
       }
     ]
   },
   {
-    "nom": "MONFORT CARRACAO PASCUAL",
+    "nom": "ARRUFAT GARCIA JOSE FRANCISCO",
     "total_adjudicat": 323619.38,
     "relacions": [
       {
@@ -20274,7 +20261,33 @@
     ]
   },
   {
-    "nom": "UBEDA HIDALGO JOSE ANTONIO",
+    "nom": "CARCELEN SANCHEZ BARBARA",
+    "total_adjudicat": 323619.38,
+    "relacions": [
+      {
+        "empresa": "SPAI INNOVA ASTIGITAS, SL",
+        "import_empresa": 323619.38,
+        "carrecs": [
+          "Apo.Sol."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "GAMERO LUCENA MARIA JOSE",
+    "total_adjudicat": 323619.38,
+    "relacions": [
+      {
+        "empresa": "SPAI INNOVA ASTIGITAS, SL",
+        "import_empresa": 323619.38,
+        "carrecs": [
+          "Apo.Sol."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "PEREZ OSTOS PATRICIA",
     "total_adjudicat": 323619.38,
     "relacions": [
       {
@@ -20294,7 +20307,114 @@
         "empresa": "SPAI INNOVA ASTIGITAS, SL",
         "import_empresa": 323619.38,
         "carrecs": [
+          "Presidente",
+          "Consejero",
+          "Con.Delegado",
           "Adm. Unico"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "GOMEZ LAGUNA MARINA",
+    "total_adjudicat": 323619.38,
+    "relacions": [
+      {
+        "empresa": "SPAI INNOVA ASTIGITAS, SL",
+        "import_empresa": 323619.38,
+        "carrecs": [
+          "Consejero"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "ARRUFAT GARCIA JOSE",
+    "total_adjudicat": 323619.38,
+    "relacions": [
+      {
+        "empresa": "SPAI INNOVA ASTIGITAS, SL",
+        "import_empresa": 323619.38,
+        "carrecs": [
+          "Consejero"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "DRUET LOPEZ JUAN",
+    "total_adjudicat": 323619.38,
+    "relacions": [
+      {
+        "empresa": "SPAI INNOVA ASTIGITAS, SL",
+        "import_empresa": 323619.38,
+        "carrecs": [
+          "Consejero"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "GOMEZ-ESCALONILLA GOMEZ-ESCALONILLA MIGUEL",
+    "total_adjudicat": 323619.38,
+    "relacions": [
+      {
+        "empresa": "SPAI INNOVA ASTIGITAS, SL",
+        "import_empresa": 323619.38,
+        "carrecs": [
+          "Consejero"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "RAPALLO FERNANDEZ CARLOS",
+    "total_adjudicat": 323619.38,
+    "relacions": [
+      {
+        "empresa": "SPAI INNOVA ASTIGITAS, SL",
+        "import_empresa": 323619.38,
+        "carrecs": [
+          "SecreNoConsj"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "NICOLAS POVEDA JOSE",
+    "total_adjudicat": 323619.38,
+    "relacions": [
+      {
+        "empresa": "SPAI INNOVA ASTIGITAS, SL",
+        "import_empresa": 323619.38,
+        "carrecs": [
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "MONFORT CARRACAO PASCUAL",
+    "total_adjudicat": 323619.38,
+    "relacions": [
+      {
+        "empresa": "SPAI INNOVA ASTIGITAS, SL",
+        "import_empresa": 323619.38,
+        "carrecs": [
+          "Apo.Sol."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "UBEDA HIDALGO JOSE ANTONIO",
+    "total_adjudicat": 323619.38,
+    "relacions": [
+      {
+        "empresa": "SPAI INNOVA ASTIGITAS, SL",
+        "import_empresa": 323619.38,
+        "carrecs": [
+          "Apo.Sol."
         ]
       }
     ]
@@ -36888,6 +37008,19 @@
     ]
   },
   {
+    "nom": "BRAVO MARTINEZ TOMAS-OMAR",
+    "total_adjudicat": 48234.25,
+    "relacions": [
+      {
+        "empresa": "IMESAPI S.A.",
+        "import_empresa": 48234.25,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
     "nom": "FERNANDEZ AFONSO MARIA ELENA",
     "total_adjudicat": 48234.25,
     "relacions": [
@@ -36974,19 +37107,6 @@
         "import_empresa": 48234.25,
         "carrecs": [
           "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "ARROYO FERNANDEZ PABLO JOSE",
-    "total_adjudicat": 48234.25,
-    "relacions": [
-      {
-        "empresa": "IMESAPI S.A.",
-        "import_empresa": 48234.25,
-        "carrecs": [
-          "Apo.Man.Soli"
         ]
       }
     ]
@@ -37629,7 +37749,7 @@
     ]
   },
   {
-    "nom": "BRAVO MARTINEZ TOMAS-OMAR",
+    "nom": "PEREZ BARTOLOME JORGE",
     "total_adjudicat": 48234.25,
     "relacions": [
       {
@@ -37642,14 +37762,14 @@
     ]
   },
   {
-    "nom": "PEREZ BARTOLOME JORGE",
-    "total_adjudicat": 48234.25,
+    "nom": "PLANA FERNANDEZ XAVIER",
+    "total_adjudicat": 47481.96,
     "relacions": [
       {
-        "empresa": "IMESAPI S.A.",
-        "import_empresa": 48234.25,
+        "empresa": "SEIDOR SOLUTIONS SL",
+        "import_empresa": 47481.96,
         "carrecs": [
-          "Apoderado"
+          "APODERAD.SOL"
         ]
       }
     ]
@@ -44920,6 +45040,46 @@
       {
         "empresa": "MES NET SL",
         "import_empresa": 33164.95,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "CLEMENTE COLLADO ANTONIO",
+    "total_adjudicat": 32987.23,
+    "relacions": [
+      {
+        "empresa": "ANOIA PET SERVICES GROUP, SLU",
+        "import_empresa": 23152.99,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      },
+      {
+        "empresa": "HOSPITAL VETERINARI DE CATALUNYA, SL",
+        "import_empresa": 9834.24,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "MANZANO TOMAS BELEN VERONICA",
+    "total_adjudicat": 32987.23,
+    "relacions": [
+      {
+        "empresa": "ANOIA PET SERVICES GROUP, SLU",
+        "import_empresa": 23152.99,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      },
+      {
+        "empresa": "HOSPITAL VETERINARI DE CATALUNYA, SL",
+        "import_empresa": 9834.24,
         "carrecs": [
           "APODERAD.SOL"
         ]
