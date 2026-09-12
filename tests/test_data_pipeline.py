@@ -1,4 +1,5 @@
 import hashlib
+import io
 import json
 import os
 import shutil
@@ -12,7 +13,11 @@ import urllib.error
 import urllib.request
 import xml.etree.ElementTree as ET
 from datetime import date
+from contextlib import redirect_stdout
 from pathlib import Path
+from unittest.mock import patch
+
+import pandas as pd
 
 ROOT = Path(__file__).resolve().parents[1]
 SCRIPTS = ROOT / ".github" / "scripts"
@@ -33,10 +38,163 @@ import generate_electoralisme
 import generate_dependencia
 import generate_concentracio
 import generate_fraccionament
+import generate_carrecs
+import generate_persones
 import validate_contractes_snapshot
 
 
 class DataPipelineTests(unittest.TestCase):
+    def run_carrecs_fixture(self, rows, empreses=None, aliases=None):
+        """Run the real matcher, purge and active-state logic; replace only parquet I/O."""
+        frame = pd.DataFrame(rows)
+        frame["fecha_borme"] = pd.to_datetime(frame["fecha_borme"])
+        with tempfile.TemporaryDirectory(dir=temporary_root()) as directory:
+            root = Path(directory)
+            companies_path = root / "empreses.json"
+            aliases_path = root / "alias_empreses.json"
+            output_path = root / "carrecs.json"
+            purged_path = root / "carrecs_eliminats.json"
+            parquet_path = root / "fixture.parquet"
+            companies_path.write_text(json.dumps(empreses or [{"nom": "PROVA LOCAL SL"}]), encoding="utf-8")
+            aliases_path.write_text(json.dumps(aliases or {}), encoding="utf-8")
+
+            def read_fixture(path, *, columns):
+                self.assertEqual(path, parquet_path)
+                return frame.loc[:, columns].copy()
+
+            with patch.multiple(
+                generate_carrecs,
+                INPUT_EMPRESES=companies_path,
+                ALIAS_JSON=aliases_path,
+                PARQUET_CARGOS=parquet_path,
+                OUTPUT_JSON=output_path,
+                OUTPUT_PURGED=purged_path,
+            ), patch.object(generate_carrecs.pd, "read_parquet", side_effect=read_fixture), redirect_stdout(io.StringIO()):
+                generate_carrecs.main()
+            return (
+                json.loads(output_path.read_text(encoding="utf-8")),
+                json.loads(purged_path.read_text(encoding="utf-8")),
+            )
+
+    @staticmethod
+    def borme_row(persona="PERSONA DE PROVA", cargo="Apoderado", tipo_acto="nombramiento", fecha="2020-01-01", empresa="PROVA LOCAL SL"):
+        return {"empresa_norm": empresa, "persona": persona, "cargo": cargo, "tipo_acto": tipo_acto, "fecha_borme": fecha}
+
+    def test_company_administrators_stay_in_carrecs_but_not_in_persones(self):
+        # Legal entities belong in the company record, while the people search stays local and physical.
+        carrecs, purged = self.run_carrecs_fixture([
+            self.borme_row(persona="HOLDING DE PROVA SL", cargo="Adm. Unico"),
+            self.borme_row(persona="PERSONA DE PROVA", cargo="Consejero"),
+            self.borme_row(persona="PERSONA DE PROVA", cargo="Apoderado"),
+            self.borme_row(persona="PERSONA FORA IGUALADA", empresa="FORA IGUALADA SL"),
+        ])
+        self.assertEqual(purged, [])
+        self.assertEqual(set(carrecs), {"PROVA LOCAL SL"})
+        self.assertEqual(
+            {row["nombre"]: row["tipo_entidad"] for row in carrecs["PROVA LOCAL SL"]},
+            {"HOLDING DE PROVA SL": "empresa", "PERSONA DE PROVA": "persona"},
+        )
+        with tempfile.TemporaryDirectory(dir=temporary_root()) as directory:
+            root = Path(directory)
+            admins_path, companies_path, output_path = [root / name for name in ("carrecs.json", "empreses.json", "persones.json")]
+            admins_path.write_text(json.dumps(carrecs), encoding="utf-8")
+            companies_path.write_text(json.dumps([{"nom": "PROVA LOCAL SL", "total_importe": 1250}]), encoding="utf-8")
+            with patch.multiple(generate_persones, INPUT_ADMINS=admins_path, INPUT_EMPRESES=companies_path, OUTPUT_PERSONES=output_path), redirect_stdout(io.StringIO()):
+                generate_persones.main()
+            persones = json.loads(output_path.read_text(encoding="utf-8"))
+        self.assertEqual([p["nom"] for p in persones], ["PERSONA DE PROVA"])
+        # Two appointments in one company must not double the company's awarded amount.
+        self.assertEqual(persones[0]["total_adjudicat"], 1250)
+        self.assertEqual(len(persones[0]["relacions"]), 1)
+        self.assertEqual(set(persones[0]["relacions"][0]["carrecs"]), {"Consejero", "Apoderado"})
+
+    def test_carrecs_purge_preserves_surnames_and_records_rejection_reasons(self):
+        preserved = ["JOAN VENTAYOL", "DE LA FUENTE PERSONA", "MAS PERSONA", "HOLDING DE PROVA SL"]
+        rejected = {
+            "PERSONA " * 10: "len>65",
+            "Y PERSONA DE PROVA": "stop-word",
+            "ARTES GRAFICAS DE PEQUENO FORMATO": "objecte-social",
+            "PERSONA DE..": "ellipsi",
+            "PERSONA,PROVA": "coma-comprimida",
+        }
+        carrecs, purged = self.run_carrecs_fixture([self.borme_row(persona=name) for name in preserved + list(rejected)])
+        self.assertEqual({row["nombre"] for row in carrecs["PROVA LOCAL SL"]}, set(preserved))
+        self.assertEqual({row["persona"] for row in purged}, set(rejected))
+        for row in purged:
+            self.assertIn(rejected[row["persona"]], row["motius"].split(","))
+
+    def test_historic_company_alias_links_appointments_to_current_contractor(self):
+        # Regression for GARDEN ANOIA -> VERSATIL GREEN; appointments are synthetic.
+        current = "VERSATIL GREEN, SL"
+        carrecs, _ = self.run_carrecs_fixture([
+            self.borme_row(empresa="GARDEN ANOIA S.L.", cargo="Consejero"),
+            self.borme_row(empresa="VERSATIL GREEN SL", cargo="Apoderado", fecha="2022-01-01"),
+            self.borme_row(empresa="FORA IGUALADA SL", persona="PERSONA EXTERNA"),
+        ], empreses=[{"nom": current}], aliases={"VERSATIL GREEN SL": ["GARDEN ANOIA SL"]})
+        self.assertEqual(set(carrecs), {current})
+        self.assertEqual({row["cargo"] for row in carrecs[current]}, {"Consejero", "Apoderado"})
+        self.assertEqual({row["fecha_nombramiento"] for row in carrecs[current]}, {"2020-01-01", "2022-01-01"})
+
+    def test_later_revocation_or_cessation_cancels_all_power_variants_only(self):
+        for act in ("revocacion", "cese"):
+            with self.subTest(act=act):
+                rows = [self.borme_row(cargo=cargo) for cargo in ("Apoderado", "Apo.Sol.", "Apo.Manc.", "Apo.Man.Soli")]
+                rows += [self.borme_row(cargo="Consejero"), self.borme_row(cargo="Apo.Sol.", tipo_acto=act, fecha="2021-01-01")]
+                carrecs, _ = self.run_carrecs_fixture(rows)
+                self.assertEqual([row["cargo"] for row in carrecs["PROVA LOCAL SL"]], ["Consejero"])
+
+    def test_power_variants_and_person_spelling_are_deduplicated(self):
+        carrecs, _ = self.run_carrecs_fixture([
+            self.borme_row(persona="JOSÉ DE PROVA", cargo="Apoderado"),
+            self.borme_row(persona="JOSE  DE PROVA", cargo="Apo.Manc.", fecha="2021-01-01"),
+        ])
+        self.assertEqual(len(carrecs["PROVA LOCAL SL"]), 1)
+        self.assertEqual(carrecs["PROVA LOCAL SL"][0]["fecha_nombramiento"], "2021-01-01")
+
+    def test_same_day_regrant_survives_revocation_regardless_of_input_order(self):
+        for act in ("nombramiento", "reeleccion"):
+            for reverse in (False, True):
+                with self.subTest(act=act, reverse=reverse):
+                    rows = [
+                        self.borme_row(),
+                        self.borme_row(cargo="Apo.Sol.", tipo_acto="revocacion", fecha="2021-01-01"),
+                        self.borme_row(cargo="Apo.Manc.", tipo_acto=act, fecha="2021-01-01"),
+                    ]
+                    carrecs, _ = self.run_carrecs_fixture(list(reversed(rows)) if reverse else rows)
+                    self.assertEqual(len(carrecs["PROVA LOCAL SL"]), 1)
+                    self.assertEqual(carrecs["PROVA LOCAL SL"][0]["cargo"], "Apo.Manc.")
+                    self.assertEqual(carrecs["PROVA LOCAL SL"][0]["fecha_nombramiento"], "2021-01-01")
+
+    def test_parc_central_signage_after_election_remains_an_alert_despite_recurrence(self):
+        # Synthetic contracts reproduce the editorial 4M VISUAL / Parc Central case.
+        base = {"adjudicatario": "4M VISUAL SCP", "importe": 2000, "procedimiento": "Menor", "tipo": "Subministraments"}
+        description = "Monòlits i rètols per a l'ampliació del Parc Central"
+        # Comparable years use the strict April-May window; the target is post-election.
+        rows = [{**base, "codigo": f"PROVA-{year}", "fecha": f"{year}-{'06' if year == 2023 else '05'}-15", "descripcion": description} for year in (2021, 2022, 2023)]
+        cases = generate_electoralisme.build_cases(rows)
+        self.assertEqual(len(cases), 1)
+        self.assertEqual(cases[0]["contractes"][0]["codigo"], "PROVA-2023")
+        self.assertGreaterEqual(cases[0]["risc"], 40)
+        self.assertEqual(cases[0]["dies_despres_votacio"], 18)
+        self.assertEqual(cases[0]["recurrencia"]["objecte_similar"], 2)
+        # Routine signage without an equipment showcase should still be attenuated.
+        routine = [{**row, "descripcion": "Monòlits i rètols del Parc Central"} for row in rows]
+        self.assertEqual(generate_electoralisme.build_cases(routine), [])
+
+    def test_electoralisme_export_excludes_preserved_contracts(self):
+        live = {"codigo": "PROVA-LIVE", "fecha": "2023-06-15", "descripcion": "Monòlits i rètols per a l'ampliació del Parc Central", "adjudicatario": "4M VISUAL SCP", "importe": 2000, "procedimiento": "Menor"}
+        rows = [live, {**live, "codigo": "PROVA-ARCHIVED", "preservat_iguadata": True}]
+        with tempfile.TemporaryDirectory(dir=temporary_root()) as directory:
+            root = Path(directory)
+            input_path, output_path = root / "contractes.json", root / "electoralisme.json"
+            input_path.write_text(json.dumps(rows), encoding="utf-8")
+            argv = ["generate_electoralisme.py", "--contractes", str(input_path), "--output", str(output_path)]
+            with patch.object(sys, "argv", argv), redirect_stdout(io.StringIO()):
+                generate_electoralisme.main()
+            payload = json.loads(output_path.read_text(encoding="utf-8"))
+        self.assertEqual(payload["total_alertes"], 1)
+        self.assertEqual(payload["alertes"][0]["contractes"][0]["codigo"], "PROVA-LIVE")
+
     def test_subsidy_republications_are_deduplicated_logically(self):
         base = {
             "codi_raisc": "AJ360-25-001",
