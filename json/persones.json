@@ -741,14 +741,14 @@
     ]
   },
   {
-    "nom": "HERNANDEZ FERNANDEZ LAURA",
+    "nom": "AJURIA FERNANDEZ JESUS",
     "total_adjudicat": 12566187.07,
     "relacions": [
       {
         "empresa": "FCC MEDIO AMBIENTE",
         "import_empresa": 12523143.07,
         "carrecs": [
-          "Apo.Man.Soli"
+          "Apoderado"
         ]
       },
       {
@@ -763,6 +763,34 @@
         "import_empresa": 8322.0,
         "carrecs": [
           "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "QUEREJETA URETA IÑIGO",
+    "total_adjudicat": 12566187.07,
+    "relacions": [
+      {
+        "empresa": "FCC MEDIO AMBIENTE",
+        "import_empresa": 12523143.07,
+        "carrecs": [
+          "Apoderado"
+        ]
+      },
+      {
+        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
+        "import_empresa": 34722.0,
+        "carrecs": [
+          "APOD.SOL/MAN"
+        ]
+      },
+      {
+        "empresa": "CONTENUR SL",
+        "import_empresa": 8322.0,
+        "carrecs": [
+          "Apo.Manc.",
+          "Consejero"
         ]
       }
     ]
@@ -876,6 +904,33 @@
     ]
   },
   {
+    "nom": "HERNANDEZ FERNANDEZ LAURA",
+    "total_adjudicat": 12566187.07,
+    "relacions": [
+      {
+        "empresa": "FCC MEDIO AMBIENTE",
+        "import_empresa": 12523143.07,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      },
+      {
+        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
+        "import_empresa": 34722.0,
+        "carrecs": [
+          "APOD.SOL/MAN"
+        ]
+      },
+      {
+        "empresa": "CONTENUR SL",
+        "import_empresa": 8322.0,
+        "carrecs": [
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
     "nom": "ALVAREZ ALVAREZ JOSE TOMAS",
     "total_adjudicat": 12566187.07,
     "relacions": [
@@ -898,61 +953,6 @@
         "import_empresa": 8322.0,
         "carrecs": [
           "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "AJURIA FERNANDEZ JESUS",
-    "total_adjudicat": 12566187.07,
-    "relacions": [
-      {
-        "empresa": "FCC MEDIO AMBIENTE",
-        "import_empresa": 12523143.07,
-        "carrecs": [
-          "Apoderado"
-        ]
-      },
-      {
-        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
-        "import_empresa": 34722.0,
-        "carrecs": [
-          "APOD.SOL/MAN"
-        ]
-      },
-      {
-        "empresa": "CONTENUR SL",
-        "import_empresa": 8322.0,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "QUEREJETA URETA IÑIGO",
-    "total_adjudicat": 12566187.07,
-    "relacions": [
-      {
-        "empresa": "FCC MEDIO AMBIENTE",
-        "import_empresa": 12523143.07,
-        "carrecs": [
-          "Apoderado"
-        ]
-      },
-      {
-        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
-        "import_empresa": 34722.0,
-        "carrecs": [
-          "APOD.SOL/MAN"
-        ]
-      },
-      {
-        "empresa": "CONTENUR SL",
-        "import_empresa": 8322.0,
-        "carrecs": [
-          "Apo.Manc.",
-          "Consejero"
         ]
       }
     ]
@@ -3285,7 +3285,7 @@
     ]
   },
   {
-    "nom": "CARRASCO DELGADO JOSE MANUEL",
+    "nom": "DA VEIGA MEJIA ESTHER",
     "total_adjudicat": 12531465.07,
     "relacions": [
       {
@@ -3305,7 +3305,7 @@
     ]
   },
   {
-    "nom": "GOMEZ MINGO JORGE LUIS",
+    "nom": "MORALES ASCARZA JAVIER",
     "total_adjudicat": 12531465.07,
     "relacions": [
       {
@@ -3325,7 +3325,7 @@
     ]
   },
   {
-    "nom": "DONOSO REBUELTA JOSE LUIS",
+    "nom": "ACOSTA MERIDA MANUEL JESUS",
     "total_adjudicat": 12531465.07,
     "relacions": [
       {
@@ -3405,7 +3405,7 @@
     ]
   },
   {
-    "nom": "MORALES ASCARZA JAVIER",
+    "nom": "DONOSO REBUELTA JOSE LUIS",
     "total_adjudicat": 12531465.07,
     "relacions": [
       {
@@ -3425,7 +3425,7 @@
     ]
   },
   {
-    "nom": "DA VEIGA MEJIA ESTHER",
+    "nom": "GOMEZ MINGO JORGE LUIS",
     "total_adjudicat": 12531465.07,
     "relacions": [
       {
@@ -3445,7 +3445,7 @@
     ]
   },
   {
-    "nom": "ACOSTA MERIDA MANUEL JESUS",
+    "nom": "CARRASCO DELGADO JOSE MANUEL",
     "total_adjudicat": 12531465.07,
     "relacions": [
       {
@@ -4490,19 +4490,6 @@
   },
   {
     "nom": "CANOSA CARRO CARLOS RAMON",
-    "total_adjudicat": 12523143.07,
-    "relacions": [
-      {
-        "empresa": "FCC MEDIO AMBIENTE",
-        "import_empresa": 12523143.07,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "VERNER TARIN SERGIO",
     "total_adjudicat": 12523143.07,
     "relacions": [
       {
@@ -7188,19 +7175,6 @@
         "import_empresa": 12523143.07,
         "carrecs": [
           "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "MONTERO SANCHEZ JAVIER",
-    "total_adjudicat": 12523143.07,
-    "relacions": [
-      {
-        "empresa": "FCC MEDIO AMBIENTE",
-        "import_empresa": 12523143.07,
-        "carrecs": [
-          "Apo.Man.Soli"
         ]
       }
     ]
@@ -19487,9 +19461,9 @@
         "empresa": "MONDO IBERICA SA",
         "import_empresa": 533214.86,
         "carrecs": [
+          "Apo.Sol.",
           "Consejero",
-          "Secretario",
-          "Apoderado"
+          "Secretario"
         ]
       }
     ]
@@ -40158,6 +40132,19 @@
         "import_empresa": 44849.0,
         "carrecs": [
           "ADM.SOLIDAR."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "DAVID VERDEJO BENITEZ",
+    "total_adjudicat": 44835.98,
+    "relacions": [
+      {
+        "empresa": "CORPORACION ALIMENTARIA GUISSONA, SA",
+        "import_empresa": 44835.98,
+        "carrecs": [
+          "Apoderado"
         ]
       }
     ]
