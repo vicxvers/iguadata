@@ -53397,7 +53397,7 @@
     ]
   },
   {
-    "nom": "LONGAN SEMINAGO ALBERTO",
+    "nom": "TOMAS LAVILLA EMILIO",
     "total_adjudicat": 18985.0,
     "relacions": [
       {
@@ -69577,6 +69577,19 @@
         "import_empresa": 5625.0,
         "carrecs": [
           "CONSEJERO"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "CRUZ CAMPOS MIRIAM",
+    "total_adjudicat": 5595.72,
+    "relacions": [
+      {
+        "empresa": "ZURICH INSURANCE EUROPE AG SUCURSAL EN ESPAÑA",
+        "import_empresa": 5595.72,
+        "carrecs": [
+          "Apoderado"
         ]
       }
     ]

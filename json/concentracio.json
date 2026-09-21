@@ -1,6 +1,6 @@
 {
   "metodologia": "concentracio_v1",
-  "generat_a": "2026-09-14",
+  "generat_a": "2026-09-21",
   "total_alertes": 43,
   "alertes": [
     {
@@ -6817,7 +6817,7 @@
           "codigo": "78/2025",
           "descripcion": "Instal·lació solar fotovoltaica col·lectiva escola Garcia Fossas, finançat pel Pla de Recuperació, Transformació i Resiliència (PRTR) ¿ Next Generation EU",
           "adjudicatario": "RENEWABLE ENERGY FORWARD SL",
-          "importe": 89964.0,
+          "importe": 14829.53,
           "fecha": "2026-02-16",
           "tipo": "1. OBRES",
           "procedimiento": "Obert",
@@ -6833,7 +6833,7 @@
           "codigo": "78/2025",
           "descripcion": "Instal·lació solar fotovoltaica col·lectiva escola Garcia Fossas, finançat pel Pla de Recuperació, Transformació i Resiliència (PRTR) ¿ Next Generation EU",
           "adjudicatario": "RENEWABLE ENERGY FORWARD SL",
-          "importe": 14829.53,
+          "importe": 89964.0,
           "fecha": "2026-02-16",
           "tipo": "1. OBRES",
           "procedimiento": "Obert",
@@ -6849,7 +6849,7 @@
           "codigo": "77/2025",
           "descripcion": "Instal·lació solar fotovoltaica col·lectiva escola Gabriel Castellà, finançat pel Pla de Recuperació, Transformació i Resiliència (PRTR) ¿ Next Generation EU",
           "adjudicatario": "RENEWABLE ENERGY FORWARD SL",
-          "importe": 5930.95,
+          "importe": 88807.6,
           "fecha": "2026-02-16",
           "tipo": "1. OBRES",
           "procedimiento": "Obert",
@@ -6865,7 +6865,7 @@
           "codigo": "77/2025",
           "descripcion": "Instal·lació solar fotovoltaica col·lectiva escola Gabriel Castellà, finançat pel Pla de Recuperació, Transformació i Resiliència (PRTR) ¿ Next Generation EU",
           "adjudicatario": "RENEWABLE ENERGY FORWARD SL",
-          "importe": 88807.6,
+          "importe": 5930.95,
           "fecha": "2026-02-16",
           "tipo": "1. OBRES",
           "procedimiento": "Obert",
