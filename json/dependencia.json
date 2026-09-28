@@ -1,8 +1,8 @@
 {
   "metodologia": "dependencia_v1",
-  "generat_a": "2026-09-21T00:44:41+00:00",
-  "registres_font": 1295,
-  "concessions_logiques": 1290,
+  "generat_a": "2026-09-28T01:28:44+00:00",
+  "registres_font": 1297,
+  "concessions_logiques": 1292,
   "duplicats_logics_exclosos": 5,
   "total_alertes": 24,
   "alertes": [
