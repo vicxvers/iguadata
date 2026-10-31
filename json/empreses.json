@@ -1,8 +1,8 @@
 [
   {
     "nom": "TALLER AURIA, SCCL",
-    "num_contratos": 101,
-    "total_importe": 5017836.35,
+    "num_contratos": 102,
+    "total_importe": 5024330.75,
     "contratos": [
       4,
       6,
@@ -104,123 +104,16 @@
       7047,
       7147,
       7277,
-      7494
+      7494,
+      7760
     ],
     "sector": "Medi Ambient, Neteja i Manteniment",
     "categoria": "Aigües residuals, residus i neteja"
   },
   {
-    "nom": "PETROMIRALLES, S.L.",
-    "num_contratos": 99,
-    "total_importe": 146490.97,
-    "contratos": [
-      174,
-      453,
-      522,
-      671,
-      1607,
-      1717,
-      1758,
-      1759,
-      1846,
-      2017,
-      2054,
-      2075,
-      2105,
-      2196,
-      2198,
-      2215,
-      2264,
-      2286,
-      2361,
-      2389,
-      2406,
-      2518,
-      2523,
-      2604,
-      2689,
-      2806,
-      2929,
-      2941,
-      2970,
-      3015,
-      3112,
-      3259,
-      3260,
-      3261,
-      3262,
-      3335,
-      3427,
-      3447,
-      3489,
-      3504,
-      3519,
-      3585,
-      3635,
-      3699,
-      3724,
-      3733,
-      3757,
-      3770,
-      3872,
-      3873,
-      4007,
-      4018,
-      4064,
-      4168,
-      4234,
-      4246,
-      4325,
-      4456,
-      4509,
-      4729,
-      4782,
-      4812,
-      4872,
-      4936,
-      4961,
-      4976,
-      4977,
-      4978,
-      4991,
-      5027,
-      5069,
-      5196,
-      5278,
-      5279,
-      5324,
-      5325,
-      5330,
-      5379,
-      5380,
-      5385,
-      5527,
-      5528,
-      5529,
-      5537,
-      5613,
-      5621,
-      5789,
-      5814,
-      5830,
-      5897,
-      5918,
-      5919,
-      5993,
-      6052,
-      6090,
-      6091,
-      6288,
-      6367,
-      6962
-    ],
-    "sector": "Indústria, Maquinària i Energia",
-    "categoria": "Productes petrolífers i energia"
-  },
-  {
     "nom": "ELM, SL",
-    "num_contratos": 99,
-    "total_importe": 487129.65,
+    "num_contratos": 101,
+    "total_importe": 490666.43,
     "contratos": [
       201,
       662,
@@ -320,115 +213,126 @@
       7143,
       7419,
       7544,
-      7570
+      7570,
+      7684,
+      7756
     ],
     "sector": "Medi Ambient, Neteja i Manteniment",
     "categoria": "Serveis de reparació i manteniment"
   },
   {
-    "nom": "VILANOVA MUSET,  ROSER",
-    "num_contratos": 91,
-    "total_importe": 110509.0,
+    "nom": "PETROMIRALLES, S.L.",
+    "num_contratos": 100,
+    "total_importe": 147936.2,
     "contratos": [
-      20,
-      92,
-      184,
-      384,
-      532,
-      598,
-      890,
-      891,
-      916,
-      944,
-      1010,
-      1067,
-      1180,
-      1181,
-      1198,
-      1230,
-      1312,
-      1326,
-      1327,
-      1328,
-      1329,
-      1375,
-      1380,
-      1439,
-      1481,
-      1546,
-      1606,
-      1765,
-      1843,
-      1847,
-      2129,
-      2391,
-      2439,
-      2524,
-      2536,
-      2662,
-      2690,
-      2700,
-      2733,
-      2758,
-      2846,
-      2922,
-      3082,
-      3205,
-      3512,
-      3643,
-      3645,
-      3675,
-      3754,
-      3760,
-      3834,
-      3953,
-      4058,
-      4386,
-      4390,
-      4494,
-      4501,
-      4575,
-      4589,
-      4590,
-      4591,
-      4592,
-      4685,
-      4686,
-      4883,
-      5148,
-      5202,
-      5230,
-      5234,
-      5236,
-      5304,
-      5493,
-      5710,
-      5813,
-      6019,
-      6022,
-      6541,
-      6613,
-      6955,
-      6977,
-      7012,
-      7026,
-      7027,
-      7176,
-      7200,
-      7273,
-      7346,
-      7347,
-      7440,
-      7471,
-      7569
+      174,
+      453,
+      522,
+      671,
+      1607,
+      1717,
+      1758,
+      1759,
+      1846,
+      2017,
+      2054,
+      2075,
+      2105,
+      2196,
+      2198,
+      2215,
+      2264,
+      2286,
+      2361,
+      2389,
+      2406,
+      2518,
+      2523,
+      2604,
+      2689,
+      2806,
+      2929,
+      2941,
+      2970,
+      3015,
+      3112,
+      3259,
+      3260,
+      3261,
+      3262,
+      3335,
+      3427,
+      3447,
+      3489,
+      3504,
+      3519,
+      3585,
+      3635,
+      3699,
+      3724,
+      3733,
+      3757,
+      3770,
+      3872,
+      3873,
+      4007,
+      4018,
+      4064,
+      4168,
+      4234,
+      4246,
+      4325,
+      4456,
+      4509,
+      4729,
+      4782,
+      4812,
+      4872,
+      4936,
+      4961,
+      4976,
+      4977,
+      4978,
+      4991,
+      5027,
+      5069,
+      5196,
+      5278,
+      5279,
+      5324,
+      5325,
+      5330,
+      5379,
+      5380,
+      5385,
+      5527,
+      5528,
+      5529,
+      5537,
+      5613,
+      5621,
+      5789,
+      5814,
+      5830,
+      5897,
+      5918,
+      5919,
+      5993,
+      6052,
+      6090,
+      6091,
+      6288,
+      6367,
+      6962,
+      7798
     ],
-    "sector": "Construcció i Infraestructures",
-    "categoria": "Serveis d'arquitectura i enginyeria"
+    "sector": "Indústria, Maquinària i Energia",
+    "categoria": "Productes petrolífers i energia"
   },
   {
     "nom": "BOSCIREM, S.L.",
-    "num_contratos": 91,
-    "total_importe": 5864849.11,
+    "num_contratos": 93,
+    "total_importe": 7120145.58,
     "contratos": [
       29,
       38,
@@ -520,15 +424,118 @@
       7381,
       7467,
       7468,
-      7565
+      7565,
+      7584,
+      7585
     ],
     "sector": "Construcció i Infraestructures",
     "categoria": "Obres de construcció"
   },
   {
+    "nom": "VILANOVA MUSET,  ROSER",
+    "num_contratos": 92,
+    "total_importe": 111559.0,
+    "contratos": [
+      20,
+      92,
+      184,
+      384,
+      532,
+      598,
+      890,
+      891,
+      916,
+      944,
+      1010,
+      1067,
+      1180,
+      1181,
+      1198,
+      1230,
+      1312,
+      1326,
+      1327,
+      1328,
+      1329,
+      1375,
+      1380,
+      1439,
+      1481,
+      1546,
+      1606,
+      1765,
+      1843,
+      1847,
+      2129,
+      2391,
+      2439,
+      2524,
+      2536,
+      2662,
+      2690,
+      2700,
+      2733,
+      2758,
+      2846,
+      2922,
+      3082,
+      3205,
+      3512,
+      3643,
+      3645,
+      3675,
+      3754,
+      3760,
+      3834,
+      3953,
+      4058,
+      4386,
+      4390,
+      4494,
+      4501,
+      4575,
+      4589,
+      4590,
+      4591,
+      4592,
+      4685,
+      4686,
+      4883,
+      5148,
+      5202,
+      5230,
+      5234,
+      5236,
+      5304,
+      5493,
+      5710,
+      5813,
+      6019,
+      6022,
+      6541,
+      6613,
+      6955,
+      6977,
+      7012,
+      7026,
+      7027,
+      7176,
+      7200,
+      7273,
+      7346,
+      7347,
+      7440,
+      7471,
+      7569,
+      7713
+    ],
+    "sector": "Construcció i Infraestructures",
+    "categoria": "Serveis d'arquitectura i enginyeria"
+  },
+  {
     "nom": "SELLARES PASCUAL, ANTONI",
-    "num_contratos": 85,
-    "total_importe": 94576.3,
+    "num_contratos": 86,
+    "total_importe": 95276.3,
     "contratos": [
       36,
       202,
@@ -614,7 +621,101 @@
       7490,
       7519,
       7520,
-      7521
+      7521,
+      7643
+    ],
+    "sector": "Construcció i Infraestructures",
+    "categoria": "Serveis d'arquitectura i enginyeria"
+  },
+  {
+    "nom": "CARLES CALLIZO I MANUEL",
+    "num_contratos": 84,
+    "total_importe": 242719.47,
+    "contratos": [
+      200,
+      316,
+      379,
+      381,
+      540,
+      542,
+      767,
+      805,
+      892,
+      1009,
+      1035,
+      1037,
+      1059,
+      1068,
+      1199,
+      1205,
+      1324,
+      1411,
+      1440,
+      1543,
+      2089,
+      2132,
+      2292,
+      2372,
+      2386,
+      2451,
+      2660,
+      2701,
+      2707,
+      2765,
+      2852,
+      2854,
+      2924,
+      3062,
+      3149,
+      3175,
+      3650,
+      3842,
+      3878,
+      3892,
+      4176,
+      4193,
+      4304,
+      4506,
+      4507,
+      4508,
+      4531,
+      4557,
+      4564,
+      4570,
+      4571,
+      4576,
+      4579,
+      4594,
+      4875,
+      5149,
+      5445,
+      5494,
+      5550,
+      5596,
+      5597,
+      5647,
+      5711,
+      5926,
+      5927,
+      6110,
+      6524,
+      6545,
+      6593,
+      7030,
+      7055,
+      7125,
+      7129,
+      7140,
+      7142,
+      7373,
+      7421,
+      7431,
+      7473,
+      7566,
+      7640,
+      7641,
+      7727,
+      7733
     ],
     "sector": "Construcció i Infraestructures",
     "categoria": "Serveis d'arquitectura i enginyeria"
@@ -712,90 +813,86 @@
     "categoria": "Obres de construcció"
   },
   {
-    "nom": "CARLES CALLIZO I MANUEL",
-    "num_contratos": 80,
-    "total_importe": 225779.47,
+    "nom": "GTEKNICS SL",
+    "num_contratos": 76,
+    "total_importe": 503538.98,
     "contratos": [
-      200,
-      316,
-      379,
-      381,
-      540,
-      542,
-      767,
-      805,
-      892,
-      1009,
-      1035,
-      1037,
-      1059,
-      1068,
-      1199,
-      1205,
-      1324,
-      1411,
-      1440,
-      1543,
-      2089,
-      2132,
-      2292,
-      2372,
-      2386,
-      2451,
-      2660,
-      2701,
-      2707,
-      2765,
-      2852,
-      2854,
-      2924,
-      3062,
-      3149,
-      3175,
-      3650,
-      3842,
-      3878,
-      3892,
-      4176,
-      4193,
-      4304,
-      4506,
-      4507,
-      4508,
-      4531,
-      4557,
-      4564,
-      4570,
-      4571,
-      4576,
-      4579,
-      4594,
-      4875,
-      5149,
-      5445,
-      5494,
-      5550,
-      5596,
-      5597,
-      5647,
-      5711,
-      5926,
-      5927,
-      6110,
-      6524,
-      6545,
-      6593,
-      7030,
-      7055,
-      7125,
-      7129,
-      7140,
-      7142,
-      7373,
-      7421,
-      7431,
-      7473,
-      7566
+      61,
+      206,
+      240,
+      261,
+      262,
+      338,
+      340,
+      489,
+      491,
+      620,
+      685,
+      693,
+      786,
+      875,
+      893,
+      904,
+      1317,
+      1539,
+      1624,
+      1719,
+      1728,
+      1848,
+      1981,
+      1983,
+      1995,
+      2085,
+      2094,
+      2168,
+      2363,
+      2378,
+      2483,
+      2487,
+      2565,
+      2610,
+      2656,
+      2712,
+      2864,
+      3304,
+      3902,
+      3940,
+      4235,
+      4345,
+      4671,
+      4775,
+      4806,
+      4828,
+      4829,
+      4830,
+      5104,
+      5267,
+      5277,
+      5428,
+      5453,
+      5503,
+      5702,
+      5773,
+      5954,
+      6208,
+      6242,
+      6265,
+      6275,
+      6289,
+      6634,
+      6653,
+      6703,
+      6704,
+      6758,
+      6920,
+      7154,
+      7355,
+      7391,
+      7563,
+      7702,
+      7765,
+      7788,
+      7791
     ],
     "sector": "Construcció i Infraestructures",
     "categoria": "Serveis d'arquitectura i enginyeria"
@@ -885,90 +982,9 @@
     "categoria": "Serveis agrícoles i forestals"
   },
   {
-    "nom": "GTEKNICS SL",
-    "num_contratos": 72,
-    "total_importe": 398686.54,
-    "contratos": [
-      61,
-      206,
-      240,
-      261,
-      262,
-      338,
-      340,
-      489,
-      491,
-      620,
-      685,
-      693,
-      786,
-      875,
-      893,
-      904,
-      1317,
-      1539,
-      1624,
-      1719,
-      1728,
-      1848,
-      1981,
-      1983,
-      1995,
-      2085,
-      2094,
-      2168,
-      2363,
-      2378,
-      2483,
-      2487,
-      2565,
-      2610,
-      2656,
-      2712,
-      2864,
-      3304,
-      3902,
-      3940,
-      4235,
-      4345,
-      4671,
-      4775,
-      4806,
-      4828,
-      4829,
-      4830,
-      5104,
-      5267,
-      5277,
-      5428,
-      5453,
-      5503,
-      5702,
-      5773,
-      5954,
-      6208,
-      6242,
-      6265,
-      6275,
-      6289,
-      6634,
-      6653,
-      6703,
-      6704,
-      6758,
-      6920,
-      7154,
-      7355,
-      7391,
-      7563
-    ],
-    "sector": "Construcció i Infraestructures",
-    "categoria": "Serveis d'arquitectura i enginyeria"
-  },
-  {
     "nom": "CONSELL ESPORTIU DE L'ANOIA",
-    "num_contratos": 67,
-    "total_importe": 333541.0,
+    "num_contratos": 69,
+    "total_importe": 336986.0,
     "contratos": [
       43,
       118,
@@ -1036,7 +1052,9 @@
       7148,
       7400,
       7401,
-      7575
+      7575,
+      7676,
+      7776
     ],
     "sector": "Cultura, Oci i Esport",
     "categoria": "Serveis recreatius i culturals"
@@ -1115,6 +1133,77 @@
     "categoria": "Serveis recreatius i culturals"
   },
   {
+    "nom": "MIRALLESTRES",
+    "num_contratos": 62,
+    "total_importe": 128736.0,
+    "contratos": [
+      167,
+      239,
+      280,
+      351,
+      415,
+      444,
+      519,
+      638,
+      684,
+      741,
+      778,
+      821,
+      1045,
+      1136,
+      1163,
+      1285,
+      1292,
+      1294,
+      1612,
+      1729,
+      1917,
+      1940,
+      1960,
+      1961,
+      2053,
+      2076,
+      2112,
+      2169,
+      2294,
+      2500,
+      2588,
+      2632,
+      2670,
+      2883,
+      2998,
+      3016,
+      3201,
+      3321,
+      3364,
+      3494,
+      3495,
+      3537,
+      3728,
+      3814,
+      4111,
+      4343,
+      4667,
+      4793,
+      4932,
+      4971,
+      5039,
+      5040,
+      5189,
+      5378,
+      5930,
+      5997,
+      6080,
+      6186,
+      6187,
+      7514,
+      7658,
+      7718
+    ],
+    "sector": "Altres Serveis i Subministraments",
+    "categoria": "Altres serveis comunitaris"
+  },
+  {
     "nom": "OBRAS Y CONSTRUCCIONES TRIVAZQUEZ, SL",
     "num_contratos": 62,
     "total_importe": 719051.71,
@@ -1186,73 +1275,73 @@
     "categoria": "Obres de construcció"
   },
   {
-    "nom": "MIRALLESTRES",
+    "nom": "AUDIOVISUAL RESOURCES, SL",
     "num_contratos": 60,
-    "total_importe": 125423.7,
+    "total_importe": 164760.77,
     "contratos": [
-      167,
-      239,
-      280,
-      351,
-      415,
-      444,
-      519,
-      638,
-      684,
-      741,
-      778,
-      821,
-      1045,
-      1136,
-      1163,
-      1285,
-      1292,
-      1294,
-      1612,
-      1729,
-      1917,
-      1940,
-      1960,
-      1961,
-      2053,
-      2076,
-      2112,
-      2169,
-      2294,
-      2500,
-      2588,
-      2632,
-      2670,
-      2883,
-      2998,
-      3016,
-      3201,
-      3321,
-      3364,
-      3494,
-      3495,
-      3537,
-      3728,
-      3814,
-      4111,
-      4343,
-      4667,
-      4793,
-      4932,
-      4971,
-      5039,
-      5040,
-      5189,
-      5378,
-      5930,
-      5997,
-      6080,
-      6186,
-      6187,
-      7514
+      66,
+      582,
+      832,
+      966,
+      984,
+      1177,
+      1215,
+      1361,
+      1544,
+      1553,
+      1746,
+      1796,
+      2056,
+      2060,
+      2110,
+      2144,
+      2194,
+      2280,
+      2383,
+      2704,
+      2942,
+      3311,
+      3450,
+      3646,
+      3647,
+      3737,
+      3787,
+      4012,
+      4107,
+      4163,
+      4182,
+      4418,
+      4519,
+      4544,
+      4930,
+      5206,
+      5216,
+      5275,
+      5591,
+      5614,
+      5835,
+      6010,
+      6092,
+      6114,
+      6294,
+      6359,
+      6376,
+      6394,
+      6559,
+      6631,
+      6707,
+      6798,
+      6805,
+      7019,
+      7180,
+      7253,
+      7459,
+      7549,
+      7572,
+      7672
     ],
-    "sector": "Altres Serveis i Subministraments",
-    "categoria": "Altres serveis comunitaris"
+    "sector": "Cultura, Oci i Esport",
+    "categoria": "Serveis recreatius i culturals"
   },
   {
     "nom": "CENGA 2000, SL",
@@ -1324,72 +1413,72 @@
     "categoria": "Obres de construcció"
   },
   {
-    "nom": "AUDIOVISUAL RESOURCES, SL",
+    "nom": "TRANS DIEMA,SL",
     "num_contratos": 59,
-    "total_importe": 163460.77,
+    "total_importe": 144450.18,
     "contratos": [
-      66,
-      582,
-      832,
-      966,
-      984,
-      1177,
-      1215,
-      1361,
-      1544,
-      1553,
-      1746,
-      1796,
-      2056,
-      2060,
-      2110,
-      2144,
-      2194,
-      2280,
-      2383,
-      2704,
-      2942,
-      3311,
-      3450,
-      3646,
-      3647,
-      3737,
-      3787,
-      4012,
-      4107,
-      4163,
-      4182,
-      4418,
-      4519,
-      4544,
-      4930,
-      5206,
-      5216,
-      5275,
-      5591,
-      5614,
-      5835,
-      6010,
-      6092,
-      6114,
-      6294,
-      6359,
-      6376,
-      6394,
-      6559,
-      6631,
-      6707,
-      6798,
-      6805,
-      7019,
-      7180,
-      7253,
-      7459,
-      7549,
-      7572
+      124,
+      230,
+      231,
+      348,
+      445,
+      601,
+      747,
+      748,
+      753,
+      754,
+      755,
+      756,
+      1158,
+      1286,
+      1291,
+      1582,
+      1583,
+      1732,
+      2478,
+      2530,
+      2679,
+      2811,
+      2812,
+      3028,
+      3124,
+      3125,
+      3202,
+      3540,
+      3717,
+      3816,
+      3832,
+      4072,
+      4173,
+      4174,
+      4242,
+      4243,
+      4381,
+      4382,
+      4510,
+      5047,
+      5286,
+      5287,
+      5538,
+      5704,
+      5797,
+      5871,
+      5872,
+      6062,
+      6183,
+      6504,
+      6505,
+      6587,
+      7096,
+      7242,
+      7243,
+      7558,
+      7609,
+      7659,
+      7688
     ],
-    "sector": "Cultura, Oci i Esport",
-    "categoria": "Serveis recreatius i culturals"
+    "sector": "Transport i Logística",
+    "categoria": "Serveis de transport"
   },
   {
     "nom": "UTE INSTAL·LACIONS ANOIA",
@@ -1456,71 +1545,6 @@
     ],
     "sector": "Construcció i Infraestructures",
     "categoria": "Serveis d'instal·lació"
-  },
-  {
-    "nom": "TRANS DIEMA,SL",
-    "num_contratos": 56,
-    "total_importe": 95388.2,
-    "contratos": [
-      124,
-      230,
-      231,
-      348,
-      445,
-      601,
-      747,
-      748,
-      753,
-      754,
-      755,
-      756,
-      1158,
-      1286,
-      1291,
-      1582,
-      1583,
-      1732,
-      2478,
-      2530,
-      2679,
-      2811,
-      2812,
-      3028,
-      3124,
-      3125,
-      3202,
-      3540,
-      3717,
-      3816,
-      3832,
-      4072,
-      4173,
-      4174,
-      4242,
-      4243,
-      4381,
-      4382,
-      4510,
-      5047,
-      5286,
-      5287,
-      5538,
-      5704,
-      5797,
-      5871,
-      5872,
-      6062,
-      6183,
-      6504,
-      6505,
-      6587,
-      7096,
-      7242,
-      7243,
-      7558
-    ],
-    "sector": "Transport i Logística",
-    "categoria": "Serveis de transport"
   },
   {
     "nom": "JUAN CARLOS CERÓN MORENO",
@@ -1647,9 +1671,66 @@
     "categoria": "Equips de seguretat i defensa"
   },
   {
+    "nom": "FUNDACIÓ SOCIOCULTURAL",
+    "num_contratos": 48,
+    "total_importe": 639129.73,
+    "contratos": [
+      147,
+      190,
+      961,
+      962,
+      1046,
+      1165,
+      1220,
+      1224,
+      1433,
+      1525,
+      1736,
+      1778,
+      1820,
+      2199,
+      2463,
+      2596,
+      2658,
+      2814,
+      2940,
+      2969,
+      3319,
+      3329,
+      3525,
+      3577,
+      3960,
+      3996,
+      4008,
+      4446,
+      4619,
+      4997,
+      5210,
+      5404,
+      5600,
+      6774,
+      6777,
+      6852,
+      6938,
+      7257,
+      7335,
+      7365,
+      7462,
+      7464,
+      7527,
+      7545,
+      7630,
+      7667,
+      7668,
+      7737
+    ],
+    "sector": "Altres Serveis i Subministraments",
+    "categoria": "Altres serveis comunitaris"
+  },
+  {
     "nom": "GLEYAL&MORE, SL",
-    "num_contratos": 46,
-    "total_importe": 246818.46,
+    "num_contratos": 48,
+    "total_importe": 251331.13,
     "contratos": [
       88,
       918,
@@ -1696,63 +1777,64 @@
       7258,
       7465,
       7523,
-      7528
+      7528,
+      7652,
+      7786
     ],
     "sector": "Serveis Professionals i Corporatius",
     "categoria": "Serveis empresarials i de consultoria"
   },
   {
-    "nom": "FUNDACIÓ SOCIOCULTURAL",
-    "num_contratos": 44,
-    "total_importe": 623591.56,
+    "nom": "ESTUDI ENGINYERIA VALL, SLP",
+    "num_contratos": 43,
+    "total_importe": 335615.0,
     "contratos": [
-      147,
-      190,
-      961,
-      962,
-      1046,
-      1165,
-      1220,
-      1224,
-      1433,
-      1525,
-      1736,
-      1778,
-      1820,
-      2199,
-      2463,
-      2596,
-      2658,
-      2814,
-      2940,
-      2969,
-      3319,
-      3329,
-      3525,
-      3577,
-      3960,
-      3996,
-      4008,
-      4446,
-      4619,
-      4997,
-      5210,
-      5404,
-      5600,
-      6774,
-      6777,
-      6852,
-      6938,
-      7257,
-      7335,
-      7365,
-      7462,
-      7464,
-      7527,
-      7545
+      93,
+      317,
+      488,
+      541,
+      547,
+      548,
+      561,
+      602,
+      603,
+      894,
+      1157,
+      1162,
+      1172,
+      1274,
+      1412,
+      1637,
+      1638,
+      1743,
+      1745,
+      2187,
+      2535,
+      2853,
+      2855,
+      3583,
+      3649,
+      3933,
+      4207,
+      4303,
+      4369,
+      4565,
+      4773,
+      5712,
+      5953,
+      6094,
+      6410,
+      7038,
+      7051,
+      7139,
+      7197,
+      7394,
+      7456,
+      7615,
+      7814
     ],
-    "sector": "Altres Serveis i Subministraments",
-    "categoria": "Altres serveis comunitaris"
+    "sector": "Construcció i Infraestructures",
+    "categoria": "Serveis d'arquitectura i enginyeria"
   },
   {
     "nom": "QUARTADA ESTUDI, SCP",
@@ -1806,54 +1888,54 @@
     "categoria": "Serveis empresarials i de consultoria"
   },
   {
-    "nom": "ESTUDI ENGINYERIA VALL, SLP",
+    "nom": "AERONAVAL DE CONSTRUCCIONES E INSTALACIONES, SA",
     "num_contratos": 41,
-    "total_importe": 320265.0,
+    "total_importe": 1175873.62,
     "contratos": [
-      93,
-      317,
-      488,
-      541,
-      547,
-      548,
-      561,
-      602,
-      603,
-      894,
-      1157,
-      1162,
-      1172,
-      1274,
-      1412,
-      1637,
-      1638,
-      1743,
-      1745,
-      2187,
-      2535,
-      2853,
-      2855,
-      3583,
-      3649,
-      3933,
-      4207,
-      4303,
-      4369,
-      4565,
-      4773,
-      5712,
-      5953,
-      6094,
-      6410,
-      7038,
-      7051,
-      7139,
-      7197,
-      7394,
-      7456
+      885,
+      1141,
+      1174,
+      1246,
+      1290,
+      1367,
+      1625,
+      1660,
+      1766,
+      1800,
+      1855,
+      2365,
+      2481,
+      2770,
+      2823,
+      3006,
+      3129,
+      3130,
+      3184,
+      3214,
+      3695,
+      3839,
+      3846,
+      4187,
+      4272,
+      4715,
+      4716,
+      4732,
+      4838,
+      5095,
+      5306,
+      5347,
+      5359,
+      5624,
+      5804,
+      5831,
+      5877,
+      6057,
+      6655,
+      7792,
+      7804
     ],
     "sector": "Construcció i Infraestructures",
-    "categoria": "Serveis d'arquitectura i enginyeria"
+    "categoria": "Serveis d'instal·lació"
   },
   {
     "nom": "LOT DESERT",
@@ -1905,6 +1987,55 @@
     "categoria": "Obres de construcció"
   },
   {
+    "nom": "DIGITAL LIDERA COMUNICACIÓ, SL",
+    "num_contratos": 40,
+    "total_importe": 177441.0,
+    "contratos": [
+      158,
+      307,
+      829,
+      889,
+      934,
+      1301,
+      1502,
+      1658,
+      1764,
+      1922,
+      2240,
+      2437,
+      2673,
+      2674,
+      3058,
+      3090,
+      3242,
+      3500,
+      3750,
+      3810,
+      4055,
+      4056,
+      4420,
+      4448,
+      4821,
+      4955,
+      5087,
+      5093,
+      5530,
+      5588,
+      5689,
+      5904,
+      6381,
+      6599,
+      6600,
+      6602,
+      7061,
+      7328,
+      7330,
+      7772
+    ],
+    "sector": "Serveis Professionals i Corporatius",
+    "categoria": "Serveis empresarials i de consultoria"
+  },
+  {
     "nom": "ALBERTO BURGOS CIBRIAN",
     "num_contratos": 40,
     "total_importe": 34450.0,
@@ -1954,100 +2085,52 @@
     "categoria": "Serveis d'arquitectura i enginyeria"
   },
   {
-    "nom": "DIGITAL LIDERA COMUNICACIÓ, SL",
+    "nom": "CRUZ ROJA",
     "num_contratos": 39,
-    "total_importe": 174941.0,
+    "total_importe": 195231.21,
     "contratos": [
-      158,
-      307,
-      829,
-      889,
-      934,
-      1301,
-      1502,
-      1658,
-      1764,
-      1922,
-      2240,
-      2437,
-      2673,
-      2674,
-      3058,
-      3090,
-      3242,
-      3500,
-      3750,
-      3810,
-      4055,
-      4056,
-      4420,
-      4448,
-      4821,
-      4955,
-      5087,
-      5093,
-      5530,
-      5588,
-      5689,
-      5904,
-      6381,
-      6599,
-      6600,
-      6602,
-      7061,
-      7328,
-      7330
+      435,
+      503,
+      513,
+      637,
+      760,
+      1164,
+      1225,
+      1227,
+      1263,
+      1950,
+      1951,
+      1953,
+      2485,
+      2558,
+      2667,
+      2708,
+      2709,
+      3165,
+      3299,
+      3615,
+      3997,
+      4000,
+      4089,
+      4688,
+      4800,
+      4859,
+      5199,
+      5211,
+      5343,
+      5370,
+      5690,
+      5802,
+      6388,
+      6802,
+      7155,
+      7461,
+      7463,
+      7695,
+      7757
     ],
-    "sector": "Serveis Professionals i Corporatius",
-    "categoria": "Serveis empresarials i de consultoria"
-  },
-  {
-    "nom": "AERONAVAL DE CONSTRUCCIONES E INSTALACIONES, SA",
-    "num_contratos": 39,
-    "total_importe": 1169025.42,
-    "contratos": [
-      885,
-      1141,
-      1174,
-      1246,
-      1290,
-      1367,
-      1625,
-      1660,
-      1766,
-      1800,
-      1855,
-      2365,
-      2481,
-      2770,
-      2823,
-      3006,
-      3129,
-      3130,
-      3184,
-      3214,
-      3695,
-      3839,
-      3846,
-      4187,
-      4272,
-      4715,
-      4716,
-      4732,
-      4838,
-      5095,
-      5306,
-      5347,
-      5359,
-      5624,
-      5804,
-      5831,
-      5877,
-      6057,
-      6655
-    ],
-    "sector": "Construcció i Infraestructures",
-    "categoria": "Serveis d'instal·lació"
+    "sector": "Salut i Serveis Socials",
+    "categoria": "Serveis sanitaris i socials"
   },
   {
     "nom": "AIGUA DE RIGAT, S.A.",
@@ -2097,52 +2180,6 @@
     "categoria": "Aigües residuals, residus i neteja"
   },
   {
-    "nom": "CRUZ ROJA",
-    "num_contratos": 37,
-    "total_importe": 191761.47,
-    "contratos": [
-      435,
-      503,
-      513,
-      637,
-      760,
-      1164,
-      1225,
-      1227,
-      1263,
-      1950,
-      1951,
-      1953,
-      2485,
-      2558,
-      2667,
-      2708,
-      2709,
-      3165,
-      3299,
-      3615,
-      3997,
-      4000,
-      4089,
-      4688,
-      4800,
-      4859,
-      5199,
-      5211,
-      5343,
-      5370,
-      5690,
-      5802,
-      6388,
-      6802,
-      7155,
-      7461,
-      7463
-    ],
-    "sector": "Salut i Serveis Socials",
-    "categoria": "Serveis sanitaris i socials"
-  },
-  {
     "nom": "CONSTRU-LLAR, SL",
     "num_contratos": 36,
     "total_importe": 1058893.7,
@@ -2186,6 +2223,50 @@
     ],
     "sector": "Construcció i Infraestructures",
     "categoria": "Obres de construcció"
+  },
+  {
+    "nom": "ALUMINIS I VIDRES IGUALADA",
+    "num_contratos": 35,
+    "total_importe": 130659.3,
+    "contratos": [
+      187,
+      249,
+      421,
+      587,
+      715,
+      844,
+      1036,
+      1206,
+      1484,
+      1836,
+      2320,
+      2511,
+      2600,
+      3123,
+      3578,
+      3751,
+      3932,
+      3965,
+      4014,
+      4312,
+      4993,
+      5151,
+      5152,
+      5572,
+      5672,
+      5673,
+      5931,
+      6811,
+      6866,
+      7056,
+      7084,
+      7106,
+      7574,
+      7625,
+      7730
+    ],
+    "sector": "Construcció i Infraestructures",
+    "categoria": "Materials de construcció"
   },
   {
     "nom": "SERVICIOS MICROINFORMÁTICA, SA",
@@ -2276,46 +2357,46 @@
     "categoria": "Maquinària elèctrica"
   },
   {
-    "nom": "ALUMINIS I VIDRES IGUALADA",
+    "nom": "INICIATIVES BARCELONA SPORTS CONSUL",
     "num_contratos": 33,
-    "total_importe": 126734.5,
+    "total_importe": 99121.33,
     "contratos": [
-      187,
-      249,
-      421,
-      587,
-      715,
-      844,
-      1036,
-      1206,
-      1484,
-      1836,
-      2320,
-      2511,
-      2600,
-      3123,
-      3578,
-      3751,
-      3932,
-      3965,
-      4014,
-      4312,
-      4993,
-      5151,
-      5152,
-      5572,
-      5672,
-      5673,
-      5931,
-      6811,
-      6866,
-      7056,
-      7084,
-      7106,
-      7574
+      265,
+      426,
+      1260,
+      1450,
+      1570,
+      1654,
+      1671,
+      1672,
+      2165,
+      2874,
+      3000,
+      3018,
+      3115,
+      3211,
+      3617,
+      3709,
+      4259,
+      4417,
+      4428,
+      4889,
+      5394,
+      6014,
+      6016,
+      6025,
+      6261,
+      6482,
+      6601,
+      6649,
+      6834,
+      7278,
+      7425,
+      7638,
+      7815
     ],
-    "sector": "Construcció i Infraestructures",
-    "categoria": "Materials de construcció"
+    "sector": "Serveis Professionals i Corporatius",
+    "categoria": "Serveis empresarials i de consultoria"
   },
   {
     "nom": "4M VISUAL SCP",
@@ -2360,41 +2441,121 @@
     "categoria": "Impresos i productes relacionats"
   },
   {
-    "nom": "INICIATIVES BARCELONA SPORTS CONSUL",
+    "nom": "BRAVO RAICH ANNA",
     "num_contratos": 31,
-    "total_importe": 96489.73,
+    "total_importe": 62304.44,
     "contratos": [
-      265,
-      426,
-      1260,
-      1450,
-      1570,
-      1654,
-      1671,
-      1672,
-      2165,
-      2874,
-      3000,
-      3018,
-      3115,
-      3211,
-      3617,
-      3709,
-      4259,
-      4417,
-      4428,
-      4889,
-      5394,
-      6014,
-      6016,
-      6025,
-      6261,
-      6482,
-      6601,
-      6649,
-      6834,
-      7278,
-      7425
+      110,
+      115,
+      129,
+      164,
+      205,
+      454,
+      456,
+      884,
+      965,
+      1179,
+      1192,
+      1349,
+      1548,
+      1812,
+      1909,
+      2605,
+      2640,
+      2791,
+      2996,
+      3346,
+      3425,
+      3835,
+      3864,
+      4362,
+      4398,
+      4502,
+      5129,
+      5420,
+      5640,
+      5760,
+      7704
+    ],
+    "sector": "Tecnologia i Telecomunicacions",
+    "categoria": "Serveis postals i telecomunicacions"
+  },
+  {
+    "nom": "LA MARCA DE GRÀFIQUES VILANOVA, S.L.",
+    "num_contratos": 31,
+    "total_importe": 72386.35,
+    "contratos": [
+      618,
+      886,
+      935,
+      946,
+      1362,
+      1718,
+      1794,
+      2078,
+      2392,
+      2410,
+      2801,
+      3022,
+      3032,
+      3522,
+      3690,
+      3691,
+      3696,
+      3698,
+      4283,
+      4422,
+      5197,
+      5480,
+      5518,
+      5519,
+      5874,
+      5995,
+      6589,
+      7126,
+      7127,
+      7128,
+      7711
+    ],
+    "sector": "Béns de Consum i Comerç",
+    "categoria": "Roba i calçat"
+  },
+  {
+    "nom": "DAMASO MORROS, DAVID",
+    "num_contratos": 31,
+    "total_importe": 76130.35,
+    "contratos": [
+      656,
+      724,
+      1310,
+      1566,
+      1875,
+      1906,
+      2251,
+      2263,
+      2878,
+      2902,
+      3051,
+      3348,
+      3648,
+      3722,
+      3909,
+      4015,
+      4436,
+      4804,
+      4811,
+      5010,
+      5057,
+      5145,
+      5731,
+      5875,
+      5924,
+      6252,
+      6279,
+      6427,
+      7219,
+      7336,
+      7805
     ],
     "sector": "Serveis Professionals i Corporatius",
     "categoria": "Serveis empresarials i de consultoria"
@@ -2440,43 +2601,43 @@
     "categoria": "Mobiliari i equipament"
   },
   {
-    "nom": "BRAVO RAICH ANNA",
+    "nom": "GIBERT I GIBERT, SL",
     "num_contratos": 30,
-    "total_importe": 60904.44,
+    "total_importe": 82002.68,
     "contratos": [
-      110,
-      115,
-      129,
-      164,
-      205,
-      454,
-      456,
-      884,
-      965,
-      1179,
-      1192,
-      1349,
-      1548,
-      1812,
-      1909,
-      2605,
-      2640,
-      2791,
-      2996,
-      3346,
-      3425,
-      3835,
-      3864,
-      4362,
-      4398,
-      4502,
-      5129,
-      5420,
-      5640,
-      5760
+      62,
+      117,
+      279,
+      324,
+      718,
+      1295,
+      1298,
+      1478,
+      1530,
+      1554,
+      1585,
+      2678,
+      2807,
+      2895,
+      2944,
+      3008,
+      3359,
+      4032,
+      4038,
+      4053,
+      4331,
+      4862,
+      5262,
+      5779,
+      5798,
+      6794,
+      6855,
+      7266,
+      7661,
+      7689
     ],
-    "sector": "Tecnologia i Telecomunicacions",
-    "categoria": "Serveis postals i telecomunicacions"
+    "sector": "Transport i Logística",
+    "categoria": "Serveis de transport"
   },
   {
     "nom": "ENGINYERIA LLIRÓ ASSOCIATS, SL",
@@ -2557,84 +2718,6 @@
     "categoria": "Maquinària elèctrica"
   },
   {
-    "nom": "LA MARCA DE GRÀFIQUES VILANOVA, S.L.",
-    "num_contratos": 30,
-    "total_importe": 70083.59,
-    "contratos": [
-      618,
-      886,
-      935,
-      946,
-      1362,
-      1718,
-      1794,
-      2078,
-      2392,
-      2410,
-      2801,
-      3022,
-      3032,
-      3522,
-      3690,
-      3691,
-      3696,
-      3698,
-      4283,
-      4422,
-      5197,
-      5480,
-      5518,
-      5519,
-      5874,
-      5995,
-      6589,
-      7126,
-      7127,
-      7128
-    ],
-    "sector": "Béns de Consum i Comerç",
-    "categoria": "Roba i calçat"
-  },
-  {
-    "nom": "DAMASO MORROS, DAVID",
-    "num_contratos": 30,
-    "total_importe": 71930.35,
-    "contratos": [
-      656,
-      724,
-      1310,
-      1566,
-      1875,
-      1906,
-      2251,
-      2263,
-      2878,
-      2902,
-      3051,
-      3348,
-      3648,
-      3722,
-      3909,
-      4015,
-      4436,
-      4804,
-      4811,
-      5010,
-      5057,
-      5145,
-      5731,
-      5875,
-      5924,
-      6252,
-      6279,
-      6427,
-      7219,
-      7336
-    ],
-    "sector": "Serveis Professionals i Corporatius",
-    "categoria": "Serveis empresarials i de consultoria"
-  },
-  {
     "nom": "HAPPYLUDIC PLAYGROUND AND URBAN EQUIPMENT SL",
     "num_contratos": 30,
     "total_importe": 476008.22,
@@ -2712,41 +2795,41 @@
     "categoria": "Serveis agrícoles i forestals"
   },
   {
-    "nom": "GIBERT I GIBERT, SL",
+    "nom": "FELIP UNIGRAFIC, SL",
     "num_contratos": 28,
-    "total_importe": 68410.86,
+    "total_importe": 54497.04,
     "contratos": [
-      62,
-      117,
-      279,
-      324,
-      718,
-      1295,
-      1298,
-      1478,
-      1530,
-      1554,
-      1585,
-      2678,
-      2807,
-      2895,
-      2944,
-      3008,
-      3359,
-      4032,
-      4038,
-      4053,
-      4331,
-      4862,
-      5262,
-      5779,
-      5798,
-      6794,
-      6855,
-      7266
+      422,
+      674,
+      691,
+      780,
+      1195,
+      1304,
+      1871,
+      2149,
+      2665,
+      2693,
+      2694,
+      2835,
+      3003,
+      3287,
+      3551,
+      3817,
+      3930,
+      4455,
+      4697,
+      4968,
+      5077,
+      5456,
+      5801,
+      6125,
+      6429,
+      6481,
+      6681,
+      7717
     ],
-    "sector": "Transport i Logística",
-    "categoria": "Serveis de transport"
+    "sector": "Béns de Consum i Comerç",
+    "categoria": "Impresos i productes relacionats"
   },
   {
     "nom": "ÀRIDS ANOIA, S.L.",
@@ -2822,42 +2905,6 @@
     "categoria": "Serveis d'instal·lació"
   },
   {
-    "nom": "FELIP UNIGRAFIC, SL",
-    "num_contratos": 27,
-    "total_importe": 53369.34,
-    "contratos": [
-      422,
-      674,
-      691,
-      780,
-      1195,
-      1304,
-      1871,
-      2149,
-      2665,
-      2693,
-      2694,
-      2835,
-      3003,
-      3287,
-      3551,
-      3817,
-      3930,
-      4455,
-      4697,
-      4968,
-      5077,
-      5456,
-      5801,
-      6125,
-      6429,
-      6481,
-      6681
-    ],
-    "sector": "Béns de Consum i Comerç",
-    "categoria": "Impresos i productes relacionats"
-  },
-  {
     "nom": "ROSA MARIA JORBA BISBAL",
     "num_contratos": 27,
     "total_importe": 67375.14,
@@ -2892,6 +2939,174 @@
     ],
     "sector": "Medi Ambient, Neteja i Manteniment",
     "categoria": "Serveis de reparació i manteniment"
+  },
+  {
+    "nom": "PROJECTES INSTAL·LACIONS I MANTENIMENTS ENERGETICS",
+    "num_contratos": 25,
+    "total_importe": 486172.08,
+    "contratos": [
+      610,
+      700,
+      968,
+      1033,
+      1132,
+      1242,
+      1428,
+      1435,
+      1444,
+      1467,
+      1468,
+      2023,
+      2241,
+      2248,
+      2274,
+      2934,
+      3308,
+      4805,
+      6255,
+      6874,
+      7286,
+      7602,
+      7720,
+      7721,
+      7778
+    ],
+    "sector": "Construcció i Infraestructures",
+    "categoria": "Serveis d'instal·lació"
+  },
+  {
+    "nom": "ESTIL LLAR IGUALADA, SL",
+    "num_contratos": 25,
+    "total_importe": 350878.16,
+    "contratos": [
+      293,
+      420,
+      1039,
+      1376,
+      1493,
+      1505,
+      1591,
+      1919,
+      1954,
+      2155,
+      2379,
+      3164,
+      3789,
+      4779,
+      4836,
+      4898,
+      5174,
+      5414,
+      5473,
+      6800,
+      6943,
+      7222,
+      7354,
+      7709,
+      7789
+    ],
+    "sector": "Construcció i Infraestructures",
+    "categoria": "Obres de construcció"
+  },
+  {
+    "nom": "SOCIEDAD ANONIMA MASATS-TRANSPORTS GENERALS, UNIPERSONAL",
+    "num_contratos": 25,
+    "total_importe": 95286.01,
+    "contratos": [
+      308,
+      309,
+      376,
+      947,
+      1296,
+      1573,
+      1631,
+      1750,
+      2104,
+      2143,
+      2146,
+      2148,
+      2752,
+      2756,
+      3041,
+      3340,
+      4039,
+      4201,
+      4286,
+      4308,
+      5777,
+      5895,
+      7715,
+      7716,
+      7780
+    ],
+    "sector": "Transport i Logística",
+    "categoria": "Serveis de transport"
+  },
+  {
+    "nom": "FIATC, MUTUA DE SEGUROS GENERALES",
+    "num_contratos": 24,
+    "total_importe": 18761.87,
+    "contratos": [
+      3670,
+      3808,
+      4841,
+      4843,
+      4849,
+      6266,
+      6267,
+      6468,
+      6469,
+      6488,
+      6489,
+      6490,
+      6491,
+      6492,
+      6493,
+      6494,
+      6495,
+      6691,
+      6808,
+      6893,
+      7077,
+      7078,
+      7312,
+      7587
+    ],
+    "sector": "Serveis Professionals i Corporatius",
+    "categoria": "Serveis financers i d'assegurances"
+  },
+  {
+    "nom": "AL&P PROJECTES, SL",
+    "num_contratos": 24,
+    "total_importe": 141270.0,
+    "contratos": [
+      19,
+      55,
+      90,
+      320,
+      321,
+      418,
+      613,
+      621,
+      629,
+      632,
+      1313,
+      1617,
+      1634,
+      1731,
+      1741,
+      1767,
+      2290,
+      2330,
+      2440,
+      2452,
+      2706,
+      3033,
+      7679,
+      7793
+    ],
+    "sector": "Construcció i Infraestructures",
+    "categoria": "Serveis d'arquitectura i enginyeria"
   },
   {
     "nom": "ANOIA DE PLASTICS INDUSTRIALS, SL",
@@ -2960,36 +3175,132 @@
     "categoria": "Roba i calçat"
   },
   {
-    "nom": "ESTIL LLAR IGUALADA, SL",
+    "nom": "AREA ESTUDI DE PUBLICITAT",
     "num_contratos": 23,
-    "total_importe": 328753.57,
+    "total_importe": 43873.6,
     "contratos": [
-      293,
-      420,
-      1039,
-      1376,
-      1493,
-      1505,
-      1591,
-      1919,
-      1954,
-      2155,
-      2379,
-      3164,
-      3789,
-      4779,
-      4836,
-      4898,
-      5174,
-      5414,
-      5473,
-      6800,
-      6943,
-      7222,
-      7354
+      252,
+      920,
+      923,
+      1015,
+      1052,
+      1299,
+      2125,
+      2235,
+      2432,
+      2705,
+      2926,
+      3830,
+      4334,
+      4432,
+      4546,
+      5264,
+      5283,
+      5716,
+      5775,
+      5799,
+      6030,
+      6786,
+      7631
+    ],
+    "sector": "Serveis Professionals i Corporatius",
+    "categoria": "Serveis empresarials i de consultoria"
+  },
+  {
+    "nom": "SENMARTI GESTIO I ASSESSORAMENT DE PLAGUES, SLU",
+    "num_contratos": 23,
+    "total_importe": 133920.93,
+    "contratos": [
+      345,
+      492,
+      493,
+      744,
+      1947,
+      1948,
+      1969,
+      2338,
+      2402,
+      3158,
+      3349,
+      3387,
+      4383,
+      4396,
+      4497,
+      5240,
+      6153,
+      6180,
+      6249,
+      6272,
+      6975,
+      7053,
+      7687
+    ],
+    "sector": "Agricultura i Alimentació",
+    "categoria": "Serveis agrícoles i forestals"
+  },
+  {
+    "nom": "NOU ACTIS, SL",
+    "num_contratos": 23,
+    "total_importe": 224039.6,
+    "contratos": [
+      171,
+      1244,
+      1353,
+      1495,
+      2192,
+      2453,
+      3133,
+      4352,
+      5284,
+      5383,
+      5384,
+      6364,
+      6458,
+      6741,
+      6830,
+      6875,
+      6877,
+      7101,
+      7109,
+      7280,
+      7432,
+      7524,
+      7714
     ],
     "sector": "Construcció i Infraestructures",
     "categoria": "Obres de construcció"
+  },
+  {
+    "nom": "CENTRE DE CALCUL, SLP",
+    "num_contratos": 23,
+    "total_importe": 119380.02,
+    "contratos": [
+      313,
+      781,
+      1007,
+      1288,
+      2088,
+      2130,
+      2131,
+      2183,
+      2314,
+      3718,
+      3833,
+      3879,
+      3890,
+      4005,
+      4047,
+      4065,
+      5244,
+      6846,
+      7010,
+      7390,
+      7474,
+      7728,
+      7729
+    ],
+    "sector": "Construcció i Infraestructures",
+    "categoria": "Serveis d'arquitectura i enginyeria"
   },
   {
     "nom": "HULEX GESTION INTEGRAL, S.L.",
@@ -3056,129 +3367,35 @@
     "categoria": "Maquinària d'oficina i informàtica"
   },
   {
-    "nom": "FIATC, MUTUA DE SEGUROS GENERALES",
-    "num_contratos": 23,
-    "total_importe": 18252.71,
-    "contratos": [
-      3670,
-      3808,
-      4841,
-      4843,
-      4849,
-      6266,
-      6267,
-      6468,
-      6469,
-      6488,
-      6489,
-      6490,
-      6491,
-      6492,
-      6493,
-      6494,
-      6495,
-      6691,
-      6808,
-      6893,
-      7077,
-      7078,
-      7312
-    ],
-    "sector": "Serveis Professionals i Corporatius",
-    "categoria": "Serveis financers i d'assegurances"
-  },
-  {
-    "nom": "AL&P PROJECTES, SL",
+    "nom": "SOCIETAT GENERAL",
     "num_contratos": 22,
-    "total_importe": 125170.0,
+    "total_importe": 74101.82,
     "contratos": [
-      19,
-      55,
-      90,
-      320,
-      321,
-      418,
-      613,
-      621,
-      629,
-      632,
-      1313,
-      1617,
-      1634,
-      1731,
-      1741,
-      1767,
-      2290,
-      2330,
-      2440,
-      2452,
-      2706,
-      3033
+      368,
+      938,
+      1040,
+      1458,
+      2599,
+      2601,
+      2739,
+      2808,
+      3520,
+      3560,
+      3837,
+      4403,
+      5339,
+      5395,
+      5544,
+      5787,
+      5816,
+      6696,
+      6761,
+      7339,
+      7581,
+      7764
     ],
-    "sector": "Construcció i Infraestructures",
-    "categoria": "Serveis d'arquitectura i enginyeria"
-  },
-  {
-    "nom": "NOU ACTIS, SL",
-    "num_contratos": 22,
-    "total_importe": 200539.6,
-    "contratos": [
-      171,
-      1244,
-      1353,
-      1495,
-      2192,
-      2453,
-      3133,
-      4352,
-      5284,
-      5383,
-      5384,
-      6364,
-      6458,
-      6741,
-      6830,
-      6875,
-      6877,
-      7101,
-      7109,
-      7280,
-      7432,
-      7524
-    ],
-    "sector": "Construcció i Infraestructures",
-    "categoria": "Obres de construcció"
-  },
-  {
-    "nom": "AREA ESTUDI DE PUBLICITAT",
-    "num_contratos": 22,
-    "total_importe": 42573.6,
-    "contratos": [
-      252,
-      920,
-      923,
-      1015,
-      1052,
-      1299,
-      2125,
-      2235,
-      2432,
-      2705,
-      2926,
-      3830,
-      4334,
-      4432,
-      4546,
-      5264,
-      5283,
-      5716,
-      5775,
-      5799,
-      6030,
-      6786
-    ],
-    "sector": "Serveis Professionals i Corporatius",
-    "categoria": "Serveis empresarials i de consultoria"
+    "sector": "Cultura, Oci i Esport",
+    "categoria": "Serveis recreatius i culturals"
   },
   {
     "nom": "FLORS ROSET, SL",
@@ -3212,158 +3429,6 @@
     "categoria": "Productes agrícoles i ramaders"
   },
   {
-    "nom": "SOCIEDAD ANONIMA MASATS-TRANSPORTS GENERALS, UNIPERSONAL",
-    "num_contratos": 22,
-    "total_importe": 87435.79,
-    "contratos": [
-      308,
-      309,
-      376,
-      947,
-      1296,
-      1573,
-      1631,
-      1750,
-      2104,
-      2143,
-      2146,
-      2148,
-      2752,
-      2756,
-      3041,
-      3340,
-      4039,
-      4201,
-      4286,
-      4308,
-      5777,
-      5895
-    ],
-    "sector": "Transport i Logística",
-    "categoria": "Serveis de transport"
-  },
-  {
-    "nom": "SENMARTI GESTIO I ASSESSORAMENT DE PLAGUES, SLU",
-    "num_contratos": 22,
-    "total_importe": 118958.43,
-    "contratos": [
-      345,
-      492,
-      493,
-      744,
-      1947,
-      1948,
-      1969,
-      2338,
-      2402,
-      3158,
-      3349,
-      3387,
-      4383,
-      4396,
-      4497,
-      5240,
-      6153,
-      6180,
-      6249,
-      6272,
-      6975,
-      7053
-    ],
-    "sector": "Agricultura i Alimentació",
-    "categoria": "Serveis agrícoles i forestals"
-  },
-  {
-    "nom": "CENTRE DE CALCUL, SLP",
-    "num_contratos": 21,
-    "total_importe": 116130.02,
-    "contratos": [
-      313,
-      781,
-      1007,
-      1288,
-      2088,
-      2130,
-      2131,
-      2183,
-      2314,
-      3718,
-      3833,
-      3879,
-      3890,
-      4005,
-      4047,
-      4065,
-      5244,
-      6846,
-      7010,
-      7390,
-      7474
-    ],
-    "sector": "Construcció i Infraestructures",
-    "categoria": "Serveis d'arquitectura i enginyeria"
-  },
-  {
-    "nom": "SOCIETAT GENERAL",
-    "num_contratos": 21,
-    "total_importe": 70024.42,
-    "contratos": [
-      368,
-      938,
-      1040,
-      1458,
-      2599,
-      2601,
-      2739,
-      2808,
-      3520,
-      3560,
-      3837,
-      4403,
-      5339,
-      5395,
-      5544,
-      5787,
-      5816,
-      6696,
-      6761,
-      7339,
-      7581
-    ],
-    "sector": "Cultura, Oci i Esport",
-    "categoria": "Serveis recreatius i culturals"
-  },
-  {
-    "nom": "PROJECTES INSTAL·LACIONS I MANTENIMENTS ENERGETICS",
-    "num_contratos": 21,
-    "total_importe": 479009.67,
-    "contratos": [
-      610,
-      700,
-      968,
-      1033,
-      1132,
-      1242,
-      1428,
-      1435,
-      1444,
-      1467,
-      1468,
-      2023,
-      2241,
-      2248,
-      2274,
-      2934,
-      3308,
-      4805,
-      6255,
-      6874,
-      7286
-    ],
-    "sector": "Construcció i Infraestructures",
-    "categoria": "Serveis d'instal·lació"
-  },
-  {
     "nom": "KONE ELEVADORES, SA",
     "num_contratos": 21,
     "total_importe": 84185.16,
@@ -3392,6 +3457,62 @@
     ],
     "sector": "Medi Ambient, Neteja i Manteniment",
     "categoria": "Serveis de reparació i manteniment"
+  },
+  {
+    "nom": "ALIVECLI SL",
+    "num_contratos": 19,
+    "total_importe": 60107.29,
+    "contratos": [
+      643,
+      1275,
+      1715,
+      2049,
+      2166,
+      2334,
+      3313,
+      3445,
+      3484,
+      3730,
+      4419,
+      4632,
+      4929,
+      5187,
+      6008,
+      6200,
+      7597,
+      7775,
+      7802
+    ],
+    "sector": "Construcció i Infraestructures",
+    "categoria": "Serveis d'instal·lació"
+  },
+  {
+    "nom": "TOI TOI SANITARIOS MOVILES, S.A.",
+    "num_contratos": 19,
+    "total_importe": 36587.46,
+    "contratos": [
+      31,
+      100,
+      141,
+      483,
+      761,
+      1129,
+      1130,
+      1337,
+      1350,
+      2531,
+      2842,
+      2856,
+      4112,
+      4682,
+      5644,
+      5722,
+      7386,
+      7559,
+      7601
+    ],
+    "sector": "Altres Serveis i Subministraments",
+    "categoria": "Altres serveis comunitaris"
   },
   {
     "nom": "FER FRANS, S.A.",
@@ -3476,33 +3597,6 @@
     ],
     "sector": "Educació i Recerca",
     "categoria": "Serveis d'ensenyament i formació"
-  },
-  {
-    "nom": "TOI TOI SANITARIOS MOVILES, S.A.",
-    "num_contratos": 18,
-    "total_importe": 34165.46,
-    "contratos": [
-      31,
-      100,
-      141,
-      483,
-      761,
-      1129,
-      1130,
-      1337,
-      1350,
-      2531,
-      2842,
-      2856,
-      4112,
-      4682,
-      5644,
-      5722,
-      7386,
-      7559
-    ],
-    "sector": "Altres Serveis i Subministraments",
-    "categoria": "Altres serveis comunitaris"
   },
   {
     "nom": "ZOOETHICS, ETHICAL ANIMAL PROJECTS, SL",
@@ -3611,6 +3705,32 @@
     ],
     "sector": "Tecnologia i Telecomunicacions",
     "categoria": "Serveis informàtics (TI)"
+  },
+  {
+    "nom": "COMERCIAL BLAUTEC SL",
+    "num_contratos": 17,
+    "total_importe": 76059.06,
+    "contratos": [
+      108,
+      1139,
+      1446,
+      1575,
+      1579,
+      2455,
+      4631,
+      4639,
+      5102,
+      5107,
+      5727,
+      5834,
+      5889,
+      6788,
+      6974,
+      7157,
+      7600
+    ],
+    "sector": "Medi Ambient, Neteja i Manteniment",
+    "categoria": "Serveis de reparació i manteniment"
   },
   {
     "nom": "LIBERTY SEGUROS COMPAÑIA SEGUROS Y REASEGUROS, SA",
@@ -3795,6 +3915,56 @@
     "categoria": "Maquinària elèctrica"
   },
   {
+    "nom": "TAELUS,S.L.",
+    "num_contratos": 16,
+    "total_importe": 77098.0,
+    "contratos": [
+      369,
+      646,
+      647,
+      797,
+      956,
+      957,
+      1893,
+      2139,
+      3569,
+      3574,
+      4980,
+      4981,
+      5720,
+      6463,
+      6464,
+      7671
+    ],
+    "sector": "Tecnologia i Telecomunicacions",
+    "categoria": "Serveis postals i telecomunicacions"
+  },
+  {
+    "nom": "SANDOVAL PEREZ , ALFREDO",
+    "num_contratos": 16,
+    "total_importe": 78111.0,
+    "contratos": [
+      204,
+      278,
+      282,
+      1222,
+      1512,
+      1809,
+      2362,
+      3280,
+      3323,
+      4019,
+      4139,
+      4825,
+      5228,
+      5329,
+      7761,
+      7816
+    ],
+    "sector": "Construcció i Infraestructures",
+    "categoria": "Obres de construcció"
+  },
+  {
     "nom": "SOMIATRUITES DREAMING OMELETS, SL",
     "num_contratos": 16,
     "total_importe": 122464.23,
@@ -3870,31 +4040,6 @@
     "categoria": "Serveis financers i d'assegurances"
   },
   {
-    "nom": "COMERCIAL BLAUTEC SL",
-    "num_contratos": 16,
-    "total_importe": 74817.86,
-    "contratos": [
-      108,
-      1139,
-      1446,
-      1575,
-      1579,
-      2455,
-      4631,
-      4639,
-      5102,
-      5107,
-      5727,
-      5834,
-      5889,
-      6788,
-      6974,
-      7157
-    ],
-    "sector": "Medi Ambient, Neteja i Manteniment",
-    "categoria": "Serveis de reparació i manteniment"
-  },
-  {
     "nom": "BANDA DE MUSICA D`IGUALADA",
     "num_contratos": 16,
     "total_importe": 49971.42,
@@ -3945,31 +4090,6 @@
     "categoria": "Serveis recreatius i culturals"
   },
   {
-    "nom": "ALIVECLI SL",
-    "num_contratos": 16,
-    "total_importe": 45895.29,
-    "contratos": [
-      643,
-      1275,
-      1715,
-      2049,
-      2166,
-      2334,
-      3313,
-      3445,
-      3484,
-      3730,
-      4419,
-      4632,
-      4929,
-      5187,
-      6008,
-      6200
-    ],
-    "sector": "Construcció i Infraestructures",
-    "categoria": "Serveis d'instal·lació"
-  },
-  {
     "nom": "ANIMAN'S SCP",
     "num_contratos": 16,
     "total_importe": 40122.81,
@@ -3990,6 +4110,30 @@
       7372,
       7383,
       7439
+    ],
+    "sector": "Cultura, Oci i Esport",
+    "categoria": "Serveis recreatius i culturals"
+  },
+  {
+    "nom": "ASS CULTURAL DIABLES STA CATERINA IGUALADA  GRUP MAL LLAMP",
+    "num_contratos": 15,
+    "total_importe": 48866.11,
+    "contratos": [
+      568,
+      1109,
+      1394,
+      2035,
+      2617,
+      2833,
+      3442,
+      3979,
+      4216,
+      5512,
+      5535,
+      5782,
+      6897,
+      7619,
+      7770
     ],
     "sector": "Cultura, Oci i Esport",
     "categoria": "Serveis recreatius i culturals"
@@ -4019,28 +4163,27 @@
     "categoria": "Serveis de reparació i manteniment"
   },
   {
-    "nom": "TAELUS,S.L.",
-    "num_contratos": 15,
-    "total_importe": 75898.0,
+    "nom": "TERESA RIBA TOMAS",
+    "num_contratos": 14,
+    "total_importe": 174898.27,
     "contratos": [
-      369,
-      646,
-      647,
-      797,
-      956,
-      957,
-      1893,
-      2139,
-      3569,
-      3574,
-      4980,
-      4981,
-      5720,
-      6463,
-      6464
+      726,
+      1058,
+      1076,
+      2337,
+      2343,
+      3548,
+      3825,
+      5122,
+      5172,
+      5472,
+      6380,
+      6386,
+      7636,
+      7670
     ],
-    "sector": "Tecnologia i Telecomunicacions",
-    "categoria": "Serveis postals i telecomunicacions"
+    "sector": "Cultura, Oci i Esport",
+    "categoria": "Serveis recreatius i culturals"
   },
   {
     "nom": "IBERPELLET SL UNIPERSONAL",
@@ -4110,29 +4253,6 @@
     ],
     "sector": "Construcció i Infraestructures",
     "categoria": "Serveis d'instal·lació"
-  },
-  {
-    "nom": "SANDOVAL PEREZ , ALFREDO",
-    "num_contratos": 14,
-    "total_importe": 69915.0,
-    "contratos": [
-      204,
-      278,
-      282,
-      1222,
-      1512,
-      1809,
-      2362,
-      3280,
-      3323,
-      4019,
-      4139,
-      4825,
-      5228,
-      5329
-    ],
-    "sector": "Construcció i Infraestructures",
-    "categoria": "Obres de construcció"
   },
   {
     "nom": "MAS XERRILL SAT N1522",
@@ -4365,6 +4485,72 @@
     "categoria": "Serveis financers i d'assegurances"
   },
   {
+    "nom": "ANOIA PET SERVICES GROUP, SLU",
+    "num_contratos": 13,
+    "total_importe": 24896.53,
+    "contratos": [
+      1,
+      3,
+      30,
+      362,
+      391,
+      502,
+      697,
+      792,
+      796,
+      880,
+      1786,
+      1991,
+      7650
+    ],
+    "sector": "Salut i Serveis Socials",
+    "categoria": "Serveis sanitaris i socials"
+  },
+  {
+    "nom": "BATLLE I ROIG ARQUITECTURA, SLP",
+    "num_contratos": 13,
+    "total_importe": 154870.0,
+    "contratos": [
+      196,
+      939,
+      1633,
+      2090,
+      4558,
+      4568,
+      4582,
+      5331,
+      5569,
+      5879,
+      5946,
+      7644,
+      7734
+    ],
+    "sector": "Construcció i Infraestructures",
+    "categoria": "Serveis d'arquitectura i enginyeria"
+  },
+  {
+    "nom": "HISPANIA GOBAL UNDERWRITING S.L. AGENCIA DE SUSCRI",
+    "num_contratos": 13,
+    "total_importe": 29926.99,
+    "contratos": [
+      5,
+      82,
+      1021,
+      1241,
+      1333,
+      1334,
+      1339,
+      2858,
+      2859,
+      4132,
+      5606,
+      7475,
+      7651
+    ],
+    "sector": "Serveis Professionals i Corporatius",
+    "categoria": "Serveis financers i d'assegurances"
+  },
+  {
     "nom": "MANTENIMENT I NETEGES ALSI, SL",
     "num_contratos": 13,
     "total_importe": 1009196.46,
@@ -4382,6 +4568,72 @@
       2735,
       2789,
       4438
+    ],
+    "sector": "Medi Ambient, Neteja i Manteniment",
+    "categoria": "Aigües residuals, residus i neteja"
+  },
+  {
+    "nom": "FREESTANY SL",
+    "num_contratos": 13,
+    "total_importe": 42856.94,
+    "contratos": [
+      702,
+      906,
+      2925,
+      3120,
+      3563,
+      3584,
+      3614,
+      3852,
+      3931,
+      4122,
+      4143,
+      7722,
+      7741
+    ],
+    "sector": "Béns de Consum i Comerç",
+    "categoria": "Mobiliari i equipament"
+  },
+  {
+    "nom": "TECNO-SEGURETAT ANOIA SL",
+    "num_contratos": 13,
+    "total_importe": 54715.42,
+    "contratos": [
+      575,
+      937,
+      2042,
+      2919,
+      3198,
+      3472,
+      4911,
+      6321,
+      6363,
+      6437,
+      6562,
+      6608,
+      7799
+    ],
+    "sector": "Construcció i Infraestructures",
+    "categoria": "Serveis d'instal·lació"
+  },
+  {
+    "nom": "LLORENS ISBERT, SL",
+    "num_contratos": 13,
+    "total_importe": 135172.44,
+    "contratos": [
+      586,
+      648,
+      929,
+      2441,
+      3110,
+      3763,
+      3828,
+      4120,
+      5406,
+      6066,
+      6742,
+      7526,
+      7806
     ],
     "sector": "Medi Ambient, Neteja i Manteniment",
     "categoria": "Aigües residuals, residus i neteja"
@@ -4497,28 +4749,6 @@
     "categoria": "Serveis empresarials i de consultoria"
   },
   {
-    "nom": "ASS CULTURAL DIABLES STA CATERINA IGUALADA  GRUP MAL LLAMP",
-    "num_contratos": 13,
-    "total_importe": 41276.11,
-    "contratos": [
-      568,
-      1109,
-      1394,
-      2035,
-      2617,
-      2833,
-      3442,
-      3979,
-      4216,
-      5512,
-      5535,
-      5782,
-      6897
-    ],
-    "sector": "Cultura, Oci i Esport",
-    "categoria": "Serveis recreatius i culturals"
-  },
-  {
     "nom": "QUANTUM",
     "num_contratos": 13,
     "total_importe": 30226.6,
@@ -4585,46 +4815,88 @@
     "categoria": "Serveis d'instal·lació"
   },
   {
-    "nom": "ANOIA PET SERVICES GROUP, SLU",
+    "nom": "SOLUCIONES Y APLIC. TECNOLÓGICAS INTEGRALES, SL",
     "num_contratos": 12,
-    "total_importe": 23152.99,
+    "total_importe": 75137.1,
     "contratos": [
-      1,
-      3,
-      30,
-      362,
-      391,
-      502,
-      697,
-      792,
-      796,
-      880,
-      1786,
-      1991
+      65,
+      251,
+      498,
+      1360,
+      1994,
+      4459,
+      4867,
+      6086,
+      6213,
+      6930,
+      7071,
+      7605
     ],
-    "sector": "Salut i Serveis Socials",
-    "categoria": "Serveis sanitaris i socials"
+    "sector": "Educació i Recerca",
+    "categoria": "Serveis d'ensenyament i formació"
   },
   {
-    "nom": "HISPANIA GOBAL UNDERWRITING S.L. AGENCIA DE SUSCRI",
+    "nom": "ASSOC. DIABLES D'IGUALADA",
     "num_contratos": 12,
-    "total_importe": 23008.63,
+    "total_importe": 33532.9,
     "contratos": [
-      5,
-      82,
-      1021,
-      1241,
-      1333,
-      1334,
-      1339,
-      2858,
-      2859,
-      4132,
-      5606,
-      7475
+      1099,
+      1420,
+      2621,
+      2832,
+      3981,
+      4214,
+      5505,
+      5783,
+      6663,
+      6899,
+      7618,
+      7771
     ],
-    "sector": "Serveis Professionals i Corporatius",
-    "categoria": "Serveis financers i d'assegurances"
+    "sector": "Cultura, Oci i Esport",
+    "categoria": "Serveis recreatius i culturals"
+  },
+  {
+    "nom": "JOC NET GESTIÓ ESPORTIVA, SL",
+    "num_contratos": 12,
+    "total_importe": 575987.76,
+    "contratos": [
+      143,
+      1249,
+      2472,
+      2933,
+      3776,
+      3788,
+      5418,
+      5736,
+      5865,
+      6871,
+      7232,
+      7635
+    ],
+    "sector": "Cultura, Oci i Esport",
+    "categoria": "Serveis recreatius i culturals"
+  },
+  {
+    "nom": "JUBERT GUILERA, LLUIS",
+    "num_contratos": 12,
+    "total_importe": 32934.65,
+    "contratos": [
+      681,
+      2884,
+      4395,
+      4450,
+      4466,
+      4467,
+      5536,
+      5622,
+      5687,
+      6533,
+      6804,
+      7751
+    ],
+    "sector": "Béns de Consum i Comerç",
+    "categoria": "Impresos i productes relacionats"
   },
   {
     "nom": "MULA FERRER, ROGER",
@@ -4643,69 +4915,6 @@
       5204,
       6254,
       7551
-    ],
-    "sector": "Cultura, Oci i Esport",
-    "categoria": "Serveis recreatius i culturals"
-  },
-  {
-    "nom": "TECNO-SEGURETAT ANOIA SL",
-    "num_contratos": 12,
-    "total_importe": 52207.13,
-    "contratos": [
-      575,
-      937,
-      2042,
-      2919,
-      3198,
-      3472,
-      4911,
-      6321,
-      6363,
-      6437,
-      6562,
-      6608
-    ],
-    "sector": "Construcció i Infraestructures",
-    "categoria": "Serveis d'instal·lació"
-  },
-  {
-    "nom": "LLORENS ISBERT, SL",
-    "num_contratos": 12,
-    "total_importe": 133969.32,
-    "contratos": [
-      586,
-      648,
-      929,
-      2441,
-      3110,
-      3763,
-      3828,
-      4120,
-      5406,
-      6066,
-      6742,
-      7526
-    ],
-    "sector": "Medi Ambient, Neteja i Manteniment",
-    "categoria": "Aigües residuals, residus i neteja"
-  },
-  {
-    "nom": "TERESA RIBA TOMAS",
-    "num_contratos": 12,
-    "total_importe": 118098.27,
-    "contratos": [
-      726,
-      1058,
-      1076,
-      2337,
-      2343,
-      3548,
-      3825,
-      5122,
-      5172,
-      5472,
-      6380,
-      6386
     ],
     "sector": "Cultura, Oci i Esport",
     "categoria": "Serveis recreatius i culturals"
@@ -4795,6 +5004,26 @@
     "categoria": "Serveis empresarials i de consultoria"
   },
   {
+    "nom": "DONCEL OBRES I SERVEIS DE L'ANOIA, S.L.",
+    "num_contratos": 11,
+    "total_importe": 282981.3,
+    "contratos": [
+      372,
+      377,
+      794,
+      857,
+      1348,
+      1391,
+      1486,
+      1601,
+      1865,
+      2726,
+      7639
+    ],
+    "sector": "Construcció i Infraestructures",
+    "categoria": "Obres de construcció"
+  },
+  {
     "nom": "RIBA SAMARRA, JOSEP M.",
     "num_contratos": 11,
     "total_importe": 61025.0,
@@ -4835,26 +5064,6 @@
     "categoria": "Serveis empresarials i de consultoria"
   },
   {
-    "nom": "SOLUCIONES Y APLIC. TECNOLÓGICAS INTEGRALES, SL",
-    "num_contratos": 11,
-    "total_importe": 73490.0,
-    "contratos": [
-      65,
-      251,
-      498,
-      1360,
-      1994,
-      4459,
-      4867,
-      6086,
-      6213,
-      6930,
-      7071
-    ],
-    "sector": "Educació i Recerca",
-    "categoria": "Serveis d'ensenyament i formació"
-  },
-  {
     "nom": "SAMCLA ESIC, SL",
     "num_contratos": 11,
     "total_importe": 30158.44,
@@ -4873,26 +5082,6 @@
     ],
     "sector": "Construcció i Infraestructures",
     "categoria": "Serveis d'instal·lació"
-  },
-  {
-    "nom": "JOC NET GESTIÓ ESPORTIVA, SL",
-    "num_contratos": 11,
-    "total_importe": 498314.48,
-    "contratos": [
-      143,
-      1249,
-      2472,
-      2933,
-      3776,
-      3788,
-      5418,
-      5736,
-      5865,
-      6871,
-      7232
-    ],
-    "sector": "Cultura, Oci i Esport",
-    "categoria": "Serveis recreatius i culturals"
   },
   {
     "nom": "COMPANYIA IGUALADINA DIGITAL DE SERVEIS CREAGIA SL",
@@ -4933,26 +5122,6 @@
     ],
     "sector": "Serveis Professionals i Corporatius",
     "categoria": "Serveis immobiliaris"
-  },
-  {
-    "nom": "BATLLE I ROIG ARQUITECTURA, SLP",
-    "num_contratos": 11,
-    "total_importe": 125120.0,
-    "contratos": [
-      196,
-      939,
-      1633,
-      2090,
-      4558,
-      4568,
-      4582,
-      5331,
-      5569,
-      5879,
-      5946
-    ],
-    "sector": "Construcció i Infraestructures",
-    "categoria": "Serveis d'arquitectura i enginyeria"
   },
   {
     "nom": "AVEGESOL, SL",
@@ -5033,46 +5202,6 @@
     ],
     "sector": "Cultura, Oci i Esport",
     "categoria": "Serveis recreatius i culturals"
-  },
-  {
-    "nom": "JUBERT GUILERA, LLUIS",
-    "num_contratos": 11,
-    "total_importe": 21318.3,
-    "contratos": [
-      681,
-      2884,
-      4395,
-      4450,
-      4466,
-      4467,
-      5536,
-      5622,
-      5687,
-      6533,
-      6804
-    ],
-    "sector": "Béns de Consum i Comerç",
-    "categoria": "Impresos i productes relacionats"
-  },
-  {
-    "nom": "FREESTANY SL",
-    "num_contratos": 11,
-    "total_importe": 37829.94,
-    "contratos": [
-      702,
-      906,
-      2925,
-      3120,
-      3563,
-      3584,
-      3614,
-      3852,
-      3931,
-      4122,
-      4143
-    ],
-    "sector": "Béns de Consum i Comerç",
-    "categoria": "Mobiliari i equipament"
   },
   {
     "nom": "STAR FOC ANOIA, SLU",
@@ -5275,6 +5404,82 @@
     "categoria": "Aigües residuals, residus i neteja"
   },
   {
+    "nom": "CATERING DE L'ANOIA, S.L.U.",
+    "num_contratos": 10,
+    "total_importe": 33610.38,
+    "contratos": [
+      1154,
+      1690,
+      3076,
+      3250,
+      3907,
+      4031,
+      4471,
+      6024,
+      7248,
+      7627
+    ],
+    "sector": "Agricultura i Alimentació",
+    "categoria": "Serveis d'hostaleria i restauració"
+  },
+  {
+    "nom": "TECNI POU SL",
+    "num_contratos": 10,
+    "total_importe": 28086.0,
+    "contratos": [
+      177,
+      1053,
+      1514,
+      1751,
+      2539,
+      6392,
+      6522,
+      7263,
+      7642,
+      7800
+    ],
+    "sector": "Construcció i Infraestructures",
+    "categoria": "Serveis d'arquitectura i enginyeria"
+  },
+  {
+    "nom": "JORDI ROTÉS SANTESMASSES",
+    "num_contratos": 10,
+    "total_importe": 21409.04,
+    "contratos": [
+      1707,
+      3369,
+      4415,
+      5635,
+      5669,
+      5933,
+      6121,
+      6133,
+      6178,
+      7755
+    ],
+    "sector": "Cultura, Oci i Esport",
+    "categoria": "Serveis recreatius i culturals"
+  },
+  {
+    "nom": "ASSOCIACIÓ DE PETITS DIABLES D'IGUALADA",
+    "num_contratos": 10,
+    "total_importe": 18113.74,
+    "contratos": [
+      569,
+      1115,
+      1395,
+      2620,
+      2824,
+      3443,
+      3982,
+      4951,
+      5475,
+      7769
+    ],
+    "sector": "Cultura, Oci i Esport",
+    "categoria": "Serveis recreatius i culturals"
+  },
+  {
     "nom": "SALVADOR BALCELLS TALAVERA",
     "num_contratos": 10,
     "total_importe": 43425.0,
@@ -5332,25 +5537,6 @@
     "categoria": "Serveis d'ensenyament i formació"
   },
   {
-    "nom": "DONCEL OBRES I SERVEIS DE L'ANOIA, S.L.",
-    "num_contratos": 10,
-    "total_importe": 271302.3,
-    "contratos": [
-      372,
-      377,
-      794,
-      857,
-      1348,
-      1391,
-      1486,
-      1601,
-      1865,
-      2726
-    ],
-    "sector": "Construcció i Infraestructures",
-    "categoria": "Obres de construcció"
-  },
-  {
     "nom": "BORDA PERERA GROUP, SL",
     "num_contratos": 10,
     "total_importe": 70515.52,
@@ -5406,25 +5592,6 @@
     ],
     "sector": "Construcció i Infraestructures",
     "categoria": "Obres de construcció"
-  },
-  {
-    "nom": "ASSOC. DIABLES D'IGUALADA",
-    "num_contratos": 10,
-    "total_importe": 28170.9,
-    "contratos": [
-      1099,
-      1420,
-      2621,
-      2832,
-      3981,
-      4214,
-      5505,
-      5783,
-      6663,
-      6899
-    ],
-    "sector": "Cultura, Oci i Esport",
-    "categoria": "Serveis recreatius i culturals"
   },
   {
     "nom": "QUATRE CANTONADES, SCCL",
@@ -5503,6 +5670,60 @@
     "categoria": "Serveis agrícoles i forestals"
   },
   {
+    "nom": "FUNDACIÓ CATALANA DE L'ESPLAI",
+    "num_contratos": 9,
+    "total_importe": 98383.14,
+    "contratos": [
+      2563,
+      3436,
+      3875,
+      3893,
+      4404,
+      4925,
+      5293,
+      7593,
+      7634
+    ],
+    "sector": "Educació i Recerca",
+    "categoria": "Serveis d'ensenyament i formació"
+  },
+  {
+    "nom": "CAROL GASTRONOMIA, SL",
+    "num_contratos": 9,
+    "total_importe": 57568.64,
+    "contratos": [
+      1372,
+      1386,
+      2805,
+      2889,
+      4265,
+      4305,
+      5838,
+      7660,
+      7785
+    ],
+    "sector": "Agricultura i Alimentació",
+    "categoria": "Serveis d'hostaleria i restauració"
+  },
+  {
+    "nom": "MONTFERRI HERMANOS, SOCIEDAD LIMITADA",
+    "num_contratos": 9,
+    "total_importe": 25059.55,
+    "contratos": [
+      762,
+      763,
+      764,
+      1089,
+      1219,
+      1894,
+      5002,
+      5970,
+      7665
+    ],
+    "sector": "Transport i Logística",
+    "categoria": "Serveis de transport"
+  },
+  {
     "nom": "PROMOTORA MEDITERRANEA 2 S A",
     "num_contratos": 9,
     "total_importe": 13493.8,
@@ -5573,6 +5794,24 @@
     ],
     "sector": "Construcció i Infraestructures",
     "categoria": "Serveis d'instal·lació"
+  },
+  {
+    "nom": "AB PAISATGISTES SL",
+    "num_contratos": 9,
+    "total_importe": 53150.0,
+    "contratos": [
+      304,
+      564,
+      1669,
+      2917,
+      6732,
+      7006,
+      7039,
+      7449,
+      7817
+    ],
+    "sector": "Construcció i Infraestructures",
+    "categoria": "Serveis d'arquitectura i enginyeria"
   },
   {
     "nom": "ECITYCLIC SOLUTIONS, SL.",
@@ -5665,24 +5904,6 @@
     "categoria": "Serveis d'arquitectura i enginyeria"
   },
   {
-    "nom": "ASSOCIACIÓ DE PETITS DIABLES D'IGUALADA",
-    "num_contratos": 9,
-    "total_importe": 16613.74,
-    "contratos": [
-      569,
-      1115,
-      1395,
-      2620,
-      2824,
-      3443,
-      3982,
-      4951,
-      5475
-    ],
-    "sector": "Cultura, Oci i Esport",
-    "categoria": "Serveis recreatius i culturals"
-  },
-  {
     "nom": "ROSICH MORIST, JOSEP M",
     "num_contratos": 9,
     "total_importe": 11502.93,
@@ -5717,24 +5938,6 @@
     ],
     "sector": "Construcció i Infraestructures",
     "categoria": "Materials de construcció"
-  },
-  {
-    "nom": "CATERING DE L'ANOIA, S.L.U.",
-    "num_contratos": 9,
-    "total_importe": 28285.38,
-    "contratos": [
-      1154,
-      1690,
-      3076,
-      3250,
-      3907,
-      4031,
-      4471,
-      6024,
-      7248
-    ],
-    "sector": "Agricultura i Alimentació",
-    "categoria": "Serveis d'hostaleria i restauració"
   },
   {
     "nom": "PAGES BERTRAN, JORDI",
@@ -5827,24 +6030,6 @@
     "categoria": "Productes agrícoles i ramaders"
   },
   {
-    "nom": "JORDI ROTÉS SANTESMASSES",
-    "num_contratos": 9,
-    "total_importe": 18609.04,
-    "contratos": [
-      1707,
-      3369,
-      4415,
-      5635,
-      5669,
-      5933,
-      6121,
-      6133,
-      6178
-    ],
-    "sector": "Cultura, Oci i Esport",
-    "categoria": "Serveis recreatius i culturals"
-  },
-  {
     "nom": "VISUAL ONLINE SOLUTIONS, SL",
     "num_contratos": 9,
     "total_importe": 37787.0,
@@ -5881,6 +6066,176 @@
     "categoria": "Serveis d'arquitectura i enginyeria"
   },
   {
+    "nom": "ROS ROCA, SA",
+    "num_contratos": 8,
+    "total_importe": 276375.94,
+    "contratos": [
+      356,
+      1002,
+      1811,
+      2281,
+      3674,
+      4078,
+      4549,
+      7590
+    ],
+    "sector": "Béns de Consum i Comerç",
+    "categoria": "Mobiliari i equipament"
+  },
+  {
+    "nom": "ANTONIO COMPTE POSADA (COSANTEX)",
+    "num_contratos": 8,
+    "total_importe": 13360.55,
+    "contratos": [
+      1156,
+      2156,
+      3212,
+      4013,
+      4333,
+      6576,
+      7268,
+      7628
+    ],
+    "sector": "Béns de Consum i Comerç",
+    "categoria": "Roba i calçat"
+  },
+  {
+    "nom": "CATALONIA UNIC, SL",
+    "num_contratos": 8,
+    "total_importe": 20115.51,
+    "contratos": [
+      808,
+      2161,
+      2494,
+      2753,
+      5539,
+      5846,
+      6548,
+      7678
+    ],
+    "sector": "Altres Serveis i Subministraments",
+    "categoria": "Altres serveis comunitaris"
+  },
+  {
+    "nom": "MES MERCAT, SL",
+    "num_contratos": 8,
+    "total_importe": 45631.96,
+    "contratos": [
+      1194,
+      2016,
+      3431,
+      3948,
+      4854,
+      5273,
+      5442,
+      7705
+    ],
+    "sector": "Agricultura i Alimentació",
+    "categoria": "Aliments i begudes"
+  },
+  {
+    "nom": "TALLERES PALAUTORDERA, SA",
+    "num_contratos": 8,
+    "total_importe": 66123.1,
+    "contratos": [
+      2128,
+      2319,
+      2915,
+      3566,
+      3594,
+      4533,
+      4739,
+      7719
+    ],
+    "sector": "Béns de Consum i Comerç",
+    "categoria": "Mobiliari i equipament"
+  },
+  {
+    "nom": "BADIES ADVOCATS ASSOCIATS, SLP",
+    "num_contratos": 8,
+    "total_importe": 22116.56,
+    "contratos": [
+      1232,
+      1828,
+      1904,
+      2364,
+      2687,
+      3116,
+      4063,
+      7723
+    ],
+    "sector": "Serveis Professionals i Corporatius",
+    "categoria": "Serveis empresarials i de consultoria"
+  },
+  {
+    "nom": "ASSOCIACIO PER A L'IMPULS DEL SECTOR TIC DE L'ANOIA",
+    "num_contratos": 8,
+    "total_importe": 21964.15,
+    "contratos": [
+      370,
+      1710,
+      3187,
+      4457,
+      6332,
+      6378,
+      6406,
+      7731
+    ],
+    "sector": "Educació i Recerca",
+    "categoria": "Serveis d'ensenyament i formació"
+  },
+  {
+    "nom": "DECCOTEXT LLAR SL",
+    "num_contratos": 8,
+    "total_importe": 18358.17,
+    "contratos": [
+      367,
+      948,
+      1308,
+      2096,
+      2817,
+      3712,
+      5447,
+      7735
+    ],
+    "sector": "Béns de Consum i Comerç",
+    "categoria": "Mobiliari i equipament"
+  },
+  {
+    "nom": "NEMESIO SÁNCHEZ ALAMILLO",
+    "num_contratos": 8,
+    "total_importe": 15635.38,
+    "contratos": [
+      807,
+      1535,
+      2999,
+      3151,
+      3309,
+      5053,
+      6671,
+      7739
+    ],
+    "sector": "Medi Ambient, Neteja i Manteniment",
+    "categoria": "Serveis de reparació i manteniment"
+  },
+  {
+    "nom": "SERVICIOS DEPEC, SLU",
+    "num_contratos": 8,
+    "total_importe": 316416.84,
+    "contratos": [
+      323,
+      730,
+      1178,
+      2512,
+      2956,
+      4434,
+      6041,
+      7813
+    ],
+    "sector": "Medi Ambient, Neteja i Manteniment",
+    "categoria": "Aigües residuals, residus i neteja"
+  },
+  {
     "nom": "TOT CLAR,SL",
     "num_contratos": 8,
     "total_importe": 36042.35,
@@ -5898,23 +6253,6 @@
     "categoria": "Serveis informàtics (TI)"
   },
   {
-    "nom": "TECNI POU SL",
-    "num_contratos": 8,
-    "total_importe": 22505.0,
-    "contratos": [
-      177,
-      1053,
-      1514,
-      1751,
-      2539,
-      6392,
-      6522,
-      7263
-    ],
-    "sector": "Construcció i Infraestructures",
-    "categoria": "Serveis d'arquitectura i enginyeria"
-  },
-  {
     "nom": "MÚSICS DE CATALUNYA SCCL",
     "num_contratos": 8,
     "total_importe": 60016.0,
@@ -5930,23 +6268,6 @@
     ],
     "sector": "Cultura, Oci i Esport",
     "categoria": "Serveis recreatius i culturals"
-  },
-  {
-    "nom": "AB PAISATGISTES SL",
-    "num_contratos": 8,
-    "total_importe": 45150.0,
-    "contratos": [
-      304,
-      564,
-      1669,
-      2917,
-      6732,
-      7006,
-      7039,
-      7449
-    ],
-    "sector": "Construcció i Infraestructures",
-    "categoria": "Serveis d'arquitectura i enginyeria"
   },
   {
     "nom": "GRUPOS ELECTRÓGENOS AGRESA SL",
@@ -6049,23 +6370,6 @@
     ],
     "sector": "Educació i Recerca",
     "categoria": "Serveis d'ensenyament i formació"
-  },
-  {
-    "nom": "MONTFERRI HERMANOS, SOCIEDAD LIMITADA",
-    "num_contratos": 8,
-    "total_importe": 23309.55,
-    "contratos": [
-      762,
-      763,
-      764,
-      1089,
-      1219,
-      1894,
-      5002,
-      5970
-    ],
-    "sector": "Transport i Logística",
-    "categoria": "Serveis de transport"
   },
   {
     "nom": "MOISES BARGUÉS ASTURIAS",
@@ -6374,6 +6678,70 @@
     "categoria": "Aigües residuals, residus i neteja"
   },
   {
+    "nom": "EXCAVACIONS ANOIA SA",
+    "num_contratos": 7,
+    "total_importe": 63878.81,
+    "contratos": [
+      951,
+      3240,
+      3257,
+      3796,
+      6457,
+      7342,
+      7599
+    ],
+    "sector": "Construcció i Infraestructures",
+    "categoria": "Obres de construcció"
+  },
+  {
+    "nom": "ASSOCIACIO DE VEINS DEL BARRI DE XAUXA",
+    "num_contratos": 7,
+    "total_importe": 13300.74,
+    "contratos": [
+      1103,
+      1571,
+      3068,
+      4165,
+      4290,
+      5566,
+      7622
+    ],
+    "sector": "Cultura, Oci i Esport",
+    "categoria": "Serveis recreatius i culturals"
+  },
+  {
+    "nom": "UNIO COMERCIAL DE GASOILS,SL",
+    "num_contratos": 7,
+    "total_importe": 8845.95,
+    "contratos": [
+      28,
+      343,
+      622,
+      644,
+      680,
+      7738,
+      7803
+    ],
+    "sector": "Indústria, Maquinària i Energia",
+    "categoria": "Productes petrolífers i energia"
+  },
+  {
+    "nom": "ALBA OSUNA CUADRAS",
+    "num_contratos": 7,
+    "total_importe": 51460.0,
+    "contratos": [
+      1942,
+      2595,
+      3891,
+      5729,
+      6894,
+      7331,
+      7747
+    ],
+    "sector": "Serveis Professionals i Corporatius",
+    "categoria": "Serveis empresarials i de consultoria"
+  },
+  {
     "nom": "TASIAS MERCE, ANNA",
     "num_contratos": 7,
     "total_importe": 38917.36,
@@ -6388,6 +6756,22 @@
     ],
     "sector": "Cultura, Oci i Esport",
     "categoria": "Serveis recreatius i culturals"
+  },
+  {
+    "nom": "MATEOS NUÑEZ ROSER",
+    "num_contratos": 7,
+    "total_importe": 13800.95,
+    "contratos": [
+      77,
+      1464,
+      1474,
+      2850,
+      4186,
+      5776,
+      7781
+    ],
+    "sector": "Béns de Consum i Comerç",
+    "categoria": "Mobiliari i equipament"
   },
   {
     "nom": "SEÑALIZACIONES VILLAR, SA",
@@ -6454,70 +6838,6 @@
     "categoria": "Serveis empresarials i de consultoria"
   },
   {
-    "nom": "SERVICIOS DEPEC, SLU",
-    "num_contratos": 7,
-    "total_importe": 314116.84,
-    "contratos": [
-      323,
-      730,
-      1178,
-      2512,
-      2956,
-      4434,
-      6041
-    ],
-    "sector": "Medi Ambient, Neteja i Manteniment",
-    "categoria": "Aigües residuals, residus i neteja"
-  },
-  {
-    "nom": "ROS ROCA, SA",
-    "num_contratos": 7,
-    "total_importe": 231718.94,
-    "contratos": [
-      356,
-      1002,
-      1811,
-      2281,
-      3674,
-      4078,
-      4549
-    ],
-    "sector": "Béns de Consum i Comerç",
-    "categoria": "Mobiliari i equipament"
-  },
-  {
-    "nom": "DECCOTEXT LLAR SL",
-    "num_contratos": 7,
-    "total_importe": 18092.09,
-    "contratos": [
-      367,
-      948,
-      1308,
-      2096,
-      2817,
-      3712,
-      5447
-    ],
-    "sector": "Béns de Consum i Comerç",
-    "categoria": "Mobiliari i equipament"
-  },
-  {
-    "nom": "ASSOCIACIO PER A L'IMPULS DEL SECTOR TIC DE L'ANOIA",
-    "num_contratos": 7,
-    "total_importe": 19710.31,
-    "contratos": [
-      370,
-      1710,
-      3187,
-      4457,
-      6332,
-      6378,
-      6406
-    ],
-    "sector": "Educació i Recerca",
-    "categoria": "Serveis d'ensenyament i formació"
-  },
-  {
     "nom": "LOPEZ PUIG, MIGUEL ANGEL",
     "num_contratos": 7,
     "total_importe": 18318.35,
@@ -6580,38 +6900,6 @@
     ],
     "sector": "Indústria, Maquinària i Energia",
     "categoria": "Productes químics"
-  },
-  {
-    "nom": "NEMESIO SÁNCHEZ ALAMILLO",
-    "num_contratos": 7,
-    "total_importe": 13711.85,
-    "contratos": [
-      807,
-      1535,
-      2999,
-      3151,
-      3309,
-      5053,
-      6671
-    ],
-    "sector": "Medi Ambient, Neteja i Manteniment",
-    "categoria": "Serveis de reparació i manteniment"
-  },
-  {
-    "nom": "CATALONIA UNIC, SL",
-    "num_contratos": 7,
-    "total_importe": 15795.51,
-    "contratos": [
-      808,
-      2161,
-      2494,
-      2753,
-      5539,
-      5846,
-      6548
-    ],
-    "sector": "Altres Serveis i Subministraments",
-    "categoria": "Altres serveis comunitaris"
   },
   {
     "nom": "ENRIC MARTÍ GABRIEL",
@@ -6710,70 +6998,6 @@
     "categoria": "Serveis recreatius i culturals"
   },
   {
-    "nom": "ANTONIO COMPTE POSADA (COSANTEX)",
-    "num_contratos": 7,
-    "total_importe": 12263.85,
-    "contratos": [
-      1156,
-      2156,
-      3212,
-      4013,
-      4333,
-      6576,
-      7268
-    ],
-    "sector": "Béns de Consum i Comerç",
-    "categoria": "Roba i calçat"
-  },
-  {
-    "nom": "MES MERCAT, SL",
-    "num_contratos": 7,
-    "total_importe": 43781.96,
-    "contratos": [
-      1194,
-      2016,
-      3431,
-      3948,
-      4854,
-      5273,
-      5442
-    ],
-    "sector": "Agricultura i Alimentació",
-    "categoria": "Aliments i begudes"
-  },
-  {
-    "nom": "BADIES ADVOCATS ASSOCIATS, SLP",
-    "num_contratos": 7,
-    "total_importe": 20116.56,
-    "contratos": [
-      1232,
-      1828,
-      1904,
-      2364,
-      2687,
-      3116,
-      4063
-    ],
-    "sector": "Serveis Professionals i Corporatius",
-    "categoria": "Serveis empresarials i de consultoria"
-  },
-  {
-    "nom": "CAROL GASTRONOMIA, SL",
-    "num_contratos": 7,
-    "total_importe": 42968.64,
-    "contratos": [
-      1372,
-      1386,
-      2805,
-      2889,
-      4265,
-      4305,
-      5838
-    ],
-    "sector": "Agricultura i Alimentació",
-    "categoria": "Serveis d'hostaleria i restauració"
-  },
-  {
     "nom": "ASSOC.SETEM CATALUNYA",
     "num_contratos": 7,
     "total_importe": 17075.21,
@@ -6836,38 +7060,6 @@
     ],
     "sector": "Construcció i Infraestructures",
     "categoria": "Serveis d'arquitectura i enginyeria"
-  },
-  {
-    "nom": "TALLERES PALAUTORDERA, SA",
-    "num_contratos": 7,
-    "total_importe": 64300.1,
-    "contratos": [
-      2128,
-      2319,
-      2915,
-      3566,
-      3594,
-      4533,
-      4739
-    ],
-    "sector": "Béns de Consum i Comerç",
-    "categoria": "Mobiliari i equipament"
-  },
-  {
-    "nom": "FUNDACIÓ CATALANA DE L'ESPLAI",
-    "num_contratos": 7,
-    "total_importe": 42713.14,
-    "contratos": [
-      2563,
-      3436,
-      3875,
-      3893,
-      4404,
-      4925,
-      5293
-    ],
-    "sector": "Educació i Recerca",
-    "categoria": "Serveis d'ensenyament i formació"
   },
   {
     "nom": "ASSA ABLOY ENTRANCE SYST. SPAIN, SA",
@@ -6982,6 +7174,66 @@
     "categoria": "Serveis postals i telecomunicacions"
   },
   {
+    "nom": "BALL DE SANT MIQUEL I ELS DIABLES D'IGUALADA",
+    "num_contratos": 6,
+    "total_importe": 37181.0,
+    "contratos": [
+      1105,
+      2625,
+      3972,
+      5477,
+      5719,
+      7594
+    ],
+    "sector": "Cultura, Oci i Esport",
+    "categoria": "Serveis recreatius i culturals"
+  },
+  {
+    "nom": "ASSOCIACIÓ CULTURAL COBLA LLUÏSOS DE TARADELL",
+    "num_contratos": 6,
+    "total_importe": 7750.36,
+    "contratos": [
+      292,
+      788,
+      1101,
+      3160,
+      4615,
+      7613
+    ],
+    "sector": "Cultura, Oci i Esport",
+    "categoria": "Serveis recreatius i culturals"
+  },
+  {
+    "nom": "PERES SPORT, SL",
+    "num_contratos": 6,
+    "total_importe": 15815.32,
+    "contratos": [
+      954,
+      5169,
+      5698,
+      7089,
+      7093,
+      7655
+    ],
+    "sector": "Seguretat i Defensa",
+    "categoria": "Equips de seguretat i defensa"
+  },
+  {
+    "nom": "HOTEL ROBERT, S.L.",
+    "num_contratos": 6,
+    "total_importe": 34308.34,
+    "contratos": [
+      1264,
+      1311,
+      2684,
+      3792,
+      5586,
+      7662
+    ],
+    "sector": "Agricultura i Alimentació",
+    "categoria": "Serveis d'hostaleria i restauració"
+  },
+  {
     "nom": "JOAN SOLÉ OLLER",
     "num_contratos": 6,
     "total_importe": 4245.0,
@@ -6997,6 +7249,111 @@
     "categoria": "Serveis recreatius i culturals"
   },
   {
+    "nom": "ASSOCIACIO CULTURAL ACTURA",
+    "num_contratos": 6,
+    "total_importe": 9815.02,
+    "contratos": [
+      215,
+      2787,
+      3620,
+      4009,
+      6005,
+      7724
+    ],
+    "sector": "Cultura, Oci i Esport",
+    "categoria": "Serveis recreatius i culturals"
+  },
+  {
+    "nom": "FIGUEROLA BUSQUETS, ROGER",
+    "num_contratos": 6,
+    "total_importe": 18513.96,
+    "contratos": [
+      1432,
+      1472,
+      2671,
+      4116,
+      5653,
+      7758
+    ],
+    "sector": "Agricultura i Alimentació",
+    "categoria": "Serveis d'hostaleria i restauració"
+  },
+  {
+    "nom": "FIRA D'IGUALADA",
+    "num_contratos": 6,
+    "total_importe": 23182.9,
+    "contratos": [
+      1017,
+      1619,
+      1656,
+      2210,
+      6925,
+      7763
+    ],
+    "sector": "Cultura, Oci i Esport",
+    "categoria": "Serveis recreatius i culturals"
+  },
+  {
+    "nom": "ASSOCACIO DRACS I VIBRIES D'IGUALADA",
+    "num_contratos": 6,
+    "total_importe": 15261.0,
+    "contratos": [
+      1110,
+      1393,
+      2622,
+      2743,
+      3980,
+      7768
+    ],
+    "sector": "Cultura, Oci i Esport",
+    "categoria": "Serveis recreatius i culturals"
+  },
+  {
+    "nom": "BORRAS TERES, DOLORS",
+    "num_contratos": 6,
+    "total_importe": 10980.0,
+    "contratos": [
+      1218,
+      2886,
+      4121,
+      5590,
+      6828,
+      7782
+    ],
+    "sector": "Cultura, Oci i Esport",
+    "categoria": "Serveis recreatius i culturals"
+  },
+  {
+    "nom": "AS. DE SENIROS ESPANYOLS PER A LA COOPERACIO TECNI",
+    "num_contratos": 6,
+    "total_importe": 39876.0,
+    "contratos": [
+      363,
+      1709,
+      2213,
+      3341,
+      5440,
+      7809
+    ],
+    "sector": "Serveis Professionals i Corporatius",
+    "categoria": "Serveis empresarials i de consultoria"
+  },
+  {
+    "nom": "INGENIERIA CONSTRUCTORA MANRESANA, SL",
+    "num_contratos": 6,
+    "total_importe": 2107083.09,
+    "contratos": [
+      33,
+      39,
+      89,
+      361,
+      1189,
+      7211
+    ],
+    "sector": "Construcció i Infraestructures",
+    "categoria": "Obres de construcció"
+  },
+  {
     "nom": "D'ALEPH INICIATIVAS Y ORGANIZACIÓN, S.A.",
     "num_contratos": 6,
     "total_importe": 39901.29,
@@ -7010,21 +7367,6 @@
     ],
     "sector": "Serveis Professionals i Corporatius",
     "categoria": "Serveis empresarials i de consultoria"
-  },
-  {
-    "nom": "MATEOS NUÑEZ ROSER",
-    "num_contratos": 6,
-    "total_importe": 12447.26,
-    "contratos": [
-      77,
-      1464,
-      1474,
-      2850,
-      4186,
-      5776
-    ],
-    "sector": "Béns de Consum i Comerç",
-    "categoria": "Mobiliari i equipament"
   },
   {
     "nom": "MEDIA MANGA MANGOTIÈRE, S.L.",
@@ -7252,21 +7594,6 @@
     "categoria": "Serveis sanitaris i socials"
   },
   {
-    "nom": "EXCAVACIONS ANOIA SA",
-    "num_contratos": 6,
-    "total_importe": 59917.0,
-    "contratos": [
-      951,
-      3240,
-      3257,
-      3796,
-      6457,
-      7342
-    ],
-    "sector": "Construcció i Infraestructures",
-    "categoria": "Obres de construcció"
-  },
-  {
     "nom": "JAUME ENRICH GUMÀ",
     "num_contratos": 6,
     "total_importe": 114322.53,
@@ -7295,21 +7622,6 @@
     ],
     "sector": "Salut i Serveis Socials",
     "categoria": "Serveis sanitaris i socials"
-  },
-  {
-    "nom": "ASSOCIACIO DE VEINS DEL BARRI DE XAUXA",
-    "num_contratos": 6,
-    "total_importe": 12550.74,
-    "contratos": [
-      1103,
-      1571,
-      3068,
-      4165,
-      4290,
-      5566
-    ],
-    "sector": "Cultura, Oci i Esport",
-    "categoria": "Serveis recreatius i culturals"
   },
   {
     "nom": "ASSOCIACIÓ FILIGRANA",
@@ -7370,21 +7682,6 @@
     ],
     "sector": "Educació i Recerca",
     "categoria": "Serveis d'ensenyament i formació"
-  },
-  {
-    "nom": "ALBA OSUNA CUADRAS",
-    "num_contratos": 6,
-    "total_importe": 40860.0,
-    "contratos": [
-      1942,
-      2595,
-      3891,
-      5729,
-      6894,
-      7331
-    ],
-    "sector": "Serveis Professionals i Corporatius",
-    "categoria": "Serveis empresarials i de consultoria"
   },
   {
     "nom": "UNIVERSITAT DE LLEIDA",
@@ -7567,32 +7864,228 @@
     "categoria": "Serveis empresarials i de consultoria"
   },
   {
-    "nom": "UNIO COMERCIAL DE GASOILS,SL",
+    "nom": "SOLITIUM CONTROL GROUP, S.A.",
     "num_contratos": 5,
-    "total_importe": 6542.06,
+    "total_importe": 9741.93,
     "contratos": [
-      28,
-      343,
-      622,
-      644,
-      680
+      126,
+      813,
+      1229,
+      7598,
+      7762
+    ],
+    "sector": "Tecnologia i Telecomunicacions",
+    "categoria": "Maquinària d'oficina i informàtica"
+  },
+  {
+    "nom": "ASSOCIACIÓ CULTURAL DESSOTA",
+    "num_contratos": 5,
+    "total_importe": 39775.0,
+    "contratos": [
+      1100,
+      2616,
+      3985,
+      5509,
+      7621
+    ],
+    "sector": "Cultura, Oci i Esport",
+    "categoria": "Serveis recreatius i culturals"
+  },
+  {
+    "nom": "JOAN CONILL ESPINAS",
+    "num_contratos": 5,
+    "total_importe": 4060.0,
+    "contratos": [
+      404,
+      477,
+      546,
+      2470,
+      7647
+    ],
+    "sector": "Construcció i Infraestructures",
+    "categoria": "Serveis d'arquitectura i enginyeria"
+  },
+  {
+    "nom": "PROBILAM EVENTS SL",
+    "num_contratos": 5,
+    "total_importe": 25049.0,
+    "contratos": [
+      144,
+      688,
+      2092,
+      2301,
+      7648
+    ],
+    "sector": "Indústria, Maquinària i Energia",
+    "categoria": "Maquinària elèctrica"
+  },
+  {
+    "nom": "ESTACIO DE SERVEI IGUALADA, SL",
+    "num_contratos": 5,
+    "total_importe": 6654.47,
+    "contratos": [
+      180,
+      623,
+      1545,
+      7680,
+      7683
     ],
     "sector": "Indústria, Maquinària i Energia",
     "categoria": "Productes petrolífers i energia"
   },
   {
-    "nom": "INGENIERIA CONSTRUCTORA MANRESANA, SL",
+    "nom": "FUNDACIÓN IMAGEN",
     "num_contratos": 5,
-    "total_importe": 1656683.09,
+    "total_importe": 14038.68,
     "contratos": [
-      33,
-      39,
-      89,
-      1189,
-      7211
+      1029,
+      4088,
+      5803,
+      6040,
+      7690
     ],
-    "sector": "Construcció i Infraestructures",
-    "categoria": "Obres de construcció"
+    "sector": "Salut i Serveis Socials",
+    "categoria": "Serveis sanitaris i socials"
+  },
+  {
+    "nom": "ULTRAMAGIC, SA",
+    "num_contratos": 5,
+    "total_importe": 8000.0,
+    "contratos": [
+      1228,
+      2682,
+      4040,
+      5581,
+      7692
+    ],
+    "sector": "Cultura, Oci i Esport",
+    "categoria": "Serveis recreatius i culturals"
+  },
+  {
+    "nom": "ÈXITS ESPECTACLES S.L.",
+    "num_contratos": 5,
+    "total_importe": 92650.0,
+    "contratos": [
+      1011,
+      2715,
+      2976,
+      7699,
+      7700
+    ],
+    "sector": "Cultura, Oci i Esport",
+    "categoria": "Serveis recreatius i culturals"
+  },
+  {
+    "nom": "ENRICH MIQUEL, BERNAT",
+    "num_contratos": 5,
+    "total_importe": 12000.0,
+    "contratos": [
+      1469,
+      6603,
+      6610,
+      7502,
+      7740
+    ],
+    "sector": "Cultura, Oci i Esport",
+    "categoria": "Serveis recreatius i culturals"
+  },
+  {
+    "nom": "HIDROTEC SANEJAMENT, SL",
+    "num_contratos": 5,
+    "total_importe": 23478.47,
+    "contratos": [
+      64,
+      5000,
+      6201,
+      6690,
+      7742
+    ],
+    "sector": "Medi Ambient, Neteja i Manteniment",
+    "categoria": "Aigües residuals, residus i neteja"
+  },
+  {
+    "nom": "FERRER VAN GINKEL, LARISSA",
+    "num_contratos": 5,
+    "total_importe": 9450.0,
+    "contratos": [
+      371,
+      1366,
+      1774,
+      2269,
+      7749
+    ],
+    "sector": "Salut i Serveis Socials",
+    "categoria": "Serveis sanitaris i socials"
+  },
+  {
+    "nom": "KOMPINI TECHNOLOGIES, SL",
+    "num_contratos": 5,
+    "total_importe": 24274.42,
+    "contratos": [
+      452,
+      1815,
+      2127,
+      2849,
+      7777
+    ],
+    "sector": "Tecnologia i Telecomunicacions",
+    "categoria": "Serveis informàtics (TI)"
+  },
+  {
+    "nom": "DON CICLETO, SL",
+    "num_contratos": 5,
+    "total_importe": 21348.0,
+    "contratos": [
+      1277,
+      1278,
+      2651,
+      6806,
+      7790
+    ],
+    "sector": "Medi Ambient, Neteja i Manteniment",
+    "categoria": "Serveis de reparació i manteniment"
+  },
+  {
+    "nom": "SOTO BALLESTEROS, S.L.",
+    "num_contratos": 5,
+    "total_importe": 6367.64,
+    "contratos": [
+      579,
+      735,
+      967,
+      1538,
+      7794
+    ],
+    "sector": "Indústria, Maquinària i Energia",
+    "categoria": "Productes petrolífers i energia"
+  },
+  {
+    "nom": "TIRADO GONZALEZ, RUBEN",
+    "num_contratos": 5,
+    "total_importe": 17110.0,
+    "contratos": [
+      1081,
+      2305,
+      2589,
+      3544,
+      7797
+    ],
+    "sector": "Serveis Professionals i Corporatius",
+    "categoria": "Serveis empresarials i de consultoria"
+  },
+  {
+    "nom": "ECONOCOM SEMIC, S.A.U",
+    "num_contratos": 5,
+    "total_importe": 10334.16,
+    "contratos": [
+      234,
+      242,
+      258,
+      496,
+      7810
+    ],
+    "sector": "",
+    "categoria": ""
   },
   {
     "nom": "USIS GUIRAO, S.L",
@@ -7707,20 +8200,6 @@
     "categoria": "Productes químics"
   },
   {
-    "nom": "ASSOCIACIO CULTURAL ACTURA",
-    "num_contratos": 5,
-    "total_importe": 9215.02,
-    "contratos": [
-      215,
-      2787,
-      3620,
-      4009,
-      6005
-    ],
-    "sector": "Cultura, Oci i Esport",
-    "categoria": "Serveis recreatius i culturals"
-  },
-  {
     "nom": "MUSICS SINGULARS",
     "num_contratos": 5,
     "total_importe": 6000.0,
@@ -7819,20 +8298,6 @@
     "categoria": "Serveis recreatius i culturals"
   },
   {
-    "nom": "ASSOCIACIÓ CULTURAL COBLA LLUÏSOS DE TARADELL",
-    "num_contratos": 5,
-    "total_importe": 6150.36,
-    "contratos": [
-      292,
-      788,
-      1101,
-      3160,
-      4615
-    ],
-    "sector": "Cultura, Oci i Esport",
-    "categoria": "Serveis recreatius i culturals"
-  },
-  {
     "nom": "LA PERLA 29 S.L.",
     "num_contratos": 5,
     "total_importe": 35805.41,
@@ -7879,28 +8344,14 @@
     "num_contratos": 5,
     "total_importe": 18126.28,
     "contratos": [
-      361,
       486,
       2020,
       4855,
-      5479
+      5479,
+      7818
     ],
     "sector": "Transport i Logística",
     "categoria": "Serveis de transport"
-  },
-  {
-    "nom": "AS. DE SENIROS ESPANYOLS PER A LA COOPERACIO TECNI",
-    "num_contratos": 5,
-    "total_importe": 28676.0,
-    "contratos": [
-      363,
-      1709,
-      2213,
-      3341,
-      5440
-    ],
-    "sector": "Serveis Professionals i Corporatius",
-    "categoria": "Serveis empresarials i de consultoria"
   },
   {
     "nom": "SOLAR-TRADEX, S.L.",
@@ -8141,20 +8592,6 @@
     "categoria": "Roba i calçat"
   },
   {
-    "nom": "PERES SPORT, SL",
-    "num_contratos": 5,
-    "total_importe": 11056.39,
-    "contratos": [
-      954,
-      5169,
-      5698,
-      7089,
-      7093
-    ],
-    "sector": "Seguretat i Defensa",
-    "categoria": "Equips de seguretat i defensa"
-  },
-  {
     "nom": "AYABI RAZEGHI, ABBAS",
     "num_contratos": 5,
     "total_importe": 25950.73,
@@ -8211,34 +8648,6 @@
     "categoria": "Serveis d'ensenyament i formació"
   },
   {
-    "nom": "FIRA D'IGUALADA",
-    "num_contratos": 5,
-    "total_importe": 19339.9,
-    "contratos": [
-      1017,
-      1619,
-      1656,
-      2210,
-      6925
-    ],
-    "sector": "Cultura, Oci i Esport",
-    "categoria": "Serveis recreatius i culturals"
-  },
-  {
-    "nom": "BALL DE SANT MIQUEL I ELS DIABLES D'IGUALADA",
-    "num_contratos": 5,
-    "total_importe": 32219.0,
-    "contratos": [
-      1105,
-      2625,
-      3972,
-      5477,
-      5719
-    ],
-    "sector": "Cultura, Oci i Esport",
-    "categoria": "Serveis recreatius i culturals"
-  },
-  {
     "nom": "COLLA DE TRABUCAIRES D'IGUALADA",
     "num_contratos": 5,
     "total_importe": 12775.0,
@@ -8248,20 +8657,6 @@
       3976,
       5513,
       6713
-    ],
-    "sector": "Cultura, Oci i Esport",
-    "categoria": "Serveis recreatius i culturals"
-  },
-  {
-    "nom": "ASSOCACIO DRACS I VIBRIES D'IGUALADA",
-    "num_contratos": 5,
-    "total_importe": 14661.0,
-    "contratos": [
-      1110,
-      1393,
-      2622,
-      2743,
-      3980
     ],
     "sector": "Cultura, Oci i Esport",
     "categoria": "Serveis recreatius i culturals"
@@ -8323,20 +8718,6 @@
     "categoria": "Mobiliari i equipament"
   },
   {
-    "nom": "BORRAS TERES, DOLORS",
-    "num_contratos": 5,
-    "total_importe": 8890.0,
-    "contratos": [
-      1218,
-      2886,
-      4121,
-      5590,
-      6828
-    ],
-    "sector": "Cultura, Oci i Esport",
-    "categoria": "Serveis recreatius i culturals"
-  },
-  {
     "nom": "SEMICONDUCTORES Y SISTEMAS, SA",
     "num_contratos": 5,
     "total_importe": 11475.9,
@@ -8349,20 +8730,6 @@
     ],
     "sector": "Tecnologia i Telecomunicacions",
     "categoria": "Paquets de programari"
-  },
-  {
-    "nom": "HOTEL ROBERT, S.L.",
-    "num_contratos": 5,
-    "total_importe": 26920.34,
-    "contratos": [
-      1264,
-      1311,
-      2684,
-      3792,
-      5586
-    ],
-    "sector": "Agricultura i Alimentació",
-    "categoria": "Serveis d'hostaleria i restauració"
   },
   {
     "nom": "CENESEPRO,S.L.",
@@ -8405,20 +8772,6 @@
     ],
     "sector": "Transport i Logística",
     "categoria": "Serveis de transport"
-  },
-  {
-    "nom": "FIGUEROLA BUSQUETS, ROGER",
-    "num_contratos": 5,
-    "total_importe": 15066.31,
-    "contratos": [
-      1432,
-      1472,
-      2671,
-      4116,
-      5653
-    ],
-    "sector": "Agricultura i Alimentació",
-    "categoria": "Serveis d'hostaleria i restauració"
   },
   {
     "nom": "BISBAL-CASACUBERTA, SL",
@@ -8883,6 +9236,123 @@
     "categoria": "Materials de construcció"
   },
   {
+    "nom": "BALL DE CERCOLETS D'IGUALADA",
+    "num_contratos": 4,
+    "total_importe": 4625.0,
+    "contratos": [
+      1120,
+      3973,
+      5508,
+      7591
+    ],
+    "sector": "Cultura, Oci i Esport",
+    "categoria": "Serveis recreatius i culturals"
+  },
+  {
+    "nom": "ASSOCIACIO BALL DE BASTONS D'IGUALADA",
+    "num_contratos": 4,
+    "total_importe": 4625.0,
+    "contratos": [
+      1098,
+      3974,
+      5507,
+      7592
+    ],
+    "sector": "Cultura, Oci i Esport",
+    "categoria": "Serveis recreatius i culturals"
+  },
+  {
+    "nom": "ASSOCIACIO BALL PASTORETS D'IGUALADA",
+    "num_contratos": 4,
+    "total_importe": 4625.0,
+    "contratos": [
+      1108,
+      3975,
+      5478,
+      7595
+    ],
+    "sector": "Cultura, Oci i Esport",
+    "categoria": "Serveis recreatius i culturals"
+  },
+  {
+    "nom": "PEREIRA CORTES, ANTONIO",
+    "num_contratos": 4,
+    "total_importe": 22200.0,
+    "contratos": [
+      1111,
+      2794,
+      4217,
+      7626
+    ],
+    "sector": "Cultura, Oci i Esport",
+    "categoria": "Serveis recreatius i culturals"
+  },
+  {
+    "nom": "LA BONA PARTY SL",
+    "num_contratos": 4,
+    "total_importe": 17498.0,
+    "contratos": [
+      182,
+      183,
+      7633,
+      7649
+    ],
+    "sector": "",
+    "categoria": ""
+  },
+  {
+    "nom": "ECOCOMPUTER, S.L.",
+    "num_contratos": 4,
+    "total_importe": 10557.42,
+    "contratos": [
+      500,
+      1581,
+      1910,
+      7681
+    ],
+    "sector": "Tecnologia i Telecomunicacions",
+    "categoria": "Serveis informàtics (TI)"
+  },
+  {
+    "nom": "MORE APP FORMULARIOS, SOCIEDAD LIMITADA",
+    "num_contratos": 4,
+    "total_importe": 11556.0,
+    "contratos": [
+      1776,
+      2798,
+      3092,
+      7682
+    ],
+    "sector": "Tecnologia i Telecomunicacions",
+    "categoria": "Serveis informàtics (TI)"
+  },
+  {
+    "nom": "DIVEREVENT MANAGEMENT, SL",
+    "num_contratos": 4,
+    "total_importe": 9450.0,
+    "contratos": [
+      1335,
+      5276,
+      5663,
+      7697
+    ],
+    "sector": "Cultura, Oci i Esport",
+    "categoria": "Serveis recreatius i culturals"
+  },
+  {
+    "nom": "ALKIRENT SERVI, SL",
+    "num_contratos": 4,
+    "total_importe": 17409.0,
+    "contratos": [
+      2637,
+      4079,
+      5489,
+      7703
+    ],
+    "sector": "Serveis Professionals i Corporatius",
+    "categoria": "Serveis empresarials i de consultoria"
+  },
+  {
     "nom": "PUBLIPRINTERS GLOBAL, S.L.",
     "num_contratos": 4,
     "total_importe": 977.67,
@@ -8894,6 +9364,45 @@
     ],
     "sector": "Béns de Consum i Comerç",
     "categoria": "Impresos i productes relacionats"
+  },
+  {
+    "nom": "SÒNIA BARGALLÓ BERMEJO",
+    "num_contratos": 4,
+    "total_importe": 90310.2,
+    "contratos": [
+      1973,
+      3327,
+      4948,
+      7708
+    ],
+    "sector": "Agricultura i Alimentació",
+    "categoria": "Serveis agrícoles i forestals"
+  },
+  {
+    "nom": "ALPHANET SECURITY SYSTEMS S.L.",
+    "num_contratos": 4,
+    "total_importe": 254774.56,
+    "contratos": [
+      1252,
+      1907,
+      4908,
+      7710
+    ],
+    "sector": "Seguretat i Defensa",
+    "categoria": "Equips de seguretat i defensa"
+  },
+  {
+    "nom": "VILA PUIG MARC",
+    "num_contratos": 4,
+    "total_importe": 11991.08,
+    "contratos": [
+      2250,
+      3434,
+      4435,
+      7712
+    ],
+    "sector": "Cultura, Oci i Esport",
+    "categoria": "Serveis recreatius i culturals"
   },
   {
     "nom": "LA LEY SOLUCIONES LEGALES, SA",
@@ -8909,17 +9418,43 @@
     "categoria": "Impresos i productes relacionats"
   },
   {
-    "nom": "HIDROTEC SANEJAMENT, SL",
+    "nom": "CASBU, SL",
     "num_contratos": 4,
-    "total_importe": 20811.47,
+    "total_importe": 10580.76,
     "contratos": [
-      64,
-      5000,
-      6201,
-      6690
+      267,
+      834,
+      2278,
+      7732
     ],
-    "sector": "Medi Ambient, Neteja i Manteniment",
-    "categoria": "Aigües residuals, residus i neteja"
+    "sector": "Altres Serveis i Subministraments",
+    "categoria": "Altres serveis comunitaris"
+  },
+  {
+    "nom": "RAMAR QUATRE S.L.U.",
+    "num_contratos": 4,
+    "total_importe": 3500.01,
+    "contratos": [
+      5609,
+      6393,
+      7736,
+      7807
+    ],
+    "sector": "Indústria, Maquinària i Energia",
+    "categoria": "Maquinària elèctrica"
+  },
+  {
+    "nom": "VPR REFRIGERACIÓ, S.L.",
+    "num_contratos": 4,
+    "total_importe": 17806.53,
+    "contratos": [
+      2136,
+      5280,
+      5901,
+      7746
+    ],
+    "sector": "Construcció i Infraestructures",
+    "categoria": "Serveis d'instal·lació"
   },
   {
     "nom": "INICIATIVES FRIGOLS SL",
@@ -8959,19 +9494,6 @@
     ],
     "sector": "Agricultura i Alimentació",
     "categoria": "Productes agrícoles i ramaders"
-  },
-  {
-    "nom": "PROBILAM EVENTS SL",
-    "num_contratos": 4,
-    "total_importe": 23549.0,
-    "contratos": [
-      144,
-      688,
-      2092,
-      2301
-    ],
-    "sector": "Indústria, Maquinària i Energia",
-    "categoria": "Maquinària elèctrica"
   },
   {
     "nom": "ESCOLA PIA DE CATALUNYA",
@@ -9026,19 +9548,6 @@
     "categoria": "Serveis recreatius i culturals"
   },
   {
-    "nom": "ECONOCOM SEMIC, S.A.U",
-    "num_contratos": 4,
-    "total_importe": 8503.36,
-    "contratos": [
-      234,
-      242,
-      258,
-      496
-    ],
-    "sector": "",
-    "categoria": ""
-  },
-  {
     "nom": "NUNSYS, S.A.",
     "num_contratos": 4,
     "total_importe": 2898.0,
@@ -9091,19 +9600,6 @@
     "categoria": "Serveis públics (aigua, energia)"
   },
   {
-    "nom": "FERRER VAN GINKEL, LARISSA",
-    "num_contratos": 4,
-    "total_importe": 7950.0,
-    "contratos": [
-      371,
-      1366,
-      1774,
-      2269
-    ],
-    "sector": "Salut i Serveis Socials",
-    "categoria": "Serveis sanitaris i socials"
-  },
-  {
     "nom": "MANSA ASSESORS, SL",
     "num_contratos": 4,
     "total_importe": 1456.0,
@@ -9115,19 +9611,6 @@
     ],
     "sector": "Serveis Professionals i Corporatius",
     "categoria": "Serveis empresarials i de consultoria"
-  },
-  {
-    "nom": "JOAN CONILL ESPINAS",
-    "num_contratos": 4,
-    "total_importe": 2950.0,
-    "contratos": [
-      404,
-      477,
-      546,
-      2470
-    ],
-    "sector": "Construcció i Infraestructures",
-    "categoria": "Serveis d'arquitectura i enginyeria"
   },
   {
     "nom": "IZQUIERDO CANAS, JOSEP",
@@ -9190,19 +9673,6 @@
       534,
       1978,
       1979
-    ],
-    "sector": "Tecnologia i Telecomunicacions",
-    "categoria": "Serveis informàtics (TI)"
-  },
-  {
-    "nom": "KOMPINI TECHNOLOGIES, SL",
-    "num_contratos": 4,
-    "total_importe": 22330.56,
-    "contratos": [
-      452,
-      1815,
-      2127,
-      2849
     ],
     "sector": "Tecnologia i Telecomunicacions",
     "categoria": "Serveis informàtics (TI)"
@@ -9310,19 +9780,6 @@
     ],
     "sector": "Béns de Consum i Comerç",
     "categoria": "Impresos i productes relacionats"
-  },
-  {
-    "nom": "SOTO BALLESTEROS, S.L.",
-    "num_contratos": 4,
-    "total_importe": 4784.64,
-    "contratos": [
-      579,
-      735,
-      967,
-      1538
-    ],
-    "sector": "Indústria, Maquinària i Energia",
-    "categoria": "Productes petrolífers i energia"
   },
   {
     "nom": "ASSOCIACIÓ CULTURAL GRALLA D'IGUALADA",
@@ -9507,19 +9964,6 @@
     "categoria": "Equips de laboratori i precisió"
   },
   {
-    "nom": "FUNDACIÓN IMAGEN",
-    "num_contratos": 4,
-    "total_importe": 11413.68,
-    "contratos": [
-      1029,
-      4088,
-      5803,
-      6040
-    ],
-    "sector": "Salut i Serveis Socials",
-    "categoria": "Serveis sanitaris i socials"
-  },
-  {
     "nom": "TAPISSERIA VILASECA",
     "num_contratos": 4,
     "total_importe": 6370.0,
@@ -9531,32 +9975,6 @@
     ],
     "sector": "Medi Ambient, Neteja i Manteniment",
     "categoria": "Serveis de reparació i manteniment"
-  },
-  {
-    "nom": "TIRADO GONZALEZ, RUBEN",
-    "num_contratos": 4,
-    "total_importe": 13200.0,
-    "contratos": [
-      1081,
-      2305,
-      2589,
-      3544
-    ],
-    "sector": "Serveis Professionals i Corporatius",
-    "categoria": "Serveis empresarials i de consultoria"
-  },
-  {
-    "nom": "ASSOCIACIÓ CULTURAL DESSOTA",
-    "num_contratos": 4,
-    "total_importe": 30375.0,
-    "contratos": [
-      1100,
-      2616,
-      3985,
-      5509
-    ],
-    "sector": "Cultura, Oci i Esport",
-    "categoria": "Serveis recreatius i culturals"
   },
   {
     "nom": "WAKEFUL SEGURETAT, S.L",
@@ -9572,19 +9990,6 @@
     "categoria": "Equips de seguretat i defensa"
   },
   {
-    "nom": "ULTRAMAGIC, SA",
-    "num_contratos": 4,
-    "total_importe": 4800.0,
-    "contratos": [
-      1228,
-      2682,
-      4040,
-      5581
-    ],
-    "sector": "Cultura, Oci i Esport",
-    "categoria": "Serveis recreatius i culturals"
-  },
-  {
     "nom": "BILBOMICRO INFORMATICA SA",
     "num_contratos": 4,
     "total_importe": 10000.0,
@@ -9596,19 +10001,6 @@
     ],
     "sector": "Tecnologia i Telecomunicacions",
     "categoria": "Paquets de programari"
-  },
-  {
-    "nom": "DON CICLETO, SL",
-    "num_contratos": 4,
-    "total_importe": 19320.0,
-    "contratos": [
-      1277,
-      1278,
-      2651,
-      6806
-    ],
-    "sector": "Medi Ambient, Neteja i Manteniment",
-    "categoria": "Serveis de reparació i manteniment"
   },
   {
     "nom": "JOSEP MARIA TOST BORRÀS",
@@ -9635,19 +10027,6 @@
     ],
     "sector": "Serveis Professionals i Corporatius",
     "categoria": "Serveis financers i d'assegurances"
-  },
-  {
-    "nom": "ENRICH MIQUEL, BERNAT",
-    "num_contratos": 4,
-    "total_importe": 9900.0,
-    "contratos": [
-      1469,
-      6603,
-      6610,
-      7502
-    ],
-    "sector": "Cultura, Oci i Esport",
-    "categoria": "Serveis recreatius i culturals"
   },
   {
     "nom": "FEM PRODUCCIONS S.L.",
@@ -10170,6 +10549,102 @@
     "categoria": ""
   },
   {
+    "nom": "DAGRAM TI, S.L.",
+    "num_contratos": 3,
+    "total_importe": 148815.42,
+    "contratos": [
+      577,
+      5128,
+      7596
+    ],
+    "sector": "Tecnologia i Telecomunicacions",
+    "categoria": "Maquinària d'oficina i informàtica"
+  },
+  {
+    "nom": "AGRUPACIO FOLKLORICA IGUALADA",
+    "num_contratos": 3,
+    "total_importe": 4500.0,
+    "contratos": [
+      1113,
+      1887,
+      7616
+    ],
+    "sector": "Cultura, Oci i Esport",
+    "categoria": "Serveis recreatius i culturals"
+  },
+  {
+    "nom": "BITRAC-DANSA",
+    "num_contratos": 3,
+    "total_importe": 5050.0,
+    "contratos": [
+      1114,
+      2626,
+      7620
+    ],
+    "sector": "Cultura, Oci i Esport",
+    "categoria": "Serveis recreatius i culturals"
+  },
+  {
+    "nom": "NO TOT ES BINARI, SCP",
+    "num_contratos": 3,
+    "total_importe": 4240.58,
+    "contratos": [
+      1629,
+      5851,
+      7646
+    ],
+    "sector": "Educació i Recerca",
+    "categoria": "Serveis d'ensenyament i formació"
+  },
+  {
+    "nom": "REFORMES JORTOM, SL",
+    "num_contratos": 3,
+    "total_importe": 3903.53,
+    "contratos": [
+      4523,
+      5361,
+      7674
+    ],
+    "sector": "Medi Ambient, Neteja i Manteniment",
+    "categoria": "Serveis de reparació i manteniment"
+  },
+  {
+    "nom": "CONSULTORIA MÈTODES I TÈCNIQUES APLICADES, SLU",
+    "num_contratos": 3,
+    "total_importe": 12600.0,
+    "contratos": [
+      5932,
+      7748,
+      7767
+    ],
+    "sector": "Serveis Professionals i Corporatius",
+    "categoria": "Serveis empresarials i de consultoria"
+  },
+  {
+    "nom": "NOVO TS SL",
+    "num_contratos": 3,
+    "total_importe": 8240.18,
+    "contratos": [
+      925,
+      2374,
+      7774
+    ],
+    "sector": "Cultura, Oci i Esport",
+    "categoria": "Serveis recreatius i culturals"
+  },
+  {
+    "nom": "APLICACIONS MULTIMEDIA INTERACTIVES, SL",
+    "num_contratos": 3,
+    "total_importe": 19580.0,
+    "contratos": [
+      1388,
+      2567,
+      7796
+    ],
+    "sector": "Tecnologia i Telecomunicacions",
+    "categoria": "Serveis informàtics (TI)"
+  },
+  {
     "nom": "PA IGUALADA, S.A.",
     "num_contratos": 3,
     "total_importe": 4378.23,
@@ -10230,18 +10705,6 @@
     "categoria": "Serveis empresarials i de consultoria"
   },
   {
-    "nom": "SOLITIUM CONTROL GROUP, S.A.",
-    "num_contratos": 3,
-    "total_importe": 6271.08,
-    "contratos": [
-      126,
-      813,
-      1229
-    ],
-    "sector": "Tecnologia i Telecomunicacions",
-    "categoria": "Maquinària d'oficina i informàtica"
-  },
-  {
     "nom": "LAVOLA , 1981 S.A.U.",
     "num_contratos": 3,
     "total_importe": 39930.43,
@@ -10300,18 +10763,6 @@
     ],
     "sector": "Serveis Professionals i Corporatius",
     "categoria": "Serveis immobiliaris"
-  },
-  {
-    "nom": "ESTACIO DE SERVEI IGUALADA, SL",
-    "num_contratos": 3,
-    "total_importe": 3703.44,
-    "contratos": [
-      180,
-      623,
-      1545
-    ],
-    "sector": "Indústria, Maquinària i Energia",
-    "categoria": "Productes petrolífers i energia"
   },
   {
     "nom": "FUNDACIÓ ESPURNES BARROQUES",
@@ -10384,18 +10835,6 @@
     ],
     "sector": "Educació i Recerca",
     "categoria": "Serveis d'ensenyament i formació"
-  },
-  {
-    "nom": "CASBU, SL",
-    "num_contratos": 3,
-    "total_importe": 9293.33,
-    "contratos": [
-      267,
-      834,
-      2278
-    ],
-    "sector": "Altres Serveis i Subministraments",
-    "categoria": "Altres serveis comunitaris"
   },
   {
     "nom": "REHABILIT, SL",
@@ -10516,18 +10955,6 @@
     ],
     "sector": "Serveis Professionals i Corporatius",
     "categoria": "Serveis empresarials i de consultoria"
-  },
-  {
-    "nom": "ECOCOMPUTER, S.L.",
-    "num_contratos": 3,
-    "total_importe": 9720.42,
-    "contratos": [
-      500,
-      1581,
-      1910
-    ],
-    "sector": "Tecnologia i Telecomunicacions",
-    "categoria": "Serveis informàtics (TI)"
   },
   {
     "nom": "ACADEMIA ARTS I  CIENCIES CINEMATOGRAFIQUES CATALANES",
@@ -10734,18 +11161,6 @@
     "categoria": "Serveis empresarials i de consultoria"
   },
   {
-    "nom": "ÈXITS ESPECTACLES S.L.",
-    "num_contratos": 3,
-    "total_importe": 36700.0,
-    "contratos": [
-      1011,
-      2715,
-      2976
-    ],
-    "sector": "Cultura, Oci i Esport",
-    "categoria": "Serveis recreatius i culturals"
-  },
-  {
     "nom": "TEIXIDO FALCO, ISAAC",
     "num_contratos": 3,
     "total_importe": 9230.0,
@@ -10770,66 +11185,6 @@
     "categoria": "Serveis recreatius i culturals"
   },
   {
-    "nom": "ASSOCIACIO BALL DE BASTONS D'IGUALADA",
-    "num_contratos": 3,
-    "total_importe": 3375.0,
-    "contratos": [
-      1098,
-      3974,
-      5507
-    ],
-    "sector": "Cultura, Oci i Esport",
-    "categoria": "Serveis recreatius i culturals"
-  },
-  {
-    "nom": "ASSOCIACIO BALL PASTORETS D'IGUALADA",
-    "num_contratos": 3,
-    "total_importe": 3375.0,
-    "contratos": [
-      1108,
-      3975,
-      5478
-    ],
-    "sector": "Cultura, Oci i Esport",
-    "categoria": "Serveis recreatius i culturals"
-  },
-  {
-    "nom": "PEREIRA CORTES, ANTONIO",
-    "num_contratos": 3,
-    "total_importe": 17100.0,
-    "contratos": [
-      1111,
-      2794,
-      4217
-    ],
-    "sector": "Cultura, Oci i Esport",
-    "categoria": "Serveis recreatius i culturals"
-  },
-  {
-    "nom": "BALL DE CERCOLETS D'IGUALADA",
-    "num_contratos": 3,
-    "total_importe": 3375.0,
-    "contratos": [
-      1120,
-      3973,
-      5508
-    ],
-    "sector": "Cultura, Oci i Esport",
-    "categoria": "Serveis recreatius i culturals"
-  },
-  {
-    "nom": "ALPHANET SECURITY SYSTEMS S.L.",
-    "num_contratos": 3,
-    "total_importe": 237000.96,
-    "contratos": [
-      1252,
-      1907,
-      4908
-    ],
-    "sector": "Seguretat i Defensa",
-    "categoria": "Equips de seguretat i defensa"
-  },
-  {
     "nom": "OSCAR PASTISSER D'IGUALADA, SL",
     "num_contratos": 3,
     "total_importe": 3373.87,
@@ -10840,18 +11195,6 @@
     ],
     "sector": "Agricultura i Alimentació",
     "categoria": "Serveis d'hostaleria i restauració"
-  },
-  {
-    "nom": "DIVEREVENT MANAGEMENT, SL",
-    "num_contratos": 3,
-    "total_importe": 6150.0,
-    "contratos": [
-      1335,
-      5276,
-      5663
-    ],
-    "sector": "Cultura, Oci i Esport",
-    "categoria": "Serveis recreatius i culturals"
   },
   {
     "nom": "ABANIK PRODUCCIONES SLU",
@@ -10974,18 +11317,6 @@
     "categoria": "Serveis recreatius i culturals"
   },
   {
-    "nom": "MORE APP FORMULARIOS, SOCIEDAD LIMITADA",
-    "num_contratos": 3,
-    "total_importe": 8228.0,
-    "contratos": [
-      1776,
-      2798,
-      3092
-    ],
-    "sector": "Tecnologia i Telecomunicacions",
-    "categoria": "Serveis informàtics (TI)"
-  },
-  {
     "nom": "ENERGREEN DESING",
     "num_contratos": 3,
     "total_importe": 13500.0,
@@ -11008,18 +11339,6 @@
     ],
     "sector": "Cultura, Oci i Esport",
     "categoria": "Serveis recreatius i culturals"
-  },
-  {
-    "nom": "SÒNIA BARGALLÓ BERMEJO",
-    "num_contratos": 3,
-    "total_importe": 37952.2,
-    "contratos": [
-      1973,
-      3327,
-      4948
-    ],
-    "sector": "Agricultura i Alimentació",
-    "categoria": "Serveis agrícoles i forestals"
   },
   {
     "nom": "ACTIVA PROSPECT RESEARCH & SOLUTIONS, SOCIEDAD LIMITADA, SOCIEDAD UNIPERSONAL",
@@ -11154,18 +11473,6 @@
     "categoria": "Serveis d'ensenyament i formació"
   },
   {
-    "nom": "VPR REFRIGERACIÓ, S.L.",
-    "num_contratos": 3,
-    "total_importe": 16573.53,
-    "contratos": [
-      2136,
-      5280,
-      5901
-    ],
-    "sector": "Construcció i Infraestructures",
-    "categoria": "Serveis d'instal·lació"
-  },
-  {
     "nom": "ORIGINAL BUFF, SA",
     "num_contratos": 3,
     "total_importe": 7253.0,
@@ -11188,18 +11495,6 @@
     ],
     "sector": "Medi Ambient, Neteja i Manteniment",
     "categoria": "Serveis de reparació i manteniment"
-  },
-  {
-    "nom": "VILA PUIG MARC",
-    "num_contratos": 3,
-    "total_importe": 8217.5,
-    "contratos": [
-      2250,
-      3434,
-      4435
-    ],
-    "sector": "Cultura, Oci i Esport",
-    "categoria": "Serveis recreatius i culturals"
   },
   {
     "nom": "GARCIA HERNANDEZ, JOSE ANTONIO",
@@ -11332,18 +11627,6 @@
     ],
     "sector": "Cultura, Oci i Esport",
     "categoria": "Serveis recreatius i culturals"
-  },
-  {
-    "nom": "ALKIRENT SERVI, SL",
-    "num_contratos": 3,
-    "total_importe": 9739.4,
-    "contratos": [
-      2637,
-      4079,
-      5489
-    ],
-    "sector": "Serveis Professionals i Corporatius",
-    "categoria": "Serveis empresarials i de consultoria"
   },
   {
     "nom": "¿ FERRETERIA INDUSTRIAL GILI, S.L.",
@@ -11982,6 +12265,171 @@
     "categoria": "Serveis d'ensenyament i formació"
   },
   {
+    "nom": "VIAJES HALCON S.A.U",
+    "num_contratos": 2,
+    "total_importe": 3371.0,
+    "contratos": [
+      72,
+      7603
+    ],
+    "sector": "",
+    "categoria": ""
+  },
+  {
+    "nom": "ASSOC. COLLA GEGANTERA DEL BISBALET",
+    "num_contratos": 2,
+    "total_importe": 1500.0,
+    "contratos": [
+      1117,
+      7611
+    ],
+    "sector": "Cultura, Oci i Esport",
+    "categoria": "Serveis recreatius i culturals"
+  },
+  {
+    "nom": "GRALLERS D'IGUALADA",
+    "num_contratos": 2,
+    "total_importe": 2450.0,
+    "contratos": [
+      1104,
+      7612
+    ],
+    "sector": "Cultura, Oci i Esport",
+    "categoria": "Serveis recreatius i culturals"
+  },
+  {
+    "nom": "ASSOCIACIÓ VEÏNAL DEL POBLE SEC D'IGUALADA",
+    "num_contratos": 2,
+    "total_importe": 2500.0,
+    "contratos": [
+      1096,
+      7617
+    ],
+    "sector": "Cultura, Oci i Esport",
+    "categoria": "Serveis recreatius i culturals"
+  },
+  {
+    "nom": "ESQUEMES INFORMÀTICS, SL",
+    "num_contratos": 2,
+    "total_importe": 12190.0,
+    "contratos": [
+      3417,
+      7624
+    ],
+    "sector": "Educació i Recerca",
+    "categoria": "Serveis d'ensenyament i formació"
+  },
+  {
+    "nom": "INQUIET ASSOCIACIO",
+    "num_contratos": 2,
+    "total_importe": 2470.83,
+    "contratos": [
+      2171,
+      7645
+    ],
+    "sector": "Educació i Recerca",
+    "categoria": "Serveis d'ensenyament i formació"
+  },
+  {
+    "nom": "SAGRES, SL",
+    "num_contratos": 2,
+    "total_importe": 13440.7,
+    "contratos": [
+      2577,
+      7654
+    ],
+    "sector": "Béns de Consum i Comerç",
+    "categoria": "Roba i calçat"
+  },
+  {
+    "nom": "BISBAL FONT, MAURE",
+    "num_contratos": 2,
+    "total_importe": 15486.78,
+    "contratos": [
+      6082,
+      7656
+    ],
+    "sector": "Cultura, Oci i Esport",
+    "categoria": "Serveis recreatius i culturals"
+  },
+  {
+    "nom": "CAMINS DE VENT, S.C.P.",
+    "num_contratos": 2,
+    "total_importe": 3370.0,
+    "contratos": [
+      2465,
+      7663
+    ],
+    "sector": "Transport i Logística",
+    "categoria": "Serveis de transport"
+  },
+  {
+    "nom": "CIRCUIT RACING S.L.",
+    "num_contratos": 2,
+    "total_importe": 3345.0,
+    "contratos": [
+      5131,
+      7664
+    ],
+    "sector": "Cultura, Oci i Esport",
+    "categoria": "Serveis recreatius i culturals"
+  },
+  {
+    "nom": "J3B3 ECONOMICS, SL",
+    "num_contratos": 2,
+    "total_importe": 5432.23,
+    "contratos": [
+      1078,
+      7673
+    ],
+    "sector": "Serveis Professionals i Corporatius",
+    "categoria": "Serveis empresarials i de consultoria"
+  },
+  {
+    "nom": "CLUB EXCURSIONISTA UEC ANOIA",
+    "num_contratos": 2,
+    "total_importe": 10500.0,
+    "contratos": [
+      276,
+      7686
+    ],
+    "sector": "",
+    "categoria": ""
+  },
+  {
+    "nom": "JURADO DELGADO, MIGUEL",
+    "num_contratos": 2,
+    "total_importe": 5895.36,
+    "contratos": [
+      2399,
+      7691
+    ],
+    "sector": "Medi Ambient, Neteja i Manteniment",
+    "categoria": "Serveis de reparació i manteniment"
+  },
+  {
+    "nom": "JOSEMU 18, SL",
+    "num_contratos": 2,
+    "total_importe": 4263.97,
+    "contratos": [
+      1262,
+      7694
+    ],
+    "sector": "Agricultura i Alimentació",
+    "categoria": "Serveis d'hostaleria i restauració"
+  },
+  {
+    "nom": "PREVISORA GENERAL MUTUALIDAD DE PREVISION SOCIAL A PRIMA FIJA",
+    "num_contratos": 2,
+    "total_importe": 57.59,
+    "contratos": [
+      2,
+      7725
+    ],
+    "sector": "",
+    "categoria": ""
+  },
+  {
     "nom": "CONSULTORES Y ASESORES EN SEGURIDAD INTEGRAL EUROPEA SL",
     "num_contratos": 2,
     "total_importe": 562227.84,
@@ -11993,6 +12441,50 @@
     "categoria": "Equips de seguretat i defensa"
   },
   {
+    "nom": "PENINSULA CORPORATE INNOVATION, SL",
+    "num_contratos": 2,
+    "total_importe": 41900.0,
+    "contratos": [
+      1866,
+      7726
+    ],
+    "sector": "Tecnologia i Telecomunicacions",
+    "categoria": "Serveis informàtics (TI)"
+  },
+  {
+    "nom": "STOP ACCIDENTES",
+    "num_contratos": 2,
+    "total_importe": 3200.0,
+    "contratos": [
+      270,
+      7750
+    ],
+    "sector": "",
+    "categoria": ""
+  },
+  {
+    "nom": "AVALL PATRIMONI VIU, S.L.",
+    "num_contratos": 2,
+    "total_importe": 3328.0,
+    "contratos": [
+      7752,
+      7753
+    ],
+    "sector": "",
+    "categoria": ""
+  },
+  {
+    "nom": "ANOIA CARRETILLES, SL",
+    "num_contratos": 2,
+    "total_importe": 3071.0,
+    "contratos": [
+      5037,
+      7759
+    ],
+    "sector": "Transport i Logística",
+    "categoria": "Serveis de transport"
+  },
+  {
     "nom": "TALLERS VIDAL AMILL, S.L.",
     "num_contratos": 2,
     "total_importe": 386700.59,
@@ -12002,6 +12494,50 @@
     ],
     "sector": "Construcció i Infraestructures",
     "categoria": "Obres de construcció"
+  },
+  {
+    "nom": "FUNDICION DUCTIL FABREGAS, SAU",
+    "num_contratos": 2,
+    "total_importe": 2576.0,
+    "contratos": [
+      595,
+      7773
+    ],
+    "sector": "Indústria, Maquinària i Energia",
+    "categoria": "Maquinària industrial"
+  },
+  {
+    "nom": "OLEA MANSILLA, CHRISTIAN GABRIEL",
+    "num_contratos": 2,
+    "total_importe": 4480.0,
+    "contratos": [
+      168,
+      7779
+    ],
+    "sector": "",
+    "categoria": ""
+  },
+  {
+    "nom": "AEROBIC AND FITNESS, SL",
+    "num_contratos": 2,
+    "total_importe": 12958.29,
+    "contratos": [
+      3596,
+      7795
+    ],
+    "sector": "Cultura, Oci i Esport",
+    "categoria": "Instruments musicals i esportius"
+  },
+  {
+    "nom": "GESTSAHEC SL",
+    "num_contratos": 2,
+    "total_importe": 1611.02,
+    "contratos": [
+      1511,
+      7808
+    ],
+    "sector": "Construcció i Infraestructures",
+    "categoria": "Materials de construcció"
   },
   {
     "nom": "ANIMA'NS EDUCACIÓ I ESPORT SL",
@@ -12120,17 +12656,6 @@
     "contratos": [
       175,
       698
-    ],
-    "sector": "",
-    "categoria": ""
-  },
-  {
-    "nom": "LA BONA PARTY SL",
-    "num_contratos": 2,
-    "total_importe": 7190.0,
-    "contratos": [
-      182,
-      183
     ],
     "sector": "",
     "categoria": ""
@@ -12521,17 +13046,6 @@
     "categoria": "Serveis recreatius i culturals"
   },
   {
-    "nom": "DAGRAM TI, S.L.",
-    "num_contratos": 2,
-    "total_importe": 146268.2,
-    "contratos": [
-      577,
-      5128
-    ],
-    "sector": "Tecnologia i Telecomunicacions",
-    "categoria": "Maquinària d'oficina i informàtica"
-  },
-  {
     "nom": "AIG EUROPE SUCURSAL EN ESPAÑA S.A.",
     "num_contratos": 2,
     "total_importe": 3136.35,
@@ -12774,17 +13288,6 @@
     "categoria": "Serveis financers i d'assegurances"
   },
   {
-    "nom": "NOVO TS SL",
-    "num_contratos": 2,
-    "total_importe": 6090.18,
-    "contratos": [
-      925,
-      2374
-    ],
-    "sector": "Cultura, Oci i Esport",
-    "categoria": "Serveis recreatius i culturals"
-  },
-  {
     "nom": "EL CAFE DE L'ATENEU,SL",
     "num_contratos": 2,
     "total_importe": 2166.45,
@@ -12857,28 +13360,6 @@
     "contratos": [
       1107,
       2792
-    ],
-    "sector": "Cultura, Oci i Esport",
-    "categoria": "Serveis recreatius i culturals"
-  },
-  {
-    "nom": "AGRUPACIO FOLKLORICA IGUALADA",
-    "num_contratos": 2,
-    "total_importe": 3500.0,
-    "contratos": [
-      1113,
-      1887
-    ],
-    "sector": "Cultura, Oci i Esport",
-    "categoria": "Serveis recreatius i culturals"
-  },
-  {
-    "nom": "BITRAC-DANSA",
-    "num_contratos": 2,
-    "total_importe": 3250.0,
-    "contratos": [
-      1114,
-      2626
     ],
     "sector": "Cultura, Oci i Esport",
     "categoria": "Serveis recreatius i culturals"
@@ -12961,17 +13442,6 @@
     "categoria": "Maquinària agrícola"
   },
   {
-    "nom": "APLICACIONS MULTIMEDIA INTERACTIVES, SL",
-    "num_contratos": 2,
-    "total_importe": 15070.0,
-    "contratos": [
-      1388,
-      2567
-    ],
-    "sector": "Tecnologia i Telecomunicacions",
-    "categoria": "Serveis informàtics (TI)"
-  },
-  {
     "nom": "MIMAX LIGHTING, S.L.",
     "num_contratos": 2,
     "total_importe": 8785.0,
@@ -13047,17 +13517,6 @@
     ],
     "sector": "Cultura, Oci i Esport",
     "categoria": "Instruments musicals i esportius"
-  },
-  {
-    "nom": "NO TOT ES BINARI, SCP",
-    "num_contratos": 2,
-    "total_importe": 2916.0,
-    "contratos": [
-      1629,
-      5851
-    ],
-    "sector": "Educació i Recerca",
-    "categoria": "Serveis d'ensenyament i formació"
   },
   {
     "nom": "ORQUESTRA SIMFÒNICA DEL VALLÈS",
@@ -14215,17 +14674,6 @@
     "categoria": "Serveis postals i telecomunicacions"
   },
   {
-    "nom": "REFORMES JORTOM, SL",
-    "num_contratos": 2,
-    "total_importe": 2333.53,
-    "contratos": [
-      4523,
-      5361
-    ],
-    "sector": "Medi Ambient, Neteja i Manteniment",
-    "categoria": "Serveis de reparació i manteniment"
-  },
-  {
     "nom": "INDUSTRIAL BREINCO, S.A.",
     "num_contratos": 2,
     "total_importe": 6178.82,
@@ -14609,17 +15057,6 @@
     ],
     "sector": "Agricultura i Alimentació",
     "categoria": "Productes agrícoles i ramaders"
-  },
-  {
-    "nom": "RAMAR QUATRE S.L.U.",
-    "num_contratos": 2,
-    "total_importe": 2909.92,
-    "contratos": [
-      5609,
-      6393
-    ],
-    "sector": "Indústria, Maquinària i Energia",
-    "categoria": "Maquinària elèctrica"
   },
   {
     "nom": "PIROTECNIA TURIS SL",
@@ -15018,11 +15455,261 @@
     "categoria": "Serveis empresarials i de consultoria"
   },
   {
-    "nom": "PREVISORA GENERAL MUTUALIDAD DE PREVISION SOCIAL A PRIMA FIJA",
+    "nom": "PROT ENERGIA INSTALACIONES SLU",
     "num_contratos": 1,
-    "total_importe": 31.01,
+    "total_importe": 116553.93,
     "contratos": [
-      2
+      7586
+    ],
+    "sector": "",
+    "categoria": ""
+  },
+  {
+    "nom": "QUALITAL SMART WINDOWS, S.L",
+    "num_contratos": 1,
+    "total_importe": 116252.82,
+    "contratos": [
+      7588
+    ],
+    "sector": "",
+    "categoria": ""
+  },
+  {
+    "nom": "JORDI GRANADO MENDEZ",
+    "num_contratos": 1,
+    "total_importe": 14000.0,
+    "contratos": [
+      7589
+    ],
+    "sector": "",
+    "categoria": ""
+  },
+  {
+    "nom": "DALMAU PALET, POL",
+    "num_contratos": 1,
+    "total_importe": 2700.0,
+    "contratos": [
+      7604
+    ],
+    "sector": "",
+    "categoria": ""
+  },
+  {
+    "nom": "LLOGUERS SARRI SL",
+    "num_contratos": 1,
+    "total_importe": 1867.5,
+    "contratos": [
+      7606
+    ],
+    "sector": "",
+    "categoria": ""
+  },
+  {
+    "nom": "MONCOBRA, SA",
+    "num_contratos": 1,
+    "total_importe": 59294.38,
+    "contratos": [
+      7607
+    ],
+    "sector": "",
+    "categoria": ""
+  },
+  {
+    "nom": "SAC PEDAGOGIA I LLEURE, SCP",
+    "num_contratos": 1,
+    "total_importe": 186189.96,
+    "contratos": [
+      7608
+    ],
+    "sector": "",
+    "categoria": ""
+  },
+  {
+    "nom": "BACKSTAGE GESTION TAP 2006 S.LL.",
+    "num_contratos": 1,
+    "total_importe": 1000.0,
+    "contratos": [
+      7610
+    ],
+    "sector": "",
+    "categoria": ""
+  },
+  {
+    "nom": "KINGS MUNTANER, SL",
+    "num_contratos": 1,
+    "total_importe": 13000.0,
+    "contratos": [
+      7614
+    ],
+    "sector": "",
+    "categoria": ""
+  },
+  {
+    "nom": "ASSOCIACIO ESPAI MALLA",
+    "num_contratos": 1,
+    "total_importe": 1324.58,
+    "contratos": [
+      7623
+    ],
+    "sector": "",
+    "categoria": ""
+  },
+  {
+    "nom": "MIQUEL MILIAN, LAURA",
+    "num_contratos": 1,
+    "total_importe": 1010.34,
+    "contratos": [
+      7629
+    ],
+    "sector": "",
+    "categoria": ""
+  },
+  {
+    "nom": "MUNDET SALAVERRIA, JAVIER",
+    "num_contratos": 1,
+    "total_importe": 1829.61,
+    "contratos": [
+      7632
+    ],
+    "sector": "",
+    "categoria": ""
+  },
+  {
+    "nom": "ESTRUCTURES MEIFSUR, SL",
+    "num_contratos": 1,
+    "total_importe": 4980.0,
+    "contratos": [
+      7637
+    ],
+    "sector": "",
+    "categoria": ""
+  },
+  {
+    "nom": "FOLCH,SA",
+    "num_contratos": 1,
+    "total_importe": 2614.0,
+    "contratos": [
+      7653
+    ],
+    "sector": "",
+    "categoria": ""
+  },
+  {
+    "nom": "MARCE SANCHEZ JAUME",
+    "num_contratos": 1,
+    "total_importe": 1010.34,
+    "contratos": [
+      7657
+    ],
+    "sector": "",
+    "categoria": ""
+  },
+  {
+    "nom": "SOLER RIERA, MARC",
+    "num_contratos": 1,
+    "total_importe": 3300.0,
+    "contratos": [
+      7666
+    ],
+    "sector": "",
+    "categoria": ""
+  },
+  {
+    "nom": "MIQUEL GUTIERREZ-POCH",
+    "num_contratos": 1,
+    "total_importe": 3305.33,
+    "contratos": [
+      7669
+    ],
+    "sector": "",
+    "categoria": ""
+  },
+  {
+    "nom": "START-IT STUDIO, S.L.",
+    "num_contratos": 1,
+    "total_importe": 2450.0,
+    "contratos": [
+      7675
+    ],
+    "sector": "",
+    "categoria": ""
+  },
+  {
+    "nom": "MARC MORA CAMPON",
+    "num_contratos": 1,
+    "total_importe": 1200.0,
+    "contratos": [
+      7677
+    ],
+    "sector": "",
+    "categoria": ""
+  },
+  {
+    "nom": "ASOCIACION CORPORATIVA DE EMPRESA SALUDABLE",
+    "num_contratos": 1,
+    "total_importe": 1500.0,
+    "contratos": [
+      7685
+    ],
+    "sector": "",
+    "categoria": ""
+  },
+  {
+    "nom": "BRUTALWORKS SL",
+    "num_contratos": 1,
+    "total_importe": 3150.0,
+    "contratos": [
+      7693
+    ],
+    "sector": "",
+    "categoria": ""
+  },
+  {
+    "nom": "ESCAPE THE TOWN, SCCL",
+    "num_contratos": 1,
+    "total_importe": 6500.0,
+    "contratos": [
+      7696
+    ],
+    "sector": "",
+    "categoria": ""
+  },
+  {
+    "nom": "LAIA BOSCH. DE GALA.CAT",
+    "num_contratos": 1,
+    "total_importe": 1450.0,
+    "contratos": [
+      7698
+    ],
+    "sector": "",
+    "categoria": ""
+  },
+  {
+    "nom": "L'ANIMETA, SCCL",
+    "num_contratos": 1,
+    "total_importe": 15200.0,
+    "contratos": [
+      7701
+    ],
+    "sector": "",
+    "categoria": ""
+  },
+  {
+    "nom": "XIP XAP",
+    "num_contratos": 1,
+    "total_importe": 1800.0,
+    "contratos": [
+      7706
+    ],
+    "sector": "",
+    "categoria": ""
+  },
+  {
+    "nom": "MARÍA JIMENA CAVALLETTI",
+    "num_contratos": 1,
+    "total_importe": 1852.5,
+    "contratos": [
+      7707
     ],
     "sector": "",
     "categoria": ""
@@ -15038,11 +15725,121 @@
     "categoria": ""
   },
   {
+    "nom": "MARSOL PUIG WMK CONSULTING-MÀRQUETING ESTRATÈGIC, CONCEPCIÓ",
+    "num_contratos": 1,
+    "total_importe": 11900.0,
+    "contratos": [
+      7743
+    ],
+    "sector": "",
+    "categoria": ""
+  },
+  {
+    "nom": "VIVAR HOLGADO, MIGUEL",
+    "num_contratos": 1,
+    "total_importe": 1200.0,
+    "contratos": [
+      7744
+    ],
+    "sector": "",
+    "categoria": ""
+  },
+  {
+    "nom": "MARKEL INSURANCE SE",
+    "num_contratos": 1,
+    "total_importe": 531.2,
+    "contratos": [
+      7745
+    ],
+    "sector": "",
+    "categoria": ""
+  },
+  {
+    "nom": "APTENT SOLUCIONES, SL",
+    "num_contratos": 1,
+    "total_importe": 2711.36,
+    "contratos": [
+      7754
+    ],
+    "sector": "",
+    "categoria": ""
+  },
+  {
+    "nom": "SOCIETAT CORAL AMICS DE LA UNIÓ",
+    "num_contratos": 1,
+    "total_importe": 1250.0,
+    "contratos": [
+      7766
+    ],
+    "sector": "",
+    "categoria": ""
+  },
+  {
     "nom": "ASFALTS DE L'ANOIA, SL",
     "num_contratos": 1,
     "total_importe": 376862.45,
     "contratos": [
       25
+    ],
+    "sector": "",
+    "categoria": ""
+  },
+  {
+    "nom": "COMBARROS VILASECA, ORIOL",
+    "num_contratos": 1,
+    "total_importe": 4376.75,
+    "contratos": [
+      7783
+    ],
+    "sector": "",
+    "categoria": ""
+  },
+  {
+    "nom": "ÀLEX RIGOL ESPEJO",
+    "num_contratos": 1,
+    "total_importe": 1150.0,
+    "contratos": [
+      7784
+    ],
+    "sector": "",
+    "categoria": ""
+  },
+  {
+    "nom": "COMPANYIA DE TEATRE ANNA ROCA, SL",
+    "num_contratos": 1,
+    "total_importe": 1150.0,
+    "contratos": [
+      7787
+    ],
+    "sector": "",
+    "categoria": ""
+  },
+  {
+    "nom": "CAMP BASE ORGANIZATION, SL",
+    "num_contratos": 1,
+    "total_importe": 1418.8,
+    "contratos": [
+      7801
+    ],
+    "sector": "",
+    "categoria": ""
+  },
+  {
+    "nom": "QUI OLMO ANOIA SL",
+    "num_contratos": 1,
+    "total_importe": 3020.0,
+    "contratos": [
+      7811
+    ],
+    "sector": "",
+    "categoria": ""
+  },
+  {
+    "nom": "ORLA PROJECTES I OBRES SL",
+    "num_contratos": 1,
+    "total_importe": 1500.0,
+    "contratos": [
+      7812
     ],
     "sector": "",
     "categoria": ""
@@ -15093,16 +15890,6 @@
     "total_importe": 1500.0,
     "contratos": [
       69
-    ],
-    "sector": "",
-    "categoria": ""
-  },
-  {
-    "nom": "VIAJES HALCON S.A.U",
-    "num_contratos": 1,
-    "total_importe": 2192.0,
-    "contratos": [
-      72
     ],
     "sector": "",
     "categoria": ""
@@ -15263,16 +16050,6 @@
     "total_importe": 8750.0,
     "contratos": [
       160
-    ],
-    "sector": "",
-    "categoria": ""
-  },
-  {
-    "nom": "OLEA MANSILLA, CHRISTIAN GABRIEL",
-    "num_contratos": 1,
-    "total_importe": 2880.0,
-    "contratos": [
-      168
     ],
     "sector": "",
     "categoria": ""
@@ -15448,31 +16225,11 @@
     "categoria": ""
   },
   {
-    "nom": "STOP ACCIDENTES",
-    "num_contratos": 1,
-    "total_importe": 1600.0,
-    "contratos": [
-      270
-    ],
-    "sector": "",
-    "categoria": ""
-  },
-  {
     "nom": "SMART STRUCTURAL SENSING TECHNOLOGIES, SL",
     "num_contratos": 1,
     "total_importe": 12900.0,
     "contratos": [
       273
-    ],
-    "sector": "",
-    "categoria": ""
-  },
-  {
-    "nom": "CLUB EXCURSIONISTA UEC ANOIA",
-    "num_contratos": 1,
-    "total_importe": 9000.0,
-    "contratos": [
-      276
     ],
     "sector": "",
     "categoria": ""
@@ -15766,16 +16523,6 @@
     ],
     "sector": "",
     "categoria": ""
-  },
-  {
-    "nom": "FUNDICION DUCTIL FABREGAS, SAU",
-    "num_contratos": 1,
-    "total_importe": 1220.0,
-    "contratos": [
-      595
-    ],
-    "sector": "Indústria, Maquinària i Energia",
-    "categoria": "Maquinària industrial"
   },
   {
     "nom": "CARO BERMÚDEZ, FRANCHESCA ADELINA",
@@ -16418,16 +17165,6 @@
     "categoria": "Serveis d'arquitectura i enginyeria"
   },
   {
-    "nom": "J3B3 ECONOMICS, SL",
-    "num_contratos": 1,
-    "total_importe": 4132.23,
-    "contratos": [
-      1078
-    ],
-    "sector": "Serveis Professionals i Corporatius",
-    "categoria": "Serveis empresarials i de consultoria"
-  },
-  {
     "nom": "COEXU SL",
     "num_contratos": 1,
     "total_importe": 4575.0,
@@ -16436,16 +17173,6 @@
     ],
     "sector": "Indústria, Maquinària i Energia",
     "categoria": "Maquinària industrial"
-  },
-  {
-    "nom": "ASSOCIACIÓ VEÏNAL DEL POBLE SEC D'IGUALADA",
-    "num_contratos": 1,
-    "total_importe": 1250.0,
-    "contratos": [
-      1096
-    ],
-    "sector": "Cultura, Oci i Esport",
-    "categoria": "Serveis recreatius i culturals"
   },
   {
     "nom": "JORDANA EXPOSITO, MOISES",
@@ -16458,31 +17185,11 @@
     "categoria": "Serveis recreatius i culturals"
   },
   {
-    "nom": "GRALLERS D'IGUALADA",
-    "num_contratos": 1,
-    "total_importe": 1400.0,
-    "contratos": [
-      1104
-    ],
-    "sector": "Cultura, Oci i Esport",
-    "categoria": "Serveis recreatius i culturals"
-  },
-  {
     "nom": "ASSOCIACIO GEGANTS VELLS D'IGUALADA",
     "num_contratos": 1,
     "total_importe": 1375.0,
     "contratos": [
       1116
-    ],
-    "sector": "Cultura, Oci i Esport",
-    "categoria": "Serveis recreatius i culturals"
-  },
-  {
-    "nom": "ASSOC. COLLA GEGANTERA DEL BISBALET",
-    "num_contratos": 1,
-    "total_importe": 750.0,
-    "contratos": [
-      1117
     ],
     "sector": "Cultura, Oci i Esport",
     "categoria": "Serveis recreatius i culturals"
@@ -16636,16 +17343,6 @@
     ],
     "sector": "Construcció i Infraestructures",
     "categoria": "Serveis d'instal·lació"
-  },
-  {
-    "nom": "JOSEMU 18, SL",
-    "num_contratos": 1,
-    "total_importe": 2082.73,
-    "contratos": [
-      1262
-    ],
-    "sector": "Agricultura i Alimentació",
-    "categoria": "Serveis d'hostaleria i restauració"
   },
   {
     "nom": "FERLAU, SL",
@@ -16886,16 +17583,6 @@
     ],
     "sector": "Cultura, Oci i Esport",
     "categoria": "Serveis recreatius i culturals"
-  },
-  {
-    "nom": "GESTSAHEC SL",
-    "num_contratos": 1,
-    "total_importe": 900.0,
-    "contratos": [
-      1511
-    ],
-    "sector": "Construcció i Infraestructures",
-    "categoria": "Materials de construcció"
   },
   {
     "nom": "CASTELLERS DE LLEIDA",
@@ -17198,16 +17885,6 @@
     "categoria": "Serveis d'arquitectura i enginyeria"
   },
   {
-    "nom": "PENINSULA CORPORATE INNOVATION, SL",
-    "num_contratos": 1,
-    "total_importe": 32900.0,
-    "contratos": [
-      1866
-    ],
-    "sector": "Tecnologia i Telecomunicacions",
-    "categoria": "Serveis informàtics (TI)"
-  },
-  {
     "nom": "EYESIGHT FORENSICS, SL",
     "num_contratos": 1,
     "total_importe": 4500.0,
@@ -17396,16 +18073,6 @@
     ],
     "sector": "Cultura, Oci i Esport",
     "categoria": "Serveis recreatius i culturals"
-  },
-  {
-    "nom": "INQUIET ASSOCIACIO",
-    "num_contratos": 1,
-    "total_importe": 1120.0,
-    "contratos": [
-      2171
-    ],
-    "sector": "Educació i Recerca",
-    "categoria": "Serveis d'ensenyament i formació"
   },
   {
     "nom": "SOLUCALC SL",
@@ -17628,16 +18295,6 @@
     "categoria": "Serveis immobiliaris"
   },
   {
-    "nom": "JURADO DELGADO, MIGUEL",
-    "num_contratos": 1,
-    "total_importe": 3454.23,
-    "contratos": [
-      2399
-    ],
-    "sector": "Medi Ambient, Neteja i Manteniment",
-    "categoria": "Serveis de reparació i manteniment"
-  },
-  {
     "nom": "ABRAHAM GIRALDES QUERALT",
     "num_contratos": 1,
     "total_importe": 2040.0,
@@ -17666,16 +18323,6 @@
     ],
     "sector": "Construcció i Infraestructures",
     "categoria": "Obres de construcció"
-  },
-  {
-    "nom": "CAMINS DE VENT, S.C.P.",
-    "num_contratos": 1,
-    "total_importe": 2010.0,
-    "contratos": [
-      2465
-    ],
-    "sector": "Transport i Logística",
-    "categoria": "Serveis de transport"
   },
   {
     "nom": "GLOBUS KON-TIKI",
@@ -17783,16 +18430,6 @@
     "total_importe": 1672.5,
     "contratos": [
       2576
-    ],
-    "sector": "Béns de Consum i Comerç",
-    "categoria": "Roba i calçat"
-  },
-  {
-    "nom": "SAGRES, SL",
-    "num_contratos": 1,
-    "total_importe": 8960.25,
-    "contratos": [
-      2577
     ],
     "sector": "Béns de Consum i Comerç",
     "categoria": "Roba i calçat"
@@ -18578,16 +19215,6 @@
     "categoria": "Serveis d'ensenyament i formació"
   },
   {
-    "nom": "ESQUEMES INFORMÀTICS, SL",
-    "num_contratos": 1,
-    "total_importe": 11040.0,
-    "contratos": [
-      3417
-    ],
-    "sector": "Educació i Recerca",
-    "categoria": "Serveis d'ensenyament i formació"
-  },
-  {
     "nom": "QUIMICEL HIGIENE, SL",
     "num_contratos": 1,
     "total_importe": 14734.04,
@@ -18776,16 +19403,6 @@
     ],
     "sector": "Construcció i Infraestructures",
     "categoria": "Serveis d'arquitectura i enginyeria"
-  },
-  {
-    "nom": "AEROBIC AND FITNESS, SL",
-    "num_contratos": 1,
-    "total_importe": 8640.51,
-    "contratos": [
-      3596
-    ],
-    "sector": "Cultura, Oci i Esport",
-    "categoria": "Instruments musicals i esportius"
   },
   {
     "nom": "JR GONIC, S.L.",
@@ -19878,16 +20495,6 @@
     "categoria": "Mobiliari i equipament"
   },
   {
-    "nom": "ANOIA CARRETILLES, SL",
-    "num_contratos": 1,
-    "total_importe": 1375.0,
-    "contratos": [
-      5037
-    ],
-    "sector": "Transport i Logística",
-    "categoria": "Serveis de transport"
-  },
-  {
     "nom": "MOBA-ISE MOBILE AUTOMATION S.L.",
     "num_contratos": 1,
     "total_importe": 5154.25,
@@ -19943,16 +20550,6 @@
     "total_importe": 14999.0,
     "contratos": [
       5130
-    ],
-    "sector": "Cultura, Oci i Esport",
-    "categoria": "Serveis recreatius i culturals"
-  },
-  {
-    "nom": "CIRCUIT RACING S.L.",
-    "num_contratos": 1,
-    "total_importe": 1365.0,
-    "contratos": [
-      5131
     ],
     "sector": "Cultura, Oci i Esport",
     "categoria": "Serveis recreatius i culturals"
@@ -20808,16 +21405,6 @@
     "categoria": "Serveis recreatius i culturals"
   },
   {
-    "nom": "CONSULTORIA MÈTODES I TÈCNIQUES APLICADES, SLU",
-    "num_contratos": 1,
-    "total_importe": 6900.0,
-    "contratos": [
-      5932
-    ],
-    "sector": "Serveis Professionals i Corporatius",
-    "categoria": "Serveis empresarials i de consultoria"
-  },
-  {
     "nom": "CARLOS LÓPEZ QUINTANILLA",
     "num_contratos": 1,
     "total_importe": 14960.0,
@@ -20866,16 +21453,6 @@
     ],
     "sector": "Salut i Serveis Socials",
     "categoria": "Equipament mèdic i farmacèutic"
-  },
-  {
-    "nom": "BISBAL FONT, MAURE",
-    "num_contratos": 1,
-    "total_importe": 11691.78,
-    "contratos": [
-      6082
-    ],
-    "sector": "Cultura, Oci i Esport",
-    "categoria": "Serveis recreatius i culturals"
   },
   {
     "nom": "DIANA PINOS CAÑIBANO",
