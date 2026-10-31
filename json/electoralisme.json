@@ -1,6 +1,6 @@
 {
   "metodologia": "electoralisme_v1",
-  "generat_a": "2026-10-05",
+  "generat_a": "2026-10-31",
   "eleccions_municipals": [
     {
       "any": 2011,
@@ -38,7 +38,7 @@
       "data_fi_finestra_posterior": "2027-07-16"
     }
   ],
-  "total_alertes": 71,
+  "total_alertes": 70,
   "alertes": [
     {
       "id": "EL-7E47A9781E",
@@ -68,11 +68,11 @@
         "video"
       ],
       "recurrencia": {
-        "comparables": 67,
-        "mateixa_empresa": 2,
+        "comparables": 85,
+        "mateixa_empresa": 3,
         "objecte_similar": 0,
-        "mitjana_import_window": 25268.88,
-        "mitjana_import_empresa": 1167.5
+        "mitjana_import_window": 20850.62,
+        "mitjana_import_empresa": 1528.33
       },
       "motius": [
         "Adjudicació a menys de 30 dies de la votació",
@@ -126,10 +126,10 @@
         "informativa"
       ],
       "recurrencia": {
-        "comparables": 67,
+        "comparables": 85,
         "mateixa_empresa": 2,
         "objecte_similar": 0,
-        "mitjana_import_window": 25268.88,
+        "mitjana_import_window": 20850.62,
         "mitjana_import_empresa": 2512.27
       },
       "motius": [
@@ -184,10 +184,10 @@
         "campanya"
       ],
       "recurrencia": {
-        "comparables": 67,
+        "comparables": 85,
         "mateixa_empresa": 0,
         "objecte_similar": 0,
-        "mitjana_import_window": 25268.88,
+        "mitjana_import_window": 20850.62,
         "mitjana_import_empresa": 0
       },
       "motius": [
@@ -241,10 +241,10 @@
         "video"
       ],
       "recurrencia": {
-        "comparables": 67,
+        "comparables": 85,
         "mateixa_empresa": 0,
         "objecte_similar": 0,
-        "mitjana_import_window": 25268.88,
+        "mitjana_import_window": 20850.62,
         "mitjana_import_empresa": 0
       },
       "motius": [
@@ -299,10 +299,10 @@
         "promocio"
       ],
       "recurrencia": {
-        "comparables": 67,
+        "comparables": 85,
         "mateixa_empresa": 0,
         "objecte_similar": 0,
-        "mitjana_import_window": 25268.88,
+        "mitjana_import_window": 20850.62,
         "mitjana_import_empresa": 0
       },
       "motius": [
@@ -359,10 +359,10 @@
         "grafic"
       ],
       "recurrencia": {
-        "comparables": 67,
+        "comparables": 85,
         "mateixa_empresa": 0,
         "objecte_similar": 0,
-        "mitjana_import_window": 25268.88,
+        "mitjana_import_window": 20850.62,
         "mitjana_import_empresa": 0
       },
       "motius": [
@@ -417,11 +417,11 @@
         "impressio"
       ],
       "recurrencia": {
-        "comparables": 67,
-        "mateixa_empresa": 1,
+        "comparables": 85,
+        "mateixa_empresa": 2,
         "objecte_similar": 0,
-        "mitjana_import_window": 25268.88,
-        "mitjana_import_empresa": 2785.0
+        "mitjana_import_window": 20850.62,
+        "mitjana_import_empresa": 2635.78
       },
       "motius": [
         "Adjudicació dins la finestra administrativa posterior",
@@ -475,11 +475,11 @@
         "senyalitzacio"
       ],
       "recurrencia": {
-        "comparables": 67,
-        "mateixa_empresa": 3,
+        "comparables": 85,
+        "mateixa_empresa": 4,
         "objecte_similar": 1,
-        "mitjana_import_window": 25268.88,
-        "mitjana_import_empresa": 4808.57
+        "mitjana_import_window": 20850.62,
+        "mitjana_import_empresa": 4615.8
       },
       "motius": [
         "Adjudicació durant la campanya electoral estricta",
@@ -533,10 +533,10 @@
         "impressio"
       ],
       "recurrencia": {
-        "comparables": 67,
+        "comparables": 85,
         "mateixa_empresa": 1,
         "objecte_similar": 0,
-        "mitjana_import_window": 25268.88,
+        "mitjana_import_window": 20850.62,
         "mitjana_import_empresa": 2868.4
       },
       "motius": [
@@ -592,10 +592,10 @@
         "disseny"
       ],
       "recurrencia": {
-        "comparables": 67,
+        "comparables": 85,
         "mateixa_empresa": 0,
         "objecte_similar": 0,
-        "mitjana_import_window": 25268.88,
+        "mitjana_import_window": 20850.62,
         "mitjana_import_empresa": 0
       },
       "motius": [
@@ -650,10 +650,10 @@
         "inauguracio"
       ],
       "recurrencia": {
-        "comparables": 67,
+        "comparables": 85,
         "mateixa_empresa": 0,
         "objecte_similar": 0,
-        "mitjana_import_window": 25268.88,
+        "mitjana_import_window": 20850.62,
         "mitjana_import_empresa": 0
       },
       "motius": [
@@ -707,10 +707,10 @@
         "impressio"
       ],
       "recurrencia": {
-        "comparables": 67,
+        "comparables": 85,
         "mateixa_empresa": 1,
         "objecte_similar": 0,
-        "mitjana_import_window": 25268.88,
+        "mitjana_import_window": 20850.62,
         "mitjana_import_empresa": 2868.4
       },
       "motius": [
@@ -766,11 +766,11 @@
         "monolits"
       ],
       "recurrencia": {
-        "comparables": 67,
-        "mateixa_empresa": 3,
+        "comparables": 85,
+        "mateixa_empresa": 6,
         "objecte_similar": 0,
-        "mitjana_import_window": 25268.88,
-        "mitjana_import_empresa": 5932.33
+        "mitjana_import_window": 20850.62,
+        "mitjana_import_empresa": 4012.5
       },
       "motius": [
         "Adjudicació dins la finestra administrativa posterior",
@@ -824,10 +824,10 @@
         "premsa"
       ],
       "recurrencia": {
-        "comparables": 67,
+        "comparables": 85,
         "mateixa_empresa": 0,
         "objecte_similar": 0,
-        "mitjana_import_window": 25268.88,
+        "mitjana_import_window": 20850.62,
         "mitjana_import_empresa": 0
       },
       "motius": [
@@ -881,10 +881,10 @@
         "promoure"
       ],
       "recurrencia": {
-        "comparables": 67,
+        "comparables": 85,
         "mateixa_empresa": 4,
         "objecte_similar": 0,
-        "mitjana_import_window": 25268.88,
+        "mitjana_import_window": 20850.62,
         "mitjana_import_empresa": 8022.5
       },
       "motius": [
@@ -939,10 +939,10 @@
         "comunicacio"
       ],
       "recurrencia": {
-        "comparables": 67,
+        "comparables": 85,
         "mateixa_empresa": 0,
         "objecte_similar": 0,
-        "mitjana_import_window": 25268.88,
+        "mitjana_import_window": 20850.62,
         "mitjana_import_empresa": 0
       },
       "motius": [
@@ -995,10 +995,10 @@
         "radio"
       ],
       "recurrencia": {
-        "comparables": 67,
+        "comparables": 85,
         "mateixa_empresa": 1,
         "objecte_similar": 0,
-        "mitjana_import_window": 25268.88,
+        "mitjana_import_window": 20850.62,
         "mitjana_import_empresa": 2450.0
       },
       "motius": [
@@ -1053,10 +1053,10 @@
         "cartell"
       ],
       "recurrencia": {
-        "comparables": 67,
+        "comparables": 85,
         "mateixa_empresa": 0,
         "objecte_similar": 0,
-        "mitjana_import_window": 25268.88,
+        "mitjana_import_window": 20850.62,
         "mitjana_import_empresa": 0
       },
       "motius": [
@@ -1112,10 +1112,10 @@
         "revista"
       ],
       "recurrencia": {
-        "comparables": 67,
+        "comparables": 85,
         "mateixa_empresa": 0,
         "objecte_similar": 0,
-        "mitjana_import_window": 25268.88,
+        "mitjana_import_window": 20850.62,
         "mitjana_import_empresa": 0
       },
       "motius": [
@@ -1170,10 +1170,10 @@
         "cartell"
       ],
       "recurrencia": {
-        "comparables": 67,
+        "comparables": 85,
         "mateixa_empresa": 0,
         "objecte_similar": 0,
-        "mitjana_import_window": 25268.88,
+        "mitjana_import_window": 20850.62,
         "mitjana_import_empresa": 0
       },
       "motius": [
@@ -1228,10 +1228,10 @@
         "premsa"
       ],
       "recurrencia": {
-        "comparables": 67,
+        "comparables": 85,
         "mateixa_empresa": 0,
         "objecte_similar": 0,
-        "mitjana_import_window": 25268.88,
+        "mitjana_import_window": 20850.62,
         "mitjana_import_empresa": 0
       },
       "motius": [
@@ -1285,10 +1285,10 @@
         "campanya"
       ],
       "recurrencia": {
-        "comparables": 67,
+        "comparables": 85,
         "mateixa_empresa": 0,
         "objecte_similar": 0,
-        "mitjana_import_window": 25268.88,
+        "mitjana_import_window": 20850.62,
         "mitjana_import_empresa": 0
       },
       "motius": [
@@ -1341,10 +1341,10 @@
         "campanya"
       ],
       "recurrencia": {
-        "comparables": 67,
+        "comparables": 85,
         "mateixa_empresa": 0,
         "objecte_similar": 0,
-        "mitjana_import_window": 25268.88,
+        "mitjana_import_window": 20850.62,
         "mitjana_import_empresa": 0
       },
       "motius": [
@@ -1399,10 +1399,10 @@
         "triptic"
       ],
       "recurrencia": {
-        "comparables": 67,
+        "comparables": 85,
         "mateixa_empresa": 0,
         "objecte_similar": 0,
-        "mitjana_import_window": 25268.88,
+        "mitjana_import_window": 20850.62,
         "mitjana_import_empresa": 0
       },
       "motius": [
@@ -1456,10 +1456,10 @@
         "comunicacio"
       ],
       "recurrencia": {
-        "comparables": 67,
+        "comparables": 85,
         "mateixa_empresa": 0,
         "objecte_similar": 0,
-        "mitjana_import_window": 25268.88,
+        "mitjana_import_window": 20850.62,
         "mitjana_import_empresa": 0
       },
       "motius": [
@@ -1513,10 +1513,10 @@
         "difusio"
       ],
       "recurrencia": {
-        "comparables": 67,
+        "comparables": 85,
         "mateixa_empresa": 0,
         "objecte_similar": 0,
-        "mitjana_import_window": 25268.88,
+        "mitjana_import_window": 20850.62,
         "mitjana_import_empresa": 0
       },
       "motius": [
@@ -1571,10 +1571,10 @@
         "fotografia"
       ],
       "recurrencia": {
-        "comparables": 67,
+        "comparables": 85,
         "mateixa_empresa": 0,
         "objecte_similar": 0,
-        "mitjana_import_window": 25268.88,
+        "mitjana_import_window": 20850.62,
         "mitjana_import_empresa": 0
       },
       "motius": [
@@ -1629,11 +1629,11 @@
         "senyalitzacio"
       ],
       "recurrencia": {
-        "comparables": 67,
-        "mateixa_empresa": 1,
+        "comparables": 85,
+        "mateixa_empresa": 2,
         "objecte_similar": 0,
-        "mitjana_import_window": 25268.88,
-        "mitjana_import_empresa": 2785.0
+        "mitjana_import_window": 20850.62,
+        "mitjana_import_empresa": 2635.78
       },
       "motius": [
         "Adjudicació dins la finestra administrativa ampliada",
@@ -1688,10 +1688,10 @@
         "campanya"
       ],
       "recurrencia": {
-        "comparables": 67,
+        "comparables": 85,
         "mateixa_empresa": 2,
         "objecte_similar": 1,
-        "mitjana_import_window": 25268.88,
+        "mitjana_import_window": 20850.62,
         "mitjana_import_empresa": 1767.2
       },
       "motius": [
@@ -1746,10 +1746,10 @@
         "comunicacio"
       ],
       "recurrencia": {
-        "comparables": 67,
+        "comparables": 85,
         "mateixa_empresa": 4,
         "objecte_similar": 0,
-        "mitjana_import_window": 25268.88,
+        "mitjana_import_window": 20850.62,
         "mitjana_import_empresa": 8022.5
       },
       "motius": [
@@ -1803,10 +1803,10 @@
         "difusio"
       ],
       "recurrencia": {
-        "comparables": 67,
+        "comparables": 85,
         "mateixa_empresa": 0,
         "objecte_similar": 0,
-        "mitjana_import_window": 25268.88,
+        "mitjana_import_window": 20850.62,
         "mitjana_import_empresa": 0
       },
       "motius": [
@@ -1860,11 +1860,11 @@
         "presentacio"
       ],
       "recurrencia": {
-        "comparables": 67,
-        "mateixa_empresa": 1,
+        "comparables": 85,
+        "mateixa_empresa": 2,
         "objecte_similar": 0,
-        "mitjana_import_window": 25268.88,
-        "mitjana_import_empresa": 2785.0
+        "mitjana_import_window": 20850.62,
+        "mitjana_import_empresa": 2635.78
       },
       "motius": [
         "Adjudicació dins del període electoral municipal",
@@ -1916,10 +1916,10 @@
         "impressio"
       ],
       "recurrencia": {
-        "comparables": 67,
+        "comparables": 85,
         "mateixa_empresa": 0,
         "objecte_similar": 0,
-        "mitjana_import_window": 25268.88,
+        "mitjana_import_window": 20850.62,
         "mitjana_import_empresa": 0
       },
       "motius": [
@@ -1972,10 +1972,10 @@
         "comunicacio"
       ],
       "recurrencia": {
-        "comparables": 67,
+        "comparables": 85,
         "mateixa_empresa": 0,
         "objecte_similar": 0,
-        "mitjana_import_window": 25268.88,
+        "mitjana_import_window": 20850.62,
         "mitjana_import_empresa": 0
       },
       "motius": [
@@ -2030,10 +2030,10 @@
         "web"
       ],
       "recurrencia": {
-        "comparables": 67,
+        "comparables": 85,
         "mateixa_empresa": 4,
         "objecte_similar": 0,
-        "mitjana_import_window": 25268.88,
+        "mitjana_import_window": 20850.62,
         "mitjana_import_empresa": 8022.5
       },
       "motius": [
@@ -2087,11 +2087,11 @@
         "retolacio"
       ],
       "recurrencia": {
-        "comparables": 67,
-        "mateixa_empresa": 3,
+        "comparables": 85,
+        "mateixa_empresa": 4,
         "objecte_similar": 0,
-        "mitjana_import_window": 25268.88,
-        "mitjana_import_empresa": 4808.57
+        "mitjana_import_window": 20850.62,
+        "mitjana_import_empresa": 4615.8
       },
       "motius": [
         "Adjudicació dins del període electoral municipal",
@@ -2143,10 +2143,10 @@
         "xarxes"
       ],
       "recurrencia": {
-        "comparables": 67,
+        "comparables": 85,
         "mateixa_empresa": 0,
         "objecte_similar": 0,
-        "mitjana_import_window": 25268.88,
+        "mitjana_import_window": 20850.62,
         "mitjana_import_empresa": 0
       },
       "motius": [
@@ -2200,10 +2200,10 @@
         "video"
       ],
       "recurrencia": {
-        "comparables": 67,
+        "comparables": 85,
         "mateixa_empresa": 3,
         "objecte_similar": 0,
-        "mitjana_import_window": 25268.88,
+        "mitjana_import_window": 20850.62,
         "mitjana_import_empresa": 3569.17
       },
       "motius": [
@@ -2260,11 +2260,11 @@
         "retols"
       ],
       "recurrencia": {
-        "comparables": 67,
-        "mateixa_empresa": 3,
+        "comparables": 85,
+        "mateixa_empresa": 6,
         "objecte_similar": 2,
-        "mitjana_import_window": 25268.88,
-        "mitjana_import_empresa": 5932.33
+        "mitjana_import_window": 20850.62,
+        "mitjana_import_empresa": 4012.5
       },
       "motius": [
         "Adjudicació dins la finestra administrativa posterior",
@@ -2318,10 +2318,10 @@
         "premsa"
       ],
       "recurrencia": {
-        "comparables": 67,
+        "comparables": 85,
         "mateixa_empresa": 0,
         "objecte_similar": 0,
-        "mitjana_import_window": 25268.88,
+        "mitjana_import_window": 20850.62,
         "mitjana_import_empresa": 0
       },
       "motius": [
@@ -2375,10 +2375,10 @@
         "lona"
       ],
       "recurrencia": {
-        "comparables": 67,
+        "comparables": 85,
         "mateixa_empresa": 0,
         "objecte_similar": 0,
-        "mitjana_import_window": 25268.88,
+        "mitjana_import_window": 20850.62,
         "mitjana_import_empresa": 0
       },
       "motius": [
@@ -2432,11 +2432,11 @@
         "monolits"
       ],
       "recurrencia": {
-        "comparables": 67,
-        "mateixa_empresa": 3,
+        "comparables": 85,
+        "mateixa_empresa": 6,
         "objecte_similar": 0,
-        "mitjana_import_window": 25268.88,
-        "mitjana_import_empresa": 5932.33
+        "mitjana_import_window": 20850.62,
+        "mitjana_import_empresa": 4012.5
       },
       "motius": [
         "Adjudicació dins la finestra administrativa posterior",
@@ -2489,10 +2489,10 @@
         "campanya"
       ],
       "recurrencia": {
-        "comparables": 67,
+        "comparables": 85,
         "mateixa_empresa": 0,
         "objecte_similar": 0,
-        "mitjana_import_window": 25268.88,
+        "mitjana_import_window": 20850.62,
         "mitjana_import_empresa": 0
       },
       "motius": [
@@ -2546,10 +2546,10 @@
         "audiovisual"
       ],
       "recurrencia": {
-        "comparables": 67,
+        "comparables": 85,
         "mateixa_empresa": 1,
         "objecte_similar": 0,
-        "mitjana_import_window": 25268.88,
+        "mitjana_import_window": 20850.62,
         "mitjana_import_empresa": 2450.0
       },
       "motius": [
@@ -2603,10 +2603,10 @@
         "xarxes"
       ],
       "recurrencia": {
-        "comparables": 67,
+        "comparables": 85,
         "mateixa_empresa": 0,
         "objecte_similar": 0,
-        "mitjana_import_window": 25268.88,
+        "mitjana_import_window": 20850.62,
         "mitjana_import_empresa": 0
       },
       "motius": [
@@ -2660,10 +2660,10 @@
         "xarxes"
       ],
       "recurrencia": {
-        "comparables": 67,
+        "comparables": 85,
         "mateixa_empresa": 0,
         "objecte_similar": 0,
-        "mitjana_import_window": 25268.88,
+        "mitjana_import_window": 20850.62,
         "mitjana_import_empresa": 0
       },
       "motius": [
@@ -2717,10 +2717,10 @@
         "radio"
       ],
       "recurrencia": {
-        "comparables": 67,
+        "comparables": 85,
         "mateixa_empresa": 0,
         "objecte_similar": 0,
-        "mitjana_import_window": 25268.88,
+        "mitjana_import_window": 20850.62,
         "mitjana_import_empresa": 0
       },
       "motius": [
@@ -2774,10 +2774,10 @@
         "xarxes"
       ],
       "recurrencia": {
-        "comparables": 67,
+        "comparables": 85,
         "mateixa_empresa": 0,
         "objecte_similar": 0,
-        "mitjana_import_window": 25268.88,
+        "mitjana_import_window": 20850.62,
         "mitjana_import_empresa": 0
       },
       "motius": [
@@ -2831,10 +2831,10 @@
         "presentacio"
       ],
       "recurrencia": {
-        "comparables": 67,
+        "comparables": 85,
         "mateixa_empresa": 0,
         "objecte_similar": 0,
-        "mitjana_import_window": 25268.88,
+        "mitjana_import_window": 20850.62,
         "mitjana_import_empresa": 0
       },
       "motius": [
@@ -2888,10 +2888,10 @@
         "disseny"
       ],
       "recurrencia": {
-        "comparables": 67,
+        "comparables": 85,
         "mateixa_empresa": 0,
         "objecte_similar": 0,
-        "mitjana_import_window": 25268.88,
+        "mitjana_import_window": 20850.62,
         "mitjana_import_empresa": 0
       },
       "motius": [
@@ -2910,63 +2910,6 @@
           "importe": 2750.0,
           "fecha": "2023-03-31",
           "tipo": "5. SERVEIS",
-          "procedimiento": "Menor",
-          "cpv": "",
-          "estat_font": "actiu_socrata",
-          "preservat_iguadata": false,
-          "primera_absencia_detectada": "",
-          "font_preservacio": "",
-          "primer_snapshot_iguadata": ""
-        }
-      ]
-    },
-    {
-      "id": "EL-11289BEDD9",
-      "tipus_alerta": "electoralisme",
-      "risc": 46,
-      "nivell": "OBSERVACIO",
-      "empresa": "SERVEIS VIALS DEL VALLÈS, SL, UNIPERSONAL",
-      "empreses": [
-        "SERVEIS VIALS DEL VALLÈS, SL, UNIPERSONAL"
-      ],
-      "import_total": 2562.07,
-      "data_inici": "2023-03-08",
-      "data_fi": "2023-03-08",
-      "periode_electoral": "Municipals 2023",
-      "data_inici_finestra_previa": "2023-02-09",
-      "data_convocatoria": "2023-04-04",
-      "data_votacio": "2023-05-28",
-      "data_fi_finestra_posterior": "2023-07-21",
-      "fase_temporal": "Finestra administrativa prèvia",
-      "dies_fins_votacio": 81,
-      "dies_abans_convocatoria": 27,
-      "dies_despres_votacio": 0,
-      "termes_detectats": [
-        "senyalitzacio"
-      ],
-      "recurrencia": {
-        "comparables": 67,
-        "mateixa_empresa": 0,
-        "objecte_similar": 0,
-        "mitjana_import_window": 25268.88,
-        "mitjana_import_empresa": 0
-      },
-      "motius": [
-        "Adjudicació dins la finestra administrativa prèvia",
-        "Possible formalització anticipada d'un servei executat en període electoral",
-        "Objecte contractual parcialment compatible amb comunicació institucional",
-        "Adjudicació mitjançant procediment menor",
-        "Sense recurrència clara en períodes equivalents no electorals"
-      ],
-      "contractes": [
-        {
-          "id": 4706,
-          "codigo": "2023.2.0007255.000",
-          "descripcion": "SUBMINISTRAMENT DE SENYALITZACIO PER ESTOC DE MAGATZEM",
-          "adjudicatario": "SERVEIS VIALS DEL VALLÈS, SL, UNIPERSONAL",
-          "importe": 2562.07,
-          "fecha": "2023-03-08",
-          "tipo": "3. SUBMINISTRAMENTS",
           "procedimiento": "Menor",
           "cpv": "",
           "estat_font": "actiu_socrata",
@@ -3002,10 +2945,10 @@
         "impressio"
       ],
       "recurrencia": {
-        "comparables": 67,
+        "comparables": 85,
         "mateixa_empresa": 0,
         "objecte_similar": 0,
-        "mitjana_import_window": 25268.88,
+        "mitjana_import_window": 20850.62,
         "mitjana_import_empresa": 0
       },
       "motius": [
@@ -3059,10 +3002,10 @@
         "disseny"
       ],
       "recurrencia": {
-        "comparables": 67,
+        "comparables": 85,
         "mateixa_empresa": 0,
         "objecte_similar": 0,
-        "mitjana_import_window": 25268.88,
+        "mitjana_import_window": 20850.62,
         "mitjana_import_empresa": 0
       },
       "motius": [
@@ -3116,10 +3059,10 @@
         "xarxes"
       ],
       "recurrencia": {
-        "comparables": 67,
+        "comparables": 85,
         "mateixa_empresa": 0,
         "objecte_similar": 0,
-        "mitjana_import_window": 25268.88,
+        "mitjana_import_window": 20850.62,
         "mitjana_import_empresa": 0
       },
       "motius": [
@@ -3173,10 +3116,10 @@
         "impressio"
       ],
       "recurrencia": {
-        "comparables": 67,
+        "comparables": 85,
         "mateixa_empresa": 0,
         "objecte_similar": 0,
-        "mitjana_import_window": 25268.88,
+        "mitjana_import_window": 20850.62,
         "mitjana_import_empresa": 0
       },
       "motius": [
@@ -3230,11 +3173,11 @@
         "senyalitzacio"
       ],
       "recurrencia": {
-        "comparables": 67,
-        "mateixa_empresa": 0,
+        "comparables": 85,
+        "mateixa_empresa": 1,
         "objecte_similar": 0,
-        "mitjana_import_window": 25268.88,
-        "mitjana_import_empresa": 0
+        "mitjana_import_window": 20850.62,
+        "mitjana_import_empresa": 4927.16
       },
       "motius": [
         "Adjudicació dins la finestra administrativa prèvia",
@@ -3287,10 +3230,10 @@
         "disseny"
       ],
       "recurrencia": {
-        "comparables": 67,
+        "comparables": 85,
         "mateixa_empresa": 0,
         "objecte_similar": 0,
-        "mitjana_import_window": 25268.88,
+        "mitjana_import_window": 20850.62,
         "mitjana_import_empresa": 0
       },
       "motius": [
@@ -3344,10 +3287,10 @@
         "impressio"
       ],
       "recurrencia": {
-        "comparables": 67,
+        "comparables": 85,
         "mateixa_empresa": 4,
         "objecte_similar": 0,
-        "mitjana_import_window": 25268.88,
+        "mitjana_import_window": 20850.62,
         "mitjana_import_empresa": 8022.5
       },
       "motius": [
@@ -3401,10 +3344,10 @@
         "disseny"
       ],
       "recurrencia": {
-        "comparables": 67,
+        "comparables": 85,
         "mateixa_empresa": 0,
         "objecte_similar": 0,
-        "mitjana_import_window": 25268.88,
+        "mitjana_import_window": 20850.62,
         "mitjana_import_empresa": 0
       },
       "motius": [
@@ -3459,10 +3402,10 @@
         "revista"
       ],
       "recurrencia": {
-        "comparables": 67,
+        "comparables": 85,
         "mateixa_empresa": 1,
         "objecte_similar": 1,
-        "mitjana_import_window": 25268.88,
+        "mitjana_import_window": 20850.62,
         "mitjana_import_empresa": 2500.0
       },
       "motius": [
@@ -3517,10 +3460,10 @@
         "nou"
       ],
       "recurrencia": {
-        "comparables": 67,
+        "comparables": 85,
         "mateixa_empresa": 0,
         "objecte_similar": 0,
-        "mitjana_import_window": 25268.88,
+        "mitjana_import_window": 20850.62,
         "mitjana_import_empresa": 0
       },
       "motius": [
@@ -3576,10 +3519,10 @@
         "video"
       ],
       "recurrencia": {
-        "comparables": 67,
+        "comparables": 85,
         "mateixa_empresa": 0,
         "objecte_similar": 0,
-        "mitjana_import_window": 25268.88,
+        "mitjana_import_window": 20850.62,
         "mitjana_import_empresa": 0
       },
       "motius": [
@@ -3632,11 +3575,11 @@
         "senyaletica"
       ],
       "recurrencia": {
-        "comparables": 67,
-        "mateixa_empresa": 1,
+        "comparables": 85,
+        "mateixa_empresa": 2,
         "objecte_similar": 0,
-        "mitjana_import_window": 25268.88,
-        "mitjana_import_empresa": 2785.0
+        "mitjana_import_window": 20850.62,
+        "mitjana_import_empresa": 2635.78
       },
       "motius": [
         "Adjudicació dins la finestra administrativa prèvia",
@@ -3691,10 +3634,10 @@
         "impressio"
       ],
       "recurrencia": {
-        "comparables": 67,
+        "comparables": 85,
         "mateixa_empresa": 0,
         "objecte_similar": 0,
-        "mitjana_import_window": 25268.88,
+        "mitjana_import_window": 20850.62,
         "mitjana_import_empresa": 0
       },
       "motius": [
@@ -3747,10 +3690,10 @@
         "campanya"
       ],
       "recurrencia": {
-        "comparables": 67,
+        "comparables": 85,
         "mateixa_empresa": 0,
         "objecte_similar": 0,
-        "mitjana_import_window": 25268.88,
+        "mitjana_import_window": 20850.62,
         "mitjana_import_empresa": 0
       },
       "motius": [
@@ -3805,10 +3748,10 @@
         "impressio"
       ],
       "recurrencia": {
-        "comparables": 67,
+        "comparables": 85,
         "mateixa_empresa": 0,
         "objecte_similar": 0,
-        "mitjana_import_window": 25268.88,
+        "mitjana_import_window": 20850.62,
         "mitjana_import_empresa": 0
       },
       "motius": [
@@ -3861,10 +3804,10 @@
         "campanya"
       ],
       "recurrencia": {
-        "comparables": 67,
+        "comparables": 85,
         "mateixa_empresa": 0,
         "objecte_similar": 0,
-        "mitjana_import_window": 25268.88,
+        "mitjana_import_window": 20850.62,
         "mitjana_import_empresa": 0
       },
       "motius": [
@@ -3916,10 +3859,10 @@
         "disseny"
       ],
       "recurrencia": {
-        "comparables": 67,
+        "comparables": 85,
         "mateixa_empresa": 0,
         "objecte_similar": 0,
-        "mitjana_import_window": 25268.88,
+        "mitjana_import_window": 20850.62,
         "mitjana_import_empresa": 0
       },
       "motius": [
@@ -3973,10 +3916,10 @@
         "radio"
       ],
       "recurrencia": {
-        "comparables": 67,
+        "comparables": 85,
         "mateixa_empresa": 0,
         "objecte_similar": 0,
-        "mitjana_import_window": 25268.88,
+        "mitjana_import_window": 20850.62,
         "mitjana_import_empresa": 0
       },
       "motius": [
@@ -4030,10 +3973,10 @@
         "disseny"
       ],
       "recurrencia": {
-        "comparables": 67,
+        "comparables": 85,
         "mateixa_empresa": 0,
         "objecte_similar": 0,
-        "mitjana_import_window": 25268.88,
+        "mitjana_import_window": 20850.62,
         "mitjana_import_empresa": 0
       },
       "motius": [
@@ -4087,10 +4030,10 @@
         "lones"
       ],
       "recurrencia": {
-        "comparables": 67,
+        "comparables": 85,
         "mateixa_empresa": 0,
         "objecte_similar": 0,
-        "mitjana_import_window": 25268.88,
+        "mitjana_import_window": 20850.62,
         "mitjana_import_empresa": 0
       },
       "motius": [

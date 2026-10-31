@@ -223,11 +223,12 @@ class DataPipelineTests(unittest.TestCase):
         self.assertEqual(generate_concentracio.apply_historic_quota_floor(92, 0.55), 92)
         self.assertEqual(generate_concentracio.apply_historic_quota_floor(39, 0.24), 39)
 
-    def test_archived_contracts_are_never_analysed(self):
+    def test_audit_versions_are_excluded_but_last_known_contracts_are_analysed(self):
         self.assertTrue(is_analysis_contract({"estat_font": "actiu_socrata"}))
         self.assertFalse(is_analysis_contract({"preservat_iguadata": True}))
         self.assertFalse(is_analysis_contract({"exclos_analisis": True}))
-        self.assertFalse(is_analysis_contract({"estat_font": "preservat_desaparegut_socrata"}))
+        self.assertTrue(is_analysis_contract({"estat_font": "preservat_desaparegut_socrata", "preservat_iguadata": True}))
+        self.assertFalse(is_analysis_contract({"estat_font": "preservat_desaparegut_socrata", "preservat_iguadata": True, "exclos_analisis": True}))
 
     def test_snapshot_guard_compares_live_contracts_only(self):
         rows = [

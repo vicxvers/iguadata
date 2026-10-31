@@ -38,6 +38,7 @@ function SobreView() {
                     Una actualització automàtica setmanal genera una fotografia coherent dels contractes, les subvencions, les empreses, les entitats, les persones i els resultats analítics. També es generen fitxers JSON propis que permeten alimentar la interfície, accelerar la consulta i mantenir còpies de suport en cas de caiguda temporal de les fonts externes.
                 </p>
                 <h2 className="prose-heading">Metodologia</h2>
+                <ContractHistoryMethodology className="prose-paragraph" />
                 <p className="prose-paragraph">
                     El projecte utilitza scripts de Python per descarregar, netejar, normalitzar i encreuar dades. Part del procés d'actualització s'executa automàticament mitjançant GitHub Actions, amb controls de validació, còpies de seguretat i comprovacions d'integritat.
                 </p>
@@ -97,7 +98,7 @@ function LegalView() {
                     La plataforma publica fotografies setmanals coherents de contractes i subvencions generades a partir de fonts públiques. Part del procés d'actualització s'executa de manera automatitzada mitjançant GitHub Actions, amb controls tècnics de validació, preservació de registres, còpies de seguretat i comprovacions d'integritat dels fitxers generats.
                 </p>
                 <p className="prose-paragraph">
-                    Aquest procés no altera el sentit de les dades originals, sinó que les estructura, normalitza i encreua per facilitar-ne la consulta pública i l'anàlisi.
+                    Els contractes que deixen d'estar disponibles al Registre Públic de Contractes es conserven amb l'última informació capturada i continuen participant en els recomptes i les anàlisis històriques. La fitxa n'indica l'absència de la font. Les versions corregides substitueixen les anteriors, que es mantenen només com a evidència d'auditoria.
                 </p>
                 <h2 className="prose-heading">4. Finalitat del tractament</h2>
                 <p className="prose-paragraph">

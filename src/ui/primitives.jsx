@@ -117,3 +117,10 @@ function FilterActions({ open, onToggle, activeCount, onReset, controlsId }) {
         </div>
     );
 }
+function ContractHistoryMethodology({ className = 'metodologia-intro' }) {
+    return (
+        <p className={className}>
+            Els recomptes i les anàlisis inclouen els contractes de la font i l'última versió conservada dels que ja no hi estan disponibles. Les versions substituïdes per una correcció no es compten dues vegades.
+        </p>
+    );
+}

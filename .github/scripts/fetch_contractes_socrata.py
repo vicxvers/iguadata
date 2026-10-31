@@ -5,9 +5,8 @@ Substitueix la lectura dels fitxers Excel/JSON estàtics de /data
 per una extracció dinàmica i massiva des de la API SODA 2.1 de
 Dades Obertes de Catalunya (analisi.transparenciacatalunya.cat).
 
-Resultat: sobreescriu json/contractes.json amb el MATEIX esquema
-que espera la resta de l'aplicació (index.html + scripts Python
-d'anàlisi), de manera que no cal modificar cap altra peça del codi.
+Resultat: actualitza json/contractes.json amb les dades de la font i
+l'última fotografia dels contractes que ja no hi estan disponibles.
 
 Ús:
     python fetch_contractes_socrata.py
@@ -19,6 +18,7 @@ Opcions addicionals (variables al capdamunt del fitxer):
     RETRY_DELAY  — segons d'espera entre reintents
 """
 
+import argparse
 import json
 import time
 import os
@@ -28,17 +28,15 @@ from urllib.error import HTTPError, URLError
 from urllib.parse import urlencode
 
 from atomic_io import write_json_atomic
-from contract_audit import change_id, contract_differences, detailed_key, identity_key
+from contract_audit import change_id, contract_differences, detailed_key
+from contract_filters import is_analysis_contract, is_live_contract
+from contract_history import contract_key, merge_snapshot
 
 # ─────────────────────────────────────────────
 # CONFIGURACIÓ
 # ─────────────────────────────────────────────
 
-# Ruta de sortida: puja dos nivells des de .dev/py -> arriba a d:/Iguadata/
-# .../Iguadata/.dev/py/fetch_contractes_socrata.py
-#               ^----^ abspath(__file__)  -> .dev/py
-#         ^---------^  dirname(...)       -> .dev
-# ^-----------^        dirname(dirname()) -> Iguadata (arrel del projecte)
+# Font mantinguda a .github/scripts/; les sortides parteixen de l'arrel.
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 OUTPUT_FILE = os.path.join(BASE_DIR, "json", "contractes.json")
 ARCHIVE_FILE = os.path.join(BASE_DIR, ".github", "audit", "contractes_arxiu.json")
@@ -100,7 +98,7 @@ SELECT_FIELDS = [
 # FUNCIONS AUXILIARS
 # ─────────────────────────────────────────────
 
-def construir_url(offset: int) -> str:
+def construir_url(offset: int, *, count_only: bool = False) -> str:
     """
     Construeix la URL completa amb la query SoQL encodada correctament.
     Filtra per:
@@ -110,7 +108,7 @@ def construir_url(offset: int) -> str:
     """
     # La clàusula $select la incloem com a text pla (no encodat aquí perquè
     # urlencode ho farà tot correctament)
-    select = ", ".join(f"`{f}`" for f in SELECT_FIELDS)
+    select = ":id AS id_socrata, " + ", ".join(f"`{f}`" for f in SELECT_FIELDS)
 
     # Condicions SoQL – inclou l'Ajuntament i tots els organismes municipals vinculats
     organismes = [
@@ -134,7 +132,7 @@ def construir_url(offset: int) -> str:
         "`exercici` ASC NULL LAST, "
         "`data_adjudicacio` ASC NULL LAST, "
         "`codi_expedient` ASC NULL LAST, "
-        "`adjudicatari` ASC NULL LAST"
+        "`adjudicatari` ASC NULL LAST, :id ASC"
     )
 
     params = {
@@ -144,6 +142,8 @@ def construir_url(offset: int) -> str:
         "$limit":  LIMIT,
         "$offset": offset,
     }
+    if count_only:
+        params = {"$select": "count(*) AS total", "$where": where}
     return f"{BASE_URL}?{urlencode(params)}"
 
 
@@ -261,30 +261,31 @@ def mapejar_registre(fila: dict, index_id: int) -> dict:
         "cpv":          (fila.get("codi_cpv") or "").strip(),
         "numero_lot":   (fila.get("numero_lot") or "").strip(),
         "contracte_origen": (fila.get("contracte") or "").strip(),
+        "id_socrata": str(fila.get("id_socrata") or ""),
     }
 
 
 def carregar_json_array(path: str) -> list:
     if not os.path.exists(path):
         return []
-    try:
-        with open(path, encoding="utf-8") as f:
-            data = json.load(f)
-        return data if isinstance(data, list) else []
-    except Exception:
-        return []
+    with open(path, encoding="utf-8") as f:
+        data = json.load(f)
+    if not isinstance(data, list) or any(not isinstance(row, dict) for row in data):
+        raise ValueError(f"{path} no és un array de registres vàlid")
+    return data
 
 
 def actualitzar_arxiu_contractes(contractes_antics: list, contractes_nous: list) -> int:
     old_live = [
         contract
         for contract in contractes_antics
-        if isinstance(contract, dict) and not contract.get("preservat_iguadata")
+        if is_analysis_contract(contract)
     ]
     new_exact = {detailed_key(contract) for contract in contractes_nous}
     new_by_identity = {}
+    new_by_source = {str(row["id_socrata"]): row for row in contractes_nous if row.get("id_socrata")}
     for contract in contractes_nous:
-        key = identity_key(contract)
+        key = contract_key(contract)
         if key:
             new_by_identity.setdefault(key, []).append(contract)
 
@@ -294,11 +295,6 @@ def actualitzar_arxiu_contractes(contractes_antics: list, contractes_nous: list)
         row.get("id"): row
         for row in canvis
         if isinstance(row, dict) and row.get("id")
-    }
-    claus_arxivades = {
-        detailed_key(row.get("contracte_original", row))
-        for row in arxiu
-        if isinstance(row, dict)
     }
 
     data_deteccio = datetime.now(timezone.utc).date().isoformat()
@@ -349,10 +345,13 @@ def actualitzar_arxiu_contractes(contractes_antics: list, contractes_nous: list)
     nous_esdeveniments = 0
     for contracte in old_live:
         key = detailed_key(contracte)
-        if key in new_exact or key in claus_arxivades:
+        if key in new_exact:
             continue
 
-        candidates = new_by_identity.get(identity_key(contracte), [])
+        candidates = new_by_identity.get(contract_key(contracte), [])
+        if not candidates and contracte.get("id_socrata"):
+            source_match = new_by_source.get(str(contracte["id_socrata"]))
+            candidates = [source_match] if source_match else []
         # Ignore schema-only backfills and exact semantic matches.
         if any(not contract_differences(contracte, candidate) for candidate in candidates):
             continue
@@ -364,6 +363,8 @@ def actualitzar_arxiu_contractes(contractes_antics: list, contractes_nous: list)
         )
         tipus = "modificat" if contracte_nou and differences else "desaparegut"
         identifier = change_id(tipus, contracte, contracte_nou)
+        if identifier in canvis_by_id:
+            continue
 
         registre = {
             "estat_font": "versio_anterior_socrata",
@@ -378,7 +379,6 @@ def actualitzar_arxiu_contractes(contractes_antics: list, contractes_nous: list)
             "camps_modificats": differences,
         }
         arxiu.append(registre)
-        claus_arxivades.add(key)
         arxiu_modificat = True
 
         if identifier not in canvis_by_id:
@@ -416,7 +416,46 @@ def actualitzar_arxiu_contractes(contractes_antics: list, contractes_nous: list)
 # PROGRAMA PRINCIPAL
 # ─────────────────────────────────────────────
 
+def comptar_registres() -> int:
+    response = fer_peticio(construir_url(0, count_only=True))
+    if not isinstance(response, list) or len(response) != 1:
+        raise RuntimeError("Recompte Socrata invàlid")
+    total = int(response[0]["total"])
+    if total <= 0:
+        raise RuntimeError("Socrata no retorna contractes; es conserva la fotografia anterior")
+    return total
+
+
+def descarregar_contractes() -> list[dict]:
+    expected = comptar_registres()
+    rows = []
+    seen = set()
+    offset = 0
+    while True:
+        page = fer_peticio(construir_url(offset))
+        if not isinstance(page, list) or any(not isinstance(row, dict) for row in page):
+            raise RuntimeError("Pàgina Socrata invàlida")
+        for row in page:
+            source_id = row.get("id_socrata")
+            if not source_id or source_id in seen:
+                raise RuntimeError("Paginació Socrata inconsistent: identificador absent o repetit")
+            seen.add(source_id)
+        rows.extend(page)
+        print(f"  >> Offset {offset}: {len(page)} registres")
+        if len(page) < LIMIT:
+            break
+        offset += LIMIT
+    if len(rows) != expected or comptar_registres() != expected:
+        raise RuntimeError("Descàrrega Socrata incompleta o modificada durant la paginació")
+    rows.sort(key=lambda row: row.get("data_adjudicacio") or "", reverse=True)
+    return [mapejar_registre(row, index + 1) for index, row in enumerate(rows)]
+
+
 def main():
+    parser = argparse.ArgumentParser(description="Actualitza la fotografia contractual i conserva l'històric.")
+    parser.add_argument("--migrate-history", action="store_true",
+                        help="Incorpora originals desapareguts a la fotografia local, sense descarregar dades.")
+    args = parser.parse_args()
     print("=" * 60)
     print("  IGUADATA — Extracció de contractes via Socrata SODA 2.1")
     print("=" * 60)
@@ -425,56 +464,19 @@ def main():
     print()
 
     contractes_anteriors = carregar_json_array(OUTPUT_FILE)
-    tots_els_registres_bruts = []
-    offset = 0
-    pagina = 1
-
-    # ─── Bucle de paginació ───────────────────────────────────────
-    while True:
-        url = construir_url(offset)
-        print(f"  >> Pagina {pagina:3d}  (offset={offset:6d})...", end=" ", flush=True)
-
-        try:
-            pàgina_data = fer_peticio(url)
-        except Exception as exc:
-            print(f"\n  ERROR fatal durant la descarrega: {exc}")
-            raise
-
-        num = len(pàgina_data)
-        print(f"rebuts {num} registres")
-
-        tots_els_registres_bruts.extend(pàgina_data)
-
-        if num < LIMIT:
-            # Última pàgina: l'API ha retornat menys de LIMIT → hem acabat
-            break
-
-        offset += LIMIT
-        pagina += 1
-
-    print()
-    print(f"  Total registres descarregats: {len(tots_els_registres_bruts):,}")
-
-    # ─── Ordenar per data descendent (el més recent primer) ──────
-    # Mantenim l'ordre que espera index.html (el primer contracte de la llista
-    # sol ser el més recent, igual que feia el pipeline Excel original).
-    tots_els_registres_bruts.sort(
-        key=lambda r: r.get("data_adjudicacio") or "",
-        reverse=True
-    )
-
-    # ─── Mapeig al format intern ──────────────────────────────────
-    print("  Mapejant al format intern...", end=" ", flush=True)
-    contractes = [
-        mapejar_registre(fila, idx + 1)
-        for idx, fila in enumerate(tots_els_registres_bruts)
-    ]
-    print("fet.")
-
-    arxivats = actualitzar_arxiu_contractes(contractes_anteriors, contractes)
-    for contracte in contractes:
-        contracte["estat_font"] = "actiu_socrata"
-        contracte["preservat_iguadata"] = False
+    legacy_archive = carregar_json_array(ARCHIVE_FILE)
+    carregar_json_array(CHANGELOG_FILE)
+    previous_companies = carregar_json_array(os.path.join(BASE_DIR, "json", "empreses.json"))
+    if args.migrate_history:
+        fresh = [dict(row) for row in contractes_anteriors if is_live_contract(row)]
+        observed_on = None
+        arxivats = 0
+    else:
+        fresh = descarregar_contractes()
+        observed_on = datetime.now(timezone.utc).date().isoformat()
+        arxivats = actualitzar_arxiu_contractes(contractes_anteriors, fresh)
+    contractes = merge_snapshot(contractes_anteriors, fresh, observed_on=observed_on,
+                               legacy_archive=legacy_archive)
 
     # ─── Escriure JSON de sortida ─────────────────────────────────
     print(f"  Escrivint {OUTPUT_FILE}...", end=" ", flush=True)
@@ -512,19 +514,13 @@ def main():
 
     # Carregar classificacions existents (sector/categoria) per empresa
     classificacions_previes = {}
-    if os.path.exists(EMPRESES_FILE):
-        try:
-            with open(EMPRESES_FILE, encoding="utf-8") as f:
-                old_empreses = json.load(f)
-            for emp in old_empreses:
-                nom = (emp.get("nom") or "").strip().upper()
-                if nom:
-                    classificacions_previes[nom] = {
-                        "sector":    emp.get("sector", ""),
-                        "categoria": emp.get("categoria", ""),
-                    }
-        except Exception:
-            pass  # Si el fitxer és invàlid, continuem sense classificacions
+    for emp in previous_companies:
+        nom = (emp.get("nom") or "").strip().upper()
+        if nom:
+            classificacions_previes[nom] = {
+                "sector": emp.get("sector", ""),
+                "categoria": emp.get("categoria", ""),
+            }
 
     # Agrupar contractes per empresa
     from collections import defaultdict

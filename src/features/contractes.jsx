@@ -221,7 +221,7 @@ function ContractDetailView({ contract: c, empreses, onBack, onEmpresaClick }) {
             <div className="contracte-detail-info-card">
                 {isPreserved && (
                     <div className="contracte-preserved-notice">
-                        Aquest contracte és recuperat i ja no consta al registre públic. La fitxa i evidència es preserven per mantenir la traçabilitat de les dades.
+                        Aquest contracte ja no està disponible al Registre Públic de Contractes. La fitxa es preserva per mantenir la traçabilitat de les dades.
                     </div>
                 )}
                 <div className={`contract-meta contracte-detail-meta contracte-detail-info-meta${hasCpv ? '' : ' contracte-detail-info-meta-without-cpv'}`}>

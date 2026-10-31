@@ -119,6 +119,15 @@ for (const [index, company] of (datasets.empreses || []).entries()) {
         errors.push(`/empreses/${index}: num_contratos does not match contratos.length`);
     }
 }
+const contractIds = new Set();
+for (const [index, contract] of (datasets.contractes || []).entries()) {
+    if (contractIds.has(contract.id)) errors.push(`/contractes/${index}: duplicate contract id ${contract.id}`);
+    contractIds.add(contract.id);
+    const historical = contract.estat_font === 'preservat_desaparegut_socrata';
+    if (historical !== contract.preservat_iguadata || contract.exclos_analisis === true) {
+        errors.push(`/contractes/${index}: inconsistent source or exclusion state`);
+    }
+}
 
 if (errors.length) {
     console.error(`Frontend data validation failed with ${errors.length} error(s):`);
