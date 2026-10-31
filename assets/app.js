@@ -261,7 +261,7 @@ async function fetchContractsSnapshot() {
   if (!resp.ok) throw new Error(`Contractes HTTP ${resp.status}`);
   const data = await resp.json();
   if (!Array.isArray(data)) return [];
-  return data.filter(contract => !contract.preservat_iguadata && contract.exclos_analisis !== true).map(contract => ({
+  return data.filter(contract => contract.exclos_analisis !== true && (!contract.preservat_iguadata || contract.estat_font === 'preservat_desaparegut_socrata')).map(contract => ({
     ...contract,
     slug: contract.slug || buildContractSlug(contract)
   }));
@@ -350,7 +350,7 @@ function prepareContracts(contracts) {
     const legacyIndex = (legacySeen.get(legacyBaseSlug) || 0) + 1;
     legacySeen.set(legacyBaseSlug, legacyIndex);
     const legacySlug = legacyIndex > 1 ? `${legacyBaseSlug}-${legacyIndex}` : legacyBaseSlug;
-    contract.slug_aliases = Array.from(new Set([previousCollisionSlug, legacyBaseSlug, legacySlug].filter(slug => slug && slug !== contract.slug)));
+    contract.slug_aliases = Array.from(new Set([baseSlug, previousCollisionSlug, legacyBaseSlug, legacySlug].filter(slug => slug && slug !== contract.slug)));
   }
   return contracts;
 }
@@ -805,6 +805,13 @@ function FilterActions({
   }), React.createElement("path", {
     d: "M3 3v5h5"
   }))));
+}
+function ContractHistoryMethodology({
+  className = 'metodologia-intro'
+}) {
+  return React.createElement("p", {
+    className: className
+  }, "Els recomptes i les an\xE0lisis inclouen els contractes de la font i l'\xFAltima versi\xF3 conservada dels que ja no hi estan disponibles. Les versions substitu\xEFdes per una correcci\xF3 no es compten dues vegades.");
 }
 function CasFraccionamentView({
   caso,
@@ -2053,7 +2060,7 @@ function ContractDetailView({
     className: "contracte-detail-info-card"
   }, isPreserved && React.createElement("div", {
     className: "contracte-preserved-notice"
-  }, "Aquest contracte \xE9s recuperat i ja no consta al registre p\xFAblic. La fitxa i evid\xE8ncia es preserven per mantenir la tra\xE7abilitat de les dades."), React.createElement("div", {
+  }, "Aquest contracte ja no est\xE0 disponible al Registre P\xFAblic de Contractes. La fitxa es preserva per mantenir la tra\xE7abilitat de les dades."), React.createElement("div", {
     className: `contract-meta contracte-detail-meta contracte-detail-info-meta${hasCpv ? '' : ' contracte-detail-info-meta-without-cpv'}`
   }, React.createElement("div", {
     className: "contract-meta-item"
@@ -3078,7 +3085,9 @@ function SobreView() {
     className: "prose-paragraph"
   }, "Una actualitzaci\xF3 autom\xE0tica setmanal genera una fotografia coherent dels contractes, les subvencions, les empreses, les entitats, les persones i els resultats anal\xEDtics. Tamb\xE9 es generen fitxers JSON propis que permeten alimentar la interf\xEDcie, accelerar la consulta i mantenir c\xF2pies de suport en cas de caiguda temporal de les fonts externes."), React.createElement("h2", {
     className: "prose-heading"
-  }, "Metodologia"), React.createElement("p", {
+  }, "Metodologia"), React.createElement(ContractHistoryMethodology, {
+    className: "prose-paragraph"
+  }), React.createElement("p", {
     className: "prose-paragraph"
   }, "El projecte utilitza scripts de Python per descarregar, netejar, normalitzar i encreuar dades. Part del proc\xE9s d'actualitzaci\xF3 s'executa autom\xE0ticament mitjan\xE7ant GitHub Actions, amb controls de validaci\xF3, c\xF2pies de seguretat i comprovacions d'integritat."), React.createElement("p", {
     className: "prose-paragraph"
@@ -3140,7 +3149,7 @@ function LegalView() {
     className: "prose-paragraph"
   }, "La plataforma publica fotografies setmanals coherents de contractes i subvencions generades a partir de fonts p\xFAbliques. Part del proc\xE9s d'actualitzaci\xF3 s'executa de manera automatitzada mitjan\xE7ant GitHub Actions, amb controls t\xE8cnics de validaci\xF3, preservaci\xF3 de registres, c\xF2pies de seguretat i comprovacions d'integritat dels fitxers generats."), React.createElement("p", {
     className: "prose-paragraph"
-  }, "Aquest proc\xE9s no altera el sentit de les dades originals, sin\xF3 que les estructura, normalitza i encreua per facilitar-ne la consulta p\xFAblica i l'an\xE0lisi."), React.createElement("h2", {
+  }, "Els contractes que deixen d'estar disponibles al Registre P\xFAblic de Contractes es conserven amb l'\xFAltima informaci\xF3 capturada i continuen participant en els recomptes i les an\xE0lisis hist\xF2riques. La fitxa n'indica l'abs\xE8ncia de la font. Les versions corregides substitueixen les anteriors, que es mantenen nom\xE9s com a evid\xE8ncia d'auditoria."), React.createElement("h2", {
     className: "prose-heading"
   }, "4. Finalitat del tractament"), React.createElement("p", {
     className: "prose-paragraph"
@@ -6923,7 +6932,7 @@ function App() {
     className: "metodologia-title"
   }, "Metodologia"), React.createElement("p", {
     className: "metodologia-intro"
-  }, "L'algoritme Iguadata de fraccionament detecta grups de contractes menors que poden ser compatibles amb una possible divisi\xF3 d'un mateix enc\xE0rrec en diversos contractes per evitar el concurs p\xFAblic. Tamb\xE9 incorpora contractes menors individuals molt propers al l\xEDmit legal, imports rodons o ajustats al llindar i repeticions multianuals del mateix objecte. La identificaci\xF3 de patrons estad\xEDsticament rellevants i les alertes generades no impliquen cap irregularitat legal confirmada i han de ser interpretades en context."), React.createElement("div", {
+  }, "L'algoritme Iguadata de fraccionament detecta grups de contractes menors que poden ser compatibles amb una possible divisi\xF3 d'un mateix enc\xE0rrec en diversos contractes per evitar el concurs p\xFAblic. Tamb\xE9 incorpora contractes menors individuals molt propers al l\xEDmit legal, imports rodons o ajustats al llindar i repeticions multianuals del mateix objecte. La identificaci\xF3 de patrons estad\xEDsticament rellevants i les alertes generades no impliquen cap irregularitat legal confirmada i han de ser interpretades en context."), React.createElement(ContractHistoryMethodology, null), React.createElement("div", {
     className: "metodologia-steps-compact"
   }, React.createElement("div", {
     className: "metodologia-step-compact"
@@ -7062,7 +7071,7 @@ function App() {
     className: "metodologia-title"
   }, "Metodologia"), React.createElement("p", {
     className: "metodologia-intro"
-  }, "L'algoritme Iguadata de concentraci\xF3 identifica quines empreses tenen m\xE9s pes dins de cada sector i detecta per\xEDodes curts en qu\xE8 una mateixa empresa acumula un nombre elevat de contractes. La identificaci\xF3 de patrons estad\xEDsticament rellevants i les alertes generades no impliquen cap irregularitat legal confirmada i han de ser interpretades en context."), React.createElement("div", {
+  }, "L'algoritme Iguadata de concentraci\xF3 identifica quines empreses tenen m\xE9s pes dins de cada sector i detecta per\xEDodes curts en qu\xE8 una mateixa empresa acumula un nombre elevat de contractes. La identificaci\xF3 de patrons estad\xEDsticament rellevants i les alertes generades no impliquen cap irregularitat legal confirmada i han de ser interpretades en context."), React.createElement(ContractHistoryMethodology, null), React.createElement("div", {
     className: "metodologia-steps-compact"
   }, React.createElement("div", {
     className: "metodologia-step-compact"
@@ -7264,7 +7273,7 @@ function App() {
     className: "metodologia-title"
   }, "Metodologia"), React.createElement("p", {
     className: "metodologia-intro"
-  }, "L'algoritme Iguadata d'electoralisme detecta contractes de comunicaci\xF3, difusi\xF3, publicitat institucional o actes p\xFAblics adjudicats durant per\xEDodes electorals. La identificaci\xF3 de patrons estad\xEDsticament rellevants i les alertes generades no impliquen cap irregularitat legal confirmada i han de ser interpretades en context."), React.createElement("div", {
+  }, "L'algoritme Iguadata d'electoralisme detecta contractes de comunicaci\xF3, difusi\xF3, publicitat institucional o actes p\xFAblics adjudicats durant per\xEDodes electorals. La identificaci\xF3 de patrons estad\xEDsticament rellevants i les alertes generades no impliquen cap irregularitat legal confirmada i han de ser interpretades en context."), React.createElement(ContractHistoryMethodology, null), React.createElement("div", {
     className: "metodologia-steps-compact"
   }, React.createElement("div", {
     className: "metodologia-step-compact"

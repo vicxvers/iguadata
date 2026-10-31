@@ -170,8 +170,15 @@
         "cpv": { "type": "string" },
         "numero_lot": { "type": "string" },
         "contracte_origen": { "type": "string" },
-        "estat_font": { "type": "string" },
-        "preservat_iguadata": { "type": "boolean" }
+        "estat_font": {
+          "type": "string",
+          "enum": ["actiu_socrata", "preservat_desaparegut_socrata"]
+        },
+        "preservat_iguadata": { "type": "boolean" },
+        "exclos_analisis": { "type": "boolean" },
+        "primera_absencia_detectada": { "type": "string" },
+        "ultima_presencia_socrata": { "type": "string" },
+        "id_socrata": { "type": "string" }
       }
     },
     "company": {

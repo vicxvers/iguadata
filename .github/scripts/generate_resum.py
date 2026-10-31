@@ -5,6 +5,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from atomic_io import write_json_atomic
+from contract_filters import is_analysis_contract
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -85,7 +86,7 @@ def minor_contract_trend(contractes):
     ]
 
 def main():
-    contractes = load_json("contractes.json")
+    contractes = [row for row in load_json("contractes.json") if is_analysis_contract(row)]
     empreses = load_json("empreses.json")
     persones = load_json("persones.json")
     fraccionament = load_json("fraccionament.json")

@@ -30,6 +30,8 @@ Les dades mercantils provenen del Butlletí Oficial del Registre Mercantil (BORM
 
 Una actualització automàtica setmanal genera una fotografia coherent dels contractes, les subvencions, les empreses, les entitats, les persones i els resultats analítics. També es generen fitxers JSON propis que permeten alimentar la interfície, accelerar la consulta i mantenir còpies de suport en cas de caiguda temporal de les fonts externes.
 
+Els contractes que deixen d'estar disponibles al Registre Públic de Contractes es conserven amb l'última informació capturada, continuen sent consultables i participen en els recomptes i les anàlisis històriques. La fitxa n'indica l'absència de la font. Les versions corregides per la font substitueixen les anteriors, que es mantenen només com a evidència d'auditoria. Les descàrregues incompletes i les caigudes massives continuen bloquejant l'actualització.
+
 ## Metodologia
 
 El projecte utilitza scripts de Python per descarregar, netejar, normalitzar i encreuar dades. Part del procés d'actualització s'executa automàticament mitjançant GitHub Actions, amb controls de validació, còpies de seguretat i comprovacions d'integritat.

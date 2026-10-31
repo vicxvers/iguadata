@@ -2514,6 +2514,7 @@ function App() {
                                     <div className="metodologia">
                                         <h3 className="metodologia-title">Metodologia</h3>
                                         <p className="metodologia-intro">L'algoritme Iguadata de fraccionament detecta grups de contractes menors que poden ser compatibles amb una possible divisió d'un mateix encàrrec en diversos contractes per evitar el concurs públic. També incorpora contractes menors individuals molt propers al límit legal, imports rodons o ajustats al llindar i repeticions multianuals del mateix objecte. La identificació de patrons estadísticament rellevants i les alertes generades no impliquen cap irregularitat legal confirmada i han de ser interpretades en context.</p>
+                                        <ContractHistoryMethodology />
                                         <div className="metodologia-steps-compact">
                                             <div className="metodologia-step-compact">
                                                 <span className="metodologia-step-num-compact">01</span>
@@ -2628,6 +2629,7 @@ function App() {
                                     <div className="metodologia">
                                         <h3 className="metodologia-title">Metodologia</h3>
                                         <p className="metodologia-intro">L'algoritme Iguadata de concentració identifica quines empreses tenen més pes dins de cada sector i detecta períodes curts en què una mateixa empresa acumula un nombre elevat de contractes. La identificació de patrons estadísticament rellevants i les alertes generades no impliquen cap irregularitat legal confirmada i han de ser interpretades en context.</p>
+                                        <ContractHistoryMethodology />
                                         <div className="metodologia-steps-compact">
                                             <div className="metodologia-step-compact">
                                                 <span className="metodologia-step-num-compact">01</span>
@@ -2809,6 +2811,7 @@ function App() {
                                     <div className="metodologia">
                                         <h3 className="metodologia-title">Metodologia</h3>
                                         <p className="metodologia-intro">L'algoritme Iguadata d'electoralisme detecta contractes de comunicació, difusió, publicitat institucional o actes públics adjudicats durant períodes electorals. La identificació de patrons estadísticament rellevants i les alertes generades no impliquen cap irregularitat legal confirmada i han de ser interpretades en context.</p>
+                                        <ContractHistoryMethodology />
                                         <div className="metodologia-steps-compact">
                                             <div className="metodologia-step-compact">
                                                 <span className="metodologia-step-num-compact">01</span>

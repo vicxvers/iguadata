@@ -4,7 +4,9 @@ async function fetchContractsSnapshot() {
     const data = await resp.json();
     if (!Array.isArray(data)) return [];
     return data
-        .filter(contract => !contract.preservat_iguadata && contract.exclos_analisis !== true)
+        .filter(contract => contract.exclos_analisis !== true && (
+            !contract.preservat_iguadata || contract.estat_font === 'preservat_desaparegut_socrata'
+        ))
         .map(contract => ({
             ...contract,
             slug: contract.slug || buildContractSlug(contract),
@@ -106,7 +108,7 @@ function prepareContracts(contracts) {
         legacySeen.set(legacyBaseSlug, legacyIndex);
         const legacySlug = legacyIndex > 1 ? `${legacyBaseSlug}-${legacyIndex}` : legacyBaseSlug;
         contract.slug_aliases = Array.from(new Set(
-            [previousCollisionSlug, legacyBaseSlug, legacySlug].filter(slug => slug && slug !== contract.slug)
+            [baseSlug, previousCollisionSlug, legacyBaseSlug, legacySlug].filter(slug => slug && slug !== contract.slug)
         ));
     }
     return contracts;

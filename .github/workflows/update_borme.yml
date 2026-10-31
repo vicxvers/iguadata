@@ -166,7 +166,7 @@ jobs:
             --new json/contractes.json \
             --max-count-drop-pct 5 \
             --max-amount-drop-pct 10 \
-            --max-missing-contracts 50 \
+            --max-missing-contracts 0 \
             --report scratch/contract-drop-report.json
 
       - name: Preserve blocked contract deletion report
@@ -195,15 +195,19 @@ jobs:
           python .github/scripts/generate_concentracio.py
           python .github/scripts/generate_electoralisme.py
           python .github/scripts/generate_dependencia.py
-          python .github/scripts/generate_resum.py
           python .github/scripts/generate_audit_impact.py --previous-dir scratch/previous
           python .github/scripts/freeze_investigacio_contracts.py --check
+          python .github/scripts/generate_resum.py
 
       - name: Validate generated JSONs
         run: |
           python - <<'PY'
           import json
+          import sys
           from pathlib import Path
+
+          sys.path.insert(0, '.github/scripts')
+          from contract_filters import is_analysis_contract
 
           checks = {
               "json/contractes.json": 500_000,
@@ -235,8 +239,11 @@ jobs:
               print(f"OK {rel}: {size} bytes")
 
           contractes = json.loads(Path("json/contractes.json").read_text(encoding="utf-8"))
-          if any(c.get("preservat_iguadata") or c.get("exclos_analisis") is True for c in contractes):
-              raise SystemExit("Archived contracts leaked into json/contractes.json")
+          if any(not is_analysis_contract(c) for c in contractes):
+              raise SystemExit("Excluded audit versions leaked into json/contractes.json")
+          ids = [c['id'] for c in contractes]
+          if len(ids) != len(set(ids)):
+              raise SystemExit("Duplicate contract IDs in json/contractes.json")
 
           arxiu = json.loads(Path(".github/audit/contractes_arxiu.json").read_text(encoding="utf-8"))
           if any(row.get("exclos_analisis") is not True for row in arxiu):
@@ -252,10 +259,10 @@ jobs:
                   contract
                   for case in payload.get("alertes", [])
                   for contract in case.get("contractes", [])
-                  if contract.get("preservat_iguadata") or contract.get("exclos_analisis") is True
+                  if not is_analysis_contract(contract)
               ]
               if leaked:
-                  raise SystemExit(f"Archived contracts leaked into {name}.json")
+                  raise SystemExit(f"Excluded audit versions leaked into {name}.json")
           PY
 
       - name: Validate frontend data contract
