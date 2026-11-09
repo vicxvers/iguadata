@@ -21661,6 +21661,26 @@
     ]
   },
   {
+    "nom": "TORRENS FERRER JOSE MARIA",
+    "total_adjudicat": 276672.2,
+    "relacions": [
+      {
+        "empresa": "PETROMIRALLES, S.L.",
+        "import_empresa": 147936.2,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      },
+      {
+        "empresa": "MIRALLESTRES",
+        "import_empresa": 128736.0,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
     "nom": "TORRENS RIU JOSEP",
     "total_adjudicat": 276672.2,
     "relacions": [
@@ -44315,6 +44335,206 @@
     ]
   },
   {
+    "nom": "MANZANO TOMAS BELEN VERONICA",
+    "total_adjudicat": 34730.77,
+    "relacions": [
+      {
+        "empresa": "ANOIA PET SERVICES GROUP, SLU",
+        "import_empresa": 24896.53,
+        "carrecs": [
+          "APOD.SOL/MAN"
+        ]
+      },
+      {
+        "empresa": "HOSPITAL VETERINARI DE CATALUNYA, SL",
+        "import_empresa": 9834.24,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "PIQUERAS MORATAL MARIA ISABEL",
+    "total_adjudicat": 34730.77,
+    "relacions": [
+      {
+        "empresa": "ANOIA PET SERVICES GROUP, SLU",
+        "import_empresa": 24896.53,
+        "carrecs": [
+          "APOD.MANCOMU"
+        ]
+      },
+      {
+        "empresa": "HOSPITAL VETERINARI DE CATALUNYA, SL",
+        "import_empresa": 9834.24,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "HERNANDEZ CERVERO EMERITA",
+    "total_adjudicat": 34730.77,
+    "relacions": [
+      {
+        "empresa": "ANOIA PET SERVICES GROUP, SLU",
+        "import_empresa": 24896.53,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      },
+      {
+        "empresa": "HOSPITAL VETERINARI DE CATALUNYA, SL",
+        "import_empresa": 9834.24,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "MIQUEL HERNANDEZ ANDREU",
+    "total_adjudicat": 34730.77,
+    "relacions": [
+      {
+        "empresa": "ANOIA PET SERVICES GROUP, SLU",
+        "import_empresa": 24896.53,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      },
+      {
+        "empresa": "HOSPITAL VETERINARI DE CATALUNYA, SL",
+        "import_empresa": 9834.24,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "GONZALEZ SERRANO ROSA",
+    "total_adjudicat": 34730.77,
+    "relacions": [
+      {
+        "empresa": "ANOIA PET SERVICES GROUP, SLU",
+        "import_empresa": 24896.53,
+        "carrecs": [
+          "APOD.MANCOMU"
+        ]
+      },
+      {
+        "empresa": "HOSPITAL VETERINARI DE CATALUNYA, SL",
+        "import_empresa": 9834.24,
+        "carrecs": [
+          "APOD.MANCOMU"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "SOPHIE LOUISE STONE",
+    "total_adjudicat": 34730.77,
+    "relacions": [
+      {
+        "empresa": "ANOIA PET SERVICES GROUP, SLU",
+        "import_empresa": 24896.53,
+        "carrecs": [
+          "APOD.MANCOMU"
+        ]
+      },
+      {
+        "empresa": "HOSPITAL VETERINARI DE CATALUNYA, SL",
+        "import_empresa": 9834.24,
+        "carrecs": [
+          "APOD.MANCOMU"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "MARIA ANN TOWNSEND",
+    "total_adjudicat": 34730.77,
+    "relacions": [
+      {
+        "empresa": "ANOIA PET SERVICES GROUP, SLU",
+        "import_empresa": 24896.53,
+        "carrecs": [
+          "APOD.MANCOMU"
+        ]
+      },
+      {
+        "empresa": "HOSPITAL VETERINARI DE CATALUNYA, SL",
+        "import_empresa": 9834.24,
+        "carrecs": [
+          "APOD.MANCOMU"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "TERESA LOUISE EMILY STEWART",
+    "total_adjudicat": 34730.77,
+    "relacions": [
+      {
+        "empresa": "ANOIA PET SERVICES GROUP, SLU",
+        "import_empresa": 24896.53,
+        "carrecs": [
+          "APOD.MANCOMU"
+        ]
+      },
+      {
+        "empresa": "HOSPITAL VETERINARI DE CATALUNYA, SL",
+        "import_empresa": 9834.24,
+        "carrecs": [
+          "APOD.MANCOMU"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "ALEX JON MONK",
+    "total_adjudicat": 34730.77,
+    "relacions": [
+      {
+        "empresa": "ANOIA PET SERVICES GROUP, SLU",
+        "import_empresa": 24896.53,
+        "carrecs": [
+          "APOD.MANCOMU"
+        ]
+      },
+      {
+        "empresa": "HOSPITAL VETERINARI DE CATALUNYA, SL",
+        "import_empresa": 9834.24,
+        "carrecs": [
+          "APOD.MANCOMU"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "JASON HAYNES",
+    "total_adjudicat": 34730.77,
+    "relacions": [
+      {
+        "empresa": "ANOIA PET SERVICES GROUP, SLU",
+        "import_empresa": 24896.53,
+        "carrecs": [
+          "APOD.MANCOMU"
+        ]
+      },
+      {
+        "empresa": "HOSPITAL VETERINARI DE CATALUNYA, SL",
+        "import_empresa": 9834.24,
+        "carrecs": [
+          "APOD.MANCOMU"
+        ]
+      }
+    ]
+  },
+  {
     "nom": "CLEMENTE COLLADO ANTONIO",
     "total_adjudicat": 34730.77,
     "relacions": [
@@ -44331,26 +44551,6 @@
         "import_empresa": 9834.24,
         "carrecs": [
           "REPR.143 RRM",
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "MANZANO TOMAS BELEN VERONICA",
-    "total_adjudicat": 34730.77,
-    "relacions": [
-      {
-        "empresa": "ANOIA PET SERVICES GROUP, SLU",
-        "import_empresa": 24896.53,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      },
-      {
-        "empresa": "HOSPITAL VETERINARI DE CATALUNYA, SL",
-        "import_empresa": 9834.24,
-        "carrecs": [
           "APODERAD.SOL"
         ]
       }
@@ -56665,6 +56865,19 @@
     ]
   },
   {
+    "nom": "AGUADO DIEM ANDRES",
+    "total_adjudicat": 15603.96,
+    "relacions": [
+      {
+        "empresa": "SIEMENS, SA",
+        "import_empresa": 15603.96,
+        "carrecs": [
+          "Apo.Manc."
+        ]
+      }
+    ]
+  },
+  {
     "nom": "MUÑOZ ALVAREZ ELENA",
     "total_adjudicat": 15603.96,
     "relacions": [
@@ -59686,19 +59899,6 @@
   },
   {
     "nom": "TEJEDOR ALCOHOL EDUARDO",
-    "total_adjudicat": 15603.96,
-    "relacions": [
-      {
-        "empresa": "SIEMENS, SA",
-        "import_empresa": 15603.96,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "AGUADO DIEM ANDRES",
     "total_adjudicat": 15603.96,
     "relacions": [
       {
@@ -80695,19 +80895,6 @@
     ]
   },
   {
-    "nom": "OLIVERAS DARDER MIGUEL",
-    "total_adjudicat": 1970.5,
-    "relacions": [
-      {
-        "empresa": "BUREAU VERITAS INSPECCIÓN Y TESTING SL UNIPERSONAL",
-        "import_empresa": 1970.5,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
     "nom": "RODRIGUEZ GARCIA EMILIANA",
     "total_adjudicat": 1970.5,
     "relacions": [
@@ -81893,6 +82080,19 @@
         "import_empresa": 1500.0,
         "carrecs": [
           "ADM.CONJUNTO"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "GUARC PRADES SILVIA",
+    "total_adjudicat": 1452.0,
+    "relacions": [
+      {
+        "empresa": "MARCO TALLER CERRAJERIA, S.L.",
+        "import_empresa": 1452.0,
+        "carrecs": [
+          "Apoderado"
         ]
       }
     ]

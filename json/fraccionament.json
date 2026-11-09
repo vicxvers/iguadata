@@ -1,6 +1,6 @@
 {
   "metodologia": "fraccionament_v2",
-  "generat_a": "2026-11-02",
+  "generat_a": "2026-11-09",
   "total_alertes": 988,
   "alertes": [
     {
@@ -34841,6 +34841,7 @@
         "PETROMIRALLES, S.L."
       ],
       "administradors_comuns": [
+        "TORRENS FERRER JOSE MARIA",
         "TORRENS RIU JOSEP"
       ],
       "import_total": 10335.81,
