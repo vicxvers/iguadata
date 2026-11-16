@@ -27,34 +27,14 @@
     ]
   },
   {
-    "nom": "GARCIA GALDON JOSE ANTONIO",
+    "nom": "GONZALEZ DE CANALES MOYANO FERNANDO-JUAN",
     "total_adjudicat": 13149747.07,
     "relacions": [
       {
         "empresa": "FCC MEDIO AMBIENTE",
         "import_empresa": 12523143.07,
         "carrecs": [
-          "Apo.Man.Soli"
-        ]
-      },
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "MORO CANTOS FRANCISCO JESUS",
-    "total_adjudicat": 13149747.07,
-    "relacions": [
-      {
-        "empresa": "FCC MEDIO AMBIENTE",
-        "import_empresa": 12523143.07,
-        "carrecs": [
-          "Apo.Man.Soli"
+          "Apo.Sol."
         ]
       },
       {
@@ -62,7 +42,27 @@
         "import_empresa": 626604.0,
         "carrecs": [
           "Apo.Man.Soli",
-          "Apoderado"
+          "Adm. Mancom."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "AZCONA SORIA EDUARDO",
+    "total_adjudicat": 13149747.07,
+    "relacions": [
+      {
+        "empresa": "FCC MEDIO AMBIENTE",
+        "import_empresa": 12523143.07,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      },
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Manc."
         ]
       }
     ]
@@ -90,46 +90,6 @@
   },
   {
     "nom": "NAVARRO REVERTER GARCIA GERMAN ANTONIO",
-    "total_adjudicat": 13149747.07,
-    "relacions": [
-      {
-        "empresa": "FCC MEDIO AMBIENTE",
-        "import_empresa": 12523143.07,
-        "carrecs": [
-          "Apo.Sol."
-        ]
-      },
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "BARCENA ROJI IÑIGO-JOAQUIN",
-    "total_adjudicat": 13149747.07,
-    "relacions": [
-      {
-        "empresa": "FCC MEDIO AMBIENTE",
-        "import_empresa": 12523143.07,
-        "carrecs": [
-          "Apo.Sol."
-        ]
-      },
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apo.Manc."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "RODRIGUEZ VILLAR INMACULADA",
     "total_adjudicat": 13149747.07,
     "relacions": [
       {
@@ -171,27 +131,7 @@
     ]
   },
   {
-    "nom": "GONZALEZ RODRIGUEZ BEATRIZ",
-    "total_adjudicat": 13149747.07,
-    "relacions": [
-      {
-        "empresa": "FCC MEDIO AMBIENTE",
-        "import_empresa": 12523143.07,
-        "carrecs": [
-          "Apo.Sol."
-        ]
-      },
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "VIGO OLLER ELISENDA",
+    "nom": "RODRIGUEZ VILLAR INMACULADA",
     "total_adjudicat": 13149747.07,
     "relacions": [
       {
@@ -233,6 +173,27 @@
     ]
   },
   {
+    "nom": "VIGO OLLER ELISENDA",
+    "total_adjudicat": 13149747.07,
+    "relacions": [
+      {
+        "empresa": "FCC MEDIO AMBIENTE",
+        "import_empresa": 12523143.07,
+        "carrecs": [
+          "Apo.Sol."
+        ]
+      },
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Manc.",
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
     "nom": "MARIN GARDE GLORIA",
     "total_adjudicat": 13149747.07,
     "relacions": [
@@ -253,7 +214,7 @@
     ]
   },
   {
-    "nom": "ARROYO ARAUJO DAVID",
+    "nom": "GONZALEZ RODRIGUEZ BEATRIZ",
     "total_adjudicat": 13149747.07,
     "relacions": [
       {
@@ -273,14 +234,56 @@
     ]
   },
   {
-    "nom": "GARCIA ULLOA ESTHER",
+    "nom": "PAU FAYOS ALFREDO",
     "total_adjudicat": 13149747.07,
     "relacions": [
       {
         "empresa": "FCC MEDIO AMBIENTE",
         "import_empresa": 12523143.07,
         "carrecs": [
-          "Apo.Sol."
+          "Apoderado"
+        ]
+      },
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apoderado",
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "MORO CANTOS FRANCISCO JESUS",
+    "total_adjudicat": 13149747.07,
+    "relacions": [
+      {
+        "empresa": "FCC MEDIO AMBIENTE",
+        "import_empresa": 12523143.07,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      },
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli",
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "GONZALO BLOCONA ALBERTO",
+    "total_adjudicat": 13149747.07,
+    "relacions": [
+      {
+        "empresa": "FCC MEDIO AMBIENTE",
+        "import_empresa": 12523143.07,
+        "carrecs": [
+          "Apoderado"
         ]
       },
       {
@@ -293,81 +296,41 @@
     ]
   },
   {
-    "nom": "DE LARA MENCIA ALVARO",
+    "nom": "GARCIA GALDON JOSE ANTONIO",
     "total_adjudicat": 13149747.07,
     "relacions": [
       {
         "empresa": "FCC MEDIO AMBIENTE",
         "import_empresa": 12523143.07,
         "carrecs": [
-          "Apo.Sol."
+          "Apo.Man.Soli"
         ]
       },
       {
         "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
         "import_empresa": 626604.0,
         "carrecs": [
-          "Apo.Man.Soli"
+          "Apoderado"
         ]
       }
     ]
   },
   {
-    "nom": "ALVAREZ RUANO CAROLINA",
+    "nom": "VAZQUEZ RUIZ ANDRES",
     "total_adjudicat": 13149747.07,
     "relacions": [
       {
         "empresa": "FCC MEDIO AMBIENTE",
         "import_empresa": 12523143.07,
         "carrecs": [
-          "Apo.Man.Soli"
+          "Apoderado"
         ]
       },
       {
         "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
         "import_empresa": 626604.0,
         "carrecs": [
-          "Apo.Man.Soli"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "ARROBA CANO EMILIO",
-    "total_adjudicat": 13149747.07,
-    "relacions": [
-      {
-        "empresa": "FCC MEDIO AMBIENTE",
-        "import_empresa": 12523143.07,
-        "carrecs": [
-          "Apo.Man.Soli"
-        ]
-      },
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apo.Man.Soli"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "GONZALEZ DE CANALES MOYANO FERNANDO-JUAN",
-    "total_adjudicat": 13149747.07,
-    "relacions": [
-      {
-        "empresa": "FCC MEDIO AMBIENTE",
-        "import_empresa": 12523143.07,
-        "carrecs": [
-          "Apo.Sol."
-        ]
-      },
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Adm. Mancom."
+          "Apoderado"
         ]
       }
     ]
@@ -453,7 +416,7 @@
     ]
   },
   {
-    "nom": "FERRAS VALDEVELL ELENA",
+    "nom": "DE LARA MENCIA ALVARO",
     "total_adjudicat": 13149747.07,
     "relacions": [
       {
@@ -467,41 +430,60 @@
         "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
         "import_empresa": 626604.0,
         "carrecs": [
-          "Apoderado"
+          "Apo.Man.Soli"
         ]
       }
     ]
   },
   {
-    "nom": "PAU FAYOS ALFREDO",
+    "nom": "GARCIA ULLOA ESTHER",
     "total_adjudicat": 13149747.07,
     "relacions": [
       {
         "empresa": "FCC MEDIO AMBIENTE",
         "import_empresa": 12523143.07,
         "carrecs": [
-          "Apoderado"
+          "Apo.Sol."
         ]
       },
       {
         "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
         "import_empresa": 626604.0,
         "carrecs": [
-          "Apoderado",
-          "APODERAD.SOL"
+          "Apo.Man.Soli"
         ]
       }
     ]
   },
   {
-    "nom": "GONZALO BLOCONA ALBERTO",
+    "nom": "ALVAREZ RUANO CAROLINA",
     "total_adjudicat": 13149747.07,
     "relacions": [
       {
         "empresa": "FCC MEDIO AMBIENTE",
         "import_empresa": 12523143.07,
         "carrecs": [
-          "Apoderado"
+          "Apo.Man.Soli"
+        ]
+      },
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "ARROBA CANO EMILIO",
+    "total_adjudicat": 13149747.07,
+    "relacions": [
+      {
+        "empresa": "FCC MEDIO AMBIENTE",
+        "import_empresa": 12523143.07,
+        "carrecs": [
+          "Apo.Man.Soli"
         ]
       },
       {
@@ -534,14 +516,14 @@
     ]
   },
   {
-    "nom": "VAZQUEZ RUIZ ANDRES",
+    "nom": "FERRAS VALDEVELL ELENA",
     "total_adjudicat": 13149747.07,
     "relacions": [
       {
         "empresa": "FCC MEDIO AMBIENTE",
         "import_empresa": 12523143.07,
         "carrecs": [
-          "Apoderado"
+          "Apo.Sol."
         ]
       },
       {
@@ -554,21 +536,21 @@
     ]
   },
   {
-    "nom": "AZCONA SORIA EDUARDO",
+    "nom": "ARROYO ARAUJO DAVID",
     "total_adjudicat": 13149747.07,
     "relacions": [
       {
         "empresa": "FCC MEDIO AMBIENTE",
         "import_empresa": 12523143.07,
         "carrecs": [
-          "Apo.Man.Soli"
+          "Apo.Sol."
         ]
       },
       {
         "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
         "import_empresa": 626604.0,
         "carrecs": [
-          "Apo.Manc."
+          "Apoderado"
         ]
       }
     ]
@@ -4976,6 +4958,19 @@
     ]
   },
   {
+    "nom": "BARCENA ROJI IÑIGO-JOAQUIN",
+    "total_adjudicat": 12523143.07,
+    "relacions": [
+      {
+        "empresa": "FCC MEDIO AMBIENTE",
+        "import_empresa": 12523143.07,
+        "carrecs": [
+          "Apo.Sol."
+        ]
+      }
+    ]
+  },
+  {
     "nom": "MUNTANER PEDROSA ALBERTO- JOSE",
     "total_adjudicat": 12523143.07,
     "relacions": [
@@ -8857,19 +8852,6 @@
     ]
   },
   {
-    "nom": "LIU LIN",
-    "total_adjudicat": 1175873.62,
-    "relacions": [
-      {
-        "empresa": "AERONAVAL DE CONSTRUCCIONES E INSTALACIONES, SA",
-        "import_empresa": 1175873.62,
-        "carrecs": [
-          "Apo.Sol."
-        ]
-      }
-    ]
-  },
-  {
     "nom": "LARA MARCILLA ROSA",
     "total_adjudicat": 1175873.62,
     "relacions": [
@@ -9053,19 +9035,6 @@
   },
   {
     "nom": "GOMEZ GARCIA MARTA",
-    "total_adjudicat": 1175873.62,
-    "relacions": [
-      {
-        "empresa": "AERONAVAL DE CONSTRUCCIONES E INSTALACIONES, SA",
-        "import_empresa": 1175873.62,
-        "carrecs": [
-          "Apo.Manc."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "PALLARES MORANO MARIA LUISA",
     "total_adjudicat": 1175873.62,
     "relacions": [
       {
@@ -9288,19 +9257,6 @@
   },
   {
     "nom": "JIMENEZ NUÑEZ JAVIER",
-    "total_adjudicat": 1175873.62,
-    "relacions": [
-      {
-        "empresa": "AERONAVAL DE CONSTRUCCIONES E INSTALACIONES, SA",
-        "import_empresa": 1175873.62,
-        "carrecs": [
-          "Apo.Sol."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "CUERVO GONZALEZ MARIA BALBINA",
     "total_adjudicat": 1175873.62,
     "relacions": [
       {
@@ -16600,6 +16556,27 @@
     ]
   },
   {
+    "nom": "DE LA IGLESIA OLMEDILLA JESUS",
+    "total_adjudicat": 661326.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apoderado",
+          "APODERADO"
+        ]
+      },
+      {
+        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
+        "import_empresa": 34722.0,
+        "carrecs": [
+          "APOD.SOL/MAN"
+        ]
+      }
+    ]
+  },
+  {
     "nom": "ALIANA PORTUGAL ANTONIO",
     "total_adjudicat": 661326.0,
     "relacions": [
@@ -16620,22 +16597,601 @@
     ]
   },
   {
-    "nom": "DE LA IGLESIA OLMEDILLA JESUS",
-    "total_adjudicat": 661326.0,
+    "nom": "VELASCO GIMENO CARMEN MARIA",
+    "total_adjudicat": 626604.0,
     "relacions": [
       {
         "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
         "import_empresa": 626604.0,
         "carrecs": [
-          "Apoderado",
-          "APODERADO"
+          "Apo.Man.Soli"
         ]
-      },
+      }
+    ]
+  },
+  {
+    "nom": "BURSIANIS HANNAH KATHERINA",
+    "total_adjudicat": 626604.0,
+    "relacions": [
       {
-        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
-        "import_empresa": 34722.0,
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
         "carrecs": [
-          "APOD.SOL/MAN"
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "LOZANO CARRASCAL MARIBI",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "MUÑOZ LANTERO NURIA",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "MOLINA GARCIA ALEJANDRO",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "SIERRA ZAPATA JOSE",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli",
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "AGUADO SOLIVA SILVIA",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "REPISO SANCHEZ JAVIER",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "LENS GARCIA MARTA",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "CAÑETE LOPEZ GONZALO",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Sol.",
+          "Apoderado",
+          "Adm. Mancom."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "CABALLERO LAGRU PABLO",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli",
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "WRIGHT MORGADO ALEXANDER JOHN",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "CAMARA BELLO ALICIA",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "GAZQUEZ SERRANO JUAN ANTONIO",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli",
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "PEDROVIEJO GUTIERREZ AGUSTIN",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "REVUELTA ORIA DIEGO JOSE",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli",
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "PERLADO DOMINGUEZ-PALACIOS ALBERTO",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "NOYA CALLEJAS RAFAEL",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "LOPEZ MIGUEL ALEJANDRO",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "SANZ NAVARRO VIRGINIA",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "PEREZ LOPEZ INES",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "PASCUAL GOMEZ JOSE IGNACIO",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "GONZALEZ GARCIA JESUS",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "DOMINGUEZ LLAURO RAUL",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "AGUASCA MARSA NURIA",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "SALAS DE ARRIBAS GUILLERMO",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "CARCELER PEREZ MARC",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "LLORENTE BERNABE PABLO ALVARO",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "SALAMERO MUÑOZ VICTOR",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "TERAN VILLAGRA CRISTINA",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli",
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "GUTIERREZ PASCUAL CRISTINA MARIA",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "VICENTE VEGUE DAVID",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "APARICIO IBAÑEZ ALBERTO",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "CAPEL ARNAU VANESSA",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Manc.",
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "MARTIN ZORITA FRANCISCO DE BORJA",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Manc.",
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "PARADA CASALEIRO BEGOÑA",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Manc."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "RAMOS MONGE MONICA",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Manc.",
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "VALBUENA GARCIA JESUS ANGEL",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Manc."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "ALVAREZ IGLESIAS CARLOS",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Manc.",
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "BARCENA ROJI IÑIGO JOAQUIN",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Manc.",
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "MUNTANER PEDROSA ALBERTO-JOSE",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Manc.",
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "ALDASORO BIENCINTO ANGEL",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Manc."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "MARIN GARDE MARIA GLORIA",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Manc.",
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "GONZALEZ RODRIGUEZ MARIA BEATRIZ",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Manc.",
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "LUQUE HURTADO DIEGO LUIS",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Manc."
         ]
       }
     ]
@@ -16824,211 +17380,6 @@
         "import_empresa": 626604.0,
         "carrecs": [
           "Apo.Man.Soli"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "CAÑETE LOPEZ GONZALO",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apo.Manc.",
-          "Apoderado",
-          "Adm. Mancom."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "GONZALEZ DE CANALES MOYANO FERNANDO JUAN",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apo.Manc.",
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "CAPEL ARNAU VANESSA",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apo.Manc.",
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "MARTIN ZORITA FRANCISCO DE BORJA",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apo.Manc.",
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "CABALLERO LAGRU PABLO",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apo.Manc.",
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "PARADA CASALEIRO BEGOÑA",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apo.Manc."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "RAMOS MONGE MONICA",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apo.Manc.",
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "VALBUENA GARCIA JESUS ANGEL",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apo.Manc."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "NAVARRO-REVERTER GARCIA- GERMAN ANTONIO",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apo.Manc."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "ALVAREZ IGLESIAS CARLOS",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apo.Manc.",
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "MUNTANER PEDROSA ALBERTO JOSE",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apo.Manc."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "ALDASORO BIENCINTO ANGEL",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apo.Manc."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "MARIN GARDE MARIA GLORIA",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apo.Manc.",
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "GONZALEZ RODRIGUEZ MARIA BEATRIZ",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apo.Manc.",
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "LUQUE HURTADO DIEGO LUIS",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apo.Manc."
         ]
       }
     ]
@@ -18442,112 +18793,7 @@
     ]
   },
   {
-    "nom": "VELASCO GIMENO CARMEN MARIA",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "BURSIANIS HANNAH KATHERINA",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "LOZANO CARRASCAL MARIBI",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
     "nom": "LOUREIRO RODRIGUEZ MONICA",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "MOLINA GARCIA ALEJANDRO",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "SIERRA ZAPATA JOSE",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apoderado",
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "AGUADO SOLIVA SILVIA",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "REPISO SANCHEZ JAVIER",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "CARCELER PEREZ MARC",
     "total_adjudicat": 626604.0,
     "relacions": [
       {
@@ -18810,7 +19056,7 @@
     ]
   },
   {
-    "nom": "BARCENA ROJI IÑIGO JOAQUIN",
+    "nom": "GONZALEZ DE CANALES MOYANO FERNANDO JUAN",
     "total_adjudicat": 626604.0,
     "relacions": [
       {
@@ -18824,19 +19070,6 @@
   },
   {
     "nom": "CABELLOS DE FRANCISCO SERGIO",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "MUNTANER PEDROSA ALBERTO-JOSE",
     "total_adjudicat": 626604.0,
     "relacions": [
       {
@@ -18902,19 +19135,6 @@
   },
   {
     "nom": "BLANCH FONTCUBERTA MARIA CINTA",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "GAZQUEZ SERRANO JUAN ANTONIO",
     "total_adjudicat": 626604.0,
     "relacions": [
       {
@@ -19044,19 +19264,6 @@
     ]
   },
   {
-    "nom": "REVUELTA ORIA DIEGO JOSE",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
     "nom": "MURGA SANTACRUZ HUGO",
     "total_adjudicat": 626604.0,
     "relacions": [
@@ -19078,19 +19285,6 @@
         "import_empresa": 626604.0,
         "carrecs": [
           "Apo.Sol."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "TERAN VILLAGRA CRISTINA",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apoderado"
         ]
       }
     ]
@@ -19616,6 +19810,32 @@
     ]
   },
   {
+    "nom": "SALLENT SALA JORDI",
+    "total_adjudicat": 572558.5,
+    "relacions": [
+      {
+        "empresa": "HAPPYLUDIC PLAYGROUND AND URBAN EQUIPMENT SL",
+        "import_empresa": 572558.5,
+        "carrecs": [
+          "ADM.SOLIDAR."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "BANUS CASTAÑE CARLES",
+    "total_adjudicat": 572558.5,
+    "relacions": [
+      {
+        "empresa": "HAPPYLUDIC PLAYGROUND AND URBAN EQUIPMENT SL",
+        "import_empresa": 572558.5,
+        "carrecs": [
+          "ADM.SOLIDAR."
+        ]
+      }
+    ]
+  },
+  {
     "nom": "DE FRUTOS CUESTA MARIANO",
     "total_adjudicat": 562227.84,
     "relacions": [
@@ -19994,32 +20214,6 @@
     ]
   },
   {
-    "nom": "SALLENT SALA JORDI",
-    "total_adjudicat": 476008.22,
-    "relacions": [
-      {
-        "empresa": "HAPPYLUDIC PLAYGROUND AND URBAN EQUIPMENT SL",
-        "import_empresa": 476008.22,
-        "carrecs": [
-          "ADM.SOLIDAR."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "BANUS CASTAÑE CARLES",
-    "total_adjudicat": 476008.22,
-    "relacions": [
-      {
-        "empresa": "HAPPYLUDIC PLAYGROUND AND URBAN EQUIPMENT SL",
-        "import_empresa": 476008.22,
-        "carrecs": [
-          "ADM.SOLIDAR."
-        ]
-      }
-    ]
-  },
-  {
     "nom": "JONATHAN ACEVEDO RODRIGUEZ",
     "total_adjudicat": 465195.29,
     "relacions": [
@@ -20055,6 +20249,172 @@
         "import_empresa": 167871.89,
         "carrecs": [
           "ADM.UNICO"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "ROMERA HINIESTA MANUEL",
+    "total_adjudicat": 464241.83,
+    "relacions": [
+      {
+        "empresa": "BL ESPAÑA SOFTWARE, SLU",
+        "import_empresa": 297682.92,
+        "carrecs": [
+          "Apo.Sol.",
+          "Apo.Manc."
+        ]
+      },
+      {
+        "empresa": "ABS INFORMÀTICA, SL",
+        "import_empresa": 166558.91,
+        "carrecs": [
+          "APOD.MANCOMU"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "GARCIA MONTERO MARIA DE GRACIA",
+    "total_adjudicat": 464241.83,
+    "relacions": [
+      {
+        "empresa": "BL ESPAÑA SOFTWARE, SLU",
+        "import_empresa": 297682.92,
+        "carrecs": [
+          "Apo.Sol.",
+          "Apo.Manc."
+        ]
+      },
+      {
+        "empresa": "ABS INFORMÀTICA, SL",
+        "import_empresa": 166558.91,
+        "carrecs": [
+          "APOD.MANCOMU"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "RIVERO GALAN SEBASTIAN",
+    "total_adjudicat": 464241.83,
+    "relacions": [
+      {
+        "empresa": "BL ESPAÑA SOFTWARE, SLU",
+        "import_empresa": 297682.92,
+        "carrecs": [
+          "Consejero"
+        ]
+      },
+      {
+        "empresa": "ABS INFORMÀTICA, SL",
+        "import_empresa": 166558.91,
+        "carrecs": [
+          "REPR.143 RRM"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "DIAZ MEJIAS FRANCISCO",
+    "total_adjudicat": 464241.83,
+    "relacions": [
+      {
+        "empresa": "BL ESPAÑA SOFTWARE, SLU",
+        "import_empresa": 297682.92,
+        "carrecs": [
+          "Apoderado"
+        ]
+      },
+      {
+        "empresa": "ABS INFORMÀTICA, SL",
+        "import_empresa": 166558.91,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "ORCHE SANZ MARIA DE LOS ANGELES",
+    "total_adjudicat": 464241.83,
+    "relacions": [
+      {
+        "empresa": "BL ESPAÑA SOFTWARE, SLU",
+        "import_empresa": 297682.92,
+        "carrecs": [
+          "Apo.Manc."
+        ]
+      },
+      {
+        "empresa": "ABS INFORMÀTICA, SL",
+        "import_empresa": 166558.91,
+        "carrecs": [
+          "APOD.MANCOMU"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "ESPINOSA CANO BIENVENIDO",
+    "total_adjudicat": 464241.83,
+    "relacions": [
+      {
+        "empresa": "BL ESPAÑA SOFTWARE, SLU",
+        "import_empresa": 297682.92,
+        "carrecs": [
+          "Consejero",
+          "Secretario",
+          "Apo.Sol."
+        ]
+      },
+      {
+        "empresa": "ABS INFORMÀTICA, SL",
+        "import_empresa": 166558.91,
+        "carrecs": [
+          "CONSEJERO",
+          "SECRETARIO",
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "GOMEZ REYES ESTRELLA MARIA",
+    "total_adjudicat": 464241.83,
+    "relacions": [
+      {
+        "empresa": "BL ESPAÑA SOFTWARE, SLU",
+        "import_empresa": 297682.92,
+        "carrecs": [
+          "Apo.Sol."
+        ]
+      },
+      {
+        "empresa": "ABS INFORMÀTICA, SL",
+        "import_empresa": 166558.91,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "SANTAMARIA MESAS JOAQUINA MARIA",
+    "total_adjudicat": 464241.83,
+    "relacions": [
+      {
+        "empresa": "BL ESPAÑA SOFTWARE, SLU",
+        "import_empresa": 297682.92,
+        "carrecs": [
+          "Apo.Sol."
+        ]
+      },
+      {
+        "empresa": "ABS INFORMÀTICA, SL",
+        "import_empresa": 166558.91,
+        "carrecs": [
+          "APODERAD.SOL"
         ]
       }
     ]
@@ -21556,6 +21916,97 @@
         "import_empresa": 316416.84,
         "carrecs": [
           "ADM.SOLIDAR."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "FIGUERAS FARRE JORGE",
+    "total_adjudicat": 315216.49,
+    "relacions": [
+      {
+        "empresa": "PLASFOC, SA UNIPERSONAL",
+        "import_empresa": 315216.49,
+        "carrecs": [
+          "Adm. Unico"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "CARTAÑA BELTRAN ESTER",
+    "total_adjudicat": 315216.49,
+    "relacions": [
+      {
+        "empresa": "PLASFOC, SA UNIPERSONAL",
+        "import_empresa": 315216.49,
+        "carrecs": [
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "HERRERO-VELARDE GUELBENZU JAIME",
+    "total_adjudicat": 297682.92,
+    "relacions": [
+      {
+        "empresa": "BL ESPAÑA SOFTWARE, SLU",
+        "import_empresa": 297682.92,
+        "carrecs": [
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "LLENIN RODRIGUEZ MARIA ELENA",
+    "total_adjudicat": 297682.92,
+    "relacions": [
+      {
+        "empresa": "BL ESPAÑA SOFTWARE, SLU",
+        "import_empresa": 297682.92,
+        "carrecs": [
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "SOLUS HERVE MARIE RAYMOND",
+    "total_adjudicat": 297682.92,
+    "relacions": [
+      {
+        "empresa": "BL ESPAÑA SOFTWARE, SLU",
+        "import_empresa": 297682.92,
+        "carrecs": [
+          "Representan"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "MERLO PEREZ MIGUEL-ANGEL",
+    "total_adjudicat": 297682.92,
+    "relacions": [
+      {
+        "empresa": "BL ESPAÑA SOFTWARE, SLU",
+        "import_empresa": 297682.92,
+        "carrecs": [
+          "Apo.Sol."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "DOMINGUEZ JOSE MARIA",
+    "total_adjudicat": 297682.92,
+    "relacions": [
+      {
+        "empresa": "BL ESPAÑA SOFTWARE, SLU",
+        "import_empresa": 297682.92,
+        "carrecs": [
+          "Apo.Sol."
         ]
       }
     ]
@@ -24853,6 +25304,58 @@
     ]
   },
   {
+    "nom": "ESTEBAN NIETO ANA CRISTINA",
+    "total_adjudicat": 218593.02,
+    "relacions": [
+      {
+        "empresa": "NUMTA CONSTRUCTORA, S.L.",
+        "import_empresa": 218593.02,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "MARSA DOT GUILLEM",
+    "total_adjudicat": 218593.02,
+    "relacions": [
+      {
+        "empresa": "NUMTA CONSTRUCTORA, S.L.",
+        "import_empresa": 218593.02,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "ROSELLO MINGUELL FRANCESC",
+    "total_adjudicat": 218593.02,
+    "relacions": [
+      {
+        "empresa": "NUMTA CONSTRUCTORA, S.L.",
+        "import_empresa": 218593.02,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "RENTERO TESORO SEBASTIAN",
+    "total_adjudicat": 218593.02,
+    "relacions": [
+      {
+        "empresa": "NUMTA CONSTRUCTORA, S.L.",
+        "import_empresa": 218593.02,
+        "carrecs": [
+          "ADM.UNICO"
+        ]
+      }
+    ]
+  },
+  {
     "nom": "BALAGUER GONZALEZ MARIA JOSE",
     "total_adjudicat": 215334.6,
     "relacions": [
@@ -25484,173 +25987,6 @@
         "import_empresa": 10334.16,
         "carrecs": [
           "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "ROMERA HINIESTA MANUEL",
-    "total_adjudicat": 173588.91,
-    "relacions": [
-      {
-        "empresa": "ABS INFORMÀTICA, SL",
-        "import_empresa": 166558.91,
-        "carrecs": [
-          "APOD.MANCOMU"
-        ]
-      },
-      {
-        "empresa": "BL ESPAÑA SOFTWARE, SLU",
-        "import_empresa": 7030.0,
-        "carrecs": [
-          "Apo.Sol.",
-          "Apo.Manc."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "GARCIA MONTERO MARIA DE GRACIA",
-    "total_adjudicat": 173588.91,
-    "relacions": [
-      {
-        "empresa": "ABS INFORMÀTICA, SL",
-        "import_empresa": 166558.91,
-        "carrecs": [
-          "APOD.MANCOMU"
-        ]
-      },
-      {
-        "empresa": "BL ESPAÑA SOFTWARE, SLU",
-        "import_empresa": 7030.0,
-        "carrecs": [
-          "Apo.Sol.",
-          "Apo.Manc."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "DIAZ MEJIAS FRANCISCO",
-    "total_adjudicat": 173588.91,
-    "relacions": [
-      {
-        "empresa": "ABS INFORMÀTICA, SL",
-        "import_empresa": 166558.91,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      },
-      {
-        "empresa": "BL ESPAÑA SOFTWARE, SLU",
-        "import_empresa": 7030.0,
-        "carrecs": [
-          "Apo.Sol.",
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "RIVERO GALAN SEBASTIAN",
-    "total_adjudicat": 173588.91,
-    "relacions": [
-      {
-        "empresa": "ABS INFORMÀTICA, SL",
-        "import_empresa": 166558.91,
-        "carrecs": [
-          "REPR.143 RRM"
-        ]
-      },
-      {
-        "empresa": "BL ESPAÑA SOFTWARE, SLU",
-        "import_empresa": 7030.0,
-        "carrecs": [
-          "Consejero"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "ORCHE SANZ MARIA DE LOS ANGELES",
-    "total_adjudicat": 173588.91,
-    "relacions": [
-      {
-        "empresa": "ABS INFORMÀTICA, SL",
-        "import_empresa": 166558.91,
-        "carrecs": [
-          "APOD.MANCOMU"
-        ]
-      },
-      {
-        "empresa": "BL ESPAÑA SOFTWARE, SLU",
-        "import_empresa": 7030.0,
-        "carrecs": [
-          "Apo.Manc."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "ESPINOSA CANO BIENVENIDO",
-    "total_adjudicat": 173588.91,
-    "relacions": [
-      {
-        "empresa": "ABS INFORMÀTICA, SL",
-        "import_empresa": 166558.91,
-        "carrecs": [
-          "CONSEJERO",
-          "SECRETARIO",
-          "APODERAD.SOL"
-        ]
-      },
-      {
-        "empresa": "BL ESPAÑA SOFTWARE, SLU",
-        "import_empresa": 7030.0,
-        "carrecs": [
-          "Consejero",
-          "Secretario",
-          "Apo.Sol."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "GOMEZ REYES ESTRELLA MARIA",
-    "total_adjudicat": 173588.91,
-    "relacions": [
-      {
-        "empresa": "ABS INFORMÀTICA, SL",
-        "import_empresa": 166558.91,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      },
-      {
-        "empresa": "BL ESPAÑA SOFTWARE, SLU",
-        "import_empresa": 7030.0,
-        "carrecs": [
-          "Apo.Sol."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "SANTAMARIA MESAS JOAQUINA MARIA",
-    "total_adjudicat": 173588.91,
-    "relacions": [
-      {
-        "empresa": "ABS INFORMÀTICA, SL",
-        "import_empresa": 166558.91,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      },
-      {
-        "empresa": "BL ESPAÑA SOFTWARE, SLU",
-        "import_empresa": 7030.0,
-        "carrecs": [
-          "Apo.Sol."
         ]
       }
     ]
@@ -27480,58 +27816,6 @@
         "import_empresa": 119271.46,
         "carrecs": [
           "APODERADO"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "ESTEBAN NIETO ANA CRISTINA",
-    "total_adjudicat": 117905.19,
-    "relacions": [
-      {
-        "empresa": "NUMTA CONSTRUCTORA, S.L.",
-        "import_empresa": 117905.19,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "MARSA DOT GUILLEM",
-    "total_adjudicat": 117905.19,
-    "relacions": [
-      {
-        "empresa": "NUMTA CONSTRUCTORA, S.L.",
-        "import_empresa": 117905.19,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "ROSELLO MINGUELL FRANCESC",
-    "total_adjudicat": 117905.19,
-    "relacions": [
-      {
-        "empresa": "NUMTA CONSTRUCTORA, S.L.",
-        "import_empresa": 117905.19,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "RENTERO TESORO SEBASTIAN",
-    "total_adjudicat": 117905.19,
-    "relacions": [
-      {
-        "empresa": "NUMTA CONSTRUCTORA, S.L.",
-        "import_empresa": 117905.19,
-        "carrecs": [
-          "ADM.UNICO"
         ]
       }
     ]
@@ -42197,6 +42481,32 @@
         "import_empresa": 44849.0,
         "carrecs": [
           "ADM.SOLIDAR."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "GEORGINA FARRE BOLDU",
+    "total_adjudicat": 44835.98,
+    "relacions": [
+      {
+        "empresa": "CORPORACION ALIMENTARIA GUISSONA, SA",
+        "import_empresa": 44835.98,
+        "carrecs": [
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "JOSEP MARIA FREIXES MIRET",
+    "total_adjudicat": 44835.98,
+    "relacions": [
+      {
+        "empresa": "CORPORACION ALIMENTARIA GUISSONA, SA",
+        "import_empresa": 44835.98,
+        "carrecs": [
+          "Apoderado"
         ]
       }
     ]
@@ -70053,6 +70363,19 @@
     ]
   },
   {
+    "nom": "FERNANDEZ CUENCA CHRISTIAN",
+    "total_adjudicat": 8139.5,
+    "relacions": [
+      {
+        "empresa": "PLAYERS SPORT I GESTIÓ, SLU",
+        "import_empresa": 8139.5,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
     "nom": "TORRES FERNANDEZ RAUL",
     "total_adjudicat": 8139.5,
     "relacions": [
@@ -71146,45 +71469,6 @@
         "import_empresa": 7050.0,
         "carrecs": [
           "ADM.UNICO"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "SOLUS HERVE MARIE RAYMOND",
-    "total_adjudicat": 7030.0,
-    "relacions": [
-      {
-        "empresa": "BL ESPAÑA SOFTWARE, SLU",
-        "import_empresa": 7030.0,
-        "carrecs": [
-          "Representan"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "MERLO PEREZ MIGUEL-ANGEL",
-    "total_adjudicat": 7030.0,
-    "relacions": [
-      {
-        "empresa": "BL ESPAÑA SOFTWARE, SLU",
-        "import_empresa": 7030.0,
-        "carrecs": [
-          "Apo.Sol."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "DOMINGUEZ JOSE MARIA",
-    "total_adjudicat": 7030.0,
-    "relacions": [
-      {
-        "empresa": "BL ESPAÑA SOFTWARE, SLU",
-        "import_empresa": 7030.0,
-        "carrecs": [
-          "Apo.Sol."
         ]
       }
     ]
@@ -74354,6 +74638,33 @@
     ]
   },
   {
+    "nom": "RODRIGUEZ HERNANDEZ OSCAR",
+    "total_adjudicat": 4444.04,
+    "relacions": [
+      {
+        "empresa": "GODO STRATEGIES, SLU",
+        "import_empresa": 2000.0,
+        "carrecs": [
+          "APOD.SOL/MAN"
+        ]
+      },
+      {
+        "empresa": "LA VANGUARDIA EDICIONES, SL.",
+        "import_empresa": 1324.04,
+        "carrecs": [
+          "APOD.SOL/MAN"
+        ]
+      },
+      {
+        "empresa": "GODO STRATEGIES, S.L.U.",
+        "import_empresa": 1120.0,
+        "carrecs": [
+          "APOD.SOL/MAN"
+        ]
+      }
+    ]
+  },
+  {
     "nom": "GONZALEZ TERCEÑO DANIEL",
     "total_adjudicat": 4444.04,
     "relacions": [
@@ -74382,33 +74693,6 @@
   },
   {
     "nom": "LIANG JIN",
-    "total_adjudicat": 4444.04,
-    "relacions": [
-      {
-        "empresa": "GODO STRATEGIES, SLU",
-        "import_empresa": 2000.0,
-        "carrecs": [
-          "APOD.SOL/MAN"
-        ]
-      },
-      {
-        "empresa": "LA VANGUARDIA EDICIONES, SL.",
-        "import_empresa": 1324.04,
-        "carrecs": [
-          "APOD.SOL/MAN"
-        ]
-      },
-      {
-        "empresa": "GODO STRATEGIES, S.L.U.",
-        "import_empresa": 1120.0,
-        "carrecs": [
-          "APOD.SOL/MAN"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "DE POL CRUZ FRANCISCO JAVIER",
     "total_adjudicat": 4444.04,
     "relacions": [
       {
@@ -77706,26 +77990,6 @@
     ]
   },
   {
-    "nom": "RODRIGUEZ HERNANDEZ OSCAR",
-    "total_adjudicat": 3120.0,
-    "relacions": [
-      {
-        "empresa": "GODO STRATEGIES, SLU",
-        "import_empresa": 2000.0,
-        "carrecs": [
-          "APOD.SOL/MAN"
-        ]
-      },
-      {
-        "empresa": "GODO STRATEGIES, S.L.U.",
-        "import_empresa": 1120.0,
-        "carrecs": [
-          "APOD.SOL/MAN"
-        ]
-      }
-    ]
-  },
-  {
     "nom": "RAFAEL FAIXEDAS CARALT",
     "total_adjudicat": 3120.0,
     "relacions": [
@@ -78116,6 +78380,19 @@
     "relacions": [
       {
         "empresa": "PATRIMONI 2.0 CONSULTORS, SL",
+        "import_empresa": 3000.0,
+        "carrecs": [
+          "ADM.UNICO"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "MARTINEZ AYUSO MIGUEL ANGEL",
+    "total_adjudicat": 3000.0,
+    "relacions": [
+      {
+        "empresa": "OBJETIVO TARSYS, SL",
         "import_empresa": 3000.0,
         "carrecs": [
           "ADM.UNICO"

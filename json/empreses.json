@@ -534,8 +534,8 @@
   },
   {
     "nom": "SELLARES PASCUAL, ANTONI",
-    "num_contratos": 86,
-    "total_importe": 95276.3,
+    "num_contratos": 87,
+    "total_importe": 97176.3,
     "contratos": [
       36,
       202,
@@ -622,7 +622,8 @@
       7519,
       7520,
       7521,
-      7643
+      7643,
+      7827
     ],
     "sector": "Construcció i Infraestructures",
     "categoria": "Serveis d'arquitectura i enginyeria"
@@ -2441,6 +2442,46 @@
     "categoria": "Impresos i productes relacionats"
   },
   {
+    "nom": "HAPPYLUDIC PLAYGROUND AND URBAN EQUIPMENT SL",
+    "num_contratos": 31,
+    "total_importe": 572558.5,
+    "contratos": [
+      950,
+      1314,
+      2333,
+      2560,
+      2664,
+      3017,
+      3111,
+      3159,
+      3970,
+      4172,
+      4239,
+      4249,
+      4499,
+      4505,
+      4521,
+      4524,
+      4613,
+      4677,
+      4679,
+      4690,
+      4967,
+      5336,
+      5381,
+      5463,
+      5649,
+      5791,
+      6258,
+      6775,
+      6948,
+      7377,
+      7821
+    ],
+    "sector": "Béns de Consum i Comerç",
+    "categoria": "Mobiliari i equipament"
+  },
+  {
     "nom": "BRAVO RAICH ANNA",
     "num_contratos": 31,
     "total_importe": 62304.44,
@@ -2718,45 +2759,6 @@
     "categoria": "Maquinària elèctrica"
   },
   {
-    "nom": "HAPPYLUDIC PLAYGROUND AND URBAN EQUIPMENT SL",
-    "num_contratos": 30,
-    "total_importe": 476008.22,
-    "contratos": [
-      950,
-      1314,
-      2333,
-      2560,
-      2664,
-      3017,
-      3111,
-      3159,
-      3970,
-      4172,
-      4239,
-      4249,
-      4499,
-      4505,
-      4521,
-      4524,
-      4613,
-      4677,
-      4679,
-      4690,
-      4967,
-      5336,
-      5381,
-      5463,
-      5649,
-      5791,
-      6258,
-      6775,
-      6948,
-      7377
-    ],
-    "sector": "Béns de Consum i Comerç",
-    "categoria": "Mobiliari i equipament"
-  },
-  {
     "nom": "PAISATGIME CAMARO, SL",
     "num_contratos": 29,
     "total_importe": 334758.02,
@@ -2975,6 +2977,40 @@
     "categoria": "Serveis d'instal·lació"
   },
   {
+    "nom": "AL&P PROJECTES, SL",
+    "num_contratos": 25,
+    "total_importe": 143770.0,
+    "contratos": [
+      19,
+      55,
+      90,
+      320,
+      321,
+      418,
+      613,
+      621,
+      629,
+      632,
+      1313,
+      1617,
+      1634,
+      1731,
+      1741,
+      1767,
+      2290,
+      2330,
+      2440,
+      2452,
+      2706,
+      3033,
+      7679,
+      7793,
+      7829
+    ],
+    "sector": "Construcció i Infraestructures",
+    "categoria": "Serveis d'arquitectura i enginyeria"
+  },
+  {
     "nom": "ESTIL LLAR IGUALADA, SL",
     "num_contratos": 25,
     "total_importe": 350878.16,
@@ -3074,39 +3110,6 @@
     ],
     "sector": "Serveis Professionals i Corporatius",
     "categoria": "Serveis financers i d'assegurances"
-  },
-  {
-    "nom": "AL&P PROJECTES, SL",
-    "num_contratos": 24,
-    "total_importe": 141270.0,
-    "contratos": [
-      19,
-      55,
-      90,
-      320,
-      321,
-      418,
-      613,
-      621,
-      629,
-      632,
-      1313,
-      1617,
-      1634,
-      1731,
-      1741,
-      1767,
-      2290,
-      2330,
-      2440,
-      2452,
-      2706,
-      3033,
-      7679,
-      7793
-    ],
-    "sector": "Construcció i Infraestructures",
-    "categoria": "Serveis d'arquitectura i enginyeria"
   },
   {
     "nom": "ANOIA DE PLASTICS INDUSTRIALS, SL",
@@ -3599,6 +3602,33 @@
     "categoria": "Serveis d'ensenyament i formació"
   },
   {
+    "nom": "OCCIDENT GCO, S.A. SEGUROS Y REASEGUROS, SA",
+    "num_contratos": 18,
+    "total_importe": 11903.1,
+    "contratos": [
+      23,
+      139,
+      330,
+      696,
+      709,
+      915,
+      963,
+      964,
+      1755,
+      1896,
+      2826,
+      2827,
+      2908,
+      3057,
+      3228,
+      3229,
+      7819,
+      7820
+    ],
+    "sector": "Serveis Professionals i Corporatius",
+    "categoria": "Serveis financers i d'assegurances"
+  },
+  {
     "nom": "ZOOETHICS, ETHICAL ANIMAL PROJECTS, SL",
     "num_contratos": 18,
     "total_importe": 105991.73,
@@ -3988,31 +4018,6 @@
     ],
     "sector": "Agricultura i Alimentació",
     "categoria": "Serveis d'hostaleria i restauració"
-  },
-  {
-    "nom": "OCCIDENT GCO, S.A. SEGUROS Y REASEGUROS, SA",
-    "num_contratos": 16,
-    "total_importe": 10714.07,
-    "contratos": [
-      23,
-      139,
-      330,
-      696,
-      709,
-      915,
-      963,
-      964,
-      1755,
-      1896,
-      2826,
-      2827,
-      2908,
-      3057,
-      3228,
-      3229
-    ],
-    "sector": "Serveis Professionals i Corporatius",
-    "categoria": "Serveis financers i d'assegurances"
   },
   {
     "nom": "ALLIANZ, COMPAÑÍA DE SEGUROS Y REASEGURADOS",
@@ -6710,6 +6715,22 @@
     "categoria": "Serveis recreatius i culturals"
   },
   {
+    "nom": "CRISTINA JIMENES - RIBA'S PINTORS",
+    "num_contratos": 7,
+    "total_importe": 46195.53,
+    "contratos": [
+      374,
+      2182,
+      4907,
+      6821,
+      7067,
+      7206,
+      7826
+    ],
+    "sector": "Medi Ambient, Neteja i Manteniment",
+    "categoria": "Serveis de reparació i manteniment"
+  },
+  {
     "nom": "UNIO COMERCIAL DE GASOILS,SL",
     "num_contratos": 7,
     "total_importe": 8845.95,
@@ -7354,6 +7375,21 @@
     "categoria": "Obres de construcció"
   },
   {
+    "nom": "FUNDACIO PRIVADA",
+    "num_contratos": 6,
+    "total_importe": 41000.0,
+    "contratos": [
+      1999,
+      2340,
+      3316,
+      3785,
+      5049,
+      7828
+    ],
+    "sector": "Salut i Serveis Socials",
+    "categoria": "Serveis sanitaris i socials"
+  },
+  {
     "nom": "D'ALEPH INICIATIVAS Y ORGANIZACIÓN, S.A.",
     "num_contratos": 6,
     "total_importe": 39901.29,
@@ -7469,21 +7505,6 @@
       5170,
       6729,
       6730
-    ],
-    "sector": "Medi Ambient, Neteja i Manteniment",
-    "categoria": "Serveis de reparació i manteniment"
-  },
-  {
-    "nom": "CRISTINA JIMENES - RIBA'S PINTORS",
-    "num_contratos": 6,
-    "total_importe": 18957.54,
-    "contratos": [
-      374,
-      2182,
-      4907,
-      6821,
-      7067,
-      7206
     ],
     "sector": "Medi Ambient, Neteja i Manteniment",
     "categoria": "Serveis de reparació i manteniment"
@@ -8870,20 +8891,6 @@
     ],
     "sector": "Altres Serveis i Subministraments",
     "categoria": "Altres serveis comunitaris"
-  },
-  {
-    "nom": "FUNDACIO PRIVADA",
-    "num_contratos": 5,
-    "total_importe": 29000.0,
-    "contratos": [
-      1999,
-      2340,
-      3316,
-      3785,
-      5049
-    ],
-    "sector": "Salut i Serveis Socials",
-    "categoria": "Serveis sanitaris i socials"
   },
   {
     "nom": "PUNTUAJOCS, S.L.",
@@ -12265,6 +12272,28 @@
     "categoria": "Serveis d'ensenyament i formació"
   },
   {
+    "nom": "NUMTA CONSTRUCTORA, S.L.",
+    "num_contratos": 2,
+    "total_importe": 218593.02,
+    "contratos": [
+      578,
+      7824
+    ],
+    "sector": "",
+    "categoria": ""
+  },
+  {
+    "nom": "BL ESPAÑA SOFTWARE, SLU",
+    "num_contratos": 2,
+    "total_importe": 297682.92,
+    "contratos": [
+      241,
+      7825
+    ],
+    "sector": "",
+    "categoria": ""
+  },
+  {
     "nom": "VIAJES HALCON S.A.U",
     "num_contratos": 2,
     "total_importe": 3371.0,
@@ -15455,6 +15484,26 @@
     "categoria": "Serveis empresarials i de consultoria"
   },
   {
+    "nom": "PLASFOC, SA UNIPERSONAL",
+    "num_contratos": 1,
+    "total_importe": 315216.49,
+    "contratos": [
+      7822
+    ],
+    "sector": "",
+    "categoria": ""
+  },
+  {
+    "nom": "OBJETIVO TARSYS, SL",
+    "num_contratos": 1,
+    "total_importe": 3000.0,
+    "contratos": [
+      7823
+    ],
+    "sector": "",
+    "categoria": ""
+  },
+  {
     "nom": "PROT ENERGIA INSTALACIONES SLU",
     "num_contratos": 1,
     "total_importe": 116553.93,
@@ -16155,11 +16204,11 @@
     "categoria": ""
   },
   {
-    "nom": "BL ESPAÑA SOFTWARE, SLU",
+    "nom": "UTE LYMET - MV CATALUNYA CENTRAL",
     "num_contratos": 1,
-    "total_importe": 7030.0,
+    "total_importe": 27205.5,
     "contratos": [
-      241
+      7830
     ],
     "sector": "",
     "categoria": ""
@@ -16480,16 +16529,6 @@
     "total_importe": 14200.0,
     "contratos": [
       566
-    ],
-    "sector": "",
-    "categoria": ""
-  },
-  {
-    "nom": "NUMTA CONSTRUCTORA, S.L.",
-    "num_contratos": 1,
-    "total_importe": 117905.19,
-    "contratos": [
-      578
     ],
     "sector": "",
     "categoria": ""

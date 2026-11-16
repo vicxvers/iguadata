@@ -1,4 +1,2730 @@
 {
+  "SABA APARCAMIENTOS, SA": [
+    {
+      "nombre": "PRICEWATERHOUSECOOPERS AUDITORES SL",
+      "cargo": "AUDIT.INDIV.",
+      "fecha_nombramiento": "2026-11-13",
+      "tipo_entidad": "empresa"
+    },
+    {
+      "nombre": "ROLAND FRANCOIS CRACCO",
+      "cargo": "REPR.143 RRM",
+      "fecha_nombramiento": "2025-10-31",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "PRICEWATERHOUSECOOPERS AUDITORES SL",
+      "cargo": "AUDIT.CUENT.",
+      "fecha_nombramiento": "2025-08-21",
+      "tipo_entidad": "empresa"
+    },
+    {
+      "nombre": "PRICEWATERHOUSECOOPERS AUDITORES SL",
+      "cargo": "AUDT.CTS.CON",
+      "fecha_nombramiento": "2025-08-21",
+      "tipo_entidad": "empresa"
+    },
+    {
+      "nombre": "SABA INFRAESTRUCTURAS SA",
+      "cargo": "ADM.UNICO",
+      "fecha_nombramiento": "2024-06-07",
+      "tipo_entidad": "empresa"
+    },
+    {
+      "nombre": "DIEZ DIEZ JORDI",
+      "cargo": "APOD.SOL/MAN",
+      "fecha_nombramiento": "2023-04-14",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "ORIOL CARRERAS JOSEP",
+      "cargo": "APOD.SOL/MAN",
+      "fecha_nombramiento": "2023-04-14",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "ANDRES GIL ROGER",
+      "cargo": "APOD.SOL/MAN",
+      "fecha_nombramiento": "2023-04-14",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "PUJOL XICOY GIMFERRER JORDI",
+      "cargo": "APOD.SOL/MAN",
+      "fecha_nombramiento": "2023-04-14",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "PERREAU DE PINNINCK BALLESTA ALBERTO MARIA",
+      "cargo": "APOD.SOL/MAN",
+      "fecha_nombramiento": "2023-04-14",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "MIRANDA FERNANDEZ VILLA MANUEL",
+      "cargo": "APOD.SOL/MAN",
+      "fecha_nombramiento": "2023-04-14",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "MARTI PEREZ AMADEO",
+      "cargo": "APOD.SOL/MAN",
+      "fecha_nombramiento": "2023-04-14",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "MASDEU TOFFOLI CARLOTA",
+      "cargo": "APOD.SOL/MAN",
+      "fecha_nombramiento": "2023-04-14",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "ESPEJO MARIMON JUAN MANUEL",
+      "cargo": "APOD.SOL/MAN",
+      "fecha_nombramiento": "2023-04-14",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "LLAURADO ALBA JORDI",
+      "cargo": "APOD.SOL/MAN",
+      "fecha_nombramiento": "2023-04-14",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "ALONSO PALMA CLARA EUGENIA",
+      "cargo": "APOD.SOL/MAN",
+      "fecha_nombramiento": "2023-04-14",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "DELOITTE SL",
+      "cargo": "AUDIT.INDIV.",
+      "fecha_nombramiento": "2020-11-26",
+      "tipo_entidad": "empresa"
+    },
+    {
+      "nombre": "DELOITTE SL",
+      "cargo": "AUDT.CTS.CON",
+      "fecha_nombramiento": "2020-11-26",
+      "tipo_entidad": "empresa"
+    },
+    {
+      "nombre": "BARRIUSO ALIX MANUEL",
+      "cargo": "APODERAD.SOL",
+      "fecha_nombramiento": "2019-11-18",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "DE LEON LAGO RAFAEL",
+      "cargo": "APODERAD.SOL",
+      "fecha_nombramiento": "2019-11-18",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "CHUECA TORAL IGNACIO",
+      "cargo": "APODERAD.SOL",
+      "fecha_nombramiento": "2019-11-18",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "MARCO GONZALEZ DAVID",
+      "cargo": "APODERAD.SOL",
+      "fecha_nombramiento": "2019-11-18",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "VENTURA PEREZ OSCAR",
+      "cargo": "APODERAD.SOL",
+      "fecha_nombramiento": "2019-11-18",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "YANES FONT MARC",
+      "cargo": "APODERAD.SOL",
+      "fecha_nombramiento": "2019-11-18",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "GARCIA FERNANDEZ ISABEL",
+      "cargo": "APODERAD.SOL",
+      "fecha_nombramiento": "2019-11-18",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "DELOITTE SL",
+      "cargo": "AUDIT.CUENT.",
+      "fecha_nombramiento": "2019-08-21",
+      "tipo_entidad": "empresa"
+    },
+    {
+      "nombre": "SANATON SANCHEZ ALBERTO JOSE",
+      "cargo": "APODERADO",
+      "fecha_nombramiento": "2011-02-01",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "DIEZ DIEZ JORDI",
+      "cargo": "DTOR.GENERAL",
+      "fecha_nombramiento": "2010-11-12",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "VILARASAU SALAT JOSE",
+      "cargo": "APODERADO",
+      "fecha_nombramiento": "2010-07-26",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "SASTRE PAPIOL SEBASTIAN",
+      "cargo": "APODERADO",
+      "fecha_nombramiento": "2010-07-26",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "PERREAU DE PINNINCK BALLESTA ALBERTO",
+      "cargo": "APODERADO",
+      "fecha_nombramiento": "2009-07-28",
+      "tipo_entidad": "persona"
+    }
+  ],
+  "PREZERO GESTIÓN DE RESIDUOS, SA": [
+    {
+      "nombre": "GONZALEZ DE CANALES MOYANO FERNANDO-JUAN",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2026-11-13",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "VELASCO GIMENO CARMEN MARIA",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2026-11-13",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "BURSIANIS HANNAH KATHERINA",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2026-11-13",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "LOZANO CARRASCAL MARIBI",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2026-11-13",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "MUÑOZ LANTERO NURIA",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2026-11-13",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "MOLINA GARCIA ALEJANDRO",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2026-11-13",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "SIERRA ZAPATA JOSE",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2026-11-13",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "AGUADO SOLIVA SILVIA",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2026-11-13",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "REPISO SANCHEZ JAVIER",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2026-11-13",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "LENS GARCIA MARTA",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2026-11-13",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "CAÑETE LOPEZ GONZALO",
+      "cargo": "Apo.Sol.",
+      "fecha_nombramiento": "2026-11-13",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "CABALLERO LAGRU PABLO",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2026-11-13",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "WRIGHT MORGADO ALEXANDER JOHN",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2026-11-13",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "CAMARA BELLO ALICIA",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2026-11-13",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "GAZQUEZ SERRANO JUAN ANTONIO",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2026-11-13",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "PEDROVIEJO GUTIERREZ AGUSTIN",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2026-11-13",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "REVUELTA ORIA DIEGO JOSE",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2026-11-13",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "PERLADO DOMINGUEZ-PALACIOS ALBERTO",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2026-11-13",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "NOYA CALLEJAS RAFAEL",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2026-11-13",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "LOPEZ MIGUEL ALEJANDRO",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2026-11-13",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "SANZ NAVARRO VIRGINIA",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2026-11-13",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "PEREZ LOPEZ INES",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2026-11-13",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "PASCUAL GOMEZ JOSE IGNACIO",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2026-11-13",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "GONZALEZ GARCIA JESUS",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2026-11-13",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "DOMINGUEZ LLAURO RAUL",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2026-11-13",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "AGUASCA MARSA NURIA",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2026-11-13",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "SALAS DE ARRIBAS GUILLERMO",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2026-11-13",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "CARCELER PEREZ MARC",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2026-11-13",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "LLORENTE BERNABE PABLO ALVARO",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2026-11-13",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "SALAMERO MUÑOZ VICTOR",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2026-11-13",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "TERAN VILLAGRA CRISTINA",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2026-11-13",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "GUTIERREZ PASCUAL CRISTINA MARIA",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2026-11-13",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "VICENTE VEGUE DAVID",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2026-11-13",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "APARICIO IBAÑEZ ALBERTO",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2026-11-13",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "CAPEL ARNAU VANESSA",
+      "cargo": "Apo.Manc.",
+      "fecha_nombramiento": "2026-11-13",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "MARTIN ZORITA FRANCISCO DE BORJA",
+      "cargo": "Apo.Manc.",
+      "fecha_nombramiento": "2026-11-13",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "AZCONA SORIA EDUARDO",
+      "cargo": "Apo.Manc.",
+      "fecha_nombramiento": "2026-11-13",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "PARADA CASALEIRO BEGOÑA",
+      "cargo": "Apo.Manc.",
+      "fecha_nombramiento": "2026-11-13",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "RAMOS MONGE MONICA",
+      "cargo": "Apo.Manc.",
+      "fecha_nombramiento": "2026-11-13",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "GARCIA LOPEZ ALFREDO JAVIER",
+      "cargo": "Apo.Manc.",
+      "fecha_nombramiento": "2026-11-13",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "VALBUENA GARCIA JESUS ANGEL",
+      "cargo": "Apo.Manc.",
+      "fecha_nombramiento": "2026-11-13",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "NAVARRO REVERTER GARCIA GERMAN ANTONIO",
+      "cargo": "Apo.Manc.",
+      "fecha_nombramiento": "2026-11-13",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "ALVAREZ IGLESIAS CARLOS",
+      "cargo": "Apo.Manc.",
+      "fecha_nombramiento": "2026-11-13",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "BARCENA ROJI IÑIGO JOAQUIN",
+      "cargo": "Apo.Manc.",
+      "fecha_nombramiento": "2026-11-13",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "MUNTANER PEDROSA ALBERTO-JOSE",
+      "cargo": "Apo.Manc.",
+      "fecha_nombramiento": "2026-11-13",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "VICENTE MORENO JOAQUIN",
+      "cargo": "Apo.Manc.",
+      "fecha_nombramiento": "2026-11-13",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "RODRIGUEZ VILLAR INMACULADA",
+      "cargo": "Apo.Manc.",
+      "fecha_nombramiento": "2026-11-13",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "ALDASORO BIENCINTO ANGEL",
+      "cargo": "Apo.Manc.",
+      "fecha_nombramiento": "2026-11-13",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "BERENGUER AMAT ANNA",
+      "cargo": "Apo.Manc.",
+      "fecha_nombramiento": "2026-11-13",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "MARIN GARDE MARIA GLORIA",
+      "cargo": "Apo.Manc.",
+      "fecha_nombramiento": "2026-11-13",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "GONZALEZ RODRIGUEZ MARIA BEATRIZ",
+      "cargo": "Apo.Manc.",
+      "fecha_nombramiento": "2026-11-13",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "VIGO OLLER ELISENDA",
+      "cargo": "Apo.Manc.",
+      "fecha_nombramiento": "2026-11-13",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "LUQUE HURTADO DIEGO LUIS",
+      "cargo": "Apo.Manc.",
+      "fecha_nombramiento": "2026-11-13",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "RODRIGUEZ PEDRERO JOSE MARIA",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2026-06-30",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "LOPEZ ALIAS JOSE MANUEL",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2026-06-30",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "MENOR GOMEZ MARCOS",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2026-06-30",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "REDONDO ARANDA PABLO",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2026-06-30",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "LEON GARCIA IVAN",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2026-06-30",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "MONDEJAR PEREZ JOSE-ANGEL",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2026-06-30",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "DOCAMPO SEOANE MANUEL ANDRES",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2026-06-30",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "BLANCO ALVAREZ OSCAR",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2026-06-30",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "CARDENAS PAIZ RAUL IGNACIO",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2026-06-30",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "NIEVES LAMAS SALVADOR",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2026-06-30",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "SANCHEZ ARROYO TEODORO",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2026-06-30",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "GARCIA PARRA MEIFREN DAVID",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2026-06-30",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "PEREZ GUERRERO JESUS ANTONIO",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2026-06-30",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "SANCHEZ GAMERO RAFAEL",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2026-06-30",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "LOPEZ DE HAGO ROJO RICARDO",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2026-06-30",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "COELLO GARCIA MARIA JOSEFA",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2026-06-30",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "RIVERO SAINZ-PARDO RUTH",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2026-06-30",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "DE NICOLAS GARCIA JUAN JAVIER",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2026-06-30",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "CABRE ALCOVERRO JAIME",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2026-06-30",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "ZARATE ZARATE PABLO",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2026-06-30",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "BEJERANO DOMINGUEZ DIEGO",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2026-06-30",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "CANO MIRO CAMILO VICENTE",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2026-06-30",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "TALAVERA MURILLO JAVIER",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2026-06-30",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "GONZALEZ MOLINA JAVIER ADRIAN",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2026-06-30",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "FERNANDEZ LOPEZ CRISTINA",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2026-06-30",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "MUÑOZ CAMPOS SANDRA",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2026-06-30",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "RODRIGUEZ PEDRERO DOMINGO",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2026-06-30",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "BAENA CUBERO JOSE RUBEN",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2026-06-30",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "BAXERAS BLANES MARIA DOLORES",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2026-06-30",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "AGUSTI GARCIA ROGER",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2026-06-30",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "ESPINOSA BARBERA CARLOS",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2026-06-30",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "MODENA NADAL MARC",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2026-06-30",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "CARMONA FERNANDEZ LUIS",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2026-06-30",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "JIMENEZ COLOMA ELENA",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2026-06-30",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "JIMENEZ MARIN FRANCISCO",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2026-06-30",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "GIRALDA MARTIN ROBERTO",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2026-06-30",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "PORTO PEREZ DAVID",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2026-06-30",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "CEPEDA GONZALEZ LUIS-JAVIER",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2026-06-30",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "GRANDE ALVAREZ ALEJANDRO-JOSE",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2026-06-30",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "MOYA REINA MIGUEL",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2026-06-30",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "CLARES PLANELLS JAVIER",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2026-06-30",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "REBOLLO GRAUPERA OMAR",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2026-06-30",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "SANCHEZ RODRIGUEZ RUTH",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2026-06-30",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "CLARES PLANELS RAFAEL",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2026-06-30",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "IGLESIAS VILAN JOSE-MARIA",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2026-06-23",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "NAVARRO MORTE JOSE VICENTE",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2026-06-23",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "PEREZ ZARCO FRANCISCO LUIS",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2026-06-23",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "DE LA ROSA BLANCO MARIA PILAR",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2026-06-23",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "LATORRE GRAU PILAR",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2026-06-23",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "AGUILERA VEGA YOLANDA",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2026-06-23",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "ARTOLA VILLANUEVA NATALIA",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2026-06-23",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "GONZALEZ PRIETO ELISABET",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2026-06-23",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "CANO GONZALEZ LETICIA",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2026-06-23",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "RAMOS HERNANDEZ ENRIQUE",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2026-06-23",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "FERNANDEZ ALVARO IRENE",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2026-06-23",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "PEREZ HERENCIA ANA MARIA",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2026-06-23",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "SANCHEZ TAVIRA JUANA MARIA",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2026-06-23",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "AMARANTE GODINO ANTONIO JOSE",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2026-06-23",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "HERRERO SERRANO OSCAR",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2026-06-23",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "GONZALEZ SEIRUL LO IGNACIO",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2026-06-23",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "RUIZ GOMEZ OCTAVI",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2026-06-23",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "SORIANO ARGUELLO FERNANDO MANUEL",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2026-06-23",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "MARIN GARDE GLORIA",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2026-06-23",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "GONZALEZ RODRIGUEZ BEATRIZ",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2026-06-23",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "GALLARDO CUBERO JOSE-ANTONIO",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2026-06-23",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "GALLEGO AMIGO CARLOS",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2026-06-23",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "AVILA LAFUENTE JOSE- MANUEL",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2026-06-23",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "DE ANCOS VIÑAS VICTOR",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2026-06-23",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "OLIVAN GARCIA MACARENA",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2026-06-23",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "PAU FAYOS ALFREDO",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2026-06-23",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "YAGUE CERCOS DANIEL",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2026-06-23",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "MARTINEZ PERALTA FRANCISCO",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2026-06-23",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "SAGARRA SANCHEZ MANUELA",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2026-06-23",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "POLLEDO CERDEIRIÑA MANUEL",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2026-06-23",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "CARRION RUIZ BEATRIZ",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2026-06-23",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "FERNANDEZ BONILLA ALBERTO",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2026-06-23",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "ROBLES AGUIRRE NEREA",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2026-06-23",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "GUTIERREZ SANCHEZ JAVIER",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2026-06-23",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "NUÑEZ GARCIA MARIA ESPERANZA",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2026-06-23",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "FERNANDEZ VIANA LUIS ALBERTO",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2026-06-23",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "MEDEL RUIZ-CARRILLO IÑIGO",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2026-06-23",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "PALMERO MOLLA DAVID",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2026-06-23",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "ESQUINAS JIMENEZ CARMEN MARIA",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2026-06-23",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "DIAZ FERNANDEZ ADRIANA",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2026-06-23",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "MORENO PRIETO JESUS JAVIER",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2026-06-23",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "PASCUALENA MUÑESA ASUNCION",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2026-06-23",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "RODRIGUEZ MARTINEZ DE ALEGRIA MARIA PALOMA",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2026-06-23",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "MARTINEZ FRIAS BETANIA",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2026-06-22",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "FERRO FERNANDEZ FRANCISCO JAVIER",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2026-06-22",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "PARREÑO MANZANO IGNACIO",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2026-06-22",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "SALAMI SAN JUAN CARLOS",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2026-06-22",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "APARICIO DEL ALAMO RAQUEL",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2026-06-22",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "MARTIN HERNANZ CRISTINA",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2026-06-22",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "HIDALGO FLOREZ MARCELINO",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2026-06-22",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "DE LA IGLESIA OLMEDILLA JESUS",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2026-06-22",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "SILVA UTRILLA LUIS FERNANDO",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2026-06-22",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "TORRALBA VILLAVERDE FELIX",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2026-06-22",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "GUTIERREZ GARCIA RODRIGO",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2026-06-22",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "HORCAS GARCIA JUAN MANUEL",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2026-06-22",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "OJEDA ALVAREZ IGNACIO",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2026-06-22",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "MORO CANTOS FRANCISCO JESUS",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2026-06-22",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "IGUALADA FERNANDEZ ANTONIO",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2026-06-22",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "GARCIA ALCARAZ JOSE MANUEL",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2026-06-22",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "FERNANDEZ JIMENEZ SERGIO",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2026-06-22",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "DOMINGUEZ MUÑOZ JOSE PASCUAL",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2026-06-22",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "CARRASCO VIEJO JOSE",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2026-06-22",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "FERNANDEZ TORONJO SEBASTIAN",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2026-06-22",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "GARCIA ALCALDE PABLO",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2026-06-22",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "ORTIZ HERRERIAS DONATO",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2026-06-22",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "MARTINEZ SANCHEZ PEDRO RAMON",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2026-06-22",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "GONZALO BLOCONA ALBERTO",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2026-06-22",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "PATRICIO ARRIMADAS ENRIQUE",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2026-06-22",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "COTARELO BENITO RAFAEL",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2026-06-22",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "GRANDIO REGO JOSE MIGUEL",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2026-06-22",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "SANCHEZ CORREDERA SILVIA",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2026-06-22",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "CORRALES REDONDO MIGUEL",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2026-06-22",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "FIGUERAS PELIJERO ALBERT",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2026-06-22",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "GONZALEZ BOUZAS CESAR ANTONIO",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2026-06-22",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "GODAYOL CODONY JOSEP",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2026-06-22",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "GOMEZ FERNANDEZ ANTONIO",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2026-06-22",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "GAZTELU GONZALEZ NAGORE",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2026-06-22",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "REGUEIRA MORANDEIRA NATALIA",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2026-06-22",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "CALVO ANCA JOSE MANUEL",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2026-06-22",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "BOVEDA PASTOR TERESA",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2026-06-22",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "DE LECEA AGUIRRE MATIAS MIGUEL",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2026-06-22",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "RIVAS DIAZ MARIA LUZ",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2026-06-22",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "VALLS PUIG JOAN",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2026-06-22",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "LOUREIRO RODRIGUEZ MONICA",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2026-02-04",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "SIMANCAS VALERO MIGUEL ALEXANDER",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2026-02-04",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "GONZALEZ DE CANALES MOYANO FERNANDO-JUAN",
+      "cargo": "Adm. Mancom.",
+      "fecha_nombramiento": "2025-08-21",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "RODRIGUEZ LOUREIRO MONICA",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2025-06-26",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "TORRES MEDRANO AMELIA MARIA",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2025-06-26",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "COELLO GARCIA MARIA JOSE",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2025-06-26",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "GARCIA LOPEZ ALFREDO",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2025-06-26",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "SEBASTIAN FERNANDEZ CRISTINA",
+      "cargo": "Apo.Sol.",
+      "fecha_nombramiento": "2025-06-23",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "SEBASTIAN FERNANDEZ BEATRIZ",
+      "cargo": "Apo.Sol.",
+      "fecha_nombramiento": "2025-06-23",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "MERCEDES FABIAN RUIZ",
+      "cargo": "Apo.Sol.",
+      "fecha_nombramiento": "2025-06-23",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "ALBERT ACIN ISOLDA",
+      "cargo": "Apo.Sol.",
+      "fecha_nombramiento": "2025-06-23",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "TIRADO NEVADO RAQUEL",
+      "cargo": "Apo.Sol.",
+      "fecha_nombramiento": "2025-06-23",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "ESQUINAS JIMENEZ MARIA CARMEN",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2025-06-23",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "NAVARRO REVERTER GERMAN GARCIA ANTONIO",
+      "cargo": "Apo.Manc.",
+      "fecha_nombramiento": "2025-02-13",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "GONZALEZ DE CANALES MOYANO FERNANDO",
+      "cargo": "Apo.Manc.",
+      "fecha_nombramiento": "2025-02-13",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "GARCIA MONTERO DAVID",
+      "cargo": "Apo.Sol.",
+      "fecha_nombramiento": "2025-02-13",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "LOPEZ HERNAEZ JOSE IGNACIO",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2024-12-03",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "MANTILLA GUTIERREZ DAVID",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2024-12-03",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "SAN MARTIN MADINA RAFAEL HANDLER",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2023-11-21",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "BARCENA ROJI IÑIGO",
+      "cargo": "Apo.Manc.",
+      "fecha_nombramiento": "2023-04-13",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "DELOITTE SL",
+      "cargo": "Auditor",
+      "fecha_nombramiento": "2023-01-11",
+      "tipo_entidad": "empresa"
+    },
+    {
+      "nombre": "HOYA GARCIA MARIANO",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2022-03-29",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "MARIN GARDE MARIA GLORIA",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2022-03-08",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "CAÑETE LOPEZ GONZALO",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2022-03-08",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "GARCIA LOPEZ ALFREDO JAVIER",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2022-03-08",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "BERENGUER AMAT ANNA",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2022-03-08",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "VIGO OLLER ELISENDA",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2022-03-08",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "NAVARRO REVERTER GARCIA GERMAN ANTONIO",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2022-03-08",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "ALIANA PORTUGAL ANTONIO",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2022-03-08",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "GONZALEZ DE CANALES MOYANO FERNANDO JUAN",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2022-03-08",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "RODRIGUEZ VILLAR INMACULADA",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2022-03-08",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "RAMOS MONGE MONICA",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2022-03-08",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "GONZALEZ RODRIGUEZ MARIA BEATRIZ",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2022-03-08",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "BARCENA ROJI IÑIGO JOAQUIN",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2022-03-08",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "CABELLOS DE FRANCISCO SERGIO",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2022-03-08",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "CABALLERO LAGRU PABLO",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2022-03-08",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "MARTIN ZORITA FRANCISCO DE BORJA",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2022-03-08",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "GARCIA GALDON JOSE ANTONIO",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2022-03-08",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "MUNTANER PEDROSA ALBERTO-JOSE",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2022-03-08",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "VICENTE MORENO JOAQUIN",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2022-03-08",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "IGLESIAS VILAN JOSE MARIA",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2022-03-08",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "MONTES PARRA BUENAVENTURA",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2022-03-08",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "ALVAREZ IGLESIAS CARLOS",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2022-03-08",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "BERENGUAR AMAT ANNA",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2022-03-08",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "FIGOLI VIVIANA AUXILIADORA",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2022-03-08",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "BLANCH FONTCUBERTA MARIA CINTA",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2022-03-08",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "GAZQUEZ SERRANO JUAN ANTONIO",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2022-03-08",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "VALLS PUIG JOAN",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2022-03-08",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "CAPEL ARNAU VANESSA",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2022-03-08",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "MAURI ORRIOLS XAVIER",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2022-03-08",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "NIETO MARTIN KOLDO",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2022-03-08",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "DOCAMPO SEOANE MANUEL ANDRES",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2022-03-08",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "VAZQUEZ RUIZ ANDRES",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2022-03-08",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "RIVAS DIAZ MARIA LUZ",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2022-03-08",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "GONZALEZ RODRIGUEZ BEATRIZ",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2022-03-08",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "MARIN GARDE GLORIA",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2022-03-08",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "REDONDO ARANDA PABLO",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2022-03-07",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "MENOR GOMEZ MARCOS",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2022-03-07",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "CARDENAS PAIZ RAUL IGNACIO",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2022-03-07",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "LOPEZ ALIAS JOSE MANUEL",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2022-03-07",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "LEON GARCIA IVAN",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2022-03-07",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "MORO CANTOS FRANCISCO JESUS",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2022-03-07",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "CAÑETE LOPEZ GONZALO",
+      "cargo": "Adm. Mancom.",
+      "fecha_nombramiento": "2022-01-14",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "JAIME BLANCO ALFREDO",
+      "cargo": "Apo.Sol.",
+      "fecha_nombramiento": "2022-01-14",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "GONZALEZ DE CANALES MOYANO FERNANDO",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2022-01-14",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "BECERRA DE MARCOS JOSE RAMON",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2022-01-14",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "MERINO MARTI ENRIQUE-ALFONSO",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2022-01-14",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "COLINO LOPEZ MANUEL",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2022-01-14",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "GUTIERREZ MORALEDA RAUL",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2022-01-14",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "DE LARA MENCIA ALVARO",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2022-01-14",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "GARCIA ULLOA ESTHER",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2022-01-14",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "ALVAREZ RUANO CAROLINA",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2022-01-14",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "ARROBA CANO EMILIO",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2022-01-14",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "BERDEJO CALONGE MARTA",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2022-01-14",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "DELOITTE SL",
+      "cargo": "Auditor",
+      "fecha_nombramiento": "2021-12-27",
+      "tipo_entidad": "empresa"
+    },
+    {
+      "nombre": "VALBUENA GARCIA JESUS ANGEL",
+      "cargo": "Apo.Manc.",
+      "fecha_nombramiento": "2021-11-03",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "CARPIO DOMINGUEZ ANA CRISTINA",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2021-11-03",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "ORDUNA ACEDO ISAAC",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2021-11-03",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "VILLAVERDE HERRANZ JAVIER",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2021-11-03",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "LOPEZ GONZALEZ EVA MARIA",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2021-11-03",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "GUTIERREZ SANCHEZ JAVIER",
+      "cargo": "Apo.Manc.",
+      "fecha_nombramiento": "2021-11-03",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "FERNANDEZ VIANA LUIS ALBERTO",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2021-11-03",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "SEGURA FONTCUBERTA ANTONIO CARLOS",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2021-11-03",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "BAENA CUBERO JOSE RUBEN",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2021-11-03",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "FERRAS VALDEVELL ELENA",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2021-11-03",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "ARROYO ARAUJO DAVID",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2021-11-03",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "CORTES CONTRERAS ALBERTO",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2021-11-03",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "REVUELTA ORIA DIEGO JOSE",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2021-07-23",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "MURGA SANTACRUZ HUGO",
+      "cargo": "Apo.Sol.",
+      "fecha_nombramiento": "2021-06-21",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "PUCELLA TOPPI MARIA CARMEN",
+      "cargo": "Apo.Sol.",
+      "fecha_nombramiento": "2021-06-21",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "TERAN VILLAGRA CRISTINA",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2021-03-03",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "GONZALEZ DE CANALES MOYANO FERNANDO-JUAN",
+      "cargo": "Adm. Mancom.",
+      "fecha_nombramiento": "2020-12-04",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "GUALDA SUAREZ JUAN MANUEL",
+      "cargo": "Apo.Man.Soli",
+      "fecha_nombramiento": "2020-11-03",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "FERRAS VALDEVELL MARIA ELENA",
+      "cargo": "Apo.Sol.",
+      "fecha_nombramiento": "2020-10-28",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "GIMENO GIMENEZ FRANCISCO JAVIER",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2019-11-11",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "NAVARRO REVERTER GERMAN GARCIA ANTONIO",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2019-11-11",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "TIRADO NEVADO RAQUEL",
+      "cargo": "Apo.Sol.",
+      "fecha_nombramiento": "2019-07-23",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "TALAVERA MURILLO JAVIER",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2018-12-24",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "RODRIGEZ-FRAILE GARCIA-ALEGRE ANDREA",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2018-12-24",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "HIDALGO FLOREZ MARCELINO",
+      "cargo": "Apo.Sol.",
+      "fecha_nombramiento": "2018-06-26",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "BAXERAS BLANES MARIA DOLORES",
+      "cargo": "Apo.Sol.",
+      "fecha_nombramiento": "2018-03-19",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "BEJERANO DOMINGUEZ DIEGO",
+      "cargo": "Apo.Sol.",
+      "fecha_nombramiento": "2018-03-19",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "CLARES PLANELS RAFAEL",
+      "cargo": "Apo.Sol.",
+      "fecha_nombramiento": "2018-03-19",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "ELENA ESTEBAN FERNANDEZ",
+      "cargo": "Apo.Sol.",
+      "fecha_nombramiento": "2018-03-19",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "GONZALEZ BOUZAS CESAR ANTONIO",
+      "cargo": "Apo.Sol.",
+      "fecha_nombramiento": "2018-03-19",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "MERCEDES FABIAN RUIZ",
+      "cargo": "Apo.Sol.",
+      "fecha_nombramiento": "2018-03-19",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "MUÑOZ CAMPOS SANDRA",
+      "cargo": "Apo.Sol.",
+      "fecha_nombramiento": "2018-03-19",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "PEREZ SANZ DIEGO",
+      "cargo": "Apo.Sol.",
+      "fecha_nombramiento": "2018-03-19",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "RODRIGUEZ PEDRERO DOMINGO",
+      "cargo": "Apo.Sol.",
+      "fecha_nombramiento": "2018-03-19",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "SEBASTIAN FERNANDEZ CRISTINA",
+      "cargo": "Apo.Sol.",
+      "fecha_nombramiento": "2018-03-19",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "OLIVAN GARCIA MACARENA",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2018-01-15",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "DE FELIPE FERNANDEZ LUIS IGNACIO",
+      "cargo": "APODERAD.SOL",
+      "fecha_nombramiento": "2017-10-31",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "VACA DE OSMA ULACIA JAVIER",
+      "cargo": "APODERAD.SOL",
+      "fecha_nombramiento": "2017-10-06",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "DELOITTE SL",
+      "cargo": "AUDIT.CUENT.",
+      "fecha_nombramiento": "2017-02-08",
+      "tipo_entidad": "empresa"
+    },
+    {
+      "nombre": "ANTON MORENO YOLANDA",
+      "cargo": "APODERAD.SOL",
+      "fecha_nombramiento": "2016-11-07",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "SALINERO JUEZ ALVARO",
+      "cargo": "APODERAD.SOL",
+      "fecha_nombramiento": "2016-11-07",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "MOYA MELCON JAVIER",
+      "cargo": "APODERAD.SOL",
+      "fecha_nombramiento": "2016-10-03",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "DORAO MADRUGA ALVARO",
+      "cargo": "APODERAD.SOL",
+      "fecha_nombramiento": "2016-08-31",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "HOYA GARCIA MARIANO",
+      "cargo": "APODERAD.SOL",
+      "fecha_nombramiento": "2016-07-22",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "CARRO OLLERO SEBASTIAN",
+      "cargo": "APODERAD.SOL",
+      "fecha_nombramiento": "2016-05-03",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "CLEMENTE FERNANDEZ JUAN CARLOS",
+      "cargo": "APODERAD.SOL",
+      "fecha_nombramiento": "2016-05-03",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "MEZQUITA BUSTILLO JOSE ANTONIO",
+      "cargo": "APODERAD.SOL",
+      "fecha_nombramiento": "2016-05-03",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "LOPEZ ARIAS FERNANDEZ",
+      "cargo": "APODERAD.SOL",
+      "fecha_nombramiento": "2016-05-03",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "MARTINEZ PEREZ ULISES",
+      "cargo": "APODERAD.SOL",
+      "fecha_nombramiento": "2016-05-03",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "LOPEZ CASTILLO ALVARO",
+      "cargo": "APODERAD.SOL",
+      "fecha_nombramiento": "2016-05-03",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "AGUADO ESTEBAN LUIS MIGUEL",
+      "cargo": "APODERAD.SOL",
+      "fecha_nombramiento": "2016-05-03",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "JULIAN JULIAN JOSE",
+      "cargo": "APODERAD.SOL",
+      "fecha_nombramiento": "2016-05-03",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "CHAVES ALVAREZ MIGUEL",
+      "cargo": "APODERAD.SOL",
+      "fecha_nombramiento": "2016-05-03",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "TURRADO FERNANDEZ OLIVERIO",
+      "cargo": "APODERAD.SOL",
+      "fecha_nombramiento": "2016-05-03",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "ROCAMORA CABELLO JOSE MANUEL",
+      "cargo": "APODERAD.SOL",
+      "fecha_nombramiento": "2016-05-03",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "JIMENEZ PASTOR ESTEFANIA",
+      "cargo": "APODERAD.SOL",
+      "fecha_nombramiento": "2016-05-03",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "CONTRERAS FERNANDEZ FULGENCIO",
+      "cargo": "APODERAD.SOL",
+      "fecha_nombramiento": "2016-05-03",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "ROBERTO GRAVINA",
+      "cargo": "APODERAD.SOL",
+      "fecha_nombramiento": "2016-05-03",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "VAZQUEZ TEJERO SANTIAGO",
+      "cargo": "APODERAD.SOL",
+      "fecha_nombramiento": "2016-05-03",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "FORCADA CASTELLTORT ROSA MARIA",
+      "cargo": "ADM.CONJUNTO",
+      "fecha_nombramiento": "2016-03-21",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "COELLO GARCIA MARIA JOSEFA",
+      "cargo": "APODERAD.SOL",
+      "fecha_nombramiento": "2015-11-05",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "DEL GRAU PASCUAL DURAN MARIA",
+      "cargo": "APOD.SOL/MAN",
+      "fecha_nombramiento": "2014-08-20",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "MARTIN RODRIGUEZ RAFAEL LUIS",
+      "cargo": "APODERAD.SOL",
+      "fecha_nombramiento": "2014-08-20",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "VIDALES PEREZ CESAREO",
+      "cargo": "APODERAD.SOL",
+      "fecha_nombramiento": "2013-11-27",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "MORALES BELCHI PEDRO",
+      "cargo": "APODERAD.SOL",
+      "fecha_nombramiento": "2013-11-27",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "YAGUE CERCOS DANIEL",
+      "cargo": "APODERAD.SOL",
+      "fecha_nombramiento": "2013-11-27",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "DE ANCOS VIÑAS VICTOR",
+      "cargo": "APODERAD.SOL",
+      "fecha_nombramiento": "2013-11-27",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "POLLEDO CERDEIRIÑA MANUEL",
+      "cargo": "APODERAD.SOL",
+      "fecha_nombramiento": "2013-11-27",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "PAU FAYOS ALFREDO",
+      "cargo": "APODERAD.SOL",
+      "fecha_nombramiento": "2013-11-27",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "GALLEGO AMIGO CARLOS",
+      "cargo": "APODERAD.SOL",
+      "fecha_nombramiento": "2013-11-27",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "MARTINEZ PERALTA FRANCISCO",
+      "cargo": "APODERAD.SOL",
+      "fecha_nombramiento": "2013-11-27",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "PEREZ SANTOS JOSE ANTONIO",
+      "cargo": "APODERAD.SOL",
+      "fecha_nombramiento": "2013-11-27",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "SIERRA ZAPATA JOSE",
+      "cargo": "APODERAD.SOL",
+      "fecha_nombramiento": "2013-11-08",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "LOPEZ PEREZ JORGE",
+      "cargo": "APODERAD.SOL",
+      "fecha_nombramiento": "2013-09-13",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "GASTON NAJARRO JUAN IGNACIO",
+      "cargo": "ADM.CONJUNTO",
+      "fecha_nombramiento": "2013-05-10",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "AGUILERA BAÑON MARTA",
+      "cargo": "APODERADO",
+      "fecha_nombramiento": "2013-02-19",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "FLORENCIA ERDOZAIN",
+      "cargo": "APODERADO",
+      "fecha_nombramiento": "2013-02-19",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "DE LA IGLESIA OLMEDILLA JESUS",
+      "cargo": "APODERADO",
+      "fecha_nombramiento": "2009-07-20",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "MORENO PRIETO JESUS JAVIER",
+      "cargo": "APODERADO",
+      "fecha_nombramiento": "2009-02-02",
+      "tipo_entidad": "persona"
+    }
+  ],
+  "PINTURES PLANELL": [
+    {
+      "nombre": "PLANELL TERRON CARLES",
+      "cargo": "ADM.UNICO",
+      "fecha_nombramiento": "2026-11-12",
+      "tipo_entidad": "persona"
+    }
+  ],
+  "CORPORACION ALIMENTARIA GUISSONA, SA": [
+    {
+      "nombre": "GEORGINA FARRE BOLDU",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2026-11-12",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "JOSEP MARIA FREIXES MIRET",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2026-11-12",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "DAVID VERDEJO BENITEZ",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2026-09-07",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "RSM SPAIN AUDITORES SLP",
+      "cargo": "Auditor",
+      "fecha_nombramiento": "2026-08-13",
+      "tipo_entidad": "empresa"
+    },
+    {
+      "nombre": "RSM SPAIN AUDITORES SLP",
+      "cargo": "Aud.C.Con.",
+      "fecha_nombramiento": "2026-08-13",
+      "tipo_entidad": "empresa"
+    },
+    {
+      "nombre": "ALSINA CORNELLANA RAMON MARIA",
+      "cargo": "Presidente",
+      "fecha_nombramiento": "2026-06-29",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "ROSSCOR SL",
+      "cargo": "Consejero",
+      "fecha_nombramiento": "2026-06-29",
+      "tipo_entidad": "empresa"
+    },
+    {
+      "nombre": "PUIG TREPAT ANDREU",
+      "cargo": "Consejero",
+      "fecha_nombramiento": "2026-06-29",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "JOSE GENE CAPDEVILA",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2026-05-26",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "AVICOLA BATALLA SL",
+      "cargo": "Vicepresid.",
+      "fecha_nombramiento": "2025-07-14",
+      "tipo_entidad": "empresa"
+    },
+    {
+      "nombre": "AGROPECUARIA ALT CAMP S.A",
+      "cargo": "Consejero",
+      "fecha_nombramiento": "2025-07-14",
+      "tipo_entidad": "empresa"
+    },
+    {
+      "nombre": "AVICOLA BATALLA SL",
+      "cargo": "Consejero",
+      "fecha_nombramiento": "2025-07-14",
+      "tipo_entidad": "empresa"
+    },
+    {
+      "nombre": "BALCELL CAPDEVILA JORDI",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2025-04-24",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "PAMPOLS CAMATS OSCAR",
+      "cargo": "Apo.Sol.",
+      "fecha_nombramiento": "2025-04-24",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "BUREU CAMATS XAVIER",
+      "cargo": "Apo.Sol.",
+      "fecha_nombramiento": "2025-04-24",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "ESPINAGOSA VILARO JOAN",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2024-11-11",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "RIU ANGUERA SERGI",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2024-11-11",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "ALBAREDA SEGURA XAVIER",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2024-11-05",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "VENDRELL SOLA RAMON",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2024-11-05",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "ALSINA CORNELLANA MARIA TERESA",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2024-10-11",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "ALSICOR SA",
+      "cargo": "Consejero",
+      "fecha_nombramiento": "2024-06-27",
+      "tipo_entidad": "empresa"
+    },
+    {
+      "nombre": "DEFIOR MONTER RAFAEL",
+      "cargo": "Consejero",
+      "fecha_nombramiento": "2024-06-27",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "ALSINA CORNELLANA RAMON MARIA",
+      "cargo": "Consejero",
+      "fecha_nombramiento": "2023-07-05",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "ALSINA CORNELLANA JOSEP",
+      "cargo": "Consejero",
+      "fecha_nombramiento": "2023-07-05",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "ALSINA CORNELLANA RAMON MARIA",
+      "cargo": "Con.Delegado",
+      "fecha_nombramiento": "2023-07-05",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "MORENO VILLANUEVA XAVIER",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2023-07-05",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "MARTI COLOMINAS MIQUEL",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2023-07-05",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "PACHECO PORRAS RAUL",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2022-10-14",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "FELIP LLOBET FERRAN",
+      "cargo": "Consejero",
+      "fecha_nombramiento": "2022-08-16",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "CIVIT CAMPABADAL CARLES",
+      "cargo": "Consejero",
+      "fecha_nombramiento": "2022-08-16",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "AUDIT CONCEPT SLP",
+      "cargo": "Auditor",
+      "fecha_nombramiento": "2022-08-16",
+      "tipo_entidad": "empresa"
+    },
+    {
+      "nombre": "AUDIT CONCEPT SLP",
+      "cargo": "Aud.C.Con.",
+      "fecha_nombramiento": "2022-08-16",
+      "tipo_entidad": "empresa"
+    },
+    {
+      "nombre": "PUIG TREPAT ANDREU",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2020-09-09",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "MARTI MALLORQUES MANEL",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2020-01-27",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "CORTES SANTIAGO MIQUEL",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2019-06-19",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "CLAVER FERRER VICENTE JAVIER",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2019-05-09",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "PUIG TREPAT PILAR",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2018-10-02",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "ROS MATHEU JORDI",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2018-06-11",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "CASTANY PAMPALONA LLUIS MARIA",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2016-04-04",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "RIALP CASANOVA NURIA",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2016-04-04",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "AUDITORES Y CONSULTORES BALAÑA-EGUIA SLP",
+      "cargo": "Auditor",
+      "fecha_nombramiento": "2014-07-29",
+      "tipo_entidad": "empresa"
+    },
+    {
+      "nombre": "AUDITORES Y CONSULTORES BALAÑA-EGUIA SLP",
+      "cargo": "Aud.C.Con.",
+      "fecha_nombramiento": "2014-07-29",
+      "tipo_entidad": "empresa"
+    },
+    {
+      "nombre": "PUIG TREPAT ANDRES",
+      "cargo": "Consejero",
+      "fecha_nombramiento": "2013-01-09",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "ALLUE PUIG JORDI",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2011-08-12",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "RIUS BERGADA MARIA MERCE",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2011-08-12",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "PUJOL TARRAGONA FERNANDO",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2011-08-12",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "CAMATS RIBERA ANTONIA",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2011-08-12",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "RIVERA MANRIQUE JOSEP ANDREU",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2011-08-12",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "BRIEBA FARRERO VICENC",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2011-03-03",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "RIBO RIBALTA JOSEP",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2011-03-03",
+      "tipo_entidad": "persona"
+    }
+  ],
+  "BL ESPAÑA SOFTWARE, SLU": [
+    {
+      "nombre": "HERRERO-VELARDE GUELBENZU JAIME",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2026-11-11",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "LLENIN RODRIGUEZ MARIA ELENA",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2026-11-11",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "SOLUS HERVE MARIE RAYMOND",
+      "cargo": "Representan",
+      "fecha_nombramiento": "2026-10-23",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "PRICE WATERHOUSE COOPERS AUDITORES SL",
+      "cargo": "Auditor",
+      "fecha_nombramiento": "2026-02-26",
+      "tipo_entidad": "empresa"
+    },
+    {
+      "nombre": "ROMERA HINIESTA MANUEL",
+      "cargo": "Apo.Sol.",
+      "fecha_nombramiento": "2026-02-24",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "GARCIA MONTERO MARIA DE GRACIA",
+      "cargo": "Apo.Sol.",
+      "fecha_nombramiento": "2026-02-24",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "MERLO PEREZ MIGUEL-ANGEL",
+      "cargo": "Apo.Sol.",
+      "fecha_nombramiento": "2026-02-24",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "BERGER LEVRAULT SA",
+      "cargo": "Presidente",
+      "fecha_nombramiento": "2026-01-28",
+      "tipo_entidad": "empresa"
+    },
+    {
+      "nombre": "RIVERO GALAN SEBASTIAN",
+      "cargo": "Consejero",
+      "fecha_nombramiento": "2026-01-28",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "DIAZ MEJIAS FRANCISCO",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2024-03-27",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "ORCHE SANZ MARIA DE LOS ANGELES",
+      "cargo": "Apo.Manc.",
+      "fecha_nombramiento": "2024-03-27",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "PRICE WATERHOUSE COOPERS AUDITORES SL",
+      "cargo": "Auditor",
+      "fecha_nombramiento": "2024-02-20",
+      "tipo_entidad": "empresa"
+    },
+    {
+      "nombre": "ESPINOSA CANO BIENVENIDO",
+      "cargo": "Consejero",
+      "fecha_nombramiento": "2023-01-24",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "ESPINOSA CANO BIENVENIDO",
+      "cargo": "Secretario",
+      "fecha_nombramiento": "2023-01-24",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "ESPINOSA CANO BIENVENIDO",
+      "cargo": "Apo.Sol.",
+      "fecha_nombramiento": "2023-01-24",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "GARCIA MONTERO MARIA DE GRACIA",
+      "cargo": "Apo.Manc.",
+      "fecha_nombramiento": "2023-01-24",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "ROMERA HINIESTA MANUEL",
+      "cargo": "Apo.Manc.",
+      "fecha_nombramiento": "2023-01-24",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "GOMEZ REYES ESTRELLA MARIA",
+      "cargo": "Apo.Sol.",
+      "fecha_nombramiento": "2023-01-24",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "KPMG AUDITORES SL",
+      "cargo": "Auditor",
+      "fecha_nombramiento": "2020-10-22",
+      "tipo_entidad": "empresa"
+    },
+    {
+      "nombre": "PRICEWATERHOUSECOOPERS AUDITORES SL",
+      "cargo": "Auditor",
+      "fecha_nombramiento": "2019-10-11",
+      "tipo_entidad": "empresa"
+    },
+    {
+      "nombre": "SANTAMARIA MESAS JOAQUINA MARIA",
+      "cargo": "Apo.Sol.",
+      "fecha_nombramiento": "2017-12-07",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "BERGER LEVRAULT SA",
+      "cargo": "Consejero",
+      "fecha_nombramiento": "2016-03-29",
+      "tipo_entidad": "empresa"
+    },
+    {
+      "nombre": "DOMINGUEZ JOSE MARIA",
+      "cargo": "Apo.Sol.",
+      "fecha_nombramiento": "2013-09-12",
+      "tipo_entidad": "persona"
+    }
+  ],
+  "LA VANGUARDIA EDICIONES, SL.": [
+    {
+      "nombre": "RODRIGUEZ HERNANDEZ OSCAR",
+      "cargo": "APOD.SOL/MAN",
+      "fecha_nombramiento": "2026-11-10",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "GONZALEZ TERCEÑO DANIEL",
+      "cargo": "APOD.SOL/MAN",
+      "fecha_nombramiento": "2026-05-06",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "LIANG JIN",
+      "cargo": "APOD.SOL/MAN",
+      "fecha_nombramiento": "2026-05-06",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "PRICEWATERHOUSECOOPERS AUDITORES SL",
+      "cargo": "AUDIT.CUENT.",
+      "fecha_nombramiento": "2025-10-08",
+      "tipo_entidad": "empresa"
+    },
+    {
+      "nombre": "MARTINEZ GOMEZ JAVIER",
+      "cargo": "APOD.SOL/MAN",
+      "fecha_nombramiento": "2024-11-15",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "BUIL BOU SANDRA",
+      "cargo": "APODERAD.SOL",
+      "fecha_nombramiento": "2022-09-21",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "GURT CARRERA JAUME",
+      "cargo": "APOD.SOL/MAN",
+      "fecha_nombramiento": "2021-12-30",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "CATALA PUJOL MONTSERRAT",
+      "cargo": "APOD.SOL/MAN",
+      "fecha_nombramiento": "2021-12-30",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "SALLENT ROIG ANA ISABEL",
+      "cargo": "APOD.SOL/MAN",
+      "fecha_nombramiento": "2021-12-30",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "MARTIN HERNANDEZ FRANCISCO JAVIER",
+      "cargo": "APOD.SOL/MAN",
+      "fecha_nombramiento": "2021-12-30",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "AUDITGLOBAL SL",
+      "cargo": "AUDIT.CUENT.",
+      "fecha_nombramiento": "2010-06-30",
+      "tipo_entidad": "empresa"
+    }
+  ],
+  "PLAYERS SPORT I GESTIÓ, SLU": [
+    {
+      "nombre": "FERNANDEZ CUENCA CHRISTIAN",
+      "cargo": "APODERAD.SOL",
+      "fecha_nombramiento": "2026-11-10",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "TORRES FERNANDEZ RAUL",
+      "cargo": "APODERAD.SOL",
+      "fecha_nombramiento": "2025-03-03",
+      "tipo_entidad": "persona"
+    }
+  ],
   "HOSPITAL VETERINARI DE CATALUNYA, SL": [
     {
       "nombre": "MANZANO TOMAS BELEN VERONICA",
@@ -9119,140 +11845,6 @@
       "tipo_entidad": "persona"
     }
   ],
-  "BL ESPAÑA SOFTWARE, SLU": [
-    {
-      "nombre": "SOLUS HERVE MARIE RAYMOND",
-      "cargo": "Representan",
-      "fecha_nombramiento": "2026-10-23",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "PRICE WATERHOUSE COOPERS AUDITORES SL",
-      "cargo": "Auditor",
-      "fecha_nombramiento": "2026-02-26",
-      "tipo_entidad": "empresa"
-    },
-    {
-      "nombre": "ROMERA HINIESTA MANUEL",
-      "cargo": "Apo.Sol.",
-      "fecha_nombramiento": "2026-02-24",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "GARCIA MONTERO MARIA DE GRACIA",
-      "cargo": "Apo.Sol.",
-      "fecha_nombramiento": "2026-02-24",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "MERLO PEREZ MIGUEL-ANGEL",
-      "cargo": "Apo.Sol.",
-      "fecha_nombramiento": "2026-02-24",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "DIAZ MEJIAS FRANCISCO",
-      "cargo": "Apo.Sol.",
-      "fecha_nombramiento": "2026-02-24",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "BERGER LEVRAULT SA",
-      "cargo": "Presidente",
-      "fecha_nombramiento": "2026-01-28",
-      "tipo_entidad": "empresa"
-    },
-    {
-      "nombre": "RIVERO GALAN SEBASTIAN",
-      "cargo": "Consejero",
-      "fecha_nombramiento": "2026-01-28",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "DIAZ MEJIAS FRANCISCO",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2024-03-27",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "ORCHE SANZ MARIA DE LOS ANGELES",
-      "cargo": "Apo.Manc.",
-      "fecha_nombramiento": "2024-03-27",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "PRICE WATERHOUSE COOPERS AUDITORES SL",
-      "cargo": "Auditor",
-      "fecha_nombramiento": "2024-02-20",
-      "tipo_entidad": "empresa"
-    },
-    {
-      "nombre": "ESPINOSA CANO BIENVENIDO",
-      "cargo": "Consejero",
-      "fecha_nombramiento": "2023-01-24",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "ESPINOSA CANO BIENVENIDO",
-      "cargo": "Secretario",
-      "fecha_nombramiento": "2023-01-24",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "ESPINOSA CANO BIENVENIDO",
-      "cargo": "Apo.Sol.",
-      "fecha_nombramiento": "2023-01-24",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "GARCIA MONTERO MARIA DE GRACIA",
-      "cargo": "Apo.Manc.",
-      "fecha_nombramiento": "2023-01-24",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "ROMERA HINIESTA MANUEL",
-      "cargo": "Apo.Manc.",
-      "fecha_nombramiento": "2023-01-24",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "GOMEZ REYES ESTRELLA MARIA",
-      "cargo": "Apo.Sol.",
-      "fecha_nombramiento": "2023-01-24",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "KPMG AUDITORES SL",
-      "cargo": "Auditor",
-      "fecha_nombramiento": "2020-10-22",
-      "tipo_entidad": "empresa"
-    },
-    {
-      "nombre": "PRICEWATERHOUSECOOPERS AUDITORES SL",
-      "cargo": "Auditor",
-      "fecha_nombramiento": "2019-10-11",
-      "tipo_entidad": "empresa"
-    },
-    {
-      "nombre": "SANTAMARIA MESAS JOAQUINA MARIA",
-      "cargo": "Apo.Sol.",
-      "fecha_nombramiento": "2017-12-07",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "BERGER LEVRAULT SA",
-      "cargo": "Consejero",
-      "fecha_nombramiento": "2016-03-29",
-      "tipo_entidad": "empresa"
-    },
-    {
-      "nombre": "DOMINGUEZ JOSE MARIA",
-      "cargo": "Apo.Sol.",
-      "fecha_nombramiento": "2013-09-12",
-      "tipo_entidad": "persona"
-    }
-  ],
   "FCC MEDIO AMBIENTE": [
     {
       "nombre": "FERNANDEZ NICOLAS ANTONIO CEFERINO",
@@ -16723,296 +19315,6 @@
       "tipo_entidad": "persona"
     }
   ],
-  "CORPORACION ALIMENTARIA GUISSONA, SA": [
-    {
-      "nombre": "DAVID VERDEJO BENITEZ",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2026-09-07",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "RSM SPAIN AUDITORES SLP",
-      "cargo": "Auditor",
-      "fecha_nombramiento": "2026-08-13",
-      "tipo_entidad": "empresa"
-    },
-    {
-      "nombre": "RSM SPAIN AUDITORES SLP",
-      "cargo": "Aud.C.Con.",
-      "fecha_nombramiento": "2026-08-13",
-      "tipo_entidad": "empresa"
-    },
-    {
-      "nombre": "ALSINA CORNELLANA RAMON MARIA",
-      "cargo": "Presidente",
-      "fecha_nombramiento": "2026-06-29",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "ROSSCOR SL",
-      "cargo": "Consejero",
-      "fecha_nombramiento": "2026-06-29",
-      "tipo_entidad": "empresa"
-    },
-    {
-      "nombre": "PUIG TREPAT ANDREU",
-      "cargo": "Consejero",
-      "fecha_nombramiento": "2026-06-29",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "JOSE GENE CAPDEVILA",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2026-05-26",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "AVICOLA BATALLA SL",
-      "cargo": "Vicepresid.",
-      "fecha_nombramiento": "2025-07-14",
-      "tipo_entidad": "empresa"
-    },
-    {
-      "nombre": "AGROPECUARIA ALT CAMP S.A",
-      "cargo": "Consejero",
-      "fecha_nombramiento": "2025-07-14",
-      "tipo_entidad": "empresa"
-    },
-    {
-      "nombre": "AVICOLA BATALLA SL",
-      "cargo": "Consejero",
-      "fecha_nombramiento": "2025-07-14",
-      "tipo_entidad": "empresa"
-    },
-    {
-      "nombre": "BALCELL CAPDEVILA JORDI",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2025-04-24",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "PAMPOLS CAMATS OSCAR",
-      "cargo": "Apo.Sol.",
-      "fecha_nombramiento": "2025-04-24",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "BUREU CAMATS XAVIER",
-      "cargo": "Apo.Sol.",
-      "fecha_nombramiento": "2025-04-24",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "ESPINAGOSA VILARO JOAN",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2024-11-11",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "RIU ANGUERA SERGI",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2024-11-11",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "ALBAREDA SEGURA XAVIER",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2024-11-05",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "VENDRELL SOLA RAMON",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2024-11-05",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "ALSINA CORNELLANA MARIA TERESA",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2024-10-11",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "ALSICOR SA",
-      "cargo": "Consejero",
-      "fecha_nombramiento": "2024-06-27",
-      "tipo_entidad": "empresa"
-    },
-    {
-      "nombre": "DEFIOR MONTER RAFAEL",
-      "cargo": "Consejero",
-      "fecha_nombramiento": "2024-06-27",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "ALSINA CORNELLANA RAMON MARIA",
-      "cargo": "Consejero",
-      "fecha_nombramiento": "2023-07-05",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "ALSINA CORNELLANA JOSEP",
-      "cargo": "Consejero",
-      "fecha_nombramiento": "2023-07-05",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "ALSINA CORNELLANA RAMON MARIA",
-      "cargo": "Con.Delegado",
-      "fecha_nombramiento": "2023-07-05",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "MORENO VILLANUEVA XAVIER",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2023-07-05",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "MARTI COLOMINAS MIQUEL",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2023-07-05",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "PACHECO PORRAS RAUL",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2022-10-14",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "FELIP LLOBET FERRAN",
-      "cargo": "Consejero",
-      "fecha_nombramiento": "2022-08-16",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "CIVIT CAMPABADAL CARLES",
-      "cargo": "Consejero",
-      "fecha_nombramiento": "2022-08-16",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "AUDIT CONCEPT SLP",
-      "cargo": "Auditor",
-      "fecha_nombramiento": "2022-08-16",
-      "tipo_entidad": "empresa"
-    },
-    {
-      "nombre": "AUDIT CONCEPT SLP",
-      "cargo": "Aud.C.Con.",
-      "fecha_nombramiento": "2022-08-16",
-      "tipo_entidad": "empresa"
-    },
-    {
-      "nombre": "PUIG TREPAT ANDREU",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2020-09-09",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "MARTI MALLORQUES MANEL",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2020-01-27",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "CORTES SANTIAGO MIQUEL",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2019-06-19",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "CLAVER FERRER VICENTE JAVIER",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2019-05-09",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "PUIG TREPAT PILAR",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2018-10-02",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "ROS MATHEU JORDI",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2018-06-11",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "CASTANY PAMPALONA LLUIS MARIA",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2016-04-04",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "RIALP CASANOVA NURIA",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2016-04-04",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "AUDITORES Y CONSULTORES BALAÑA-EGUIA SLP",
-      "cargo": "Auditor",
-      "fecha_nombramiento": "2014-07-29",
-      "tipo_entidad": "empresa"
-    },
-    {
-      "nombre": "AUDITORES Y CONSULTORES BALAÑA-EGUIA SLP",
-      "cargo": "Aud.C.Con.",
-      "fecha_nombramiento": "2014-07-29",
-      "tipo_entidad": "empresa"
-    },
-    {
-      "nombre": "PUIG TREPAT ANDRES",
-      "cargo": "Consejero",
-      "fecha_nombramiento": "2013-01-09",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "ALLUE PUIG JORDI",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2011-08-12",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "RIUS BERGADA MARIA MERCE",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2011-08-12",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "PUJOL TARRAGONA FERNANDO",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2011-08-12",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "CAMATS RIBERA ANTONIA",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2011-08-12",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "RIVERA MANRIQUE JOSEP ANDREU",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2011-08-12",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "BRIEBA FARRERO VICENC",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2011-03-03",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "RIBO RIBALTA JOSEP",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2011-03-03",
-      "tipo_entidad": "persona"
-    }
-  ],
   "MONDO IBERICA SA": [
     {
       "nombre": "ARRANZ TORRES ANGELA",
@@ -22415,12 +24717,6 @@
       "tipo_entidad": "persona"
     },
     {
-      "nombre": "LIU LIN",
-      "cargo": "Apo.Sol.",
-      "fecha_nombramiento": "2026-05-05",
-      "tipo_entidad": "persona"
-    },
-    {
       "nombre": "LARA MARCILLA ROSA",
       "cargo": "Apoderado",
       "fecha_nombramiento": "2026-02-10",
@@ -22506,12 +24802,6 @@
     },
     {
       "nombre": "GOMEZ GARCIA MARTA",
-      "cargo": "Apo.Manc.",
-      "fecha_nombramiento": "2025-07-09",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "PALLARES MORANO MARIA LUISA",
       "cargo": "Apo.Manc.",
       "fecha_nombramiento": "2025-07-09",
       "tipo_entidad": "persona"
@@ -22628,12 +24918,6 @@
       "nombre": "JIMENEZ NUÑEZ JAVIER",
       "cargo": "Apo.Sol.",
       "fecha_nombramiento": "2023-11-15",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "CUERVO GONZALEZ MARIA BALBINA",
-      "cargo": "Apo.Sol.",
-      "fecha_nombramiento": "2023-09-19",
       "tipo_entidad": "persona"
     },
     {
@@ -25635,1874 +27919,6 @@
       "tipo_entidad": "persona"
     }
   ],
-  "PREZERO GESTIÓN DE RESIDUOS, SA": [
-    {
-      "nombre": "RODRIGUEZ PEDRERO JOSE MARIA",
-      "cargo": "Apo.Man.Soli",
-      "fecha_nombramiento": "2026-06-30",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "LOPEZ ALIAS JOSE MANUEL",
-      "cargo": "Apo.Man.Soli",
-      "fecha_nombramiento": "2026-06-30",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "MENOR GOMEZ MARCOS",
-      "cargo": "Apo.Man.Soli",
-      "fecha_nombramiento": "2026-06-30",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "REDONDO ARANDA PABLO",
-      "cargo": "Apo.Man.Soli",
-      "fecha_nombramiento": "2026-06-30",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "LEON GARCIA IVAN",
-      "cargo": "Apo.Man.Soli",
-      "fecha_nombramiento": "2026-06-30",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "MONDEJAR PEREZ JOSE-ANGEL",
-      "cargo": "Apo.Man.Soli",
-      "fecha_nombramiento": "2026-06-30",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "DOCAMPO SEOANE MANUEL ANDRES",
-      "cargo": "Apo.Man.Soli",
-      "fecha_nombramiento": "2026-06-30",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "BLANCO ALVAREZ OSCAR",
-      "cargo": "Apo.Man.Soli",
-      "fecha_nombramiento": "2026-06-30",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "CARDENAS PAIZ RAUL IGNACIO",
-      "cargo": "Apo.Man.Soli",
-      "fecha_nombramiento": "2026-06-30",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "NIEVES LAMAS SALVADOR",
-      "cargo": "Apo.Man.Soli",
-      "fecha_nombramiento": "2026-06-30",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "SANCHEZ ARROYO TEODORO",
-      "cargo": "Apo.Man.Soli",
-      "fecha_nombramiento": "2026-06-30",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "GARCIA PARRA MEIFREN DAVID",
-      "cargo": "Apo.Man.Soli",
-      "fecha_nombramiento": "2026-06-30",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "PEREZ GUERRERO JESUS ANTONIO",
-      "cargo": "Apo.Man.Soli",
-      "fecha_nombramiento": "2026-06-30",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "SANCHEZ GAMERO RAFAEL",
-      "cargo": "Apo.Man.Soli",
-      "fecha_nombramiento": "2026-06-30",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "CAÑETE LOPEZ GONZALO",
-      "cargo": "Apo.Manc.",
-      "fecha_nombramiento": "2026-06-30",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "GONZALEZ DE CANALES MOYANO FERNANDO JUAN",
-      "cargo": "Apo.Manc.",
-      "fecha_nombramiento": "2026-06-30",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "CAPEL ARNAU VANESSA",
-      "cargo": "Apo.Manc.",
-      "fecha_nombramiento": "2026-06-30",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "MARTIN ZORITA FRANCISCO DE BORJA",
-      "cargo": "Apo.Manc.",
-      "fecha_nombramiento": "2026-06-30",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "AZCONA SORIA EDUARDO",
-      "cargo": "Apo.Manc.",
-      "fecha_nombramiento": "2026-06-30",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "CABALLERO LAGRU PABLO",
-      "cargo": "Apo.Manc.",
-      "fecha_nombramiento": "2026-06-30",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "PARADA CASALEIRO BEGOÑA",
-      "cargo": "Apo.Manc.",
-      "fecha_nombramiento": "2026-06-30",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "RAMOS MONGE MONICA",
-      "cargo": "Apo.Manc.",
-      "fecha_nombramiento": "2026-06-30",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "GARCIA LOPEZ ALFREDO JAVIER",
-      "cargo": "Apo.Manc.",
-      "fecha_nombramiento": "2026-06-30",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "VALBUENA GARCIA JESUS ANGEL",
-      "cargo": "Apo.Manc.",
-      "fecha_nombramiento": "2026-06-30",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "NAVARRO-REVERTER GARCIA- GERMAN ANTONIO",
-      "cargo": "Apo.Manc.",
-      "fecha_nombramiento": "2026-06-30",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "ALVAREZ IGLESIAS CARLOS",
-      "cargo": "Apo.Manc.",
-      "fecha_nombramiento": "2026-06-30",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "BARCENA ROJI IÑIGO-JOAQUIN",
-      "cargo": "Apo.Manc.",
-      "fecha_nombramiento": "2026-06-30",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "MUNTANER PEDROSA ALBERTO JOSE",
-      "cargo": "Apo.Manc.",
-      "fecha_nombramiento": "2026-06-30",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "VICENTE MORENO JOAQUIN",
-      "cargo": "Apo.Manc.",
-      "fecha_nombramiento": "2026-06-30",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "RODRIGUEZ VILLAR INMACULADA",
-      "cargo": "Apo.Manc.",
-      "fecha_nombramiento": "2026-06-30",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "ALDASORO BIENCINTO ANGEL",
-      "cargo": "Apo.Manc.",
-      "fecha_nombramiento": "2026-06-30",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "BERENGUER AMAT ANNA",
-      "cargo": "Apo.Manc.",
-      "fecha_nombramiento": "2026-06-30",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "MARIN GARDE MARIA GLORIA",
-      "cargo": "Apo.Manc.",
-      "fecha_nombramiento": "2026-06-30",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "GONZALEZ RODRIGUEZ MARIA BEATRIZ",
-      "cargo": "Apo.Manc.",
-      "fecha_nombramiento": "2026-06-30",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "VIGO OLLER ELISENDA",
-      "cargo": "Apo.Manc.",
-      "fecha_nombramiento": "2026-06-30",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "LUQUE HURTADO DIEGO LUIS",
-      "cargo": "Apo.Manc.",
-      "fecha_nombramiento": "2026-06-30",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "LOPEZ DE HAGO ROJO RICARDO",
-      "cargo": "Apo.Man.Soli",
-      "fecha_nombramiento": "2026-06-30",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "COELLO GARCIA MARIA JOSEFA",
-      "cargo": "Apo.Man.Soli",
-      "fecha_nombramiento": "2026-06-30",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "RIVERO SAINZ-PARDO RUTH",
-      "cargo": "Apo.Man.Soli",
-      "fecha_nombramiento": "2026-06-30",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "DE NICOLAS GARCIA JUAN JAVIER",
-      "cargo": "Apo.Man.Soli",
-      "fecha_nombramiento": "2026-06-30",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "CABRE ALCOVERRO JAIME",
-      "cargo": "Apo.Man.Soli",
-      "fecha_nombramiento": "2026-06-30",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "ZARATE ZARATE PABLO",
-      "cargo": "Apo.Man.Soli",
-      "fecha_nombramiento": "2026-06-30",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "BEJERANO DOMINGUEZ DIEGO",
-      "cargo": "Apo.Man.Soli",
-      "fecha_nombramiento": "2026-06-30",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "CANO MIRO CAMILO VICENTE",
-      "cargo": "Apo.Man.Soli",
-      "fecha_nombramiento": "2026-06-30",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "TALAVERA MURILLO JAVIER",
-      "cargo": "Apo.Man.Soli",
-      "fecha_nombramiento": "2026-06-30",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "GONZALEZ MOLINA JAVIER ADRIAN",
-      "cargo": "Apo.Man.Soli",
-      "fecha_nombramiento": "2026-06-30",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "FERNANDEZ LOPEZ CRISTINA",
-      "cargo": "Apo.Man.Soli",
-      "fecha_nombramiento": "2026-06-30",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "MUÑOZ CAMPOS SANDRA",
-      "cargo": "Apo.Man.Soli",
-      "fecha_nombramiento": "2026-06-30",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "RODRIGUEZ PEDRERO DOMINGO",
-      "cargo": "Apo.Man.Soli",
-      "fecha_nombramiento": "2026-06-30",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "BAENA CUBERO JOSE RUBEN",
-      "cargo": "Apo.Man.Soli",
-      "fecha_nombramiento": "2026-06-30",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "BAXERAS BLANES MARIA DOLORES",
-      "cargo": "Apo.Man.Soli",
-      "fecha_nombramiento": "2026-06-30",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "AGUSTI GARCIA ROGER",
-      "cargo": "Apo.Man.Soli",
-      "fecha_nombramiento": "2026-06-30",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "ESPINOSA BARBERA CARLOS",
-      "cargo": "Apo.Man.Soli",
-      "fecha_nombramiento": "2026-06-30",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "MODENA NADAL MARC",
-      "cargo": "Apo.Man.Soli",
-      "fecha_nombramiento": "2026-06-30",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "CARMONA FERNANDEZ LUIS",
-      "cargo": "Apo.Man.Soli",
-      "fecha_nombramiento": "2026-06-30",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "JIMENEZ COLOMA ELENA",
-      "cargo": "Apo.Man.Soli",
-      "fecha_nombramiento": "2026-06-30",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "JIMENEZ MARIN FRANCISCO",
-      "cargo": "Apo.Man.Soli",
-      "fecha_nombramiento": "2026-06-30",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "GIRALDA MARTIN ROBERTO",
-      "cargo": "Apo.Man.Soli",
-      "fecha_nombramiento": "2026-06-30",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "PORTO PEREZ DAVID",
-      "cargo": "Apo.Man.Soli",
-      "fecha_nombramiento": "2026-06-30",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "CEPEDA GONZALEZ LUIS-JAVIER",
-      "cargo": "Apo.Man.Soli",
-      "fecha_nombramiento": "2026-06-30",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "GRANDE ALVAREZ ALEJANDRO-JOSE",
-      "cargo": "Apo.Man.Soli",
-      "fecha_nombramiento": "2026-06-30",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "MOYA REINA MIGUEL",
-      "cargo": "Apo.Man.Soli",
-      "fecha_nombramiento": "2026-06-30",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "CLARES PLANELLS JAVIER",
-      "cargo": "Apo.Man.Soli",
-      "fecha_nombramiento": "2026-06-30",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "REBOLLO GRAUPERA OMAR",
-      "cargo": "Apo.Man.Soli",
-      "fecha_nombramiento": "2026-06-30",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "SANCHEZ RODRIGUEZ RUTH",
-      "cargo": "Apo.Man.Soli",
-      "fecha_nombramiento": "2026-06-30",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "CLARES PLANELS RAFAEL",
-      "cargo": "Apo.Man.Soli",
-      "fecha_nombramiento": "2026-06-30",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "IGLESIAS VILAN JOSE-MARIA",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2026-06-23",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "NAVARRO MORTE JOSE VICENTE",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2026-06-23",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "PEREZ ZARCO FRANCISCO LUIS",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2026-06-23",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "DE LA ROSA BLANCO MARIA PILAR",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2026-06-23",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "LATORRE GRAU PILAR",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2026-06-23",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "AGUILERA VEGA YOLANDA",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2026-06-23",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "ARTOLA VILLANUEVA NATALIA",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2026-06-23",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "GONZALEZ PRIETO ELISABET",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2026-06-23",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "CANO GONZALEZ LETICIA",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2026-06-23",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "RAMOS HERNANDEZ ENRIQUE",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2026-06-23",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "FERNANDEZ ALVARO IRENE",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2026-06-23",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "PEREZ HERENCIA ANA MARIA",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2026-06-23",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "SANCHEZ TAVIRA JUANA MARIA",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2026-06-23",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "AMARANTE GODINO ANTONIO JOSE",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2026-06-23",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "HERRERO SERRANO OSCAR",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2026-06-23",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "GONZALEZ SEIRUL LO IGNACIO",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2026-06-23",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "RUIZ GOMEZ OCTAVI",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2026-06-23",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "SORIANO ARGUELLO FERNANDO MANUEL",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2026-06-23",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "MARIN GARDE GLORIA",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2026-06-23",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "GONZALEZ RODRIGUEZ BEATRIZ",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2026-06-23",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "GALLARDO CUBERO JOSE-ANTONIO",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2026-06-23",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "GALLEGO AMIGO CARLOS",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2026-06-23",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "AVILA LAFUENTE JOSE- MANUEL",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2026-06-23",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "DE ANCOS VIÑAS VICTOR",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2026-06-23",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "OLIVAN GARCIA MACARENA",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2026-06-23",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "PAU FAYOS ALFREDO",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2026-06-23",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "YAGUE CERCOS DANIEL",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2026-06-23",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "MARTINEZ PERALTA FRANCISCO",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2026-06-23",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "SAGARRA SANCHEZ MANUELA",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2026-06-23",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "POLLEDO CERDEIRIÑA MANUEL",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2026-06-23",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "CARRION RUIZ BEATRIZ",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2026-06-23",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "FERNANDEZ BONILLA ALBERTO",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2026-06-23",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "ROBLES AGUIRRE NEREA",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2026-06-23",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "GUTIERREZ SANCHEZ JAVIER",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2026-06-23",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "NUÑEZ GARCIA MARIA ESPERANZA",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2026-06-23",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "FERNANDEZ VIANA LUIS ALBERTO",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2026-06-23",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "MEDEL RUIZ-CARRILLO IÑIGO",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2026-06-23",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "PALMERO MOLLA DAVID",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2026-06-23",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "ESQUINAS JIMENEZ CARMEN MARIA",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2026-06-23",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "DIAZ FERNANDEZ ADRIANA",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2026-06-23",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "MORENO PRIETO JESUS JAVIER",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2026-06-23",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "PASCUALENA MUÑESA ASUNCION",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2026-06-23",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "RODRIGUEZ MARTINEZ DE ALEGRIA MARIA PALOMA",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2026-06-23",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "MARTINEZ FRIAS BETANIA",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2026-06-22",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "FERRO FERNANDEZ FRANCISCO JAVIER",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2026-06-22",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "PARREÑO MANZANO IGNACIO",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2026-06-22",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "SALAMI SAN JUAN CARLOS",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2026-06-22",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "APARICIO DEL ALAMO RAQUEL",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2026-06-22",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "MARTIN HERNANZ CRISTINA",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2026-06-22",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "HIDALGO FLOREZ MARCELINO",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2026-06-22",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "DE LA IGLESIA OLMEDILLA JESUS",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2026-06-22",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "SILVA UTRILLA LUIS FERNANDO",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2026-06-22",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "TORRALBA VILLAVERDE FELIX",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2026-06-22",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "GUTIERREZ GARCIA RODRIGO",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2026-06-22",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "HORCAS GARCIA JUAN MANUEL",
-      "cargo": "Apo.Man.Soli",
-      "fecha_nombramiento": "2026-06-22",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "OJEDA ALVAREZ IGNACIO",
-      "cargo": "Apo.Man.Soli",
-      "fecha_nombramiento": "2026-06-22",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "MORO CANTOS FRANCISCO JESUS",
-      "cargo": "Apo.Man.Soli",
-      "fecha_nombramiento": "2026-06-22",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "IGUALADA FERNANDEZ ANTONIO",
-      "cargo": "Apo.Man.Soli",
-      "fecha_nombramiento": "2026-06-22",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "GARCIA ALCARAZ JOSE MANUEL",
-      "cargo": "Apo.Man.Soli",
-      "fecha_nombramiento": "2026-06-22",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "FERNANDEZ JIMENEZ SERGIO",
-      "cargo": "Apo.Man.Soli",
-      "fecha_nombramiento": "2026-06-22",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "DOMINGUEZ MUÑOZ JOSE PASCUAL",
-      "cargo": "Apo.Man.Soli",
-      "fecha_nombramiento": "2026-06-22",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "CARRASCO VIEJO JOSE",
-      "cargo": "Apo.Man.Soli",
-      "fecha_nombramiento": "2026-06-22",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "FERNANDEZ TORONJO SEBASTIAN",
-      "cargo": "Apo.Man.Soli",
-      "fecha_nombramiento": "2026-06-22",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "GARCIA ALCALDE PABLO",
-      "cargo": "Apo.Man.Soli",
-      "fecha_nombramiento": "2026-06-22",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "ORTIZ HERRERIAS DONATO",
-      "cargo": "Apo.Man.Soli",
-      "fecha_nombramiento": "2026-06-22",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "MARTINEZ SANCHEZ PEDRO RAMON",
-      "cargo": "Apo.Man.Soli",
-      "fecha_nombramiento": "2026-06-22",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "GONZALO BLOCONA ALBERTO",
-      "cargo": "Apo.Man.Soli",
-      "fecha_nombramiento": "2026-06-22",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "PATRICIO ARRIMADAS ENRIQUE",
-      "cargo": "Apo.Man.Soli",
-      "fecha_nombramiento": "2026-06-22",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "COTARELO BENITO RAFAEL",
-      "cargo": "Apo.Man.Soli",
-      "fecha_nombramiento": "2026-06-22",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "GRANDIO REGO JOSE MIGUEL",
-      "cargo": "Apo.Man.Soli",
-      "fecha_nombramiento": "2026-06-22",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "SANCHEZ CORREDERA SILVIA",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2026-06-22",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "CORRALES REDONDO MIGUEL",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2026-06-22",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "FIGUERAS PELIJERO ALBERT",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2026-06-22",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "GONZALEZ BOUZAS CESAR ANTONIO",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2026-06-22",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "GODAYOL CODONY JOSEP",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2026-06-22",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "GOMEZ FERNANDEZ ANTONIO",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2026-06-22",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "GAZTELU GONZALEZ NAGORE",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2026-06-22",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "REGUEIRA MORANDEIRA NATALIA",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2026-06-22",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "CALVO ANCA JOSE MANUEL",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2026-06-22",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "BOVEDA PASTOR TERESA",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2026-06-22",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "DE LECEA AGUIRRE MATIAS MIGUEL",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2026-06-22",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "RIVAS DIAZ MARIA LUZ",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2026-06-22",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "VALLS PUIG JOAN",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2026-06-22",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "VELASCO GIMENO CARMEN MARIA",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2026-02-04",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "BURSIANIS HANNAH KATHERINA",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2026-02-04",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "LOZANO CARRASCAL MARIBI",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2026-02-04",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "LOUREIRO RODRIGUEZ MONICA",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2026-02-04",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "MOLINA GARCIA ALEJANDRO",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2026-02-04",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "SIERRA ZAPATA JOSE",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2026-02-04",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "AGUADO SOLIVA SILVIA",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2026-02-04",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "REPISO SANCHEZ JAVIER",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2026-02-04",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "CARCELER PEREZ MARC",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2026-02-04",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "SIMANCAS VALERO MIGUEL ALEXANDER",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2026-02-04",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "GONZALEZ DE CANALES MOYANO FERNANDO-JUAN",
-      "cargo": "Adm. Mancom.",
-      "fecha_nombramiento": "2025-08-21",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "RODRIGUEZ LOUREIRO MONICA",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2025-06-26",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "TORRES MEDRANO AMELIA MARIA",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2025-06-26",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "COELLO GARCIA MARIA JOSE",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2025-06-26",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "GARCIA LOPEZ ALFREDO",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2025-06-26",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "SEBASTIAN FERNANDEZ CRISTINA",
-      "cargo": "Apo.Sol.",
-      "fecha_nombramiento": "2025-06-23",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "SEBASTIAN FERNANDEZ BEATRIZ",
-      "cargo": "Apo.Sol.",
-      "fecha_nombramiento": "2025-06-23",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "MERCEDES FABIAN RUIZ",
-      "cargo": "Apo.Sol.",
-      "fecha_nombramiento": "2025-06-23",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "ALBERT ACIN ISOLDA",
-      "cargo": "Apo.Sol.",
-      "fecha_nombramiento": "2025-06-23",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "TIRADO NEVADO RAQUEL",
-      "cargo": "Apo.Sol.",
-      "fecha_nombramiento": "2025-06-23",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "ESQUINAS JIMENEZ MARIA CARMEN",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2025-06-23",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "NAVARRO REVERTER GERMAN GARCIA ANTONIO",
-      "cargo": "Apo.Manc.",
-      "fecha_nombramiento": "2025-02-13",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "GONZALEZ DE CANALES MOYANO FERNANDO",
-      "cargo": "Apo.Manc.",
-      "fecha_nombramiento": "2025-02-13",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "GARCIA MONTERO DAVID",
-      "cargo": "Apo.Sol.",
-      "fecha_nombramiento": "2025-02-13",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "LOPEZ HERNAEZ JOSE IGNACIO",
-      "cargo": "Apo.Man.Soli",
-      "fecha_nombramiento": "2024-12-03",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "MANTILLA GUTIERREZ DAVID",
-      "cargo": "Apo.Man.Soli",
-      "fecha_nombramiento": "2024-12-03",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "SAN MARTIN MADINA RAFAEL HANDLER",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2023-11-21",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "BARCENA ROJI IÑIGO",
-      "cargo": "Apo.Manc.",
-      "fecha_nombramiento": "2023-04-13",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "DELOITTE SL",
-      "cargo": "Auditor",
-      "fecha_nombramiento": "2023-01-11",
-      "tipo_entidad": "empresa"
-    },
-    {
-      "nombre": "HOYA GARCIA MARIANO",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2022-03-29",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "MARIN GARDE MARIA GLORIA",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2022-03-08",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "CAÑETE LOPEZ GONZALO",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2022-03-08",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "GARCIA LOPEZ ALFREDO JAVIER",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2022-03-08",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "BERENGUER AMAT ANNA",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2022-03-08",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "VIGO OLLER ELISENDA",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2022-03-08",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "NAVARRO REVERTER GARCIA GERMAN ANTONIO",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2022-03-08",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "ALIANA PORTUGAL ANTONIO",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2022-03-08",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "GONZALEZ DE CANALES MOYANO FERNANDO JUAN",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2022-03-08",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "RODRIGUEZ VILLAR INMACULADA",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2022-03-08",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "RAMOS MONGE MONICA",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2022-03-08",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "GONZALEZ RODRIGUEZ MARIA BEATRIZ",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2022-03-08",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "BARCENA ROJI IÑIGO JOAQUIN",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2022-03-08",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "CABELLOS DE FRANCISCO SERGIO",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2022-03-08",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "CABALLERO LAGRU PABLO",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2022-03-08",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "MARTIN ZORITA FRANCISCO DE BORJA",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2022-03-08",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "GARCIA GALDON JOSE ANTONIO",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2022-03-08",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "MUNTANER PEDROSA ALBERTO-JOSE",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2022-03-08",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "VICENTE MORENO JOAQUIN",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2022-03-08",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "IGLESIAS VILAN JOSE MARIA",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2022-03-08",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "MONTES PARRA BUENAVENTURA",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2022-03-08",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "ALVAREZ IGLESIAS CARLOS",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2022-03-08",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "BERENGUAR AMAT ANNA",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2022-03-08",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "FIGOLI VIVIANA AUXILIADORA",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2022-03-08",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "BLANCH FONTCUBERTA MARIA CINTA",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2022-03-08",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "GAZQUEZ SERRANO JUAN ANTONIO",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2022-03-08",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "VALLS PUIG JOAN",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2022-03-08",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "CAPEL ARNAU VANESSA",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2022-03-08",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "MAURI ORRIOLS XAVIER",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2022-03-08",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "NIETO MARTIN KOLDO",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2022-03-08",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "DOCAMPO SEOANE MANUEL ANDRES",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2022-03-08",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "VAZQUEZ RUIZ ANDRES",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2022-03-08",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "RIVAS DIAZ MARIA LUZ",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2022-03-08",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "GONZALEZ RODRIGUEZ BEATRIZ",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2022-03-08",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "MARIN GARDE GLORIA",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2022-03-08",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "REDONDO ARANDA PABLO",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2022-03-07",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "MENOR GOMEZ MARCOS",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2022-03-07",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "CARDENAS PAIZ RAUL IGNACIO",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2022-03-07",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "LOPEZ ALIAS JOSE MANUEL",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2022-03-07",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "LEON GARCIA IVAN",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2022-03-07",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "MORO CANTOS FRANCISCO JESUS",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2022-03-07",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "CAÑETE LOPEZ GONZALO",
-      "cargo": "Adm. Mancom.",
-      "fecha_nombramiento": "2022-01-14",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "JAIME BLANCO ALFREDO",
-      "cargo": "Apo.Sol.",
-      "fecha_nombramiento": "2022-01-14",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "GONZALEZ DE CANALES MOYANO FERNANDO",
-      "cargo": "Apo.Man.Soli",
-      "fecha_nombramiento": "2022-01-14",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "BECERRA DE MARCOS JOSE RAMON",
-      "cargo": "Apo.Man.Soli",
-      "fecha_nombramiento": "2022-01-14",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "MERINO MARTI ENRIQUE-ALFONSO",
-      "cargo": "Apo.Man.Soli",
-      "fecha_nombramiento": "2022-01-14",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "COLINO LOPEZ MANUEL",
-      "cargo": "Apo.Man.Soli",
-      "fecha_nombramiento": "2022-01-14",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "GUTIERREZ MORALEDA RAUL",
-      "cargo": "Apo.Man.Soli",
-      "fecha_nombramiento": "2022-01-14",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "DE LARA MENCIA ALVARO",
-      "cargo": "Apo.Man.Soli",
-      "fecha_nombramiento": "2022-01-14",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "GARCIA ULLOA ESTHER",
-      "cargo": "Apo.Man.Soli",
-      "fecha_nombramiento": "2022-01-14",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "ALVAREZ RUANO CAROLINA",
-      "cargo": "Apo.Man.Soli",
-      "fecha_nombramiento": "2022-01-14",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "ARROBA CANO EMILIO",
-      "cargo": "Apo.Man.Soli",
-      "fecha_nombramiento": "2022-01-14",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "BERDEJO CALONGE MARTA",
-      "cargo": "Apo.Man.Soli",
-      "fecha_nombramiento": "2022-01-14",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "DELOITTE SL",
-      "cargo": "Auditor",
-      "fecha_nombramiento": "2021-12-27",
-      "tipo_entidad": "empresa"
-    },
-    {
-      "nombre": "VALBUENA GARCIA JESUS ANGEL",
-      "cargo": "Apo.Manc.",
-      "fecha_nombramiento": "2021-11-03",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "CARPIO DOMINGUEZ ANA CRISTINA",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2021-11-03",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "ORDUNA ACEDO ISAAC",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2021-11-03",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "VILLAVERDE HERRANZ JAVIER",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2021-11-03",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "LOPEZ GONZALEZ EVA MARIA",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2021-11-03",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "GUTIERREZ SANCHEZ JAVIER",
-      "cargo": "Apo.Manc.",
-      "fecha_nombramiento": "2021-11-03",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "FERNANDEZ VIANA LUIS ALBERTO",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2021-11-03",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "SEGURA FONTCUBERTA ANTONIO CARLOS",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2021-11-03",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "BAENA CUBERO JOSE RUBEN",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2021-11-03",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "FERRAS VALDEVELL ELENA",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2021-11-03",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "ARROYO ARAUJO DAVID",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2021-11-03",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "CORTES CONTRERAS ALBERTO",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2021-11-03",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "REVUELTA ORIA DIEGO JOSE",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2021-07-23",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "MURGA SANTACRUZ HUGO",
-      "cargo": "Apo.Sol.",
-      "fecha_nombramiento": "2021-06-21",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "PUCELLA TOPPI MARIA CARMEN",
-      "cargo": "Apo.Sol.",
-      "fecha_nombramiento": "2021-06-21",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "TERAN VILLAGRA CRISTINA",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2021-03-03",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "GONZALEZ DE CANALES MOYANO FERNANDO-JUAN",
-      "cargo": "Adm. Mancom.",
-      "fecha_nombramiento": "2020-12-04",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "GUALDA SUAREZ JUAN MANUEL",
-      "cargo": "Apo.Man.Soli",
-      "fecha_nombramiento": "2020-11-03",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "FERRAS VALDEVELL MARIA ELENA",
-      "cargo": "Apo.Sol.",
-      "fecha_nombramiento": "2020-10-28",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "GIMENO GIMENEZ FRANCISCO JAVIER",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2019-11-11",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "NAVARRO REVERTER GERMAN GARCIA ANTONIO",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2019-11-11",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "TIRADO NEVADO RAQUEL",
-      "cargo": "Apo.Sol.",
-      "fecha_nombramiento": "2019-07-23",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "TALAVERA MURILLO JAVIER",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2018-12-24",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "RODRIGEZ-FRAILE GARCIA-ALEGRE ANDREA",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2018-12-24",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "HIDALGO FLOREZ MARCELINO",
-      "cargo": "Apo.Sol.",
-      "fecha_nombramiento": "2018-06-26",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "BAXERAS BLANES MARIA DOLORES",
-      "cargo": "Apo.Sol.",
-      "fecha_nombramiento": "2018-03-19",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "BEJERANO DOMINGUEZ DIEGO",
-      "cargo": "Apo.Sol.",
-      "fecha_nombramiento": "2018-03-19",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "CLARES PLANELS RAFAEL",
-      "cargo": "Apo.Sol.",
-      "fecha_nombramiento": "2018-03-19",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "ELENA ESTEBAN FERNANDEZ",
-      "cargo": "Apo.Sol.",
-      "fecha_nombramiento": "2018-03-19",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "GONZALEZ BOUZAS CESAR ANTONIO",
-      "cargo": "Apo.Sol.",
-      "fecha_nombramiento": "2018-03-19",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "MERCEDES FABIAN RUIZ",
-      "cargo": "Apo.Sol.",
-      "fecha_nombramiento": "2018-03-19",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "MUÑOZ CAMPOS SANDRA",
-      "cargo": "Apo.Sol.",
-      "fecha_nombramiento": "2018-03-19",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "PEREZ SANZ DIEGO",
-      "cargo": "Apo.Sol.",
-      "fecha_nombramiento": "2018-03-19",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "RODRIGUEZ PEDRERO DOMINGO",
-      "cargo": "Apo.Sol.",
-      "fecha_nombramiento": "2018-03-19",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "SEBASTIAN FERNANDEZ CRISTINA",
-      "cargo": "Apo.Sol.",
-      "fecha_nombramiento": "2018-03-19",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "OLIVAN GARCIA MACARENA",
-      "cargo": "Apoderado",
-      "fecha_nombramiento": "2018-01-15",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "DE FELIPE FERNANDEZ LUIS IGNACIO",
-      "cargo": "APODERAD.SOL",
-      "fecha_nombramiento": "2017-10-31",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "VACA DE OSMA ULACIA JAVIER",
-      "cargo": "APODERAD.SOL",
-      "fecha_nombramiento": "2017-10-06",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "DELOITTE SL",
-      "cargo": "AUDIT.CUENT.",
-      "fecha_nombramiento": "2017-02-08",
-      "tipo_entidad": "empresa"
-    },
-    {
-      "nombre": "ANTON MORENO YOLANDA",
-      "cargo": "APODERAD.SOL",
-      "fecha_nombramiento": "2016-11-07",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "SALINERO JUEZ ALVARO",
-      "cargo": "APODERAD.SOL",
-      "fecha_nombramiento": "2016-11-07",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "MOYA MELCON JAVIER",
-      "cargo": "APODERAD.SOL",
-      "fecha_nombramiento": "2016-10-03",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "DORAO MADRUGA ALVARO",
-      "cargo": "APODERAD.SOL",
-      "fecha_nombramiento": "2016-08-31",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "HOYA GARCIA MARIANO",
-      "cargo": "APODERAD.SOL",
-      "fecha_nombramiento": "2016-07-22",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "CARRO OLLERO SEBASTIAN",
-      "cargo": "APODERAD.SOL",
-      "fecha_nombramiento": "2016-05-03",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "CLEMENTE FERNANDEZ JUAN CARLOS",
-      "cargo": "APODERAD.SOL",
-      "fecha_nombramiento": "2016-05-03",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "MEZQUITA BUSTILLO JOSE ANTONIO",
-      "cargo": "APODERAD.SOL",
-      "fecha_nombramiento": "2016-05-03",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "LOPEZ ARIAS FERNANDEZ",
-      "cargo": "APODERAD.SOL",
-      "fecha_nombramiento": "2016-05-03",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "MARTINEZ PEREZ ULISES",
-      "cargo": "APODERAD.SOL",
-      "fecha_nombramiento": "2016-05-03",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "LOPEZ CASTILLO ALVARO",
-      "cargo": "APODERAD.SOL",
-      "fecha_nombramiento": "2016-05-03",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "AGUADO ESTEBAN LUIS MIGUEL",
-      "cargo": "APODERAD.SOL",
-      "fecha_nombramiento": "2016-05-03",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "JULIAN JULIAN JOSE",
-      "cargo": "APODERAD.SOL",
-      "fecha_nombramiento": "2016-05-03",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "CHAVES ALVAREZ MIGUEL",
-      "cargo": "APODERAD.SOL",
-      "fecha_nombramiento": "2016-05-03",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "TURRADO FERNANDEZ OLIVERIO",
-      "cargo": "APODERAD.SOL",
-      "fecha_nombramiento": "2016-05-03",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "ROCAMORA CABELLO JOSE MANUEL",
-      "cargo": "APODERAD.SOL",
-      "fecha_nombramiento": "2016-05-03",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "JIMENEZ PASTOR ESTEFANIA",
-      "cargo": "APODERAD.SOL",
-      "fecha_nombramiento": "2016-05-03",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "CONTRERAS FERNANDEZ FULGENCIO",
-      "cargo": "APODERAD.SOL",
-      "fecha_nombramiento": "2016-05-03",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "ROBERTO GRAVINA",
-      "cargo": "APODERAD.SOL",
-      "fecha_nombramiento": "2016-05-03",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "VAZQUEZ TEJERO SANTIAGO",
-      "cargo": "APODERAD.SOL",
-      "fecha_nombramiento": "2016-05-03",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "FORCADA CASTELLTORT ROSA MARIA",
-      "cargo": "ADM.CONJUNTO",
-      "fecha_nombramiento": "2016-03-21",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "COELLO GARCIA MARIA JOSEFA",
-      "cargo": "APODERAD.SOL",
-      "fecha_nombramiento": "2015-11-05",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "DEL GRAU PASCUAL DURAN MARIA",
-      "cargo": "APOD.SOL/MAN",
-      "fecha_nombramiento": "2014-08-20",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "MARTIN RODRIGUEZ RAFAEL LUIS",
-      "cargo": "APODERAD.SOL",
-      "fecha_nombramiento": "2014-08-20",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "VIDALES PEREZ CESAREO",
-      "cargo": "APODERAD.SOL",
-      "fecha_nombramiento": "2013-11-27",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "MORALES BELCHI PEDRO",
-      "cargo": "APODERAD.SOL",
-      "fecha_nombramiento": "2013-11-27",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "YAGUE CERCOS DANIEL",
-      "cargo": "APODERAD.SOL",
-      "fecha_nombramiento": "2013-11-27",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "DE ANCOS VIÑAS VICTOR",
-      "cargo": "APODERAD.SOL",
-      "fecha_nombramiento": "2013-11-27",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "POLLEDO CERDEIRIÑA MANUEL",
-      "cargo": "APODERAD.SOL",
-      "fecha_nombramiento": "2013-11-27",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "PAU FAYOS ALFREDO",
-      "cargo": "APODERAD.SOL",
-      "fecha_nombramiento": "2013-11-27",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "GALLEGO AMIGO CARLOS",
-      "cargo": "APODERAD.SOL",
-      "fecha_nombramiento": "2013-11-27",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "MARTINEZ PERALTA FRANCISCO",
-      "cargo": "APODERAD.SOL",
-      "fecha_nombramiento": "2013-11-27",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "PEREZ SANTOS JOSE ANTONIO",
-      "cargo": "APODERAD.SOL",
-      "fecha_nombramiento": "2013-11-27",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "SIERRA ZAPATA JOSE",
-      "cargo": "APODERAD.SOL",
-      "fecha_nombramiento": "2013-11-08",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "LOPEZ PEREZ JORGE",
-      "cargo": "APODERAD.SOL",
-      "fecha_nombramiento": "2013-09-13",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "GASTON NAJARRO JUAN IGNACIO",
-      "cargo": "ADM.CONJUNTO",
-      "fecha_nombramiento": "2013-05-10",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "AGUILERA BAÑON MARTA",
-      "cargo": "APODERADO",
-      "fecha_nombramiento": "2013-02-19",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "FLORENCIA ERDOZAIN",
-      "cargo": "APODERADO",
-      "fecha_nombramiento": "2013-02-19",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "DE LA IGLESIA OLMEDILLA JESUS",
-      "cargo": "APODERADO",
-      "fecha_nombramiento": "2009-07-20",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "MORENO PRIETO JESUS JAVIER",
-      "cargo": "APODERADO",
-      "fecha_nombramiento": "2009-02-02",
-      "tipo_entidad": "persona"
-    }
-  ],
   "LES DEUS AVENTURA, S.L.": [
     {
       "nombre": "ESTRUCH FORTUÑO GERARD",
@@ -29265,74 +29681,6 @@
       "tipo_entidad": "persona"
     }
   ],
-  "LA VANGUARDIA EDICIONES, SL.": [
-    {
-      "nombre": "GONZALEZ TERCEÑO DANIEL",
-      "cargo": "APOD.SOL/MAN",
-      "fecha_nombramiento": "2026-05-06",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "LIANG JIN",
-      "cargo": "APOD.SOL/MAN",
-      "fecha_nombramiento": "2026-05-06",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "PRICEWATERHOUSECOOPERS AUDITORES SL",
-      "cargo": "AUDIT.CUENT.",
-      "fecha_nombramiento": "2025-10-08",
-      "tipo_entidad": "empresa"
-    },
-    {
-      "nombre": "MARTINEZ GOMEZ JAVIER",
-      "cargo": "APOD.SOL/MAN",
-      "fecha_nombramiento": "2024-11-15",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "DE POL CRUZ FRANCISCO JAVIER",
-      "cargo": "APOD.SOL/MAN",
-      "fecha_nombramiento": "2023-06-30",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "BUIL BOU SANDRA",
-      "cargo": "APODERAD.SOL",
-      "fecha_nombramiento": "2022-09-21",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "GURT CARRERA JAUME",
-      "cargo": "APOD.SOL/MAN",
-      "fecha_nombramiento": "2021-12-30",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "CATALA PUJOL MONTSERRAT",
-      "cargo": "APOD.SOL/MAN",
-      "fecha_nombramiento": "2021-12-30",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "SALLENT ROIG ANA ISABEL",
-      "cargo": "APOD.SOL/MAN",
-      "fecha_nombramiento": "2021-12-30",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "MARTIN HERNANDEZ FRANCISCO JAVIER",
-      "cargo": "APOD.SOL/MAN",
-      "fecha_nombramiento": "2021-12-30",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "AUDITGLOBAL SL",
-      "cargo": "AUDIT.CUENT.",
-      "fecha_nombramiento": "2010-06-30",
-      "tipo_entidad": "empresa"
-    }
-  ],
   "GODO STRATEGIES, S.L.U.": [
     {
       "nombre": "GONZALEZ TERCEÑO DANIEL",
@@ -29362,12 +29710,6 @@
       "nombre": "RODRIGUEZ HERNANDEZ OSCAR",
       "cargo": "APOD.SOL/MAN",
       "fecha_nombramiento": "2024-11-15",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "DE POL CRUZ FRANCISCO JAVIER",
-      "cargo": "APOD.SOL/MAN",
-      "fecha_nombramiento": "2023-06-30",
       "tipo_entidad": "persona"
     },
     {
@@ -29412,12 +29754,6 @@
       "nombre": "RODRIGUEZ HERNANDEZ OSCAR",
       "cargo": "APOD.SOL/MAN",
       "fecha_nombramiento": "2024-11-15",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "DE POL CRUZ FRANCISCO JAVIER",
-      "cargo": "APOD.SOL/MAN",
-      "fecha_nombramiento": "2023-06-30",
       "tipo_entidad": "persona"
     },
     {
@@ -35661,6 +35997,26 @@
       "tipo_entidad": "persona"
     }
   ],
+  "PLASFOC, SA UNIPERSONAL": [
+    {
+      "nombre": "FIGUERAS FARRE JORGE",
+      "cargo": "Adm. Unico",
+      "fecha_nombramiento": "2025-12-24",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "CARTAÑA BELTRAN ESTER",
+      "cargo": "Apoderado",
+      "fecha_nombramiento": "2025-12-24",
+      "tipo_entidad": "persona"
+    },
+    {
+      "nombre": "BLAZQUEZ PLANAS I ASSOCIATS SOCIEDAD LIMITADA",
+      "cargo": "Auditor",
+      "fecha_nombramiento": "2025-11-21",
+      "tipo_entidad": "empresa"
+    }
+  ],
   "RAYOFLIGHT MANAGEMENT SL": [
     {
       "nombre": "MARTINEZ RAYO SANDRA",
@@ -37312,188 +37668,6 @@
       "nombre": "MARIN ZORITA MARTA",
       "cargo": "ADM.UNICO",
       "fecha_nombramiento": "2025-10-31",
-      "tipo_entidad": "persona"
-    }
-  ],
-  "SABA APARCAMIENTOS, SA": [
-    {
-      "nombre": "ROLAND FRANCOIS CRACCO",
-      "cargo": "REPR.143 RRM",
-      "fecha_nombramiento": "2025-10-31",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "PRICEWATERHOUSECOOPERS AUDITORES SL",
-      "cargo": "AUDIT.CUENT.",
-      "fecha_nombramiento": "2025-08-21",
-      "tipo_entidad": "empresa"
-    },
-    {
-      "nombre": "PRICEWATERHOUSECOOPERS AUDITORES SL",
-      "cargo": "AUDT.CTS.CON",
-      "fecha_nombramiento": "2025-08-21",
-      "tipo_entidad": "empresa"
-    },
-    {
-      "nombre": "SABA INFRAESTRUCTURAS SA",
-      "cargo": "ADM.UNICO",
-      "fecha_nombramiento": "2024-06-07",
-      "tipo_entidad": "empresa"
-    },
-    {
-      "nombre": "DIEZ DIEZ JORDI",
-      "cargo": "APOD.SOL/MAN",
-      "fecha_nombramiento": "2023-04-14",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "ORIOL CARRERAS JOSEP",
-      "cargo": "APOD.SOL/MAN",
-      "fecha_nombramiento": "2023-04-14",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "ANDRES GIL ROGER",
-      "cargo": "APOD.SOL/MAN",
-      "fecha_nombramiento": "2023-04-14",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "PUJOL XICOY GIMFERRER JORDI",
-      "cargo": "APOD.SOL/MAN",
-      "fecha_nombramiento": "2023-04-14",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "PERREAU DE PINNINCK BALLESTA ALBERTO MARIA",
-      "cargo": "APOD.SOL/MAN",
-      "fecha_nombramiento": "2023-04-14",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "MIRANDA FERNANDEZ VILLA MANUEL",
-      "cargo": "APOD.SOL/MAN",
-      "fecha_nombramiento": "2023-04-14",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "MARTI PEREZ AMADEO",
-      "cargo": "APOD.SOL/MAN",
-      "fecha_nombramiento": "2023-04-14",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "MASDEU TOFFOLI CARLOTA",
-      "cargo": "APOD.SOL/MAN",
-      "fecha_nombramiento": "2023-04-14",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "ESPEJO MARIMON JUAN MANUEL",
-      "cargo": "APOD.SOL/MAN",
-      "fecha_nombramiento": "2023-04-14",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "LLAURADO ALBA JORDI",
-      "cargo": "APOD.SOL/MAN",
-      "fecha_nombramiento": "2023-04-14",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "ALONSO PALMA CLARA EUGENIA",
-      "cargo": "APOD.SOL/MAN",
-      "fecha_nombramiento": "2023-04-14",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "DELOITTE SL",
-      "cargo": "AUDIT.INDIV.",
-      "fecha_nombramiento": "2020-11-26",
-      "tipo_entidad": "empresa"
-    },
-    {
-      "nombre": "DELOITTE SL",
-      "cargo": "AUDT.CTS.CON",
-      "fecha_nombramiento": "2020-11-26",
-      "tipo_entidad": "empresa"
-    },
-    {
-      "nombre": "BARRIUSO ALIX MANUEL",
-      "cargo": "APODERAD.SOL",
-      "fecha_nombramiento": "2019-11-18",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "DE LEON LAGO RAFAEL",
-      "cargo": "APODERAD.SOL",
-      "fecha_nombramiento": "2019-11-18",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "CHUECA TORAL IGNACIO",
-      "cargo": "APODERAD.SOL",
-      "fecha_nombramiento": "2019-11-18",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "MARCO GONZALEZ DAVID",
-      "cargo": "APODERAD.SOL",
-      "fecha_nombramiento": "2019-11-18",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "VENTURA PEREZ OSCAR",
-      "cargo": "APODERAD.SOL",
-      "fecha_nombramiento": "2019-11-18",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "YANES FONT MARC",
-      "cargo": "APODERAD.SOL",
-      "fecha_nombramiento": "2019-11-18",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "GARCIA FERNANDEZ ISABEL",
-      "cargo": "APODERAD.SOL",
-      "fecha_nombramiento": "2019-11-18",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "DELOITTE SL",
-      "cargo": "AUDIT.CUENT.",
-      "fecha_nombramiento": "2019-08-21",
-      "tipo_entidad": "empresa"
-    },
-    {
-      "nombre": "SANATON SANCHEZ ALBERTO JOSE",
-      "cargo": "APODERADO",
-      "fecha_nombramiento": "2011-02-01",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "DIEZ DIEZ JORDI",
-      "cargo": "DTOR.GENERAL",
-      "fecha_nombramiento": "2010-11-12",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "VILARASAU SALAT JOSE",
-      "cargo": "APODERADO",
-      "fecha_nombramiento": "2010-07-26",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "SASTRE PAPIOL SEBASTIAN",
-      "cargo": "APODERADO",
-      "fecha_nombramiento": "2010-07-26",
-      "tipo_entidad": "persona"
-    },
-    {
-      "nombre": "PERREAU DE PINNINCK BALLESTA ALBERTO",
-      "cargo": "APODERADO",
-      "fecha_nombramiento": "2009-07-28",
       "tipo_entidad": "persona"
     }
   ],
@@ -39547,14 +39721,6 @@
     {
       "nombre": "MARTINEZ MARTINEZ AITOR",
       "cargo": "REPR.143 RRM",
-      "fecha_nombramiento": "2025-03-03",
-      "tipo_entidad": "persona"
-    }
-  ],
-  "PLAYERS SPORT I GESTIÓ, SLU": [
-    {
-      "nombre": "TORRES FERNANDEZ RAUL",
-      "cargo": "APODERAD.SOL",
       "fecha_nombramiento": "2025-03-03",
       "tipo_entidad": "persona"
     }
@@ -48175,14 +48341,6 @@
       "tipo_entidad": "persona"
     }
   ],
-  "PINTURES PLANELL": [
-    {
-      "nombre": "PLANELL TERRON CARLES",
-      "cargo": "ADM.UNICO",
-      "fecha_nombramiento": "2021-11-18",
-      "tipo_entidad": "persona"
-    }
-  ],
   "SPEED MUSIC MANAGEMENT SL": [
     {
       "nombre": "GARCIA CANOVAS MARIO",
@@ -55038,6 +55196,14 @@
       "nombre": "GARCIA LOZANO RAUL",
       "cargo": "ADM.SOLIDAR.",
       "fecha_nombramiento": "2009-06-05",
+      "tipo_entidad": "persona"
+    }
+  ],
+  "OBJETIVO TARSYS, SL": [
+    {
+      "nombre": "MARTINEZ AYUSO MIGUEL ANGEL",
+      "cargo": "ADM.UNICO",
+      "fecha_nombramiento": "2009-05-26",
       "tipo_entidad": "persona"
     }
   ],
