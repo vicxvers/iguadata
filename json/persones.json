@@ -41,7 +41,7 @@
         "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
         "import_empresa": 626604.0,
         "carrecs": [
-          "Apo.Man.Soli",
+          "Apo.Manc.",
           "Adm. Mancom."
         ]
       }
@@ -194,6 +194,46 @@
     ]
   },
   {
+    "nom": "GONZALO BLOCONA ALBERTO",
+    "total_adjudicat": 13149747.07,
+    "relacions": [
+      {
+        "empresa": "FCC MEDIO AMBIENTE",
+        "import_empresa": 12523143.07,
+        "carrecs": [
+          "Apoderado"
+        ]
+      },
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "CALAFAT GILI ANTONIO",
+    "total_adjudicat": 13149747.07,
+    "relacions": [
+      {
+        "empresa": "FCC MEDIO AMBIENTE",
+        "import_empresa": 12523143.07,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      },
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
     "nom": "MARIN GARDE GLORIA",
     "total_adjudicat": 13149747.07,
     "relacions": [
@@ -234,68 +274,6 @@
     ]
   },
   {
-    "nom": "PAU FAYOS ALFREDO",
-    "total_adjudicat": 13149747.07,
-    "relacions": [
-      {
-        "empresa": "FCC MEDIO AMBIENTE",
-        "import_empresa": 12523143.07,
-        "carrecs": [
-          "Apoderado"
-        ]
-      },
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apoderado",
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "MORO CANTOS FRANCISCO JESUS",
-    "total_adjudicat": 13149747.07,
-    "relacions": [
-      {
-        "empresa": "FCC MEDIO AMBIENTE",
-        "import_empresa": 12523143.07,
-        "carrecs": [
-          "Apo.Man.Soli"
-        ]
-      },
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apo.Man.Soli",
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "GONZALO BLOCONA ALBERTO",
-    "total_adjudicat": 13149747.07,
-    "relacions": [
-      {
-        "empresa": "FCC MEDIO AMBIENTE",
-        "import_empresa": 12523143.07,
-        "carrecs": [
-          "Apoderado"
-        ]
-      },
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apo.Man.Soli"
-        ]
-      }
-    ]
-  },
-  {
     "nom": "GARCIA GALDON JOSE ANTONIO",
     "total_adjudicat": 13149747.07,
     "relacions": [
@@ -324,6 +302,26 @@
         "import_empresa": 12523143.07,
         "carrecs": [
           "Apoderado"
+        ]
+      },
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "MORO CANTOS FRANCISCO JESUS",
+    "total_adjudicat": 13149747.07,
+    "relacions": [
+      {
+        "empresa": "FCC MEDIO AMBIENTE",
+        "import_empresa": 12523143.07,
+        "carrecs": [
+          "Apo.Man.Soli"
         ]
       },
       {
@@ -556,6 +554,26 @@
     ]
   },
   {
+    "nom": "PAU FAYOS ALFREDO",
+    "total_adjudicat": 13149747.07,
+    "relacions": [
+      {
+        "empresa": "FCC MEDIO AMBIENTE",
+        "import_empresa": 12523143.07,
+        "carrecs": [
+          "Apoderado"
+        ]
+      },
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
     "nom": "HOMS MIRALPEIX MATEU",
     "total_adjudicat": 12820672.45,
     "relacions": [
@@ -603,47 +621,7 @@
     ]
   },
   {
-    "nom": "MICO HERNANDEZ JESUS MARIA",
-    "total_adjudicat": 12571377.32,
-    "relacions": [
-      {
-        "empresa": "FCC MEDIO AMBIENTE",
-        "import_empresa": 12523143.07,
-        "carrecs": [
-          "Apoderado"
-        ]
-      },
-      {
-        "empresa": "IMESAPI S.A.",
-        "import_empresa": 48234.25,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
     "nom": "GONZALEZ PLANA ADOLFO",
-    "total_adjudicat": 12571377.32,
-    "relacions": [
-      {
-        "empresa": "FCC MEDIO AMBIENTE",
-        "import_empresa": 12523143.07,
-        "carrecs": [
-          "Apoderado"
-        ]
-      },
-      {
-        "empresa": "IMESAPI S.A.",
-        "import_empresa": 48234.25,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "GONZALEZ PRETEL JOSE MARIA",
     "total_adjudicat": 12571377.32,
     "relacions": [
       {
@@ -723,14 +701,54 @@
     ]
   },
   {
-    "nom": "HERNANDEZ FERNANDEZ LAURA",
+    "nom": "MICO HERNANDEZ JESUS MARIA",
+    "total_adjudicat": 12571377.32,
+    "relacions": [
+      {
+        "empresa": "FCC MEDIO AMBIENTE",
+        "import_empresa": 12523143.07,
+        "carrecs": [
+          "Apoderado"
+        ]
+      },
+      {
+        "empresa": "IMESAPI S.A.",
+        "import_empresa": 48234.25,
+        "carrecs": [
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "GONZALEZ PRETEL JOSE MARIA",
+    "total_adjudicat": 12571377.32,
+    "relacions": [
+      {
+        "empresa": "FCC MEDIO AMBIENTE",
+        "import_empresa": 12523143.07,
+        "carrecs": [
+          "Apoderado"
+        ]
+      },
+      {
+        "empresa": "IMESAPI S.A.",
+        "import_empresa": 48234.25,
+        "carrecs": [
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "AJURIA FERNANDEZ JESUS",
     "total_adjudicat": 12566187.07,
     "relacions": [
       {
         "empresa": "FCC MEDIO AMBIENTE",
         "import_empresa": 12523143.07,
         "carrecs": [
-          "Apo.Man.Soli"
+          "Apoderado"
         ]
       },
       {
@@ -745,6 +763,34 @@
         "import_empresa": 8322.0,
         "carrecs": [
           "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "QUEREJETA URETA IÑIGO",
+    "total_adjudicat": 12566187.07,
+    "relacions": [
+      {
+        "empresa": "FCC MEDIO AMBIENTE",
+        "import_empresa": 12523143.07,
+        "carrecs": [
+          "Apoderado"
+        ]
+      },
+      {
+        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
+        "import_empresa": 34722.0,
+        "carrecs": [
+          "APOD.SOL/MAN"
+        ]
+      },
+      {
+        "empresa": "CONTENUR SL",
+        "import_empresa": 8322.0,
+        "carrecs": [
+          "Apo.Manc.",
+          "Consejero"
         ]
       }
     ]
@@ -858,6 +904,33 @@
     ]
   },
   {
+    "nom": "HERNANDEZ FERNANDEZ LAURA",
+    "total_adjudicat": 12566187.07,
+    "relacions": [
+      {
+        "empresa": "FCC MEDIO AMBIENTE",
+        "import_empresa": 12523143.07,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      },
+      {
+        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
+        "import_empresa": 34722.0,
+        "carrecs": [
+          "APOD.SOL/MAN"
+        ]
+      },
+      {
+        "empresa": "CONTENUR SL",
+        "import_empresa": 8322.0,
+        "carrecs": [
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
     "nom": "ALVAREZ ALVAREZ JOSE TOMAS",
     "total_adjudicat": 12566187.07,
     "relacions": [
@@ -880,61 +953,6 @@
         "import_empresa": 8322.0,
         "carrecs": [
           "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "AJURIA FERNANDEZ JESUS",
-    "total_adjudicat": 12566187.07,
-    "relacions": [
-      {
-        "empresa": "FCC MEDIO AMBIENTE",
-        "import_empresa": 12523143.07,
-        "carrecs": [
-          "Apoderado"
-        ]
-      },
-      {
-        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
-        "import_empresa": 34722.0,
-        "carrecs": [
-          "APOD.SOL/MAN"
-        ]
-      },
-      {
-        "empresa": "CONTENUR SL",
-        "import_empresa": 8322.0,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "QUEREJETA URETA IÑIGO",
-    "total_adjudicat": 12566187.07,
-    "relacions": [
-      {
-        "empresa": "FCC MEDIO AMBIENTE",
-        "import_empresa": 12523143.07,
-        "carrecs": [
-          "Apoderado"
-        ]
-      },
-      {
-        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
-        "import_empresa": 34722.0,
-        "carrecs": [
-          "APOD.SOL/MAN"
-        ]
-      },
-      {
-        "empresa": "CONTENUR SL",
-        "import_empresa": 8322.0,
-        "carrecs": [
-          "Apo.Manc.",
-          "Consejero"
         ]
       }
     ]
@@ -3247,7 +3265,7 @@
     ]
   },
   {
-    "nom": "CARRASCO DELGADO JOSE MANUEL",
+    "nom": "DA VEIGA MEJIA ESTHER",
     "total_adjudicat": 12531465.07,
     "relacions": [
       {
@@ -3267,27 +3285,7 @@
     ]
   },
   {
-    "nom": "GOMEZ MINGO JORGE LUIS",
-    "total_adjudicat": 12531465.07,
-    "relacions": [
-      {
-        "empresa": "FCC MEDIO AMBIENTE",
-        "import_empresa": 12523143.07,
-        "carrecs": [
-          "Apoderado"
-        ]
-      },
-      {
-        "empresa": "CONTENUR SL",
-        "import_empresa": 8322.0,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "DONOSO REBUELTA JOSE LUIS",
+    "nom": "ACOSTA MERIDA MANUEL JESUS",
     "total_adjudicat": 12531465.07,
     "relacions": [
       {
@@ -3367,7 +3365,7 @@
     ]
   },
   {
-    "nom": "MORALES ASCARZA JAVIER",
+    "nom": "DONOSO REBUELTA JOSE LUIS",
     "total_adjudicat": 12531465.07,
     "relacions": [
       {
@@ -3387,7 +3385,7 @@
     ]
   },
   {
-    "nom": "DA VEIGA MEJIA ESTHER",
+    "nom": "GOMEZ MINGO JORGE LUIS",
     "total_adjudicat": 12531465.07,
     "relacions": [
       {
@@ -3407,7 +3405,7 @@
     ]
   },
   {
-    "nom": "ACOSTA MERIDA MANUEL JESUS",
+    "nom": "CARRASCO DELGADO JOSE MANUEL",
     "total_adjudicat": 12531465.07,
     "relacions": [
       {
@@ -4828,6 +4826,19 @@
     ]
   },
   {
+    "nom": "MORALES ASCARZA JAVIER",
+    "total_adjudicat": 12523143.07,
+    "relacions": [
+      {
+        "empresa": "FCC MEDIO AMBIENTE",
+        "import_empresa": 12523143.07,
+        "carrecs": [
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
     "nom": "ORTEGA VINE FRANCISCO",
     "total_adjudicat": 12523143.07,
     "relacions": [
@@ -4933,19 +4944,6 @@
   },
   {
     "nom": "GRAU ALAFONT FRANCISCO JAVIER",
-    "total_adjudicat": 12523143.07,
-    "relacions": [
-      {
-        "empresa": "FCC MEDIO AMBIENTE",
-        "import_empresa": 12523143.07,
-        "carrecs": [
-          "Apo.Man.Soli"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "CALAFAT GILI ANTONIO",
     "total_adjudicat": 12523143.07,
     "relacions": [
       {
@@ -7577,6 +7575,19 @@
       {
         "empresa": "ROGASA CONSTRUCCIONES Y CONTRATAS, S.A.U",
         "import_empresa": 4618981.65,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "ALISEDA LOPEZ RAUL",
+    "total_adjudicat": 3187014.41,
+    "relacions": [
+      {
+        "empresa": "CONSTRUCTORA DE CALAF, SAU",
+        "import_empresa": 3187014.41,
         "carrecs": [
           "APODERAD.SOL"
         ]
@@ -16597,6 +16608,593 @@
     ]
   },
   {
+    "nom": "PARADA CASALEIRO BEGOÑA",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "GALLARDO CUBERO JOSE ANTONIO",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "GUTIERREZ SANCHEZ JAVIER",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli",
+          "Apo.Manc."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "NUÑEZ GARCIA MARIA ESPERANZA",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "GALLEGO AMIGO CARLOS",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli",
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "DE ANCOS VIÑA VICTOR",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "AVILA LAFUENTE JOSE MANUEL",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "FERNANDEZ VIANA LUIS ALBERTO",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli",
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "MEDEL RUIZ-CARRILLO IÑIGO",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "PALMERO MOLLA DAVID",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "ESQUINAS JIMENEZ CARMEN MARIA",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "DIAZ FERNANDEZ ADRIANA",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "MORENO PRIETO JESUS JAVIER",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli",
+          "APODERADO"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "PASCUALENA MUNIESA MARIA ASUNCION",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "RODRIGUEZ MARTINEZ DE ALEGRIA MARIA PALOMA",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "ALVARADO NOTARIO MARIA LUISA",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "CAÑETE LOPEZ GONZALO",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Manc.",
+          "Apoderado",
+          "Adm. Mancom."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "CAPEL ARNAU VANESSA",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Manc.",
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "MARTIN ZORITA FRANCISCO DE BORJA",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Manc.",
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "CABALLERO LAGRU PABLO",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Manc.",
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "RAMOS MONGE MONICA",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Manc.",
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "VALBUENA GARCIA JESUS ANGEL",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Manc."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "ALVAREZ IGLESIAS CARLOS",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Manc.",
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "BARCENA ROJI IÑIGO JOAQUIN",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Manc.",
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "MUNTANER PEDROSA ALBERTO-JOSE",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Manc.",
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "ALDASORO BIENCINTO ANGEL",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Manc."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "MARIN GARDE MARIA GLORIA",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Manc.",
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "GONZALEZ RODRIGUEZ MARIA BEATRIZ",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Manc.",
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "LUQUE HURTADO DIEGO LUIS",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Manc."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "HORCAS GARCIA JUAN MANUEL",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "OJEDA ALVAREZ IGNACIO",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "IGUALADA FERNANDEZ ANTONIO",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "GARCIA ALCARAZ JOSE MANUEL",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "FERNANDEZ JIMENEZ SERGIO",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "DOMINGUEZ MUÑOZ JOSE PASCUAL",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "CARRASCO VIEJO JOSE",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "FERNANDEZ TORONJO SEBASTIAN",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "GARCIA ALCALDE PABLO",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "ORTIZ HERRERIAS DONATO",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "MARTINEZ SANCHEZ PEDRO RAMON",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "PATRICIO ARRIMADAS ENRIQUE",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "COTARELO BENITO RAFAEL",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "GRANDIO REGO JOSE MIGUEL",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "CASTILLO CACERES JOSE DAVID",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
     "nom": "VELASCO GIMENO CARMEN MARIA",
     "total_adjudicat": 626604.0,
     "relacions": [
@@ -16710,35 +17308,6 @@
         "import_empresa": 626604.0,
         "carrecs": [
           "Apo.Man.Soli"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "CAÑETE LOPEZ GONZALO",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apo.Sol.",
-          "Apoderado",
-          "Adm. Mancom."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "CABALLERO LAGRU PABLO",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apo.Man.Soli",
-          "Apoderado"
         ]
       }
     ]
@@ -17033,371 +17602,6 @@
     ]
   },
   {
-    "nom": "CAPEL ARNAU VANESSA",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apo.Manc.",
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "MARTIN ZORITA FRANCISCO DE BORJA",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apo.Manc.",
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "PARADA CASALEIRO BEGOÑA",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apo.Manc."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "RAMOS MONGE MONICA",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apo.Manc.",
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "VALBUENA GARCIA JESUS ANGEL",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apo.Manc."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "ALVAREZ IGLESIAS CARLOS",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apo.Manc.",
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "BARCENA ROJI IÑIGO JOAQUIN",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apo.Manc.",
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "MUNTANER PEDROSA ALBERTO-JOSE",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apo.Manc.",
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "ALDASORO BIENCINTO ANGEL",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apo.Manc."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "MARIN GARDE MARIA GLORIA",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apo.Manc.",
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "GONZALEZ RODRIGUEZ MARIA BEATRIZ",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apo.Manc.",
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "LUQUE HURTADO DIEGO LUIS",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apo.Manc."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "RODRIGUEZ PEDRERO JOSE MARIA",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apo.Man.Soli"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "LOPEZ ALIAS JOSE MANUEL",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apo.Man.Soli",
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "MENOR GOMEZ MARCOS",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apo.Man.Soli",
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "REDONDO ARANDA PABLO",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apo.Man.Soli",
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "LEON GARCIA IVAN",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apo.Man.Soli",
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "MONDEJAR PEREZ JOSE-ANGEL",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apo.Man.Soli"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "DOCAMPO SEOANE MANUEL ANDRES",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apo.Man.Soli",
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "BLANCO ALVAREZ OSCAR",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apo.Man.Soli"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "CARDENAS PAIZ RAUL IGNACIO",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apo.Man.Soli",
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "NIEVES LAMAS SALVADOR",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apo.Man.Soli"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "SANCHEZ ARROYO TEODORO",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apo.Man.Soli"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "GARCIA PARRA MEIFREN DAVID",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apo.Man.Soli"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "PEREZ GUERRERO JESUS ANTONIO",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apo.Man.Soli"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "SANCHEZ GAMERO RAFAEL",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apo.Man.Soli"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "LOPEZ DE HAGO ROJO RICARDO",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apo.Man.Soli"
-        ]
-      }
-    ]
-  },
-  {
     "nom": "COELLO GARCIA MARIA JOSEFA",
     "total_adjudicat": 626604.0,
     "relacions": [
@@ -17451,60 +17655,6 @@
     ]
   },
   {
-    "nom": "ZARATE ZARATE PABLO",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apo.Man.Soli"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "BEJERANO DOMINGUEZ DIEGO",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apo.Man.Soli",
-          "Apo.Sol."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "CANO MIRO CAMILO VICENTE",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apo.Man.Soli"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "TALAVERA MURILLO JAVIER",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apo.Man.Soli",
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
     "nom": "GONZALEZ MOLINA JAVIER ADRIAN",
     "total_adjudicat": 626604.0,
     "relacions": [
@@ -17513,75 +17663,6 @@
         "import_empresa": 626604.0,
         "carrecs": [
           "Apo.Man.Soli"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "FERNANDEZ LOPEZ CRISTINA",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apo.Man.Soli"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "MUÑOZ CAMPOS SANDRA",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apo.Man.Soli",
-          "Apo.Sol."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "RODRIGUEZ PEDRERO DOMINGO",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apo.Man.Soli",
-          "Apo.Sol."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "BAENA CUBERO JOSE RUBEN",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apo.Man.Soli",
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "BAXERAS BLANES MARIA DOLORES",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apo.Man.Soli",
-          "Apo.Sol."
         ]
       }
     ]
@@ -17783,46 +17864,7 @@
     ]
   },
   {
-    "nom": "IGLESIAS VILAN JOSE-MARIA",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
     "nom": "NAVARRO MORTE JOSE VICENTE",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "PEREZ ZARCO FRANCISCO LUIS",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "DE LA ROSA BLANCO MARIA PILAR",
     "total_adjudicat": 626604.0,
     "relacions": [
       {
@@ -18004,300 +18046,7 @@
     ]
   },
   {
-    "nom": "SORIANO ARGUELLO FERNANDO MANUEL",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "GALLARDO CUBERO JOSE-ANTONIO",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "GALLEGO AMIGO CARLOS",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apoderado",
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "AVILA LAFUENTE JOSE- MANUEL",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "DE ANCOS VIÑAS VICTOR",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apoderado",
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "OLIVAN GARCIA MACARENA",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "YAGUE CERCOS DANIEL",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apoderado",
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "MARTINEZ PERALTA FRANCISCO",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apoderado",
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "SAGARRA SANCHEZ MANUELA",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "POLLEDO CERDEIRIÑA MANUEL",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apoderado",
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "CARRION RUIZ BEATRIZ",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "FERNANDEZ BONILLA ALBERTO",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
     "nom": "ROBLES AGUIRRE NEREA",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "GUTIERREZ SANCHEZ JAVIER",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apoderado",
-          "Apo.Manc."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "NUÑEZ GARCIA MARIA ESPERANZA",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "FERNANDEZ VIANA LUIS ALBERTO",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "MEDEL RUIZ-CARRILLO IÑIGO",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "PALMERO MOLLA DAVID",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "ESQUINAS JIMENEZ CARMEN MARIA",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "DIAZ FERNANDEZ ADRIANA",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "MORENO PRIETO JESUS JAVIER",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apoderado",
-          "APODERADO"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "PASCUALENA MUÑESA ASUNCION",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "RODRIGUEZ MARTINEZ DE ALEGRIA MARIA PALOMA",
     "total_adjudicat": 626604.0,
     "relacions": [
       {
@@ -18436,188 +18185,6 @@
         "import_empresa": 626604.0,
         "carrecs": [
           "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "HORCAS GARCIA JUAN MANUEL",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apo.Man.Soli"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "OJEDA ALVAREZ IGNACIO",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apo.Man.Soli"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "IGUALADA FERNANDEZ ANTONIO",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apo.Man.Soli"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "GARCIA ALCARAZ JOSE MANUEL",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apo.Man.Soli"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "FERNANDEZ JIMENEZ SERGIO",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apo.Man.Soli"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "DOMINGUEZ MUÑOZ JOSE PASCUAL",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apo.Man.Soli"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "CARRASCO VIEJO JOSE",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apo.Man.Soli"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "FERNANDEZ TORONJO SEBASTIAN",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apo.Man.Soli"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "GARCIA ALCALDE PABLO",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apo.Man.Soli"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "ORTIZ HERRERIAS DONATO",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apo.Man.Soli"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "MARTINEZ SANCHEZ PEDRO RAMON",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apo.Man.Soli"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "PATRICIO ARRIMADAS ENRIQUE",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apo.Man.Soli"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "COTARELO BENITO RAFAEL",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apo.Man.Soli"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "GRANDIO REGO JOSE MIGUEL",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apo.Man.Soli"
         ]
       }
     ]
@@ -18806,19 +18373,6 @@
     ]
   },
   {
-    "nom": "SIMANCAS VALERO MIGUEL ALEXANDER",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
     "nom": "RODRIGUEZ LOUREIRO MONICA",
     "total_adjudicat": 626604.0,
     "relacions": [
@@ -18859,84 +18413,6 @@
   },
   {
     "nom": "GARCIA LOPEZ ALFREDO",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "SEBASTIAN FERNANDEZ CRISTINA",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apo.Sol."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "SEBASTIAN FERNANDEZ BEATRIZ",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apo.Sol."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "MERCEDES FABIAN RUIZ",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apo.Sol."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "ALBERT ACIN ISOLDA",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apo.Sol."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "TIRADO NEVADO RAQUEL",
-    "total_adjudicat": 626604.0,
-    "relacions": [
-      {
-        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
-        "import_empresa": 626604.0,
-        "carrecs": [
-          "Apo.Sol."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "ESQUINAS JIMENEZ MARIA CARMEN",
     "total_adjudicat": 626604.0,
     "relacions": [
       {
@@ -19173,6 +18649,84 @@
     ]
   },
   {
+    "nom": "DOCAMPO SEOANE MANUEL ANDRES",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "REDONDO ARANDA PABLO",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "MENOR GOMEZ MARCOS",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "CARDENAS PAIZ RAUL IGNACIO",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "LOPEZ ALIAS JOSE MANUEL",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "LEON GARCIA IVAN",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
     "nom": "JAIME BLANCO ALFREDO",
     "total_adjudicat": 626604.0,
     "relacions": [
@@ -19239,6 +18793,19 @@
   },
   {
     "nom": "SEGURA FONTCUBERTA ANTONIO CARLOS",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "BAENA CUBERO JOSE RUBEN",
     "total_adjudicat": 626604.0,
     "relacions": [
       {
@@ -19329,6 +18896,32 @@
     ]
   },
   {
+    "nom": "TIRADO NEVADO RAQUEL",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Sol."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "TALAVERA MURILLO JAVIER",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
     "nom": "RODRIGEZ-FRAILE GARCIA-ALEGRE ANDREA",
     "total_adjudicat": 626604.0,
     "relacions": [
@@ -19342,7 +18935,59 @@
     ]
   },
   {
+    "nom": "BAXERAS BLANES MARIA DOLORES",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Sol."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "BEJERANO DOMINGUEZ DIEGO",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Sol."
+        ]
+      }
+    ]
+  },
+  {
     "nom": "ELENA ESTEBAN FERNANDEZ",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Sol."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "MERCEDES FABIAN RUIZ",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Sol."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "MUÑOZ CAMPOS SANDRA",
     "total_adjudicat": 626604.0,
     "relacions": [
       {
@@ -19363,6 +19008,45 @@
         "import_empresa": 626604.0,
         "carrecs": [
           "Apo.Sol."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "RODRIGUEZ PEDRERO DOMINGO",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Sol."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "SEBASTIAN FERNANDEZ CRISTINA",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apo.Sol."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "OLIVAN GARCIA MACARENA",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "Apoderado"
         ]
       }
     ]
@@ -19694,6 +19378,58 @@
   },
   {
     "nom": "MORALES BELCHI PEDRO",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "YAGUE CERCOS DANIEL",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "DE ANCOS VIÑAS VICTOR",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "POLLEDO CERDEIRIÑA MANUEL",
+    "total_adjudicat": 626604.0,
+    "relacions": [
+      {
+        "empresa": "PREZERO GESTIÓN DE RESIDUOS, SA",
+        "import_empresa": 626604.0,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "MARTINEZ PERALTA FRANCISCO",
     "total_adjudicat": 626604.0,
     "relacions": [
       {
@@ -20544,6 +20280,71 @@
     ]
   },
   {
+    "nom": "MEDINA IMBRODA JAVIER",
+    "total_adjudicat": 392471.99,
+    "relacions": [
+      {
+        "empresa": "SERVEIS EDUCATIUS CAVALL DE CARTRÓ, SL",
+        "import_empresa": 392471.99,
+        "carrecs": [
+          "APOD.SOL/MAN"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "VALDERAS ALVARADO JOSE JAVIER",
+    "total_adjudicat": 392471.99,
+    "relacions": [
+      {
+        "empresa": "SERVEIS EDUCATIUS CAVALL DE CARTRÓ, SL",
+        "import_empresa": 392471.99,
+        "carrecs": [
+          "APOD.SOL/MAN"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "CHICA RODRIGUEZ JUAN CARLOS",
+    "total_adjudicat": 392471.99,
+    "relacions": [
+      {
+        "empresa": "SERVEIS EDUCATIUS CAVALL DE CARTRÓ, SL",
+        "import_empresa": 392471.99,
+        "carrecs": [
+          "APOD.SOL/MAN"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "CALVENTE AYORA MIGUEL",
+    "total_adjudicat": 392471.99,
+    "relacions": [
+      {
+        "empresa": "SERVEIS EDUCATIUS CAVALL DE CARTRÓ, SL",
+        "import_empresa": 392471.99,
+        "carrecs": [
+          "APOD.SOL/MAN"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "GARCIA AVILES PABLO",
+    "total_adjudicat": 392471.99,
+    "relacions": [
+      {
+        "empresa": "SERVEIS EDUCATIUS CAVALL DE CARTRÓ, SL",
+        "import_empresa": 392471.99,
+        "carrecs": [
+          "APOD.SOL/MAN"
+        ]
+      }
+    ]
+  },
+  {
     "nom": "MELO ESCRIVA MARC",
     "total_adjudicat": 392471.99,
     "relacions": [
@@ -20578,19 +20379,6 @@
         "import_empresa": 392471.99,
         "carrecs": [
           "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "TARDON COBO FERNANDO",
-    "total_adjudicat": 392471.99,
-    "relacions": [
-      {
-        "empresa": "SERVEIS EDUCATIUS CAVALL DE CARTRÓ, SL",
-        "import_empresa": 392471.99,
-        "carrecs": [
-          "APOD.SOL/MAN"
         ]
       }
     ]
@@ -22107,6 +21895,26 @@
         "import_empresa": 282981.3,
         "carrecs": [
           "ADM.UNICO"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "ORGA GAMEZ EVA",
+    "total_adjudicat": 276672.2,
+    "relacions": [
+      {
+        "empresa": "PETROMIRALLES, S.L.",
+        "import_empresa": 147936.2,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      },
+      {
+        "empresa": "MIRALLESTRES",
+        "import_empresa": 128736.0,
+        "carrecs": [
+          "APODERAD.SOL"
         ]
       }
     ]
@@ -46439,19 +46247,6 @@
     ]
   },
   {
-    "nom": "URBANO DE SALETA FELIPE",
-    "total_adjudicat": 34722.0,
-    "relacions": [
-      {
-        "empresa": "FOMENTO DE CONSTRUCCIONES Y CONTRATAS SA",
-        "import_empresa": 34722.0,
-        "carrecs": [
-          "APOD.SOL/MAN"
-        ]
-      }
-    ]
-  },
-  {
     "nom": "ARIAS SOMALO ANA MARIA",
     "total_adjudicat": 34722.0,
     "relacions": [
@@ -47663,19 +47458,6 @@
     ]
   },
   {
-    "nom": "PATRICK LEUCHTMANN",
-    "total_adjudicat": 32352.0,
-    "relacions": [
-      {
-        "empresa": "COOLTRA MOTOS, SL",
-        "import_empresa": 32352.0,
-        "carrecs": [
-          "APODERADO"
-        ]
-      }
-    ]
-  },
-  {
     "nom": "PARTICIPACIONES SOCIALES",
     "total_adjudicat": 32352.0,
     "relacions": [
@@ -48823,6 +48605,33 @@
     ]
   },
   {
+    "nom": "MAYOLAS AMOROS GEORGINA",
+    "total_adjudicat": 27942.97,
+    "relacions": [
+      {
+        "empresa": "PROMOTORA MEDITERRANEA 2 S A",
+        "import_empresa": 13493.8,
+        "carrecs": [
+          "V-SEC NO CON"
+        ]
+      },
+      {
+        "empresa": "ESCOFET 1886, SA",
+        "import_empresa": 8270.35,
+        "carrecs": [
+          "V-SEC NO CON"
+        ]
+      },
+      {
+        "empresa": "INDUSTRIAL BREINCO, S.A.",
+        "import_empresa": 6178.82,
+        "carrecs": [
+          "V-SEC NO CON"
+        ]
+      }
+    ]
+  },
+  {
     "nom": "FERNANDEZ CAPO SALVADOR",
     "total_adjudicat": 27942.97,
     "relacions": [
@@ -48877,33 +48686,6 @@
         "import_empresa": 6178.82,
         "carrecs": [
           "SECR.NO CONS"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "MAYOLAS AMOROS GEORGINA",
-    "total_adjudicat": 27942.97,
-    "relacions": [
-      {
-        "empresa": "PROMOTORA MEDITERRANEA 2 S A",
-        "import_empresa": 13493.8,
-        "carrecs": [
-          "V-SEC NO CON"
-        ]
-      },
-      {
-        "empresa": "ESCOFET 1886, SA",
-        "import_empresa": 8270.35,
-        "carrecs": [
-          "V-SEC NO CON"
-        ]
-      },
-      {
-        "empresa": "INDUSTRIAL BREINCO, S.A.",
-        "import_empresa": 6178.82,
-        "carrecs": [
-          "V-SEC NO CON"
         ]
       }
     ]
@@ -49669,6 +49451,240 @@
     ]
   },
   {
+    "nom": "BARRERO VAZQUEZ BERTA",
+    "total_adjudicat": 22863.2,
+    "relacions": [
+      {
+        "empresa": "TRADESEGUR, S.A.",
+        "import_empresa": 22863.2,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "PEREZ FERNANDEZ IVAN",
+    "total_adjudicat": 22863.2,
+    "relacions": [
+      {
+        "empresa": "TRADESEGUR, S.A.",
+        "import_empresa": 22863.2,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "FRANCOS DELGADO DAVID",
+    "total_adjudicat": 22863.2,
+    "relacions": [
+      {
+        "empresa": "TRADESEGUR, S.A.",
+        "import_empresa": 22863.2,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "IZQUIERDO MARTIN FERNANDO JOSE",
+    "total_adjudicat": 22863.2,
+    "relacions": [
+      {
+        "empresa": "TRADESEGUR, S.A.",
+        "import_empresa": 22863.2,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "HENESTROSA MARTINEZ OSCAR",
+    "total_adjudicat": 22863.2,
+    "relacions": [
+      {
+        "empresa": "TRADESEGUR, S.A.",
+        "import_empresa": 22863.2,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "COLLAR VICENTE JUSTO",
+    "total_adjudicat": 22863.2,
+    "relacions": [
+      {
+        "empresa": "TRADESEGUR, S.A.",
+        "import_empresa": 22863.2,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "POZA GARCIA MIGUEL ANGEL",
+    "total_adjudicat": 22863.2,
+    "relacions": [
+      {
+        "empresa": "TRADESEGUR, S.A.",
+        "import_empresa": 22863.2,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "JIMENEZ CORRAL MARGARITA",
+    "total_adjudicat": 22863.2,
+    "relacions": [
+      {
+        "empresa": "TRADESEGUR, S.A.",
+        "import_empresa": 22863.2,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "GIL CASQUETE VICTOR DAVID",
+    "total_adjudicat": 22863.2,
+    "relacions": [
+      {
+        "empresa": "TRADESEGUR, S.A.",
+        "import_empresa": 22863.2,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "MARTINEZ LOZANO JOSE LUIS",
+    "total_adjudicat": 22863.2,
+    "relacions": [
+      {
+        "empresa": "TRADESEGUR, S.A.",
+        "import_empresa": 22863.2,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "JIMENEZ SANCHEZ LUIS MANUEL",
+    "total_adjudicat": 22863.2,
+    "relacions": [
+      {
+        "empresa": "TRADESEGUR, S.A.",
+        "import_empresa": 22863.2,
+        "carrecs": [
+          "Apo.Sol."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "TUDELA BADILLO SONIA",
+    "total_adjudicat": 22863.2,
+    "relacions": [
+      {
+        "empresa": "TRADESEGUR, S.A.",
+        "import_empresa": 22863.2,
+        "carrecs": [
+          "Apo.Sol."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "MOLINA MUÑOZ PEDRO ANTONIO",
+    "total_adjudicat": 22863.2,
+    "relacions": [
+      {
+        "empresa": "TRADESEGUR, S.A.",
+        "import_empresa": 22863.2,
+        "carrecs": [
+          "Apo.Sol."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "JIMENEZ CID ALVARO",
+    "total_adjudicat": 22863.2,
+    "relacions": [
+      {
+        "empresa": "TRADESEGUR, S.A.",
+        "import_empresa": 22863.2,
+        "carrecs": [
+          "Apo.Sol."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "MUELA ARANDA MOISES",
+    "total_adjudicat": 22863.2,
+    "relacions": [
+      {
+        "empresa": "TRADESEGUR, S.A.",
+        "import_empresa": 22863.2,
+        "carrecs": [
+          "Apo.Sol."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "MUÑOZ DEL VALLE GEMA",
+    "total_adjudicat": 22863.2,
+    "relacions": [
+      {
+        "empresa": "TRADESEGUR, S.A.",
+        "import_empresa": 22863.2,
+        "carrecs": [
+          "Apo.Sol."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "RECIO GONZALEZ ADRIA",
+    "total_adjudicat": 22863.2,
+    "relacions": [
+      {
+        "empresa": "TRADESEGUR, S.A.",
+        "import_empresa": 22863.2,
+        "carrecs": [
+          "Apo.Sol."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "RUEDA DE LA PUERTA MANUEL",
+    "total_adjudicat": 22863.2,
+    "relacions": [
+      {
+        "empresa": "TRADESEGUR, S.A.",
+        "import_empresa": 22863.2,
+        "carrecs": [
+          "Apo.Sol."
+        ]
+      }
+    ]
+  },
+  {
     "nom": "DELGADO DELGADO JAVIER",
     "total_adjudicat": 22863.2,
     "relacions": [
@@ -49682,176 +49698,7 @@
     ]
   },
   {
-    "nom": "PEREZ FERNANDEZ IVAN",
-    "total_adjudicat": 22863.2,
-    "relacions": [
-      {
-        "empresa": "TRADESEGUR, S.A.",
-        "import_empresa": 22863.2,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "FRANCOS DELGADO DAVID",
-    "total_adjudicat": 22863.2,
-    "relacions": [
-      {
-        "empresa": "TRADESEGUR, S.A.",
-        "import_empresa": 22863.2,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "IZQUIERDO MARTIN FERNANDO JOSE",
-    "total_adjudicat": 22863.2,
-    "relacions": [
-      {
-        "empresa": "TRADESEGUR, S.A.",
-        "import_empresa": 22863.2,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "COLLAR VICENTE JUSTO",
-    "total_adjudicat": 22863.2,
-    "relacions": [
-      {
-        "empresa": "TRADESEGUR, S.A.",
-        "import_empresa": 22863.2,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "POZA GARCIA MIGUEL ANGEL",
-    "total_adjudicat": 22863.2,
-    "relacions": [
-      {
-        "empresa": "TRADESEGUR, S.A.",
-        "import_empresa": 22863.2,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "GIL CASQUETE VICTOR DAVID",
-    "total_adjudicat": 22863.2,
-    "relacions": [
-      {
-        "empresa": "TRADESEGUR, S.A.",
-        "import_empresa": 22863.2,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
     "nom": "SOLIS RUIZ ALBERTO JESUS",
-    "total_adjudicat": 22863.2,
-    "relacions": [
-      {
-        "empresa": "TRADESEGUR, S.A.",
-        "import_empresa": 22863.2,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "JIMENEZ SANCHEZ LUIS MANUEL",
-    "total_adjudicat": 22863.2,
-    "relacions": [
-      {
-        "empresa": "TRADESEGUR, S.A.",
-        "import_empresa": 22863.2,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "TUDELA BADILLO SONIA",
-    "total_adjudicat": 22863.2,
-    "relacions": [
-      {
-        "empresa": "TRADESEGUR, S.A.",
-        "import_empresa": 22863.2,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "MOLINA MUÑOZ PEDRO ANTONIO",
-    "total_adjudicat": 22863.2,
-    "relacions": [
-      {
-        "empresa": "TRADESEGUR, S.A.",
-        "import_empresa": 22863.2,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "JIMENEZ CID ALVARO",
-    "total_adjudicat": 22863.2,
-    "relacions": [
-      {
-        "empresa": "TRADESEGUR, S.A.",
-        "import_empresa": 22863.2,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "MUELA ARANDA MOISES",
-    "total_adjudicat": 22863.2,
-    "relacions": [
-      {
-        "empresa": "TRADESEGUR, S.A.",
-        "import_empresa": 22863.2,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "MUÑOZ DEL VALLE GEMA",
-    "total_adjudicat": 22863.2,
-    "relacions": [
-      {
-        "empresa": "TRADESEGUR, S.A.",
-        "import_empresa": 22863.2,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "RECIO GONZALEZ ADRIA",
     "total_adjudicat": 22863.2,
     "relacions": [
       {
@@ -50197,19 +50044,6 @@
         "import_empresa": 22522.25,
         "carrecs": [
           "Apo.Sol."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "JAÑEZ MERAYO NURIA",
-    "total_adjudicat": 22522.25,
-    "relacions": [
-      {
-        "empresa": "AIG EUROPE , S. A. SUCURSAL EN ESPAÑA",
-        "import_empresa": 22522.25,
-        "carrecs": [
-          "Apoderado"
         ]
       }
     ]
@@ -62737,26 +62571,6 @@
     ]
   },
   {
-    "nom": "ZANGO XURIGUERA JOSE LUIS",
-    "total_adjudicat": 15235.78,
-    "relacions": [
-      {
-        "empresa": "ADO CERRAMIENTOS METÁLICOS, SA",
-        "import_empresa": 8170.06,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      },
-      {
-        "empresa": "ADO URBAN FURNITURE, SL",
-        "import_empresa": 7065.72,
-        "carrecs": [
-          "APODERAD.SOL"
-        ]
-      }
-    ]
-  },
-  {
     "nom": "ADELANTADO FERNANDEZ RUBEN RAFAEL",
     "total_adjudicat": 15235.78,
     "relacions": [
@@ -62773,6 +62587,26 @@
         "import_empresa": 7065.72,
         "carrecs": [
           "ADM.UNICO"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "ZANGO XURIGUERA JOSE LUIS",
+    "total_adjudicat": 15235.78,
+    "relacions": [
+      {
+        "empresa": "ADO CERRAMIENTOS METÁLICOS, SA",
+        "import_empresa": 8170.06,
+        "carrecs": [
+          "APODERAD.SOL"
+        ]
+      },
+      {
+        "empresa": "ADO URBAN FURNITURE, SL",
+        "import_empresa": 7065.72,
+        "carrecs": [
+          "APODERAD.SOL"
         ]
       }
     ]
@@ -63368,6 +63202,19 @@
         "import_empresa": 14443.76,
         "carrecs": [
           "ADM.SOLIDAR."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "BAUTISTA ALVAREZ EMILIO",
+    "total_adjudicat": 14362.12,
+    "relacions": [
+      {
+        "empresa": "ACVIL APARCAMIENTOS, SL",
+        "import_empresa": 14362.12,
+        "carrecs": [
+          "Apoderado"
         ]
       }
     ]
@@ -69455,6 +69302,19 @@
     ]
   },
   {
+    "nom": "HERNANDEZ FERNANDEZ PABLO",
+    "total_adjudicat": 8322.0,
+    "relacions": [
+      {
+        "empresa": "CONTENUR SL",
+        "import_empresa": 8322.0,
+        "carrecs": [
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
     "nom": "FUENTES HERNANDEZ ANGEL EDUARDO",
     "total_adjudicat": 8322.0,
     "relacions": [
@@ -75164,6 +75024,7 @@
         "empresa": "DOUBLET IBERICA, SA",
         "import_empresa": 4011.2,
         "carrecs": [
+          "APODERAD.SOL",
           "PRESIDENTE",
           "CONSEJERO"
         ]
@@ -77421,6 +77282,19 @@
     ]
   },
   {
+    "nom": "BRUNET GONZALEZ ROBERT",
+    "total_adjudicat": 3150.0,
+    "relacions": [
+      {
+        "empresa": "BRUTALWORKS SL",
+        "import_empresa": 3150.0,
+        "carrecs": [
+          "ADM.UNICO"
+        ]
+      }
+    ]
+  },
+  {
     "nom": "BARDON FERNANDEZ-PACHECO MARTA",
     "total_adjudicat": 3150.0,
     "relacions": [
@@ -77860,19 +77734,6 @@
         "import_empresa": 3150.0,
         "carrecs": [
           "Apo.Sol."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "BRUNET GONZALEZ ROBERT",
-    "total_adjudicat": 3150.0,
-    "relacions": [
-      {
-        "empresa": "BRUTALWORKS SL",
-        "import_empresa": 3150.0,
-        "carrecs": [
-          "ADM.SOLIDAR."
         ]
       }
     ]
@@ -78989,47 +78850,7 @@
     ]
   },
   {
-    "nom": "CASTELO MARIN ALFREDO",
-    "total_adjudicat": 2348.18,
-    "relacions": [
-      {
-        "empresa": "MAPFRE",
-        "import_empresa": 1282.11,
-        "carrecs": [
-          "Apo.Manc."
-        ]
-      },
-      {
-        "empresa": "MAPFRE ESPAÑA COMPAÑÍA DE SEGUROS Y REASEGUROS SA",
-        "import_empresa": 1066.07,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "RONDEAU MARTINEZ JUAN CARLOS",
-    "total_adjudicat": 2348.18,
-    "relacions": [
-      {
-        "empresa": "MAPFRE",
-        "import_empresa": 1282.11,
-        "carrecs": [
-          "Apoderado"
-        ]
-      },
-      {
-        "empresa": "MAPFRE ESPAÑA COMPAÑÍA DE SEGUROS Y REASEGUROS SA",
-        "import_empresa": 1066.07,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "MARTINEZ ALVAREZ CARLOS",
+    "nom": "PEDRAZA LAYNEZ JUAN JOSE",
     "total_adjudicat": 2348.18,
     "relacions": [
       {
@@ -79043,33 +78864,38 @@
         "empresa": "MAPFRE ESPAÑA COMPAÑÍA DE SEGUROS Y REASEGUROS SA",
         "import_empresa": 1066.07,
         "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "ARIAS BERMUDEZ JOSE ANTONIO",
-    "total_adjudicat": 2348.18,
-    "relacions": [
-      {
-        "empresa": "MAPFRE",
-        "import_empresa": 1282.11,
-        "carrecs": [
-          "Apo.Manc."
-        ]
-      },
-      {
-        "empresa": "MAPFRE ESPAÑA COMPAÑÍA DE SEGUROS Y REASEGUROS SA",
-        "import_empresa": 1066.07,
-        "carrecs": [
           "Apo.Sol."
         ]
       }
     ]
   },
   {
-    "nom": "DIAZ GRIDILLA CARLOS",
+    "nom": "ALVAREZ DE LAS ASTURIAS BOHORQUES RUMEU JAIME",
+    "total_adjudicat": 2348.18,
+    "relacions": [
+      {
+        "empresa": "MAPFRE",
+        "import_empresa": 1282.11,
+        "carrecs": [
+          "Apo.Man.Soli",
+          "VsecrNoConsj",
+          "ViceSec.C.Dl",
+          "Vsecr.Com.Au",
+          "Vsec.Com.Ej."
+        ]
+      },
+      {
+        "empresa": "MAPFRE ESPAÑA COMPAÑÍA DE SEGUROS Y REASEGUROS SA",
+        "import_empresa": 1066.07,
+        "carrecs": [
+          "Apo.Sol.",
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "INVERNON SACRISTAN ROBERTO",
     "total_adjudicat": 2348.18,
     "relacions": [
       {
@@ -79090,6 +78916,194 @@
   },
   {
     "nom": "GUILLEUMA CUQUERELLA ELENA",
+    "total_adjudicat": 2348.18,
+    "relacions": [
+      {
+        "empresa": "MAPFRE",
+        "import_empresa": 1282.11,
+        "carrecs": [
+          "Apo.Sol."
+        ]
+      },
+      {
+        "empresa": "MAPFRE ESPAÑA COMPAÑÍA DE SEGUROS Y REASEGUROS SA",
+        "import_empresa": 1066.07,
+        "carrecs": [
+          "Apo.Sol."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "NEBOT MATEOS JUAN MANUEL",
+    "total_adjudicat": 2348.18,
+    "relacions": [
+      {
+        "empresa": "MAPFRE",
+        "import_empresa": 1282.11,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      },
+      {
+        "empresa": "MAPFRE ESPAÑA COMPAÑÍA DE SEGUROS Y REASEGUROS SA",
+        "import_empresa": 1066.07,
+        "carrecs": [
+          "Apo.Sol.",
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "FERNANZ LOBO JORGE",
+    "total_adjudicat": 2348.18,
+    "relacions": [
+      {
+        "empresa": "MAPFRE",
+        "import_empresa": 1282.11,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      },
+      {
+        "empresa": "MAPFRE ESPAÑA COMPAÑÍA DE SEGUROS Y REASEGUROS SA",
+        "import_empresa": 1066.07,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "ALCOLEA CANTOS JOSE MIGUEL",
+    "total_adjudicat": 2348.18,
+    "relacions": [
+      {
+        "empresa": "MAPFRE",
+        "import_empresa": 1282.11,
+        "carrecs": [
+          "Apo.Sol.",
+          "SecreNoConsj",
+          "Se.Com.AyR",
+          "Secr.Cte.NyR"
+        ]
+      },
+      {
+        "empresa": "MAPFRE ESPAÑA COMPAÑÍA DE SEGUROS Y REASEGUROS SA",
+        "import_empresa": 1066.07,
+        "carrecs": [
+          "Apo.Sol."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "INCHAUSTI PEREZ JOSE MANUEL",
+    "total_adjudicat": 2348.18,
+    "relacions": [
+      {
+        "empresa": "MAPFRE",
+        "import_empresa": 1282.11,
+        "carrecs": [
+          "Apo.Sol.",
+          "Vicepr.1",
+          "Mmbr.Com.Del",
+          "Vpre.Pres.Co",
+          "Cons.Ejecuti"
+        ]
+      },
+      {
+        "empresa": "MAPFRE ESPAÑA COMPAÑÍA DE SEGUROS Y REASEGUROS SA",
+        "import_empresa": 1066.07,
+        "carrecs": [
+          "Con.Delegado",
+          "Vicepr.1",
+          "MiemComDirec",
+          "PresComDirec",
+          "Consejero"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "HUERTAS MEJIAS ANTONIO",
+    "total_adjudicat": 2348.18,
+    "relacions": [
+      {
+        "empresa": "MAPFRE",
+        "import_empresa": 1282.11,
+        "carrecs": [
+          "Apo.Sol.",
+          "Presidente",
+          "Cons.Ejecuti",
+          "Pres.Com.Del",
+          "Consejero"
+        ]
+      },
+      {
+        "empresa": "MAPFRE ESPAÑA COMPAÑÍA DE SEGUROS Y REASEGUROS SA",
+        "import_empresa": 1066.07,
+        "carrecs": [
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "FERNANDEZ ALVAREZ ANA ISABEL",
+    "total_adjudicat": 2348.18,
+    "relacions": [
+      {
+        "empresa": "MAPFRE",
+        "import_empresa": 1282.11,
+        "carrecs": [
+          "Consej.Coord",
+          "Vicepr.2",
+          "Vpre.Pres.Co",
+          "Pdte.Cte.NyR",
+          "Miem.Com.Ri.",
+          "Con.Ind.",
+          "Miem.ComAyR.",
+          "Mmbr.Com.Del",
+          "Mbro.Cte.NyR",
+          "Pte.Comit.Au"
+        ]
+      },
+      {
+        "empresa": "MAPFRE ESPAÑA COMPAÑÍA DE SEGUROS Y REASEGUROS SA",
+        "import_empresa": 1066.07,
+        "carrecs": [
+          "Consejero"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "MARCO ORENES FRANCISCO JOSE",
+    "total_adjudicat": 2348.18,
+    "relacions": [
+      {
+        "empresa": "MAPFRE",
+        "import_empresa": 1282.11,
+        "carrecs": [
+          "Mbro.Cte.NyR",
+          "Consj.Domini",
+          "Miem.Com.Ri.",
+          "Mmbr.Com.Del"
+        ]
+      },
+      {
+        "empresa": "MAPFRE ESPAÑA COMPAÑÍA DE SEGUROS Y REASEGUROS SA",
+        "import_empresa": 1066.07,
+        "carrecs": [
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "SANCHEZ FRESCO BLANCA",
     "total_adjudicat": 2348.18,
     "relacions": [
       {
@@ -79131,68 +79145,16 @@
     ]
   },
   {
-    "nom": "SANZ ISLA MARIA ELENA",
+    "nom": "PERELLI ALONSO JOSE LUIS",
     "total_adjudicat": 2348.18,
     "relacions": [
       {
         "empresa": "MAPFRE",
         "import_empresa": 1282.11,
         "carrecs": [
-          "Apo.Manc.",
-          "Cons.Ejecuti"
-        ]
-      },
-      {
-        "empresa": "MAPFRE ESPAÑA COMPAÑÍA DE SEGUROS Y REASEGUROS SA",
-        "import_empresa": 1066.07,
-        "carrecs": [
-          "Pres.Com.Del",
-          "Consejero",
-          "Vicepr.1",
-          "Con.Delegado",
-          "Apo.Sol."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "MIGUEL-ROMERO DE OLANO ANTONIO",
-    "total_adjudicat": 2348.18,
-    "relacions": [
-      {
-        "empresa": "MAPFRE",
-        "import_empresa": 1282.11,
-        "carrecs": [
-          "Consejero"
-        ]
-      },
-      {
-        "empresa": "MAPFRE ESPAÑA COMPAÑÍA DE SEGUROS Y REASEGUROS SA",
-        "import_empresa": 1066.07,
-        "carrecs": [
-          "Pres.Com.Del"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "FERNANDEZ ALVAREZ ANA ISABEL",
-    "total_adjudicat": 2348.18,
-    "relacions": [
-      {
-        "empresa": "MAPFRE",
-        "import_empresa": 1282.11,
-        "carrecs": [
-          "Consej.Coord",
-          "Vicepr.2",
-          "Vpre.Pres.Co",
-          "Pdte.Cte.NyR",
-          "Miem.Com.Ri.",
           "Con.Ind.",
           "Miem.ComAyR.",
-          "Mmbr.Com.Del",
-          "Mbro.Cte.NyR",
-          "Pte.Comit.Au"
+          "Miem.Com.Ri."
         ]
       },
       {
@@ -79200,54 +79162,6 @@
         "import_empresa": 1066.07,
         "carrecs": [
           "Consejero"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "ALCOLEA CANTOS JOSE MIGUEL",
-    "total_adjudicat": 2348.18,
-    "relacions": [
-      {
-        "empresa": "MAPFRE",
-        "import_empresa": 1282.11,
-        "carrecs": [
-          "Apo.Manc.",
-          "SecreNoConsj",
-          "Se.Com.AyR",
-          "Secr.Cte.NyR"
-        ]
-      },
-      {
-        "empresa": "MAPFRE ESPAÑA COMPAÑÍA DE SEGUROS Y REASEGUROS SA",
-        "import_empresa": 1066.07,
-        "carrecs": [
-          "Apo.Sol."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "ALVAREZ DE LAS ASTURIAS BOHORQUES RUMEU JAIME",
-    "total_adjudicat": 2348.18,
-    "relacions": [
-      {
-        "empresa": "MAPFRE",
-        "import_empresa": 1282.11,
-        "carrecs": [
-          "Apo.Manc.",
-          "VsecrNoConsj",
-          "ViceSec.C.Dl",
-          "Vsecr.Com.Au",
-          "Vsec.Com.Ej."
-        ]
-      },
-      {
-        "empresa": "MAPFRE ESPAÑA COMPAÑÍA DE SEGUROS Y REASEGUROS SA",
-        "import_empresa": 1066.07,
-        "carrecs": [
-          "Apo.Sol.",
-          "Apoderado"
         ]
       }
     ]
@@ -79277,23 +79191,106 @@
     ]
   },
   {
-    "nom": "MIÑARRO BRUGAROLAS CATALINA",
+    "nom": "DIAZ GRIDILLA CARLOS",
     "total_adjudicat": 2348.18,
     "relacions": [
       {
         "empresa": "MAPFRE",
         "import_empresa": 1282.11,
         "carrecs": [
-          "Mbro.Cte.NyR",
-          "Pdte.Cte.NyR",
-          "Consejero"
+          "Apo.Sol."
         ]
       },
       {
         "empresa": "MAPFRE ESPAÑA COMPAÑÍA DE SEGUROS Y REASEGUROS SA",
         "import_empresa": 1066.07,
         "carrecs": [
-          "Consejero"
+          "Apo.Sol."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "SANZ ISLA MARIA ELENA",
+    "total_adjudicat": 2348.18,
+    "relacions": [
+      {
+        "empresa": "MAPFRE",
+        "import_empresa": 1282.11,
+        "carrecs": [
+          "Apo.Manc.",
+          "Cons.Ejecuti"
+        ]
+      },
+      {
+        "empresa": "MAPFRE ESPAÑA COMPAÑÍA DE SEGUROS Y REASEGUROS SA",
+        "import_empresa": 1066.07,
+        "carrecs": [
+          "Pres.Com.Del",
+          "Consejero",
+          "Vicepr.1",
+          "Con.Delegado",
+          "Apo.Sol."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "CASTELO MARIN ALFREDO",
+    "total_adjudicat": 2348.18,
+    "relacions": [
+      {
+        "empresa": "MAPFRE",
+        "import_empresa": 1282.11,
+        "carrecs": [
+          "Apo.Manc."
+        ]
+      },
+      {
+        "empresa": "MAPFRE ESPAÑA COMPAÑÍA DE SEGUROS Y REASEGUROS SA",
+        "import_empresa": 1066.07,
+        "carrecs": [
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "COSTILLA PRIETO RAUL",
+    "total_adjudicat": 2348.18,
+    "relacions": [
+      {
+        "empresa": "MAPFRE",
+        "import_empresa": 1282.11,
+        "carrecs": [
+          "Apo.Manc."
+        ]
+      },
+      {
+        "empresa": "MAPFRE ESPAÑA COMPAÑÍA DE SEGUROS Y REASEGUROS SA",
+        "import_empresa": 1066.07,
+        "carrecs": [
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "ARIAS BERMUDEZ JOSE ANTONIO",
+    "total_adjudicat": 2348.18,
+    "relacions": [
+      {
+        "empresa": "MAPFRE",
+        "import_empresa": 1282.11,
+        "carrecs": [
+          "Apo.Manc."
+        ]
+      },
+      {
+        "empresa": "MAPFRE ESPAÑA COMPAÑÍA DE SEGUROS Y REASEGUROS SA",
+        "import_empresa": 1066.07,
+        "carrecs": [
+          "Apo.Sol."
         ]
       }
     ]
@@ -79320,23 +79317,41 @@
     ]
   },
   {
-    "nom": "PERELLI ALONSO JOSE LUIS",
+    "nom": "MARTINEZ ALVAREZ CARLOS",
     "total_adjudicat": 2348.18,
     "relacions": [
       {
         "empresa": "MAPFRE",
         "import_empresa": 1282.11,
         "carrecs": [
-          "Con.Ind.",
-          "Miem.ComAyR.",
-          "Miem.Com.Ri."
+          "Apo.Man.Soli"
         ]
       },
       {
         "empresa": "MAPFRE ESPAÑA COMPAÑÍA DE SEGUROS Y REASEGUROS SA",
         "import_empresa": 1066.07,
         "carrecs": [
-          "Consejero"
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "RONDEAU MARTINEZ JUAN CARLOS",
+    "total_adjudicat": 2348.18,
+    "relacions": [
+      {
+        "empresa": "MAPFRE",
+        "import_empresa": 1282.11,
+        "carrecs": [
+          "Apoderado"
+        ]
+      },
+      {
+        "empresa": "MAPFRE ESPAÑA COMPAÑÍA DE SEGUROS Y REASEGUROS SA",
+        "import_empresa": 1066.07,
+        "carrecs": [
+          "Apoderado"
         ]
       }
     ]
@@ -79382,27 +79397,29 @@
     ]
   },
   {
-    "nom": "SANCHEZ FRESCO BLANCA",
+    "nom": "MIÑARRO BRUGAROLAS CATALINA",
     "total_adjudicat": 2348.18,
     "relacions": [
       {
         "empresa": "MAPFRE",
         "import_empresa": 1282.11,
         "carrecs": [
-          "Apo.Sol."
+          "Mbro.Cte.NyR",
+          "Pdte.Cte.NyR",
+          "Consejero"
         ]
       },
       {
         "empresa": "MAPFRE ESPAÑA COMPAÑÍA DE SEGUROS Y REASEGUROS SA",
         "import_empresa": 1066.07,
         "carrecs": [
-          "Apo.Sol."
+          "Consejero"
         ]
       }
     ]
   },
   {
-    "nom": "PEDRAZA LAYNEZ JUAN JOSE",
+    "nom": "TABOADA DIEZ CARLA",
     "total_adjudicat": 2348.18,
     "relacions": [
       {
@@ -79416,7 +79433,47 @@
         "empresa": "MAPFRE ESPAÑA COMPAÑÍA DE SEGUROS Y REASEGUROS SA",
         "import_empresa": 1066.07,
         "carrecs": [
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "LLORENTE BALLESTEROS GUILLERMO",
+    "total_adjudicat": 2348.18,
+    "relacions": [
+      {
+        "empresa": "MAPFRE",
+        "import_empresa": 1282.11,
+        "carrecs": [
           "Apo.Sol."
+        ]
+      },
+      {
+        "empresa": "MAPFRE ESPAÑA COMPAÑÍA DE SEGUROS Y REASEGUROS SA",
+        "import_empresa": 1066.07,
+        "carrecs": [
+          "Apoderado"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "LEDESMA GARCIA JOSE ANTONIO",
+    "total_adjudicat": 2348.18,
+    "relacions": [
+      {
+        "empresa": "MAPFRE",
+        "import_empresa": 1282.11,
+        "carrecs": [
+          "Apoderado"
+        ]
+      },
+      {
+        "empresa": "MAPFRE ESPAÑA COMPAÑÍA DE SEGUROS Y REASEGUROS SA",
+        "import_empresa": 1066.07,
+        "carrecs": [
+          "Apoderado"
         ]
       }
     ]
@@ -79443,122 +79500,21 @@
     ]
   },
   {
-    "nom": "FERNANZ LOBO JORGE GASPAR",
+    "nom": "MIGUEL-ROMERO DE OLANO ANTONIO",
     "total_adjudicat": 2348.18,
     "relacions": [
       {
         "empresa": "MAPFRE",
         "import_empresa": 1282.11,
         "carrecs": [
-          "Apoderado"
+          "Consejero"
         ]
       },
       {
         "empresa": "MAPFRE ESPAÑA COMPAÑÍA DE SEGUROS Y REASEGUROS SA",
         "import_empresa": 1066.07,
         "carrecs": [
-          "Apo.Sol."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "NEBOT MATEOS JUAN MANUEL",
-    "total_adjudicat": 2348.18,
-    "relacions": [
-      {
-        "empresa": "MAPFRE",
-        "import_empresa": 1282.11,
-        "carrecs": [
-          "Apoderado"
-        ]
-      },
-      {
-        "empresa": "MAPFRE ESPAÑA COMPAÑÍA DE SEGUROS Y REASEGUROS SA",
-        "import_empresa": 1066.07,
-        "carrecs": [
-          "Apo.Sol.",
-          "Apo.Man.Soli"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "LEDESMA GARCIA JOSE ANTONIO",
-    "total_adjudicat": 2348.18,
-    "relacions": [
-      {
-        "empresa": "MAPFRE",
-        "import_empresa": 1282.11,
-        "carrecs": [
-          "Apoderado"
-        ]
-      },
-      {
-        "empresa": "MAPFRE ESPAÑA COMPAÑÍA DE SEGUROS Y REASEGUROS SA",
-        "import_empresa": 1066.07,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "INVERNON SACRISTAN ROBERTO",
-    "total_adjudicat": 2348.18,
-    "relacions": [
-      {
-        "empresa": "MAPFRE",
-        "import_empresa": 1282.11,
-        "carrecs": [
-          "Apo.Sol."
-        ]
-      },
-      {
-        "empresa": "MAPFRE ESPAÑA COMPAÑÍA DE SEGUROS Y REASEGUROS SA",
-        "import_empresa": 1066.07,
-        "carrecs": [
-          "Apo.Sol."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "LLORENTE BALLESTEROS GUILLERMO",
-    "total_adjudicat": 2348.18,
-    "relacions": [
-      {
-        "empresa": "MAPFRE",
-        "import_empresa": 1282.11,
-        "carrecs": [
-          "Apo.Sol."
-        ]
-      },
-      {
-        "empresa": "MAPFRE ESPAÑA COMPAÑÍA DE SEGUROS Y REASEGUROS SA",
-        "import_empresa": 1066.07,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "TABOADA DIEZ CARLA",
-    "total_adjudicat": 2348.18,
-    "relacions": [
-      {
-        "empresa": "MAPFRE",
-        "import_empresa": 1282.11,
-        "carrecs": [
-          "Apoderado"
-        ]
-      },
-      {
-        "empresa": "MAPFRE ESPAÑA COMPAÑÍA DE SEGUROS Y REASEGUROS SA",
-        "import_empresa": 1066.07,
-        "carrecs": [
-          "Apoderado"
+          "Pres.Com.Del"
         ]
       }
     ]
@@ -79587,58 +79543,7 @@
     ]
   },
   {
-    "nom": "INCHAUSTI PEREZ JOSE MANUEL",
-    "total_adjudicat": 2348.18,
-    "relacions": [
-      {
-        "empresa": "MAPFRE",
-        "import_empresa": 1282.11,
-        "carrecs": [
-          "Apo.Sol.",
-          "Vicepr.1",
-          "Mmbr.Com.Del",
-          "Vpre.Pres.Co",
-          "Cons.Ejecuti"
-        ]
-      },
-      {
-        "empresa": "MAPFRE ESPAÑA COMPAÑÍA DE SEGUROS Y REASEGUROS SA",
-        "import_empresa": 1066.07,
-        "carrecs": [
-          "Con.Delegado",
-          "Vicepr.1",
-          "MiemComDirec",
-          "PresComDirec",
-          "Consejero"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "MARCO ORENES FRANCISCO JOSE",
-    "total_adjudicat": 2348.18,
-    "relacions": [
-      {
-        "empresa": "MAPFRE",
-        "import_empresa": 1282.11,
-        "carrecs": [
-          "Mbro.Cte.NyR",
-          "Consj.Domini",
-          "Miem.Com.Ri.",
-          "Mmbr.Com.Del"
-        ]
-      },
-      {
-        "empresa": "MAPFRE ESPAÑA COMPAÑÍA DE SEGUROS Y REASEGUROS SA",
-        "import_empresa": 1066.07,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "FERNANZ LOBO JORGE",
+    "nom": "FERNANZ LOBO JORGE GASPAR",
     "total_adjudicat": 2348.18,
     "relacions": [
       {
@@ -79652,7 +79557,7 @@
         "empresa": "MAPFRE ESPAÑA COMPAÑÍA DE SEGUROS Y REASEGUROS SA",
         "import_empresa": 1066.07,
         "carrecs": [
-          "Apo.Man.Soli"
+          "Apo.Sol."
         ]
       }
     ]
@@ -79666,50 +79571,6 @@
         "import_empresa": 1282.11,
         "carrecs": [
           "Sec.Com.Del"
-        ]
-      },
-      {
-        "empresa": "MAPFRE ESPAÑA COMPAÑÍA DE SEGUROS Y REASEGUROS SA",
-        "import_empresa": 1066.07,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "COSTILLA PRIETO RAUL",
-    "total_adjudicat": 2348.18,
-    "relacions": [
-      {
-        "empresa": "MAPFRE",
-        "import_empresa": 1282.11,
-        "carrecs": [
-          "Apo.Manc."
-        ]
-      },
-      {
-        "empresa": "MAPFRE ESPAÑA COMPAÑÍA DE SEGUROS Y REASEGUROS SA",
-        "import_empresa": 1066.07,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "HUERTAS MEJIAS ANTONIO",
-    "total_adjudicat": 2348.18,
-    "relacions": [
-      {
-        "empresa": "MAPFRE",
-        "import_empresa": 1282.11,
-        "carrecs": [
-          "Presidente",
-          "Cons.Ejecuti",
-          "Pres.Com.Del",
-          "Apo.Sol.",
-          "Consejero"
         ]
       },
       {
@@ -82733,6 +82594,19 @@
     ]
   },
   {
+    "nom": "CORRAL ZABALA MARIA NAGORE",
+    "total_adjudicat": 1282.11,
+    "relacions": [
+      {
+        "empresa": "MAPFRE",
+        "import_empresa": 1282.11,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
     "nom": "CERDEIRAS MEGIAS GABRIELA",
     "total_adjudicat": 1282.11,
     "relacions": [
@@ -82740,7 +82614,72 @@
         "empresa": "MAPFRE",
         "import_empresa": 1282.11,
         "carrecs": [
-          "Apoderado"
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "LAFUENTE GONZALEZ ANTONIO",
+    "total_adjudicat": 1282.11,
+    "relacions": [
+      {
+        "empresa": "MAPFRE",
+        "import_empresa": 1282.11,
+        "carrecs": [
+          "Apo.Man.Soli"
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "DIAZ-NEGRETE GARCIA BELEN",
+    "total_adjudicat": 1282.11,
+    "relacions": [
+      {
+        "empresa": "MAPFRE",
+        "import_empresa": 1282.11,
+        "carrecs": [
+          "Apo.Sol."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "HIDALGO BENITO ANA",
+    "total_adjudicat": 1282.11,
+    "relacions": [
+      {
+        "empresa": "MAPFRE",
+        "import_empresa": 1282.11,
+        "carrecs": [
+          "Apo.Sol."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "MARTIN-ROMO COBO NURIA",
+    "total_adjudicat": 1282.11,
+    "relacions": [
+      {
+        "empresa": "MAPFRE",
+        "import_empresa": 1282.11,
+        "carrecs": [
+          "Apo.Sol."
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "ESTEVEZ BURGOS CARLOTA",
+    "total_adjudicat": 1282.11,
+    "relacions": [
+      {
+        "empresa": "MAPFRE",
+        "import_empresa": 1282.11,
+        "carrecs": [
+          "Apo.Sol."
         ]
       }
     ]
@@ -82853,32 +82792,6 @@
         "import_empresa": 1282.11,
         "carrecs": [
           "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "MARTIN-ROMO COBO NURIA",
-    "total_adjudicat": 1282.11,
-    "relacions": [
-      {
-        "empresa": "MAPFRE",
-        "import_empresa": 1282.11,
-        "carrecs": [
-          "Apo.Sol."
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "HIDALGO BENITO ANA",
-    "total_adjudicat": 1282.11,
-    "relacions": [
-      {
-        "empresa": "MAPFRE",
-        "import_empresa": 1282.11,
-        "carrecs": [
-          "Apo.Sol."
         ]
       }
     ]
@@ -83121,19 +83034,6 @@
   },
   {
     "nom": "FERNANDEZ ARIAS ALMAGRO CARLOS",
-    "total_adjudicat": 1282.11,
-    "relacions": [
-      {
-        "empresa": "MAPFRE",
-        "import_empresa": 1282.11,
-        "carrecs": [
-          "Apoderado"
-        ]
-      }
-    ]
-  },
-  {
-    "nom": "CORRAL ZABALA MARIA NAGORE",
     "total_adjudicat": 1282.11,
     "relacions": [
       {
